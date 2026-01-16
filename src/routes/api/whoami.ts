@@ -1,12 +1,20 @@
-import { getRequest } from '@tanstack/react-start/server';
-import { getUserFromReq } from '../../server/getUserFromReq';
-import { HttpError } from '../../errors';
-import { success } from '../../utils/http';
-
 // src/routes/api/whoami.ts
-export function GET() {
-    const req = getRequest();
-    const user = getUserFromReq(req);
-    if (!user) return HttpError.UNAUTHORIZED('UNAUTHORIZED: You are not logged in');
-    return success({ user });
-}
+import { createFileRoute } from '@tanstack/react-router';
+import { getUserFromRequest } from '../../server/auth/getUserFromRequest';
+
+export const Route = createFileRoute('/api/whoami')({
+    server: {
+        handlers: {
+            GET: async ({ request }: { request: Request }) => {
+                try {
+                    const user = await getUserFromRequest(request);
+                    if (!user) return Response.json({ user: null }, { status: 200 });
+                    return Response.json({ user }, { status: 200 });
+                } catch (error) {
+                    console.log(error);
+                    throw error;
+                }
+            }
+        }
+    }
+});

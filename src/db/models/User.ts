@@ -1,4 +1,4 @@
-// src/db/models/user.ts
+// src/db/models/User.ts
 import mongoose, { Schema } from 'mongoose';
 import { User } from '../../types/game';
 
@@ -6,7 +6,7 @@ export const userSchema = new Schema(
     {
         _id: { type: String, required: true, minLength: 16 },
         name: { type: String, required: true, minLength: 1 },
-        email: { type: String },
+        email: { type: String, required: true, unique: true, index: true },
         passwordHash: { type: String, required: true },
         userRoles: [{ type: String, enum: ['moderator', 'user', 'admin'], required: true }]
     },

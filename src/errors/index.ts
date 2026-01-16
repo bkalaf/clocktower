@@ -1,3 +1,5 @@
+import { safeStringify } from '../utils/safeStringify';
+
 // src/errors/index.ts
 export class HttpError extends Error {
     status: number;
@@ -57,6 +59,15 @@ export class HttpError extends Error {
         });
         return response;
     }
+    static CONFLICT_RESPONSE(message: string, extra?: unknown) {
+        const code = $STATUS_CODES.CONFLICT;
+        const response = new Response(safeStringify({ message, ...(extra ?? {}) }), {
+            headers: { 'Content-Type': 'application/json' },
+            status: code,
+            statusText: $STATUS_CODES2[code as keyof typeof $STATUS_CODES2]
+        });
+        return response;
+    }
 }
 
 export const $STATUS_CODES2 = {
@@ -73,6 +84,7 @@ export const $STATUS_CODES2 = {
     405: 'Method Not Allowed',
     406: 'Not Acceptable',
     408: 'Request Timeout',
+    409: 'Conflict',
     425: 'Too Early',
     429: 'Too Many Requests',
     500: 'Internal Server Error',
@@ -93,6 +105,7 @@ export const $STATUS_CODES = {
     METHOD_NOT_ALLOWED: 405,
     NOT_ACCEPTABLE: 406,
     REQUEST_TIMEOUT: 408,
+    CONFLICT: 409,
     TOO_EARLY: 425,
     TOO_MANY_REQUESTS: 429,
     INTERNAL_SERVER_ERROR: 500,

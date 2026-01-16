@@ -10,7 +10,9 @@ export function safeStringify(value: unknown): string {
         if (typeof value === 'object' && 'toJSON' in value && typeof (value as any).toJSON === 'function') {
             return JSON.stringify((value as any).toJSON());
         }
-
+        if (typeof value === 'object') {
+            return JSON.stringify(value);
+        }
         // Fall back to toString if present
         if (typeof (value as any).toString === 'function') {
             return (value as any).toString();

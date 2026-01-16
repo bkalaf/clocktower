@@ -1,4 +1,5 @@
 // src/env.ts
+import 'dotenv/config';
 import { createEnv } from '@t3-oss/env-core';
 import { z } from 'zod';
 
@@ -7,7 +8,7 @@ export const env = createEnv({
         REDIS_URL: z.url().min(1),
         MONGODB_URI: z.url().min(1),
         MONGODB_DB: z.string().min(1),
-        REALTIME_PORT: z.int().min(0),
+        REALTIME_PORT: z.coerce.number().int().min(0),
         SESSION_COOKIE_NAME: z.string().min(1)
     },
 
@@ -25,7 +26,10 @@ export const env = createEnv({
      * What object holds the environment variables at runtime. This is usually
      * `process.env` or `import.meta.env`.
      */
-    runtimeEnv: import.meta.env,
+    runtimeEnv: {
+        ...process.env,
+        ...import.meta.env
+    },
 
     /**
      * By default, this library will feed the environment variables directly to

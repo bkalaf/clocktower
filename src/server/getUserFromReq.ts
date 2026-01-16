@@ -1,7 +1,7 @@
 // src/server/getUserFromReq.ts
 import { connectMongoose } from '../db/connectMongoose';
-import { SessionModel } from '../db/models/session';
-import { UserModel } from '../db/models/user';
+import { SessionModel } from '../db/models/Session';
+import { UserModel } from '../db/models/User';
 import { env } from '../env';
 import { HttpError } from '../errors';
 import { AuthedUser } from '../types/game';

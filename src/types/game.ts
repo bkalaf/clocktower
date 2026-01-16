@@ -18,7 +18,7 @@ export const CURSORS_KEY = (gameId: string) => `botc:cursors:${gameId}`;
 export interface User {
     _id: UserId;
     name: string;
-    email?: string;
+    email: string;
     passwordHash: string;
     roles: GlobalRoles[];
 }
