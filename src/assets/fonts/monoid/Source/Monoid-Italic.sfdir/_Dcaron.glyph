@@ -1,0 +1,17 @@
+StartChar: Dcaron
+Encoding: 270 270 179
+GlifName: D_caron
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<190 513.596> 1288 120<417 728.147> 1536 256
+VStem: 885 120<695.652 1130.53>
+LayerCount: 3
+Back
+Fore
+Refer: 303 780 N 1 0 0 1 39 256 2
+Refer: 32 68 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Dcaron.sq
+EndChar

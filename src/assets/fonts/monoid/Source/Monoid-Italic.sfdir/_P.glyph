@@ -1,0 +1,36 @@
+StartChar: P
+Encoding: 80 80 43
+GlifName: P_
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<52 183.885> 520 120<304 670.048> 1288 120<430 779.852>
+VStem: 902 130<879.989 1172.93>
+LayerCount: 3
+Back
+Fore
+SplineSet
+430 1288 m 1
+ 304 640 l 1
+ 453 640 l 2
+ 535 640 642 640 740 713 c 0
+ 825 776 902 895 902 1037 c 0
+ 902 1112 878 1174 837 1215 c 0
+ 767 1288 661 1288 579 1288 c 2
+ 430 1288 l 1
+326 1408 m 1
+ 603 1408 l 2
+ 694 1408 841 1408 940 1303 c 0
+ 995 1244 1032 1160 1032 1057 c 0
+ 1032 867 924 712 808 625 c 0
+ 669 520 521 520 430 520 c 2
+ 281 520 l 1
+ 180 0 l 1
+ 52 0 l 1
+ 326 1408 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Position2: "Single Positioning lookup 23 subtable" dx=-128 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 22 subtable" dx=0 dy=0 dh=0 dv=0
+EndChar

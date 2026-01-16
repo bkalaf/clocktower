@@ -1,0 +1,19 @@
+StartChar: Egrave
+Encoding: 200 200 107
+GlifName: E_grave
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<320 960> 648 120<320 832> 1288 120<320 960> 1536 256
+VStem: 192 128<120 648 768 1288> 360 304
+LayerCount: 5
+Back
+Fore
+Refer: 293 768 N 1 0 0 1 0 256 2
+Refer: 33 69 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+Layer: 4
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Egrave.sq
+EndChar

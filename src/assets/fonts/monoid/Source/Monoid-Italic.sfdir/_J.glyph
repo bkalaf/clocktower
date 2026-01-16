@@ -1,0 +1,29 @@
+StartChar: J
+Encoding: 74 74 38
+GlifName: J_
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -12 120<269.657 573.099> 1288 120<454 942>
+AnchorPoint: "top" 704 1408 basechar 0
+LayerCount: 3
+Back
+Fore
+SplineSet
+942 1288 m 1
+ 430 1288 l 1
+ 454 1408 l 1
+ 1094 1408 l 1
+ 912 474 l 2
+ 894 381 869 253 758 139 c 0
+ 673 52 545 -12 400 -12 c 0
+ 241 -12 116 63 37 143 c 1
+ 129 239 l 1
+ 192 173 297 108 424 108 c 0
+ 525 108 610 150 669 210 c 0
+ 749 291 768 389 784 474 c 2
+ 942 1288 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+EndChar

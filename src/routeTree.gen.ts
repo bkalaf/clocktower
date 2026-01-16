@@ -16,6 +16,10 @@ import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as DemoStartApiRequestRouteImport } from './routes/demo/start.api-request'
 import { Route as DemoApiTqTodosRouteImport } from './routes/demo/api.tq-todos'
 import { Route as DemoApiNamesRouteImport } from './routes/demo/api.names'
+import { Route as ApiAuthSessionRouteImport } from './routes/api/auth/session'
+import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
+import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
+import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
 import { Route as DemoStartSsrIndexRouteImport } from './routes/demo/start.ssr.index'
 import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr.spa-mode'
 import { Route as DemoStartSsrFullSsrRouteImport } from './routes/demo/start.ssr.full-ssr'
@@ -57,6 +61,26 @@ const DemoApiNamesRoute = DemoApiNamesRouteImport.update({
   path: '/demo/api/names',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAuthSessionRoute = ApiAuthSessionRouteImport.update({
+  id: '/api/auth/session',
+  path: '/api/auth/session',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
+  id: '/api/auth/register',
+  path: '/api/auth/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLogoutRoute = ApiAuthLogoutRouteImport.update({
+  id: '/api/auth/logout',
+  path: '/api/auth/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
+  id: '/api/auth/login',
+  path: '/api/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DemoStartSsrIndexRoute = DemoStartSsrIndexRouteImport.update({
   id: '/demo/start/ssr/',
   path: '/demo/start/ssr/',
@@ -88,6 +112,10 @@ export interface FileRoutesByFullPath {
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/auth/session': typeof ApiAuthSessionRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -102,6 +130,10 @@ export interface FileRoutesByTo {
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/auth/session': typeof ApiAuthSessionRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -117,6 +149,10 @@ export interface FileRoutesById {
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/auth/session': typeof ApiAuthSessionRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -133,6 +169,10 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/whoami'
     | '/demo/tanstack-query'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/register'
+    | '/api/auth/session'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/start/api-request'
@@ -147,6 +187,10 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/whoami'
     | '/demo/tanstack-query'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/register'
+    | '/api/auth/session'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/start/api-request'
@@ -161,6 +205,10 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/whoami'
     | '/demo/tanstack-query'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/register'
+    | '/api/auth/session'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/start/api-request'
@@ -176,6 +224,10 @@ export interface RootRouteChildren {
   ApiHealthRoute: typeof ApiHealthRoute
   ApiWhoamiRoute: typeof ApiWhoamiRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
+  ApiAuthLoginRoute: typeof ApiAuthLoginRoute
+  ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
+  ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
+  ApiAuthSessionRoute: typeof ApiAuthSessionRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
   DemoApiTqTodosRoute: typeof DemoApiTqTodosRoute
   DemoStartApiRequestRoute: typeof DemoStartApiRequestRoute
@@ -237,6 +289,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoApiNamesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/auth/session': {
+      id: '/api/auth/session'
+      path: '/api/auth/session'
+      fullPath: '/api/auth/session'
+      preLoaderRoute: typeof ApiAuthSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/register': {
+      id: '/api/auth/register'
+      path: '/api/auth/register'
+      fullPath: '/api/auth/register'
+      preLoaderRoute: typeof ApiAuthRegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/logout': {
+      id: '/api/auth/logout'
+      path: '/api/auth/logout'
+      fullPath: '/api/auth/logout'
+      preLoaderRoute: typeof ApiAuthLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/login': {
+      id: '/api/auth/login'
+      path: '/api/auth/login'
+      fullPath: '/api/auth/login'
+      preLoaderRoute: typeof ApiAuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/demo/start/ssr/': {
       id: '/demo/start/ssr/'
       path: '/demo/start/ssr'
@@ -280,6 +360,10 @@ const rootRouteChildren: RootRouteChildren = {
   ApiHealthRoute: ApiHealthRoute,
   ApiWhoamiRoute: ApiWhoamiRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
+  ApiAuthLoginRoute: ApiAuthLoginRoute,
+  ApiAuthLogoutRoute: ApiAuthLogoutRoute,
+  ApiAuthRegisterRoute: ApiAuthRegisterRoute,
+  ApiAuthSessionRoute: ApiAuthSessionRoute,
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoApiTqTodosRoute: DemoApiTqTodosRoute,
   DemoStartApiRequestRoute: DemoStartApiRequestRoute,

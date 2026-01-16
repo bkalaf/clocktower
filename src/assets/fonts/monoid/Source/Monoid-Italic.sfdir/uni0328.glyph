@@ -1,0 +1,26 @@
+StartChar: uni0328
+Encoding: 808 808 308
+GlifName: uni0328
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -350 120<335.327 433> -20 20G<331.5 500>
+VStem: 201 126<-222.015 -98.2031>
+AnchorPoint: "bottom" 436 0 mark 0
+LayerCount: 3
+Back
+Fore
+SplineSet
+391 -230 m 0
+ 414 -230 436 -229 456 -225 c 1
+ 433 -345 l 1
+ 407 -349 378 -350 348 -350 c 0
+ 282 -350 201 -287 201 -185 c 0
+ 201 -97 291 -39 372 0 c 1
+ 500 0 l 1
+ 381 -48 327 -90 327 -158 c 0
+ 327 -211 362 -230 391 -230 c 0
+EndSplineSet
+Validated: 1
+Layer: 2
+EndChar

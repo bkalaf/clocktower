@@ -1,0 +1,17 @@
+StartChar: uni021B
+Encoding: 539 539 463
+GlifName: uni021B_
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -400 272<634 729.835> -16 240<717.58 957.438> 778 246<192 448 704 960>
+VStem: 448 256<231.939 778 1024 1280> 634 198<-205.998 -128>
+LayerCount: 4
+Back
+Fore
+Refer: 304 806 N 1 0 0 1 128 0 2
+Refer: 20 116 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

@@ -1,0 +1,14 @@
+# Byte-compiled / optimized files
+*.py[co]
+__pycache__/
+
+# Build byproducts
+_release/
+node_modules/
+woff2/
+
+# OS X file metadata
+.DS_Store
+
+# Vim swap
+*.swp

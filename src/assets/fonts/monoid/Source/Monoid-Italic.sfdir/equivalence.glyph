@@ -1,0 +1,31 @@
+StartChar: equivalence
+Encoding: 8801 8801 568
+GlifName: equivalence
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 260 120<62 935> 644 120<137 1009> 1028 120<211 1084>
+CounterMasks: 1 e0
+LayerCount: 3
+Back
+Fore
+SplineSet
+211 1148 m 1
+ 1107 1148 l 1
+ 1084 1028 l 1
+ 188 1028 l 1
+ 211 1148 l 1
+62 380 m 1
+ 958 380 l 1
+ 935 260 l 1
+ 39 260 l 1
+ 62 380 l 1
+137 764 m 1
+ 1033 764 l 1
+ 1009 644 l 1
+ 113 644 l 1
+ 137 764 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+EndChar

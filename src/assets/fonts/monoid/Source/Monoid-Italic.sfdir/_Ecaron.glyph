@@ -1,0 +1,16 @@
+StartChar: Ecaron
+Encoding: 282 282 189
+GlifName: E_caron
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<203 820> 648 120<329 818> 1288 120<430 1070> 1536 256
+LayerCount: 3
+Back
+Fore
+Refer: 303 780 N 1 0 0 1 39 256 2
+Refer: 33 69 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Ecaron.sq
+EndChar

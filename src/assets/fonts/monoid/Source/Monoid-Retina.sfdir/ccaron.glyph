@@ -1,0 +1,18 @@
+StartChar: ccaron
+Encoding: 269 269 178
+GlifName: ccaron
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 120<458.805 891.341> 920 120<458.805 871.765> 1152 256
+VStem: 224 128<223.756 800.244>
+LayerCount: 5
+Back
+Fore
+Refer: 303 780 N 1 0 0 1 0 -128 2
+Refer: 3 99 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+Layer: 4
+EndChar

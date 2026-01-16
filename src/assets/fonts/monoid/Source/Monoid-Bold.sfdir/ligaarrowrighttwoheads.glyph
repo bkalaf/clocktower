@@ -1,0 +1,36 @@
+StartChar: ligaarrowrighttwoheads
+Encoding: 1114124 -1 615
+GlifName: ligaarrowrighttwoheads
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -17 21G<-488 -446.79 152 193.21> 520 240<-1664 -256>
+LayerCount: 4
+Back
+Fore
+SplineSet
+-4 1121 m 1
+ 172 1297 l 1
+ 768 735 l 1
+ 768 545 l 1
+ 172 -17 l 1
+ -4 159 l 1
+ 507 635 l 1
+ 507 645 l 1
+ -4 1121 l 1
+-644 1121 m 1
+ -468 1297 l 1
+ 128 735 l 1
+ 128 545 l 1
+ -468 -17 l 1
+ -644 159 l 1
+ -256 520 l 1
+ -1664 520 l 5
+ -1664 760 l 5
+ -256 760 l 1
+ -644 1121 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

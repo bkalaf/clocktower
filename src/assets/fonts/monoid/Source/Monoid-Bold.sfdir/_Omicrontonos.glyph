@@ -1,0 +1,17 @@
+StartChar: Omicrontonos
+Encoding: 908 908 559
+GlifName: O_microntonos
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 240<470.309 681.691> 1184 240<470.309 681.691> 1242 402
+VStem: -128 394 112 256<355.825 1052.18> 784 256<355.825 1052.18>
+LayerCount: 4
+Back
+Fore
+Refer: 552 900 S 1 0 0 1 -576 158 2
+Refer: 470 927 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

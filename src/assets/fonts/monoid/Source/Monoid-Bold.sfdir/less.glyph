@@ -1,0 +1,55 @@
+StartChar: less
+Encoding: 60 60 82
+GlifName: less
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -17 21G<766.79 808>
+LayerCount: 4
+Back
+SplineSet
+565.234375 576 m 1
+ 990.21875 180.124023438 l 0
+ 1039.90234375 133.84375 1036.53515625 58.0419921875 995.338867188 14.9296875 c 0
+ 909.338867188 -75.0703125 l 0
+ 865.065429688 -121.403320312 781.953125 -134.963867188 723.2421875 -79.6201171875 c 0
+ 165.2421875 446.380859375 l 0
+ 140.93359375 469.294921875 128 504.780273438 128 531 c 0
+ 128 621 l 0
+ 128 653.318359375 145.520507812 687.029296875 165.2421875 705.620117188 c 0
+ 723.2421875 1231.62011719 l 0
+ 770.032226562 1275.7265625 853.786132812 1285.20703125 909.338867188 1227.0703125 c 0
+ 995.338867188 1137.0703125 l 0
+ 1042.07226562 1088.16308594 1034.015625 1012.67285156 990.21875 971.875976562 c 0
+ 565.234375 576 l 1
+EndSplineSet
+Fore
+SplineSet
+453 635 m 5
+ 964 159 l 5
+ 788 -17 l 5
+ 192 545 l 5
+ 192 735 l 5
+ 788 1297 l 5
+ 964 1121 l 5
+ 453 645 l 5
+ 453 635 l 5
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "Single Substitution lookup 104 subtable" less2
+Substitution2: "Single Substitution lookup 103 subtable" less1
+Substitution2: "Single Substitution lookup 98 subtable" rangeless
+Substitution2: "Single Substitution lookup 68 subtable" equallessless
+Substitution2: "Single Substitution lookup 67 subtable" larsenwork8
+Substitution2: "Single Substitution lookup 61 subtable" larsenwork3
+Substitution2: "Single Substitution lookup 54 subtable" larsenwork6
+Substitution2: "Single Substitution lookup 47 subtable" larsenwork10
+Substitution2: "Single Substitution lookup 44 subtable" larsenwork9
+Substitution2: "Single Substitution lookup 35 subtable" larsenwork2
+Substitution2: "Single Substitution lookup 30 subtable" larsenwork1
+Substitution2: "Single Substitution lookup 29 subtable" larsenwork1
+Substitution2: "Single Substitution lookup 23 subtable" larsenwork3
+Substitution2: "Single Substitution lookup 19 subtable" larsenwork5
+EndChar

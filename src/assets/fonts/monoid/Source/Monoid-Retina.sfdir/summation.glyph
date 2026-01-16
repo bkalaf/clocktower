@@ -1,0 +1,34 @@
+StartChar: summation
+Encoding: 8721 8721 574
+GlifName: summation
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<357 960> 1288 120<357 960>
+LayerCount: 5
+Back
+Fore
+SplineSet
+559 709 m 1
+ 192 1316 l 1
+ 192 1408 l 1
+ 960 1408 l 1
+ 960 1288 l 1
+ 357 1288 l 1
+ 357 1278 l 1
+ 670 752 l 1
+ 670 656 l 1
+ 357 130 l 1
+ 357 120 l 1
+ 960 120 l 1
+ 960 0 l 1
+ 192 0 l 1
+ 192 92 l 1
+ 559 699 l 1
+ 559 709 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Layer: 4
+EndChar

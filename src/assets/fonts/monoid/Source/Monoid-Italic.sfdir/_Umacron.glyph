@@ -1,0 +1,17 @@
+StartChar: Umacron
+Encoding: 362 362 199
+GlifName: U_macron
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 120<329.872 597.812> 1388 20G<322.112 454 962.112 1094> 1540 120<428 1045>
+VStem: 121 129<183.055 525.406>
+LayerCount: 3
+Back
+Fore
+Refer: 297 772 N 1 0 0 1 39 256 2
+Refer: 48 85 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Umacron.sq
+EndChar

@@ -1,0 +1,31 @@
+StartChar: igrave
+Encoding: 236 236 143
+GlifName: igrave
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<139 395 523 756> 904 120<315 548> 1388 20G<494 641.062>
+LayerCount: 3
+Back
+Fore
+SplineSet
+748 1152 m 1
+ 610 1152 l 1
+ 494 1408 l 1
+ 632 1408 l 1
+ 748 1152 l 1
+116 0 m 1
+ 139 120 l 1
+ 395 120 l 1
+ 548 904 l 1
+ 292 904 l 1
+ 315 1024 l 1
+ 699 1024 l 1
+ 523 120 l 1
+ 779 120 l 1
+ 756 0 l 1
+ 116 0 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+EndChar

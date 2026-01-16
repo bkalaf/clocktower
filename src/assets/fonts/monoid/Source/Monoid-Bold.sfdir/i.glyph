@@ -1,0 +1,30 @@
+StartChar: i
+Encoding: 105 105 9
+GlifName: i
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<512 768> 656 240<266 512> 1047 354<457.628 694.372>
+VStem: 399 354<1105.63 1342.37> 512 256<0 656>
+LayerCount: 4
+Back
+Fore
+SplineSet
+512 0 m 1xe8
+ 512 656 l 1
+ 266 656 l 1
+ 266 896 l 1
+ 768 896 l 1
+ 768 0 l 1
+ 512 0 l 1xe8
+576 1401 m 0
+ 680 1401 753 1328 753 1224 c 0
+ 753 1120 680 1047 576 1047 c 0
+ 472 1047 399 1120 399 1224 c 0xf0
+ 399 1328 472 1401 576 1401 c 0
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "'ss07' Style Set 7 lookup 6 subtable" i.flyingdot
+EndChar

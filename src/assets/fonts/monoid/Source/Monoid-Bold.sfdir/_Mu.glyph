@@ -1,0 +1,34 @@
+StartChar: Mu
+Encoding: 924 924 474
+GlifName: M_u
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<128 384 768 1024> 1388 20G<128 392.539 759.507 1024>
+VStem: 128 256<0 900> 768 256<0 896>
+LayerCount: 4
+Back
+Fore
+SplineSet
+384 0 m 1
+ 128 0 l 1
+ 128 1408 l 1
+ 384 1408 l 1
+ 571 970 l 1
+ 582 970 l 1
+ 768 1408 l 1
+ 1024 1408 l 1
+ 1024 0 l 1
+ 768 0 l 1
+ 768 896 l 1
+ 758 896 l 1
+ 631 640 l 1
+ 521 640 l 1
+ 394 900 l 1
+ 384 900 l 1
+ 384 0 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

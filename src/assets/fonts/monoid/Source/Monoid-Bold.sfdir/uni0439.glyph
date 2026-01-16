@@ -1,0 +1,17 @@
+StartChar: uni0439
+Encoding: 1081 1081 358
+GlifName: uni0439
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<256 478.27 640 896> 1004 20G<256 512 674.813 896> 1136 180<443.571 708.429>
+VStem: 256 256<510 1024> 640 256<0 504>
+LayerCount: 4
+Back
+Fore
+Refer: 296 774 N 1 0 0 1 0 -128 2
+Refer: 357 1080 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

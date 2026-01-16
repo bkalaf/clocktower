@@ -27,6 +27,7 @@
         "@tanstack/router-plugin": "^1.132.0",
         "@typescript-eslint/eslint-plugin": "^8.53.0",
         "@typescript-eslint/parser": "^8.53.0",
+        "animate.css": "^4.1.1",
         "bcryptjs": "^3.0.3",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",

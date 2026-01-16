@@ -1,0 +1,18 @@
+StartChar: quotedblleft
+Encoding: 8220 8220 426
+GlifName: quotedblleft
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 784 240<384 512 768 896> 1304 120<415.486 512 799.486 896>
+VStem: 256 128<1024 1257.26> 256 256<784 1024> 640 128<1024 1257.26> 640 256<784 1024>
+LayerCount: 5
+Back
+Fore
+Refer: 423 8217 S -1 0 0 -1 896 2192 2
+Refer: 423 8217 S -1 0 0 -1 1280 2192 2
+Validated: 1
+Layer: 2
+Layer: 3
+Layer: 4
+EndChar

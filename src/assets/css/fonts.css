@@ -1,0 +1,69 @@
+@import './fonts-firasans';
+/* src/assets/css/fonts.css */
+@import './fonts-opensans';
+/* @import './fonts-patrickhand'; */
+/* @import './fonts-righteous'; */
+@import './fonts-raleway';
+/* @import './fonts-concert-one'; */
+@import './fonts-rubik';
+@import './fonts-grandstander';
+@import './fonts-rowdies';
+/* @import './fonts-itim';
+@import './fonts-palanquin-dark'; */
+
+.font-rowdies {
+    font-family: 'Rowdies' !important;
+}
+.font-raleway {
+    font-family: 'Raleway' !important;
+}
+.font-patrickhand {
+    font-family: 'Patrick Hand' !important;
+}
+.font-righteous {
+    font-family: 'Righteous' !important;
+}
+.font-concert-one {
+    font-family: 'Concert One' !important;
+}
+.font-palanquin-dark {
+    font-family: 'Palanquin Dark' !important;
+}
+.font-itim {
+    font-family: 'Itim' !important;
+}
+.font-rubik {
+    font-family: 'Rubik' !important;
+}
+.font-grandstander {
+    font-family: 'Grandstander' !important;
+}
+.font-opensans {
+    font-family: 'Open Sans' !important;
+}
+
+html,
+body,
+div,
+span,
+ul,
+li,
+button,
+section,
+aside,
+input,
+select,
+textarea,
+output,
+table,
+tr,
+td,
+thead,
+th,
+tbody,
+tfoot,
+fieldset,
+a,
+form {
+    @apply font-rowdies;
+}

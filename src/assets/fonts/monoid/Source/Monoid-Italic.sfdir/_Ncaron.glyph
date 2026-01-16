@@ -1,0 +1,16 @@
+StartChar: Ncaron
+Encoding: 327 327 242
+GlifName: N_caron
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<52 183.883 686.982 823.892> 1388 20G<322.108 458.018 962.099 1094> 1536 256
+LayerCount: 3
+Back
+Fore
+Refer: 303 780 N 1 0 0 1 39 256 2
+Refer: 41 78 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Ncaron.sq
+EndChar

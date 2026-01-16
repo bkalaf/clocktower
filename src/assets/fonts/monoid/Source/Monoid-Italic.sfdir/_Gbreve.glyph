@@ -1,0 +1,17 @@
+StartChar: Gbreve
+Encoding: 286 286 193
+GlifName: G_breve
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 120<326.973 714.074> 648 120<585 818> 1304 120<558.059 1020.29> 1520 120<608.756 890.461>
+VStem: 72 131<241.328 686.265> 429 130<1686.36 1792> 986 128<1725.03 1792>
+LayerCount: 3
+Back
+Fore
+Refer: 298 774 N 1 0 0 1 39 256 2
+Refer: 35 71 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Gbreve.sq
+EndChar

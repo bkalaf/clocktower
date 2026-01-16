@@ -1,0 +1,17 @@
+StartChar: upsilondieresistonos
+Encoding: 944 944 536
+GlifName: upsilondieresistonos
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 240<525.679 626.321> 1004 20G<256 512 640 896> 1136 264<172.506 371.494 780.506 979.494>
+VStem: 140 264<1168.51 1367.49> 256 256<228.515 1024> 640 256<228.515 1024> 748 264<1168.51 1367.49>
+LayerCount: 4
+Back
+Fore
+Refer: 553 901 N 1 0 0 1 0 64 2
+Refer: 534 965 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

@@ -1,0 +1,16 @@
+StartChar: uni0215
+Encoding: 533 533 459
+GlifName: uni0215
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 120<347.207 527.059> 0 21G<628 759.887> 1004 20G<311.104 443 823.104 955> 1152 256<418 440 802 824>
+VStem: 169 130<152.659 438.859>
+LayerCount: 3
+Back
+Fore
+Refer: 435 783 N 1 0 0 1 -25 -128 2
+Refer: 21 117 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+EndChar

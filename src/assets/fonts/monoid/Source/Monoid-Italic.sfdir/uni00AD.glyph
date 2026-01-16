@@ -1,0 +1,20 @@
+StartChar: uni00AD
+Encoding: 173 173 96
+GlifName: uni00A_D_
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 516 120<140 1012>
+LayerCount: 3
+Back
+Fore
+SplineSet
+140 636 m 1
+ 1036 636 l 1
+ 1012 516 l 1
+ 116 516 l 1
+ 140 636 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+EndChar

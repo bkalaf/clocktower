@@ -1,0 +1,36 @@
+StartChar: three
+Encoding: 51 51 73
+GlifName: three
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 240<259.799 638.501> 1168 240<256 610>
+VStem: 672 256<251.37 638.398>
+LayerCount: 4
+Back
+Fore
+SplineSet
+672 429 m 4
+ 672 591 646 662 572 662 c 4
+ 534 662 504 654 474 641 c 5
+ 325 807 l 5
+ 610 1168 l 5
+ 256 1168 l 5
+ 256 1408 l 5
+ 896 1408 l 5
+ 896 1178 l 5
+ 644 883 l 5
+ 651 876 l 5
+ 663 880 675 881 686 881 c 4
+ 884 881 928 645 928 427 c 4
+ 928 124 804 -16 560 -16 c 4
+ 448 -16 338 1 256 15 c 5
+ 256 257 l 5
+ 335 242 456 224 560 224 c 4
+ 655 224 672 317 672 429 c 4
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "'ss06' Style Set 6 lookup 5 subtable" three.boob
+EndChar

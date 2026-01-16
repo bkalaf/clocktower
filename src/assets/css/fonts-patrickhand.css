@@ -1,0 +1,116 @@
+/* @font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 100;
+    font-style: normal;
+    src: url('./../fonts/Patrick-Hand/FiraSans-Thin.ttf') format('truetype')
+}
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 100;
+    font-style: italic;
+    src: url('./../fonts/Patrick-Hand/FiraSans-ThinItalic.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 200;
+    font-style: normal;
+    src: url('./../fonts/Patrick-Hand/FiraSans-ExtraLight.ttf') format('truetype')
+}
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 200;
+    font-style: italic;
+    src: url('./../fonts/Patrick-Hand/FiraSans-ExtraLightItalic.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 300;
+    font-style: normal;
+    src: url('./../fonts/Patrick-Hand/FiraSans-Light.ttf') format('truetype')
+}
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 300;
+    font-style: italic;
+    src: url('./../fonts/Patrick-Hand/FiraSans-LightItalic.ttf') format('truetype')
+} */
+
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 400;
+    font-style: normal;
+    src: url('./../fonts/Patrick-Hand/PatrickHand-Regular.ttf') format('truetype');
+}
+/* @font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 400;
+    font-style: italic;
+    src: url('./../fonts/Patrick-Hand/FiraSans-RegularItalic.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 500;
+    font-style: normal;
+    src: url('./../fonts/Patrick-Hand/FiraSans-Medium.ttf') format('truetype')
+}
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 500;
+    font-style: italic;
+    src: url('./../fonts/Patrick-Hand/FiraSans-MediumItalic.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 600;
+    font-style: normal;
+    src: url('./../fonts/Patrick-Hand/FiraSans-SemiBold.ttf') format('truetype')
+}
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 600;
+    font-style: italic;
+    src: url('./../fonts/Patrick-Hand/FiraSans-SemiBoldItalic.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 700;
+    font-style: normal;
+    src: url('./../fonts/Patrick-Hand/FiraSans-Bold.ttf') format('truetype')
+}
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 700;
+    font-style: italic;
+    src: url('./../fonts/Patrick-Hand/FiraSans-BoldItalic.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 800;
+    font-style: normal;
+    src: url('./../fonts/Patrick-Hand/FiraSans-ExtraBold.ttf') format('truetype')
+}
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 800;
+    font-style: italic;
+    src: url('./../fonts/Patrick-Hand/FiraSans-ExtraBoldItalic.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 900;
+    font-style: normal;
+    src: url('./../fonts/Patrick-Hand/FiraSans-Black.ttf') format('truetype')
+}
+@font-face {
+    font-family: 'Patrick Hand';
+    font-weight: 900;
+    font-style: italic;
+    src: url('./../fonts/Patrick-Hand/FiraSans-BlackItalic.ttf') format('truetype')
+} */

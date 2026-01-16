@@ -1,0 +1,41 @@
+languagesystem DFLT dflt;
+languagesystem latn dflt;
+languagesystem cyrl dflt;
+languagesystem grek dflt;
+
+@wide = [A B C D E G H M N O P Q R S U V W X Z m w];
+@narrow = [i l period comma colon semicolon exclam];
+@narrowi = [i period comma colon semicolon exclam];
+@narrowl = [l];
+@medium = [a b c d e f g h j k n o p q r s t u v x y z];
+@lowfront = [a c d e g i j m n o p q r s u v w x y z];
+
+feature calt {
+  pos @wide @narrow' <64 0 0 0> @narrow;
+  pos @wide @medium' <128 0 0 0> @narrow;
+  pos @wide @medium @narrow' <64 0 0 0> @narrow;
+  pos @wide @medium @narrowi' <64 0 0 0> @medium;
+  pos @wide @medium @narrowi @medium' <0 0 0 0>;
+  pos @wide @medium' <64 0 0 0> @medium @narrow;
+  pos @wide @medium @medium' <128 0 0 0> @narrow;
+  pos @wide @medium @medium @narrow' <-64 0 0 0> @medium @wide;
+  pos @wide @medium @medium @narrow @medium' <-128 0 0 0> @wide;
+  pos @wide @medium @medium @narrow' <64 0 0 0> @medium;
+  pos @wide @medium @medium @narrow @medium' <0 0 0 0>;
+  pos @wide @medium @medium @narrow' <128 0 0 0> @narrow;
+  pos @narrowl' <-128 0 0 0> @medium @wide;
+  pos @narrow @medium' <-64 0 0 0> @wide;
+  pos @medium @narrowi' <0 0 0 0> @narrowl @wide;
+  pos @medium @narrowi @narrowl' <-128 0 0 0> @wide;
+  pos @medium @narrowi' <0 0 0 0> @narrowl @medium;
+  pos @medium @narrowi @narrowl' <-64 0 0 0> @medium;
+  pos @medium @narrowi' <64 0 0 0> @narrowl;
+  pos @wide @narrowi' <64 0 0 0> @medium @medium;
+  pos @wide @narrowi @medium' <0 0 0 0> @medium;
+  pos @narrowi @medium' <-64 0 0 0> @medium;
+  pos @narrowi @medium @medium' <-128 0 0 0> @wide;
+  pos @narrowi @wide' <0 0 0 0> @medium @narrow;
+  pos @narrowi @wide' <-128 0 0 0> @medium;
+  pos @narrow @narrow' <-128 0 0 0> @wide;
+  pos @wide slash' <128 0 0 0> @lowfront;
+} calt;

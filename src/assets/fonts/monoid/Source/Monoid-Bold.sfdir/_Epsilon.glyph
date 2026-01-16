@@ -1,0 +1,31 @@
+StartChar: Epsilon
+Encoding: 917 917 467
+GlifName: E_psilon
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 240<448 960> 588 240<448 832> 1168 240<448 960>
+VStem: 192 256<240 588 828 1168>
+AnchorPoint: "top" 576 1408 basechar 0
+LayerCount: 4
+Back
+Fore
+SplineSet
+192 1408 m 1
+ 960 1408 l 1
+ 960 1168 l 1
+ 448 1168 l 1
+ 448 828 l 1
+ 832 828 l 1
+ 832 588 l 1
+ 448 588 l 1
+ 448 240 l 1
+ 960 240 l 1
+ 960 0 l 1
+ 192 0 l 1
+ 192 1408 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

@@ -1,0 +1,34 @@
+StartChar: C
+Encoding: 67 67 31
+GlifName: C_
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 120<328.534 802.045> 1304 120<547.843 1039.74>
+VStem: 72 131<245.126 686.265>
+AnchorPoint: "top" 704 1408 basechar 0
+LayerCount: 3
+Back
+Fore
+SplineSet
+203 432 m 0
+ 203 237 270 104 479 104 c 0
+ 595 104 728 121 847 141 c 1
+ 824 21 l 1
+ 709 1 583 -16 456 -16 c 0
+ 181 -16 72 160 72 410 c 0
+ 72 509 90 609 109 704 c 0
+ 130 814 155 930 206 1044 c 0
+ 305 1265 469 1424 726 1424 c 0
+ 845 1424 958 1412 1061 1395 c 1
+ 1038 1275 l 1
+ 932 1292 811 1304 702 1304 c 0
+ 511 1304 402 1187 325 1016 c 0
+ 281 919 258 813 237 704 c 0
+ 219 610 203 518 203 432 c 0
+EndSplineSet
+Validated: 1
+Layer: 2
+Position2: "Single Positioning lookup 23 subtable" dx=-128 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 22 subtable" dx=0 dy=0 dh=0 dv=0
+EndChar

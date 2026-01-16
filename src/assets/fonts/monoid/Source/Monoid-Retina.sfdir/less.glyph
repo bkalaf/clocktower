@@ -1,0 +1,44 @@
+StartChar: less
+Encoding: 60 60 82
+GlifName: less
+Width: 1024
+VWidth: 0
+Flags: W
+LayerCount: 5
+Back
+Fore
+SplineSet
+389 571 m 1
+ 900 95 l 1
+ 814 5 l 1
+ 256 531 l 1
+ 256 621 l 1
+ 814 1147 l 1
+ 900 1057 l 1
+ 389 581 l 1
+ 389 571 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+SplineSet
+856 50 m 5
+ 298 576 l 5
+ 856 1102 l 1029
+EndSplineSet
+Layer: 3
+Layer: 4
+Substitution2: "Single Substitution lookup 104 subtable" less2
+Substitution2: "Single Substitution lookup 103 subtable" less1
+Substitution2: "Single Substitution lookup 98 subtable" rangeless
+Substitution2: "Single Substitution lookup 68 subtable" equallessless
+Substitution2: "Single Substitution lookup 67 subtable" larsenwork8
+Substitution2: "Single Substitution lookup 61 subtable" larsenwork3
+Substitution2: "Single Substitution lookup 54 subtable" larsenwork6
+Substitution2: "Single Substitution lookup 47 subtable" larsenwork10
+Substitution2: "Single Substitution lookup 44 subtable" larsenwork9
+Substitution2: "Single Substitution lookup 35 subtable" larsenwork2
+Substitution2: "Single Substitution lookup 30 subtable" larsenwork1
+Substitution2: "Single Substitution lookup 29 subtable" larsenwork1
+Substitution2: "Single Substitution lookup 23 subtable" larsenwork3
+Substitution2: "Single Substitution lookup 19 subtable" larsenwork5
+EndChar

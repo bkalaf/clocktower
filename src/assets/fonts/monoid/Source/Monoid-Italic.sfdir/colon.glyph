@@ -1,0 +1,39 @@
+StartChar: colon
+Encoding: 58 58 80
+GlifName: colon
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 240<291 500> 784 240<443 652>
+VStem: 244 455
+LayerCount: 3
+Back
+Fore
+SplineSet
+291 240 m 5
+ 547 240 l 5
+ 500 0 l 5
+ 244 0 l 5
+ 291 240 l 5
+443 1024 m 5
+ 699 1024 l 5
+ 652 784 l 5
+ 396 784 l 5
+ 443 1024 l 5
+EndSplineSet
+Validated: 1
+Layer: 2
+Substitution2: "Single Substitution lookup 92 subtable" colon.2r
+Substitution2: "Single Substitution lookup 91 subtable" colon.2l
+Substitution2: "Single Substitution lookup 58 subtable" larsenwork7
+Position2: "Single Positioning lookup 24 subtable" dx=-128 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 18 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 17 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 15 subtable" dx=0 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 13 subtable" dx=0 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 10 subtable" dx=128 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 8 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 4 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 3 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 1 subtable" dx=64 dy=0 dh=0 dv=0
+EndChar

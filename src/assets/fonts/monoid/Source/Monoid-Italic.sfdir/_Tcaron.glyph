@@ -1,0 +1,16 @@
+StartChar: Tcaron
+Encoding: 356 356 286
+GlifName: T_caron
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<372 503.882> 1288 120<262 622 750 1134> 1536 256
+LayerCount: 3
+Back
+Fore
+Refer: 303 780 N 1 0 0 1 39 256 2
+Refer: 47 84 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Tcaron.sq
+EndChar

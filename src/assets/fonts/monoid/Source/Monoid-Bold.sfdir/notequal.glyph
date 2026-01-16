@@ -1,0 +1,37 @@
+StartChar: notequal
+Encoding: 8800 8800 566
+GlifName: notequal
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<130 421.531> 256 240<128 252 648 1024> 768 240<128 496 892 1024>
+LayerCount: 4
+Back
+Fore
+SplineSet
+740 1280 m 1
+ 1022 1280 l 1
+ 892 1008 l 1
+ 1024 1008 l 1
+ 1024 768 l 1
+ 778 768 l 1
+ 648 496 l 1
+ 1024 496 l 1
+ 1024 256 l 1
+ 534 256 l 1
+ 412 0 l 1
+ 130 0 l 1
+ 252 256 l 1
+ 128 256 l 1
+ 128 496 l 1
+ 366 496 l 1
+ 496 768 l 1
+ 128 768 l 1
+ 128 1008 l 1
+ 610 1008 l 1
+ 740 1280 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

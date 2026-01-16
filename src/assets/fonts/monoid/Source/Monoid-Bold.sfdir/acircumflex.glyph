@@ -1,0 +1,17 @@
+StartChar: acircumflex
+Encoding: 226 226 133
+GlifName: acircumflex
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 240<418.561 602.99> 0 21G<640 896> 421 219<495.809 640> 799 241<323.911 636.549> 1152 256<427 448 704 725>
+VStem: 224 256<230.935 409.657> 640 256<0 53 242.469 421 640 794.879>
+LayerCount: 4
+Back
+Fore
+Refer: 293 770 N 1 0 0 1 0 -128 2
+Refer: 2 97 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

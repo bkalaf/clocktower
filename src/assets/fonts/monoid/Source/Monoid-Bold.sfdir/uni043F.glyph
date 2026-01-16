@@ -1,0 +1,26 @@
+StartChar: uni043F
+Encoding: 1087 1087 364
+GlifName: uni043F_
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<256 512 640 896> 784 240<512 640>
+VStem: 256 256<0 784> 640 256<0 784>
+LayerCount: 4
+Back
+Fore
+SplineSet
+256 1024 m 1
+ 896 1024 l 1
+ 896 0 l 1
+ 640 0 l 1
+ 640 784 l 1
+ 512 784 l 1
+ 512 0 l 1
+ 256 0 l 1
+ 256 1024 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

@@ -1,0 +1,18 @@
+StartChar: Aacute
+Encoding: 193 193 102
+GlifName: A_acute
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<105 368 784 1047> 272 240<431 721> 1388 20G<307 845> 1536 256<590 666>
+VStem: 448 408
+LayerCount: 4
+Back
+Fore
+Refer: 292 769 N 1 0 0 1 0 256 2
+Refer: 29 65 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Aacute.sq
+EndChar

@@ -1,0 +1,18 @@
+StartChar: uni0419
+Encoding: 1049 1049 328
+GlifName: uni0419
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<192 328.901 832 960> 1388 20G<192 320 824.082 960> 1520 120<420.418 731.582>
+VStem: 192 128<280 1408> 236 128<1697.88 1792> 788 128<1697.88 1792> 832 128<0 1128>
+LayerCount: 5
+Back
+Fore
+Refer: 298 774 N 1 0 0 1 0 256 2
+Refer: 327 1048 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+Layer: 4
+EndChar

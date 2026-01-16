@@ -1,0 +1,38 @@
+StartChar: G
+Encoding: 71 71 35
+GlifName: G_
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 120<326.973 714.074> 648 120<585 818> 1304 120<558.059 1020.29>
+VStem: 72 131<241.328 686.265>
+AnchorPoint: "top" 704 1408 basechar 0
+LayerCount: 3
+Back
+Fore
+SplineSet
+436 -16 m 0
+ 180 -16 72 162 72 410 c 0
+ 72 509 90 609 109 704 c 0
+ 130 814 155 930 206 1044 c 0
+ 305 1266 488 1424 746 1424 c 0
+ 851 1424 953 1415 1043 1402 c 1
+ 1019 1282 l 1
+ 925 1295 818 1304 722 1304 c 0
+ 528 1304 403 1187 325 1016 c 0
+ 281 919 258 813 237 704 c 0
+ 219 610 203 518 203 432 c 0
+ 203 240 270 104 459 104 c 0
+ 540 104 629 113 717 128 c 1
+ 818 648 l 1
+ 562 648 l 1
+ 585 768 l 1
+ 969 768 l 1
+ 827 34 l 1
+ 705 6 570 -16 436 -16 c 0
+EndSplineSet
+Validated: 1
+Layer: 2
+Position2: "Single Positioning lookup 23 subtable" dx=-128 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 22 subtable" dx=0 dy=0 dh=0 dv=0
+EndChar

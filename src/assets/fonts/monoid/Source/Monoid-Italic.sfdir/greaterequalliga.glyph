@@ -1,0 +1,29 @@
+StartChar: greaterequalliga
+Encoding: 1114131 -1 623
+GlifName: greaterequalliga
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 132 120<-731 654>
+LayerCount: 3
+Back
+Fore
+SplineSet
+-731 252 m 1
+ 677 252 l 1
+ 654 132 l 1
+ -754 132 l 1
+ -731 252 l 1
+567 773 m 1
+ -580 1029 l 1
+ -556 1152 l 1
+ 793 848 l 1
+ 762 688 l 1
+ -705 384 l 1
+ -681 507 l 1
+ 565 763 l 1
+ 567 773 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+EndChar

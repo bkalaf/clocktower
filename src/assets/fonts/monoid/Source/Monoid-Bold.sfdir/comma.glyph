@@ -1,0 +1,27 @@
+StartChar: comma
+Encoding: 44 44 67
+GlifName: comma
+Width: 1024
+VWidth: 0
+Flags: W
+VStem: 384 384<128 488>
+LayerCount: 4
+Back
+Fore
+SplineSet
+384 488 m 1
+ 768 488 l 1
+ 768 112 l 2
+ 768 34 768 -57 690 -148 c 0
+ 627 -223 519 -272 384 -272 c 1
+ 384 -32 l 1
+ 440 -32 472 -11 490 17 c 0
+ 508 46 512 82 512 112 c 2
+ 512 128 l 1
+ 384 128 l 1
+ 384 488 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

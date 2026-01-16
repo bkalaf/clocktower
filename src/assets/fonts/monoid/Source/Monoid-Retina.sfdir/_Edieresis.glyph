@@ -1,0 +1,19 @@
+StartChar: Edieresis
+Encoding: 203 203 110
+GlifName: E_dieresis
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<320 960> 648 120<320 832> 1288 120<320 960> 1584 224<262.609 441.391 710.609 889.391>
+VStem: 192 128<120 648 768 1288> 240 224<1606.61 1785.39> 688 224<1606.61 1785.39>
+LayerCount: 5
+Back
+Fore
+Refer: 300 776 N 1 0 0 1 0 256 2
+Refer: 33 69 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+Layer: 4
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Edieresis.sq
+EndChar

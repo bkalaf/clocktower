@@ -1,0 +1,7 @@
+/* src/assets/css/fonts-concert-one.css */
+@font-face {
+    font-family: 'Concert One';
+    font-weight: 400;
+    font-style: normal;
+    src: url('./../fonts/Concert-One/ConcertOne-Regular.ttf') format('truetype');
+}

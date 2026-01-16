@@ -1,0 +1,40 @@
+StartChar: uni0436
+Encoding: 1078 1078 355
+GlifName: uni0436
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<84 344.346 512 640 817.18 1068> 1004 20G<141 396.55 512 640 755.45 1011>
+VStem: 512 128<0 422 642 1024>
+LayerCount: 4
+Back
+Fore
+SplineSet
+512 0 m 1
+ 512 422 l 1
+ 492 422 l 1
+ 337 0 l 1
+ 84 0 l 1
+ 298 535 l 1
+ 141 1024 l 1
+ 391 1024 l 1
+ 497 642 l 1
+ 512 642 l 1
+ 512 1024 l 1
+ 640 1024 l 1
+ 640 642 l 1
+ 655 642 l 1
+ 761 1024 l 1
+ 1011 1024 l 1
+ 854 535 l 1
+ 1068 0 l 1
+ 825 0 l 1
+ 660 422 l 1
+ 640 422 l 1
+ 640 0 l 1
+ 512 0 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

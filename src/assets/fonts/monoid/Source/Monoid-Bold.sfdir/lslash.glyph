@@ -1,0 +1,38 @@
+StartChar: lslash
+Encoding: 322 322 283
+GlifName: lslash
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 240<732.9 960> 1388 20G<448 704>
+VStem: 448 256<250.178 400 887 1408>
+AnchorPoint: "bottom" 768 0 basechar 0
+AnchorPoint: "top" 576 1408 basechar 0
+LayerCount: 4
+Back
+Fore
+SplineSet
+822 971 m 1
+ 970 773 l 1
+ 704 583 l 1
+ 704 328 l 2
+ 704 308 704 274 732 249 c 0
+ 751 232 783 224 832 224 c 0
+ 874 224 924 226 960 229 c 1
+ 960 -11 l 1
+ 909 -13 849 -16 776 -16 c 0
+ 680 -16 600 10 545 58 c 0
+ 448 142 448 241 448 308 c 2
+ 448 400 l 1
+ 327 314 l 1
+ 184 516 l 1
+ 448 704 l 1
+ 448 1408 l 1
+ 704 1408 l 1
+ 704 887 l 1
+ 822 971 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

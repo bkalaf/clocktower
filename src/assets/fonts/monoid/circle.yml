@@ -1,0 +1,46 @@
+general:
+  branches:
+    only:
+      - master
+machine:
+  services:
+    - docker
+checkout:
+  post:
+    - git remote set-url origin "git@github.com:${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git"
+    - git fetch -f -p origin release-template:release
+    # Check for any changes,  otherwise fail the build
+    - . Scripts/check-for-changes.sh
+    - git config --global user.email "chase+circleci@colman.io"
+    - git config --global user.name "CircleCI Bot"
+dependencies:
+  cache_directories:
+    - woff2
+    - node_modules
+  pre:
+    - sudo apt-get install g++
+    - "[[ ! -d woff2 ]] && ./Scripts/woff2.sh || echo 'Using cached woff2_compress'"
+    - "[[ ! -d node_modules ]] && npm install ttf2woff ttf2eot || echo 'Using cached ttf2woff'"
+    - docker pull colman/py-fontforge
+  post:
+    - . Scripts/cleanup-git.sh
+test:
+  override:
+    - for file in ./Source/Monoid*.sfdir; do . Scripts/parallel_build.sh $file; done:
+        parallel: true
+    # Copy artifacts to keep after branch switch
+    # DANGER! Assumes node0 builds normal iterations :)
+    - cp _release/Monoid-{Regular,Italic,Bold}.ttf /tmp/
+    # Prepare the release
+    - . Scripts/prepare_release.sh:
+        parallel: true
+    # Collect all build products into node0
+    - "[ $CIRCLE_NODE_INDEX -eq 0 ] || scp *.zip node0:~/monoid/":
+        parallel: true
+    # Add, commit, push
+    - ls -lh ./*.zip
+    - git add -v ./*.zip
+    - git commit -m "Release build for ${CIRCLE_SHA1} [ci skip]"
+    - git push -f origin release
+    # Go-go-github pages
+    - . /tmp/gh-pages.sh

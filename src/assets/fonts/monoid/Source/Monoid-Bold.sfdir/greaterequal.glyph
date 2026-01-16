@@ -1,0 +1,30 @@
+StartChar: greaterequal
+Encoding: 8805 8805 565
+GlifName: greaterequal
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 132 240<128 1024>
+LayerCount: 4
+Back
+Fore
+SplineSet
+128 372 m 1
+ 1024 372 l 1
+ 1024 132 l 1
+ 128 132 l 1
+ 128 372 l 1
+733 870 m 1
+ 128 1036 l 1
+ 128 1279 l 1
+ 1024 1035 l 1
+ 1024 695 l 1
+ 128 451 l 1
+ 128 694 l 1
+ 733 860 l 1
+ 733 870 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

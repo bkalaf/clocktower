@@ -1,0 +1,32 @@
+StartChar: l
+Encoding: 108 108 12
+GlifName: l
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 240<668.9 896> 1388 20G<384 640>
+VStem: 384 256<250.178 1408>
+AnchorPoint: "bottom" 704 0 basechar 0
+AnchorPoint: "top" 512 1408 basechar 0
+LayerCount: 4
+Back
+Fore
+SplineSet
+896 -11 m 1
+ 845 -13 785 -16 712 -16 c 0
+ 616 -16 536 10 481 58 c 0
+ 384 142 384 241 384 308 c 2
+ 384 1408 l 1
+ 640 1408 l 1
+ 640 328 l 2
+ 640 308 640 274 668 249 c 0
+ 687 232 719 224 768 224 c 0
+ 810 224 860 226 896 229 c 1
+ 896 -11 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "'ss09' Style Set 9 lookup 8 subtable" l.base
+Substitution2: "'ss08' Style Set 8 lookup 7 subtable" l.zstyle
+EndChar

@@ -1,0 +1,17 @@
+StartChar: Idieresis
+Encoding: 207 207 114
+GlifName: I_dieresis
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<139 395 523 756> 1288 120<390 622 750 1006> 1584 224<464.179 597.609 912.179 1045.61>
+VStem: 416 229<1631.22 1760.44> 864 229<1631.22 1760.44>
+LayerCount: 3
+Back
+Fore
+Refer: 300 776 N 1 0 0 1 39 256 2
+Refer: 37 73 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Idieresis.sq
+EndChar

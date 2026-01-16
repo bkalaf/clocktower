@@ -1,0 +1,30 @@
+StartChar: Zeta
+Encoding: 918 918 470
+GlifName: Z_eta
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<342 960> 1288 120<212 790>
+LayerCount: 5
+Back
+Fore
+SplineSet
+212 1288 m 1
+ 212 1408 l 1
+ 940 1408 l 1
+ 940 1318 l 1
+ 342 130 l 1
+ 342 120 l 1
+ 960 120 l 1
+ 960 0 l 1
+ 192 0 l 1
+ 192 92 l 1
+ 790 1278 l 1
+ 790 1288 l 1
+ 212 1288 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Layer: 4
+EndChar

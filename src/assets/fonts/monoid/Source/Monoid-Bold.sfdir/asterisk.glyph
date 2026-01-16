@@ -1,0 +1,37 @@
+StartChar: asterisk
+Encoding: 42 42 65
+GlifName: asterisk
+Width: 1024
+VWidth: 0
+Flags: W
+VStem: 448 256<128 438>
+LayerCount: 4
+Back
+Fore
+SplineSet
+448 438 m 1
+ 165 345 l 25
+ 81 572 l 25
+ 376 668 l 1
+ 191 923 l 25
+ 403 1058 l 25
+ 576 819 l 1
+ 750 1058 l 25
+ 962 923 l 25
+ 776 668 l 1
+ 1071 572 l 25
+ 987 345 l 25
+ 704 438 l 1
+ 704 128 l 25
+ 448 128 l 25
+ 448 438 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "Single Substitution lookup 109 subtable" asterisk.commentend
+Substitution2: "Single Substitution lookup 108 subtable" asterisk.commentstart
+Substitution2: "Single Substitution lookup 107 subtable" asterisk.commentstart
+Substitution2: "Single Substitution lookup 86 subtable" asterisk.period
+Substitution2: "'ss02' Style Set 2 lookup 1 subtable" asterisk.multi
+EndChar

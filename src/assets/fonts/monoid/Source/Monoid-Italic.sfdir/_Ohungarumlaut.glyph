@@ -1,0 +1,17 @@
+StartChar: Ohungarumlaut
+Encoding: 336 336 251
+GlifName: O_hungarumlaut
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 120<324.113 601.969> 1304 120<543.531 821.484> 1536 256
+VStem: 68 131<241.184 663.208> 947 131<744.792 1166.82>
+LayerCount: 3
+Back
+Fore
+Refer: 302 779 N 1 0 0 1 39 256 2
+Refer: 42 79 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Ohungarumlaut.sq
+EndChar

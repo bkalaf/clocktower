@@ -1,0 +1,39 @@
+StartChar: daggerdbl
+Encoding: 8225 8225 584
+GlifName: daggerdbl
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<448 704> 256 240<192 448 704 960> 912 240<192 448 704 960> 1388 20G<448 704>
+VStem: 448 256<0 256 496 912 1152 1408>
+AnchorPoint: "top" 576 1408 basechar 0
+LayerCount: 4
+Back
+Fore
+SplineSet
+960 1152 m 1
+ 960 912 l 1
+ 704 912 l 1
+ 704 496 l 1
+ 960 496 l 1
+ 960 256 l 1
+ 704 256 l 1
+ 704 0 l 1
+ 448 0 l 1
+ 448 256 l 1
+ 192 256 l 1
+ 192 496 l 1
+ 448 496 l 1
+ 448 912 l 1
+ 192 912 l 1
+ 192 1152 l 1
+ 448 1152 l 1
+ 448 1408 l 1
+ 704 1408 l 1
+ 704 1152 l 1
+ 960 1152 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

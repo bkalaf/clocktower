@@ -1,0 +1,25 @@
+StartChar: github
+Encoding: 1114113 -1 605
+GlifName: github
+Width: 1536
+VWidth: 0
+Flags: H
+LayerCount: 3
+Back
+SplineSet
+639 128 m 5
+ 639 1280 l 5
+ -512 1280 l 5
+ -512 128 l 5
+ 639 128 l 5
+-640 1408 m 5
+ 768 1408 l 5
+ 768 0 l 5
+ -640 0 l 5
+ -640 1408 l 5
+EndSplineSet
+Fore
+Validated: 1
+Layer: 2
+LCarets2: 8 -140 -140 -140 -140 -140 -140 -140 -140
+EndChar

@@ -1,0 +1,33 @@
+StartChar: guillemotleft
+Encoding: 171 171 313
+GlifName: guillemotleft
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 1019 20G<492.166 537.765 876.166 921.765>
+LayerCount: 3
+Back
+Fore
+SplineSet
+226 581 m 1
+ 224 571 l 1
+ 448 181 l 1
+ 331 113 l 1
+ 93 542 l 1
+ 107 610 l 1
+ 511 1039 l 1
+ 602 971 l 1
+ 226 581 l 1
+610 581 m 1
+ 608 571 l 1
+ 832 181 l 1
+ 715 113 l 1
+ 477 542 l 1
+ 491 610 l 1
+ 895 1039 l 1
+ 986 971 l 1
+ 610 581 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+EndChar

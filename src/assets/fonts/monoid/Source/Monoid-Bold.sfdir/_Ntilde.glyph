@@ -1,0 +1,18 @@
+StartChar: Ntilde
+Encoding: 209 209 116
+GlifName: N_tilde
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<192 448 697.835 960> 1388 20G<192 453.19 704 960> 1540 190<556.009 765.591> 1598 190<386.409 595.991>
+VStem: 192 256<0 798 1367.65 1408> 704 256<0 43.598 610 1408>
+LayerCount: 4
+Back
+Fore
+Refer: 294 771 N 1 0 0 1 0 256 2
+Refer: 41 78 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Ntilde.sq
+EndChar

@@ -1,0 +1,37 @@
+StartChar: comma
+Encoding: 44 44 67
+GlifName: comma
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -272 120<214 309.22>
+VStem: 191 381
+LayerCount: 3
+Back
+Fore
+SplineSet
+316 368 m 5
+ 572 368 l 5
+ 504 23 l 6
+ 492 -37 480 -107 414 -177 c 4
+ 361 -234 281 -272 191 -272 c 5
+ 214 -152 l 5
+ 261 -152 297 -135 323 -107 c 4
+ 358 -70 366 -27 376 23 c 6
+ 397 128 l 5
+ 269 128 l 5
+ 316 368 l 5
+EndSplineSet
+Validated: 1
+Layer: 2
+Position2: "Single Positioning lookup 24 subtable" dx=-128 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 18 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 17 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 15 subtable" dx=0 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 13 subtable" dx=0 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 10 subtable" dx=128 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 8 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 4 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 3 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 1 subtable" dx=64 dy=0 dh=0 dv=0
+EndChar

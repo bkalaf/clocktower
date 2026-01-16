@@ -1,0 +1,50 @@
+StartChar: four.triangle
+Encoding: 1114157 -1 650
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<640 896> 388 240<399 640 896 1024> 1388 20G<638.933 896>
+VStem: 640 256<0 388 628 1008>
+LayerCount: 4
+Back
+SplineSet
+896 0 m 5
+ 640 0 l 5
+ 640 388 l 5
+ 128 388 l 5
+ 128 580 l 5
+ 264 1408 l 5
+ 510 1408 l 5
+ 379 628 l 5
+ 640 628 l 5
+ 640 1408 l 5
+ 896 1408 l 5
+ 896 628 l 5
+ 1024 628 l 5
+ 1024 388 l 5
+ 896 388 l 5
+ 896 0 l 5
+EndSplineSet
+Fore
+SplineSet
+896 0 m 1
+ 640 0 l 1
+ 640 388 l 1
+ 128 384 l 1
+ 128 606 l 1
+ 652 1408 l 1
+ 896 1408 l 1
+ 896 628 l 1
+ 1024 628 l 1
+ 1024 388 l 1
+ 896 388 l 1
+ 896 0 l 1
+640 1008 m 1
+ 399 628 l 1
+ 640 628 l 1
+ 640 1008 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

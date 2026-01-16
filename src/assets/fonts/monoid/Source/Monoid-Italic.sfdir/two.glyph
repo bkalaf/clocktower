@@ -1,0 +1,30 @@
+StartChar: two
+Encoding: 50 50 72
+GlifName: two
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<301 810> 1304 120<389.269 795.382>
+VStem: 858 130<1006.25 1248>
+LayerCount: 3
+Back
+Fore
+SplineSet
+387 1393 m 5
+ 477 1410 586 1424 681 1424 c 4
+ 906 1424 988 1305 988 1168 c 4
+ 988 1019 920 926 856 843 c 6
+ 301 120 l 5
+ 833 120 l 5
+ 810 0 l 5
+ 116 0 l 5
+ 133 89 l 5
+ 753 899 l 6
+ 806 969 858 1033 858 1148 c 4
+ 858 1228 816 1304 657 1304 c 4
+ 558 1304 447 1288 363 1273 c 5
+ 387 1393 l 5
+EndSplineSet
+Validated: 1
+Layer: 2
+EndChar

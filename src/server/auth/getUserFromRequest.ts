@@ -3,7 +3,8 @@ import { connectMongoose } from '../../db/connectMongoose';
 import { SessionModel } from '../../db/models/Session';
 import { UserModel } from '../../db/models/User';
 import { HttpError } from '../../errors';
-import { parseCookie, cookieName } from './session';
+import { parseCookie } from '../parseCookie';
+import { cookieName } from './session';
 
 export async function getUserFromRequest(request: Request) {
     await connectMongoose();

@@ -1,0 +1,17 @@
+StartChar: Otilde
+Encoding: 213 213 120
+GlifName: O_tilde
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 120<324.113 601.969> 1304 120<543.531 821.484> 1540 120<815.279 931.541> 1668 120<566.242 682.335>
+VStem: 68 131<241.184 663.208> 406 127<1561 1635.7> 947 131<744.792 1166.82> 965 127<1692.7 1767>
+LayerCount: 3
+Back
+Fore
+Refer: 296 771 N 1 0 0 1 39 256 2
+Refer: 42 79 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Otilde.sq
+EndChar

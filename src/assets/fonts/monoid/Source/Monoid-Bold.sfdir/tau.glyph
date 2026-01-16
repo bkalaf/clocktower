@@ -1,0 +1,32 @@
+StartChar: tau
+Encoding: 964 964 487
+GlifName: tau
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 247<707.553 894.117> 784 240<128 448 704 1024>
+VStem: 448 256<235.256 784>
+AnchorPoint: "top" 576 1024 basechar 0
+LayerCount: 4
+Back
+Fore
+SplineSet
+896 -2 m 1
+ 849 -9 793 -16 724 -16 c 0
+ 640 -16 566 5 521 52 c 0
+ 448 128 448 218 448 279 c 2
+ 448 784 l 1
+ 128 784 l 1
+ 128 1024 l 1
+ 1024 1024 l 1
+ 1024 784 l 1
+ 704 784 l 1
+ 704 299 l 2
+ 704 262 715 231 780 231 c 0
+ 818 231 863 235 896 239 c 1
+ 896 -2 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

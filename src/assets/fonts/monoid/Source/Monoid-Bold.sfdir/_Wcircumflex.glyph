@@ -1,0 +1,18 @@
+StartChar: Wcircumflex
+Encoding: 372 372 209
+GlifName: W_circumflex
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<172 486.588 665.412 980> 1388 20G<119 373 779 1033> 1536 256<427 448 704 725>
+VStem: 119 254<855.475 1408> 779 254<855.475 1408>
+LayerCount: 4
+Back
+Fore
+Refer: 293 770 N 1 0 0 1 0 256 2
+Refer: 50 87 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Wcircumflex.sq
+EndChar

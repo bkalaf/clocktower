@@ -1,0 +1,23 @@
+StartChar: bar
+Encoding: 124 124 92
+GlifName: bar
+Width: 1024
+VWidth: 0
+Flags: W
+VStem: 448 256<-256 1536>
+LayerCount: 4
+Back
+Fore
+SplineSet
+704 1536 m 1
+ 704 -256 l 1
+ 448 -256 l 1
+ 448 1536 l 1
+ 704 1536 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "Single Substitution lookup 88 subtable" bar2
+Substitution2: "Single Substitution lookup 87 subtable" bar1
+EndChar

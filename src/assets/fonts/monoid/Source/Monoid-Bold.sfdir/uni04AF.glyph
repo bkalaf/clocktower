@@ -1,0 +1,28 @@
+StartChar: uni04AF
+Encoding: 1199 1199 420
+GlifName: uni04A_F_
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 1004 20G<174 449 703 977>
+VStem: 174 258<810.747 1024> 448 256<-384 107.7> 720 257<810.747 1024>
+LayerCount: 4
+Back
+Fore
+SplineSet
+432 1024 m 1
+ 466 791 510 562 571 347 c 1
+ 581 347 l 1
+ 642 563 686 791 720 1024 c 1
+ 977 1024 l 1
+ 915 673 832 326 704 0 c 1
+ 704 -384 l 1
+ 448 -384 l 1
+ 448 0 l 1
+ 320 326 236 673 174 1024 c 1
+ 432 1024 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

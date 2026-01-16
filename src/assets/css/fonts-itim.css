@@ -1,0 +1,7 @@
+/* src/assets/css/fonts-itim.css */
+@font-face {
+    font-family: '';
+    font-weight: 400;
+    font-style: normal;
+    src: url('./../fonts/Itim/Itim-Regular.ttf') format('truetype');
+}

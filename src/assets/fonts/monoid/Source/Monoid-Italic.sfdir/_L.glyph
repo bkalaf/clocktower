@@ -1,0 +1,22 @@
+StartChar: L
+Encoding: 76 76 40
+GlifName: L_
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<267 884> 1388 20G<386.108 518>
+LayerCount: 3
+Back
+Fore
+SplineSet
+116 0 m 1
+ 390 1408 l 1
+ 518 1408 l 1
+ 267 120 l 1
+ 907 120 l 1
+ 884 0 l 1
+ 116 0 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+EndChar

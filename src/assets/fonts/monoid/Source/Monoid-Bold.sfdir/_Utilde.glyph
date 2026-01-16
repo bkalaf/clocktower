@@ -1,0 +1,18 @@
+StartChar: Utilde
+Encoding: 360 360 197
+GlifName: U_tilde
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 240<457.921 694.079> 1388 20G<128 384 768 1024> 1540 190<556.009 765.591> 1598 190<386.409 595.991>
+VStem: 128 256<303.02 1408> 768 256<303.02 1408>
+LayerCount: 4
+Back
+Fore
+Refer: 294 771 N 1 0 0 1 0 256 2
+Refer: 48 85 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Utilde.sq
+EndChar

@@ -1,0 +1,17 @@
+StartChar: quoteleft
+Encoding: 8216 8216 425
+GlifName: quoteleft
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 784 240<640 768> 1304 120<671.486 768>
+VStem: 512 128<1024 1257.26> 512 256<784 1024>
+LayerCount: 5
+Back
+Fore
+Refer: 423 8217 S -1 0 0 -1 1152 2192 2
+Validated: 1
+Layer: 2
+Layer: 3
+Layer: 4
+EndChar

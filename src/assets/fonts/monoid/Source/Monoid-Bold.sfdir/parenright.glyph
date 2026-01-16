@@ -1,0 +1,24 @@
+StartChar: parenright
+Encoding: 41 41 64
+GlifName: parenright
+Width: 1024
+VWidth: 0
+Flags: W
+VStem: 640 256<435.104 970.896>
+LayerCount: 4
+Back
+Fore
+SplineSet
+377 1539 m 17
+ 697 1396 896 1115 896 703 c 0
+ 896 291 697 10 377 -133 c 9
+ 272 78 l 17
+ 498 181 640 379 640 703 c 0
+ 640 1027 498 1225 272 1328 c 9
+ 377 1539 l 17
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "Single Substitution lookup 17 subtable" parenright.shrug
+EndChar

@@ -1,0 +1,30 @@
+StartChar: Iota
+Encoding: 921 921 477
+GlifName: I_ota
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 240<256 448 704 896> 1168 240<256 448 704 896>
+VStem: 256 640<0 240 1168 1408>
+LayerCount: 4
+Back
+Fore
+SplineSet
+896 1408 m 1
+ 896 1168 l 1
+ 704 1168 l 1
+ 704 240 l 1
+ 896 240 l 1
+ 896 0 l 1
+ 256 0 l 1
+ 256 240 l 1
+ 448 240 l 1
+ 448 1168 l 1
+ 256 1168 l 1
+ 256 1408 l 1
+ 896 1408 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

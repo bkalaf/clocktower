@@ -1,0 +1,41 @@
+StartChar: x
+Encoding: 120 120 23
+GlifName: x
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<19 201.777 677.991 853> 1004 20G<240 414.842 847.368 1030>
+LayerCount: 3
+Back
+Fore
+SplineSet
+556 644 m 1
+ 566 644 l 1
+ 863 1024 l 1
+ 1030 1024 l 1
+ 617 551 l 1
+ 615 541 l 1
+ 853 0 l 1
+ 685 0 l 1
+ 528 448 l 1
+ 518 448 l 1
+ 187 0 l 1
+ 19 0 l 1
+ 467 541 l 1
+ 469 551 l 1
+ 240 1024 l 1
+ 407 1024 l 1
+ 556 644 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Position2: "Single Positioning lookup 21 subtable" dx=-128 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 20 subtable" dx=-64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 19 subtable" dx=0 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 12 subtable" dx=-128 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 9 subtable" dx=0 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 7 subtable" dx=128 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 6 subtable" dx=64 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 5 subtable" dx=0 dy=0 dh=0 dv=0
+Position2: "Single Positioning lookup 2 subtable" dx=128 dy=0 dh=0 dv=0
+EndChar

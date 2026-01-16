@@ -1,0 +1,18 @@
+StartChar: Hcircumflex
+Encoding: 292 292 220
+GlifName: H_circumflex
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<192 448 704 960> 580 240<448 704> 1388 20G<192 448 704 960> 1536 256<427 448 704 725>
+VStem: 192 256<0 580 820 1408> 704 256<0 580 820 1408>
+LayerCount: 4
+Back
+Fore
+Refer: 293 770 N 1 0 0 1 0 256 2
+Refer: 36 72 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Hcircumflex.sq
+EndChar

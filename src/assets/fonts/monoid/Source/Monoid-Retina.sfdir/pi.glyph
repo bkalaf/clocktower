@@ -1,0 +1,35 @@
+StartChar: pi
+Encoding: 960 960 486
+GlifName: pi
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -16 120<927.741 1024> 0 21G<256 384> 904 120<128 256 384 768 896 1024>
+VStem: 256 128<0 904> 768 128<149.787 904>
+LayerCount: 5
+Back
+Fore
+SplineSet
+768 279 m 2xb8
+ 768 904 l 1
+ 384 904 l 1
+ 384 0 l 1
+ 256 0 l 1x78
+ 256 904 l 1
+ 128 904 l 1
+ 128 1024 l 1
+ 1024 1024 l 1
+ 1024 904 l 1
+ 896 904 l 1
+ 896 279 l 2
+ 896 232 896 186 924 148 c 0
+ 944 121 975 104 1024 104 c 1
+ 1024 -16 l 1
+ 938 -16 884 7 841 52 c 0
+ 768 128 768 218 768 279 c 2xb8
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Layer: 4
+EndChar

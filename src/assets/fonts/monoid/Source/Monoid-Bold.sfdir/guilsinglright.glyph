@@ -1,0 +1,25 @@
+StartChar: guilsinglright
+Encoding: 8250 8250 581
+GlifName: guilsinglright
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -17 21G<280 321.21>
+LayerCount: 4
+Back
+Fore
+SplineSet
+124 1121 m 1
+ 300 1297 l 1
+ 896 735 l 1
+ 896 545 l 1
+ 300 -17 l 1
+ 124 159 l 1
+ 635 635 l 1
+ 635 645 l 1
+ 124 1121 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

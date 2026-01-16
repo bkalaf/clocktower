@@ -1,0 +1,16 @@
+StartChar: Jcircumflex
+Encoding: 308 308 236
+GlifName: J_circumflex
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: -12 120<269.657 573.099> 1288 120<454 942> 1536 256
+LayerCount: 3
+Back
+Fore
+Refer: 295 770 N 1 0 0 1 39 256 2
+Refer: 38 74 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Jcircumflex.sq
+EndChar

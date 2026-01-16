@@ -1,0 +1,17 @@
+StartChar: Zacute
+Encoding: 377 377 214
+GlifName: Z_acute
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 120<176 884> 1288 120<282 949> 1536 256
+VStem: 636 354
+LayerCount: 3
+Back
+Fore
+Refer: 294 769 N 1 0 0 1 39 256 2
+Refer: 53 90 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Zacute.sq
+EndChar

@@ -1,0 +1,44 @@
+StartChar: equal
+Encoding: 61 61 83
+GlifName: equal
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 260 240<192 960> 772 240<192 960>
+LayerCount: 4
+Back
+Fore
+SplineSet
+192 500 m 1
+ 960 500 l 5
+ 960 260 l 5
+ 192 260 l 1
+ 192 500 l 1
+192 1012 m 1
+ 960 1012 l 5
+ 960 772 l 5
+ 192 772 l 1
+ 192 1012 l 1
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "Single Substitution lookup 71 subtable" larsenwork2
+Substitution2: "Single Substitution lookup 70 subtable" greaterequalliga
+Substitution2: "Single Substitution lookup 66 subtable" larsenwork8
+Substitution2: "Single Substitution lookup 65 subtable" greatergreaterequal
+Substitution2: "Single Substitution lookup 62 subtable" lessequalliga
+Substitution2: "Single Substitution lookup 60 subtable" equal.after
+Substitution2: "Single Substitution lookup 59 subtable" equalcolonequal
+Substitution2: "Single Substitution lookup 57 subtable" larsenwork7
+Substitution2: "Single Substitution lookup 56 subtable" leftarrowequallong
+Substitution2: "Single Substitution lookup 55 subtable" larsenwork6
+Substitution2: "Single Substitution lookup 52 subtable" larsenwork5
+Substitution2: "Single Substitution lookup 51 subtable" larsenwork5
+Substitution2: "Single Substitution lookup 49 subtable" larsenwork10
+Substitution2: "Single Substitution lookup 48 subtable" larsenwork10
+Substitution2: "Single Substitution lookup 45 subtable" larsenwork9
+Substitution2: "Single Substitution lookup 43 subtable" notequalliga
+Substitution2: "Single Substitution lookup 41 subtable" notequaltypeliga
+Substitution2: "Single Substitution lookup 40 subtable" larsenwork1
+EndChar

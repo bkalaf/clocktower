@@ -1,0 +1,17 @@
+StartChar: Acircumflex
+Encoding: 194 194 98
+GlifName: A_circumflex
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<105 368 784 1047> 272 240<431 721> 1388 20G<307 845> 1536 256<427 448 704 725>
+LayerCount: 4
+Back
+Fore
+Refer: 293 770 N 1 0 0 1 0 256 2
+Refer: 29 65 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "'ss14' Style Set 14 lookup 13 subtable" Acircumflex.sq
+EndChar

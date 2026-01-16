@@ -1,0 +1,17 @@
+StartChar: Alphatonos
+Encoding: 902 902 555
+GlifName: A_lphatonos
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<105 368 784 1047> 272 240<431 721> 1242 402 1388 20G<307 845>
+VStem: -128 394
+LayerCount: 4
+Back
+Fore
+Refer: 552 900 S 1 0 0 1 -576 158 2
+Refer: 464 913 N 1 0 0 1 0 0 3
+Validated: 1
+Layer: 2
+Layer: 3
+EndChar

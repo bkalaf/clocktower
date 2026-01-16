@@ -1,0 +1,48 @@
+StartChar: r
+Encoding: 114 114 18
+GlifName: r
+Width: 1024
+VWidth: 0
+Flags: W
+HStem: 0 21G<256 512> 800 240<595.883 896> 1004 20G<256 512>
+VStem: 256 256<0 704.166 915 1024>
+AnchorPoint: "bottom" 384 0 basechar 0
+AnchorPoint: "top" 576 1024 basechar 0
+LayerCount: 4
+Back
+SplineSet
+716 800 m 0xd0
+ 624 800 552 816.739726027 501 847 c 0
+ 512 740 512 589 512 475 c 6
+ 512 0 l 5
+ 256 0 l 1
+ 256 1024 l 1
+ 384 1024 l 1xb0
+ 384 865 l 1
+ 394 865 l 1
+ 469 967 561 1040 716 1040 c 0
+ 782 1040 839 1034 896 1027 c 1
+ 896 787 l 1
+ 839 794 781 800 716 800 c 0xd0
+EndSplineSet
+Fore
+SplineSet
+716 800 m 0xd0
+ 659 800 615 781 583 747 c 0
+ 512 669 512 558 512 475 c 2
+ 512 0 l 1
+ 256 0 l 1
+ 256 1024 l 1
+ 512 1024 l 1xb0
+ 512 915 l 1
+ 522 915 l 1
+ 570 988 628 1040 726 1040 c 0
+ 788 1040 842 1034 896 1027 c 1
+ 896 787 l 1
+ 839 794 781 800 716 800 c 0xd0
+EndSplineSet
+Validated: 1
+Layer: 2
+Layer: 3
+Substitution2: "'ss09' Style Set 9 lookup 8 subtable" r.base
+EndChar
