@@ -1,3 +1,4 @@
+// src/routes/demo/start.ssr.index.tsx
 import { createFileRoute, Link } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/demo/start/ssr/')({

@@ -1,3 +1,4 @@
+// src/routes/demo/start.ssr.spa-mode.tsx
 import { useEffect, useState } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 import { getPunkSongs } from '@/data/demo.punk-songs';

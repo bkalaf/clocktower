@@ -1,11 +1,15 @@
 // src/server/findById.ts
 import { GameModel } from '../db/models/game';
 import { GameMemberModel } from '../db/models/gameMember';
-import { GameId, GameRoles } from '../types/game';
+import { GameId, GameRoles, UserId } from '../types/game';
 
-// src/server/findById.ts
 export const $findById = {
-    game: (gameId: GameId) => GameModel.findById(gameId).lean()
+    game: (gameId: GameId) => GameModel.findById(gameId).lean(),
+    gameMember: (gameId: GameId, userId: string) => GameMemberModel.findOne({ gameId, userId }).lean()
+};
+
+export const $findOne = {
+    gameMember: (gameId: GameId, userId: UserId) => GameMemberModel.findOne({ gameId, userId }).lean()
 };
 
 export const $countDocuments = {

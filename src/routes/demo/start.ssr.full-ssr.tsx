@@ -1,3 +1,4 @@
+// src/routes/demo/start.ssr.full-ssr.tsx
 import { createFileRoute } from '@tanstack/react-router';
 import { getPunkSongs } from '@/data/demo.punk-songs';
 

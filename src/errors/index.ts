@@ -1,3 +1,4 @@
+// src/errors/index.ts
 import { safeStringify } from '../utils/safeStringify';
 
 // src/errors/index.ts

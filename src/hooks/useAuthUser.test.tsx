@@ -1,3 +1,4 @@
+// src/hooks/useAuthUser.test.tsx
 import type { ReactNode } from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

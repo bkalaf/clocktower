@@ -25,6 +25,7 @@
         "@tanstack/react-router-ssr-query": "^1.131.7",
         "@tanstack/react-start": "^1.132.0",
         "@tanstack/router-plugin": "^1.132.0",
+        "@types/ws": "^8.18.1",
         "@typescript-eslint/eslint-plugin": "^8.53.0",
         "@typescript-eslint/parser": "^8.53.0",
         "animate.css": "^4.1.1",
@@ -48,6 +49,7 @@
         "tw-animate-css": "^1.3.6",
         "typescript-eslint": "^8.53.0",
         "vite-tsconfig-paths": "^6.0.2",
+        "ws": "^8.19.0",
         "zod": "^4.1.11"
     },
     "devDependencies": {

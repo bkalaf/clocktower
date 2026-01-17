@@ -1,11 +1,11 @@
 // src/server/realtime/reminder.ts
 import { $keys } from '../../$keys';
 import { connectMongoose } from '../../db/connectMongoose';
-import { GameModel } from '../../db/models/game';
 import { getRedis } from '../../redis';
 import { $countDocuments, $findById } from '../findById';
 import { getConnectedUserIds } from './presence';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type PublishFn = (topic: string, msg: any) => Promise<void> | void;
 
 type RemindersDeps = {
