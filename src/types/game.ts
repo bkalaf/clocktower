@@ -20,7 +20,7 @@ export interface User {
     name: string;
     email: string;
     passwordHash: string;
-    roles: GlobalRoles[];
+    userRoles: GlobalRoles[];
 }
 
 export type AuthedUser = Omit<User, 'passwordHash'>;

@@ -28,8 +28,8 @@
     --font-source-code-pro: 'Source Code Pro';
 }
 
-@import 'animate.css';
 @import 'tailwindcss';
+@import 'tw-animate-css';
 
 @layer base, components {
     html {

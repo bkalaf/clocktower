@@ -45,17 +45,24 @@ export const Route = createFileRoute('/api/auth/register')({
                     _id: userId,
                     email: body.email.toLowerCase(),
                     name: body.name,
-                    passwordHash
+                    passwordHash,
+                    userRoles: ['user']
                 });
 
-                const { _id: sessionId, expiresAt } = await createSession(userId);
+                const { sessionId, expiresAt } = await createSession(userId);
                 const headers = new Headers({
                     'Content-Type': 'application/json'
                 });
                 setSessionCookie(headers, sessionId, expiresAt);
 
                 return new Response(
-                    JSON.stringify({ ok: true, userId: doc._id, name: doc.name, email: doc.email, roles: doc.roles }),
+                    JSON.stringify({
+                        ok: true,
+                        userId: doc._id,
+                        name: doc.name,
+                        email: doc.email,
+                        userRoles: doc.userRoles
+                    }),
                     {
                         status: 200,
                         headers

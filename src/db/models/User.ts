@@ -15,4 +15,8 @@ export const userSchema = new Schema(
     }
 );
 
-export const UserModel = (mongoose.models['User'] as mongoose.Model<User>) || mongoose.model('User', userSchema);
+export type UserType = mongoose.InferRawDocType<typeof userSchema>;
+export type UserDocument = mongoose.HydratedDocument<UserType>;
+
+export const UserModel =
+    (mongoose.models['User'] as mongoose.Model<UserDocument>) || mongoose.model('User', userSchema);

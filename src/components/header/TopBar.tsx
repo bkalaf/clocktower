@@ -1,3 +1,4 @@
+// src/components/header/TopBar.tsx
 import { Link } from '@tanstack/react-router';
 import { Home, LogIn, LogOut, Menu, Network, StickyNote, User, UserPlus } from 'lucide-react';
 

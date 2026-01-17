@@ -1,3 +1,4 @@
+// src/components/header/LoginDialog.tsx
 import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 

@@ -1,5 +1,5 @@
 // src/components/header/Header.tsx
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { useDialogToggler } from '@/hooks/useDialogToggler';
@@ -16,7 +16,6 @@ export default function Header() {
     const registerDialog = useDialogToggler();
     const logoutDialog = useDialogToggler();
     const { user, isLoading: isAuthLoading } = useAuthUser();
-
     return (
         <>
             <TopBar
