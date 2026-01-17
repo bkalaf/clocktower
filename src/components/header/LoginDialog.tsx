@@ -16,6 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { WHOAMI_QUERY_KEY } from '@/hooks/useAuthUser';
+import { dialogBackgroundClassName, dialogBackgroundStyle } from './dialogBackground';
 
 type LoginDialogProps = {
     open: boolean;
@@ -23,7 +24,7 @@ type LoginDialogProps = {
 };
 
 const loginSchema = z.object({
-    email: z.string().min(1, 'Email is required').email('Invalid email'),
+    email: z.email('Invalid email'),
     password: z.string().min(8, 'Password must be at least 8 characters')
 });
 
@@ -48,6 +49,7 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
 
     useEffect(() => {
         if (!open) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setServerError(null);
             reset();
         }
@@ -62,10 +64,13 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                 }
             }}
         >
-            <DialogContent>
+            <DialogContent
+                className={dialogBackgroundClassName}
+                style={dialogBackgroundStyle}
+            >
                 <DialogHeader>
-                    <DialogTitle>Login</DialogTitle>
-                    <DialogDescription>Enter your credentials to continue</DialogDescription>
+                    <DialogTitle className='text-white'>Login</DialogTitle>
+                    <DialogDescription className='text-white/80'>Enter your credentials to continue</DialogDescription>
                 </DialogHeader>
                 <form
                     className='space-y-4'
@@ -98,7 +103,7 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                     <div className='space-y-1 text-sm'>
                         <label
                             htmlFor='login-email'
-                            className='font-semibold text-gray-700'
+                            className='font-semibold text-white'
                         >
                             Email
                         </label>
@@ -114,7 +119,7 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                     <div className='space-y-1 text-sm'>
                         <label
                             htmlFor='login-password'
-                            className='font-semibold text-gray-700'
+                            className='font-semibold text-white'
                         >
                             Password
                         </label>

@@ -8,12 +8,13 @@ export const listWhisperTopicsInput = z.object({
     userId: z.string().min(1),
     role: z.enum(['storyteller', 'player', 'spectator'])
 });
-export const success = (obj: any) => {
+export const success = (obj: any, headers?: HeadersInit) => {
     console.log(`safeStringify`, safeStringify(obj));
     return Response.json(obj, {
         status: 200,
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            ...(headers ?? {})
         }
     });
 };

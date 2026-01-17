@@ -1,6 +1,5 @@
 // src/components/header/Header.tsx
-import { useMemo, useState } from 'react';
-
+import { useState } from 'react';
 import { useAuthUser } from '@/hooks/useAuthUser';
 import { useDialogToggler } from '@/hooks/useDialogToggler';
 

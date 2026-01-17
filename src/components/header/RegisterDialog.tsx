@@ -16,6 +16,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { WHOAMI_QUERY_KEY } from '@/hooks/useAuthUser';
+import { dialogBackgroundClassName, dialogBackgroundStyle } from './dialogBackground';
 
 type RegisterDialogProps = {
     open: boolean;
@@ -25,7 +26,7 @@ type RegisterDialogProps = {
 const registerSchema = z
     .object({
         name: z.string().min(2, 'Full name is required'),
-        email: z.string().email('Invalid email'),
+        email: z.email('Invalid email'),
         password: z.string().min(8, 'Password must be at least 8 characters'),
         verificationPassword: z.string().min(8, 'Password confirmation is required')
     })
@@ -57,6 +58,7 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
 
     useEffect(() => {
         if (!open) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setServerError(null);
             reset();
         }
@@ -71,10 +73,13 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                 }
             }}
         >
-            <DialogContent>
+            <DialogContent
+                className={dialogBackgroundClassName}
+                style={dialogBackgroundStyle}
+            >
                 <DialogHeader>
-                    <DialogTitle>Create an account</DialogTitle>
-                    <DialogDescription>We only ask for what we need</DialogDescription>
+                    <DialogTitle className='text-white'>Create an account</DialogTitle>
+                    <DialogDescription className='text-white/80'>We only ask for what we need</DialogDescription>
                 </DialogHeader>
                 <form
                     className='space-y-4'
@@ -107,7 +112,7 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                     <div className='space-y-1 text-sm'>
                         <label
                             htmlFor='register-name'
-                            className='font-semibold text-gray-700'
+                            className='font-semibold text-white'
                         >
                             Full name
                         </label>
@@ -122,7 +127,7 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                     <div className='space-y-1 text-sm'>
                         <label
                             htmlFor='register-email'
-                            className='font-semibold text-gray-700'
+                            className='font-semibold text-white'
                         >
                             Email
                         </label>
@@ -137,7 +142,7 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                     <div className='space-y-1 text-sm'>
                         <label
                             htmlFor='register-password'
-                            className='font-semibold text-gray-700'
+                            className='font-semibold text-white'
                         >
                             Password
                         </label>
@@ -152,7 +157,7 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                     <div className='space-y-1 text-sm'>
                         <label
                             htmlFor='register-verification-password'
-                            className='font-semibold text-gray-700'
+                            className='font-semibold text-white'
                         >
                             Confirm password
                         </label>

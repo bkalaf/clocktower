@@ -21,3 +21,4 @@ export const zStartSetupInput = z.object({
 export const zGameIdParams = z.object({
     gameId: zGameId
 });
+

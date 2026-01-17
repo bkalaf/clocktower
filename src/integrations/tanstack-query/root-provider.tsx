@@ -1,3 +1,4 @@
+// src/integrations/tanstack-query/root-provider.tsx
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export function getContext() {

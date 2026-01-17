@@ -4,16 +4,18 @@ import { SessionModel } from '../db/models/Session';
 import { UserModel } from '../db/models/User';
 import { env } from '../env';
 import { HttpError } from '../errors';
-import { AuthedUser } from '../types/game';
+import { success } from '../utils/http';
 import { parseCookie } from './parseCookie';
 
-export async function getUserFromReq(req: Request): Promise<AuthedUser | null> {
+export async function getUserFromReq(req: Request): Promise<Response> {
     if (!req.headers.has('cookie')) {
-        throw HttpError.BAD_REQUEST('No cookie.');
+        return HttpError.BAD_REQUEST_RESPONSE('No cookie.');
     }
+    const cookie = req.headers.get('cookie') as string;
+    console.log(`cookie`, cookie);
     const sessionId = parseCookie(req.headers.get('cookie') as string, env.SESSION_COOKIE_NAME);
     if (!sessionId) {
-        throw HttpError.UNAUTHORIZED('No sessionId');
+        return HttpError.UNAUTHORIZED_RESPONSE('No sessionId');
     }
 
     await connectMongoose();
@@ -21,13 +23,13 @@ export async function getUserFromReq(req: Request): Promise<AuthedUser | null> {
     const now = Date.now();
     const session = await SessionModel.findOne({ _id: sessionId, expiresAt: { $gt: now } }).lean();
     if (!session) {
-        throw HttpError.UNAUTHORIZED('No session');
+        return HttpError.UNAUTHORIZED_RESPONSE('No session');
     }
 
     const user = await UserModel.findById(session.userId).lean();
     if (!user) {
-        throw HttpError.UNAUTHORIZED('No user');
+        return HttpError.UNAUTHORIZED_RESPONSE('No user');
     }
 
-    return { _id: user._id, name: user.name, email: user.email, roles: user.roles };
+    return success({ _id: user._id, name: user.name, email: user.email, userRoles: user.userRoles });
 }

@@ -14,9 +14,9 @@ export const Route = createFileRoute('/api/games/$gameId/host')({
     server: {
         handlers: {
             POST: async ({ params, request }) => {
-                const user = await getUserFromReq(request);
+                const response = await getUserFromReq(request);
                 if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 });
-
+                const user = zAuthUser
                 const gameId = zGameId.parse(params.gameId);
                 const body = zAssignHostInput.parse(await request.json());
 

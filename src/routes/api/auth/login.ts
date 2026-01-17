@@ -38,8 +38,12 @@ export const Route = createFileRoute('/api/auth/login')({
                 const session = await createSession(user._id);
                 const headers = new Headers();
                 setSessionCookie(headers, session.sessionId, session.expiresAt);
-
-                return success({ userId: user._id });
+                console.log(`session`, session);
+                console.log(`headers`, headers);
+                return new Response(JSON.stringify({ ok: true }), {
+                    status: 200,
+                    headers
+                });
             }
         }
     }

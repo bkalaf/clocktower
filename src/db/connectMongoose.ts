@@ -1,8 +1,6 @@
 // src/db/connectMongoose.ts
 import mongoose from 'mongoose';
 
-console.log(process.env);
-
 declare global {
     var __mongooseConn: { promise: Promise<typeof mongoose> | null; conn: typeof mongoose | null } | undefined;
 }
