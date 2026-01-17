@@ -1,18 +1,19 @@
 // src/db/models/GameMember.ts
 import mongoose from 'mongoose';
-import { zGameRoles } from '../../schemas';
 import z from 'zod/v4';
 import { getTypesFor } from '../../utils/zodToMongoose';
+import schemas from '../../schemas/index';
+const { refs, aliases, enums } = schemas;
 
 const zUpdateGameMember = z.object({
-    role: zGameRoles.default('spectator'),
+    role: enums.sessionRoles.default('spectator'),
     isSeated: z.boolean().default(false)
 });
 
 export const zGameMember = z.object({
-    _id: z.uuid('Must be a UUID'),
-    gameId: z.uuid('Must be a UUID'),
-    userId: z.uuid('Must be a UUID'),
+    _id: aliases.gameMemberId,
+    gameId: refs.game,
+    userId: refs.user,
     joinedAt: z.date(),
     ...zUpdateGameMember.shape
 });

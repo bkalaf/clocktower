@@ -1,7 +1,7 @@
-// src/serverFns/requireRole.ts
+// src/serverFns/require/requireRole.ts
 import { createServerFn } from '@tanstack/react-start';
+import { zRequireRoleInput } from '../../schemas';
 import { requireGameMember } from './requireGameMember';
-import { zRequireRoleInput } from '../schemas';
 
 export const requireMemberRole = createServerFn({
     method: 'GET'

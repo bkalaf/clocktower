@@ -1,6 +1,10 @@
 // src/server/schemas/$z.ts
 import sessionModels from '../../db/models/Session';
 import gameMemberModels from '../../db/models/GameMember';
+import userModels from '../../db/models/User';
+import gameModels from '../../db/models/Game';
+import chatItemModels from '../../db/models/ChatItem';
+import whisperModels from '../../db/models/Whisper';
 
 // export const $z = {
 //     authUser: z.object({
@@ -21,5 +25,9 @@ import gameMemberModels from '../../db/models/GameMember';
 
 export const $z = {
     gameMember: gameMemberModels,
-    session: sessionModels
+    session: sessionModels,
+    user: userModels,
+    game: gameModels,
+    chatItem: chatItemModels,
+    whisper: whisperModels
 };

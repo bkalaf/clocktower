@@ -2,10 +2,12 @@
 import z from 'zod/v4';
 import { getTypesFor } from '../../utils/zodToMongoose';
 import mongoose from 'mongoose';
+import refs from '../../schemas/refs';
+import aliases from '../../schemas/aliases';
 
 export const zSession = z.object({
-    _id: z.uuid('Must be a UUID'),
-    userId: z.uuid('Must be a UUID'),
+    _id: aliases.sessionId,
+    userId: refs.user,
     expiresAt: z.date()
 });
 

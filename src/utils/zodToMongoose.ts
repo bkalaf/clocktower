@@ -1,40 +1,66 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/utils/zodToMongoose.ts
-import z4 from 'zod/v4';
+import z from 'zod/v4';
 import { JSONSchema, jsonSchemaToMongoose } from './jsonSchemaToMongoose';
 import mongoose, { SchemaOptions } from 'mongoose';
 
-// src/utils/zodToMongoose.ts
-export function zodToJSONSchema<Shape extends z4.ZodRawShape>(zodObj: z4.ZodObject<Shape>) {
+
+export function zodToJSONSchema<Shape extends z.ZodRawShape>(zodObj: z.ZodObject<Shape>) {
     return zodObj.toJSONSchema({
         unrepresentable: 'any',
         override: (ctx) => {
-            const def = ctx.zodSchema._zod.def;
-            if (def.type === 'date') {
-                ctx.jsonSchema.bsonType = 'date';
-            } else {
-                ctx.jsonSchema.bsonType = ctx.jsonSchema.type;
-                delete ctx.jsonSchema.type;
+            const def = ctx.zodSchema?._zod?.def;
+            const type = def?.type;
+            if (typeof ctx.jsonSchema.required === 'boolean') {
+                console.log(`ERROR at: ${(def as any)?.path}`);
+            }
+            if (type === 'any') {
+                ctx.jsonSchema.type = 'object';
+                return;
+            }
+
+            // 1) date => { type: "date" }  (note: not standard JSON Schema)
+            if (type === 'date') {
+                // ctx.jsonSchema.type = 'date';
+                // If you want standard JSON Schema instead, do:
+                ctx.jsonSchema.type = 'string';
+                ctx.jsonSchema.format = 'date-time';
+                return;
+            }
+
+            // 2) optional / nullable => keep whatever Zod already produced
+            if (type === 'optional' || type === 'nullable') {
+                return; // do nothing
+            }
+
+            // 3) enum => ensure it has type: "string"
+            if (type === 'enum') {
+                // Only set if missing so you don't stomp other cases
+                if (ctx.jsonSchema.type === undefined) {
+                    ctx.jsonSchema.type = 'string';
+                }
+                return;
             }
         }
     }) as JSONSchema;
 }
 
-export function getSchemaFor<Shape extends z4.ZodRawShape>(
-    zodObj: z4.ZodObject<Shape>,
+export function getSchemaFor<Shape extends z.ZodRawShape>(
+    zodObj: z.ZodObject<Shape>,
     options: SchemaOptions = {}
-): mongoose.Schema<z4.infer<typeof zodObj>> {
+): mongoose.Schema<z.infer<typeof zodObj>> {
     const obj = zodToJSONSchema(zodObj);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return new mongoose.Schema(jsonSchemaToMongoose(obj), options) as any as mongoose.Schema<z4.infer<typeof zodObj>>;
+    return new mongoose.Schema(jsonSchemaToMongoose(obj), options) as any as mongoose.Schema<z.infer<typeof zodObj>>;
 }
 
-export function getModelFor<Shape extends z4.ZodRawShape>(
+export function getModelFor<Shape extends z.ZodRawShape>(
     name: string,
-    zodObj: z4.ZodObject<Shape>,
+    zodObj: z.ZodObject<Shape>,
     options: SchemaOptions = {}
 ) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    type Doc = z4.infer<typeof zodObj>;
+    type Doc = z.infer<typeof zodObj>;
     const schema: mongoose.Schema<Doc> = getSchemaFor(zodObj, options);
     const model =
         (mongoose.models[name] as mongoose.Model<Doc> | undefined) ??
@@ -42,17 +68,17 @@ export function getModelFor<Shape extends z4.ZodRawShape>(
     return [schema, model] as [mongoose.Schema<Doc>, mongoose.Model<Doc>];
 }
 
-
-export function defineIndexes<Shape extends z4.ZodRawShape>(schema: mongoose.Schema<z4.ZodObject<Shape>>) {
-    return function (indexes: [Record<string, 1 | -1>, { unique?: boolean, sparse?: boolean }?][]) {
+export function defineIndexes<Shape extends z.ZodRawShape>(schema: mongoose.Schema<z.ZodObject<Shape>>) {
+    return function (indexes: [Record<string, 1 | -1>, { unique?: boolean; sparse?: boolean }?][]) {
         for (const [fields, opts] of indexes) {
             schema.index(fields, opts);
         }
-    }
+    };
 }
-export function getTypesFor<Shape extends z4.ZodRawShape, T extends Record<string, any>>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function getTypesFor<Shape extends z.ZodRawShape, T extends Record<string, any>>(
     name: string,
-    zodObj: z4.ZodObject<Shape>,
+    zodObj: z.ZodObject<Shape>,
     options: SchemaOptions = {},
     obj: T,
     ...indexes: [Record<string, 1 | -1>, { unique?: boolean; sparse?: boolean; expireAfterSeconds?: number }?][]

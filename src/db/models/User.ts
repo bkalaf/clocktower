@@ -1,19 +1,13 @@
 // src/db/models/User.ts
 import mongoose from 'mongoose';
 import z from 'zod/v4';
-import { zGlobalRoles } from '../../schemas';
 import { getTypesFor } from '../../utils/zodToMongoose';
+import aliases from '../../schemas/aliases';
+import { zAuthedUser } from './AuthedUser';
 
 const zUser = z.object({
-    _id: z.uuid('Must be a UUID'),
-    name: z
-        .string()
-        .min(3, 'Must be over 3 characters long')
-        .max(64, 'Must be under 64 characters')
-        .meta({ description: 'Your displayed username.' }),
-    email: z.email('Invalid email').meta({ description: 'Your e-mail (this is private and not shown to others).' }),
-    passwordHash: z.string().min(8, 'Must be over 8 characters long.'),
-    userRoles: z.array(zGlobalRoles).min(1, 'Must have at least 1 role.').default(['user'])
+    ...zAuthedUser.shape,
+    passwordHash: aliases.password
 });
 
 const userModels = getTypesFor(

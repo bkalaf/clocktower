@@ -68,24 +68,6 @@ export type SkillLevel = 'novice' | 'intermediate' | 'advanced' | 'expert';
 
 export type Editions = 'tb' | 'bmr' | 'snv';
 
-export interface LobbySettings {
-    minPlayers?: number;
-    maxPlayers?: number;
-    canTravel: boolean;
-    edition?: Editions;
-    skillLevel?: SkillLevel;
-    plannedStartTime?: Date;
-}
-
-export interface Game {
-    _id: GameId; // gameId
-    version: number;
-    snapshot: Snapshot;
-    hostUserId: UserId;
-    status: GameStatus;
-    endedAt?: number;
-    lobbySettings: LobbySettings;
-}
 
 export interface Session {
     _id: SessionId;

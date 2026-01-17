@@ -1,8 +1,8 @@
-// src/serverFns/requireGameMember.ts
-import { connectMongoose } from '../db/connectMongoose';
-import $gameMember from './$gameMember';
+// src/serverFns/require/requireGameMember.ts
+import { connectMongoose } from '../../db/connectMongoose';
+import $gameMember from '../$gameMember';
 import { createServerFn } from '@tanstack/react-start';
-import { zRequireGameMemberInput } from '../schemas';
+import { zRequireGameMemberInput } from '../../schemas';
 
 export const requireGameMember = createServerFn({
     method: 'GET'

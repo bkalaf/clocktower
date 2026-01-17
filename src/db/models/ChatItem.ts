@@ -2,21 +2,19 @@
 import mongoose from 'mongoose';
 import z from 'zod/v4';
 import { getTypesFor } from '../../utils/zodToMongoose';
+import schemas from '../../schemas/index';
+const { refs, aliases, enums } = schemas;
 
 const zChatItem = z.object({
-    _id: z.uuid('Must be a UUID'),
-    gameId: z.uuid('Must be a UUID'),
-    topicId: z.uuid('Must be a UUID'),
+    _id: aliases.chatItemId,
+    gameId: refs.game,
+    topicId: refs.topic,
     from: z.object({
-        userId: z.uuid('Must be a UUID'),
-        name: z
-            .string()
-            .min(3, 'Must be over 3 characters long')
-            .max(64, 'Must be under 64 characters')
-            .meta({ description: 'The displayed name of the sender.' })
+        userId: aliases.userId,
+        name: aliases.name.meta({ description: 'The displayed name of the sender.' })
     }),
     text: z.string(),
-    streamId: z.uuid('Must be a UUID')
+    streamId: refs.stream
 });
 
 const chatItemModels = getTypesFor(

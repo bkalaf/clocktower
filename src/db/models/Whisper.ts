@@ -2,20 +2,18 @@
 import mongoose from 'mongoose';
 import z from 'zod/v4';
 import { getTypesFor } from '../../utils/zodToMongoose';
+import schemas from '../../schemas';
+const { refs, aliases } = schemas;
 
 const zWhisper = z.object({
-    _id: z.uuid('Must be a UUID'),
-    gameId: z.uuid('Must be a UUID'),
-    topicId: z.uuid('Must be a UUID'),
-    creatorId: z.uuid('Must be a UUID'),
-    members: z.array(z.uuid('Must be a UUID')),
+    _id: aliases.whisperId,
+    gameId: refs.game,
+    topicId: refs.topic,
+    creatorId: refs.user,
+    members: z.array(refs.user),
     isActive: z.boolean().default(true),
     meta: z.object({
-        name: z
-            .string()
-            .min(3, 'Must be over 3 characters long')
-            .max(64, 'Must be under 64 characters')
-            .meta({ description: 'The displayed name of the channel.' }),
+        name: aliases.name.meta({ description: 'The displayed name of the channel.' }),
         includeStoryteller: z.boolean().default(true)
     })
 });

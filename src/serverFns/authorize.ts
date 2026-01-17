@@ -2,7 +2,7 @@
 import { createServerFn } from '@tanstack/react-start';
 import z from 'zod';
 import { $is, GameRoles } from '../types/game';
-import { requireGameMember } from './requireGameMember';
+import { requireGameMember } from './require/requireGameMember';
 import { $keys } from '../$keys';
 import { listWhisperTopicsForUser } from './listWhisperTopicsForUser';
 import { getUserFromCookie } from './getUserFromCookie';

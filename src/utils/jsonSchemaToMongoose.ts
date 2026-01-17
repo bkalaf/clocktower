@@ -12,6 +12,7 @@ export type JSONSchema =
           const?: any;
           format?: string;
 
+          $ref?: string;
           // string validations
           minLength?: number;
           maxLength?: number;
@@ -34,16 +35,20 @@ export type JSONSchema =
           allOf?: JSONSchema[];
       }
     | boolean;
-
+type RefResolver = (ref: string) => string;
 // ---- public API ----
-export function jsonSchemaToMongoose(schema: JSONSchema, opts: { strict?: boolean } = {}): Record<string, any> {
+export function jsonSchemaToMongoose(
+    schema: JSONSchema,
+    opts: { strict?: boolean; refResolver?: RefResolver } = {}
+): Record<string, any> {
     console.log(`schema`, schema);
     if (!schema || schema === true) {
         // true/false schemas are too abstract; treat as Mixed
         return { type: mongoose.Schema.Types.Mixed };
     }
 
-    const def = schemaToMongooseField(schema, { path: [] });
+    const ctx = { path: [], refResolver: opts.refResolver };
+    const def = schemaToMongooseField(schema, ctx);
 
     // If top-level is an object with properties, return its properties mapping
     if (isObjectSchema(schema) && schema.properties) {
@@ -54,8 +59,41 @@ export function jsonSchemaToMongoose(schema: JSONSchema, opts: { strict?: boolea
     return { value: def };
 }
 
+function defaultRefResolver(ref: string): string {
+    // "#/definitions/User" or "#/$defs/User"
+    const m = ref.match(/#\/(?:definitions|\$defs)\/([^/]+)$/);
+    if (m) return m[1];
+
+    // last path segment of a URL-ish ref
+    const tail = ref.split('/').pop();
+    return tail ? decodeURIComponent(tail) : ref;
+}
 // ---- internals ----
-function schemaToMongooseField(schema: Exclude<JSONSchema, boolean>, ctx: { path: string[] }): any {
+function schemaToMongooseField(
+    schema: Exclude<JSONSchema, boolean> & { $ref?: string },
+    ctx: { path: string[]; refResolver?: RefResolver }
+): any {
+    if (schema.type === 'object' && Object.keys(schema).length === 1) {
+        return { type: mongoose.Schema.Types.Mixed };
+    }
+    if (schema.$ref) {
+        const refName = (ctx.refResolver ?? defaultRefResolver)(schema.$ref);
+
+        // If the node claims it's a string (or doesn't specify), treat as an ObjectId ref
+        const schemaTypes = normalizeTypes(schema.type);
+        const isStringish = !schema.type || schemaTypes.includes('string');
+
+        if (isStringish) {
+            // Common pattern: store foreign keys as ObjectId
+            return applyCommonOptions(schema, {
+                type: mongoose.Schema.Types.UUID,
+                ref: refName
+            });
+        }
+
+        // otherwise, fall back to Mixed (or you can expand with real $ref resolution)
+        return { type: mongoose.Schema.Types.Mixed };
+    }
     // Handle composition keywords (basic)
     if (schema.allOf?.length) {
         // naive merge: later wins
@@ -64,10 +102,42 @@ function schemaToMongooseField(schema: Exclude<JSONSchema, boolean>, ctx: { path
     if (schema.oneOf?.length || schema.anyOf?.length) {
         // Mongoose doesn't do union types well; safest is Mixed + optional enum narrowing if common
         const variants = schema.oneOf ?? schema.anyOf ?? [];
+        console.log(`variants`, variants);
+        const filtered = variants.filter((x) => (x as any).type !== 'null');
+        if (variants.length === filtered.length) {
+            const consts = variants.filter((x) => Object.keys(x).includes('const'));
+            if (consts.length === variants.length) {
+                if ((consts[0] as Exclude<JSONSchema, boolean>).type === 'number') {
+                    return {
+                        type: mongoose.Schema.Types.Int32,
+                        enum: variants.map((x) => (x as Exclude<JSONSchema, boolean>).const) as number[]
+                    };
+                }
+            }
+        }
+        console.log(`filtered`, filtered);
+        if (filtered.length === 1) {
+            const $dt = filtered[0] as Exclude<JSONSchema, boolean>;
+            console.log(`$dt`, $dt);
+            const { type, ...dt } = $dt;
+            if (type === 'string') {
+                if (dt.format === 'uuid') {
+                    return { ...dt, type: mongoose.Schema.Types.UUID };
+                } else if (dt.format === 'date-time') {
+                    return { ...dt, type: mongoose.Schema.Types.Date };
+                }
+                return { ...dt, type: mongoose.Schema.Types.String };
+            } else if (type === 'number') {
+                return { ...dt, type: mongoose.Schema.Types.Double };
+            } else if (type === 'integer') {
+                return { ...dt, type: mongoose.Schema.Types.String };
+            }
+            return { type: mongoose.Schema.Types.Mixed };
+        }
         const enums = variants.map((v) => (v as any).enum).filter(Boolean);
         if (enums.length === variants.length) {
             const mergedEnum = Array.from(new Set(enums.flat()));
-            return { type: mongoose.Schema.Types.Mixed, enum: mergedEnum };
+            return { type: mongoose.Schema.Types.String, enum: mergedEnum };
         }
         return { type: mongoose.Schema.Types.Mixed };
     }
@@ -107,6 +177,9 @@ function schemaToMongooseField(schema: Exclude<JSONSchema, boolean>, ctx: { path
     // format shortcuts
     if (schema.format === 'date-time') {
         return applyCommonOptions(schema, { type: Date });
+    }
+    if (schema.format === 'uuid') {
+        return { ...schema, type: mongoose.Schema.Types.UUID };
     }
 
     // type-based mapping
