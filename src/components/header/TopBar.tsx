@@ -2,12 +2,12 @@
 import { Link } from '@tanstack/react-router';
 import { LogIn, LogOut, Menu, User, UserPlus } from 'lucide-react';
 
-import { AuthUser } from '@/hooks/useAuthUser';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { AuthedUser } from '../../types/game';
 
 export type TopBarProps = {
-    user: AuthUser | null;
+    user?: AuthedUser | null;
     isAuthLoading: boolean;
     onMenuOpen: () => void;
     onOpenLogin: () => void;

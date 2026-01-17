@@ -8,6 +8,7 @@ import { NavigationDrawer } from './NavigationDrawer';
 import { LoginDialog } from './LoginDialog';
 import { RegisterDialog } from './RegisterDialog';
 import { LogoutDialog } from './LogoutDialog';
+import { MatchRoute } from '@tanstack/react-router';
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -29,10 +30,12 @@ export default function Header() {
                 isOpen={menuOpen}
                 onClose={() => setMenuOpen(false)}
             />
-            <LoginDialog
-                open={loginDialog.isOpen}
-                onClose={loginDialog.close}
-            />
+            <MatchRoute to='/login'>
+                <LoginDialog
+                    open={true}
+                    onClose={loginDialog.close}
+                />
+            </MatchRoute>
             <RegisterDialog
                 open={registerDialog.isOpen}
                 onClose={registerDialog.close}

@@ -17,6 +17,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { WHOAMI_QUERY_KEY } from '@/hooks/useAuthUser';
 import { dialogBackgroundClassName, dialogBackgroundStyle } from './dialogBackground';
+import { useNavigate } from '@tanstack/react-router';
 
 type LoginDialogProps = {
     open: boolean;
@@ -33,7 +34,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 export function LoginDialog({ open, onClose }: LoginDialogProps) {
     const queryClient = useQueryClient();
     const [serverError, setServerError] = useState<string | null>(null);
-
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -95,6 +96,7 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                             await queryClient.invalidateQueries({ queryKey: WHOAMI_QUERY_KEY });
                             reset();
                             onClose();
+                            navigate({ to: '/' });
                         } catch (err) {
                             setServerError('Unable to log in');
                         }

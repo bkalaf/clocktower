@@ -92,12 +92,13 @@ export const $STATUS_CODES2 = {
     502: 'Bad Gateway',
     503: 'Service Unavailable'
 };
+
 export const $STATUS_CODES = {
     OK: 200,
-    Created: 201,
-    Accepted: 202,
-    No_Content: 204,
-    Continue: 100,
+    CREATED: 201,
+    ACCEPTED: 202,
+    NO_CONTENT: 204,
+    CONTINUE: 100,
     BAD_REQUEST: 400,
     UNAUTHORIZED: 401,
     PAYMENT_REQUIRED: 402,

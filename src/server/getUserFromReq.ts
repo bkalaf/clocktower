@@ -3,10 +3,12 @@ import { connectMongoose } from '../db/connectMongoose';
 import { SessionModel } from '../db/models/Session';
 import { UserModel } from '../db/models/User';
 import { env } from '../env';
-import { HttpError } from '../errors';
-import { success } from '../utils/http';
+import { $STATUS_CODES, HttpError } from '../errors';
 import { parseCookie } from './parseCookie';
 
+/**
+* @deprecated
+*/
 export async function getUserFromReq(req: Request): Promise<Response> {
     if (!req.headers.has('cookie')) {
         return HttpError.BAD_REQUEST_RESPONSE('No cookie.');
@@ -33,3 +35,4 @@ export async function getUserFromReq(req: Request): Promise<Response> {
 
     return success({ _id: user._id, name: user.name, email: user.email, userRoles: user.userRoles });
 }
+

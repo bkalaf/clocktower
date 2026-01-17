@@ -1,10 +1,6 @@
 // src/server/schemas/gameSchemas.ts
 import z from 'zod';
-import { zGameId, zUserId } from '../../schemas';
-
-export const zReadyInput = z.object({
-    isReady: z.boolean().default(false)
-});
+import { zGameId, zUserId } from '../../schemas';   
 
 export const zPromoteStorytellerInput = z.object({
     userId: zUserId

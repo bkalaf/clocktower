@@ -9,9 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
-import { Route as ApiWhoamiRouteImport } from './routes/api/whoami'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as DemoStartApiRequestRouteImport } from './routes/demo/start.api-request'
 import { Route as DemoApiTqTodosRouteImport } from './routes/demo/api.tq-todos'
@@ -30,6 +30,11 @@ import { Route as ApiGamesGameIdStartSetupRouteImport } from './routes/api/games
 import { Route as ApiGamesGameIdReadyRouteImport } from './routes/api/games/$gameId/ready'
 import { Route as ApiGamesGameIdHostRouteImport } from './routes/api/games/$gameId/host'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -38,11 +43,6 @@ const IndexRoute = IndexRouteImport.update({
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   id: '/demo/tanstack-query',
   path: '/demo/tanstack-query',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiWhoamiRoute = ApiWhoamiRouteImport.update({
-  id: '/api/whoami',
-  path: '/api/whoami',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiHealthRoute = ApiHealthRouteImport.update({
@@ -135,8 +135,8 @@ const ApiGamesGameIdHostRoute = ApiGamesGameIdHostRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/api/health': typeof ApiHealthRoute
-  '/api/whoami': typeof ApiWhoamiRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
@@ -157,8 +157,8 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/api/health': typeof ApiHealthRoute
-  '/api/whoami': typeof ApiWhoamiRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
@@ -180,8 +180,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/api/health': typeof ApiHealthRoute
-  '/api/whoami': typeof ApiWhoamiRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
@@ -204,8 +204,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login'
     | '/api/health'
-    | '/api/whoami'
     | '/demo/tanstack-query'
     | '/api/auth/login'
     | '/api/auth/logout'
@@ -226,8 +226,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/login'
     | '/api/health'
-    | '/api/whoami'
     | '/demo/tanstack-query'
     | '/api/auth/login'
     | '/api/auth/logout'
@@ -248,8 +248,8 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/login'
     | '/api/health'
-    | '/api/whoami'
     | '/demo/tanstack-query'
     | '/api/auth/login'
     | '/api/auth/logout'
@@ -271,8 +271,8 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginRoute: typeof LoginRoute
   ApiHealthRoute: typeof ApiHealthRoute
-  ApiWhoamiRoute: typeof ApiWhoamiRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
@@ -294,6 +294,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -306,13 +313,6 @@ declare module '@tanstack/react-router' {
       path: '/demo/tanstack-query'
       fullPath: '/demo/tanstack-query'
       preLoaderRoute: typeof DemoTanstackQueryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/whoami': {
-      id: '/api/whoami'
-      path: '/api/whoami'
-      fullPath: '/api/whoami'
-      preLoaderRoute: typeof ApiWhoamiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/health': {
@@ -439,8 +439,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginRoute: LoginRoute,
   ApiHealthRoute: ApiHealthRoute,
-  ApiWhoamiRoute: ApiWhoamiRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,

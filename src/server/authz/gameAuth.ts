@@ -11,6 +11,9 @@ export async function requireGame(gameId: GameId) {
     return game;
 }
 
+/**
+* @deprecated
+*/
 export async function requireMember(gameId: GameId, userId: UserId) {
     await connectMongoose();
     const m = await GameMemberModel.findOne({ gameId, userId }).lean();

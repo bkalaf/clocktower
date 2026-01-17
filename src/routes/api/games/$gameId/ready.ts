@@ -7,34 +7,40 @@ import z from 'zod';
 import { parseJsonBody } from '../../../../server/parseJsonBody';
 import { zReadyInput } from '../../../../server/schemas/gameSchemas';
 import { connectMongoose } from '../../../../db/connectMongoose';
-import { getUserFromReq } from '../../../../server/getUserFromReq';
 import { requireMember } from '../../../../server/authz/gameAuth';
 import { GameMemberModel } from '../../../../db/models/gameMember';
 import { $keys } from '../../../../$keys';
 import { getRedis } from '../../../../redis';
+import { getUserFromCookie } from '../../../../serverFns/getUserFromCookie';
+import { createServerFn } from '@tanstack/react-start';
+import { $z } from '../../../../server/schemas/$z';
 
 const zReadyParams = z.object({
     gameId: zGameId
 });
 
+export const makeReady = createServerFn({
+    method: 'POST'
+})
+    .inputValidator($z.makeReadyInput)
+    .handler(async (data) => {
+        await connectMongoose();
+        const {
+            data: { gameId, isReady }
+        } = data;
+        const user = await getUserFromCookie();
+        requireMember(gameId, user._id);
+        
+    });
 export const Route = createFileRoute('/api/games/$gameId/ready')({
     server: {
         handlers: {
             POST: async ({ params, request }) => {
-                const user = await getUserFromReq(request);
+                const user = await getUserFromCookie();
                 if (!user) return HttpError.UNAUTHORIZED_RESPONSE('UNAUTHORIZED');
 
                 const $params = parseParams(params, zReadyParams);
                 const body = await parseJsonBody(request, zReadyInput);
-                if (!$params.ok) {
-                    return $params.response;
-                }
-                if (!body.ok) {
-                    return body.response;
-                }
-                const {
-                    data: { gameId }
-                } = $params;
 
                 await requireMember(gameId, user._id);
                 await connectMongoose();

@@ -1,13 +1,13 @@
-// src/server/authorize.ts
+// src/serverFns/authorize.ts
 import { createServerFn } from '@tanstack/react-start';
-import { getRequest } from '@tanstack/react-start/server';
 import z from 'zod';
-import { getUserFromReq } from './getUserFromReq';
-import { HttpError } from '../errors';
-import { GameRoles, UserId } from '../types/game';
+import { $is, GameRoles } from '../types/game';
 import { requireGameMember } from './requireGameMember';
 import { $keys } from '../$keys';
 import { listWhisperTopicsForUser } from './listWhisperTopicsForUser';
+import { getUserFromCookie } from './getUserFromCookie';
+import $response from '../utils/http';
+import { zRequireGameMemberOutput } from '../schemas';
 
 const authorizeInputSchema = z.object({
     gameId: z.string().min(1)
@@ -16,16 +16,21 @@ const authorizeInputSchema = z.object({
 export const authorize = createServerFn({
     method: 'POST'
 })
-    .inputValidator((data: z.infer<typeof authorizeInputSchema>) => authorizeInputSchema.parse(data))
+    .inputValidator(authorizeInputSchema)
     .handler(async ({ data: { gameId } }) => {
-        const req = getRequest();
-        const user = await getUserFromReq(req);
-        if (!user) throw HttpError.BAD_REQUEST('No cookie with user');
-        let member: { role: GameRoles; userId: UserId };
+        const user = await getUserFromCookie();
+        if (user == null) return null;
+        let member: { role: GameRoles; userId: string } | null;
         try {
-            member = await requireGameMember(gameId, user);
+            member = await requireGameMember({
+                data: {
+                    gameId,
+                    user
+                }
+            });
+            if (member == null) return null;
         } catch (error) {
-            throw HttpError.FORBIDDEN('no user authorized');
+            return null;
         }
         const topics: string[] = [];
         topics.push($keys.publicTopic(gameId));

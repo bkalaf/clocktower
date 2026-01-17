@@ -5,18 +5,27 @@ import { zAssignHostInput } from '../../../../server/schemas/gameSchemas';
 import { requireHost, requireMember } from '../../../../server/authz/gameAuth';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { getRedis } from '../../../../redis';
-import { getUserFromReq } from '../../../../server/getUserFromReq';
 import { zGameId } from '../../../../schemas';
 import { $keys } from '../../../../$keys';
 import { setHostUserId } from '../../../../server/game';
+import { getUserFromCookie } from '../../../../serverFns/getUserFromCookie';
+import { $is } from '../../../../types/game';
+import { createServerFn } from '@tanstack/react-start';
 
+export const hostPost = createServerFn({
+    method: 'POST'
+})
+    .inputValidator(zAssignHostInput)
+    .handler(async (data) => {
+
+    });
 export const Route = createFileRoute('/api/games/$gameId/host')({
     server: {
         handlers: {
             POST: async ({ params, request }) => {
-                const response = await getUserFromReq(request);
-                if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 });
-                const user = zAuthUser
+                const response = await getUserFromCookie();
+                if (!$is.failure(response)) return response;
+                const user = zAuthUser;
                 const gameId = zGameId.parse(params.gameId);
                 const body = zAssignHostInput.parse(await request.json());
 

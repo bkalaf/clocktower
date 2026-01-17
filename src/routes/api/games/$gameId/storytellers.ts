@@ -1,6 +1,5 @@
 // src/routes/api/games/$gameId/storytellers.ts
 import { createFileRoute } from '@tanstack/react-router';
-import { getUserFromReq } from '../../../../server/getUserFromReq';
 import { HttpError } from '../../../../errors';
 import { parseParams } from '../../../../server/parseParams';
 import { GameMemberModel } from '../../../../db/models/gameMember';
@@ -15,7 +14,7 @@ export const Route = createFileRoute('/api/games/$gameId/storytellers')({
     server: {
         handlers: {
             POST: async ({ params, request }) => {
-                const user = await getUserFromReq(request);
+                const user = await getUserFromCookie();
                 if (!user) {
                     return HttpError.UNAUTHORIZED_RESPONSE('UNAUTHORIZED');
                 }

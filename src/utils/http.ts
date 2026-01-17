@@ -1,71 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // src/utils/http.ts
 import z from 'zod';
-import { safeStringify } from './safeStringify';
+import { $ctor, Result } from '../types/game';
 
 export const listWhisperTopicsInput = z.object({
     gameId: z.string().min(1),
     userId: z.string().min(1),
     role: z.enum(['storyteller', 'player', 'spectator'])
 });
-export const success = (obj: any, headers?: HeadersInit) => {
-    console.log(`safeStringify`, safeStringify(obj));
-    return Response.json(obj, {
-        status: 200,
-        headers: {
-            'Content-Type': 'application/json',
-            ...(headers ?? {})
-        }
-    });
+
+const success = <T>(obj: T): Result<T> => $ctor.success(obj, 'OK');
+const created = <T>(obj: T): Result<T> => $ctor.success(obj, 'CREATED');
+const unauthorized = <T>(msg?: string): Result<T> => $ctor.failure('UNAUTHORIZED', msg);
+const notFound = <T>(msg?: string): Result<T> => $ctor.failure('NOT_FOUND', msg);
+const forbidden = <T>(msg?: string): Result<T> => $ctor.failure('FORBIDDEN', msg);
+const badRequest = <T>(msg?: string): Result<T> => $ctor.failure('BAD_REQUEST', msg);
+
+const $response = {
+    success,
+    created,
+    forbidden,
+    badRequest,
+    notFound,
+    unauthorized
 };
-export const created = (obj: any) => {
-    return Response.json(safeStringify(obj), {
-        status: 201,
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
-};
-export const notFound = () =>
-    Response.json(
-        { error: 'Not Found.' },
-        {
-            status: 404,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    );
 
-export const unauthorized = () =>
-    Response.json(
-        { error: 'Unauthorized' },
-        {
-            status: 401,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    );
-
-export const forbidden = () =>
-    Response.json(
-        { error: 'Forbidden' },
-        {
-            status: 403,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    );
-
-export const badRequest = (msg: string) =>
-    Response.json(
-        { error: msg },
-        {
-            status: 400,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
-    );
+export default $response;

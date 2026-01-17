@@ -1,4 +1,42 @@
 // src/types/game.ts
+import z from 'zod';
+import { $STATUS_CODES } from '../errors';
+
+export type Success<T> = {
+    kind: 'success';
+    value: T;
+    code: number;
+    statusText: string;
+};
+export type Failure = {
+    kind: 'failure';
+    code: number;
+    statusText: string;
+    message?: string;
+};
+export type Result<T> = Success<T> | Failure;
+
+export const $is = {
+    success: <T>(result: Result<T>): result is Success<T> => result.kind === 'success',
+    failure: <T>(result: Result<T>): result is Failure => result.kind === 'failure'
+};
+
+export const $ctor = {
+    success: <T>(value: T, key: keyof typeof $STATUS_CODES = 'OK'): Result<T> => ({
+        kind: 'success',
+        value,
+        code: $STATUS_CODES[key],
+        statusText: key
+    }),
+    failure: <T = unknown>(key: keyof typeof $STATUS_CODES, message?: string): Result<T> => ({
+        kind: 'failure',
+        code: $STATUS_CODES[key],
+        statusText: key,
+        message
+    })
+};
+
+export type ServerFnInput<T> = z.infer<T>;
 export type UserId = string;
 export type GameId = string;
 export type WhisperId = string;

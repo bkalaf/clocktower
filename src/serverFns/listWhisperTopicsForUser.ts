@@ -1,29 +1,23 @@
-// src/server/listWhisperTopicsForUser.ts
+// src/serverFns/listWhisperTopicsForUser.ts
 import { createServerFn } from '@tanstack/react-start';
 import { $keys } from '../$keys';
 import { connectMongoose } from '../db/connectMongoose';
-import { WhisperModel } from '../db/models/whisper';
 import { getRedis } from '../redis';
 import { GameId, UserId, GameRoles } from '../types/game';
 import { listWhisperTopicsInput } from '../utils/http';
-import z from 'zod';
+import $whisper from './$whisper';
 
 export const listWhisperTopicsForUser = createServerFn({
     method: 'POST'
 })
-    .inputValidator((data: z.infer<typeof listWhisperTopicsInput>) => listWhisperTopicsInput.parse(data))
+    .inputValidator(listWhisperTopicsInput)
     .handler(async ({ data }: { data: { gameId: GameId; userId: UserId; role: GameRoles } }) => {
         const r = await getRedis();
         const key = $keys.userWhisperKey(data.gameId, data.userId);
         const topics = await r.sMembers(key);
         if (topics.length === 0) {
             await connectMongoose();
-            const query =
-                data.role === 'storyteller' ?
-                    { gameId: data.gameId, isActive: true }
-                :   { gameId: data.gameId, isActive: true, members: data.userId };
-
-            const whispers = await WhisperModel.find(query).lean();
+            const whispers = await $whisper.find(data.gameId, data.userId, true);
 
             topics.push(...whispers.map((whisper) => whisper.topicId));
 

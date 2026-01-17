@@ -4,7 +4,7 @@ import { zCreateWhisperInput, zCreateWhisperParams } from '../../../../schemas';
 import { HttpError } from '../../../../errors';
 import { GameMemberModel } from '../../../../db/models/gameMember';
 import { getUserFromReq } from '../../../../server/getUserFromReq';
-import { requireRole } from '../../../../server/requireRole';
+import { requireRole } from '../../../../serverFns/requireRole';
 import { parseParams } from '../../../../server/parseParams';
 import { parseJsonBody } from '../../../../server/parseJsonBody';
 import { created } from '../../../../utils/http';
@@ -25,7 +25,7 @@ export const Route = createFileRoute('/api/games/$gameId/whispers')({
                 const { gameId } = p.data;
                 const body = b.data;
 
-                const user = await getUserFromReq(request);
+                const user = await getUserFromCookie();
                 if (!user) return HttpError.UNAUTHORIZED_RESPONSE('Unauthorized');
 
                 const { userId } = await requireRole(gameId, user, ['player', 'storyteller']);

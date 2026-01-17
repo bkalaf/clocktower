@@ -11,7 +11,7 @@ import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
 import { $keys } from '../../$keys';
 import { $findById, $findOne } from '../findById';
-import { listWhisperTopicsForUser } from '../listWhisperTopicsForUser';
+import { listWhisperTopicsForUser } from '../../serverFns/listWhisperTopicsForUser';
 import { GameRoles } from '../../types/game';
 import { maybeRemindPickStoryteller } from './reminder';
 import { ChatItemModel } from '../../db/models/chatItem';
