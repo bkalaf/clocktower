@@ -24,7 +24,12 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
     }, [open]);
 
     return (
-        <Dialog open={open} onClose={onClose} title='Login' description='Enter your credentials to continue'>
+        <Dialog
+            open={open}
+            onClose={onClose}
+            title='Login'
+            description='Enter your credentials to continue'
+        >
             <form
                 className='space-y-4'
                 onSubmit={async (event) => {
@@ -61,7 +66,10 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                 }}
             >
                 <div className='space-y-1 text-sm'>
-                    <label htmlFor='login-email' className='font-semibold text-gray-700'>
+                    <label
+                        htmlFor='login-email'
+                        className='font-semibold text-gray-700'
+                    >
                         Email
                     </label>
                     <Input
@@ -75,7 +83,10 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                     />
                 </div>
                 <div className='space-y-1 text-sm'>
-                    <label htmlFor='login-password' className='font-semibold text-gray-700'>
+                    <label
+                        htmlFor='login-password'
+                        className='font-semibold text-gray-700'
+                    >
                         Password
                     </label>
                     <Input
@@ -89,7 +100,11 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                     />
                 </div>
                 {error && <p className='text-sm text-red-500'>{error}</p>}
-                <Button type='submit' disabled={isLoading} className='w-full'>
+                <Button
+                    type='submit'
+                    disabled={isLoading}
+                    className='w-full'
+                >
                     {isLoading ? 'Logging in…' : 'Log in'}
                 </Button>
             </form>

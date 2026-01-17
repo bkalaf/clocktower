@@ -23,11 +23,13 @@ export function LogoutDialog({ open, onClose }: LogoutDialogProps) {
         >
             <div className='space-y-4'>
                 <p className='text-sm text-gray-600'>
-                    Are you sure you want to log out? This will clear your local session and sign you out on the
-                    server.
+                    Are you sure you want to log out? This will clear your local session and sign you out on the server.
                 </p>
                 <div className='flex justify-end gap-3'>
-                    <Button variant='outline' onClick={onClose}>
+                    <Button
+                        variant='outline'
+                        onClick={onClose}
+                    >
                         Cancel
                     </Button>
                     <Button

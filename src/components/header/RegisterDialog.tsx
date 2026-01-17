@@ -84,7 +84,10 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                 }}
             >
                 <div className='space-y-1 text-sm'>
-                    <label htmlFor='register-name' className='font-semibold text-gray-700'>
+                    <label
+                        htmlFor='register-name'
+                        className='font-semibold text-gray-700'
+                    >
                         Full name
                     </label>
                     <Input
@@ -97,7 +100,10 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                     />
                 </div>
                 <div className='space-y-1 text-sm'>
-                    <label htmlFor='register-email' className='font-semibold text-gray-700'>
+                    <label
+                        htmlFor='register-email'
+                        className='font-semibold text-gray-700'
+                    >
                         Email
                     </label>
                     <Input
@@ -110,7 +116,10 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                     />
                 </div>
                 <div className='space-y-1 text-sm'>
-                    <label htmlFor='register-password' className='font-semibold text-gray-700'>
+                    <label
+                        htmlFor='register-password'
+                        className='font-semibold text-gray-700'
+                    >
                         Password
                     </label>
                     <Input
@@ -124,7 +133,10 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                     />
                 </div>
                 <div className='space-y-1 text-sm'>
-                    <label htmlFor='register-verification-password' className='font-semibold text-gray-700'>
+                    <label
+                        htmlFor='register-verification-password'
+                        className='font-semibold text-gray-700'
+                    >
                         Confirm password
                     </label>
                     <Input
@@ -133,14 +145,17 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                         minLength={8}
                         required
                         value={form.verificationPassword}
-                        onChange={(event) =>
-                            setForm((prev) => ({ ...prev, verificationPassword: event.target.value }))
-                        }
+                        onChange={(event) => setForm((prev) => ({ ...prev, verificationPassword: event.target.value }))}
                         autoComplete='new-password'
                     />
                 </div>
                 {error && <p className='text-sm text-red-500'>{error}</p>}
-                <Button type='submit' disabled={isLoading} className='w-full' variant='default'>
+                <Button
+                    type='submit'
+                    disabled={isLoading}
+                    className='w-full'
+                    variant='default'
+                >
                     {isLoading ? 'Registering…' : 'Register'}
                 </Button>
             </form>

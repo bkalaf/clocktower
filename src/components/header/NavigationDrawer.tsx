@@ -20,7 +20,13 @@ export function NavigationDrawer({ isOpen, onClose }: NavigationDrawerProps) {
         >
             <div className='flex items-center justify-between p-4 border-b border-gray-700'>
                 <h2 className='text-xl font-bold'>Navigation</h2>
-                <Button variant='ghost' size='lg' className='p-2 bg-transparent' onClick={onClose} aria-label='Close menu'>
+                <Button
+                    variant='ghost'
+                    size='lg'
+                    className='p-2 bg-transparent'
+                    onClick={onClose}
+                    aria-label='Close menu'
+                >
                     <X size={24} />
                 </Button>
             </div>
@@ -75,7 +81,9 @@ export function NavigationDrawer({ isOpen, onClose }: NavigationDrawerProps) {
                         }
                         aria-label='Toggle Start SSR list'
                     >
-                        {groupedExpanded.StartSSRDemo ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
+                        {groupedExpanded.StartSSRDemo ?
+                            <ChevronDown size={20} />
+                        :   <ChevronRight size={20} />}
                     </button>
                 </div>
 

@@ -9,4 +9,3 @@ export const setHostUserId = async (gameId: GameId, hostUserId: UserId) =>
     GameModel.updateOne({ _id: gameId }, { $set: { hostUserId: hostUserId } });
 
 export const setEnded = async (gameId: GameId) => setStatus(gameId, 'ended', { endedAt: new Date().valueOf() });
-

@@ -7,7 +7,7 @@ export type StreamId = string;
 export type Snapshot = object;
 export type GameMemberId = `${GameId}:${UserId}`;
 export type TopicId = `game:${GameId}:whisper:${WhisperId}`;
-export type ChatItemid = 
+export type ChatItemId = string;
 export type GlobalRoles = 'moderator' | 'user' | 'admin';
 export type GameRoles = 'player' | 'storyteller' | 'spectator';
 export type TopicTypes = 'public' | 'st' | 'whisper';
@@ -86,7 +86,7 @@ export interface ChatMsg {
 }
 
 export interface ChatItem {
-    _id: ChatItemid;
+    _id: ChatItemId;
     from: { userId: UserId; name: string };
     gameId: GameId;
     topicId: TopicId;

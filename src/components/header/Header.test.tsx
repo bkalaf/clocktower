@@ -3,12 +3,7 @@ import type { ReactElement, ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import {
-    LoginDialog,
-    LogoutDialog,
-    RegisterDialog,
-    TopBar
-} from './index';
+import { LoginDialog, LogoutDialog, RegisterDialog, TopBar } from './index';
 import { WHOAMI_QUERY_KEY } from '@/hooks/useAuthUser';
 
 jest.mock('@tanstack/react-router', () => ({
@@ -91,7 +86,12 @@ describe('LoginDialog', () => {
         globalThis.fetch = fetchMock as typeof globalThis.fetch;
 
         const onClose = jest.fn();
-        const { invalidateSpy } = renderWithClient(<LoginDialog open onClose={onClose} />);
+        const { invalidateSpy } = renderWithClient(
+            <LoginDialog
+                open
+                onClose={onClose}
+            />
+        );
 
         fireEvent.change(screen.getByLabelText(/Email/i), {
             target: { value: 'hi@example.com' }
@@ -134,7 +134,12 @@ describe('RegisterDialog', () => {
         globalThis.fetch = fetchMock as typeof globalThis.fetch;
 
         const onClose = jest.fn();
-        const { invalidateSpy } = renderWithClient(<RegisterDialog open onClose={onClose} />);
+        const { invalidateSpy } = renderWithClient(
+            <RegisterDialog
+                open
+                onClose={onClose}
+            />
+        );
 
         fireEvent.change(screen.getByLabelText(/Full name/i), {
             target: { value: 'New User' }
@@ -182,7 +187,12 @@ describe('LogoutDialog', () => {
         globalThis.fetch = fetchMock as typeof globalThis.fetch;
 
         const onClose = jest.fn();
-        const { invalidateSpy } = renderWithClient(<LogoutDialog open onClose={onClose} />);
+        const { invalidateSpy } = renderWithClient(
+            <LogoutDialog
+                open
+                onClose={onClose}
+            />
+        );
 
         fireEvent.click(screen.getByRole('button', { name: /log out/i }));
 

@@ -9,7 +9,7 @@ export const listWhisperTopicsInput = z.object({
     role: z.enum(['storyteller', 'player', 'spectator'])
 });
 export const success = (obj: any) => {
-    console.log(`safeStringify`, safeStringify(obj))
+    console.log(`safeStringify`, safeStringify(obj));
     return Response.json(obj, {
         status: 200,
         headers: {

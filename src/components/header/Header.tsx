@@ -1,3 +1,4 @@
+// src/components/header/Header.tsx
 import { useState } from 'react';
 
 import { useAuthUser } from '@/hooks/useAuthUser';
@@ -26,10 +27,22 @@ export default function Header() {
                 onOpenRegister={registerDialog.open}
                 onOpenLogout={logoutDialog.open}
             />
-            <NavigationDrawer isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
-            <LoginDialog open={loginDialog.isOpen} onClose={loginDialog.close} />
-            <RegisterDialog open={registerDialog.isOpen} onClose={registerDialog.close} />
-            <LogoutDialog open={logoutDialog.isOpen} onClose={logoutDialog.close} />
+            <NavigationDrawer
+                isOpen={menuOpen}
+                onClose={() => setMenuOpen(false)}
+            />
+            <LoginDialog
+                open={loginDialog.isOpen}
+                onClose={loginDialog.close}
+            />
+            <RegisterDialog
+                open={registerDialog.isOpen}
+                onClose={registerDialog.close}
+            />
+            <LogoutDialog
+                open={logoutDialog.isOpen}
+                onClose={logoutDialog.close}
+            />
         </>
     );
 }

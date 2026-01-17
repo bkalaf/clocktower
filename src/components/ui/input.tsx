@@ -21,10 +21,14 @@ const inputVariants = cva(
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement>, VariantProps<typeof inputVariants> {}
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ className, intent, ...props }, ref) => {
-        return <input ref={ref} className={cn(inputVariants({ intent }), className)} {...props} />;
-    }
-);
+export const Input = forwardRef<HTMLInputElement, InputProps>(({ className, intent, ...props }, ref) => {
+    return (
+        <input
+            ref={ref}
+            className={cn(inputVariants({ intent }), className)}
+            {...props}
+        />
+    );
+});
 
 Input.displayName = 'Input';

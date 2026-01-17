@@ -58,9 +58,10 @@ async function canJoinTopic(conn: Conn, topicId: string) {
     if (topicId.startsWith(`game:${conn.gameId}:whisper:`)) {
         if (!conn.role) return false;
         try {
-            const topics = (await listWhisperTopicsForUser({
-                data: { gameId: conn.gameId, userId: conn.userId, role: conn.role }
-            })) ?? [];
+            const topics =
+                (await listWhisperTopicsForUser({
+                    data: { gameId: conn.gameId, userId: conn.userId, role: conn.role }
+                })) ?? [];
             return topics.includes(topicId);
         } catch {
             return false;
@@ -291,10 +292,7 @@ export async function handleWsConnection(
 
 const MAX_REPLAY_ITEMS = 200;
 
-async function replayFromLastStreamIds(
-    ws: WebSocket,
-    lastStreamIds?: Record<string, string>
-) {
+async function replayFromLastStreamIds(ws: WebSocket, lastStreamIds?: Record<string, string>) {
     if (!lastStreamIds) return;
     const entries = Object.entries(lastStreamIds);
     if (entries.length === 0) return;
