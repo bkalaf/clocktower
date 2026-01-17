@@ -55,7 +55,7 @@ type TopBarProps = {
     onOpenLogout: () => void;
 };
 
-function TopBar({
+export function TopBar({
     user,
     isAuthLoading,
     onMenuOpen,
@@ -277,7 +277,7 @@ type LoginDialogProps = {
     onClose: () => void;
 };
 
-function LoginDialog({ open, onClose }: LoginDialogProps) {
+export function LoginDialog({ open, onClose }: LoginDialogProps) {
     const queryClient = useQueryClient();
     const [form, setForm] = useState({ email: '', password: '' });
     const [error, setError] = useState<string | null>(null);
@@ -373,7 +373,7 @@ type RegisterDialogProps = {
     onClose: () => void;
 };
 
-function RegisterDialog({ open, onClose }: RegisterDialogProps) {
+export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
     const queryClient = useQueryClient();
     const [form, setForm] = useState({
         name: '',
@@ -521,7 +521,7 @@ type LogoutDialogProps = {
     onClose: () => void;
 };
 
-function LogoutDialog({ open, onClose }: LogoutDialogProps) {
+export function LogoutDialog({ open, onClose }: LogoutDialogProps) {
     const queryClient = useQueryClient();
     const [isLoading, setIsLoading] = useState(false);
 

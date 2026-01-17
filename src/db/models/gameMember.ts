@@ -17,9 +17,9 @@ const gameMemberSchema = new Schema<GameMember>(
 gameMemberSchema.index({ gameId: 1, userId: 1 }, { unique: true });
 gameMemberSchema.index({ gameId: 1, role: 1 });
 
+export type GameMemberType = mongoose.InferRawDocType<GameMember>;
+export type GameMemberDocument = mongoose.HydratedDocument<GameMemberType>;
+
 export const GameMemberModel =
     (mongoose.models['GameMember'] as mongoose.Model<GameMember>) ??
     mongoose.model<GameMember>('GameMember', gameMemberSchema);
-
-export type GameMemberType = mongoose.InferRawDocType<GameMember>;
-export type GameMemberDocument = mongoose.HydratedDocument<GameMemberType>;

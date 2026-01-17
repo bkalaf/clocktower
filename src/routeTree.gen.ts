@@ -25,6 +25,10 @@ import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr
 import { Route as DemoStartSsrFullSsrRouteImport } from './routes/demo/start.ssr.full-ssr'
 import { Route as DemoStartSsrDataOnlyRouteImport } from './routes/demo/start.ssr.data-only'
 import { Route as ApiGamesGameIdWhispersRouteImport } from './routes/api/games/$gameId/whispers'
+import { Route as ApiGamesGameIdStorytellersRouteImport } from './routes/api/games/$gameId/storytellers'
+import { Route as ApiGamesGameIdStartSetupRouteImport } from './routes/api/games/$gameId/start-setup'
+import { Route as ApiGamesGameIdReadyRouteImport } from './routes/api/games/$gameId/ready'
+import { Route as ApiGamesGameIdHostRouteImport } from './routes/api/games/$gameId/host'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -106,6 +110,28 @@ const ApiGamesGameIdWhispersRoute = ApiGamesGameIdWhispersRouteImport.update({
   path: '/api/games/$gameId/whispers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiGamesGameIdStorytellersRoute =
+  ApiGamesGameIdStorytellersRouteImport.update({
+    id: '/api/games/$gameId/storytellers',
+    path: '/api/games/$gameId/storytellers',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiGamesGameIdStartSetupRoute =
+  ApiGamesGameIdStartSetupRouteImport.update({
+    id: '/api/games/$gameId/start-setup',
+    path: '/api/games/$gameId/start-setup',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiGamesGameIdReadyRoute = ApiGamesGameIdReadyRouteImport.update({
+  id: '/api/games/$gameId/ready',
+  path: '/api/games/$gameId/ready',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGamesGameIdHostRoute = ApiGamesGameIdHostRouteImport.update({
+  id: '/api/games/$gameId/host',
+  path: '/api/games/$gameId/host',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -119,6 +145,10 @@ export interface FileRoutesByFullPath {
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
+  '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
+  '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
+  '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
+  '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute
   '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
@@ -137,6 +167,10 @@ export interface FileRoutesByTo {
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
+  '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
+  '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
+  '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
+  '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute
   '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
@@ -156,6 +190,10 @@ export interface FileRoutesById {
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
+  '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
+  '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
+  '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
+  '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute
   '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
@@ -176,6 +214,10 @@ export interface FileRouteTypes {
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/start/api-request'
+    | '/api/games/$gameId/host'
+    | '/api/games/$gameId/ready'
+    | '/api/games/$gameId/start-setup'
+    | '/api/games/$gameId/storytellers'
     | '/api/games/$gameId/whispers'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
@@ -194,6 +236,10 @@ export interface FileRouteTypes {
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/start/api-request'
+    | '/api/games/$gameId/host'
+    | '/api/games/$gameId/ready'
+    | '/api/games/$gameId/start-setup'
+    | '/api/games/$gameId/storytellers'
     | '/api/games/$gameId/whispers'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
@@ -212,6 +258,10 @@ export interface FileRouteTypes {
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/start/api-request'
+    | '/api/games/$gameId/host'
+    | '/api/games/$gameId/ready'
+    | '/api/games/$gameId/start-setup'
+    | '/api/games/$gameId/storytellers'
     | '/api/games/$gameId/whispers'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
@@ -231,6 +281,10 @@ export interface RootRouteChildren {
   DemoApiNamesRoute: typeof DemoApiNamesRoute
   DemoApiTqTodosRoute: typeof DemoApiTqTodosRoute
   DemoStartApiRequestRoute: typeof DemoStartApiRequestRoute
+  ApiGamesGameIdHostRoute: typeof ApiGamesGameIdHostRoute
+  ApiGamesGameIdReadyRoute: typeof ApiGamesGameIdReadyRoute
+  ApiGamesGameIdStartSetupRoute: typeof ApiGamesGameIdStartSetupRoute
+  ApiGamesGameIdStorytellersRoute: typeof ApiGamesGameIdStorytellersRoute
   ApiGamesGameIdWhispersRoute: typeof ApiGamesGameIdWhispersRoute
   DemoStartSsrDataOnlyRoute: typeof DemoStartSsrDataOnlyRoute
   DemoStartSsrFullSsrRoute: typeof DemoStartSsrFullSsrRoute
@@ -352,6 +406,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGamesGameIdWhispersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/games/$gameId/storytellers': {
+      id: '/api/games/$gameId/storytellers'
+      path: '/api/games/$gameId/storytellers'
+      fullPath: '/api/games/$gameId/storytellers'
+      preLoaderRoute: typeof ApiGamesGameIdStorytellersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/games/$gameId/start-setup': {
+      id: '/api/games/$gameId/start-setup'
+      path: '/api/games/$gameId/start-setup'
+      fullPath: '/api/games/$gameId/start-setup'
+      preLoaderRoute: typeof ApiGamesGameIdStartSetupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/games/$gameId/ready': {
+      id: '/api/games/$gameId/ready'
+      path: '/api/games/$gameId/ready'
+      fullPath: '/api/games/$gameId/ready'
+      preLoaderRoute: typeof ApiGamesGameIdReadyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/games/$gameId/host': {
+      id: '/api/games/$gameId/host'
+      path: '/api/games/$gameId/host'
+      fullPath: '/api/games/$gameId/host'
+      preLoaderRoute: typeof ApiGamesGameIdHostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -367,6 +449,10 @@ const rootRouteChildren: RootRouteChildren = {
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoApiTqTodosRoute: DemoApiTqTodosRoute,
   DemoStartApiRequestRoute: DemoStartApiRequestRoute,
+  ApiGamesGameIdHostRoute: ApiGamesGameIdHostRoute,
+  ApiGamesGameIdReadyRoute: ApiGamesGameIdReadyRoute,
+  ApiGamesGameIdStartSetupRoute: ApiGamesGameIdStartSetupRoute,
+  ApiGamesGameIdStorytellersRoute: ApiGamesGameIdStorytellersRoute,
   ApiGamesGameIdWhispersRoute: ApiGamesGameIdWhispersRoute,
   DemoStartSsrDataOnlyRoute: DemoStartSsrDataOnlyRoute,
   DemoStartSsrFullSsrRoute: DemoStartSsrFullSsrRoute,

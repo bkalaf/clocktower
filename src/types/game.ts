@@ -7,7 +7,7 @@ export type StreamId = string;
 export type Snapshot = object;
 export type GameMemberId = `${GameId}:${UserId}`;
 export type TopicId = `game:${GameId}:whisper:${WhisperId}`;
-
+export type ChatItemid = 
 export type GlobalRoles = 'moderator' | 'user' | 'admin';
 export type GameRoles = 'player' | 'storyteller' | 'spectator';
 export type TopicTypes = 'public' | 'st' | 'whisper';
@@ -24,11 +24,29 @@ export interface User {
 }
 
 export type AuthedUser = Omit<User, 'passwordHash'>;
+export type GameStatus = 'idle' | 'playing' | 'reveal' | 'setup' | 'ended';
+export type GameSpeed = 'fast' | 'moderate' | 'slow';
+export type SkillLevel = 'novice' | 'intermediate' | 'advanced' | 'expert';
+
+export type Editions = 'tb' | 'bmr' | 'snv';
+
+export interface LobbySettings {
+    minPlayers?: number;
+    maxPlayers?: number;
+    canTravel: boolean;
+    edition?: Editions;
+    skillLevel?: SkillLevel;
+    plannedStartTime?: Date;
+}
 
 export interface Game {
     _id: GameId; // gameId
     version: number;
     snapshot: Snapshot;
+    hostUserId: UserId;
+    status: GameStatus;
+    endedAt?: number;
+    lobbySettings: LobbySettings;
 }
 
 export interface Session {
@@ -42,6 +60,8 @@ export interface GameMember {
     gameId: GameId;
     userId: UserId;
     role: GameRoles;
+    joinedAt: number;
+    isSeated: boolean;
 }
 
 export interface Whisper {
@@ -66,7 +86,7 @@ export interface ChatMsg {
 }
 
 export interface ChatItem {
-    _id: string;
+    _id: ChatItemid;
     from: { userId: UserId; name: string };
     gameId: GameId;
     topicId: TopicId;
