@@ -1,5 +1,6 @@
 // src/server/realtime/hostGrace.ts
 
+import { HostGraceDeps } from '.';
 import { $keys } from '../../$keys';
 import { connectMongoose } from '../../db/connectMongoose';
 import { GameModel } from '../../db/models/game';
@@ -107,7 +108,7 @@ async function resolveGrace(gameId: GameId, hostUserId: UserId) {
     // TODO publish: hostChanged { from: hostUserId, to: newHost }
 }
 
-export async function onUserConnected(gameId: string, userId: string) {
+export async function onUserConnected(gameId: string, userId: string, deps: HostGraceDeps = {}) {
     const r = await getRedis();
     const current = await r.get($keys.graceKey(gameId));
     if (current === userId) {
@@ -117,11 +118,23 @@ export async function onUserConnected(gameId: string, userId: string) {
             clearTimeout(t);
             timers.delete(gameId);
         }
-        // TODO publish: hostGraceCanceled
+        if (deps.publish) {
+            const payload = {
+                kind: 'event',
+                type: 'system/hostGraceCanceled',
+                ts: Date.now(),
+                payload: { gameId, hostUserId: userId }
+            };
+
+            await Promise.all([
+                deps.publish($keys.publicTopic(gameId), payload),
+                deps.publish($keys.stTopic(gameId), payload)
+            ]);
+        }
     }
 }
 
-export async function onUserDisconnected(gameId: GameId, userId: UserId) {
+export async function onUserDisconnected(gameId: GameId, userId: UserId, deps: HostGraceDeps = {}) {
     // If host left and no one else is connected => end immediately (no grace)
     await connectMongoose();
     const game = await GameModel.findById(gameId).lean();
@@ -136,6 +149,8 @@ export async function onUserDisconnected(gameId: GameId, userId: UserId) {
 
     // start grace
     const r = await getRedis();
+    const now = Date.now();
+    const untilTs = now + 300_000;
     await r.set($keys.graceKey(gameId), userId, { EX: 300 });
 
     // schedule local timer too (ok if process restarts; Redis is truth)
@@ -145,5 +160,17 @@ export async function onUserDisconnected(gameId: GameId, userId: UserId) {
     }, 300_000);
     timers.set(gameId, timer);
 
-    // TODO publish: hostGraceStarted { hostUserId: userId, untilTs: Date.now()+300000 }
+    if (deps.publish) {
+        const payload = {
+            kind: 'event',
+            type: 'system/hostGraceStarted',
+            ts: now,
+            payload: { gameId, hostUserId: userId, untilTs }
+        };
+
+        await Promise.all([
+            deps.publish($keys.publicTopic(gameId), payload),
+            deps.publish($keys.stTopic(gameId), payload)
+        ]);
+    }
 }

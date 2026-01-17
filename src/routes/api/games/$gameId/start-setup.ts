@@ -8,6 +8,8 @@ import { zGameIdParams } from '../../../../server/schemas/gameSchemas';
 import { getConnectedUserIds } from '../../../../server/realtime/presence';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { setStatus } from '../../../../server/game';
+import { $keys } from '../../../../$keys';
+import { getRedis } from '../../../../redis';
 
 export const Route = createFileRoute('/api/games/$gameId/start-setup')({
     server: {
@@ -20,14 +22,15 @@ export const Route = createFileRoute('/api/games/$gameId/start-setup')({
                 if (!$params.ok) {
                     return $params.response;
                 }
-                const game = await requireGame($params.data.gameId);
-                await requireStoryteller($params.data.gameId, user);
+                const { gameId } = $params.data;
+                const game = await requireGame(gameId);
+                await requireStoryteller(gameId, user);
 
                 if (game.status !== 'idle') {
                     return Response.json({ error: 'not_idle' }, { status: 409 });
                 }
 
-                const connected = await getConnectedUserIds($params.data.gameId);
+                const connected = await getConnectedUserIds(gameId);
                 const minPlayers = game.lobbySettings?.minPlayers ?? 0;
                 const planned =
                     game.lobbySettings?.plannedStartTime ?
@@ -43,9 +46,20 @@ export const Route = createFileRoute('/api/games/$gameId/start-setup')({
                 }
 
                 await connectMongoose();
-                await setStatus($params.data.gameId, 'setup');
+                await setStatus(gameId, 'setup');
 
-                // TODO: publish realtime event: setupStarted
+                const redis = await getRedis();
+                const payload = {
+                    kind: 'event',
+                    type: 'system/setupStarted',
+                    ts: Date.now(),
+                    payload: { gameId }
+                };
+                const message = JSON.stringify(payload);
+                await Promise.all([
+                    redis.publish($keys.publicTopic(gameId), message),
+                    redis.publish($keys.stTopic(gameId), message)
+                ]);
                 return Response.json({ ok: true });
             }
         }

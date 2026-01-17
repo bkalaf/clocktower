@@ -10,6 +10,8 @@ import { connectMongoose } from '../../../../db/connectMongoose';
 import { getUserFromReq } from '../../../../server/getUserFromReq';
 import { requireMember } from '../../../../server/authz/gameAuth';
 import { GameMemberModel } from '../../../../db/models/gameMember';
+import { $keys } from '../../../../$keys';
+import { getRedis } from '../../../../redis';
 
 const zReadyParams = z.object({
     gameId: zGameId
@@ -44,7 +46,23 @@ export const Route = createFileRoute('/api/games/$gameId/ready')({
                     }
                 );
 
-                // TODO: publish realtime event: memberReadyChanged
+                const memberReadyPayload = {
+                    kind: 'event',
+                    type: 'memberReadyChanged',
+                    ts: Date.now(),
+                    payload: {
+                        gameId,
+                        userId: user._id,
+                        userName: user.name,
+                        isReady: body.data.isReady
+                    }
+                };
+                const message = JSON.stringify(memberReadyPayload);
+                const redis = await getRedis();
+                await Promise.all([
+                    redis.publish($keys.publicTopic(gameId), message),
+                    redis.publish($keys.stTopic(gameId), message)
+                ]);
                 return Response.json({ ok: true });
             }
         }

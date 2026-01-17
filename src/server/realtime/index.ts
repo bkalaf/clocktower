@@ -8,3 +8,10 @@ export const zJoinGame = z.object({
 });
 
 export type JoinGameMsg = z.infer<typeof zJoinGame>;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type PublishFn = (topic: string, msg: any) => Promise<void> | void;
+
+export type HostGraceDeps = {
+    publish?: PublishFn;
+};
