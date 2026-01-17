@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { Dialog } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { WHOAMI_QUERY_KEY } from '@/hooks/useAuthUser';
 
@@ -17,15 +24,21 @@ export function LogoutDialog({ open, onClose }: LogoutDialogProps) {
     return (
         <Dialog
             open={open}
-            onClose={onClose}
-            title='Confirm logout'
-            description='You will need to log back in to continue.'
+            onOpenChange={(isOpen) => {
+                if (!isOpen) {
+                    onClose();
+                }
+            }}
         >
-            <div className='space-y-4'>
-                <p className='text-sm text-gray-600'>
+            <DialogContent>
+                <DialogHeader>
+                    <DialogTitle>Confirm logout</DialogTitle>
+                    <DialogDescription>You will need to log back in to continue.</DialogDescription>
+                </DialogHeader>
+                <p className='text-sm text-muted-foreground'>
                     Are you sure you want to log out? This will clear your local session and sign you out on the server.
                 </p>
-                <div className='flex justify-end gap-3'>
+                <DialogFooter className='mt-4 flex-col-reverse gap-3 sm:flex-row sm:justify-end'>
                     <Button
                         variant='outline'
                         onClick={onClose}
@@ -58,8 +71,8 @@ export function LogoutDialog({ open, onClose }: LogoutDialogProps) {
                     >
                         {isLoading ? 'Logging out…' : 'Log out'}
                     </Button>
-                </div>
-            </div>
+                </DialogFooter>
+            </DialogContent>
         </Dialog>
     );
 }

@@ -14,6 +14,6 @@ const sessionSchema = new Schema<Session>(
 );
 
 sessionSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
-
-export const SessionModel =
-    (mongoose.models['Session'] as mongoose.Model<Session>) || mongoose.model<Session>('Session', sessionSchema);
+const model2 = mongoose.model('Session', sessionSchema);
+const model1 = mongoose.models['Session'] as typeof model2;
+export const SessionModel = model2 || model1;

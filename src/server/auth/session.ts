@@ -15,10 +15,9 @@ export function setSessionCookie(headers: Headers, sessionId: string, expiresAt:
     // Secure should be on in prod HTTPS.
     const date = new Date(expiresAt);
     const secure = process.env.NODE_ENV === 'production' ? 'Secure; ' : '';
-    headers.append(
-        'Set-Cookie',
-        `${cookieName()}=${encodeURIComponent(sessionId)}; ${secure}HttpOnly; Path=/; SameSite=Lax; Expires=${date.toUTCString()}`
-    );
+    const cookie = `${cookieName()}=${encodeURIComponent(sessionId)}; ${secure}HttpOnly; Path=/; SameSite=Lax; Expires=${date.toUTCString()}`;
+    headers.append('Set-Cookie', cookie);
+    localStorage.setItem('clocktower-session', sessionId);
 }
 
 export function clearSessionCookie(headers: Headers) {

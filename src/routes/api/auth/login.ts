@@ -37,7 +37,7 @@ export const Route = createFileRoute('/api/auth/login')({
 
                 const session = await createSession(user._id);
                 const headers = new Headers();
-                setSessionCookie(headers, session._id, session.expiresAt);
+                setSessionCookie(headers, session.sessionId, session.expiresAt);
 
                 return success({ userId: user._id });
             }

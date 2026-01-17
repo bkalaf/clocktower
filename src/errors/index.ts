@@ -23,11 +23,11 @@ export class HttpError extends Error {
     }
     static BAD_REQUEST(message: string, extra?: unknown) {
         const code = $STATUS_CODES.BAD_REQUEST;
-        const response = new Response(extra ?? {}, {
-            headers: { 'Content-Type': 'applicatoin/json' },
-            status: code,
-            statusText: $STATUS_CODES2[code as keyof typeof $STATUS_CODES2]
-        });
+        // const response = new Response(extra as any ?? {}, {
+        //     headers: { 'Content-Type': 'applicatoin/json' },
+        //     status: code,
+        //     statusText: $STATUS_CODES2[code as keyof typeof $STATUS_CODES2]
+        // });
         return new HttpError(code, $STATUS_CODES2[code as keyof typeof $STATUS_CODES2], message, extra);
     }
     static BAD_REQUEST_RESPONSE(message: string, extra?: unknown) {

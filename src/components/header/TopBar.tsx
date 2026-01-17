@@ -1,9 +1,10 @@
 // src/components/header/TopBar.tsx
 import { Link } from '@tanstack/react-router';
-import { Home, LogIn, LogOut, Menu, Network, StickyNote, User, UserPlus } from 'lucide-react';
+import { LogIn, LogOut, Menu, User, UserPlus } from 'lucide-react';
 
 import { AuthUser } from '@/hooks/useAuthUser';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
 export type TopBarProps = {
     user: AuthUser | null;
@@ -16,16 +17,15 @@ export type TopBarProps = {
 
 export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenRegister, onOpenLogout }: TopBarProps) {
     return (
-        <header className='px-4 py-3 flex items-center justify-between bg-gray-900 text-white shadow-lg'>
+        <header className='flex items-center justify-between bg-gray-900 px-4 py-3 text-white shadow-lg'>
             <div className='flex items-center gap-4'>
                 <Button
                     variant='ghost'
-                    size='lg'
+                    size='icon'
                     onClick={onMenuOpen}
-                    className='p-2 bg-transparent hover:bg-gray-800 rounded-lg'
                     aria-label='Open menu'
                 >
-                    <Menu size={24} />
+                    <Menu size={20} />
                 </Button>
                 <Link
                     to='/'
@@ -36,34 +36,39 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenReg
                         alt='TanStack Logo'
                         className='h-10'
                     />
-                    <h1 className='text-xl font-semibold text-white hidden md:block'>Start</h1>
+                    <h1 className='hidden text-xl font-semibold text-white md:block'>Start</h1>
                 </Link>
             </div>
 
             <div className='flex items-center gap-3'>
                 {!user && isAuthLoading && <span className='text-sm text-gray-300'>Checking session…</span>}
-                {user ?
+                {user ? (
                     <>
                         <Button
                             variant='outline'
-                            size='lg'
+                            size='sm'
                             onClick={onOpenLogout}
                             className='flex items-center gap-2'
                         >
                             <LogOut size={16} />
                             Logout
                         </Button>
-                        <div className='flex flex-col items-center'>
-                            <div className='h-12 w-12 rounded-full bg-gray-800 border border-white/10 flex items-center justify-center shadow-inner'>
-                                <User size={24} />
+                        <div className='flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 px-3 py-1'>
+                            <Avatar className='bg-gray-800 border border-white/10 shadow-inner'>
+                                <AvatarFallback>
+                                    <User size={18} />
+                                </AvatarFallback>
+                            </Avatar>
+                            <div className='flex flex-col text-right text-xs text-gray-300'>
+                                <span className='text-sm font-medium text-white'>{user.name}</span>
                             </div>
-                            <span className='text-xs text-gray-300 mt-1 text-center'>{user.name}</span>
                         </div>
                     </>
-                :   <>
+                ) : (
+                    <>
                         <Button
                             variant='outline'
-                            size='lg'
+                            size='sm'
                             onClick={onOpenLogin}
                             className='flex items-center gap-2'
                         >
@@ -72,7 +77,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenReg
                         </Button>
                         <Button
                             variant='default'
-                            size='lg'
+                            size='sm'
                             onClick={onOpenRegister}
                             className='flex items-center gap-2'
                         >
@@ -80,7 +85,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenReg
                             Register
                         </Button>
                     </>
-                }
+                )}
             </div>
         </header>
     );

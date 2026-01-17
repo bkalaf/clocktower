@@ -18,5 +18,6 @@ export const userSchema = new Schema(
 export type UserType = mongoose.InferRawDocType<typeof userSchema>;
 export type UserDocument = mongoose.HydratedDocument<UserType>;
 
-export const UserModel =
-    (mongoose.models['User'] as mongoose.Model<UserDocument>) || mongoose.model('User', userSchema);
+const currentModel2 = mongoose.model('User', userSchema);
+const currentModel = mongoose.models['User'] as typeof currentModel2;
+export const UserModel = currentModel ?? currentModel2;

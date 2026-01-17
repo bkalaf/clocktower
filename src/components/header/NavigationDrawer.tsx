@@ -3,146 +3,157 @@ import { Link } from '@tanstack/react-router';
 import { ChevronDown, ChevronRight, Home, Network, StickyNote, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetTitle
+} from '@/components/ui/sheet';
 
 type NavigationDrawerProps = {
     isOpen: boolean;
     onClose: () => void;
 };
 
+const navLinkBase =
+    'flex items-center gap-3 p-3 rounded-lg transition-colors font-medium text-white mb-2';
+
 export function NavigationDrawer({ isOpen, onClose }: NavigationDrawerProps) {
     const [groupedExpanded, setGroupedExpanded] = useState<Record<string, boolean>>({});
 
     return (
-        <aside
-            className={`fixed top-0 left-0 h-full w-80 bg-gray-900 text-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out flex flex-col ${
-                isOpen ? 'translate-x-0' : '-translate-x-full'
-            }`}
+        <Sheet
+            open={isOpen}
+            onOpenChange={(open) => {
+                if (!open) {
+                    onClose();
+                }
+            }}
         >
-            <div className='flex items-center justify-between p-4 border-b border-gray-700'>
-                <h2 className='text-xl font-bold'>Navigation</h2>
-                <Button
-                    variant='ghost'
-                    size='lg'
-                    className='p-2 bg-transparent'
-                    onClick={onClose}
-                    aria-label='Close menu'
-                >
-                    <X size={24} />
-                </Button>
-            </div>
-
-            <nav className='flex-1 p-4 overflow-y-auto'>
-                <Link
-                    to='/'
-                    onClick={onClose}
-                    className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2'
-                    activeProps={{
-                        className:
-                            'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2'
-                    }}
-                >
-                    <Home size={20} />
-                    <span className='font-medium'>Home</span>
-                </Link>
-
-                <Link
-                    to='/demo/start/api-request'
-                    onClick={onClose}
-                    className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2'
-                    activeProps={{
-                        className:
-                            'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2'
-                    }}
-                >
-                    <Network size={20} />
-                    <span className='font-medium'>Start - API Request</span>
-                </Link>
-
-                <div className='flex flex-row justify-between'>
-                    <Link
-                        to='/demo/start/ssr'
-                        onClick={onClose}
-                        className='flex-1 flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2'
-                        activeProps={{
-                            className:
-                                'flex-1 flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2'
-                        }}
-                    >
-                        <StickyNote size={20} />
-                        <span className='font-medium'>Start - SSR Demos</span>
-                    </Link>
-                    <button
-                        className='p-2 hover:bg-gray-800 rounded-lg transition-colors'
-                        onClick={() =>
-                            setGroupedExpanded((prev) => ({
-                                ...prev,
-                                StartSSRDemo: !prev.StartSSRDemo
-                            }))
-                        }
-                        aria-label='Toggle Start SSR list'
-                    >
-                        {groupedExpanded.StartSSRDemo ?
-                            <ChevronDown size={20} />
-                        :   <ChevronRight size={20} />}
-                    </button>
+            <SheetContent
+                side='left'
+                className='bg-gray-900 text-white border-r border-white/10 w-80 p-0'
+            >
+                <div className='flex items-center justify-between border-b border-white/10 px-4 py-3'>
+                    <SheetTitle className='text-lg font-semibold text-white p-0'>Navigation</SheetTitle>
+                    <SheetClose asChild>
+                        <Button
+                            variant='ghost'
+                            size='icon'
+                            aria-label='Close menu'
+                        >
+                            <X size={20} />
+                        </Button>
+                    </SheetClose>
                 </div>
 
-                {groupedExpanded.StartSSRDemo && (
-                    <div className='flex flex-col ml-4'>
-                        <Link
-                            to='/demo/start/ssr/spa-mode'
-                            onClick={onClose}
-                            className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2'
-                            activeProps={{
-                                className:
-                                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2'
-                            }}
-                        >
-                            <StickyNote size={20} />
-                            <span className='font-medium'>SPA Mode</span>
-                        </Link>
+                <nav className='flex flex-1 flex-col overflow-y-auto px-4 py-6'>
+                    <Link
+                        to='/'
+                        onClick={onClose}
+                        className={`${navLinkBase} hover:bg-gray-800`}
+                        activeProps={{
+                            className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
+                        }}
+                    >
+                        <Home size={20} />
+                        <span>Home</span>
+                    </Link>
 
-                        <Link
-                            to='/demo/start/ssr/full-ssr'
-                            onClick={onClose}
-                            className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2'
-                            activeProps={{
-                                className:
-                                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2'
-                            }}
-                        >
-                            <StickyNote size={20} />
-                            <span className='font-medium'>Full SSR</span>
-                        </Link>
+                    <Link
+                        to='/demo/start/api-request'
+                        onClick={onClose}
+                        className={`${navLinkBase} hover:bg-gray-800`}
+                        activeProps={{
+                            className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
+                        }}
+                    >
+                        <Network size={20} />
+                        <span>Start - API Request</span>
+                    </Link>
 
+                    <div className='flex flex-row items-start justify-between'>
                         <Link
-                            to='/demo/start/ssr/data-only'
+                            to='/demo/start/ssr'
                             onClick={onClose}
-                            className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2'
+                            className={`${navLinkBase} flex-1 hover:bg-gray-800`}
                             activeProps={{
-                                className:
-                                    'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2'
+                                className: `${navLinkBase} flex-1 bg-cyan-600 hover:bg-cyan-700`
                             }}
                         >
                             <StickyNote size={20} />
-                            <span className='font-medium'>Data Only</span>
+                            <span>Start - SSR Demos</span>
                         </Link>
+                        <Button
+                            variant='ghost'
+                            size='icon'
+                            onClick={() =>
+                                setGroupedExpanded((prev) => ({
+                                    ...prev,
+                                    StartSSRDemo: !prev.StartSSRDemo
+                                }))
+                            }
+                            aria-label='Toggle Start SSR list'
+                        >
+                            {groupedExpanded.StartSSRDemo ?
+                                <ChevronDown size={20} />
+                            :   <ChevronRight size={20} />}
+                        </Button>
                     </div>
-                )}
 
-                <Link
-                    to='/demo/tanstack-query'
-                    onClick={onClose}
-                    className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2'
-                    activeProps={{
-                        className:
-                            'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2'
-                    }}
-                >
-                    <Network size={20} />
-                    <span className='font-medium'>TanStack Query</span>
-                </Link>
-            </nav>
-        </aside>
+                    {groupedExpanded.StartSSRDemo && (
+                        <div className='flex flex-col ml-4'>
+                            <Link
+                                to='/demo/start/ssr/spa-mode'
+                                onClick={onClose}
+                                className={`${navLinkBase} ml-0 hover:bg-gray-800`}
+                                activeProps={{
+                                    className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
+                                }}
+                            >
+                                <StickyNote size={20} />
+                                <span>SPA Mode</span>
+                            </Link>
+
+                            <Link
+                                to='/demo/start/ssr/full-ssr'
+                                onClick={onClose}
+                                className={`${navLinkBase} ml-0 hover:bg-gray-800`}
+                                activeProps={{
+                                    className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
+                                }}
+                            >
+                                <StickyNote size={20} />
+                                <span>Full SSR</span>
+                            </Link>
+
+                            <Link
+                                to='/demo/start/ssr/data-only'
+                                onClick={onClose}
+                                className={`${navLinkBase} ml-0 hover:bg-gray-800`}
+                                activeProps={{
+                                    className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
+                                }}
+                            >
+                                <StickyNote size={20} />
+                                <span>Data Only</span>
+                            </Link>
+                        </div>
+                    )}
+
+                    <Link
+                        to='/demo/tanstack-query'
+                        onClick={onClose}
+                        className={`${navLinkBase} hover:bg-gray-800`}
+                        activeProps={{
+                            className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
+                        }}
+                    >
+                        <Network size={20} />
+                        <span>TanStack Query</span>
+                    </Link>
+                </nav>
+            </SheetContent>
+        </Sheet>
     );
 }
