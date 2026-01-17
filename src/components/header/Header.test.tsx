@@ -3,8 +3,13 @@ import type { ReactElement, ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 
-import { LoginDialog, LogoutDialog, RegisterDialog, TopBar } from './Header';
-import { WHOAMI_QUERY_KEY } from '../hooks/useAuthUser';
+import {
+    LoginDialog,
+    LogoutDialog,
+    RegisterDialog,
+    TopBar
+} from './index';
+import { WHOAMI_QUERY_KEY } from '@/hooks/useAuthUser';
 
 jest.mock('@tanstack/react-router', () => ({
     Link: ({ children }: { children: ReactNode }) => <a>{children}</a>

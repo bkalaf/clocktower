@@ -7,6 +7,21 @@ export const zJoinGame = z.object({
     lastStreamIds: z.record(z.string(), z.string()).optional()
 });
 
+export const zJoinTopic = z.object({
+    t: z.literal('joinTopic'),
+    topicId: z.string().min(1)
+});
+
+export const zChat = z.object({
+    t: z.literal('chat'),
+    topicId: z.string().min(1),
+    text: z.string().min(1)
+});
+
+export const zPing = z.object({
+    t: z.literal('ping')
+});
+
 export type JoinGameMsg = z.infer<typeof zJoinGame>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

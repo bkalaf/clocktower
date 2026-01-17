@@ -76,6 +76,6 @@ export const zCreateGameMemberInput = z.object({
     isSeated: z.boolean().default(true)
 });
 
-export const zCreateChatItemInput = z.object({
-    _id: 
-})
+// export const zCreateChatItemInput = z.object({
+//     _id:
+// })

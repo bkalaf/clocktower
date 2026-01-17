@@ -13,10 +13,22 @@ import { getConnectedUserIds, connectedCount } from './presence';
 // in-process timers as a convenience; Redis TTL is the source of truth
 const timers = new Map<string, NodeJS.Timeout>();
 
-async function endGame(gameId: GameId) {
+async function endGame(gameId: GameId, deps: HostGraceDeps = {}) {
     await connectMongoose();
     await setEnded(gameId);
-    // TODO publish: gameEnded
+    if (deps.publish) {
+        const payload = {
+            kind: 'event',
+            type: 'system/gameEnded',
+            ts: Date.now(),
+            payload: { gameId }
+        };
+
+        await Promise.all([
+            deps.publish($keys.publicTopic(gameId), payload),
+            deps.publish($keys.stTopic(gameId), payload)
+        ]);
+    }
 }
 
 async function chooseNewHost(
@@ -51,7 +63,7 @@ async function chooseNewHost(
     return choices[0]?.userId ?? null;
 }
 
-async function resolveGrace(gameId: GameId, hostUserId: UserId) {
+async function resolveGrace(gameId: GameId, hostUserId: UserId, deps: HostGraceDeps = {}) {
     const r = await getRedis();
 
     const graceVal = await r.get($keys.graceKey(gameId));
@@ -68,7 +80,7 @@ async function resolveGrace(gameId: GameId, hostUserId: UserId) {
     // no one else connected => end
     if (connectedIds.length === 0) {
         await r.del($keys.graceKey(gameId));
-        await endGame(gameId);
+        await endGame(gameId, deps);
         return;
     }
 
@@ -98,7 +110,7 @@ async function resolveGrace(gameId: GameId, hostUserId: UserId) {
 
     if (!newHost) {
         await r.del($keys.graceKey(gameId));
-        await endGame(gameId);
+        await endGame(gameId, deps);
         return;
     }
 
@@ -143,7 +155,7 @@ export async function onUserDisconnected(gameId: GameId, userId: UserId, deps: H
 
     const count = await connectedCount(gameId);
     if (count === 0) {
-        await endGame(gameId);
+        await endGame(gameId, deps);
         return;
     }
 
@@ -156,7 +168,7 @@ export async function onUserDisconnected(gameId: GameId, userId: UserId, deps: H
     // schedule local timer too (ok if process restarts; Redis is truth)
     if (timers.has(gameId)) clearTimeout(timers.get(gameId)!);
     const timer = setTimeout(() => {
-        resolveGrace(gameId, userId).catch(() => {});
+        resolveGrace(gameId, userId, deps).catch(() => {});
     }, 300_000);
     timers.set(gameId, timer);
 

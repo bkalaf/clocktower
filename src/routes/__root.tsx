@@ -1,8 +1,8 @@
 // src/routes/__root.tsx
-import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
+import { HeadContent, Link, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
-import Header from '../components/Header';
+import Header from '../components/header';
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 import appCss from './../assets/css/app.css?url';
 import type { QueryClient } from '@tanstack/react-query';
@@ -33,7 +33,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         ]
     }),
 
-    shellComponent: RootDocument
+    shellComponent: RootDocument,
+    notFoundComponent: NotFound
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
@@ -60,5 +61,20 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <Scripts />
             </body>
         </html>
+    );
+}
+
+function NotFound() {
+    return (
+        <main className='flex min-h-screen flex-col items-center justify-center gap-4 px-3 text-center text-slate-600'>
+            <p className='text-5xl font-semibold text-slate-900'>404</p>
+            <p className='max-w-sm text-lg'>
+                The page you were looking for could not be found. Try returning{' '}
+                <Link to='/'>
+                    <strong className='underline'>home</strong>
+                </Link>
+                .
+            </p>
+        </main>
     );
 }

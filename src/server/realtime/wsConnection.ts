@@ -1,23 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // src/server/realtime/wsConnection.ts
+import { randomUUID } from 'crypto';
 import type { RedisClientType } from 'redis';
 import type WebSocket from 'ws';
 import { markConnected, markDisconnected } from './presence';
 import { onUserConnected, onUserDisconnected } from './hostGrace';
 import { getUserFromReq } from '../getUserFromReq';
-import { zJoinGame } from '.';
+import { zChat, zJoinGame, zJoinTopic, zPing } from '.';
 import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
 import { $keys } from '../../$keys';
 import { $findById, $findOne } from '../findById';
+import { listWhisperTopicsForUser } from '../listWhisperTopicsForUser';
+import { GameRoles } from '../../types/game';
 import { maybeRemindPickStoryteller } from './reminder';
+import { ChatItemModel } from '../../db/models/chatItem';
 
 type Conn = {
     ws: WebSocket;
     userId: string;
     name: string;
     gameId?: string;
+    role?: GameRoles;
     subscriber?: RedisClientType;
+    topics: Set<string>;
 };
 
 function send(ws: WebSocket, obj: any) {
@@ -30,6 +36,37 @@ function parsePubsubMessage(raw: string) {
     } catch {
         return raw;
     }
+}
+
+async function subscribeToTopic(conn: Conn, topic: string) {
+    if (!conn.subscriber) throw new Error('no subscriber');
+    await conn.subscriber.subscribe(topic, (message, channel) => {
+        const payload = parsePubsubMessage(message);
+        send(conn.ws, {
+            t: 'topicMessage',
+            topic: channel ?? topic,
+            payload
+        });
+    });
+}
+
+async function canJoinTopic(conn: Conn, topicId: string) {
+    if (!conn.gameId) return false;
+    if (!topicId.startsWith(`game:${conn.gameId}:`)) return false;
+    if (topicId === $keys.publicTopic(conn.gameId)) return true;
+    if (topicId === $keys.stTopic(conn.gameId)) return conn.role === 'storyteller';
+    if (topicId.startsWith(`game:${conn.gameId}:whisper:`)) {
+        if (!conn.role) return false;
+        try {
+            const topics = (await listWhisperTopicsForUser({
+                data: { gameId: conn.gameId, userId: conn.userId, role: conn.role }
+            })) ?? [];
+            return topics.includes(topicId);
+        } catch {
+            return false;
+        }
+    }
+    return false;
 }
 
 export async function handleWsConnection(
@@ -45,12 +82,13 @@ export async function handleWsConnection(
         return;
     }
 
-    const conn: Conn = { ws, userId: user._id, name: user.name };
+    const conn: Conn = { ws, userId: user._id, name: user.name, topics: new Set() };
 
     const cleanupSubscriber = async () => {
         const subscriber = conn.subscriber;
         if (!subscriber) return;
         conn.subscriber = undefined;
+        conn.topics.clear();
         try {
             await subscriber.unsubscribe();
         } catch {
@@ -98,6 +136,7 @@ export async function handleWsConnection(
             }
 
             conn.gameId = gameId;
+            conn.role = member.role;
 
             await cleanupSubscriber();
             const topics = [$keys.publicTopic(gameId)];
@@ -111,20 +150,12 @@ export async function handleWsConnection(
                 conn.subscriber = subscriber;
                 try {
                     await subscriber.connect();
-
-                    const handleMessage = (message: string, channel?: string) => {
-                        const payload = parsePubsubMessage(message);
-                        send(ws, {
-                            t: 'topicMessage',
-                            topic: channel ?? topics[0],
-                            payload
-                        });
-                    };
-
-                    await Promise.all(
-                        topics.map((topic) => subscriber.subscribe(topic, (message, channel) => handleMessage(message, channel ?? topic)))
-                    );
-                } catch (error) {
+                    await Promise.all(topics.map((topic) => subscribeToTopic(conn, topic)));
+                    topics.forEach((topic) => {
+                        conn.topics.add(topic);
+                        send(ws, { t: 'joinedTopic', topicId: topic });
+                    });
+                } catch {
                     await cleanupSubscriber();
                     send(ws, {
                         t: 'error',
@@ -157,12 +188,89 @@ export async function handleWsConnection(
                 publish: publish ? async (topic, payload) => publish(topic, payload) : undefined
             });
 
-            // TODO: join topics (public always; st only if storyteller)
-            // TODO: replay from lastStreamIds per topic
+            await replayFromLastStreamIds(ws, parsed.data.lastStreamIds);
             return;
         }
 
-        // TODO: joinTopic, chat, ping, etc.
+        if (msg?.t === 'ping') {
+            const parsed = zPing.safeParse(msg);
+            if (!parsed.success) {
+                send(ws, { t: 'error', code: 'bad_msg', message: 'Invalid ping message' });
+                return;
+            }
+            send(ws, { t: 'pong', ts: Date.now() });
+            return;
+        }
+
+        if (msg?.t === 'joinTopic') {
+            if (!conn.gameId) {
+                send(ws, { t: 'error', code: 'not_in_game', message: 'Join a game first' });
+                return;
+            }
+            if (!conn.subscriber) {
+                send(ws, { t: 'error', code: 'topic_join_failed', message: 'Realtime connection not ready' });
+                return;
+            }
+            const parsed = zJoinTopic.safeParse(msg);
+            if (!parsed.success) {
+                send(ws, { t: 'error', code: 'bad_msg', message: 'Invalid joinTopic message' });
+                return;
+            }
+            const { topicId } = parsed.data;
+            if (!(await canJoinTopic(conn, topicId))) {
+                send(ws, { t: 'error', code: 'not_allowed', message: 'Cannot join this topic' });
+                return;
+            }
+            if (conn.topics.has(topicId)) {
+                send(ws, { t: 'joinedTopic', topicId });
+                return;
+            }
+            try {
+                await subscribeToTopic(conn, topicId);
+            } catch {
+                send(ws, { t: 'error', code: 'topic_join_failed', message: 'Failed to join topic' });
+                return;
+            }
+            conn.topics.add(topicId);
+            send(ws, { t: 'joinedTopic', topicId });
+            return;
+        }
+
+        if (msg?.t === 'chat') {
+            if (!conn.gameId) {
+                send(ws, { t: 'error', code: 'not_in_game', message: 'Join a game first' });
+                return;
+            }
+            const parsed = zChat.safeParse(msg);
+            if (!parsed.success) {
+                send(ws, { t: 'error', code: 'bad_msg', message: 'Invalid chat message' });
+                return;
+            }
+            const { topicId, text } = parsed.data;
+            if (!conn.topics.has(topicId)) {
+                send(ws, { t: 'error', code: 'topic_not_joined', message: 'Join the topic before chatting' });
+                return;
+            }
+            const chatEvent = {
+                kind: 'chat',
+                id: randomUUID(),
+                ts: Date.now(),
+                from: { userId: conn.userId, name: conn.name },
+                text
+            };
+            if (publish) {
+                try {
+                    await publish(topicId, chatEvent);
+                } catch {
+                    send(ws, { t: 'error', code: 'publish_failed', message: 'Failed to broadcast chat' });
+                    return;
+                }
+            }
+            send(ws, { t: 'chatSent', topicId, event: chatEvent });
+            return;
+        }
+
+        send(ws, { t: 'error', code: 'bad_msg', message: 'Unknown message type' });
     });
 
     ws.on('close', async () => {
@@ -179,4 +287,59 @@ export async function handleWsConnection(
             publish: publish ? async (topic, payload) => publish(topic, payload) : undefined
         });
     });
+}
+
+const MAX_REPLAY_ITEMS = 200;
+
+async function replayFromLastStreamIds(
+    ws: WebSocket,
+    lastStreamIds?: Record<string, string>
+) {
+    if (!lastStreamIds) return;
+    const entries = Object.entries(lastStreamIds);
+    if (entries.length === 0) return;
+    await Promise.all(entries.map(([topic, streamId]) => replayTopicMessages(ws, topic, streamId)));
+}
+
+async function replayTopicMessages(ws: WebSocket, topic: string, lastStreamId: string) {
+    try {
+        const lastDoc = await ChatItemModel.findOne({ topicId: topic, streamId: lastStreamId })
+            .select('createdAt streamId')
+            .lean();
+
+        if (!lastDoc?.createdAt) {
+            return;
+        }
+
+        const filter: Record<string, unknown> = {
+            topicId: topic,
+            $or: [
+                { createdAt: { $gt: lastDoc.createdAt } },
+                { createdAt: lastDoc.createdAt, streamId: { $gt: lastStreamId } }
+            ]
+        };
+
+        const items = await ChatItemModel.find(filter)
+            .sort({ createdAt: 1, streamId: 1 })
+            .limit(MAX_REPLAY_ITEMS)
+            .lean();
+
+        if (items.length === 0) return;
+
+        send(ws, {
+            t: 'topicReplay',
+            topic,
+            payloads: items.map((item) => ({
+                _id: item._id,
+                gameId: item.gameId,
+                topicId: item.topicId,
+                from: item.from,
+                text: item.text,
+                ts: item.ts,
+                streamId: item.streamId
+            }))
+        });
+    } catch {
+        /* intentionally ignore replay failures */
+    }
 }

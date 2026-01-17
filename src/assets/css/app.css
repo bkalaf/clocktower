@@ -61,7 +61,7 @@
     span,
     div,
     p {
-        @apply font-
+        @apply font-rubik;
     }
 }
 

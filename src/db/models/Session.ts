@@ -6,7 +6,7 @@ const sessionSchema = new Schema<Session>(
     {
         _id: { type: String, required: true, minLength: 16 },
         userId: { type: String, required: true, minLength: 16 },
-        expiresAt: { type: Number, required: true, index: true }
+        expiresAt: { type: Number, required: true }
     },
     {
         timestamps: true

@@ -4,7 +4,7 @@ import { Game } from '../../types/game';
 
 const gameSchema = new Schema<Game>(
     {
-        _id: { type: String, required: true, index: true },
+        _id: { type: String, required: true },
         version: { type: Number, required: true, default: 0 },
         snapshot: { type: Schema.Types.Mixed, required: true, default: {} }
     },
