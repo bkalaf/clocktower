@@ -1,6 +1,6 @@
 // src/server/findById.ts
-import { GameModel } from '../db/models/game';
-import { GameMemberModel } from '../db/models/gameMember';
+import { GameModel } from '../db/models/Game';
+import { GameMemberModel } from '../db/models/GameMember';
 import { GameId, GameRoles, UserId } from '../types/game';
 
 export const $findById = {

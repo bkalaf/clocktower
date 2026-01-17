@@ -1,7 +1,7 @@
 // src/server/gameMember/findGameMember.ts
 import { createServerFn } from '@tanstack/react-start';
 import z from 'zod';
-import { GameMemberDocument, GameMemberModel } from '../../db/models/gameMember';
+import { GameMemberDocument, GameMemberModel } from '../../db/models/GameMember';
 import { HttpError } from '../../errors';
 import { success } from '../../utils/http';
 

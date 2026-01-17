@@ -2,7 +2,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { HttpError } from '../../../../errors';
 import { parseParams } from '../../../../server/parseParams';
-import { GameMemberModel } from '../../../../db/models/gameMember';
+import { GameMemberModel } from '../../../../db/models/GameMember';
 import { requireHost, requireMember } from '../../../../server/authz/gameAuth';
 import { zGameIdParams, zPromoteStorytellerInput } from '../../../../server/schemas/gameSchemas';
 import { parseJsonBody } from '../../../../server/parseJsonBody';

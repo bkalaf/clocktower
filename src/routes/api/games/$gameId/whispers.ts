@@ -2,7 +2,7 @@
 import { createWhisper } from '../../../../server/whisper/createWhisper';
 import { zCreateWhisperInput, zCreateWhisperParams } from '../../../../schemas';
 import { HttpError } from '../../../../errors';
-import { GameMemberModel } from '../../../../db/models/gameMember';
+import { GameMemberModel } from '../../../../db/models/GameMember';
 import { getUserFromReq } from '../../../../server/getUserFromReq';
 import { requireRole } from '../../../../serverFns/requireRole';
 import { parseParams } from '../../../../server/parseParams';

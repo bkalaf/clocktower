@@ -42,13 +42,24 @@ export function getModelFor<Shape extends z4.ZodRawShape>(
     return [schema, model] as [mongoose.Schema<Doc>, mongoose.Model<Doc>];
 }
 
+
+export function defineIndexes<Shape extends z4.ZodRawShape>(schema: mongoose.Schema<z4.ZodObject<Shape>>) {
+    return function (indexes: [Record<string, 1 | -1>, { unique?: boolean, sparse?: boolean }?][]) {
+        for (const [fields, opts] of indexes) {
+            schema.index(fields, opts);
+        }
+    }
+}
 export function getTypesFor<Shape extends z4.ZodRawShape, T extends Record<string, any>>(
     name: string,
     zodObj: z4.ZodObject<Shape>,
     options: SchemaOptions = {},
-    obj: T
+    obj: T,
+    ...indexes: [Record<string, 1 | -1>, { unique?: boolean; sparse?: boolean; expireAfterSeconds?: number }?][]
 ) {
     const [schema, model] = getModelFor(name, zodObj, options);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    defineIndexes<Shape>(schema as any)(indexes);
     return {
         schema,
         model,

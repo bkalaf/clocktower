@@ -1,19 +1,21 @@
 // src/db/models/Session.ts
-import mongoose, { Schema } from 'mongoose';
-import { Session } from '../../types/game';
+import z from 'zod/v4';
+import { getTypesFor } from '../../utils/zodToMongoose';
+import mongoose from 'mongoose';
 
-const sessionSchema = new Schema<Session>(
-    {
-        _id: { type: String, required: true, minLength: 16 },
-        userId: { type: String, required: true, minLength: 16 },
-        expiresAt: { type: Number, required: true }
-    },
-    {
-        timestamps: true
-    }
-);
+export const zSession = z.object({
+    _id: z.uuid('Must be a UUID'),
+    userId: z.uuid('Must be a UUID'),
+    expiresAt: z.date()
+});
 
-sessionSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
-const model2 = mongoose.model('Session', sessionSchema);
-const model1 = mongoose.models['Session'] as typeof model2;
-export const SessionModel = model2 || model1;
+const sessionModels = getTypesFor('Session', zSession, { timestamps: true, collection: 'session' }, {}, [
+    { expiresAt: 1 },
+    { expireAfterSeconds: 0 }
+]);
+
+export default sessionModels;
+export type Session = z.infer<typeof zSession>;
+export type SessionType = mongoose.InferRawDocType<Session>;
+export type SessionDocument = mongoose.HydratedDocument<SessionType>;
+export const SessionModel = sessionModels.model;

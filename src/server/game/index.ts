@@ -1,5 +1,5 @@
 // src/server/game/index.ts
-import { GameModel } from '../../db/models/game';
+import { GameModel } from '../../db/models/Game';
 import { Game, GameId, GameStatus, UserId } from '../../types/game';
 
 export const setStatus = async (gameId: GameId, status: GameStatus, args?: Pick<Game, 'endedAt'>) =>

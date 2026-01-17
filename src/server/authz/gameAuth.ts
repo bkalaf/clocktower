@@ -1,7 +1,7 @@
 // src/server/authz/gameAuth.ts
 import { connectMongoose } from '../../db/connectMongoose';
-import { GameModel } from '../../db/models/game';
-import { GameMemberModel } from '../../db/models/gameMember';
+import { GameModel } from '../../db/models/Game';
+import { GameMemberModel } from '../../db/models/GameMember';
 import { AuthedUser, GameId, UserId } from '../../types/game';
 
 export async function requireGame(gameId: GameId) {

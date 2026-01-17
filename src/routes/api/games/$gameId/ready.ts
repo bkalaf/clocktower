@@ -8,7 +8,7 @@ import { parseJsonBody } from '../../../../server/parseJsonBody';
 import { zReadyInput } from '../../../../server/schemas/gameSchemas';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { requireMember } from '../../../../server/authz/gameAuth';
-import { GameMemberModel } from '../../../../db/models/gameMember';
+import { GameMemberModel } from '../../../../db/models/GameMember';
 import { $keys } from '../../../../$keys';
 import { getRedis } from '../../../../redis';
 import { getUserFromCookie } from '../../../../serverFns/getUserFromCookie';

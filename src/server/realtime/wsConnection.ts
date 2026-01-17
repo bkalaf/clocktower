@@ -14,7 +14,7 @@ import { $findById, $findOne } from '../findById';
 import { listWhisperTopicsForUser } from '../../serverFns/listWhisperTopicsForUser';
 import { GameRoles } from '../../types/game';
 import { maybeRemindPickStoryteller } from './reminder';
-import { ChatItemModel } from '../../db/models/chatItem';
+import { ChatItemModel } from '@/db/models/ChatItem';
 
 type Conn = {
     ws: WebSocket;

@@ -1,23 +1,34 @@
 // src/db/models/User.ts
-import mongoose, { Schema } from 'mongoose';
-import { User } from '../../types/game';
+import mongoose from 'mongoose';
+import z from 'zod/v4';
+import { zGlobalRoles } from '../../schemas';
+import { getTypesFor } from '../../utils/zodToMongoose';
 
-export const userSchema = new Schema(
+const zUser = z.object({
+    _id: z.uuid('Must be a UUID'),
+    name: z
+        .string()
+        .min(3, 'Must be over 3 characters long')
+        .max(64, 'Must be under 64 characters')
+        .meta({ description: 'Your displayed username.' }),
+    email: z.email('Invalid email').meta({ description: 'Your e-mail (this is private and not shown to others).' }),
+    passwordHash: z.string().min(8, 'Must be over 8 characters long.'),
+    userRoles: z.array(zGlobalRoles).min(1, 'Must have at least 1 role.').default(['user'])
+});
+
+const userModels = getTypesFor(
+    'User',
+    zUser,
     {
-        _id: { type: String, required: true, minLength: 16 },
-        name: { type: String, required: true, minLength: 1 },
-        email: { type: String, required: true, unique: true, index: true },
-        passwordHash: { type: String, required: true },
-        userRoles: [{ type: String, enum: ['moderator', 'user', 'admin'], required: true }]
+        timestamps: true,
+        collection: 'user'
     },
-    {
-        timestamps: true
-    }
+    {},
+    [{ email: 1 }, { unique: true }]
 );
 
-export type UserType = mongoose.InferRawDocType<typeof userSchema>;
+export type User = z.infer<typeof zUser>;
+export type UserType = mongoose.InferRawDocType<User>;
 export type UserDocument = mongoose.HydratedDocument<UserType>;
-
-const currentModel2 = mongoose.model('User', userSchema);
-const currentModel = mongoose.models['User'] as typeof currentModel2;
-export const UserModel = currentModel ?? currentModel2;
+export const UserModel = userModels.model;
+export default userModels;

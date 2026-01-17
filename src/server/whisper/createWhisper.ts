@@ -1,7 +1,7 @@
 // src/server/whisper/createWhisper.ts
 import { randomUUID } from 'crypto';
 import { connectMongoose } from '../../db/connectMongoose';
-import { WhisperModel } from '../../db/models/whisper';
+import { WhisperModel } from '@/db/models/Whisper';
 import { getRedis } from '../../redis';
 import { $keys } from '../../$keys';
 import { GameId, TopicId, UserId } from '../../types/game';

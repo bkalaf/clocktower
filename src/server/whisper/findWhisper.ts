@@ -2,7 +2,7 @@
 import { createServerFn } from '@tanstack/react-start';
 import z from 'zod';
 import { HttpError } from '../../errors';
-import { WhisperDocument, WhisperModel } from '../../db/models/whisper';
+import { WhisperDocument, WhisperModel } from '@/db/models/Whisper';
 import { success } from '../../utils/http';
 
 const findWhisperInputSchema = z.object({

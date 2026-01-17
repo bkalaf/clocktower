@@ -1,6 +1,6 @@
 // src/serverFns/$whisper.ts
 
-import { WhisperModel } from '../db/models/whisper';
+import { WhisperModel } from '@/db/models/Whisper';
 import { GameId, UserId } from '../types/game';
 
 const find = async (gameId: GameId, member?: UserId, isActive = true) =>

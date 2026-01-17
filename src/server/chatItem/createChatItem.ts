@@ -1,7 +1,7 @@
 // src/server/chatItem/createChatItem.ts
 import { createServerFn } from '@tanstack/react-start';
 import z from 'zod';
-import { ChatItemModel } from '../../db/models/chatItem';
+import { ChatItemModel } from '@/db/models/ChatItem';
 import { created } from '../../utils/http';
 
 const chatItemInputSchema = z.object({

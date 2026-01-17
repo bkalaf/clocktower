@@ -1,30 +1,6 @@
 // src/server/schemas/$z.ts
-import z from 'zod/v4';
-import { zUserId, zGlobalRoles, zGameId, zGameRoles } from '../../schemas';
-import mongoose, { Schema } from 'mongoose';
-import { JSONSchema, jsonSchemaToMongoose } from '../../utils/jsonSchemaToMongoose';
-import { getModelFor, getTypesFor } from '../../utils/zodToMongoose';
-import { Game } from '../../types/game';
-
-const zUpdateGameMember = z.object({
-    role: zGameRoles.default('spectator'),
-    isSeated: z.boolean().default(false)
-});
-
-const zGameMember = z.object({
-    _id: z.uuid('Must be a UUID'),
-    gameId: z.uuid('Must be a UUID'),
-    userId: z.uuid('Must be a UUID'),
-    joinedAt: z.date(),
-    ...zUpdateGameMember.shape
-});
-
-const [GameMemberSchema, GameMemberModel] = getModelFor('GameMember', zGameMember, {
-    timestamps: {
-        createdAt: 'joinedAt',
-        updatedAt: 'updatedAt'
-    }
-});
+import sessionModels from '../../db/models/Session';
+import gameMemberModels from '../../db/models/GameMember';
 
 // export const $z = {
 //     authUser: z.object({
@@ -44,16 +20,6 @@ const [GameMemberSchema, GameMemberModel] = getModelFor('GameMember', zGameMembe
 // };
 
 export const $z = {
-    zgameMember: {
-        schema: GameMemberSchema,
-        model: GameMemberModel,
-        update: zUpdateGameMember,
-        insert: zGameMember
-    },
-    gameMember: getTypesFor(
-        'GameMember',
-        zGameMember,
-        { timestamps: { createdAt: 'joinedAt', updatedAt: 'updatedAt' } },
-        { update: zUpdateGameMember }
-    )
+    gameMember: gameMemberModels,
+    session: sessionModels
 };
