@@ -3,20 +3,14 @@ import { Link } from '@tanstack/react-router';
 import { ChevronDown, ChevronRight, Home, Network, StickyNote, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import {
-    Sheet,
-    SheetClose,
-    SheetContent,
-    SheetTitle
-} from '@/components/ui/sheet';
+import { Sheet, SheetClose, SheetContent, SheetTitle } from '@/components/ui/sheet';
 
 type NavigationDrawerProps = {
     isOpen: boolean;
     onClose: () => void;
 };
 
-const navLinkBase =
-    'flex items-center gap-3 p-3 rounded-lg transition-colors font-medium text-white mb-2';
+const navLinkBase = 'flex items-center gap-3 p-3 rounded-lg transition-colors font-medium text-white mb-2';
 
 export function NavigationDrawer({ isOpen, onClose }: NavigationDrawerProps) {
     const [groupedExpanded, setGroupedExpanded] = useState<Record<string, boolean>>({});

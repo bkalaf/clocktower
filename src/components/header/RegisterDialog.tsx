@@ -1,6 +1,9 @@
 // src/components/header/RegisterDialog.tsx
 import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
     Dialog,
@@ -19,22 +22,45 @@ type RegisterDialogProps = {
     onClose: () => void;
 };
 
+const registerSchema = z
+    .object({
+        name: z.string().min(2, 'Full name is required'),
+        email: z.string().email('Invalid email'),
+        password: z.string().min(8, 'Password must be at least 8 characters'),
+        verificationPassword: z.string().min(8, 'Password confirmation is required')
+    })
+    .refine((data) => data.password === data.verificationPassword, {
+        message: 'Passwords must match',
+        path: ['verificationPassword']
+    });
+
+type RegisterFormValues = z.infer<typeof registerSchema>;
+
 export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
     const queryClient = useQueryClient();
-    const [form, setForm] = useState({
-        name: '',
-        email: '',
-        password: '',
-        verificationPassword: ''
+    const [serverError, setServerError] = useState<string | null>(null);
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isSubmitting }
+    } = useForm<RegisterFormValues>({
+        resolver: zodResolver(registerSchema),
+        defaultValues: {
+            name: '',
+            email: '',
+            password: '',
+            verificationPassword: ''
+        }
     });
-    const [error, setError] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (!open) {
-            setError(null);
+            setServerError(null);
+            reset();
         }
-    }, [open]);
+    }, [open, reset]);
 
     return (
         <Dialog
@@ -52,16 +78,8 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                 </DialogHeader>
                 <form
                     className='space-y-4'
-                    onSubmit={async (event) => {
-                        event.preventDefault();
-                        setError(null);
-
-                        if (form.password !== form.verificationPassword) {
-                            setError('Passwords must match');
-                            return;
-                        }
-
-                        setIsLoading(true);
+                    onSubmit={handleSubmit(async (values) => {
+                        setServerError(null);
                         try {
                             const response = await fetch('/api/auth/register', {
                                 method: 'POST',
@@ -69,34 +87,22 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({
-                                    name: form.name,
-                                    email: form.email,
-                                    password: form.password,
-                                    verificationPassword: form.verificationPassword
-                                })
+                                body: JSON.stringify(values)
                             });
 
                             if (!response.ok) {
                                 const body = await response.json().catch(() => null);
-                                setError(body?.message ?? 'Registration failed');
+                                setServerError(body?.message ?? 'Registration failed');
                                 return;
                             }
 
                             await queryClient.invalidateQueries({ queryKey: WHOAMI_QUERY_KEY });
-                            setForm({
-                                name: '',
-                                email: '',
-                                password: '',
-                                verificationPassword: ''
-                            });
+                            reset();
                             onClose();
                         } catch (err) {
-                            setError('Unable to create account');
-                        } finally {
-                            setIsLoading(false);
+                            setServerError('Unable to create account');
                         }
-                    }}
+                    })}
                 >
                     <div className='space-y-1 text-sm'>
                         <label
@@ -108,11 +114,10 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                         <Input
                             id='register-name'
                             type='text'
-                            required
-                            value={form.name}
-                            onChange={(event) => setForm((prev) => ({ ...prev, name: event.target.value }))}
                             autoComplete='name'
+                            {...register('name')}
                         />
+                        {errors.name && <p className='text-xs text-red-500'>{errors.name.message}</p>}
                     </div>
                     <div className='space-y-1 text-sm'>
                         <label
@@ -124,11 +129,10 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                         <Input
                             id='register-email'
                             type='email'
-                            required
-                            value={form.email}
-                            onChange={(event) => setForm((prev) => ({ ...prev, email: event.target.value }))}
                             autoComplete='email'
+                            {...register('email')}
                         />
+                        {errors.email && <p className='text-xs text-red-500'>{errors.email.message}</p>}
                     </div>
                     <div className='space-y-1 text-sm'>
                         <label
@@ -140,12 +144,10 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                         <Input
                             id='register-password'
                             type='password'
-                            minLength={8}
-                            required
-                            value={form.password}
-                            onChange={(event) => setForm((prev) => ({ ...prev, password: event.target.value }))}
                             autoComplete='new-password'
+                            {...register('password')}
                         />
+                        {errors.password && <p className='text-xs text-red-500'>{errors.password.message}</p>}
                     </div>
                     <div className='space-y-1 text-sm'>
                         <label
@@ -157,22 +159,22 @@ export function RegisterDialog({ open, onClose }: RegisterDialogProps) {
                         <Input
                             id='register-verification-password'
                             type='password'
-                            minLength={8}
-                            required
-                            value={form.verificationPassword}
-                            onChange={(event) => setForm((prev) => ({ ...prev, verificationPassword: event.target.value }))}
                             autoComplete='new-password'
+                            {...register('verificationPassword')}
                         />
+                        {errors.verificationPassword && (
+                            <p className='text-xs text-red-500'>{errors.verificationPassword.message}</p>
+                        )}
                     </div>
-                    {error && <p className='text-sm text-red-500'>{error}</p>}
+                    {serverError && <p className='text-sm text-red-500'>{serverError}</p>}
                     <DialogFooter className='pt-0'>
                         <Button
                             type='submit'
-                            disabled={isLoading}
+                            disabled={isSubmitting}
                             className='w-full'
                             variant='default'
                         >
-                            {isLoading ? 'Registering…' : 'Register'}
+                            {isSubmitting ? 'Registering…' : 'Register'}
                         </Button>
                     </DialogFooter>
                 </form>

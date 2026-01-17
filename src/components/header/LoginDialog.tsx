@@ -1,6 +1,9 @@
 // src/components/header/LoginDialog.tsx
 import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import {
     Dialog,
@@ -19,17 +22,36 @@ type LoginDialogProps = {
     onClose: () => void;
 };
 
+const loginSchema = z.object({
+    email: z.string().min(1, 'Email is required').email('Invalid email'),
+    password: z.string().min(8, 'Password must be at least 8 characters')
+});
+
+type LoginFormValues = z.infer<typeof loginSchema>;
+
 export function LoginDialog({ open, onClose }: LoginDialogProps) {
     const queryClient = useQueryClient();
-    const [form, setForm] = useState({ email: '', password: '' });
-    const [error, setError] = useState<string | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [serverError, setServerError] = useState<string | null>(null);
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isSubmitting }
+    } = useForm<LoginFormValues>({
+        resolver: zodResolver(loginSchema),
+        defaultValues: {
+            email: '',
+            password: ''
+        }
+    });
 
     useEffect(() => {
         if (!open) {
-            setError(null);
+            setServerError(null);
+            reset();
         }
-    }, [open]);
+    }, [open, reset]);
 
     return (
         <Dialog
@@ -47,10 +69,8 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                 </DialogHeader>
                 <form
                     className='space-y-4'
-                    onSubmit={async (event) => {
-                        event.preventDefault();
-                        setError(null);
-                        setIsLoading(true);
+                    onSubmit={handleSubmit(async (values) => {
+                        setServerError(null);
                         try {
                             const response = await fetch('/api/auth/login', {
                                 method: 'POST',
@@ -58,27 +78,22 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({
-                                    email: form.email,
-                                    password: form.password
-                                })
+                                body: JSON.stringify(values)
                             });
 
                             if (!response.ok) {
                                 const body = await response.json().catch(() => null);
-                                setError(body?.message ?? 'Login failed');
+                                setServerError(body?.message ?? 'Login failed');
                                 return;
                             }
 
                             await queryClient.invalidateQueries({ queryKey: WHOAMI_QUERY_KEY });
-                            setForm({ email: '', password: '' });
+                            reset();
                             onClose();
                         } catch (err) {
-                            setError('Unable to log in');
-                        } finally {
-                            setIsLoading(false);
+                            setServerError('Unable to log in');
                         }
-                    }}
+                    })}
                 >
                     <div className='space-y-1 text-sm'>
                         <label
@@ -90,12 +105,11 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                         <Input
                             id='login-email'
                             type='email'
-                            required
-                            value={form.email}
-                            onChange={(event) => setForm((prev) => ({ ...prev, email: event.target.value }))}
                             autoComplete='email'
                             placeholder='you@example.com'
+                            {...register('email')}
                         />
+                        {errors.email && <p className='text-xs text-red-500'>{errors.email.message}</p>}
                     </div>
                     <div className='space-y-1 text-sm'>
                         <label
@@ -107,21 +121,19 @@ export function LoginDialog({ open, onClose }: LoginDialogProps) {
                         <Input
                             id='login-password'
                             type='password'
-                            required
-                            minLength={8}
-                            value={form.password}
-                            onChange={(event) => setForm((prev) => ({ ...prev, password: event.target.value }))}
                             autoComplete='current-password'
+                            {...register('password')}
                         />
+                        {errors.password && <p className='text-xs text-red-500'>{errors.password.message}</p>}
                     </div>
-                    {error && <p className='text-sm text-red-500'>{error}</p>}
+                    {serverError && <p className='text-sm text-red-500'>{serverError}</p>}
                     <DialogFooter className='pt-0'>
                         <Button
                             type='submit'
-                            disabled={isLoading}
+                            disabled={isSubmitting}
                             className='w-full'
                         >
-                            {isLoading ? 'Logging in…' : 'Log in'}
+                            {isSubmitting ? 'Logging in…' : 'Log in'}
                         </Button>
                     </DialogFooter>
                 </form>

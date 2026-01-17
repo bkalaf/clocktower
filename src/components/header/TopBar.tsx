@@ -42,7 +42,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenReg
 
             <div className='flex items-center gap-3'>
                 {!user && isAuthLoading && <span className='text-sm text-gray-300'>Checking session…</span>}
-                {user ? (
+                {user ?
                     <>
                         <Button
                             variant='outline'
@@ -64,8 +64,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenReg
                             </div>
                         </div>
                     </>
-                ) : (
-                    <>
+                :   <>
                         <Button
                             variant='outline'
                             size='sm'
@@ -85,7 +84,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenReg
                             Register
                         </Button>
                     </>
-                )}
+                }
             </div>
         </header>
     );
