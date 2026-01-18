@@ -3,6 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Zap, Server, Route as RouteIcon, Shield, Waves, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { DevGrimoirePanel } from '../client/dev/DevGrimoirePanel';
+import backgroundImage from '../assets/images/tokens-desk-window.png';
 
 export const Route = createFileRoute('/')({ component: App });
 
@@ -12,6 +13,7 @@ function App() {
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
+        // TODO convert this from it's current implementation into using the search property on createFileRoute
         const params = new URLSearchParams(window.location.search);
         setRoomId(params.get('roomId'));
         setMatchId(params.get('matchId'));
@@ -53,9 +55,12 @@ function App() {
     ];
 
     return (
-        <div className='min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900'>
-            <section className='relative py-20 px-6 text-center overflow-hidden'>
-                <div className='absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10'></div>
+        <div className='min-h-screen bg-linear-to-b from-slate-900 via-slate-800 to-slate-900'>
+            <section
+                className='relative py-20 px-6 text-center overflow-hidden bg-cover bg-center bg-no-repeat'
+                style={{ backgroundImage: `url(${backgroundImage})` }}
+            >
+                <div className='absolute inset-0 bg-linear-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10'></div>
                 <div className='relative max-w-5xl mx-auto'>
                     <div className='flex items-center justify-center gap-6 mb-6'>
                         <img
@@ -63,9 +68,9 @@ function App() {
                             alt='TanStack Logo'
                             className='w-24 h-24 md:w-32 md:h-32'
                         />
-                        <h1 className='text-6xl md:text-7xl font-black text-white [letter-spacing:-0.08em]'>
+                        <h1 className='text-6xl md:text-7xl font-black text-white tracking-[-0.08em]'>
                             <span className='text-gray-300'>TANSTACK</span>{' '}
-                            <span className='bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent'>
+                            <span className='bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent'>
                                 START
                             </span>
                         </h1>

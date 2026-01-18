@@ -16,6 +16,7 @@ export const zMatch = z.object({
     travelerUserIds: z.array(aliases.userId).default([]),
     travelerCountUsed: z.number().int().min(0).default(0),
     travelerLimit: z.number().int().min(0).default(5),
+    playerSeatMap: z.record(aliases.userId, z.unknown()).default({}),
     nominationsOpen: z.boolean().default(false),
     breakoutWhispersEnabled: z.boolean().default(true),
     dayNominated: z.array(aliases.userId).default([]),
