@@ -5,12 +5,7 @@ import { ChatItemModel } from '@/db/models/ChatItem';
 import { StreamMessageModel } from '@/db/models/StreamMessage';
 import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
-import {
-    getMatchIdFromTopic,
-    getRoomIdFromTopic,
-    streamKeyForTopic,
-    timestampFromStreamId
-} from './topicStreams';
+import { getMatchIdFromTopic, getRoomIdFromTopic, streamKeyForTopic, timestampFromStreamId } from './topicStreams';
 
 function toDate(value: number | Date): Date {
     if (value instanceof Date) return value;

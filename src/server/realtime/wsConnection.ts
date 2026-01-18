@@ -64,8 +64,8 @@ async function canJoinTopic(conn: Conn, topicId: string) {
     const isRoomTopic = topicId.startsWith(roomPrefix);
     if (!isLegacyTopic && !isRoomTopic) return false;
 
-    const publicTopics = new Set([ $keys.publicTopic(conn.gameId), $keys.roomPublicTopic(conn.gameId) ]);
-    const stTopics = new Set([ $keys.stTopic(conn.gameId), $keys.roomStTopic(conn.gameId) ]);
+    const publicTopics = new Set([$keys.publicTopic(conn.gameId), $keys.roomPublicTopic(conn.gameId)]);
+    const stTopics = new Set([$keys.stTopic(conn.gameId), $keys.roomStTopic(conn.gameId)]);
     if (publicTopics.has(topicId)) return true;
     if (stTopics.has(topicId)) return conn.role === 'storyteller';
 

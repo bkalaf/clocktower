@@ -43,8 +43,7 @@ export const Route = createFileRoute('/api/invites/$inviteId/accept')({
                 const activeMatch = await GameModel.findOne({
                     _id: { $in: activeRoomIds },
                     status: 'in_match'
-                })
-                    .lean();
+                }).lean();
                 if (activeMatch) {
                     return Response.json({ error: 'already_in_match' }, { status: 409 });
                 }

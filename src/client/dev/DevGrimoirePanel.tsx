@@ -67,7 +67,9 @@ export function DevGrimoirePanel({ roomId, matchId }: { roomId: string; matchId:
                     <button onClick={() => setOpen(false)}>Close</button>
                 </div>
             </div>
-            {err ? <div style={{ color: 'crimson' }}>{err}</div> : null}
+            {err ?
+                <div style={{ color: 'crimson' }}>{err}</div>
+            :   null}
             <pre style={{ whiteSpace: 'pre-wrap', fontSize: 12 }}>
                 {data ? JSON.stringify(data, null, 2) : 'No data loaded'}
             </pre>

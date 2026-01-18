@@ -1,5 +1,5 @@
 // src/machines/MatchMachine.ts
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { assign, setup } from 'xstate';
 
 export type NominationType = 'execution' | 'exile';
@@ -144,8 +144,7 @@ const canBeNominatedGuard = ({ context, event }: GuardMeta) => {
     return false;
 };
 
-const canNominateAndBeNominatedGuard = (meta: GuardMeta) =>
-    canNominateGuard(meta) && canBeNominatedGuard(meta);
+const canNominateAndBeNominatedGuard = (meta: GuardMeta) => canNominateGuard(meta) && canBeNominatedGuard(meta);
 
 const canVoteGuard = ({ context, event }: GuardMeta) => {
     if (event.type !== 'VOTE_CAST') return false;
@@ -193,12 +192,12 @@ export const machine = setup({
         startNomination: assign((context, event) => {
             if (event.type !== 'NOMINATION_ATTEMPTED') return {};
             const { nominatorId, nomineeId, nominationType } = event.payload;
-            const nextNominators = context.dayNominators.includes(nominatorId)
-                ? context.dayNominators
-                : [...context.dayNominators, nominatorId];
-            const nextNominated = context.dayNominated.includes(nomineeId)
-                ? context.dayNominated
-                : [...context.dayNominated, nomineeId];
+            const nextNominators =
+                context.dayNominators.includes(nominatorId) ?
+                    context.dayNominators
+                :   [...context.dayNominators, nominatorId];
+            const nextNominated =
+                context.dayNominated.includes(nomineeId) ? context.dayNominated : [...context.dayNominated, nomineeId];
             return {
                 dayNominators: nextNominators,
                 dayNominated: nextNominated,

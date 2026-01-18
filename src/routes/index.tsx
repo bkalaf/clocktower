@@ -108,7 +108,12 @@ function App() {
                     ))}
                 </div>
             </section>
-            {roomId && matchId ? <DevGrimoirePanel roomId={roomId} matchId={matchId} /> : null}
+            {roomId && matchId ?
+                <DevGrimoirePanel
+                    roomId={roomId}
+                    matchId={matchId}
+                />
+            :   null}
         </div>
     );
 }

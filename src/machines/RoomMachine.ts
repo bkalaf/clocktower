@@ -1,5 +1,5 @@
 // src/machines/RoomMachine.ts
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { setup, createMachine } from 'xstate';
 
 export const machine = setup({

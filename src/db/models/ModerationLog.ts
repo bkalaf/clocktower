@@ -16,13 +16,9 @@ export const zModerationLog = z.object({
     ts: aliases.timestamp.default(() => new Date())
 });
 
-const moderationLogModels = getTypesFor(
-    'moderation_log',
-    zModerationLog,
-    { collection: 'moderation_log' },
-    {},
-    [{ roomId: 1 }]
-);
+const moderationLogModels = getTypesFor('moderation_log', zModerationLog, { collection: 'moderation_log' }, {}, [
+    { roomId: 1 }
+]);
 
 export type ModerationLog = z.infer<typeof zModerationLog>;
 export type ModerationLogType = mongoose.InferRawDocType<ModerationLog>;

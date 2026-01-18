@@ -69,9 +69,6 @@ export const zFindSessionInput = z.object({
     expiresAt: aliases.timestamp
 });
 
-
-
-
 export const zRequireGameMemberOutput = z.object({
     role: enums.sessionRoles,
     userId: refs.user

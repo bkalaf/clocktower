@@ -1,5 +1,5 @@
 // src/machines/AppShell.ts
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { setup } from 'xstate';
 
 export const machine = setup({

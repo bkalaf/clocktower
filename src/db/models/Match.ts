@@ -53,13 +53,7 @@ export const zMatch = z.object({
         .default([])
 });
 
-const matchModels = getTypesFor(
-    'match',
-    zMatch,
-    { timestamps: true, collection: 'match' },
-    {},
-    [{ roomId: 1 }]
-);
+const matchModels = getTypesFor('match', zMatch, { timestamps: true, collection: 'match' }, {}, [{ roomId: 1 }]);
 
 export type Match = z.infer<typeof zMatch>;
 export type MatchType = mongoose.InferRawDocType<Match>;

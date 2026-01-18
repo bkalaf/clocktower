@@ -20,13 +20,10 @@ export const zScript = z.object({
     characters: z.array(zScriptCharacter).default([])
 });
 
-const scriptModels = getTypesFor(
-    'script',
-    zScript,
-    { timestamps: true, collection: 'script' },
-    {},
-    [{ scriptId: 1 }, { unique: true }]
-);
+const scriptModels = getTypesFor('script', zScript, { timestamps: true, collection: 'script' }, {}, [
+    { scriptId: 1 },
+    { unique: true }
+]);
 
 export type Script = z.infer<typeof zScript>;
 export type ScriptType = mongoose.InferRawDocType<Script>;
