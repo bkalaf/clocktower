@@ -39,20 +39,21 @@ export function SelectScriptDialog({
     onSelectScript
 }: SelectScriptDialogProps) {
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog
+            open={open}
+            onOpenChange={onOpenChange}
+        >
             <DialogContent className='max-w-3xl bg-black/70 border border-white/10'>
                 <DialogHeader>
-                    <DialogTitle className='text-2xl text-white font-semibold'>
-                        Select a Script
-                    </DialogTitle>
+                    <DialogTitle className='text-2xl text-white font-semibold'>Select a Script</DialogTitle>
                     <DialogDescription className='text-sm text-slate-300'>
-                        Every script wields a unique set of characters and story beats. Pick
-                        the one you want to study in the Grimoire.
+                        Every script wields a unique set of characters and story beats. Pick the one you want to study
+                        in the Grimoire.
                     </DialogDescription>
                 </DialogHeader>
                 <ScrollArea className='mb-4 max-h-96 rounded-xl border border-white/10 bg-black/50 p-4'>
                     <div className='grid grid-cols-1 gap-3 md:grid-cols-2'>
-                        {scripts.map(script => {
+                        {scripts.map((script) => {
                             const isActive = script.scriptId === currentScriptId;
                             return (
                                 <button
@@ -61,9 +62,9 @@ export function SelectScriptDialog({
                                     onClick={() => onSelectScript(script.scriptId)}
                                     className={cn(
                                         'group flex w-full flex-col gap-3 rounded-2xl border px-4 py-4 transition hover:border-cyan-400/60',
-                                        isActive
-                                            ? 'border-cyan-400/80 bg-cyan-500/10 shadow-[0_15px_35px_rgba(14,165,233,0.25)]'
-                                            : 'border-white/5 bg-slate-900/40'
+                                        isActive ?
+                                            'border-cyan-400/80 bg-cyan-500/10 shadow-[0_15px_35px_rgba(14,165,233,0.25)]'
+                                        :   'border-white/5 bg-slate-900/40'
                                     )}
                                 >
                                     <div className='flex items-center justify-between text-left text-white'>
@@ -82,7 +83,7 @@ export function SelectScriptDialog({
                                         )}
                                     </div>
                                     <div className='flex flex-wrap gap-2'>
-                                        {script.characters.map(character => (
+                                        {script.characters.map((character) => (
                                             <span
                                                 key={character.id}
                                                 className='flex items-center gap-2 rounded-full border border-white/10 px-3 py-1 text-xs text-white/90'
@@ -98,7 +99,10 @@ export function SelectScriptDialog({
                     </div>
                 </ScrollArea>
                 <DialogFooter className='gap-2'>
-                    <Button variant='outline' onClick={() => onOpenChange(false)}>
+                    <Button
+                        variant='outline'
+                        onClick={() => onOpenChange(false)}
+                    >
                         Close
                     </Button>
                 </DialogFooter>

@@ -34,11 +34,17 @@ export function ScriptDropdown({ scriptName, onViewScript, onChangeScript }: Scr
                         'shadow-[0_20px_65px_rgba(0,0,0,0.55)]'
                     )}
                 >
-                    <DropdownMenuItem onSelect={onViewScript} className='gap-2'>
+                    <DropdownMenuItem
+                        onSelect={onViewScript}
+                        className='gap-2'
+                    >
                         <FileText className='size-4 text-cyan-400' />
                         View Script
                     </DropdownMenuItem>
-                    <DropdownMenuItem onSelect={onChangeScript} className='gap-2'>
+                    <DropdownMenuItem
+                        onSelect={onChangeScript}
+                        className='gap-2'
+                    >
                         <List className='size-4 text-amber-400' />
                         Change Script
                     </DropdownMenuItem>

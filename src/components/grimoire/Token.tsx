@@ -30,8 +30,7 @@ export function Token({ name, image, size = 130, badges = [], className, onClick
             style={{
                 width: size,
                 height: size,
-                backgroundImage:
-                    'radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 55%)'
+                backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25), transparent 55%)'
             }}
             onClick={onClick}
         >

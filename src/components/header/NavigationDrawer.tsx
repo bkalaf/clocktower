@@ -1,3 +1,4 @@
+// src/components/header/NavigationDrawer.tsx
 import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { ChevronDown, ChevronRight, Home, Network, StickyNote, X } from 'lucide-react';

@@ -20,27 +20,20 @@ export type ReminderTokenProps = {
     style?: React.CSSProperties;
 };
 
-export function ReminderToken({
-    reminder,
-    size = 34,
-    draggableId,
-    instanceId,
-    className
-}: ReminderTokenProps) {
+export function ReminderToken({ reminder, size = 34, draggableId, instanceId, className, style }: ReminderTokenProps) {
     const isDraggable = typeof draggableId === 'string';
-    const uniqueId = isDraggable
-        ? draggableId
-        : `reminder-overlay-${instanceId ?? reminder.key}`;
+    const uniqueId = isDraggable ? draggableId : `reminder-overlay-${instanceId ?? reminder.key}`;
     const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
         id: uniqueId,
         disabled: !isDraggable
     });
 
-    const dragStyle: React.CSSProperties = transform
-        ? {
-              transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`
-          }
-        : {};
+    const dragStyle: React.CSSProperties =
+        transform ?
+            {
+                transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`
+            }
+        :   {};
 
     return (
         <span
@@ -55,7 +48,7 @@ export function ReminderToken({
                 height: size,
                 backgroundColor: reminder.color,
                 ...dragStyle,
-                ...style
+                ...(style ?? {})
             }}
             {...(isDraggable ? { ...attributes, ...listeners } : {})}
         >

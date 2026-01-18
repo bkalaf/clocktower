@@ -192,10 +192,7 @@ export function GrimoireBoard() {
     }, []);
 
     const currentScript = React.useMemo(() => {
-        return (
-            builtinScripts.find(script => script.scriptId === state.scriptId) ??
-            builtinScripts[0]
-        );
+        return builtinScripts.find((script) => script.scriptId === state.scriptId) ?? builtinScripts[0];
     }, [state.scriptId]);
 
     const seatPositions = React.useMemo(() => {
@@ -220,18 +217,18 @@ export function GrimoireBoard() {
     }, [boardSize.height, boardSize.width, state.seats]);
 
     const handleScriptSelect = (scriptId: string) => {
-        setState(prev => ({ ...prev, scriptId }));
+        setState((prev) => ({ ...prev, scriptId }));
         setScriptDialogOpen(false);
     };
 
     const handleDragEnd = (event: DragEndEvent) => {
         const reminderKey = String(event.active.id);
         const dropTarget = event.over?.id;
-        if (!dropTarget || !dropTarget.startsWith('seat-')) return;
-        const seatId = Number(dropTarget.replace('seat-', ''));
-        setState(prev => ({
+        if (!dropTarget || !dropTarget?.toString().startsWith('seat-')) return;
+        const seatId = Number(dropTarget?.toString().replace('seat-', ''));
+        setState((prev) => ({
             ...prev,
-            seats: prev.seats.map(seat => {
+            seats: prev.seats.map((seat) => {
                 if (seat.seatId !== seatId) return seat;
                 if (seat.reminders.includes(reminderKey)) {
                     return seat;
@@ -285,12 +282,8 @@ export function GrimoireBoard() {
                                         {currentScript?.name ?? 'Unknown'}
                                     </span>
                                     <div className='mt-4 flex w-full items-center justify-between text-[0.65rem] uppercase tracking-[0.45em] text-white/70'>
-                                        <span className='rounded-full border border-white/20 px-3 py-1'>
-                                            Day 2
-                                        </span>
-                                        <span className='rounded-full border border-white/20 px-3 py-1'>
-                                            Night +3
-                                        </span>
+                                        <span className='rounded-full border border-white/20 px-3 py-1'>Day 2</span>
+                                        <span className='rounded-full border border-white/20 px-3 py-1'>Night +3</span>
                                     </div>
                                 </div>
                             </div>
@@ -328,7 +321,7 @@ export function GrimoireBoard() {
             <AssignTokensDialog
                 open={assignDialogOpen}
                 onOpenChange={setAssignDialogOpen}
-                seats={state.seats.map(seat => ({
+                seats={state.seats.map((seat) => ({
                     seatId: seat.seatId,
                     name: seat.name,
                     tokenImg: seat.tokenImg,
@@ -336,7 +329,10 @@ export function GrimoireBoard() {
                 }))}
             />
 
-            <Dialog open={scriptViewerOpen} onOpenChange={setScriptViewerOpen}>
+            <Dialog
+                open={scriptViewerOpen}
+                onOpenChange={setScriptViewerOpen}
+            >
                 <DialogContent className='max-w-3xl bg-black/80 border border-white/10'>
                     <DialogHeader>
                         <DialogTitle className='text-2xl text-white font-semibold'>
@@ -347,22 +343,21 @@ export function GrimoireBoard() {
                         </DialogDescription>
                     </DialogHeader>
                     <div className='grid grid-cols-1 gap-3 sm:grid-cols-2'>
-                        {currentScript?.characters.map(character => (
+                        {currentScript?.characters.map((character) => (
                             <div
                                 key={character.id}
                                 className='rounded-2xl border border-white/10 bg-slate-900/40 p-4'
                             >
-                                <p className='text-sm uppercase tracking-[0.4em] text-white/60'>
-                                    {character.icon}
-                                </p>
-                                <p className='mt-1 text-lg font-semibold text-white'>
-                                    {character.name}
-                                </p>
+                                <p className='text-sm uppercase tracking-[0.4em] text-white/60'>{character.icon}</p>
+                                <p className='mt-1 text-lg font-semibold text-white'>{character.name}</p>
                             </div>
                         ))}
                     </div>
                     <DialogFooter className='mt-4 gap-2'>
-                        <Button variant='outline' onClick={() => setScriptViewerOpen(false)}>
+                        <Button
+                            variant='outline'
+                            onClick={() => setScriptViewerOpen(false)}
+                        >
                             Close
                         </Button>
                     </DialogFooter>
@@ -378,11 +373,7 @@ type SeatTokenNodeProps = {
     reminderOptions: ReminderTokenMeta[];
 };
 
-const SeatTokenNode = React.memo(function SeatTokenNode({
-    seat,
-    style,
-    reminderOptions
-}: SeatTokenNodeProps) {
+const SeatTokenNode = React.memo(function SeatTokenNode({ seat, style, reminderOptions }: SeatTokenNodeProps) {
     const { isOver, setNodeRef } = useDroppable({
         id: `seat-${seat.seatId}`
     });
@@ -399,13 +390,13 @@ const SeatTokenNode = React.memo(function SeatTokenNode({
                 <Token
                     name={seat.name}
                     image={seat.tokenImg}
-                    badges={seat.nightOrderBadges?.map(badge => ({
+                    badges={seat.nightOrderBadges?.map((badge) => ({
                         label: String(badge.n),
                         color: badge.color === 'gray' ? 'gray' : badge.color
                     }))}
                 />
                 {seat.reminders.map((reminderKey, index) => {
-                    const meta = reminderOptions.find(r => r.key === reminderKey);
+                    const meta = reminderOptions.find((r) => r.key === reminderKey);
                     if (!meta) return null;
                     const angle = (index / seat.reminders.length) * Math.PI * 2;
                     const offset = 52;

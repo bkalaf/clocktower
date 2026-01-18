@@ -21,8 +21,8 @@ export type TopBarProps = {
 export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenRegister, onOpenLogout }: TopBarProps) {
     const navigate = useNavigate();
     const toLogin = useCallback(() => {
-        navigate({ to: '/login' })
-    }, [navigate])
+        navigate({ to: '/login' });
+    }, [navigate]);
     return (
         <header className='flex items-center justify-between bg-gray-900 px-4 py-3 text-white shadow-lg'>
             <div className='flex items-center gap-4'>

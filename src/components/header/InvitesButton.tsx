@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/components/header/InvitesButton.tsx
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -17,11 +18,17 @@ export function InvitesButton() {
 
     const acceptMutation = useMutation({
         mutationFn: (inviteId: string) => acceptInvite(inviteId),
-        onSuccess: () => queryClient.invalidateQueries(['invites'])
+        onSuccess: () =>
+            queryClient.invalidateQueries({
+                queryKey: ['invites']
+            })
     });
     const rejectMutation = useMutation({
         mutationFn: (inviteId: string) => rejectInvite(inviteId),
-        onSuccess: () => queryClient.invalidateQueries(['invites'])
+        onSuccess: () =>
+            queryClient.invalidateQueries({
+                queryKey: ['invites']
+            })
     });
 
     const invites = Array.isArray(data) ? data : [];
@@ -46,27 +53,35 @@ export function InvitesButton() {
 
     return (
         <div className='relative'>
-            <Button variant='ghost' size='sm' onClick={() => setPanelOpen((prev) => !prev)}>
+            <Button
+                variant='ghost'
+                size='sm'
+                onClick={() => setPanelOpen((prev) => !prev)}
+            >
                 Invites
-                {isLoading ? (
+                {isLoading ?
                     <span className='ml-2 h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400' />
-                ) : invites.length > 0 ? (
+                : invites.length > 0 ?
                     <span className='ml-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-xs font-semibold text-white'>
                         {invites.length}
                     </span>
-                ) : null}
+                :   null}
             </Button>
-            {panelOpen ? (
+            {panelOpen ?
                 <div className='absolute right-0 top-[110%] z-50 w-72 rounded-xl border border-white/10 bg-slate-950/95 p-3 shadow-lg shadow-black/40'>
-                    <div className='mb-2 text-xs font-semibold uppercase tracking-wide text-white/60'>Pending Invites</div>
-                    {invites.length === 0 ? (
+                    <div className='mb-2 text-xs font-semibold uppercase tracking-wide text-white/60'>
+                        Pending Invites
+                    </div>
+                    {invites.length === 0 ?
                         <div className='rounded-xl border border-white/5 bg-white/5 px-3 py-4 text-sm text-slate-300'>
                             No pending invites
                         </div>
-                    ) : (
-                        <div className='flex flex-col gap-2'>
+                    :   <div className='flex flex-col gap-2'>
                             {invites.map((invite: any) => (
-                                <div key={invite._id} className='rounded-xl border border-white/5 bg-white/5 p-3 text-sm text-white'>
+                                <div
+                                    key={invite._id}
+                                    className='rounded-xl border border-white/5 bg-white/5 p-3 text-sm text-white'
+                                >
                                     <div className='flex items-center justify-between'>
                                         <span className='font-medium'>
                                             {invite.kind === 'seat' ? 'Seat Invite' : 'Spectator'}
@@ -81,7 +96,7 @@ export function InvitesButton() {
                                             variant='ghost'
                                             size='sm'
                                             onClick={() => handleAccept(invite._id)}
-                                            disabled={acceptMutation.isLoading}
+                                            disabled={acceptMutation.isPending}
                                         >
                                             Accept
                                         </Button>
@@ -89,7 +104,7 @@ export function InvitesButton() {
                                             variant='outline'
                                             size='sm'
                                             onClick={() => handleReject(invite._id)}
-                                            disabled={rejectMutation.isLoading}
+                                            disabled={rejectMutation.isPending}
                                         >
                                             Decline
                                         </Button>
@@ -97,9 +112,9 @@ export function InvitesButton() {
                                 </div>
                             ))}
                         </div>
-                    )}
+                    }
                 </div>
-            ) : null}
+            :   null}
         </div>
     );
 }

@@ -60,10 +60,10 @@ describe('TopBar', () => {
         render(
             <TopBar
                 user={{
-                    userId: 'user:1',
+                    _id: 'user:1',
                     name: 'Tester',
                     email: 'test@example.com',
-                    roles: ['user']
+                    userRoles: ['user']
                 }}
                 isAuthLoading={false}
                 onMenuOpen={noop}

@@ -34,15 +34,24 @@ export function ToolsMenu({ onOpenReminders, onOpenFabled, onOpenAssignTokens }:
                         'w-52 rounded-2xl border border-white/10 bg-black/70 p-1 backdrop-blur shadow-[0_20px_65px_rgba(0,0,0,0.65)]'
                     )}
                 >
-                    <DropdownMenuItem onSelect={onOpenReminders} className='gap-2'>
+                    <DropdownMenuItem
+                        onSelect={onOpenReminders}
+                        className='gap-2'
+                    >
                         <CircleDashed className='size-4 text-cyan-300' />
                         Reminder Tokens
                     </DropdownMenuItem>
-                    <DropdownMenuItem onSelect={onOpenFabled} className='gap-2'>
+                    <DropdownMenuItem
+                        onSelect={onOpenFabled}
+                        className='gap-2'
+                    >
                         <ShieldAlert className='size-4 text-amber-400' />
                         Fabled List
                     </DropdownMenuItem>
-                    <DropdownMenuItem onSelect={onOpenAssignTokens} className='gap-2'>
+                    <DropdownMenuItem
+                        onSelect={onOpenAssignTokens}
+                        className='gap-2'
+                    >
                         <Briefcase className='size-4 text-violet-400' />
                         Assign Tokens
                     </DropdownMenuItem>

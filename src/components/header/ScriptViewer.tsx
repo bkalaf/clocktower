@@ -27,7 +27,10 @@ export function ScriptViewer({
 }) {
     if (!script) return null;
     return (
-        <Dialog.Root open={open} onOpenChange={onOpenChange}>
+        <Dialog.Root
+            open={open}
+            onOpenChange={onOpenChange}
+        >
             <Dialog.Portal>
                 <Dialog.Overlay className='fixed inset-0 bg-black/40 backdrop-blur-sm' />
                 <Dialog.Content className='fixed inset-0 m-auto max-w-md rounded-xl bg-slate-950/90 p-6 shadow-xl shadow-indigo-500/30'>
@@ -45,13 +48,18 @@ export function ScriptViewer({
                                     <div className='text-base font-medium'>{character.name}</div>
                                     <div className='text-xs text-slate-400'>{character.team}</div>
                                 </div>
-                                {character.icon ? <span>{character.icon}</span> : null}
+                                {character.icon ?
+                                    <span>{character.icon}</span>
+                                :   null}
                             </div>
                         ))}
                     </div>
                     <div className='mt-6 flex justify-end'>
                         <Dialog.Close asChild>
-                            <Button variant='ghost' size='sm'>
+                            <Button
+                                variant='ghost'
+                                size='sm'
+                            >
                                 Close
                             </Button>
                         </Dialog.Close>

@@ -23,18 +23,15 @@ export type AssignTokensDialogProps = {
     }>;
 };
 
-export function AssignTokensDialog({
-    open,
-    onOpenChange,
-    seats
-}: AssignTokensDialogProps) {
+export function AssignTokensDialog({ open, onOpenChange, seats }: AssignTokensDialogProps) {
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog
+            open={open}
+            onOpenChange={onOpenChange}
+        >
             <DialogContent className='max-w-4xl bg-black/70 border border-white/10'>
                 <DialogHeader>
-                    <DialogTitle className='text-2xl text-white font-semibold'>
-                        Assign Tokens
-                    </DialogTitle>
+                    <DialogTitle className='text-2xl text-white font-semibold'>Assign Tokens</DialogTitle>
                     <DialogDescription className='text-sm text-slate-300'>
                         Drop tokens onto the matching players or click to shuffle the board.
                     </DialogDescription>
@@ -42,7 +39,7 @@ export function AssignTokensDialog({
 
                 <ScrollArea className='mb-4 max-h-96 rounded-xl border border-white/10 bg-black/50 p-4'>
                     <div className='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
-                        {seats.map(seat => (
+                        {seats.map((seat) => (
                             <div
                                 key={seat.seatId}
                                 className='flex flex-col gap-3 rounded-2xl border border-white/10 bg-slate-900/40 p-4'
@@ -51,10 +48,14 @@ export function AssignTokensDialog({
                                     <span>{seat.name}</span>
                                     <span>{`#${seat.seatId + 1}`}</span>
                                 </div>
-                                <Token name={seat.name} image={seat.tokenImg} size={110} />
+                                <Token
+                                    name={seat.name}
+                                    image={seat.tokenImg}
+                                    size={110}
+                                />
                                 <div className='flex flex-wrap gap-2 text-[0.65rem] text-slate-300'>
                                     {seat.reminders.length === 0 && <span>No Reminders</span>}
-                                    {seat.reminders.map(token => (
+                                    {seat.reminders.map((token) => (
                                         <span
                                             key={`${seat.seatId}-${token}`}
                                             className='rounded-full border border-white/20 px-2 py-0.5'
@@ -69,7 +70,10 @@ export function AssignTokensDialog({
                 </ScrollArea>
 
                 <DialogFooter className='gap-2'>
-                    <Button variant='outline' onClick={() => onOpenChange(false)}>
+                    <Button
+                        variant='outline'
+                        onClick={() => onOpenChange(false)}
+                    >
                         Close
                     </Button>
                 </DialogFooter>
