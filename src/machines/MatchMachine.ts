@@ -11,59 +11,206 @@ export const machine = setup({
             scriptId: string;
             subphase: string;
             dayNumber: number;
-            playerSeatMap: Record<string, any>;
-            stStateVersion: Record<string, any>;
+            playerSeatMap: {};
+            stStateVersion: {};
             customScriptRoles: unknown[];
             publicStateVersion: number;
             storytellerUserIds: string;
+            acceptTravelers: boolean;
+            travelerCountUsed: number;
+            availableTravelers: unknown[];
+            pendingTravelerRequests: unknown[];
         },
         events: {} as
             | { type: 'DAWN' }
             | { type: 'DUSK' }
-            | { type: 'SETUP_COMPLETE' }
             | { type: 'CLOCKTOWER_GONG' }
             | { type: 'REVEAL_COMPLETE' }
-            | { type: 'TRAVELER_DENIED' }
             | { type: 'OPEN_NOMINATIONS' }
             | { type: 'CLOSE_NOMINATIONS' }
             | { type: 'GAME_OVER(winner)' }
-            | { type: 'TRAVELER_APPROVED' }
             | { type: 'EXECUTION_OCCURRED' }
-            | { type: 'TRAVELER_REQUESTED' }
             | { type: 'ANNOUNCEMENTS_COMPLETE' }
+            | { type: 'SETUP_COMPLETE' }
+            | { type: 'TRAVELER_REQUESTED'; requestId: string; userId: string }
+            | {
+                  type: 'DECIDE_TRAVELER';
+                  requestId: string;
+                  decision: string;
+                  characterRole: string;
+              }
+    },
+    actions: {
+        autoDenyNotAccepting: function ({ context, event }, params) {
+            // Add your action code here
+            // ...
+        },
+        enqueueRequest: function ({ context, event }, params) {
+            // Add your action code here
+            // ...
+        },
+        autoDenyIneligible: function ({ context, event }, params) {
+            // Add your action code here
+            // ...
+        },
+        approveTraveler: function ({ context, event }, params) {
+            // Add your action code here
+            // ...
+        }
     },
     guards: {
-        openTravelerSeats: function ({ context, event }: { context: any; event: any }) {
+        isAllowingTravelers: function ({ context, event }, params) {
+            // Add your guard code here
+            return context.allowTravelers === true;
+        },
+        hasCapacity: function ({ context, event }) {
             // Add your guard condition here
-            console.log(context, event);
             return true;
         },
-        openTravelerRequests: function ({ context, event }: { context: any; event: any }) {
+        eligibleTraveler: function ({ context, event }) {
             // Add your guard condition here
-            console.log(context, event);
+            return true;
+        },
+        approved: function ({ context, event }) {
+            // Add your guard condition here
             return true;
         }
     }
 }).createMachine({
     context: {},
     id: 'MatchMachine',
-    type: 'parallel',
+    initial: 'setup',
     states: {
         setup: {
             on: {
                 SETUP_COMPLETE: {
-                    target: '#MatchMachine.in_progress.night.resolve_first_night_order'
+                    target: 'in_progress'
                 }
             }
         },
         in_progress: {
-            initial: 'day',
+            initial: 'night',
             on: {
                 'GAME_OVER(winner)': {
                     target: 'reveal'
                 }
             },
             states: {
+                night: {
+                    initial: 'resolve_first_night_order',
+                    on: {
+                        DAWN: {
+                            target: '#MatchMachine.in_progress.day.dawn_announcements'
+                        }
+                    },
+                    always: {
+                        target: 'traveler_admission'
+                    },
+                    states: {
+                        resolve_first_night_order: {},
+                        resolve_night_order: {}
+                    }
+                },
+                traveler_admission: {
+                    type: 'parallel',
+                    states: {
+                        accepting: {
+                            initial: 'routing',
+                            states: {
+                                routing: {
+                                    always: [
+                                        {
+                                            target: 'capacity_available',
+                                            guard: {
+                                                type: 'hasCapacity'
+                                            }
+                                        },
+                                        {
+                                            target: 'limit_reached'
+                                        }
+                                    ]
+                                },
+                                capacity_available: {
+                                    on: {
+                                        TRAVELER_REQUESTED: [
+                                            {
+                                                target: 'capacity_available',
+                                                actions: {
+                                                    type: 'enqueueRequest'
+                                                },
+                                                guard: {
+                                                    type: 'eligibleTraveler'
+                                                }
+                                            },
+                                            {
+                                                target: 'capacity_available',
+                                                actions: {
+                                                    type: 'autoDenyIneligible'
+                                                }
+                                            }
+                                        ],
+                                        DECIDE_TRAVELER: [
+                                            {
+                                                target: 'capacity_available',
+                                                actions: {
+                                                    type: 'approveTraveler'
+                                                },
+                                                guard: {
+                                                    type: 'approved'
+                                                }
+                                            },
+                                            {
+                                                target: 'capacity_available'
+                                            }
+                                        ]
+                                    },
+                                    always: [
+                                        {
+                                            target: 'capacity_available',
+                                            guard: {
+                                                type: 'hasCapacity'
+                                            }
+                                        },
+                                        {
+                                            target: 'limit_reached'
+                                        }
+                                    ]
+                                },
+                                limit_reached: {
+                                    always: {
+                                        target: '#MatchMachine.in_progress.traveler_admission.not_accepting'
+                                    }
+                                }
+                            }
+                        },
+                        not_accepting: {
+                            on: {
+                                TRAVELER_REQUESTED: {
+                                    target: 'not_accepting',
+                                    actions: {
+                                        type: 'autoDenyNotAccepting',
+                                        params: {
+                                            requestId: 'string'
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        routing: {
+                            always: [
+                                {
+                                    target: 'accepting',
+                                    guard: {
+                                        type: 'isAllowingTravelers'
+                                    }
+                                },
+                                {
+                                    target: 'not_accepting'
+                                }
+                            ]
+                        }
+                    }
+                },
                 day: {
                     initial: 'dawn_announcements',
                     on: {
@@ -82,7 +229,11 @@ export const machine = setup({
                                 }
                             }
                         },
-                        execution_resolution: {},
+                        execution_resolution: {
+                            always: {
+                                target: '#MatchMachine.in_progress.night'
+                            }
+                        },
                         discussions: {
                             initial: 'private_conversations',
                             on: {
@@ -126,18 +277,6 @@ export const machine = setup({
                             }
                         }
                     }
-                },
-                night: {
-                    initial: 'resolve_night_order',
-                    on: {
-                        DAWN: {
-                            target: '#MatchMachine.in_progress.day.dawn_announcements'
-                        }
-                    },
-                    states: {
-                        resolve_night_order: {},
-                        resolve_first_night_order: {}
-                    }
                 }
             }
         },
@@ -150,48 +289,6 @@ export const machine = setup({
         },
         complete: {
             type: 'final'
-        },
-        traveler_requests: {
-            type: 'parallel',
-            states: {
-                empty: {
-                    on: {
-                        TRAVELER_REQUESTED: {
-                            target: 'pending_request',
-                            guard: {
-                                type: 'openTravelerSeats'
-                            },
-                            description: 'travelerCountUsed &lt; 5 && canTravel'
-                        }
-                    }
-                },
-                pending_request: {
-                    on: {
-                        TRAVELER_APPROVED: [
-                            {
-                                target: 'pending_request',
-                                guard: {
-                                    type: 'openTravelerRequests'
-                                }
-                            },
-                            {
-                                target: 'empty'
-                            }
-                        ],
-                        TRAVELER_DENIED: [
-                            {
-                                target: 'pending_request',
-                                guard: {
-                                    type: 'openTravelerRequests'
-                                }
-                            },
-                            {
-                                target: 'empty'
-                            }
-                        ]
-                    }
-                }
-            }
         }
     }
 });

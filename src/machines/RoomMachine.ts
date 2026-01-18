@@ -13,7 +13,7 @@ export const machine = setup({
             minPlayers: number;
             visibility: string;
             customScript: unknown[];
-            readyByUserId: Record<string, boolean>;
+            readyByUserId: {};
             currentMatchId: string;
             storytellerMode: string;
             acceptingPlayers: string;
@@ -23,7 +23,6 @@ export const machine = setup({
             pendingSeatsInviteCount: number;
         },
         events: {} as
-            | { type: 'Event 1' }
             | { type: 'OPEN_ROOM' }
             | { type: 'CLOSE_ROOM' }
             | { type: 'START_GAME' }
@@ -32,32 +31,27 @@ export const machine = setup({
             | { type: 'ARCHIVE_ROOM' }
             | { type: 'CONDITION_MET' }
             | { type: 'READY_CHANGED' }
-            | { type: 'HOST_REASSIGNED' }
             | { type: 'COOLDOWN_EXPIRED' }
             | { type: 'HOST_RECONNECTED' }
             | { type: 'HOST_DISCONNECTED' }
             | { type: 'HOST_GRACE_EXPIRED' }
     },
     actions: {
-        startTimer: function ({ context, event }: { context: any; event: any }) {
-            // Add your guard condition here
-            console.log(context, event);
-            return true;
+        startTimer: function ({ context, event }, params) {
+            // Add your action code here
+            // ...
         },
-        cancelTimer: function ({ context, event }: { context: any; event: any }) {
-            // Add your guard condition here
-            console.log(context, event);
-            return true;
+        cancelTimer: function ({ context, event }, params) {
+            // Add your action code here
+            // ...
         },
-        reassignHost: function ({ context, event }: { context: any; event: any }) {
-            // Add your guard condition here
-            console.log(context, event);
-            return true;
+        reassignHost: function ({ context, event }, params) {
+            // Add your action code here
+            // ...
         },
-        sendReminderPickStoryteller: function ({ context, event }: { context: any; event: any }) {
-            // Add your guard condition here
-            console.log(context, event);
-            return true;
+        sendReminderPickStoryteller: function ({ context, event }, params) {
+            // Add your action code here
+            // ...
         }
     },
     actors: {
@@ -69,24 +63,20 @@ export const machine = setup({
         })
     },
     guards: {
-        canStartMatch: function ({ context, event }: { context: any; event: any }) {
+        canStartMatch: function ({ context, event }) {
             // Add your guard condition here
-            console.log(context, event);
             return true;
         },
-        zeroConnected: function ({ context, event }: { context: any; event: any }) {
+        zeroConnected: function ({ context, event }) {
             // Add your guard condition here
-            console.log(context, event);
             return true;
         },
-        shouldRemindPickST: function ({ context, event }: { context: any; event: any }) {
+        shouldRemindPickST: function ({ context, event }) {
             // Add your guard condition here
-            console.log(context, event);
             return true;
         },
-        allReady: function ({ context, event }: { context: any; event: any }) {
+        allReady: function ({ context, event }) {
             // Add your guard condition here
-            console.log(context, event);
             return true;
         }
     }
@@ -96,7 +86,7 @@ export const machine = setup({
     type: 'parallel',
     states: {
         hostContinuity: {
-            type: 'parallel',
+            initial: 'host_present',
             states: {
                 host_present: {
                     on: {
@@ -115,9 +105,6 @@ export const machine = setup({
                                 }
                             }
                         ]
-                    },
-                    states: {
-                        'New state 1': {}
                     }
                 },
                 host_grace: {
@@ -137,16 +124,14 @@ export const machine = setup({
                     }
                 },
                 host_reassigned: {
-                    on: {
-                        'Event 1': {
-                            target: '#RoomMachine.hostContinuity.host_present.New state 1'
-                        }
+                    always: {
+                        target: 'host_present'
                     }
                 }
             }
         },
         reminders: {
-            type: 'parallel',
+            initial: 'silent',
             states: {
                 silent: {
                     on: {
@@ -172,14 +157,14 @@ export const machine = setup({
             }
         },
         roomStatus: {
-            type: 'parallel',
+            initial: 'open',
             states: {
                 open: {
                     on: {
                         CLOSE_ROOM: {
                             target: 'closed'
                         },
-                        START_GAME: {
+                        START_MATCH: {
                             target: 'in_match'
                         }
                     }
@@ -204,6 +189,7 @@ export const machine = setup({
                 },
                 in_match: {
                     invoke: {
+                        id: 'match',
                         input: {},
                         onDone: {
                             target: 'closed'
@@ -215,7 +201,7 @@ export const machine = setup({
             }
         },
         readiness: {
-            type: 'parallel',
+            initial: 'collecting',
             states: {
                 collecting: {
                     on: {

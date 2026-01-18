@@ -9,10 +9,10 @@ export const machine = setup({
             | { type: 'LOGOUT' }
             | { type: 'LEAVE_ROOM' }
             | { type: 'LOGIN_SUCCESS' }
-            | { type: 'ENTER_ROOM(roomId)' }
+            | { type: 'ENTER_ROOM'; roomId: string }
     }
 }).createMachine({
-    context: {} as any,
+    context: {},
     id: 'AppShell',
     initial: 'unauthenticated',
     states: {
@@ -25,8 +25,9 @@ export const machine = setup({
         },
         lobby: {
             on: {
-                'ENTER_ROOM(roomId)': {
-                    target: 'in_room'
+                ENTER_ROOM: {
+                    target: 'in_room',
+                    description: '{ roomId: string }'
                 },
                 LOGOUT: {
                     target: 'unauthenticated'
