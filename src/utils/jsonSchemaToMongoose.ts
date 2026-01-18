@@ -41,7 +41,7 @@ export function jsonSchemaToMongoose(
     schema: JSONSchema,
     opts: { strict?: boolean; refResolver?: RefResolver } = {}
 ): Record<string, any> {
-    console.log(`schema`, schema);
+    // console.log(`schema`, schema);
     if (!schema || schema === true) {
         // true/false schemas are too abstract; treat as Mixed
         return { type: mongoose.Schema.Types.Mixed };
@@ -102,7 +102,7 @@ function schemaToMongooseField(
     if (schema.oneOf?.length || schema.anyOf?.length) {
         // Mongoose doesn't do union types well; safest is Mixed + optional enum narrowing if common
         const variants = schema.oneOf ?? schema.anyOf ?? [];
-        console.log(`variants`, variants);
+        // console.log(`variants`, variants);
         const filtered = variants.filter((x) => (x as any).type !== 'null');
         if (variants.length === filtered.length) {
             const consts = variants.filter((x) => Object.keys(x).includes('const'));
@@ -115,10 +115,10 @@ function schemaToMongooseField(
                 }
             }
         }
-        console.log(`filtered`, filtered);
+        // console.log(`filtered`, filtered);
         if (filtered.length === 1) {
             const $dt = filtered[0] as Exclude<JSONSchema, boolean>;
-            console.log(`$dt`, $dt);
+            // console.log(`$dt`, $dt);
             const { type, ...dt } = $dt;
             if (type === 'string') {
                 if (dt.format === 'uuid') {

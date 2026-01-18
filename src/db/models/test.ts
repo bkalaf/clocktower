@@ -43,12 +43,12 @@ const zPCPlayerCount = z.union([z.literal(5), z.literal(6), z.literal(7), z.lite
 // });
 
 function runTest(obj: any, name: string) {
-    console.log(`***** ${name} ****`)
-    console.log(`zGame`, obj);
+    // console.log(`***** ${name} ****`)
+    // console.log(`zGame`, obj);
 
-    console.log(`zGame.toJSONSchema()`, JSON.stringify(zodToJSONSchema(obj), null, '\t'));
+    // console.log(`zGame.toJSONSchema()`, JSON.stringify(zodToJSONSchema(obj), null, '\t'));
 
-    console.log(jsonSchemaToMongoose(zodToJSONSchema(obj)));
+    // console.log(jsonSchemaToMongoose(zodToJSONSchema(obj)));
 }
 
 runTest(zGameMember, 'GameMember');

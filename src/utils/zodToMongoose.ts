@@ -8,11 +8,11 @@ export function zodToJSONSchema<Shape extends z.ZodRawShape>(zodObj: z.ZodObject
     return zodObj.toJSONSchema({
         unrepresentable: 'any',
         override: (ctx) => {
-            console.log(ctx.path);
+            // console.log(ctx.path);
             const def = ctx.zodSchema?._zod?.def;
             const type = def?.type;
             if (typeof ctx.jsonSchema.required === 'boolean') {
-                console.log(`ERROR at: ${(def as any)?.path}`);
+                // console.log(`ERROR at: ${(def as any)?.path}`);
             }
             if (type === 'any') {
                 ctx.jsonSchema.type = 'object';
@@ -63,7 +63,7 @@ export function getModelFor<Shape extends z.ZodRawShape>(
     zodObj: z.ZodObject<Shape>,
     options: SchemaOptions = {}
 ) {
-    console.log(`registering: ${name}`);
+    // console.log(`registering: ${name}`);
     type Doc = z.infer<typeof zodObj>;
     const schema: mongoose.Schema<Doc> = getSchemaFor(zodObj, options);
     const model =

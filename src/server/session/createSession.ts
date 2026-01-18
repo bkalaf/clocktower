@@ -15,7 +15,7 @@ export async function createSession(userId: string) {
         userId,
         expiresAt: expiresAt.valueOf()
     });
-    console.log(`doc`, doc);
+    // console.log(`doc`, doc);
 
     return { expiresAt: doc.expiresAt, sessionId };
 }

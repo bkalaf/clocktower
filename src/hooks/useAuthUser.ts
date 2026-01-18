@@ -10,7 +10,7 @@ export function useAuthUser() {
         queryKey: WHOAMI_QUERY_KEY,
         queryFn: async () => {
             const result = await whoAmIServerFn();
-            console.log(`result`, result);
+            // console.log(`result`, result);
             return result;
         },
         staleTime: 5 * 60 * 1000,
