@@ -3,7 +3,7 @@ import z from 'zod/v4';
 import enums from './enums';
 import aliases from './aliases';
 import refs from './refs';
-import { zAuthedUser } from '../db/models/AuthedUser';
+import inputs from './inputs';
 
 export const zCreateLobbySettings = z.object({
     minPlayers: aliases.pcPlayerCount.default(5),
@@ -66,32 +66,19 @@ export const zFindSessionInput = z.object({
     expiresAt: aliases.timestamp
 });
 
-export const zRequireRoleInput = z.object({
-    gameId: refs.game,
-    user: zAuthedUser,
-    role: enums.sessionRoles
-});
 
-export const zRequireGameMemberInput = z.object({
-    gameId: refs.game,
-    user: zAuthedUser
-});
+
 
 export const zRequireGameMemberOutput = z.object({
     role: enums.sessionRoles,
     userId: refs.user
 });
 
-export const zFindUserInput = aliases.userId;
-
-// export const zCreateChatItemInput = z.object({
-//     _id:
-// })
-
 const schemas = {
     enums,
     aliases,
-    refs
+    refs,
+    inputs
 };
 
 export default schemas;

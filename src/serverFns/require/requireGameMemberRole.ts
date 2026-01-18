@@ -1,12 +1,12 @@
-// src/serverFns/require/requireRole.ts
+// src/serverFns/require/requireGameMemberRole.ts
 import { createServerFn } from '@tanstack/react-start';
-import { zRequireRoleInput } from '../../schemas';
 import { requireGameMember } from './requireGameMember';
+import inputs from '../../schemas/inputs';
 
-export const requireMemberRole = createServerFn({
+export const requireGameMemberRole = createServerFn({
     method: 'GET'
 })
-    .inputValidator(zRequireRoleInput)
+    .inputValidator(inputs.require.role)
     .handler(async ({ data }) => {
         const result = await requireGameMember({
             data: {
@@ -15,7 +15,10 @@ export const requireMemberRole = createServerFn({
             }
         });
         if (result == null) {
-            return null;
+            throw new Error('no gameMember found');
+        }
+        if (result.role !== data.role) {
+            throw new Error('role mismatch');
         }
         return result;
     });

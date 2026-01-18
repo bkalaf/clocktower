@@ -1,34 +1,27 @@
 // src/serverFns/authorize.ts
 import { createServerFn } from '@tanstack/react-start';
 import z from 'zod';
-import { $is, GameRoles } from '../types/game';
-import { requireGameMember } from './require/requireGameMember';
+import { GameRoles } from '../types/game';
 import { $keys } from '../$keys';
 import { listWhisperTopicsForUser } from './listWhisperTopicsForUser';
-import { getUserFromCookie } from './getUserFromCookie';
-import $response from '../utils/http';
-import { zRequireGameMemberOutput } from '../schemas';
-
-const authorizeInputSchema = z.object({
-    gameId: z.string().min(1)
-});
+import { getUserFromCookie } from './getId/getUserFromCookie';
+import inputs from '../schemas/inputs';
+import require from './require';
 
 export const authorize = createServerFn({
     method: 'POST'
 })
-    .inputValidator(authorizeInputSchema)
-    .handler(async ({ data: { gameId } }) => {
+    .inputValidator(inputs._id)
+    .handler(async ({ data: gameId }) => {
         const user = await getUserFromCookie();
-        if (user == null) return null;
-        let member: { role: GameRoles; userId: string } | null;
+        let member: { role: GameRoles; userId: string };
         try {
-            member = await requireGameMember({
+            member = await require.gameMember({
                 data: {
                     gameId,
                     user
                 }
             });
-            if (member == null) return null;
         } catch (error) {
             return null;
         }

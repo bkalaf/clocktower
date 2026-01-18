@@ -4,7 +4,6 @@ import z from 'zod/v4';
 import { JSONSchema, jsonSchemaToMongoose } from './jsonSchemaToMongoose';
 import mongoose, { SchemaOptions } from 'mongoose';
 
-
 export function zodToJSONSchema<Shape extends z.ZodRawShape>(zodObj: z.ZodObject<Shape>) {
     return zodObj.toJSONSchema({
         unrepresentable: 'any',
@@ -50,7 +49,7 @@ export function getSchemaFor<Shape extends z.ZodRawShape>(
     options: SchemaOptions = {}
 ): mongoose.Schema<z.infer<typeof zodObj>> {
     const obj = zodToJSONSchema(zodObj);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     return new mongoose.Schema(jsonSchemaToMongoose(obj), options) as any as mongoose.Schema<z.infer<typeof zodObj>>;
 }
 
@@ -59,7 +58,6 @@ export function getModelFor<Shape extends z.ZodRawShape>(
     zodObj: z.ZodObject<Shape>,
     options: SchemaOptions = {}
 ) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     type Doc = z.infer<typeof zodObj>;
     const schema: mongoose.Schema<Doc> = getSchemaFor(zodObj, options);
     const model =
@@ -75,7 +73,7 @@ export function defineIndexes<Shape extends z.ZodRawShape>(schema: mongoose.Sche
         }
     };
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export function getTypesFor<Shape extends z.ZodRawShape, T extends Record<string, any>>(
     name: string,
     zodObj: z.ZodObject<Shape>,
@@ -84,7 +82,7 @@ export function getTypesFor<Shape extends z.ZodRawShape, T extends Record<string
     ...indexes: [Record<string, 1 | -1>, { unique?: boolean; sparse?: boolean; expireAfterSeconds?: number }?][]
 ) {
     const [schema, model] = getModelFor(name, zodObj, options);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     defineIndexes<Shape>(schema as any)(indexes);
     return {
         schema,

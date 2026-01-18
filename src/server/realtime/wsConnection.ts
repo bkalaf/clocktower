@@ -5,16 +5,18 @@ import type { RedisClientType } from 'redis';
 import type WebSocket from 'ws';
 import { markConnected, markDisconnected } from './presence';
 import { onUserConnected, onUserDisconnected } from './hostGrace';
-import { getUserFromReq } from '../getUserFromReq';
 import { zChat, zJoinGame, zJoinTopic, zPing } from '.';
 import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
 import { $keys } from '../../$keys';
-import { $findById, $findOne } from '../findById';
 import { listWhisperTopicsForUser } from '../../serverFns/listWhisperTopicsForUser';
 import { GameRoles } from '../../types/game';
 import { maybeRemindPickStoryteller } from './reminder';
-import { ChatItemModel } from '@/db/models/ChatItem';
+import { ChatItem, ChatItemModel } from '@/db/models/ChatItem';
+import { getUserFromCookie } from '../../serverFns/getId/getUserFromCookie';
+import $gameMember from '../../serverFns/$gameMember';
+import $models from '../../db/models';
+import $game from '../../serverFns/$game';
 
 type Conn = {
     ws: WebSocket;
@@ -76,7 +78,7 @@ export async function handleWsConnection(
     publish?: (topic: string, msg: any) => Promise<void>
 ) {
     // Authenticate using your existing cookie-session helper.
-    const user = await getUserFromReq(request);
+    const user = await getUserFromCookie();
     if (!user) {
         send(ws, { t: 'error', code: 'unauthorized', message: 'Not logged in' });
         ws.close();
@@ -123,14 +125,14 @@ export async function handleWsConnection(
             await connectMongoose();
 
             // Must be a member of the game
-            const member = await $findOne.gameMember(gameId, conn.userId);
+            const member = await $gameMember.findOne(gameId, user);
 
             if (!member) {
                 send(ws, { t: 'error', code: 'not_in_game', message: 'Not a member of this game' });
                 return;
             }
 
-            const game = await $findById.game(gameId);
+            const game = await $game.findById({ data: gameId });
             if (!game) {
                 send(ws, { t: 'error', code: 'game_not_found', message: 'Game not found' });
                 return;
@@ -148,7 +150,7 @@ export async function handleWsConnection(
             if (topics.length > 0) {
                 const redis = await getRedis();
                 const subscriber = redis.duplicate();
-                conn.subscriber = subscriber;
+                conn.subscriber = subscriber as any;
                 try {
                     await subscriber.connect();
                     await Promise.all(topics.map((topic) => subscribeToTopic(conn, topic)));
@@ -301,20 +303,17 @@ async function replayFromLastStreamIds(ws: WebSocket, lastStreamIds?: Record<str
 
 async function replayTopicMessages(ws: WebSocket, topic: string, lastStreamId: string) {
     try {
-        const lastDoc = await ChatItemModel.findOne({ topicId: topic, streamId: lastStreamId })
-            .select('createdAt streamId')
-            .lean();
+        const lastDoc = (await $models.ChatItemModel.findOne({ topicId: topic, streamId: lastStreamId })
+            .select('ts streamId')
+            .lean()) as Pick<ChatItem, 'ts' | 'streamId'>;
 
-        if (!lastDoc?.createdAt) {
+        if (!lastDoc?.ts) {
             return;
         }
 
         const filter: Record<string, unknown> = {
             topicId: topic,
-            $or: [
-                { createdAt: { $gt: lastDoc.createdAt } },
-                { createdAt: lastDoc.createdAt, streamId: { $gt: lastStreamId } }
-            ]
+            $or: [{ createdAt: { $gt: lastDoc.ts } }, { createdAt: lastDoc.ts, streamId: { $gt: lastStreamId } }]
         };
 
         const items = await ChatItemModel.find(filter)

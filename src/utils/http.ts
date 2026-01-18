@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/utils/http.ts
 import z from 'zod';
 import { $ctor, Result } from '../types/game';

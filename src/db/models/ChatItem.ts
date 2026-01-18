@@ -14,7 +14,8 @@ const zChatItem = z.object({
         name: aliases.name.meta({ description: 'The displayed name of the sender.' })
     }),
     text: z.string(),
-    streamId: refs.stream
+    streamId: refs.stream,
+    ts: aliases.timestamp
 });
 
 const chatItemModels = getTypesFor(

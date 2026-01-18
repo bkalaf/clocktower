@@ -1,10 +1,10 @@
 // src/serverFns/$user.ts
 import { connectMongoose } from '../db/connectMongoose';
-import { UserModel } from '../db/models/User';
+import $models from '../db/models';
 
 const findById = async (userId: string) => {
     await connectMongoose();
-    return UserModel.findById(userId).lean();
+    return $models.UserModel.findById(userId);
 };
 
 const $user = {

@@ -8,7 +8,7 @@ import { getRedis } from '../../../../redis';
 import { zGameId } from '../../../../schemas';
 import { $keys } from '../../../../$keys';
 import { setHostUserId } from '../../../../server/game';
-import { getUserFromCookie } from '../../../../serverFns/getUserFromCookie';
+import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { $is } from '../../../../types/game';
 import { createServerFn } from '@tanstack/react-start';
 
@@ -16,9 +16,7 @@ export const hostPost = createServerFn({
     method: 'POST'
 })
     .inputValidator(zAssignHostInput)
-    .handler(async (data) => {
-
-    });
+    .handler(async (data) => {});
 export const Route = createFileRoute('/api/games/$gameId/host')({
     server: {
         handlers: {

@@ -7,8 +7,7 @@ import { UserModel } from '../../../db/models/User';
 import { HttpError } from '../../../errors';
 import { verifyPassword } from '../../../server/auth/password';
 import { createSession } from '../../../server/session/createSession';
-import { setSessionCookie } from '../../../server/auth/session';
-import { success } from '../../../utils/http';
+import { setSessionCookie } from '../../../server/auth/cookies';
 
 const loginBodySchema = z.object({
     email: z.email().min(1),
@@ -37,9 +36,7 @@ export const Route = createFileRoute('/api/auth/login')({
 
                 const session = await createSession(user._id);
                 const headers = new Headers();
-                setSessionCookie(headers, session.sessionId, session.expiresAt);
-                console.log(`session`, session);
-                console.log(`headers`, headers);
+                setSessionCookie(session.sessionId, session.expiresAt);
                 return new Response(JSON.stringify({ ok: true }), {
                     status: 200,
                     headers

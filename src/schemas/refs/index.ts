@@ -1,8 +1,12 @@
 // src/schemas/refs/index.ts
 import aliases, { $coll } from '../aliases';
+import z from 'zod/v4';
 
-const toRef = (coll: keyof typeof $coll, alias: keyof typeof aliases) => {
-    return aliases[alias].meta({ $ref: $coll[coll], description: `a foreign key to the ${$coll[coll]} table` });
+const zodUUID = z.uuid('Must be a UUID').meta({ ref: 'any' });
+
+const toRef = (coll: keyof typeof $coll, alias: keyof typeof aliases): typeof zodUUID => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return aliases[alias].meta({ $ref: $coll[coll], description: `a foreign key to the ${$coll[coll]} table` }) as any;
 };
 
 const refs = {

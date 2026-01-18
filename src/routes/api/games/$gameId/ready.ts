@@ -11,7 +11,7 @@ import { requireMember } from '../../../../server/authz/gameAuth';
 import { GameMemberModel } from '../../../../db/models/GameMember';
 import { $keys } from '../../../../$keys';
 import { getRedis } from '../../../../redis';
-import { getUserFromCookie } from '../../../../serverFns/getUserFromCookie';
+import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { createServerFn } from '@tanstack/react-start';
 import { $z } from '../../../../server/schemas/$z';
 
@@ -30,7 +30,6 @@ export const makeReady = createServerFn({
         } = data;
         const user = await getUserFromCookie();
         requireMember(gameId, user._id);
-        
     });
 export const Route = createFileRoute('/api/games/$gameId/ready')({
     server: {

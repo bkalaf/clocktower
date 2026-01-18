@@ -2,7 +2,7 @@
 import { randomUUID } from 'crypto';
 import { connectMongoose } from '../../db/connectMongoose';
 import { SessionModel } from '../../db/models/Session';
-import { SESSION_TTL_DAYS } from '../auth/session';
+import { SESSION_TTL_DAYS } from '../auth/cookies';
 
 export async function createSession(userId: string) {
     await connectMongoose();

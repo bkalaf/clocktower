@@ -8,7 +8,7 @@ import { connectMongoose } from '../../../db/connectMongoose';
 import { UserModel } from '../../../db/models/User';
 import { HttpError } from '../../../errors';
 import { createSession } from '../../../server/session/createSession';
-import { setSessionCookie } from '../../../server/auth/session';
+import { setSessionCookie } from '../../../server/auth/cookies';
 
 const RegisterBodySchema = z
     .object({
@@ -53,7 +53,8 @@ export const Route = createFileRoute('/api/auth/register')({
                 const headers = new Headers({
                     'Content-Type': 'application/json'
                 });
-                setSessionCookie(headers, sessionId, expiresAt);
+                setSessionCookie(sessionId, expiresAt);
+                // setSessionCookie2(headers, sessionId, expiresAt);
 
                 return new Response(
                     JSON.stringify({

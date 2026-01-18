@@ -68,7 +68,6 @@ export type SkillLevel = 'novice' | 'intermediate' | 'advanced' | 'expert';
 
 export type Editions = 'tb' | 'bmr' | 'snv';
 
-
 export interface Session {
     _id: SessionId;
     userId: UserId;

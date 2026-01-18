@@ -1,9 +1,10 @@
 // src/serverFns/require/index.ts
-
 import { requireGameMember } from './requireGameMember';
-import { requireMemberRole } from './requireRole';
+import { requireGameMemberRole } from './requireGameMemberRole';
 
 const require = {
     gameMember: requireGameMember,
-    role: requireMemberRole
-}
+    gameMemberRole: requireGameMemberRole
+};
+
+export default require;

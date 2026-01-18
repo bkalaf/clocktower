@@ -1,6 +1,6 @@
 // src/serverFns/whoAmI.ts
 import { createServerFn } from '@tanstack/react-start';
-import { getUserFromCookie } from './getUserFromCookie';
+import { getUserFromCookie } from './getId/getUserFromCookie';
 import { redirect } from '@tanstack/react-router';
 
 export const whoAmIServerFn = createServerFn({

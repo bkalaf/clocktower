@@ -1,7 +1,7 @@
 // src/db/models/AuthedUser.ts
 import z from 'zod/v4';
 import schemas from '../../schemas/index';
-const { refs, aliases, enums } = schemas;
+const { aliases, enums } = schemas;
 
 export const zAuthedUser = z.object({
     _id: aliases.gameId,
