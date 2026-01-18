@@ -7,6 +7,8 @@ import { GameId, UserId, GameRoles } from '../types/game';
 import { listWhisperTopicsInput } from '../utils/http';
 import $whisper from './$whisper';
 
+const toRoomTopic = (topic: string) => (topic.startsWith('game:') ? topic.replace(/^game:/, 'room:') : topic);
+
 export const listWhisperTopicsForUser = createServerFn({
     method: 'POST'
 })
@@ -25,8 +27,15 @@ export const listWhisperTopicsForUser = createServerFn({
                 await r.sAdd($keys.whisperMembersKey(data.gameId, whisper._id), whisper.members);
                 for (const member of whisper.members) {
                     await r.sAdd($keys.userWhisperKey(data.gameId, member), whisper.topicId);
+                    await r.sAdd($keys.userWhisperKey(data.gameId, member), toRoomTopic(whisper.topicId));
                 }
             }
         }
-        return topics;
+        const normalized = new Set<string>();
+
+        for (const topic of topics) {
+            normalized.add(topic);
+            normalized.add(toRoomTopic(topic));
+        }
+        return Array.from(normalized);
     });

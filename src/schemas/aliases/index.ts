@@ -14,6 +14,11 @@ import { zWhisperId } from './zWhisperId';
 import { zChatItemId } from './zChatItemId';
 import { zName } from './zName';
 import { zGameMemberId } from './zGameMemberId';
+import { zScriptId } from './zScriptId';
+import { zMatchId } from './zMatchId';
+import { zInviteId } from './zInviteId';
+import { zModerationLogId } from './zModerationLogId';
+import { zTravelerRequestId } from './zTravelerRequestId';
 import z from 'zod/v4';
 
 export const zStreamId = z.uuid('Must be a UUID');
@@ -27,7 +32,12 @@ export const $coll = {
     topic: 'topic',
     session: 'session',
     user: 'user',
-    stream: 'stream'
+    stream: 'stream',
+    script: 'script',
+    match: 'match',
+    invite: 'invite',
+    moderationLog: 'moderation_log',
+    travelerRequest: 'traveler_request'
 };
 
 const aliases = {
@@ -46,7 +56,12 @@ const aliases = {
     topicId: z.string('Must be a UUID'),
     userId: z.string('Must be a UUID'),
     version: zVersion,
-    whisperId: z.string('Must be a UUID')
+    whisperId: z.string('Must be a UUID'),
+    scriptId: zScriptId,
+    matchId: zMatchId,
+    inviteId: zInviteId,
+    moderationLogId: zModerationLogId,
+    travelerRequestId: zTravelerRequestId
 };
 
 export default aliases;

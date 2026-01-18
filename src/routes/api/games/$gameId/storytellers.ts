@@ -7,8 +7,8 @@ import { requireHost, requireMember } from '../../../../server/authz/gameAuth';
 import { zGameIdParams, zPromoteStorytellerInput } from '../../../../server/schemas/gameSchemas';
 import { parseJsonBody } from '../../../../server/parseJsonBody';
 import { connectMongoose } from '../../../../db/connectMongoose';
-import { getRedis } from '../../../../redis';
-import { $keys } from '../../../../$keys';
+import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 
 export const Route = createFileRoute('/api/games/$gameId/storytellers')({
     server: {
@@ -39,18 +39,13 @@ export const Route = createFileRoute('/api/games/$gameId/storytellers')({
                 // add-only: set union
                 await GameMemberModel.updateOne({ gameId, userId: userId }, { $set: { role: 'storyteller' } });
 
-                const redis = await getRedis();
                 const payload = {
                     kind: 'event',
                     type: 'storytellerPromoted',
                     ts: Date.now(),
                     payload: { gameId, userId }
                 };
-                const message = JSON.stringify(payload);
-                await Promise.all([
-                    redis.publish($keys.publicTopic(gameId), message),
-                    redis.publish($keys.stTopic(gameId), message)
-                ]);
+                await broadcastRoomEvent(gameId, payload);
                 return Response.json({ ok: true });
             }
         }

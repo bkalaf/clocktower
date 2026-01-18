@@ -17,7 +17,7 @@ export async function maybeRemindPickStoryteller(gameId: string, deps: Reminders
     await connectMongoose();
     const game = await $findById.game(gameId);
     if (!game) return;
-    if (game.status !== 'idle') return;
+    if (game.status !== 'open') return;
 
     // If there's already a storyteller, no reminder needed.
     const stCount = await $countDocuments.gameMember(gameId, 'storyteller');

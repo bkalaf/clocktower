@@ -87,7 +87,7 @@ async function resolveGrace(gameId: GameId, hostUserId: UserId, deps: HostGraceD
     // confirm current host still the same
     await connectMongoose();
     const game = await GameModel.findById(gameId).lean();
-    if (!game || game.status === 'ended') {
+    if (!game || game.status === 'archived') {
         await r.del($keys.graceKey(gameId));
         return;
     }
@@ -150,7 +150,7 @@ export async function onUserDisconnected(gameId: GameId, userId: UserId, deps: H
     // If host left and no one else is connected => end immediately (no grace)
     await connectMongoose();
     const game = await GameModel.findById(gameId).lean();
-    if (!game || game.status === 'ended') return;
+    if (!game || game.status === 'archived') return;
     if (game.hostUserId !== userId) return;
 
     const count = await connectedCount(gameId);

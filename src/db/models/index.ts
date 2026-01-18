@@ -6,6 +6,11 @@ import { GameMemberModel } from './GameMember';
 import { ChatItemModel } from './ChatItem';
 import { WhisperModel } from './Whisper';
 import { StreamMessageModel } from './StreamMessage';
+import { ScriptModel } from './Script';
+import { MatchModel } from './Match';
+import { InviteModel } from './Invite';
+import { ModerationLogModel } from './ModerationLog';
+import { TravelerRequestModel } from './TravelerRequest';
 
 const $models = {
     UserModel,
@@ -14,7 +19,12 @@ const $models = {
     GameMemberModel,
     ChatItemModel,
     WhisperModel,
-    StreamMessageModel
+    StreamMessageModel,
+    ScriptModel,
+    MatchModel,
+    InviteModel,
+    ModerationLogModel,
+    TravelerRequestModel
 };
 
 export default $models;

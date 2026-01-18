@@ -1,6 +1,7 @@
 // src/types/game.ts
 import z from 'zod';
 import { $STATUS_CODES } from '../errors';
+import { RoomStatus } from './room';
 
 export type Success<T> = {
     kind: 'success';
@@ -62,7 +63,7 @@ export interface User {
 }
 
 export type AuthedUser = Omit<User, 'passwordHash'>;
-export type GameStatus = 'idle' | 'playing' | 'reveal' | 'setup' | 'ended';
+export type GameStatus = RoomStatus;
 export type GameSpeed = 'fast' | 'moderate' | 'slow';
 export type SkillLevel = 'novice' | 'intermediate' | 'advanced' | 'expert';
 

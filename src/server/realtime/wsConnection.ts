@@ -20,6 +20,7 @@ import { whoAmIServerFn } from '../../serverFns/whoAmI';
 import { parseCookie } from '../parseCookie';
 import { cookieName } from '../auth/cookies';
 import $session from '../../serverFns/$session';
+import { shouldAllowWhisper } from './whisperGate';
 
 type Conn = {
     ws: WebSocket;
@@ -57,17 +58,28 @@ async function subscribeToTopic(conn: Conn, topic: string) {
 
 async function canJoinTopic(conn: Conn, topicId: string) {
     if (!conn.gameId) return false;
-    if (!topicId.startsWith(`game:${conn.gameId}:`)) return false;
-    if (topicId === $keys.publicTopic(conn.gameId)) return true;
-    if (topicId === $keys.stTopic(conn.gameId)) return conn.role === 'storyteller';
-    if (topicId.startsWith(`game:${conn.gameId}:whisper:`)) {
+    const legacyPrefix = `game:${conn.gameId}:`;
+    const roomPrefix = `room:${conn.gameId}:`;
+    const isLegacyTopic = topicId.startsWith(legacyPrefix);
+    const isRoomTopic = topicId.startsWith(roomPrefix);
+    if (!isLegacyTopic && !isRoomTopic) return false;
+
+    const publicTopics = new Set([ $keys.publicTopic(conn.gameId), $keys.roomPublicTopic(conn.gameId) ]);
+    const stTopics = new Set([ $keys.stTopic(conn.gameId), $keys.roomStTopic(conn.gameId) ]);
+    if (publicTopics.has(topicId)) return true;
+    if (stTopics.has(topicId)) return conn.role === 'storyteller';
+
+    const whisperPrefix = `${legacyPrefix}whisper:`;
+    const roomWhisperPrefix = `${roomPrefix}whisper:`;
+    if (topicId.startsWith(whisperPrefix) || topicId.startsWith(roomWhisperPrefix)) {
         if (!conn.role) return false;
         try {
             const topics =
                 (await listWhisperTopicsForUser({
                     data: { gameId: conn.gameId, userId: conn.userId, role: conn.role }
                 })) ?? [];
-            return topics.includes(topicId);
+            if (!topics.includes(topicId)) return false;
+            return await shouldAllowWhisper(conn.gameId, topicId);
         } catch {
             return false;
         }

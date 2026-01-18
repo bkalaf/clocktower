@@ -40,5 +40,5 @@ export async function storytellerCount(gameId: GameId) {
 export async function canHostEditLobby(gameId: GameId, user: AuthedUser) {
     const game = await requireHost(gameId, user);
     const stCount = await storytellerCount(gameId);
-    return game.status === 'idle' && stCount === 0;
+    return game.status === 'closed' && stCount === 0;
 }

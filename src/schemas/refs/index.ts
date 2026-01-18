@@ -17,7 +17,13 @@ const refs = {
     whisper: toRef('whisper', 'whisperId'),
     session: toRef('session', 'sessionId'),
     user: toRef('user', 'userId'),
-    stream: toRef('stream', 'streamId')
+    stream: toRef('stream', 'streamId'),
+    script: toRef('script', 'scriptId'),
+    match: toRef('match', 'matchId'),
+    invite: toRef('invite', 'inviteId'),
+    moderationLog: toRef('moderationLog', 'moderationLogId'),
+    travelerRequest: toRef('travelerRequest', 'travelerRequestId')
+    // Additional refs can be added as needed
 };
 
 export default refs;

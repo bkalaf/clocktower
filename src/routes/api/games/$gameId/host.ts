@@ -4,10 +4,9 @@ import { createFileRoute } from '@tanstack/react-router';
 import { zAssignHostInput } from '../../../../server/schemas/gameSchemas';
 import { requireHost, requireMember } from '../../../../server/authz/gameAuth';
 import { connectMongoose } from '../../../../db/connectMongoose';
-import { getRedis } from '../../../../redis';
 import { zGameId } from '../../../../schemas';
-import { $keys } from '../../../../$keys';
 import { setHostUserId } from '../../../../server/game';
+import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { $is } from '../../../../types/game';
 import { createServerFn } from '@tanstack/react-start';
@@ -33,18 +32,13 @@ export const Route = createFileRoute('/api/games/$gameId/host')({
 
                 await setHostUserId(gameId, body.userId);
 
-                const redis = await getRedis();
                 const payload = {
                     kind: 'event',
                     type: 'hostChanged',
                     ts: Date.now(),
                     payload: { gameId, from: game.hostUserId, to: body.userId }
                 };
-                const message = JSON.stringify(payload);
-                await Promise.all([
-                    redis.publish($keys.publicTopic(gameId), message),
-                    redis.publish($keys.stTopic(gameId), message)
-                ]);
+                await broadcastRoomEvent(gameId, payload);
                 return Response.json({ ok: true });
             }
         }

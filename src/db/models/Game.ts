@@ -8,11 +8,10 @@ const { refs, aliases, enums } = schemas;
 export const zLobbySettings = z.object({
     minPlayers: aliases.pcPlayerCount.default(5),
     maxPlayers: aliases.pcPlayerCount.default(15),
-    allowTravelers: z.boolean().default(false),
     maxTravelers: aliases.pcTraverCount.default(0),
     edition: enums.editions.default('tb'),
     skillLevel: enums.skillLevel.default('novice'),
-    plannedStart: aliases.timestamp,
+    plannedStartTime: aliases.timestamp.optional().nullable(),
     gameSpeed: enums.gameSpeed.default('moderate'),
     isPrivate: z.boolean().default(false),
     banner: z.string().optional().nullable()
@@ -23,7 +22,10 @@ export const zGame = z.object({
     version: aliases.version,
     snapshot: aliases.snapshot,
     hostUserId: refs.user,
-    status: enums.gameStatus.default('idle'),
+    status: enums.roomStatus.default('closed'),
+    scriptId: aliases.scriptId,
+    allowTravelers: z.boolean().default(false),
+    visibility: enums.roomVisibility.default('public'),
     endedAt: aliases.timestamp.optional().nullable(),
     lobbySettings: zLobbySettings.optional().nullable()
 });

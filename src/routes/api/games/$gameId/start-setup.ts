@@ -5,10 +5,10 @@ import { HttpError } from '../../../../errors';
 import { parseParams } from '../../../../server/parseParams';
 import { zGameIdParams } from '../../../../server/schemas/gameSchemas';
 import { getConnectedUserIds } from '../../../../server/realtime/presence';
+import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { setStatus } from '../../../../server/game';
-import { $keys } from '../../../../$keys';
-import { getRedis } from '../../../../redis';
+import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
 
 export const Route = createFileRoute('/api/games/$gameId/start-setup')({
     server: {
@@ -25,7 +25,7 @@ export const Route = createFileRoute('/api/games/$gameId/start-setup')({
                 const game = await requireGame(gameId);
                 await requireStoryteller(gameId, user);
 
-                if (game.status !== 'idle') {
+                if (game.status !== 'open') {
                     return Response.json({ error: 'not_idle' }, { status: 409 });
                 }
 
@@ -45,20 +45,15 @@ export const Route = createFileRoute('/api/games/$gameId/start-setup')({
                 }
 
                 await connectMongoose();
-                await setStatus(gameId, 'setup');
+                await setStatus(gameId, 'open');
 
-                const redis = await getRedis();
                 const payload = {
                     kind: 'event',
                     type: 'system/setupStarted',
                     ts: Date.now(),
                     payload: { gameId }
                 };
-                const message = JSON.stringify(payload);
-                await Promise.all([
-                    redis.publish($keys.publicTopic(gameId), message),
-                    redis.publish($keys.stTopic(gameId), message)
-                ]);
+                await broadcastRoomEvent(gameId, payload);
                 return Response.json({ ok: true });
             }
         }

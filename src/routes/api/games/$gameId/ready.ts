@@ -9,8 +9,7 @@ import { zReadyInput } from '../../../../server/schemas/gameSchemas';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { requireMember } from '../../../../server/authz/gameAuth';
 import { GameMemberModel } from '../../../../db/models/GameMember';
-import { $keys } from '../../../../$keys';
-import { getRedis } from '../../../../redis';
+import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { createServerFn } from '@tanstack/react-start';
 import { $z } from '../../../../server/schemas/$z';
@@ -62,12 +61,7 @@ export const Route = createFileRoute('/api/games/$gameId/ready')({
                         isReady: body.data.isReady
                     }
                 };
-                const message = JSON.stringify(memberReadyPayload);
-                const redis = await getRedis();
-                await Promise.all([
-                    redis.publish($keys.publicTopic(gameId), message),
-                    redis.publish($keys.stTopic(gameId), message)
-                ]);
+                await broadcastRoomEvent(gameId, memberReadyPayload);
                 return Response.json({ ok: true });
             }
         }

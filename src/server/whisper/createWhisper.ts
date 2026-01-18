@@ -39,8 +39,13 @@ export async function createWhisper(input: CreateWhisperInput) {
 
     const redis = await getRedis();
     if (members.length > 0) {
+        const roomTopic = topicId.startsWith('game:') ? topicId.replace(/^game:/, 'room:') : topicId;
         await redis.sAdd($keys.whisperMembersKey(input.gameId, whisperId), members);
-        await Promise.all(members.map((member) => redis.sAdd($keys.userWhisperKey(input.gameId, member), topicId)));
+        await Promise.all(
+            members.map((member) =>
+                redis.sAdd($keys.userWhisperKey(input.gameId, member), topicId, roomTopic)
+            )
+        );
     }
 
     return doc;

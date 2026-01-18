@@ -5,6 +5,8 @@ import { LogIn, LogOut, Menu, User, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { AuthedUser } from '../../types/game';
+import { ScriptMenu } from './ScriptMenu';
+import { InvitesButton } from './InvitesButton';
 import { useCallback } from 'react';
 
 export type TopBarProps = {
@@ -32,6 +34,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenReg
                 >
                     <Menu size={20} />
                 </Button>
+                <ScriptMenu />
                 <Link
                     to='/'
                     className='flex items-center gap-3'
@@ -46,6 +49,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenReg
             </div>
 
             <div className='flex items-center gap-3'>
+                <InvitesButton />
                 {!user && isAuthLoading && <span className='text-sm text-gray-300'>Checking session…</span>}
                 {user ?
                     <>

@@ -8,7 +8,7 @@ import inputs from './inputs';
 export const zCreateLobbySettings = z.object({
     minPlayers: aliases.pcPlayerCount.default(5),
     maxPlayers: aliases.pcPlayerCount.default(15),
-    canTravel: z.boolean().default(false),
+    maxTravelers: aliases.pcTraverCount.default(0),
     edition: enums.editions.optional().nullable(),
     skillLevel: enums.skillLevel.optional().nullable(),
     plannedStartTime: aliases.timestamp.optional().nullable()
@@ -19,7 +19,10 @@ export const zCreateGameInput = z.object({
     version: aliases.version,
     snapshot: z.any(),
     hostUserId: refs.user,
-    status: enums.gameStatus.default('idle'),
+    status: enums.roomStatus.default('closed'),
+    scriptId: aliases.scriptId,
+    allowTravelers: z.boolean().default(false),
+    visibility: enums.roomVisibility.default('public'),
     endedAt: aliases.timestamp.optional().nullable(),
     lobbySettings: zCreateLobbySettings
 });

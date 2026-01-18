@@ -5,6 +5,8 @@ import { GameId } from './types/game';
 export const $keys = {
     publicTopic: (gameId: GameId) => `game:${gameId}:public`,
     stTopic: (gameId: GameId) => `game:${gameId}:st`,
+    roomPublicTopic: (gameId: GameId) => `room:${gameId}:public`,
+    roomStTopic: (gameId: GameId) => `room:${gameId}:st`,
     whisperMembersKey: (gameId: GameId, whisperId: string) => `whisper:${gameId}:${whisperId}:members`,
     userWhisperKey: (gameId: GameId, userId: string) => `user:${userId}:whispers:${gameId}`,
     presenceKey: (gameId: GameId) => `presence:${gameId}`,
