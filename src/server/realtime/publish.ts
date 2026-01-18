@@ -5,15 +5,12 @@ import { ChatItemModel } from '@/db/models/ChatItem';
 import { StreamMessageModel } from '@/db/models/StreamMessage';
 import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
-
-const GAME_TOPIC_PREFIX = 'game:';
-
-function getGameIdFromTopic(topic: string): string | null {
-    if (!topic.startsWith(GAME_TOPIC_PREFIX)) return null;
-    const parts = topic.split(':');
-    if (parts.length < 3) return null;
-    return parts[1];
-}
+import {
+    getMatchIdFromTopic,
+    getRoomIdFromTopic,
+    streamKeyForTopic,
+    timestampFromStreamId
+} from './topicStreams';
 
 function toDate(value: number | Date): Date {
     if (value instanceof Date) return value;
@@ -23,21 +20,23 @@ function toDate(value: number | Date): Date {
 export async function publish(
     topic: string,
     msg: AppEvents
-): Promise<AppEvents & { streamId: StreamId }> {
-    const streamId = randomUUID();
-    const ts = typeof msg.ts === 'number' ? msg.ts : Date.now();
-    const published = { ...msg, ts, streamId };
-
-    const gameId = getGameIdFromTopic(topic);
-    if (!gameId) {
-        throw new Error(`Unable to derive gameId from topic "${topic}"`);
+): Promise<AppEvents & { streamId: StreamId; roomId: string; matchId: string | null }> {
+    const roomId = getRoomIdFromTopic(topic);
+    if (!roomId) {
+        throw new Error(`Unable to derive roomId from topic "${topic}"`);
     }
+    const matchId = getMatchIdFromTopic(topic);
+    const redis = await getRedis();
+    const streamKey = streamKeyForTopic(topic);
+    const streamId = await redis.xAdd(streamKey, '*', { payload: JSON.stringify(msg) });
+    const ts = timestampFromStreamId(streamId);
+    const published = { ...msg, ts, streamId, roomId, matchId };
 
     await connectMongoose();
     if (published.kind === 'chat') {
         await ChatItemModel.create({
             _id: published.id,
-            gameId,
+            gameId: roomId,
             topicId: topic,
             text: published.text,
             ts: toDate(published.ts),
@@ -47,7 +46,7 @@ export async function publish(
     } else {
         await StreamMessageModel.create({
             _id: randomUUID(),
-            gameId,
+            gameId: roomId,
             topicId: topic,
             streamId,
             ts: toDate(published.ts),
@@ -56,7 +55,6 @@ export async function publish(
         });
     }
 
-    const redis = await getRedis();
     await redis.publish(topic, JSON.stringify(published));
     return published;
 }

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/server/realtime/wsConnection.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { randomUUID } from 'crypto';
 import type { RedisClientType } from 'redis';
 import type WebSocket from 'ws';
@@ -8,12 +8,11 @@ import { onUserConnected, onUserDisconnected } from './hostGrace';
 import { zChat, zJoinGame, zJoinTopic, zPing } from '.';
 import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
+import { getRoomIdFromTopic, streamKeyForTopic, timestampFromStreamId } from './topicStreams';
 import { $keys } from '../../$keys';
 import { listWhisperTopicsForUser } from '../../serverFns/listWhisperTopicsForUser';
 import { AuthedUser, GameRoles, ChatMsg } from '../../types/game';
 import { maybeRemindPickStoryteller } from './reminder';
-import { ChatItem, ChatItemModel } from '@/db/models/ChatItem';
-import { StreamMessageModel } from '@/db/models/StreamMessage';
 import { getUserFromCookie } from '../../serverFns/getId/getUserFromCookie';
 import $gameMember from '../../serverFns/$gameMember';
 import $game from '../../serverFns/$game';
@@ -313,96 +312,52 @@ async function replayFromLastStreamIds(ws: WebSocket, lastStreamIds?: Record<str
     await Promise.all(entries.map(([topic, streamId]) => replayTopicMessages(ws, topic, streamId)));
 }
 
-type ReplayDoc =
-    | {
-          kind: 'chat';
-          doc: ChatItem & { _id: string; streamId: string };
-      }
-    | {
-          kind: 'event' | 'snapshot';
-          doc: {
-              _id: string;
-              gameId: string;
-              topicId: string;
-              streamId: string;
-              ts: Date;
-              message: Record<string, unknown>;
-              kind: 'event' | 'snapshot';
-          };
-      };
-
 async function replayTopicMessages(ws: WebSocket, topic: string, lastStreamId: string) {
     try {
-        const lastDoc =
-            (await ChatItemModel.findOne({ topicId: topic, streamId: lastStreamId })
-                .select('ts streamId')
-                .lean()) ??
-            (await StreamMessageModel.findOne({ topicId: topic, streamId: lastStreamId })
-                .select('ts streamId')
-                .lean());
-
-        if (!lastDoc?.ts) {
-            return;
+        const redis = await getRedis();
+        const streamKey = streamKeyForTopic(topic);
+        let entries: Array<[string, Record<string, string>]> = [];
+        if (lastStreamId) {
+            const start = `(${lastStreamId}`;
+            entries = await redis.xRange(streamKey, start, '+', { COUNT: MAX_REPLAY_ITEMS });
+        } else {
+            const reversed = await redis.xRevRange(streamKey, '+', '-', { COUNT: MAX_REPLAY_ITEMS });
+            entries = reversed.reverse();
         }
 
-        const filter: Record<string, unknown> = {
-            topicId: topic,
-            $or: [{ ts: { $gt: lastDoc.ts } }, { ts: lastDoc.ts, streamId: { $gt: lastStreamId } }]
-        };
+        if (entries.length === 0) return;
 
-        const [chatItems, streamItems] = await Promise.all([
-            ChatItemModel.find(filter)
-                .sort({ ts: 1, streamId: 1 })
-                .limit(MAX_REPLAY_ITEMS)
-                .lean(),
-            StreamMessageModel.find(filter)
-                .sort({ ts: 1, streamId: 1 })
-                .limit(MAX_REPLAY_ITEMS)
-                .lean()
-        ]);
+        const roomId = getRoomIdFromTopic(topic);
+        const payloads: Record<string, unknown>[] = [];
 
-        const combined: ReplayDoc[] = [
-            ...chatItems.map((item) => ({ kind: 'chat' as const, doc: item })),
-            ...streamItems.map((item) => ({ kind: item.kind, doc: item }))
-        ]
-            .filter((entry) => entry.doc.ts != null)
-            .sort((a, b) => {
-                const aTs = a.doc.ts instanceof Date ? a.doc.ts.getTime() : new Date(a.doc.ts).getTime();
-                const bTs = b.doc.ts instanceof Date ? b.doc.ts.getTime() : new Date(b.doc.ts).getTime();
+        for (const [streamId, fields] of entries) {
+            const raw = fields?.payload;
+            if (!raw || typeof raw !== 'string') continue;
+            let parsed: unknown;
+            try {
+                parsed = JSON.parse(raw);
+            } catch {
+                continue;
+            }
+            if (typeof parsed !== 'object' || parsed === null) continue;
+            const payloadContent = parsed as Record<string, unknown>;
 
-                if (aTs !== bTs) return aTs - bTs;
-                return a.doc.streamId.localeCompare(b.doc.streamId);
-            })
-            .slice(0, MAX_REPLAY_ITEMS);
+            const ts = timestampFromStreamId(streamId);
+            payloads.push({
+                ...payloadContent,
+                ts,
+                streamId,
+                topicId: topic,
+                ...(roomId ? { roomId } : {})
+            });
+        }
 
-        if (combined.length === 0) return;
+        if (payloads.length === 0) return;
 
         send(ws, {
             t: 'topicReplay',
             topic,
-            payloads: combined.map((entry) => {
-                if (entry.kind === 'chat') {
-                    const item = entry.doc;
-                    return {
-                        _id: item._id,
-                        gameId: item.gameId,
-                        topicId: item.topicId,
-                        from: item.from,
-                        text: item.text,
-                        ts: item.ts,
-                        streamId: item.streamId,
-                        kind: 'chat'
-                    };
-                }
-                const item = entry.doc;
-                return {
-                    _id: item._id,
-                    gameId: item.gameId,
-                    topicId: item.topicId,
-                    ...item.message,
-                    streamId: item.streamId
-                };
-            })
+            payloads
         });
     } catch {
         /* intentionally ignore replay failures */

@@ -9,7 +9,8 @@ export const env = createEnv({
         MONGODB_URI: z.url().min(1),
         MONGODB_DB: z.string().min(1),
         REALTIME_PORT: z.coerce.number().int().min(0),
-        SESSION_COOKIE_NAME: z.string().min(1)
+        SESSION_COOKIE_NAME: z.string().min(1),
+        ALLOW_DEV_GRIMOIRE: z.string().optional()
     },
 
     /**

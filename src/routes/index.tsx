@@ -1,10 +1,21 @@
 // src/routes/index.tsx
 import { createFileRoute } from '@tanstack/react-router';
 import { Zap, Server, Route as RouteIcon, Shield, Waves, Sparkles } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { DevGrimoirePanel } from '../client/dev/DevGrimoirePanel';
 
 export const Route = createFileRoute('/')({ component: App });
 
 function App() {
+    const [roomId, setRoomId] = useState<string | null>(null);
+    const [matchId, setMatchId] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const params = new URLSearchParams(window.location.search);
+        setRoomId(params.get('roomId'));
+        setMatchId(params.get('matchId'));
+    }, []);
     const features = [
         {
             icon: <Zap className='w-12 h-12 text-cyan-400' />,
@@ -97,6 +108,7 @@ function App() {
                     ))}
                 </div>
             </section>
+            {roomId && matchId ? <DevGrimoirePanel roomId={roomId} matchId={matchId} /> : null}
         </div>
     );
 }
