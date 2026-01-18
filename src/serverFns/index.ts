@@ -20,3 +20,9 @@ const serverFns = {
 };
 
 export default serverFns;
+
+if (typeof window === 'undefined') {
+    void import('../server/realtime/wsServer').catch((error) => {
+        console.error('[realtime] websocket bootstrap failed', error);
+    });
+}

@@ -5,6 +5,7 @@ import { GameModel } from './Game';
 import { GameMemberModel } from './GameMember';
 import { ChatItemModel } from './ChatItem';
 import { WhisperModel } from './Whisper';
+import { StreamMessageModel } from './StreamMessage';
 
 const $models = {
     UserModel,
@@ -12,7 +13,8 @@ const $models = {
     GameModel,
     GameMemberModel,
     ChatItemModel,
-    WhisperModel
+    WhisperModel,
+    StreamMessageModel
 };
 
 export default $models;

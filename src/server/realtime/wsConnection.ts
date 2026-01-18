@@ -10,12 +10,12 @@ import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
 import { $keys } from '../../$keys';
 import { listWhisperTopicsForUser } from '../../serverFns/listWhisperTopicsForUser';
-import { AuthedUser, GameRoles } from '../../types/game';
+import { AuthedUser, GameRoles, ChatMsg } from '../../types/game';
 import { maybeRemindPickStoryteller } from './reminder';
 import { ChatItem, ChatItemModel } from '@/db/models/ChatItem';
+import { StreamMessageModel } from '@/db/models/StreamMessage';
 import { getUserFromCookie } from '../../serverFns/getId/getUserFromCookie';
 import $gameMember from '../../serverFns/$gameMember';
-import $models from '../../db/models';
 import $game from '../../serverFns/$game';
 import { whoAmIServerFn } from '../../serverFns/whoAmI';
 import { parseCookie } from '../parseCookie';
@@ -272,15 +272,16 @@ export async function handleWsConnection(
                 from: { userId: conn.userId, name: conn.name },
                 text
             };
+            let eventToSend: ChatMsg | (ChatMsg & { streamId: string }) = chatEvent;
             if (publish) {
                 try {
-                    await publish(topicId, chatEvent);
+                    eventToSend = await publish(topicId, chatEvent);
                 } catch {
                     send(ws, { t: 'error', code: 'publish_failed', message: 'Failed to broadcast chat' });
                     return;
                 }
             }
-            send(ws, { t: 'chatSent', topicId, event: chatEvent });
+            send(ws, { t: 'chatSent', topicId, event: eventToSend });
             return;
         }
 
@@ -312,11 +313,33 @@ async function replayFromLastStreamIds(ws: WebSocket, lastStreamIds?: Record<str
     await Promise.all(entries.map(([topic, streamId]) => replayTopicMessages(ws, topic, streamId)));
 }
 
+type ReplayDoc =
+    | {
+          kind: 'chat';
+          doc: ChatItem & { _id: string; streamId: string };
+      }
+    | {
+          kind: 'event' | 'snapshot';
+          doc: {
+              _id: string;
+              gameId: string;
+              topicId: string;
+              streamId: string;
+              ts: Date;
+              message: Record<string, unknown>;
+              kind: 'event' | 'snapshot';
+          };
+      };
+
 async function replayTopicMessages(ws: WebSocket, topic: string, lastStreamId: string) {
     try {
-        const lastDoc = (await $models.ChatItemModel.findOne({ topicId: topic, streamId: lastStreamId })
-            .select('ts streamId')
-            .lean()) as Pick<ChatItem, 'ts' | 'streamId'>;
+        const lastDoc =
+            (await ChatItemModel.findOne({ topicId: topic, streamId: lastStreamId })
+                .select('ts streamId')
+                .lean()) ??
+            (await StreamMessageModel.findOne({ topicId: topic, streamId: lastStreamId })
+                .select('ts streamId')
+                .lean());
 
         if (!lastDoc?.ts) {
             return;
@@ -324,28 +347,62 @@ async function replayTopicMessages(ws: WebSocket, topic: string, lastStreamId: s
 
         const filter: Record<string, unknown> = {
             topicId: topic,
-            $or: [{ createdAt: { $gt: lastDoc.ts } }, { createdAt: lastDoc.ts, streamId: { $gt: lastStreamId } }]
+            $or: [{ ts: { $gt: lastDoc.ts } }, { ts: lastDoc.ts, streamId: { $gt: lastStreamId } }]
         };
 
-        const items = await ChatItemModel.find(filter)
-            .sort({ createdAt: 1, streamId: 1 })
-            .limit(MAX_REPLAY_ITEMS)
-            .lean();
+        const [chatItems, streamItems] = await Promise.all([
+            ChatItemModel.find(filter)
+                .sort({ ts: 1, streamId: 1 })
+                .limit(MAX_REPLAY_ITEMS)
+                .lean(),
+            StreamMessageModel.find(filter)
+                .sort({ ts: 1, streamId: 1 })
+                .limit(MAX_REPLAY_ITEMS)
+                .lean()
+        ]);
 
-        if (items.length === 0) return;
+        const combined: ReplayDoc[] = [
+            ...chatItems.map((item) => ({ kind: 'chat' as const, doc: item })),
+            ...streamItems.map((item) => ({ kind: item.kind, doc: item }))
+        ]
+            .filter((entry) => entry.doc.ts != null)
+            .sort((a, b) => {
+                const aTs = a.doc.ts instanceof Date ? a.doc.ts.getTime() : new Date(a.doc.ts).getTime();
+                const bTs = b.doc.ts instanceof Date ? b.doc.ts.getTime() : new Date(b.doc.ts).getTime();
+
+                if (aTs !== bTs) return aTs - bTs;
+                return a.doc.streamId.localeCompare(b.doc.streamId);
+            })
+            .slice(0, MAX_REPLAY_ITEMS);
+
+        if (combined.length === 0) return;
 
         send(ws, {
             t: 'topicReplay',
             topic,
-            payloads: items.map((item) => ({
-                _id: item._id,
-                gameId: item.gameId,
-                topicId: item.topicId,
-                from: item.from,
-                text: item.text,
-                ts: item.ts,
-                streamId: item.streamId
-            }))
+            payloads: combined.map((entry) => {
+                if (entry.kind === 'chat') {
+                    const item = entry.doc;
+                    return {
+                        _id: item._id,
+                        gameId: item.gameId,
+                        topicId: item.topicId,
+                        from: item.from,
+                        text: item.text,
+                        ts: item.ts,
+                        streamId: item.streamId,
+                        kind: 'chat'
+                    };
+                }
+                const item = entry.doc;
+                return {
+                    _id: item._id,
+                    gameId: item.gameId,
+                    topicId: item.topicId,
+                    ...item.message,
+                    streamId: item.streamId
+                };
+            })
         });
     } catch {
         /* intentionally ignore replay failures */
