@@ -17,3 +17,8 @@ export const zStartSetupInput = z.object({
 export const zGameIdParams = z.object({
     gameId: zGameId
 });
+
+export const zReadyInput = z.object({
+    gameId: zGameId,
+    isReady: z.boolean().default(false)
+});

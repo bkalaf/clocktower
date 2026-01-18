@@ -2,7 +2,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { listAvailableScripts } from '../../../server/scripts';
 
-export const Route = createFileRoute('/api/scripts')({
+export const Route = createFileRoute('/api/scripts/')({
     server: {
         handlers: {
             GET: async () => {

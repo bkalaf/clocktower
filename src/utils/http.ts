@@ -24,4 +24,6 @@ const $response = {
     unauthorized
 };
 
+export { success, created, forbidden, badRequest, notFound, unauthorized };
+
 export default $response;

@@ -21,6 +21,10 @@ export const machine = setup({
             plannedStartTime: number;
             storytellerUserIds: unknown[];
             pendingSeatsInviteCount: number;
+            beenNominated: unknown[];
+            nominated: unknown[];
+            voteHolders: unknown[];
+            history: unknown[];
         },
         events: {} as
             | { type: 'OPEN_ROOM' }

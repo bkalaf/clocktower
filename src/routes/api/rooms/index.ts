@@ -9,7 +9,7 @@ import { getUserFromCookie } from '../../../serverFns/getId/getUserFromCookie';
 import { connectMongoose } from '../../../db/connectMongoose';
 import { getScript } from '../../../server/scripts';
 
-export const Route = createFileRoute('/api/rooms')({
+export const Route = createFileRoute('/api/rooms/')({
     server: {
         handlers: {
             POST: async ({ request }) => {

@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { getUserFromCookie } from '../../../serverFns/getId/getUserFromCookie';
 import { InviteModel } from '../../../db/models/Invite';
 
-export const Route = createFileRoute('/api/invites')({
+export const Route = createFileRoute('/api/invites/')({
     server: {
         handlers: {
             GET: async () => {

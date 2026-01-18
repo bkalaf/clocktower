@@ -1,3 +1,6 @@
+/* src/styles.css */
+@import '@fontsource/cinzel/400.css';
+@import '@fontsource/cinzel/700.css';
 @import 'tailwindcss';
 
 @import 'tw-animate-css';
@@ -126,6 +129,12 @@ code {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer utilities {
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
 }
 
 @layer base {

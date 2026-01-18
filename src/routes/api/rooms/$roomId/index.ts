@@ -8,7 +8,7 @@ import { requireGame } from '../../../../server/authz/gameAuth';
 import { GameMemberModel } from '../../../../db/models/GameMember';
 import { connectMongoose } from '../../../../db/connectMongoose';
 
-export const Route = createFileRoute('/api/rooms/$roomId')({
+export const Route = createFileRoute('/api/rooms/$roomId/')({
     server: {
         handlers: {
             GET: async ({ params }) => {

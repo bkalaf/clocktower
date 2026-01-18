@@ -84,4 +84,7 @@ const schemas = {
     inputs
 };
 
+export { zGameId } from './aliases/zGameId';
+export { zUserId } from './aliases/zUserId';
+
 export default schemas;
