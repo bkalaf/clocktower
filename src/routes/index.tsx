@@ -1,23 +1,35 @@
 // src/routes/index.tsx
 import { createFileRoute } from '@tanstack/react-router';
 import { Zap, Server, Route as RouteIcon, Shield, Waves, Sparkles } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import { DevGrimoirePanel } from '../client/dev/DevGrimoirePanel';
 import backgroundImage from '../assets/images/tokens-desk-window.png';
 
-export const Route = createFileRoute('/')({ component: App });
+const normalizeSearchParam = (value: unknown): string | null => {
+    if (Array.isArray(value)) {
+        return value.length ? normalizeSearchParam(value[0]) : null;
+    }
+    if (value === null || value === undefined) {
+        return null;
+    }
+    if (typeof value === 'string') {
+        return value;
+    }
+    if (typeof value === 'number' || typeof value === 'boolean') {
+        return String(value);
+    }
+    return null;
+};
+
+export const Route = createFileRoute('/')({
+    component: App,
+    validateSearch: (search: Record<string, unknown>) => ({
+        roomId: normalizeSearchParam(search.roomId),
+        matchId: normalizeSearchParam(search.matchId)
+    })
+});
 
 function App() {
-    const [roomId, setRoomId] = useState<string | null>(null);
-    const [matchId, setMatchId] = useState<string | null>(null);
-
-    useEffect(() => {
-        if (typeof window === 'undefined') return;
-        // TODO convert this from it's current implementation into using the search property on createFileRoute
-        const params = new URLSearchParams(window.location.search);
-        setRoomId(params.get('roomId'));
-        setMatchId(params.get('matchId'));
-    }, []);
+    const { roomId, matchId } = Route.useSearch();
     const features = [
         {
             icon: <Zap className='w-12 h-12 text-cyan-400' />,
