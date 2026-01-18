@@ -29,7 +29,6 @@ export const machine = setup({
         events: {} as
             | { type: 'OPEN_ROOM' }
             | { type: 'CLOSE_ROOM' }
-            | { type: 'START_GAME' }
             | { type: 'MATCH_ENDED' }
             | { type: 'START_MATCH' }
             | { type: 'ARCHIVE_ROOM' }
@@ -181,7 +180,7 @@ export const machine = setup({
                         OPEN_ROOM: {
                             target: 'open'
                         },
-                        START_GAME: {
+                        START_MATCH: {
                             target: 'in_match',
                             guard: {
                                 type: 'canStartMatch'

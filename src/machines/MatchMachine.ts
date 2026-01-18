@@ -46,9 +46,8 @@ type MatchContext = {
     stStateVersion: Record<string, unknown>;
     customScriptRoles: unknown[];
     publicStateVersion: number;
-    storytellerUserIds: string;
+    storytellerUserIds: string[];
     allowTravelers: boolean;
-    acceptTravelers: boolean;
     travelerCountUsed: number;
     availableTravelers: unknown[];
     pendingTravelerRequests: unknown[];
@@ -100,9 +99,8 @@ const initialContext: MatchContext = {
     stStateVersion: {},
     customScriptRoles: [],
     publicStateVersion: 0,
-    storytellerUserIds: '',
+    storytellerUserIds: [],
     allowTravelers: false,
-    acceptTravelers: false,
     travelerCountUsed: 0,
     availableTravelers: [],
     pendingTravelerRequests: [],
@@ -325,31 +323,146 @@ export const machine = setup({
             }
         },
         in_progress: {
-            initial: 'night',
+            type: 'parallel',
             on: {
                 GAME_OVER: {
                     target: 'reveal'
                 }
             },
             states: {
-                night: {
-                    initial: 'resolve_first_night_order',
-                    on: {
-                        DAWN: {
-                            target: '#MatchMachine.in_progress.day.dawn_announcements'
-                        }
-                    },
-                    always: {
-                        target: 'traveler_admission'
-                    },
+                phase: {
+                    initial: 'night',
                     states: {
-                        resolve_first_night_order: {},
-                        resolve_night_order: {}
+                        night: {
+                            initial: 'resolve_first_night_order',
+                            on: {
+                                DAWN: {
+                                    target: '#MatchMachine.in_progress.phase.day.dawn_announcements'
+                                }
+                            },
+                            states: {
+                                resolve_first_night_order: {},
+                                resolve_night_order: {}
+                            }
+                        },
+                        day: {
+                            initial: 'dawn_announcements',
+                            on: {
+                                DUSK: {
+                                    target: '#MatchMachine.in_progress.phase.night.resolve_night_order'
+                                }
+                            },
+                            states: {
+                                dawn_announcements: {
+                                    entry: 'resetDailyNominationLimits',
+                                    on: {
+                                        EXECUTION_OCCURRED: {
+                                            target: 'execution_resolution'
+                                        },
+                                        ANNOUNCEMENTS_COMPLETE: {
+                                            target: 'discussions'
+                                        }
+                                    }
+                                },
+                                execution_resolution: {
+                                    always: {
+                                        target: '#MatchMachine.in_progress.phase.night'
+                                    }
+                                },
+                                discussions: {
+                                    initial: 'private_conversations',
+                                    on: {
+                                        EXECUTION_OCCURRED: {
+                                            target: 'execution_resolution'
+                                        }
+                                    },
+                                    states: {
+                                        private_conversations: {
+                                            on: {
+                                                CLOCKTOWER_GONG: {
+                                                    target: 'public_conversation'
+                                                }
+                                            }
+                                        },
+                                        public_conversation: {
+                                            on: {
+                                                OPEN_NOMINATIONS: {
+                                                    target: 'nominations'
+                                                },
+                                                EXECUTION_OCCURRED: {
+                                                    target: '#MatchMachine.in_progress.phase.day.execution_resolution'
+                                                }
+                                            }
+                                        },
+                                        nominations: {
+                                            initial: 'nominations_open',
+                                            on: {
+                                                CLOSE_NOMINATIONS: {
+                                                    target: '#MatchMachine.in_progress.phase.day.discussions.public_conversation'
+                                                },
+                                                EXECUTION_OCCURRED: {
+                                                    target: '#MatchMachine.in_progress.phase.day.execution_resolution'
+                                                }
+                                            },
+                                            states: {
+                                                nominations_open: {
+                                                    on: {
+                                                        NOMINATION_ATTEMPTED: {
+                                                            target: 'vote_in_progress',
+                                                            guard: {
+                                                                type: 'canNominateAndBeNominated'
+                                                            },
+                                                            actions: {
+                                                                type: 'startNomination'
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                vote_in_progress: {
+                                                    on: {
+                                                        VOTE_CAST: {
+                                                            actions: {
+                                                                type: 'recordVote'
+                                                            },
+                                                            guard: {
+                                                                type: 'canVote'
+                                                            }
+                                                        },
+                                                        VOTE_CLOSED: {
+                                                            target: 'nomination_resolve'
+                                                        }
+                                                    }
+                                                },
+                                                nomination_resolve: {
+                                                    entry: ['resolveNomination', 'clearNomination'],
+                                                    always: {
+                                                        target: 'nominations_open'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 },
                 traveler_admission: {
-                    type: 'parallel',
+                    initial: 'routing',
                     states: {
+                        routing: {
+                            always: [
+                                {
+                                    target: 'accepting',
+                                    guard: {
+                                        type: 'isAllowingTravelers'
+                                    }
+                                },
+                                {
+                                    target: 'not_accepting'
+                                }
+                            ]
+                        },
                         accepting: {
                             initial: 'routing',
                             states: {
@@ -427,119 +540,6 @@ export const machine = setup({
                                         type: 'autoDenyNotAccepting',
                                         params: {
                                             requestId: 'string'
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        routing: {
-                            always: [
-                                {
-                                    target: 'accepting',
-                                    guard: {
-                                        type: 'isAllowingTravelers'
-                                    }
-                                },
-                                {
-                                    target: 'not_accepting'
-                                }
-                            ]
-                        }
-                    }
-                },
-                day: {
-                    initial: 'dawn_announcements',
-                    on: {
-                        DUSK: {
-                            target: '#MatchMachine.in_progress.night.resolve_night_order'
-                        }
-                    },
-                    states: {
-                        dawn_announcements: {
-                            entry: 'resetDailyNominationLimits',
-                            on: {
-                                EXECUTION_OCCURRED: {
-                                    target: 'execution_resolution'
-                                },
-                                ANNOUNCEMENTS_COMPLETE: {
-                                    target: 'discussions'
-                                }
-                            }
-                        },
-                        execution_resolution: {
-                            always: {
-                                target: '#MatchMachine.in_progress.night'
-                            }
-                        },
-                        discussions: {
-                            initial: 'private_conversations',
-                            on: {
-                                EXECUTION_OCCURRED: {
-                                    target: 'execution_resolution'
-                                }
-                            },
-                            states: {
-                                private_conversations: {
-                                    on: {
-                                        CLOCKTOWER_GONG: {
-                                            target: 'public_conversation'
-                                        }
-                                    }
-                                },
-                                public_conversation: {
-                                    on: {
-                                        OPEN_NOMINATIONS: {
-                                            target: 'nominations'
-                                        },
-                                        EXECUTION_OCCURRED: {
-                                            target: '#MatchMachine.in_progress.day.execution_resolution'
-                                        }
-                                    }
-                                },
-                                nominations: {
-                                    initial: 'nominations_open',
-                                    on: {
-                                        CLOSE_NOMINATIONS: {
-                                            target: '#MatchMachine.in_progress.day.discussions.public_conversation'
-                                        },
-                                        EXECUTION_OCCURRED: {
-                                            target: '#MatchMachine.in_progress.day.execution_resolution'
-                                        }
-                                    },
-                                    states: {
-                                        nominations_open: {
-                                            on: {
-                                                NOMINATION_ATTEMPTED: {
-                                                    target: 'vote_in_progress',
-                                                    guard: {
-                                                        type: 'canNominateAndBeNominated'
-                                                    },
-                                                    actions: {
-                                                        type: 'startNomination'
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        vote_in_progress: {
-                                            on: {
-                                                VOTE_CAST: {
-                                                    actions: {
-                                                        type: 'recordVote'
-                                                    },
-                                                    guard: {
-                                                        type: 'canVote'
-                                                    }
-                                                },
-                                                VOTE_CLOSED: {
-                                                    target: 'nomination_resolve'
-                                                }
-                                            }
-                                        },
-                                        nomination_resolve: {
-                                            entry: ['resolveNomination', 'clearNomination'],
-                                            always: {
-                                                target: 'nominations_open'
-                                            }
                                         }
                                     }
                                 }
