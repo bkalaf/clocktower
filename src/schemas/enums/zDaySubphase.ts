@@ -6,6 +6,8 @@ export const zDaySubphase = z.enum([
     'private_conversations',
     'public_conversations',
     'nominations_open',
+    'vote_in_progress',
+    'nomination_resolve',
     'nomination_voting',
     'execution_resolution'
 ]);

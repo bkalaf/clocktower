@@ -1,44 +1,170 @@
 // src/machines/MatchMachine.ts
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { setup } from 'xstate';
+import { assign, setup } from 'xstate';
+
+export type NominationType = 'execution' | 'exile';
+export type VoteChoice = 'yes' | 'no' | 'abstain';
+
+type CurrentNomination = {
+    nominatorId: string;
+    nomineeId: string;
+    nominationType: NominationType;
+    openedAt: number;
+};
+
+type VoteRecord = {
+    voterId: string;
+    choice: VoteChoice;
+    usedGhost?: boolean;
+};
+
+type VoteHistoryEntry = {
+    day: number;
+    nominationType: NominationType;
+    nominatorId: string;
+    nomineeId: string;
+    votesFor: number;
+    threshold: number;
+    passed: boolean;
+    votes: VoteRecord[];
+    ts: number;
+};
+
+type OnTheBlockStatus = {
+    nomineeId: string;
+    votesFor: number;
+    nominatorId: string;
+};
+
+type MatchContext = {
+    phase: string;
+    roomId: string;
+    matchId: string;
+    scriptId: string;
+    subphase: string;
+    dayNumber: number;
+    playerSeatMap: Record<string, unknown>;
+    stStateVersion: Record<string, unknown>;
+    customScriptRoles: unknown[];
+    publicStateVersion: number;
+    storytellerUserIds: string;
+    allowTravelers: boolean;
+    acceptTravelers: boolean;
+    travelerCountUsed: number;
+    availableTravelers: unknown[];
+    pendingTravelerRequests: unknown[];
+    dayNominated: string[];
+    dayNominators: string[];
+    currentNomination?: CurrentNomination;
+    currentVotes: Record<string, VoteChoice>;
+    currentVoteGhostUsage: Record<string, boolean>;
+    isAliveById: Record<string, boolean>;
+    isTravelerById: Record<string, boolean>;
+    ghostVoteAvailableById: Record<string, boolean>;
+    onTheBlock?: OnTheBlockStatus;
+    voteHistory: VoteHistoryEntry[];
+};
+
+type MatchEvent =
+    | { type: 'DAWN' }
+    | { type: 'DUSK' }
+    | { type: 'CLOCKTOWER_GONG' }
+    | { type: 'REVEAL_COMPLETE' }
+    | { type: 'OPEN_NOMINATIONS' }
+    | { type: 'CLOSE_NOMINATIONS' }
+    | { type: 'GAME_OVER'; payload: { winner: string } }
+    | { type: 'EXECUTION_OCCURRED' }
+    | { type: 'ANNOUNCEMENTS_COMPLETE' }
+    | { type: 'SETUP_COMPLETE' }
+    | { type: 'TRAVELER_REQUESTED'; requestId: string; userId: string }
+    | { type: 'DECIDE_TRAVELER'; requestId: string; decision: string; characterRole: string }
+    | {
+          type: 'NOMINATION_ATTEMPTED';
+          payload: { nominatorId: string; nomineeId: string; nominationType: NominationType };
+      }
+    | { type: 'VOTE_CAST'; payload: { voterId: string; choice: VoteChoice } }
+    | { type: 'VOTE_CLOSED' };
+
+type GuardMeta = {
+    context: MatchContext;
+    event: MatchEvent;
+};
+
+const initialContext: MatchContext = {
+    phase: 'setup',
+    roomId: '',
+    matchId: '',
+    scriptId: '',
+    subphase: 'day.dawn_announcements',
+    dayNumber: 1,
+    playerSeatMap: {},
+    stStateVersion: {},
+    customScriptRoles: [],
+    publicStateVersion: 0,
+    storytellerUserIds: '',
+    allowTravelers: false,
+    acceptTravelers: false,
+    travelerCountUsed: 0,
+    availableTravelers: [],
+    pendingTravelerRequests: [],
+    dayNominated: [],
+    dayNominators: [],
+    currentNomination: undefined,
+    currentVotes: {},
+    currentVoteGhostUsage: {},
+    isAliveById: {},
+    isTravelerById: {},
+    ghostVoteAvailableById: {},
+    onTheBlock: undefined,
+    voteHistory: []
+};
+
+const canNominateGuard = ({ context, event }: GuardMeta) => {
+    if (event.type !== 'NOMINATION_ATTEMPTED') return false;
+    const { nominatorId } = event.payload;
+    const isAlive = context.isAliveById[nominatorId] ?? false;
+    const isTraveler = context.isTravelerById[nominatorId] ?? false;
+    const alreadyNominated = context.dayNominators.includes(nominatorId);
+    const hasActiveNomination = Boolean(context.currentNomination);
+    return isAlive && !isTraveler && !alreadyNominated && !hasActiveNomination;
+};
+
+const canBeNominatedGuard = ({ context, event }: GuardMeta) => {
+    if (event.type !== 'NOMINATION_ATTEMPTED') return false;
+    const { nomineeId, nominationType } = event.payload;
+    if (context.dayNominated.includes(nomineeId)) return false;
+    const nomineeIsTraveler = context.isTravelerById[nomineeId] ?? false;
+    const nomineeIsAlive = context.isAliveById[nomineeId] ?? false;
+    if (nominationType === 'execution') {
+        return nomineeIsAlive && !nomineeIsTraveler;
+    }
+    if (nominationType === 'exile') {
+        return nomineeIsTraveler;
+    }
+    return false;
+};
+
+const canNominateAndBeNominatedGuard = (meta: GuardMeta) =>
+    canNominateGuard(meta) && canBeNominatedGuard(meta);
+
+const canVoteGuard = ({ context, event }: GuardMeta) => {
+    if (event.type !== 'VOTE_CAST') return false;
+    if (!context.currentNomination) return false;
+    const { voterId, choice } = event.payload;
+    const isExecution = context.currentNomination.nominationType === 'execution';
+    const isAlive = context.isAliveById[voterId] ?? false;
+    if (isAlive) return true;
+    if (!isExecution) return true;
+    if (choice === 'abstain') return true;
+    const hasGlobalGhost = context.ghostVoteAvailableById[voterId] !== false;
+    const usedGhostAlready = Boolean(context.currentVoteGhostUsage[voterId]);
+    return hasGlobalGhost || usedGhostAlready;
+};
 
 export const machine = setup({
     types: {
-        context: {} as {
-            phase: string;
-            roomId: string;
-            matchId: string;
-            scriptId: string;
-            subphase: string;
-            dayNumber: number;
-            playerSeatMap: {};
-            stStateVersion: {};
-            customScriptRoles: unknown[];
-            publicStateVersion: number;
-            storytellerUserIds: string;
-            acceptTravelers: boolean;
-            travelerCountUsed: number;
-            availableTravelers: unknown[];
-            pendingTravelerRequests: unknown[];
-        },
-        events: {} as
-            | { type: 'DAWN' }
-            | { type: 'DUSK' }
-            | { type: 'CLOCKTOWER_GONG' }
-            | { type: 'REVEAL_COMPLETE' }
-            | { type: 'OPEN_NOMINATIONS' }
-            | { type: 'CLOSE_NOMINATIONS' }
-            | { type: 'GAME_OVER(winner)' }
-            | { type: 'EXECUTION_OCCURRED' }
-            | { type: 'ANNOUNCEMENTS_COMPLETE' }
-            | { type: 'SETUP_COMPLETE' }
-            | { type: 'TRAVELER_REQUESTED'; requestId: string; userId: string }
-            | {
-                  type: 'DECIDE_TRAVELER';
-                  requestId: string;
-                  decision: string;
-                  characterRole: string;
-              }
+        context: {} as MatchContext,
+        events: {} as MatchEvent
     },
     actions: {
         autoDenyNotAccepting: function ({ context, event }, params) {
@@ -56,7 +182,115 @@ export const machine = setup({
         approveTraveler: function ({ context, event }, params) {
             // Add your action code here
             // ...
-        }
+        },
+        resetDailyNominationLimits: assign((context) => ({
+            dayNominated: [],
+            dayNominators: [],
+            currentNomination: undefined,
+            currentVotes: {},
+            currentVoteGhostUsage: {}
+        })),
+        startNomination: assign((context, event) => {
+            if (event.type !== 'NOMINATION_ATTEMPTED') return {};
+            const { nominatorId, nomineeId, nominationType } = event.payload;
+            const nextNominators = context.dayNominators.includes(nominatorId)
+                ? context.dayNominators
+                : [...context.dayNominators, nominatorId];
+            const nextNominated = context.dayNominated.includes(nomineeId)
+                ? context.dayNominated
+                : [...context.dayNominated, nomineeId];
+            return {
+                dayNominators: nextNominators,
+                dayNominated: nextNominated,
+                currentNomination: {
+                    nominatorId,
+                    nomineeId,
+                    nominationType,
+                    openedAt: Date.now()
+                },
+                currentVotes: {},
+                currentVoteGhostUsage: {}
+            };
+        }),
+        recordVote: assign((context, event) => {
+            if (event.type !== 'VOTE_CAST') return {};
+            if (!context.currentNomination) return {};
+            const { voterId, choice } = event.payload;
+            const isExecution = context.currentNomination.nominationType === 'execution';
+            const isAlive = context.isAliveById[voterId] ?? false;
+            const isDead = !isAlive;
+            const consumesGhostVote = isExecution && isDead && choice !== 'abstain';
+            const updatedVotes = {
+                ...context.currentVotes,
+                [voterId]: choice
+            };
+            const updatedGhostUsage = { ...context.currentVoteGhostUsage };
+            if (consumesGhostVote) {
+                updatedGhostUsage[voterId] = true;
+            }
+            const assignments: Partial<MatchContext> = {
+                currentVotes: updatedVotes,
+                currentVoteGhostUsage: updatedGhostUsage
+            };
+            if (consumesGhostVote) {
+                const alreadyUsed = Boolean(context.currentVoteGhostUsage[voterId]);
+                const hasGhostAvailable = context.ghostVoteAvailableById[voterId] !== false;
+                if (!alreadyUsed && hasGhostAvailable) {
+                    assignments.ghostVoteAvailableById = {
+                        ...context.ghostVoteAvailableById,
+                        [voterId]: false
+                    };
+                }
+            }
+            return assignments;
+        }),
+        resolveNomination: assign((context) => {
+            const nomination = context.currentNomination;
+            if (!nomination) return {};
+            const aliveNonTraveler = Object.entries(context.isAliveById).reduce((count, [id, alive]) => {
+                if (!alive) return count;
+                if (context.isTravelerById[id]) return count;
+                return count + 1;
+            }, 0);
+            const threshold = Math.ceil(aliveNonTraveler / 2);
+            const votes: VoteRecord[] = Object.entries(context.currentVotes).map(([voterId, choice]) => ({
+                voterId,
+                choice,
+                ...(context.currentVoteGhostUsage[voterId] ? { usedGhost: true } : {})
+            }));
+            const votesFor = votes.filter((vote) => vote.choice === 'yes').length;
+            const passed = votesFor >= threshold;
+            const historyEntry: VoteHistoryEntry = {
+                day: context.dayNumber,
+                nominationType: nomination.nominationType,
+                nominatorId: nomination.nominatorId,
+                nomineeId: nomination.nomineeId,
+                votesFor,
+                threshold,
+                passed,
+                votes,
+                ts: Date.now()
+            };
+            let updatedOnTheBlock = context.onTheBlock;
+            if (passed && nomination.nominationType === 'execution') {
+                if (!context.onTheBlock || votesFor > context.onTheBlock.votesFor) {
+                    updatedOnTheBlock = {
+                        nomineeId: nomination.nomineeId,
+                        votesFor,
+                        nominatorId: nomination.nominatorId
+                    };
+                }
+            }
+            return {
+                voteHistory: [...context.voteHistory, historyEntry],
+                onTheBlock: updatedOnTheBlock
+            };
+        }),
+        clearNomination: assign(() => ({
+            currentNomination: undefined,
+            currentVotes: {},
+            currentVoteGhostUsage: {}
+        }))
     },
     guards: {
         isAllowingTravelers: function ({ context, event }, params) {
@@ -74,10 +308,14 @@ export const machine = setup({
         approved: function ({ context, event }) {
             // Add your guard condition here
             return true;
-        }
+        },
+        canNominate: canNominateGuard,
+        canBeNominated: canBeNominatedGuard,
+        canNominateAndBeNominated: canNominateAndBeNominatedGuard,
+        canVote: canVoteGuard
     }
 }).createMachine({
-    context: {},
+    context: initialContext,
     id: 'MatchMachine',
     initial: 'setup',
     states: {
@@ -91,7 +329,7 @@ export const machine = setup({
         in_progress: {
             initial: 'night',
             on: {
-                'GAME_OVER(winner)': {
+                GAME_OVER: {
                     target: 'reveal'
                 }
             },
@@ -220,6 +458,7 @@ export const machine = setup({
                     },
                     states: {
                         dawn_announcements: {
+                            entry: 'resetDailyNominationLimits',
                             on: {
                                 EXECUTION_OCCURRED: {
                                     target: 'execution_resolution'
@@ -253,25 +492,57 @@ export const machine = setup({
                                     on: {
                                         OPEN_NOMINATIONS: {
                                             target: 'nominations'
+                                        },
+                                        EXECUTION_OCCURRED: {
+                                            target: '#MatchMachine.in_progress.day.execution_resolution'
                                         }
                                     }
                                 },
                                 nominations: {
-                                    initial: 'open',
+                                    initial: 'nominations_open',
                                     on: {
+                                        CLOSE_NOMINATIONS: {
+                                            target: '#MatchMachine.in_progress.day.discussions.public_conversation'
+                                        },
                                         EXECUTION_OCCURRED: {
                                             target: '#MatchMachine.in_progress.day.execution_resolution'
                                         }
                                     },
                                     states: {
-                                        open: {
+                                        nominations_open: {
                                             on: {
-                                                CLOSE_NOMINATIONS: {
-                                                    target: 'closed'
+                                                NOMINATION_ATTEMPTED: {
+                                                    target: 'vote_in_progress',
+                                                    guard: {
+                                                        type: 'canNominateAndBeNominated'
+                                                    },
+                                                    actions: {
+                                                        type: 'startNomination'
+                                                    }
                                                 }
                                             }
                                         },
-                                        closed: {}
+                                        vote_in_progress: {
+                                            on: {
+                                                VOTE_CAST: {
+                                                    actions: {
+                                                        type: 'recordVote'
+                                                    },
+                                                    guard: {
+                                                        type: 'canVote'
+                                                    }
+                                                },
+                                                VOTE_CLOSED: {
+                                                    target: 'nomination_resolve'
+                                                }
+                                            }
+                                        },
+                                        nomination_resolve: {
+                                            entry: ['resolveNomination', 'clearNomination'],
+                                            always: {
+                                                target: 'nominations_open'
+                                            }
+                                        }
                                     }
                                 }
                             }

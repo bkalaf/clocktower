@@ -17,7 +17,40 @@ export const zMatch = z.object({
     travelerCountUsed: z.number().int().min(0).default(0),
     travelerLimit: z.number().int().min(0).default(5),
     nominationsOpen: z.boolean().default(false),
-    breakoutWhispersEnabled: z.boolean().default(true)
+    breakoutWhispersEnabled: z.boolean().default(true),
+    dayNominated: z.array(aliases.userId).default([]),
+    dayNominators: z.array(aliases.userId).default([]),
+    aliveById: z.record(aliases.userId, z.boolean()).default({}),
+    isTravelerById: z.record(aliases.userId, z.boolean()).default({}),
+    ghostVoteAvailableById: z.record(aliases.userId, z.boolean()).default({}),
+    onTheBlock: z
+        .object({
+            nomineeId: aliases.userId,
+            votesFor: z.number().int().min(0),
+            nominatorId: aliases.userId
+        })
+        .optional(),
+    voteHistory: z
+        .array(
+            z.object({
+                day: z.number().int().min(1),
+                nominationType: z.enum(['execution', 'exile']),
+                nominatorId: aliases.userId,
+                nomineeId: aliases.userId,
+                votesFor: z.number().int().min(0),
+                threshold: z.number().int().min(0),
+                passed: z.boolean(),
+                votes: z.array(
+                    z.object({
+                        voterId: aliases.userId,
+                        choice: z.enum(['yes', 'no', 'abstain']),
+                        usedGhost: z.boolean().optional()
+                    })
+                ),
+                ts: z.number().int()
+            })
+        )
+        .default([])
 });
 
 const matchModels = getTypesFor(
