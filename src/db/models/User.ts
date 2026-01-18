@@ -11,7 +11,7 @@ const zUser = z.object({
 });
 
 const userModels = getTypesFor(
-    'User',
+    'user',
     zUser,
     {
         timestamps: true,

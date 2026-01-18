@@ -16,7 +16,6 @@ import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as DemoStartApiRequestRouteImport } from './routes/demo/start.api-request'
 import { Route as DemoApiTqTodosRouteImport } from './routes/demo/api.tq-todos'
 import { Route as DemoApiNamesRouteImport } from './routes/demo/api.names'
-import { Route as ApiAuthSessionRouteImport } from './routes/api/auth/session'
 import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
 import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
 import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
@@ -63,11 +62,6 @@ const DemoApiTqTodosRoute = DemoApiTqTodosRouteImport.update({
 const DemoApiNamesRoute = DemoApiNamesRouteImport.update({
   id: '/demo/api/names',
   path: '/demo/api/names',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAuthSessionRoute = ApiAuthSessionRouteImport.update({
-  id: '/api/auth/session',
-  path: '/api/auth/session',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
@@ -141,7 +135,6 @@ export interface FileRoutesByFullPath {
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/auth/session': typeof ApiAuthSessionRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -163,7 +156,6 @@ export interface FileRoutesByTo {
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/auth/session': typeof ApiAuthSessionRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -186,7 +178,6 @@ export interface FileRoutesById {
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/auth/session': typeof ApiAuthSessionRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/api/tq-todos': typeof DemoApiTqTodosRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
@@ -210,7 +201,6 @@ export interface FileRouteTypes {
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
-    | '/api/auth/session'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/start/api-request'
@@ -232,7 +222,6 @@ export interface FileRouteTypes {
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
-    | '/api/auth/session'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/start/api-request'
@@ -254,7 +243,6 @@ export interface FileRouteTypes {
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
-    | '/api/auth/session'
     | '/demo/api/names'
     | '/demo/api/tq-todos'
     | '/demo/start/api-request'
@@ -277,7 +265,6 @@ export interface RootRouteChildren {
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
   ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
-  ApiAuthSessionRoute: typeof ApiAuthSessionRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
   DemoApiTqTodosRoute: typeof DemoApiTqTodosRoute
   DemoStartApiRequestRoute: typeof DemoStartApiRequestRoute
@@ -341,13 +328,6 @@ declare module '@tanstack/react-router' {
       path: '/demo/api/names'
       fullPath: '/demo/api/names'
       preLoaderRoute: typeof DemoApiNamesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/auth/session': {
-      id: '/api/auth/session'
-      path: '/api/auth/session'
-      fullPath: '/api/auth/session'
-      preLoaderRoute: typeof ApiAuthSessionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/register': {
@@ -445,7 +425,6 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,
   ApiAuthRegisterRoute: ApiAuthRegisterRoute,
-  ApiAuthSessionRoute: ApiAuthSessionRoute,
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoApiTqTodosRoute: DemoApiTqTodosRoute,
   DemoStartApiRequestRoute: DemoStartApiRequestRoute,

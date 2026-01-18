@@ -2,7 +2,7 @@
 import aliases, { $coll } from '../aliases';
 import z from 'zod/v4';
 
-const zodUUID = z.uuid('Must be a UUID').meta({ ref: 'any' });
+const zodUUID = z.string('Must be a UUID').meta({ ref: 'any' });
 
 const toRef = (coll: keyof typeof $coll, alias: keyof typeof aliases): typeof zodUUID => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

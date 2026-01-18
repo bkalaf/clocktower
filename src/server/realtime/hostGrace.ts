@@ -42,7 +42,7 @@ async function chooseNewHost(
         const st = await GameMemberModel.find({
             gameId,
             userId: { $in: connectedIds },
-            roles: 'storyteller'
+            role: 'storyteller'
         })
             .sort({ joinedAt: 1, userId: 1 })
             .lean();

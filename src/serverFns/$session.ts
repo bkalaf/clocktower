@@ -16,11 +16,15 @@ export interface ISession<T> {
 // TODO change to server fn
 const findOne = async (_id: SessionId, expiresAt: number = Date.now()) => {
     await connectMongoose();
-    const res = (await $models.SessionModel.findOne({ _id, expiresAt: { $gt: expiresAt } }).populate(
-        'userId'
-    )) as ISession<PopulatedDoc<AuthedUser>>;
-    if (res.userId && typeof res.userId !== 'string') {
-        return res as ISession<AuthedUser>;
+    console.log(`_id`, _id);
+    console.log(`expiresAt`, expiresAt);
+    const res = await $models.SessionModel.findOne({ _id, expiresAt: { $gt: new Date(expiresAt) } }).populate(
+        'userId',
+        '_id name email userRoles'
+    );
+    console.log(`res`, res);
+    if (res?.userId && typeof res?.userId !== 'string') {
+        return res as any as ISession<AuthedUser>;
     }
     throw new Error(`could not populate userId`);
 };

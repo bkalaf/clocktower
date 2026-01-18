@@ -31,22 +31,22 @@ export const $coll = {
 };
 
 const aliases = {
-    chatItemId: zChatItemId,
+    chatItemId: z.string('Must be a UUID'),
     email: zEmail,
-    gameId: zGameId,
-    gameMemberId: zGameMemberId,
+    gameId: z.string('Must be a UUID'),
+    gameMemberId: z.string('Must be a UUID'),
     name: zName,
     password: zPassword,
     pcPlayerCount: zPCPlayerCount,
     pcTraverCount: zPCTravelerCount,
-    sessionId: zSessionId,
+    sessionId: z.string('Must be a UUID'),
     snapshot: zSnapshot,
-    streamId: zStreamId,
+    streamId: z.string('Must be a UUID'),
     timestamp: zTimestamp,
-    topicId: zTopicId,
-    userId: zUserId,
+    topicId: z.string('Must be a UUID'),
+    userId: z.string('Must be a UUID'),
     version: zVersion,
-    whisperId: zWhisperId
+    whisperId: z.string('Must be a UUID')
 };
 
 export default aliases;

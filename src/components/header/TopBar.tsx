@@ -1,10 +1,11 @@
 // src/components/header/TopBar.tsx
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { LogIn, LogOut, Menu, User, UserPlus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { AuthedUser } from '../../types/game';
+import { useCallback } from 'react';
 
 export type TopBarProps = {
     user?: AuthedUser | null;
@@ -16,6 +17,10 @@ export type TopBarProps = {
 };
 
 export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenRegister, onOpenLogout }: TopBarProps) {
+    const navigate = useNavigate();
+    const toLogin = useCallback(() => {
+        navigate({ to: '/login' })
+    }, [navigate])
     return (
         <header className='flex items-center justify-between bg-gray-900 px-4 py-3 text-white shadow-lg'>
             <div className='flex items-center gap-4'>
@@ -68,7 +73,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onOpenLogin, onOpenReg
                         <Button
                             variant='outline'
                             size='sm'
-                            onClick={onOpenLogin}
+                            onClick={toLogin}
                             className='flex items-center gap-2'
                         >
                             <LogIn size={16} />

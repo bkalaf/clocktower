@@ -11,7 +11,7 @@ export const zSession = z.object({
     expiresAt: z.date()
 });
 
-const sessionModels = getTypesFor('Session', zSession, { timestamps: true, collection: 'session' }, {}, [
+const sessionModels = getTypesFor('session', zSession, { timestamps: true, collection: 'session' }, {}, [
     { expiresAt: 1 },
     { expireAfterSeconds: 0 }
 ]);

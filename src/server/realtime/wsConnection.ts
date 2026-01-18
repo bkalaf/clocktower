@@ -10,13 +10,17 @@ import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
 import { $keys } from '../../$keys';
 import { listWhisperTopicsForUser } from '../../serverFns/listWhisperTopicsForUser';
-import { GameRoles } from '../../types/game';
+import { AuthedUser, GameRoles } from '../../types/game';
 import { maybeRemindPickStoryteller } from './reminder';
 import { ChatItem, ChatItemModel } from '@/db/models/ChatItem';
 import { getUserFromCookie } from '../../serverFns/getId/getUserFromCookie';
 import $gameMember from '../../serverFns/$gameMember';
 import $models from '../../db/models';
 import $game from '../../serverFns/$game';
+import { whoAmIServerFn } from '../../serverFns/whoAmI';
+import { parseCookie } from '../parseCookie';
+import { cookieName } from '../auth/cookies';
+import $session from '../../serverFns/$session';
 
 type Conn = {
     ws: WebSocket;
@@ -78,13 +82,20 @@ export async function handleWsConnection(
     publish?: (topic: string, msg: any) => Promise<void>
 ) {
     // Authenticate using your existing cookie-session helper.
-    const user = await getUserFromCookie();
-    if (!user) {
+    const cookie = request.headers.get('cookie');
+    const sessionId = parseCookie(cookie, cookieName());
+    if (!sessionId) {
         send(ws, { t: 'error', code: 'unauthorized', message: 'Not logged in' });
         ws.close();
         return;
     }
-
+    const session = await $session.findOne(sessionId);
+    if (!session) {
+        send(ws, { t: 'error', code: 'unauthorized', message: 'Not logged in' });
+        ws.close();
+        return;
+    }
+    const user = session.userId;
     const conn: Conn = { ws, userId: user._id, name: user.name, topics: new Set() };
 
     const cleanupSubscriber = async () => {

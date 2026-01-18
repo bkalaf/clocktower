@@ -86,7 +86,7 @@ function schemaToMongooseField(
         if (isStringish) {
             // Common pattern: store foreign keys as ObjectId
             return applyCommonOptions(schema, {
-                type: mongoose.Schema.Types.UUID,
+                type: mongoose.Schema.Types.String,
                 ref: refName
             });
         }
@@ -122,7 +122,7 @@ function schemaToMongooseField(
             const { type, ...dt } = $dt;
             if (type === 'string') {
                 if (dt.format === 'uuid') {
-                    return { ...dt, type: mongoose.Schema.Types.UUID };
+                    return { ...dt, type: mongoose.Schema.Types.String };
                 } else if (dt.format === 'date-time') {
                     return { ...dt, type: mongoose.Schema.Types.Date };
                 }
@@ -179,7 +179,7 @@ function schemaToMongooseField(
         return applyCommonOptions(schema, { type: Date });
     }
     if (schema.format === 'uuid') {
-        return { ...schema, type: mongoose.Schema.Types.UUID };
+        return { ...schema, type: mongoose.Schema.Types.String };
     }
 
     // type-based mapping

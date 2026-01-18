@@ -5,20 +5,23 @@ import { getTypesFor } from '../../utils/zodToMongoose';
 import schemas from '../../schemas';
 const { refs, aliases } = schemas;
 
-const zWhisper = z.object({
+export const zWhisper = z.object({
     _id: aliases.whisperId,
     gameId: refs.game,
     topicId: refs.topic,
     creatorId: refs.user,
     members: z.array(refs.user),
     isActive: z.boolean().default(true),
-    meta: z.object({
-        name: aliases.name.meta({ description: 'The displayed name of the channel.' }),
-        includeStoryteller: z.boolean().default(true)
-    })
+    meta: z
+        .object({
+            name: aliases.name.meta({ description: 'The displayed name of the channel.' }),
+            includeStoryteller: z.boolean().default(true)
+        })
+        .optional()
+        .nullable()
 });
 
-const whisperModels = getTypesFor('Whisper', zWhisper, { collection: 'whisper', timestamps: true }, {}, [
+const whisperModels = getTypesFor('whisper', zWhisper, { collection: 'whisper', timestamps: true }, {}, [
     { gameId: 1, isActive: 1 }
 ]);
 

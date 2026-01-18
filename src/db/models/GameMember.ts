@@ -19,7 +19,7 @@ export const zGameMember = z.object({
 });
 
 const gameMemberModels = getTypesFor(
-    'GameMember',
+    'game_member',
     zGameMember,
     { timestamps: { createdAt: 'joinedAt', updatedAt: 'updatedAt' }, collection: 'game_member' },
     { update: zUpdateGameMember },

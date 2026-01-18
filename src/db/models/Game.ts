@@ -18,17 +18,17 @@ export const zLobbySettings = z.object({
     banner: z.string().optional().nullable()
 });
 
-const zGame = z.object({
+export const zGame = z.object({
     _id: aliases.gameId,
     version: aliases.version,
     snapshot: aliases.snapshot,
     hostUserId: refs.user,
     status: enums.gameStatus.default('idle'),
     endedAt: aliases.timestamp.optional().nullable(),
-    lobbySettings: zLobbySettings
+    lobbySettings: zLobbySettings.optional().nullable()
 });
 
-const gameModels = getTypesFor('Game', zGame, { timestamps: true, collection: 'game' }, {}, [
+const gameModels = getTypesFor('game', zGame, { timestamps: true, collection: 'game' }, {}, [
     { hostUserId: 1 },
     { unique: true }
 ]);
