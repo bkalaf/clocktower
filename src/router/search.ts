@@ -8,7 +8,7 @@ export type NightCardType =
     | 'this_is_the_demon'
     | 'you_are';
 
-export type ModalKind = 'invites' | 'reveal' | 'nightCards';
+export type ModalKind = 'invites' | 'reveal' | 'nightCards' | 'preferences';
 
 export type RootSearch = {
     modal?: ModalKind;

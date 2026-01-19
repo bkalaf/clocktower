@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import type { ModalKind, NightCardType } from '../../router/search';
 import { Invites } from './Invites';
+import { Preferences } from './Preferences';
 
 type Props = {
     modal?: ModalKind;
@@ -34,6 +35,7 @@ export function ModalHost({ modal, type }: Props) {
         >
             <DialogContent className='w-full max-w-3xl space-y-6'>
                 {modal === 'invites' && <Invites onClose={close} />}
+                {modal === 'preferences' && <Preferences onClose={close} />}
                 {modal === 'reveal' && (
                     <section className='space-y-4'>
                         <DialogHeader className='flex items-center justify-between gap-4'>

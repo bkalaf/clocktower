@@ -1,3 +1,4 @@
+// src/shared/api/endpoints.ts
 import { defineCommand, defineQuery } from './endpoint';
 import { z } from 'zod';
 import aliases from '@/schemas/aliases';
@@ -38,7 +39,7 @@ const zGameResponse = z.object({
 });
 
 const zGameUiResponse = z.object({
-    can: z.record(z.boolean())
+    can: z.record(z.string(), z.boolean())
 });
 
 const zGameActionInput = z.object({

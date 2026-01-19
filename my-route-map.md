@@ -47,6 +47,7 @@ help me work out how this would work - When I go to
 
 ## SearchParams 
     - modal:
+        * preferences: <Preferences />
         * invites: <Invites />
         * reveal: <Reveal />
         * nightCards: <NightCards />

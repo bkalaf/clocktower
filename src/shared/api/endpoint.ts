@@ -11,7 +11,9 @@ export type EndpointSpec<TKind extends ApiKind, TIn extends z.ZodTypeAny, TOut e
     output: TOut;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type InferInput<E extends EndpointSpec<any, any, any>> = z.infer<E['input']>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type InferOutput<E extends EndpointSpec<any, any, any>> = z.infer<E['output']>;
 
 export type QueryEndpoint<TIn extends z.ZodTypeAny, TOut extends z.ZodTypeAny> = EndpointSpec<'query', TIn, TOut>;

@@ -1,153 +1,111 @@
-// src/components/header/NavigationDrawer.tsx
-import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
-import { ChevronDown, ChevronRight, Home, Network, StickyNote, X } from 'lucide-react';
+import { Home, Lock, LogIn, Mail, Settings, UserPlus, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetClose, SheetContent, SheetTitle } from '@/components/ui/sheet';
+import { Sheet, SheetClose, SheetContent } from '@/components/ui/sheet';
+import { useModal } from '@/ui/modals/useModal';
+
+import demonHead from '@/assets/images/demon-head.png';
 
 type NavigationDrawerProps = {
     isOpen: boolean;
     onClose: () => void;
 };
 
-const navLinkBase = 'flex items-center gap-3 p-3 rounded-lg transition-colors font-medium text-white mb-2';
+const navItems = [
+    { to: '/', label: 'Dashboard', icon: Home },
+    { to: '/login', label: 'Login', icon: LogIn },
+    { to: '/register', label: 'Register', icon: UserPlus },
+    { to: '/forgot-password', label: 'Forgot password', icon: Lock }
+];
+
+const itemBase =
+    'flex items-center gap-3 rounded-2xl px-3 py-2 text-sm font-semibold text-white transition-colors duration-150';
 
 export function NavigationDrawer({ isOpen, onClose }: NavigationDrawerProps) {
-    const [groupedExpanded, setGroupedExpanded] = useState<Record<string, boolean>>({});
+    const { open } = useModal();
+
+    const handleOpen = (callback: () => void) => () => {
+        callback();
+        onClose();
+    };
 
     return (
         <Sheet
             open={isOpen}
-            onOpenChange={(open) => {
-                if (!open) {
+            onOpenChange={(openState) => {
+                if (!openState) {
                     onClose();
                 }
             }}
         >
             <SheetContent
                 side='left'
-                className='bg-gray-900 text-white border-r border-white/10 w-80 p-0'
+                className='relative flex h-full w-72 flex-col bg-slate-950/90 border-r border-white/10 p-0 shadow-2xl shadow-black/50'
             >
                 <div className='flex items-center justify-between border-b border-white/10 px-4 py-3'>
-                    <SheetTitle className='text-lg font-semibold text-white p-0'>Navigation</SheetTitle>
+                    <div className='flex items-center gap-3'>
+                        <img
+                            src={demonHead}
+                            alt='Demon head logo'
+                            className='h-12 w-12 rounded-full border border-white/20 object-cover'
+                        />
+                        <div>
+                            <p className='text-sm font-semibold uppercase tracking-[0.3em] text-white'>Clocktower</p>
+                            <p className='text-[10px] uppercase tracking-[0.4em] text-slate-400'>Sidebar</p>
+                        </div>
+                    </div>
                     <SheetClose asChild>
                         <Button
                             variant='ghost'
                             size='icon'
-                            aria-label='Close menu'
+                            aria-label='Close navigation'
                         >
-                            <X size={20} />
+                            <X size={18} />
                         </Button>
                     </SheetClose>
                 </div>
 
-                <nav className='flex flex-1 flex-col overflow-y-auto px-4 py-6'>
-                    <Link
-                        to='/'
-                        onClick={onClose}
-                        className={`${navLinkBase} hover:bg-gray-800`}
-                        activeProps={{
-                            className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
-                        }}
-                    >
-                        <Home size={20} />
-                        <span>Home</span>
-                    </Link>
-
-                    <Link
-                        to='/demo/start/api-request'
-                        onClick={onClose}
-                        className={`${navLinkBase} hover:bg-gray-800`}
-                        activeProps={{
-                            className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
-                        }}
-                    >
-                        <Network size={20} />
-                        <span>Start - API Request</span>
-                    </Link>
-
-                    <div className='flex flex-row items-start justify-between'>
+                <nav className='flex flex-1 flex-col gap-2 px-3 py-4'>
+                    {navItems.map((item) => (
                         <Link
-                            to='/demo/start/ssr'
+                            key={item.to}
+                            to={item.to}
                             onClick={onClose}
-                            className={`${navLinkBase} flex-1 hover:bg-gray-800`}
+                            className={`${itemBase} hover:bg-white/5`}
                             activeProps={{
-                                className: `${navLinkBase} flex-1 bg-cyan-600 hover:bg-cyan-700`
+                                className: `${itemBase} bg-cyan-700/70`
                             }}
                         >
-                            <StickyNote size={20} />
-                            <span>Start - SSR Demos</span>
+                            <item.icon className='h-4 w-4 text-cyan-300' />
+                            {item.label}
                         </Link>
+                    ))}
+                </nav>
+
+                <div className='border-t border-white/10 px-3 py-4'>
+                    <p className='text-[10px] uppercase tracking-[0.4em] text-slate-500'>Tools</p>
+                    <div className='mt-2 flex flex-col gap-2'>
                         <Button
+                            size='sm'
                             variant='ghost'
-                            size='icon'
-                            onClick={() =>
-                                setGroupedExpanded((prev) => ({
-                                    ...prev,
-                                    StartSSRDemo: !prev.StartSSRDemo
-                                }))
-                            }
-                            aria-label='Toggle Start SSR list'
+                            className='flex items-center gap-2 rounded-2xl px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.4em]'
+                            onClick={handleOpen(() => open('preferences'))}
                         >
-                            {groupedExpanded.StartSSRDemo ?
-                                <ChevronDown size={20} />
-                            :   <ChevronRight size={20} />}
+                            <Settings size={16} />
+                            Preferences
+                        </Button>
+                        <Button
+                            size='sm'
+                            variant='ghost'
+                            className='flex items-center gap-2 rounded-2xl px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.4em]'
+                            onClick={handleOpen(() => open('invites'))}
+                        >
+                            <Mail size={16} />
+                            Invites
                         </Button>
                     </div>
-
-                    {groupedExpanded.StartSSRDemo && (
-                        <div className='flex flex-col ml-4'>
-                            <Link
-                                to='/demo/start/ssr/spa-mode'
-                                onClick={onClose}
-                                className={`${navLinkBase} ml-0 hover:bg-gray-800`}
-                                activeProps={{
-                                    className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
-                                }}
-                            >
-                                <StickyNote size={20} />
-                                <span>SPA Mode</span>
-                            </Link>
-
-                            <Link
-                                to='/demo/start/ssr/full-ssr'
-                                onClick={onClose}
-                                className={`${navLinkBase} ml-0 hover:bg-gray-800`}
-                                activeProps={{
-                                    className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
-                                }}
-                            >
-                                <StickyNote size={20} />
-                                <span>Full SSR</span>
-                            </Link>
-
-                            <Link
-                                to='/demo/start/ssr/data-only'
-                                onClick={onClose}
-                                className={`${navLinkBase} ml-0 hover:bg-gray-800`}
-                                activeProps={{
-                                    className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
-                                }}
-                            >
-                                <StickyNote size={20} />
-                                <span>Data Only</span>
-                            </Link>
-                        </div>
-                    )}
-
-                    <Link
-                        to='/demo/tanstack-query'
-                        onClick={onClose}
-                        className={`${navLinkBase} hover:bg-gray-800`}
-                        activeProps={{
-                            className: `${navLinkBase} bg-cyan-600 hover:bg-cyan-700`
-                        }}
-                    >
-                        <Network size={20} />
-                        <span>TanStack Query</span>
-                    </Link>
-                </nav>
+                </div>
             </SheetContent>
         </Sheet>
     );

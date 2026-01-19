@@ -5,6 +5,7 @@ import type { EndpointSpec, InferInput, InferOutput } from './endpoint';
 
 export type ServerFn<I, O> = (input: I) => Promise<O>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function bindQuery<E extends EndpointSpec<'query', any, any>>(opts: {
     endpoint: E;
     fn: ServerFn<InferInput<E>, InferOutput<E>>;
@@ -35,6 +36,7 @@ export function bindQuery<E extends EndpointSpec<'query', any, any>>(opts: {
     };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function bindCommand<E extends EndpointSpec<'command', any, any>>(opts: {
     endpoint: E;
     fn: ServerFn<InferInput<E>, InferOutput<E>>;

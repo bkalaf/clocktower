@@ -1,9 +1,11 @@
+// src/shared/api/bindingsZod.ts
 import type { QueryClient, QueryKey } from '@tanstack/react-query';
 import { makeQueryKey } from './queryKeys';
 import type { EndpointSpec, InferInput, InferOutput } from './endpoint';
 
 export type ServerFn<I, O> = (input: I) => Promise<O>;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function bindQueryZod<E extends EndpointSpec<'query', any, any>>(opts: {
     endpoint: E;
     fn: ServerFn<InferInput<E>, InferOutput<E>>;
@@ -34,6 +36,7 @@ export function bindQueryZod<E extends EndpointSpec<'query', any, any>>(opts: {
     };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function bindCommandZod<E extends EndpointSpec<'command', any, any>>(opts: {
     endpoint: E;
     fn: ServerFn<InferInput<E>, InferOutput<E>>;

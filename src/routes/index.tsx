@@ -1,136 +1,111 @@
-// src/routes/index.tsx
 import { createFileRoute } from '@tanstack/react-router';
-import { Zap, Server, Route as RouteIcon, Shield, Waves, Sparkles } from 'lucide-react';
-import { DevGrimoirePanel } from '../client/dev/DevGrimoirePanel';
-import backgroundImage from '../assets/images/tokens-desk-window.png';
+import { Settings, Sparkles, Clock3, ShieldCheck, Moon } from 'lucide-react';
 
-const normalizeSearchParam = (value: unknown): string | null => {
-    if (Array.isArray(value)) {
-        return value.length ? normalizeSearchParam(value[0]) : null;
-    }
-    if (value === null || value === undefined) {
-        return null;
-    }
-    if (typeof value === 'string') {
-        return value;
-    }
-    if (typeof value === 'number' || typeof value === 'boolean') {
-        return String(value);
-    }
-    return null;
-};
+import { Button } from '@/components/ui/button';
+import { useModal } from '@/ui/modals/useModal';
+import { usePreferences } from '@/state/usePreferences';
+import type { NightCardType } from '@/router/search';
+
+const nightCardHighlights: { label: string; type: NightCardType }[] = [
+    { label: 'You are evil', type: 'you_are_evil' },
+    { label: 'Make a choice', type: 'make_a_choice' },
+    { label: 'Use your ability', type: 'use_your_ability' }
+];
+
+const quickActions = [
+    { label: 'Preferences', icon: Settings, action: 'preferences' },
+    { label: 'Invites', icon: Sparkles, action: 'invites' },
+    { label: 'Reveal', icon: ShieldCheck, action: 'reveal' }
+] as const;
 
 export const Route = createFileRoute('/')({
-    component: App,
-    validateSearch: (search: Record<string, unknown>) => ({
-        roomId: normalizeSearchParam(search.roomId),
-        matchId: normalizeSearchParam(search.matchId)
-    })
+    component: DashboardRoute
 });
 
-function App() {
-    const { roomId, matchId } = Route.useSearch();
-    const features = [
-        {
-            icon: <Zap className='w-12 h-12 text-cyan-400' />,
-            title: 'Powerful Server Functions',
-            description:
-                'Write server-side code that seamlessly integrates with your client components. Type-safe, secure, and simple.'
-        },
-        {
-            icon: <Server className='w-12 h-12 text-cyan-400' />,
-            title: 'Flexible Server Side Rendering',
-            description:
-                'Full-document SSR, streaming, and progressive enhancement out of the box. Control exactly what renders where.'
-        },
-        {
-            icon: <RouteIcon className='w-12 h-12 text-cyan-400' />,
-            title: 'API Routes',
-            description: 'Build type-safe API endpoints alongside your application. No separate backend needed.'
-        },
-        {
-            icon: <Shield className='w-12 h-12 text-cyan-400' />,
-            title: 'Strongly Typed Everything',
-            description: 'End-to-end type safety from server to client. Catch errors before they reach production.'
-        },
-        {
-            icon: <Waves className='w-12 h-12 text-cyan-400' />,
-            title: 'Full Streaming Support',
-            description:
-                'Stream data from server to client progressively. Perfect for AI applications and real-time updates.'
-        },
-        {
-            icon: <Sparkles className='w-12 h-12 text-cyan-400' />,
-            title: 'Next Generation Ready',
-            description: 'Built from the ground up for modern web applications. Deploy anywhere JavaScript runs.'
-        }
-    ];
+function DashboardRoute() {
+    const { open } = useModal();
+    const { values } = usePreferences();
+
+    const handleAction = (action: typeof quickActions[number]['action']) => {
+        open(action);
+    };
 
     return (
-        <div className='min-h-screen bg-linear-to-b from-slate-900 via-slate-800 to-slate-900'>
-            <section
-                className='relative py-20 px-6 text-center overflow-hidden bg-cover bg-center bg-no-repeat'
-                style={{ backgroundImage: `url(${backgroundImage})` }}
-            >
-                <div className='absolute inset-0 bg-linear-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10'></div>
-                <div className='relative max-w-5xl mx-auto'>
-                    <div className='flex items-center justify-center gap-6 mb-6'>
-                        <img
-                            src='/tanstack-circle-logo.png'
-                            alt='TanStack Logo'
-                            className='w-24 h-24 md:w-32 md:h-32'
-                        />
-                        <h1 className='text-6xl md:text-7xl font-black text-white tracking-[-0.08em]'>
-                            <span className='text-gray-300'>TANSTACK</span>{' '}
-                            <span className='bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent'>
-                                START
-                            </span>
-                        </h1>
-                    </div>
-                    <p className='text-2xl md:text-3xl text-gray-300 mb-4 font-light'>
-                        The framework for next generation AI applications
-                    </p>
-                    <p className='text-lg text-gray-400 max-w-3xl mx-auto mb-8'>
-                        Full-stack framework powered by TanStack Router for React and Solid. Build modern applications
-                        with server functions, streaming, and type safety.
-                    </p>
-                    <div className='flex flex-col items-center gap-4'>
-                        <a
-                            href='https://tanstack.com/start'
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            className='px-8 py-3 bg-cyan-500 hover:bg-cyan-600 text-white font-semibold rounded-lg transition-colors shadow-lg shadow-cyan-500/50'
-                        >
-                            Documentation
-                        </a>
-                        <p className='text-gray-400 text-sm mt-2'>
-                            Begin your TanStack Start journey by editing{' '}
-                            <code className='px-2 py-1 bg-slate-700 rounded text-cyan-400'>/src/routes/index.tsx</code>
-                        </p>
-                    </div>
-                </div>
-            </section>
+        <section className='flex flex-col gap-6'>
+            <header className='space-y-2'>
+                <p className='text-[11px] uppercase tracking-[0.6em] text-slate-400'>Clocktower Command</p>
+                <h1 className='text-3xl font-semibold text-white sm:text-4xl'>Command Bridge</h1>
+                <p className='max-w-2xl text-sm text-slate-300'>
+                    Manage invites, night cards, and UI preference chips from the drawer and the chrome. The deck keeps things compact by default and surfaces only the essentials until you open the modals you care about.
+                </p>
+            </header>
 
-            <section className='py-16 px-6 max-w-7xl mx-auto'>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-                    {features.map((feature, index) => (
-                        <div
-                            key={index}
-                            className='bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10'
-                        >
-                            <div className='mb-4'>{feature.icon}</div>
-                            <h3 className='text-xl font-semibold text-white mb-3'>{feature.title}</h3>
-                            <p className='text-gray-400 leading-relaxed'>{feature.description}</p>
-                        </div>
-                    ))}
+            <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+                <article className='rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200 backdrop-blur'>
+                    <div className='flex items-center gap-2 text-xs uppercase tracking-[0.4em] text-slate-400'>
+                        <Clock3 size={16} />
+                        Quick actions
+                    </div>
+                    <div className='mt-3 flex flex-col gap-2'>
+                        {quickActions.map((action) => (
+                            <Button
+                                key={action.label}
+                                size='sm'
+                                variant='outline'
+                                className='flex items-center justify-between gap-3 rounded-2xl px-3 text-[11px] font-semibold uppercase tracking-[0.3em]'
+                                onClick={() => handleAction(action.action)}
+                            >
+                                <div className='flex items-center gap-2'>
+                                    <action.icon size={14} />
+                                    {action.label}
+                                </div>
+                                <span className='text-[10px] tracking-[0.4em] text-slate-500'>⌘</span>
+                            </Button>
+                        ))}
+                    </div>
+                </article>
+
+                <article className='rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200 backdrop-blur'>
+                    <div className='flex items-center gap-2 text-xs uppercase tracking-[0.4em] text-slate-400'>
+                        <Settings size={16} />
+                        User Preferences
+                    </div>
+                    <div className='mt-3 space-y-2 text-[11px]'>
+                        {Object.entries(values).map(([key, value]) => (
+                            <div
+                                key={key}
+                                className='flex items-center justify-between rounded-xl border border-white/5 bg-white/5 px-3 py-2'
+                            >
+                                <span className='text-slate-300'>{key}</span>
+                                <span className='text-white'>{value}</span>
+                            </div>
+                        ))}
+                    </div>
+                </article>
+
+                <article className='rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200 backdrop-blur'>
+                <div className='flex items-center gap-2 text-xs uppercase tracking-[0.4em] text-slate-400'>
+                    <Moon size={16} />
+                    Night Cards
                 </div>
-            </section>
-            {roomId && matchId ?
-                <DevGrimoirePanel
-                    roomId={roomId}
-                    matchId={matchId}
-                />
-            :   null}
-        </div>
+                    <p className='mt-2 text-[11px] text-slate-400'>
+                        Press a card to load it as a modal so the storyteller can prompt players without leaving the current scene.
+                    </p>
+                    <div className='mt-3 flex flex-wrap gap-2'>
+                        {nightCardHighlights.map((card) => (
+                            <Button
+                                key={card.type}
+                                variant='outline'
+                                size='sm'
+                                className='rounded-2xl px-3 text-[11px] font-semibold uppercase tracking-[0.3em]'
+                                onClick={() => open('nightCards', { type: card.type })}
+                            >
+                                {card.label}
+                            </Button>
+                        ))}
+                    </div>
+                </article>
+            </div>
+        </section>
     );
 }

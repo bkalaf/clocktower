@@ -1,4 +1,5 @@
 // src/routes/api/scripts/index.ts
+// TODO Not used and restored
 import { createFileRoute } from '@tanstack/react-router';
 import { listAvailableScripts } from '../../../server/scripts';
 

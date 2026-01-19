@@ -1,4 +1,5 @@
 // src/components/header/ScriptViewer.tsx
+// TODO Not used and restored
 import * as Dialog from '@radix-ui/react-dialog';
 import { Button } from '@/components/ui/button';
 
