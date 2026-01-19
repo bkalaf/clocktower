@@ -1,0 +1,65 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Generated schema for Root",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "edition": {
+                "type": "string"
+            },
+            "team": {
+                "type": "string"
+            },
+            "firstNight": {
+                "type": "number"
+            },
+            "firstNightReminder": {
+                "type": "string"
+            },
+            "otherNight": {
+                "type": "number"
+            },
+            "otherNightReminder": {
+                "type": "string"
+            },
+            "reminders": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            },
+            "setup": {
+                "type": "boolean"
+            },
+            "ability": {
+                "type": "string"
+            },
+            "remindersGlobal": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        "required": [
+            "id",
+            "name",
+            "edition",
+            "team",
+            "firstNight",
+            "firstNightReminder",
+            "otherNight",
+            "otherNightReminder",
+            "reminders",
+            "setup",
+            "ability"
+        ]
+    }
+}

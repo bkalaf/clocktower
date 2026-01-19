@@ -1,30 +1,30 @@
 // src/machines/RoomMachine.ts
-
 import { setup, createMachine } from 'xstate';
 
 export const machine = setup({
     types: {
         context: {} as {
-            speed: string;
+            speed: GameSpeed;
             roomId: string;
             scriptId: string;
             hostUserId: string;
-            maxPlayers: number;
-            minPlayers: number;
-            visibility: string;
-            customScript: unknown[];
-            readyByUserId: {};
+            maxPlayers: PcPlayerCount;
+            minPlayers: PcPlayerCount;
+            visibility: RoomVisibility;
+            customScript: CharacterRoles[];
+            readyByUserId: Record<string, boolean>;
             currentMatchId: string;
-            storytellerMode: string;
-            acceptingPlayers: string;
-            connectedUserIds: unknown[];
+            storytellerMode: StorytellerMode;
+            acceptingPlayers: boolean;
+            connectedUserIds: string[];
             plannedStartTime: number;
-            storytellerUserIds: unknown[];
+            storytellerUserIds: string[];
             pendingSeatsInviteCount: number;
-            beenNominated: unknown[];
-            nominated: unknown[];
-            voteHolders: unknown[];
-            history: unknown[];
+            beenNominated: string[];
+            nominated: string[];
+            voteHolders: string[];
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            history: any[];
         },
         events: {} as
             | { type: 'OPEN_ROOM' }

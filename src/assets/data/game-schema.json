@@ -1,0 +1,206 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Generated schema for Root",
+    "type": "object",
+    "properties": {
+        "5": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        },
+        "6": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        },
+        "7": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        },
+        "8": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        },
+        "9": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        },
+        "10": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        },
+        "11": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        },
+        "12": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        },
+        "13": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        },
+        "14": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        },
+        "15": {
+            "type": "object",
+            "properties": {
+                "townsfolk": {
+                    "type": "number"
+                },
+                "outsider": {
+                    "type": "number"
+                },
+                "minion": {
+                    "type": "number"
+                },
+                "demon": {
+                    "type": "number"
+                }
+            },
+            "required": ["townsfolk", "outsider", "minion", "demon"]
+        }
+    },
+    "required": ["5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"]
+}
