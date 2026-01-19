@@ -10,7 +10,7 @@
         "lint": "eslint",
         "format": "prettier",
         "check": "prettier --write . && eslint --fix",
-        "api:print": "node --loader ts-node/esm scripts/print-api-registry.ts",
+        "api:print": "node --import=tsx scripts/print-api-registry.ts",
         "cir": "madge --circular --extensions ts,tsx ./src",
         "test:jest": "jest"
     },
