@@ -26,9 +26,9 @@ export async function apiFetch<T = unknown>(path: string, options: RequestInit =
 
     if (!response.ok) {
         const message =
-            typeof data === 'object' && data && 'message' in data
-                ? (data as { message?: string }).message ?? response.statusText
-                : response.statusText;
+            typeof data === 'object' && data && 'message' in data ?
+                ((data as { message?: string }).message ?? response.statusText)
+            :   response.statusText;
         throw new Error(message || 'Request failed');
     }
 

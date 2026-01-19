@@ -1,10 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import {
-    DialogDescription,
-    DialogHeader,
-    DialogTitle
-} from '@/components/ui/dialog';
+import { DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { fetchInvites, acceptInvite, rejectInvite } from '@/client/api/invites';
 
 export function Invites({ onClose }: { onClose: () => void }) {
@@ -51,22 +47,24 @@ export function Invites({ onClose }: { onClose: () => void }) {
         <div className='space-y-4'>
             <DialogHeader className='flex items-center justify-between gap-4'>
                 <DialogTitle className='text-white'>Invites</DialogTitle>
-                <Button variant='ghost' size='sm' onClick={onClose}>
+                <Button
+                    variant='ghost'
+                    size='sm'
+                    onClick={onClose}
+                >
                     Close
                 </Button>
             </DialogHeader>
-            {isLoading ? (
-                <DialogDescription className='text-sm text-slate-400'>
-                    Loading invites…
-                </DialogDescription>
-            ) : invites.length === 0 ? (
-                <DialogDescription className='text-sm text-slate-400'>
-                    No pending invites.
-                </DialogDescription>
-            ) : (
-                <div className='flex flex-col gap-3'>
+            {isLoading ?
+                <DialogDescription className='text-sm text-slate-400'>Loading invites…</DialogDescription>
+            : invites.length === 0 ?
+                <DialogDescription className='text-sm text-slate-400'>No pending invites.</DialogDescription>
+            :   <div className='flex flex-col gap-3'>
                     {invites.map((invite: any) => (
-                        <div key={invite._id} className='rounded-2xl border border-white/5 bg-white/5 p-4'>
+                        <div
+                            key={invite._id}
+                            className='rounded-2xl border border-white/5 bg-white/5 p-4'
+                        >
                             <div className='flex items-center justify-between'>
                                 <span className='font-medium text-white'>
                                     {invite.kind === 'seat' ? 'Seat Invite' : 'Spectator'}
@@ -97,7 +95,7 @@ export function Invites({ onClose }: { onClose: () => void }) {
                         </div>
                     ))}
                 </div>
-            )}
+            }
         </div>
     );
 }

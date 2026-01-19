@@ -8,3 +8,6 @@
 * Next logical implementation : wire /login + /logout to set/clear authUserId, and on successful join/start, set lastRoomId/lastGameId.
 * Add a property called pronouns to User (string) that is optional.
 * SessionState should also have displayName (for the Avatar UI piece), pronouns, and username at a minimum so it can be easily accessed since it will be accessed in the main view page.
+* Point your loaders/mutations at the new bindings so the router always uses the Zod input/output shapes and invalidates caches via rooms.invalidateRoom. 2. Run yarn api:print whenever you update the registry to catch path or key drift early.
+* Point route loaders/mutations to the new roomsCrud/rooms helpers so they rely on the Zod-validated payloads and invalidateRoom helper instead of ad-hoc queries.
+* Run yarn api:print whenever the registry changes to keep the query-key map in sync with the new schema-driven definitions.

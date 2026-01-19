@@ -44,19 +44,21 @@ export const Route = createFileRoute('/api/matches/$matchId/phase')({
                 const nextNominationsOpen = body.nominationsOpen ?? prevNominationsOpen;
                 const matchId = match._id;
                 const roomId = match.roomId;
-                const nominationPayload: NominationEventPayload | null = body.nomination
-                    ? {
-                          matchId,
-                          nominationType: body.nomination.nominationType,
-                          nominatorId: body.nomination.nominatorId,
-                          nomineeId: body.nomination.nomineeId
-                      }
-                    : null;
+                const nominationPayload: NominationEventPayload | null =
+                    body.nomination ?
+                        {
+                            matchId,
+                            nominationType: body.nomination.nominationType,
+                            nominatorId: body.nomination.nominatorId,
+                            nomineeId: body.nomination.nomineeId
+                        }
+                    :   null;
                 const prevVoteHistory = match.voteHistory ?? [];
                 const bodyVoteHistory = body.voteHistory;
-                const newHistoryEntries = (bodyVoteHistory && bodyVoteHistory.length > prevVoteHistory.length
-                    ? bodyVoteHistory.slice(prevVoteHistory.length)
-                    : []) as VoteHistoryRecord[];
+                const newHistoryEntries = (
+                    bodyVoteHistory && bodyVoteHistory.length > prevVoteHistory.length ?
+                        bodyVoteHistory.slice(prevVoteHistory.length)
+                    :   []) as VoteHistoryRecord[];
                 const nextOnTheBlock = body.onTheBlock === undefined ? match.onTheBlock : body.onTheBlock;
                 const onTheBlockNomineeId = nextOnTheBlock?.nomineeId;
 

@@ -43,22 +43,6 @@ const zOnTheBlock = z
     })
     .nullable();
 
-export const zCreateRoomInput = z.object({
-    scriptId: aliases.scriptId,
-    visibility: enums.roomVisibility.default('public'),
-    allowTravelers: z.boolean().default(false),
-    lobbySettings: z
-        .object({
-            minPlayers: aliases.pcPlayerCount.default(5),
-            maxPlayers: aliases.pcPlayerCount.default(15),
-            maxTravelers: aliases.pcTraverCount.default(0),
-            edition: enums.editions.optional().nullable(),
-            skillLevel: enums.skillLevel.optional().nullable(),
-            plannedStartTime: aliases.timestamp.optional().nullable()
-        })
-        .optional()
-});
-
 export const zChangeScriptInput = z.object({
     scriptId: aliases.scriptId
 });

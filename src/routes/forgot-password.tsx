@@ -2,13 +2,7 @@
 import { useCallback } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { ForgotPasswordForm } from '../components/auth/ForgotPasswordForm';
 import { dialogBackgroundClassName, dialogBackgroundStyle } from '@/components/header/dialogBackground';
 import { authReturnToSearchSchema, normalizeReturnTo } from './auth/-common';

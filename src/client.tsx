@@ -28,7 +28,10 @@ function AppRouter() {
 
                 return (
                     <TanstackQueryProvider queryClient={queryClient}>
-                        <RouterProvider router={router} context={{ session }} />
+                        <RouterProvider
+                            router={router}
+                            context={{ session }}
+                        />
                     </TanstackQueryProvider>
                 );
             }}

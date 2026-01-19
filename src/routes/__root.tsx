@@ -40,9 +40,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     }),
 
     validateSearch: (search: Record<string, unknown>): RootSearch => {
-        const modal = typeof search.modal === 'string' ? search.modal : undefined
-        const type = typeof search.type === 'string' ? search.type : undefined
-        return { modal: modal as RootSearch['modal'], type: type as RootSearch['type'] }
+        const modal = typeof search.modal === 'string' ? search.modal : undefined;
+        const type = typeof search.type === 'string' ? search.type : undefined;
+        return { modal: modal as RootSearch['modal'], type: type as RootSearch['type'] };
     },
     component: RootLayout,
     shellComponent: RootDocument,
@@ -56,9 +56,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <HeadContent />
             </head>
             <body>
-                <AuthProvider>
-                    {children}
-                </AuthProvider>
+                <AuthProvider>{children}</AuthProvider>
                 <TanStackDevtools
                     config={{
                         position: 'bottom-right'
@@ -85,7 +83,10 @@ function RootLayout() {
             <Header />
             <main className='relative min-h-screen'>
                 <Outlet />
-                <ModalHost modal={search.modal} type={search.type} />
+                <ModalHost
+                    modal={search.modal}
+                    type={search.type}
+                />
             </main>
         </div>
     );

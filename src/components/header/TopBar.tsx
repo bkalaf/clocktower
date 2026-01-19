@@ -111,7 +111,8 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onLogout }: TopBarProp
                             <UserPlus size={16} />
                             Register
                         </Button>
-                    </>}
+                    </>
+                }
             </div>
         </header>
     );
