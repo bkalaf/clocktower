@@ -1,4 +1,4 @@
-// src/server/schemas/$z.ts
+// src/server/schemas/z.ts
 import sessionModels from '../../db/models/Session';
 import gameMemberModels from '../../db/models/GameMember';
 import userModels from '../../db/models/User';

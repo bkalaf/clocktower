@@ -4,7 +4,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ChevronDown, Loader2 } from 'lucide-react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { useAuthUser } from '@/hooks/useAuthUser';
+import { useAuth } from '@/state/useAuth';
 import { useRoomParams } from '@/hooks/useRoomParams';
 import { fetchScripts, setRoomScript } from '@/client/api/scripts';
 import { fetchRoom } from '@/client/api/rooms';
@@ -12,7 +12,7 @@ import { ScriptViewer } from './ScriptViewer';
 
 export function ScriptMenu() {
     const { roomId } = useRoomParams();
-    const { user } = useAuthUser();
+    const { user } = useAuth();
     const queryClient = useQueryClient();
     const [viewerOpen, setViewerOpen] = useState(false);
 

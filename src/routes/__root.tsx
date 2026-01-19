@@ -6,6 +6,7 @@ import Header from '../components/header';
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 import appCss from './../assets/css/app.css?url';
 import type { QueryClient } from '@tanstack/react-query';
+import { AuthProvider } from '../state/useAuth';
 
 interface MyRouterContext {
     queryClient: QueryClient;
@@ -44,8 +45,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <HeadContent />
             </head>
             <body>
-                <Header />
-                {children}
+                <AuthProvider>
+                    <Header />
+                    {children}
+                </AuthProvider>
                 <TanStackDevtools
                     config={{
                         position: 'bottom-right'

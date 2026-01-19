@@ -1,4 +1,4 @@
-// src/serverFns/$gameMember.ts
+// src/serverFns/gameMember.ts
 import { connectMongoose } from '../db/connectMongoose';
 import { AuthedUser, GameId, UserId } from '../types/game';
 import $models from '../db/models';

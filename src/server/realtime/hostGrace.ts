@@ -1,7 +1,7 @@
 // src/server/realtime/hostGrace.ts
 
 import { HostGraceDeps } from '.';
-import { $keys } from '../../$keys';
+import { $keys } from '../../keys';
 import { connectMongoose } from '../../db/connectMongoose';
 import { GameModel } from '../../db/models/Game';
 import { GameMemberModel } from '../../db/models/GameMember';

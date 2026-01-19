@@ -1,6 +1,6 @@
 // src/serverFns/getId/getUserFromCookie.ts
 import { createServerFn } from '@tanstack/react-start';
-import $session from '../$session';
+import $session from '../session';
 import { getSessionCookie } from '../../server/auth/cookies';
 import { connectMongoose } from '../../db/connectMongoose';
 

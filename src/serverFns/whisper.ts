@@ -1,4 +1,4 @@
-// src/serverFns/$whisper.ts
+// src/serverFns/whisper.ts
 
 import { WhisperModel } from '@/db/models/Whisper';
 import { GameId, UserId } from '../types/game';

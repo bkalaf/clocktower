@@ -1,4 +1,4 @@
-// src/serverFns/$game.ts
+// src/serverFns/game.ts
 
 import { createServerFn } from '@tanstack/react-start';
 import inputs from '../schemas/inputs';

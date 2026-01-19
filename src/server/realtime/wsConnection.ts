@@ -9,17 +9,16 @@ import { zChat, zJoinGame, zJoinTopic, zPing } from '.';
 import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
 import { getRoomIdFromTopic, streamKeyForTopic, timestampFromStreamId } from './topicStreams';
-import { $keys } from '../../$keys';
+import { $keys } from '../../keys';
 import { listWhisperTopicsForUser } from '../../serverFns/listWhisperTopicsForUser';
 import { AuthedUser, GameRoles, ChatMsg } from '../../types/game';
 import { maybeRemindPickStoryteller } from './reminder';
 import { getUserFromCookie } from '../../serverFns/getId/getUserFromCookie';
-import $gameMember from '../../serverFns/$gameMember';
-import $game from '../../serverFns/$game';
-import { whoAmIServerFn } from '../../serverFns/whoAmI';
+import $gameMember from '../../serverFns/gameMember';
+import $game from '../../serverFns/game';
 import { parseCookie } from '../parseCookie';
 import { cookieName } from '../auth/cookies';
-import $session from '../../serverFns/$session';
+import $session from '../../serverFns/session';
 import { shouldAllowWhisper } from './whisperGate';
 
 type Conn = {

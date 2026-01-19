@@ -1,6 +1,6 @@
 // src/routes/api/auth/logout.ts
 import { createFileRoute } from '@tanstack/react-router';
-import $session from '../../../serverFns/$session';
+import $session from '../../../serverFns/session';
 
 export const Route = createFileRoute('/api/auth/logout')({
     server: {

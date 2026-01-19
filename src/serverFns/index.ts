@@ -1,9 +1,9 @@
 // src/serverFns/index.ts
-import $chatItem from './$chatItem';
-import $game from './$game';
-import $gameMember from './$gameMember';
-import $session from './$session';
-import $whisper from './$whisper';
+import $chatItem from './chatItem';
+import $game from './game';
+import $gameMember from './gameMember';
+import $session from './session';
+import $whisper from './whisper';
 import { authorize } from './authorize';
 import getId from './getId';
 import require from './require';

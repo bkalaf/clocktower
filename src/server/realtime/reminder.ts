@@ -1,5 +1,5 @@
 // src/server/realtime/reminder.ts
-import { $keys } from '../../$keys';
+import { $keys } from '../../keys';
 import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
 import { $countDocuments, $findById } from '../findById';

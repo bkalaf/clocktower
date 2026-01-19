@@ -1,5 +1,5 @@
 // src/server/realtime/presence.ts
-import { $keys } from '../../$keys';
+import { $keys } from '../../keys';
 import { getRedis } from '../../redis';
 
 export async function markConnected(gameId: string, userId: string) {

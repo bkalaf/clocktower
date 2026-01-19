@@ -1,48 +1,32 @@
 // src/components/header/Header.tsx
-import { useState } from 'react';
-import { useAuthUser } from '@/hooks/useAuthUser';
-import { useDialogToggler } from '@/hooks/useDialogToggler';
+import { useCallback, useState } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 
 import { TopBar } from './TopBar';
 import { NavigationDrawer } from './NavigationDrawer';
-import { LoginDialog } from './LoginDialog';
-import { RegisterDialog } from './RegisterDialog';
-import { LogoutDialog } from './LogoutDialog';
-import { MatchRoute } from '@tanstack/react-router';
+import { useAuth } from '@/state/useAuth';
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
-    const loginDialog = useDialogToggler();
-    const registerDialog = useDialogToggler();
-    const logoutDialog = useDialogToggler();
-    const { user, isLoading: isAuthLoading } = useAuthUser();
+    const { user, loading: isAuthLoading, logoutAndClear } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = useCallback(async () => {
+        await logoutAndClear();
+        navigate({ to: '/', replace: true });
+    }, [logoutAndClear, navigate]);
+
     return (
         <>
             <TopBar
                 user={user}
                 isAuthLoading={isAuthLoading}
                 onMenuOpen={() => setMenuOpen(true)}
-                onOpenLogin={loginDialog.open}
-                onOpenRegister={registerDialog.open}
-                onOpenLogout={logoutDialog.open}
+                onLogout={handleLogout}
             />
             <NavigationDrawer
                 isOpen={menuOpen}
                 onClose={() => setMenuOpen(false)}
-            />
-            <MatchRoute to='/login'>
-                <LoginDialog
-                    open={true}
-                    onClose={loginDialog.close}
-                />
-            </MatchRoute>
-            <RegisterDialog
-                open={registerDialog.isOpen}
-                onClose={registerDialog.close}
-            />
-            <LogoutDialog
-                open={logoutDialog.isOpen}
-                onClose={logoutDialog.close}
             />
         </>
     );

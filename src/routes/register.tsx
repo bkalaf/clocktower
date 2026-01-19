@@ -1,4 +1,4 @@
-// src/routes/login.tsx
+// src/routes/register.tsx
 import { useCallback, useEffect } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 
@@ -9,20 +9,20 @@ import {
     DialogHeader,
     DialogTitle
 } from '@/components/ui/dialog';
-import { LoginForm } from '../components/auth/LoginForm';
+import { RegisterForm } from '../components/auth/RegisterForm';
 import { dialogBackgroundClassName, dialogBackgroundStyle } from '@/components/header/dialogBackground';
 import { useAuth } from '@/state/useAuth';
 import { authReturnToSearchSchema, normalizeReturnTo } from './auth/-common';
 
-export const Route = createFileRoute('/login')({
-    component: LoginRoute,
+export const Route = createFileRoute('/register')({
+    component: RegisterRoute,
     validateSearch: (search) => {
         const parsed = authReturnToSearchSchema.safeParse(search);
         return parsed.success ? parsed.data : {};
     }
 });
 
-function LoginRoute() {
+function RegisterRoute() {
     const navigate = useNavigate();
     const { refreshWhoami, user, loading } = useAuth();
     const { returnTo } = Route.useSearch();
@@ -57,10 +57,10 @@ function LoginRoute() {
                 style={dialogBackgroundStyle}
             >
                 <DialogHeader>
-                    <DialogTitle className='text-white'>Welcome back</DialogTitle>
-                    <DialogDescription className='text-white/80'>Sign in to continue</DialogDescription>
+                    <DialogTitle className='text-white'>Create an account</DialogTitle>
+                    <DialogDescription className='text-white/80'>We only ask for what we need</DialogDescription>
                 </DialogHeader>
-                <LoginForm
+                <RegisterForm
                     onSuccess={handleSuccess}
                     returnTo={normalizedReturnTo}
                 />

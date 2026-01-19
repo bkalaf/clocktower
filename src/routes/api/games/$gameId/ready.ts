@@ -12,7 +12,7 @@ import { GameMemberModel } from '../../../../db/models/GameMember';
 import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { createServerFn } from '@tanstack/react-start';
-import { $z } from '../../../../server/schemas/$z';
+import { $z } from '../../../../server/schemas/z';
 
 const zReadyParams = z.object({
     gameId: zGameId

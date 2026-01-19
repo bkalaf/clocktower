@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { env } from '../../../env';
 import { parseCookie } from '../../../server/parseCookie';
 import { cookieName } from '../../../server/auth/cookies';
-import $session from '../../../serverFns/$session';
+import $session from '../../../serverFns/session';
 import { requireStoryteller } from '../../../server/authz/gameAuth';
 
 const respond = (payload: unknown, status = 200) => Response.json(payload, { status });

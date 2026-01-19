@@ -3,7 +3,7 @@ import { randomUUID } from 'crypto';
 import { connectMongoose } from '../../db/connectMongoose';
 import { WhisperModel } from '@/db/models/Whisper';
 import { getRedis } from '../../redis';
-import { $keys } from '../../$keys';
+import { $keys } from '../../keys';
 import { GameId, TopicId, UserId } from '../../types/game';
 
 export interface CreateWhisperInput {

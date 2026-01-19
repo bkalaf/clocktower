@@ -1,4 +1,4 @@
-// src/serverFns/$session.ts
+// src/serverFns/session.ts
 import { createServerFn } from '@tanstack/react-start';
 import { connectMongoose } from '../db/connectMongoose';
 import { SessionModel } from '../db/models/Session';

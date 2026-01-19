@@ -1,4 +1,4 @@
-// src/serverFns/$user.ts
+// src/serverFns/user.ts
 import { connectMongoose } from '../db/connectMongoose';
 import $models from '../db/models';
 

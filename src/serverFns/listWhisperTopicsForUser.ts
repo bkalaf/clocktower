@@ -1,11 +1,11 @@
 // src/serverFns/listWhisperTopicsForUser.ts
 import { createServerFn } from '@tanstack/react-start';
-import { $keys } from '../$keys';
+import { $keys } from '../keys';
 import { connectMongoose } from '../db/connectMongoose';
 import { getRedis } from '../redis';
 import { GameId, UserId, GameRoles } from '../types/game';
 import { listWhisperTopicsInput } from '../utils/http';
-import $whisper from './$whisper';
+import $whisper from './whisper';
 
 const toRoomTopic = (topic: string) => (topic.startsWith('game:') ? topic.replace(/^game:/, 'room:') : topic);
 

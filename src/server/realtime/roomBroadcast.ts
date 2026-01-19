@@ -1,6 +1,6 @@
 // src/server/realtime/roomBroadcast.ts
 import { getRedis } from '../../redis';
-import { $keys } from '../../$keys';
+import { $keys } from '../../keys';
 
 export async function broadcastRoomEvent(roomId: string, payload: unknown) {
     const redis = await getRedis();

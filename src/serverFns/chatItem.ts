@@ -1,4 +1,4 @@
-// src/serverFns/$chatItem.ts
+// src/serverFns/chatItem.ts
 import { createServerFn } from '@tanstack/react-start';
 import inputs from '../schemas/inputs';
 import { connectMongoose } from '../db/connectMongoose';

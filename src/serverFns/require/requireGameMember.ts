@@ -1,6 +1,6 @@
 // src/serverFns/require/requireGameMember.ts
 import { connectMongoose } from '../../db/connectMongoose';
-import $gameMember from '../$gameMember';
+import $gameMember from '../gameMember';
 import { createServerFn } from '@tanstack/react-start';
 import { GameMember } from '../../db/models/GameMember';
 import inputs from '../../schemas/inputs';

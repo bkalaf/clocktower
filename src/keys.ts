@@ -1,7 +1,6 @@
-// src/$keys.ts
+// src/keys.ts
 import { GameId } from './types/game';
 
-// src/$keys.ts
 export const $keys = {
     publicTopic: (gameId: GameId) => `game:${gameId}:public`,
     stTopic: (gameId: GameId) => `game:${gameId}:st`,
