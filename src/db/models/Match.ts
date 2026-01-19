@@ -30,7 +30,8 @@ export const zMatch = z.object({
             votesFor: z.number().int().min(0),
             nominatorId: aliases.userId
         })
-        .optional(),
+        .optional()
+        .nullable(),
     voteHistory: z
         .array(
             z.object({
@@ -52,6 +53,8 @@ export const zMatch = z.object({
             })
         )
         .default([])
+        .optional()
+        .nullable()
 });
 
 const matchModels = getTypesFor('match', zMatch, { timestamps: true, collection: 'match' }, {}, [{ roomId: 1 }]);

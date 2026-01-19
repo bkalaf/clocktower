@@ -13,6 +13,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GamesGameIdRouteImport } from './routes/games/$gameId'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
 import { Route as DemoGrimoireRouteImport } from './routes/demo/grimoire'
 import { Route as ApiWhoamiRouteImport } from './routes/api/whoami'
@@ -30,12 +31,14 @@ import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
 import { Route as ApiAuthForgotPasswordRouteImport } from './routes/api/auth/forgot-password'
 import { Route as DemoStartSsrIndexRouteImport } from './routes/demo/start.ssr.index'
 import { Route as ApiRoomsRoomIdIndexRouteImport } from './routes/api/rooms/$roomId/index'
+import { Route as ApiMatchesMatchIdIndexRouteImport } from './routes/api/matches/$matchId/index'
 import { Route as DemoStartSsrSpaModeRouteImport } from './routes/demo/start.ssr.spa-mode'
 import { Route as DemoStartSsrFullSsrRouteImport } from './routes/demo/start.ssr.full-ssr'
 import { Route as DemoStartSsrDataOnlyRouteImport } from './routes/demo/start.ssr.data-only'
 import { Route as ApiRoomsRoomIdStartMatchRouteImport } from './routes/api/rooms/$roomId/start-match'
 import { Route as ApiRoomsRoomIdScriptRouteImport } from './routes/api/rooms/$roomId/script'
 import { Route as ApiRoomsRoomIdRemovePlayerRouteImport } from './routes/api/rooms/$roomId/remove-player'
+import { Route as ApiRoomsRoomIdMatchRouteImport } from './routes/api/rooms/$roomId/match'
 import { Route as ApiRoomsRoomIdInvitesRouteImport } from './routes/api/rooms/$roomId/invites'
 import { Route as ApiRoomsRoomIdEmptySeatRouteImport } from './routes/api/rooms/$roomId/empty-seat'
 import { Route as ApiMatchesMatchIdTravelRequestRouteImport } from './routes/api/matches/$matchId/travel-request'
@@ -69,6 +72,11 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GamesGameIdRoute = GamesGameIdRouteImport.update({
+  id: '/games/$gameId',
+  path: '/games/$gameId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
@@ -156,6 +164,11 @@ const ApiRoomsRoomIdIndexRoute = ApiRoomsRoomIdIndexRouteImport.update({
   path: '/api/rooms/$roomId/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiMatchesMatchIdIndexRoute = ApiMatchesMatchIdIndexRouteImport.update({
+  id: '/api/matches/$matchId/',
+  path: '/api/matches/$matchId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DemoStartSsrSpaModeRoute = DemoStartSsrSpaModeRouteImport.update({
   id: '/demo/start/ssr/spa-mode',
   path: '/demo/start/ssr/spa-mode',
@@ -188,6 +201,11 @@ const ApiRoomsRoomIdRemovePlayerRoute =
     path: '/api/rooms/$roomId/remove-player',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiRoomsRoomIdMatchRoute = ApiRoomsRoomIdMatchRouteImport.update({
+  id: '/api/rooms/$roomId/match',
+  path: '/api/rooms/$roomId/match',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiRoomsRoomIdInvitesRoute = ApiRoomsRoomIdInvitesRouteImport.update({
   id: '/api/rooms/$roomId/invites',
   path: '/api/rooms/$roomId/invites',
@@ -276,6 +294,7 @@ export interface FileRoutesByFullPath {
   '/api/whoami': typeof ApiWhoamiRoute
   '/demo/grimoire': typeof DemoGrimoireRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/games/$gameId': typeof GamesGameIdRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
@@ -301,12 +320,14 @@ export interface FileRoutesByFullPath {
   '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute
   '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute
   '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute
+  '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute
   '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
   '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
   '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
   '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
+  '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute
   '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute
   '/demo/start/ssr': typeof DemoStartSsrIndexRoute
 }
@@ -319,6 +340,7 @@ export interface FileRoutesByTo {
   '/api/whoami': typeof ApiWhoamiRoute
   '/demo/grimoire': typeof DemoGrimoireRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/games/$gameId': typeof GamesGameIdRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
@@ -344,12 +366,14 @@ export interface FileRoutesByTo {
   '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute
   '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute
   '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute
+  '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute
   '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
   '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
   '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
   '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
+  '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute
   '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute
   '/demo/start/ssr': typeof DemoStartSsrIndexRoute
 }
@@ -363,6 +387,7 @@ export interface FileRoutesById {
   '/api/whoami': typeof ApiWhoamiRoute
   '/demo/grimoire': typeof DemoGrimoireRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/games/$gameId': typeof GamesGameIdRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
@@ -388,12 +413,14 @@ export interface FileRoutesById {
   '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute
   '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute
   '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute
+  '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute
   '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
   '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
   '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
   '/demo/start/ssr/data-only': typeof DemoStartSsrDataOnlyRoute
   '/demo/start/ssr/full-ssr': typeof DemoStartSsrFullSsrRoute
   '/demo/start/ssr/spa-mode': typeof DemoStartSsrSpaModeRoute
+  '/api/matches/$matchId/': typeof ApiMatchesMatchIdIndexRoute
   '/api/rooms/$roomId/': typeof ApiRoomsRoomIdIndexRoute
   '/demo/start/ssr/': typeof DemoStartSsrIndexRoute
 }
@@ -408,6 +435,7 @@ export interface FileRouteTypes {
     | '/api/whoami'
     | '/demo/grimoire'
     | '/demo/tanstack-query'
+    | '/games/$gameId'
     | '/api/auth/forgot-password'
     | '/api/auth/login'
     | '/api/auth/logout'
@@ -433,12 +461,14 @@ export interface FileRouteTypes {
     | '/api/matches/$matchId/travel-request'
     | '/api/rooms/$roomId/empty-seat'
     | '/api/rooms/$roomId/invites'
+    | '/api/rooms/$roomId/match'
     | '/api/rooms/$roomId/remove-player'
     | '/api/rooms/$roomId/script'
     | '/api/rooms/$roomId/start-match'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
     | '/demo/start/ssr/spa-mode'
+    | '/api/matches/$matchId'
     | '/api/rooms/$roomId'
     | '/demo/start/ssr'
   fileRoutesByTo: FileRoutesByTo
@@ -451,6 +481,7 @@ export interface FileRouteTypes {
     | '/api/whoami'
     | '/demo/grimoire'
     | '/demo/tanstack-query'
+    | '/games/$gameId'
     | '/api/auth/forgot-password'
     | '/api/auth/login'
     | '/api/auth/logout'
@@ -476,12 +507,14 @@ export interface FileRouteTypes {
     | '/api/matches/$matchId/travel-request'
     | '/api/rooms/$roomId/empty-seat'
     | '/api/rooms/$roomId/invites'
+    | '/api/rooms/$roomId/match'
     | '/api/rooms/$roomId/remove-player'
     | '/api/rooms/$roomId/script'
     | '/api/rooms/$roomId/start-match'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
     | '/demo/start/ssr/spa-mode'
+    | '/api/matches/$matchId'
     | '/api/rooms/$roomId'
     | '/demo/start/ssr'
   id:
@@ -494,6 +527,7 @@ export interface FileRouteTypes {
     | '/api/whoami'
     | '/demo/grimoire'
     | '/demo/tanstack-query'
+    | '/games/$gameId'
     | '/api/auth/forgot-password'
     | '/api/auth/login'
     | '/api/auth/logout'
@@ -519,12 +553,14 @@ export interface FileRouteTypes {
     | '/api/matches/$matchId/travel-request'
     | '/api/rooms/$roomId/empty-seat'
     | '/api/rooms/$roomId/invites'
+    | '/api/rooms/$roomId/match'
     | '/api/rooms/$roomId/remove-player'
     | '/api/rooms/$roomId/script'
     | '/api/rooms/$roomId/start-match'
     | '/demo/start/ssr/data-only'
     | '/demo/start/ssr/full-ssr'
     | '/demo/start/ssr/spa-mode'
+    | '/api/matches/$matchId/'
     | '/api/rooms/$roomId/'
     | '/demo/start/ssr/'
   fileRoutesById: FileRoutesById
@@ -538,6 +574,7 @@ export interface RootRouteChildren {
   ApiWhoamiRoute: typeof ApiWhoamiRoute
   DemoGrimoireRoute: typeof DemoGrimoireRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
+  GamesGameIdRoute: typeof GamesGameIdRoute
   ApiAuthForgotPasswordRoute: typeof ApiAuthForgotPasswordRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
@@ -563,12 +600,14 @@ export interface RootRouteChildren {
   ApiMatchesMatchIdTravelRequestRoute: typeof ApiMatchesMatchIdTravelRequestRoute
   ApiRoomsRoomIdEmptySeatRoute: typeof ApiRoomsRoomIdEmptySeatRoute
   ApiRoomsRoomIdInvitesRoute: typeof ApiRoomsRoomIdInvitesRoute
+  ApiRoomsRoomIdMatchRoute: typeof ApiRoomsRoomIdMatchRoute
   ApiRoomsRoomIdRemovePlayerRoute: typeof ApiRoomsRoomIdRemovePlayerRoute
   ApiRoomsRoomIdScriptRoute: typeof ApiRoomsRoomIdScriptRoute
   ApiRoomsRoomIdStartMatchRoute: typeof ApiRoomsRoomIdStartMatchRoute
   DemoStartSsrDataOnlyRoute: typeof DemoStartSsrDataOnlyRoute
   DemoStartSsrFullSsrRoute: typeof DemoStartSsrFullSsrRoute
   DemoStartSsrSpaModeRoute: typeof DemoStartSsrSpaModeRoute
+  ApiMatchesMatchIdIndexRoute: typeof ApiMatchesMatchIdIndexRoute
   ApiRoomsRoomIdIndexRoute: typeof ApiRoomsRoomIdIndexRoute
   DemoStartSsrIndexRoute: typeof DemoStartSsrIndexRoute
 }
@@ -601,6 +640,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/games/$gameId': {
+      id: '/games/$gameId'
+      path: '/games/$gameId'
+      fullPath: '/games/$gameId'
+      preLoaderRoute: typeof GamesGameIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/tanstack-query': {
@@ -722,6 +768,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiRoomsRoomIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/matches/$matchId/': {
+      id: '/api/matches/$matchId/'
+      path: '/api/matches/$matchId'
+      fullPath: '/api/matches/$matchId'
+      preLoaderRoute: typeof ApiMatchesMatchIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/demo/start/ssr/spa-mode': {
       id: '/demo/start/ssr/spa-mode'
       path: '/demo/start/ssr/spa-mode'
@@ -762,6 +815,13 @@ declare module '@tanstack/react-router' {
       path: '/api/rooms/$roomId/remove-player'
       fullPath: '/api/rooms/$roomId/remove-player'
       preLoaderRoute: typeof ApiRoomsRoomIdRemovePlayerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/rooms/$roomId/match': {
+      id: '/api/rooms/$roomId/match'
+      path: '/api/rooms/$roomId/match'
+      fullPath: '/api/rooms/$roomId/match'
+      preLoaderRoute: typeof ApiRoomsRoomIdMatchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/rooms/$roomId/invites': {
@@ -874,6 +934,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiWhoamiRoute: ApiWhoamiRoute,
   DemoGrimoireRoute: DemoGrimoireRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
+  GamesGameIdRoute: GamesGameIdRoute,
   ApiAuthForgotPasswordRoute: ApiAuthForgotPasswordRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,
@@ -899,12 +960,14 @@ const rootRouteChildren: RootRouteChildren = {
   ApiMatchesMatchIdTravelRequestRoute: ApiMatchesMatchIdTravelRequestRoute,
   ApiRoomsRoomIdEmptySeatRoute: ApiRoomsRoomIdEmptySeatRoute,
   ApiRoomsRoomIdInvitesRoute: ApiRoomsRoomIdInvitesRoute,
+  ApiRoomsRoomIdMatchRoute: ApiRoomsRoomIdMatchRoute,
   ApiRoomsRoomIdRemovePlayerRoute: ApiRoomsRoomIdRemovePlayerRoute,
   ApiRoomsRoomIdScriptRoute: ApiRoomsRoomIdScriptRoute,
   ApiRoomsRoomIdStartMatchRoute: ApiRoomsRoomIdStartMatchRoute,
   DemoStartSsrDataOnlyRoute: DemoStartSsrDataOnlyRoute,
   DemoStartSsrFullSsrRoute: DemoStartSsrFullSsrRoute,
   DemoStartSsrSpaModeRoute: DemoStartSsrSpaModeRoute,
+  ApiMatchesMatchIdIndexRoute: ApiMatchesMatchIdIndexRoute,
   ApiRoomsRoomIdIndexRoute: ApiRoomsRoomIdIndexRoute,
   DemoStartSsrIndexRoute: DemoStartSsrIndexRoute,
 }

@@ -3,7 +3,7 @@
 import { randomUUID } from 'crypto';
 import type { RedisClientType } from 'redis';
 import type WebSocket from 'ws';
-import { markConnected, markDisconnected } from './presence';
+import { markConnected, markDisconnected, getConnectedUserIds } from './presence';
 import { onUserConnected, onUserDisconnected } from './hostGrace';
 import { zChat, zJoinGame, zJoinTopic, zPing } from '.';
 import { connectMongoose } from '../../db/connectMongoose';
@@ -41,6 +41,28 @@ function parsePubsubMessage(raw: string) {
     } catch {
         return raw;
     }
+}
+
+async function publishPresenceUpdate(
+    gameId: string,
+    userId: string,
+    status: 'connected' | 'disconnected',
+    publish?: (topic: string, msg: any) => Promise<void>
+) {
+    if (!publish) return;
+    const connectedUserIds = await getConnectedUserIds(gameId);
+    const payload = {
+        kind: 'event',
+        type: 'presenceChanged',
+        ts: Date.now(),
+        payload: {
+            gameId,
+            userId,
+            status,
+            connectedUserIds
+        }
+    };
+    await Promise.all([publish($keys.publicTopic(gameId), payload), publish($keys.stTopic(gameId), payload)]);
 }
 
 async function subscribeToTopic(conn: Conn, topic: string) {
@@ -193,6 +215,7 @@ export async function handleWsConnection(
 
             // Presence + host grace cancellation
             await markConnected(gameId, conn.userId);
+            await publishPresenceUpdate(gameId, conn.userId, 'connected', publish);
             await onUserConnected(gameId, conn.userId, { publish });
 
             // Respond to client with per-game role (host status is separate via hostUserId)
@@ -304,6 +327,7 @@ export async function handleWsConnection(
         const gameId = conn.gameId;
 
         await markDisconnected(gameId, conn.userId);
+        await publishPresenceUpdate(gameId, conn.userId, 'disconnected', publish);
         await onUserDisconnected(gameId, conn.userId, { publish });
 
         // Reminder check again after disconnect (might trigger “pick storyteller” as players cross min threshold,

@@ -1,5 +1,6 @@
 // src/client/api/invites.ts
 export async function fetchInvites() {
+    console.log(`fetchInvites called`)
     const response = await fetch('/api/invites', { credentials: 'include' });
     if (!response.ok) {
         throw new Error('Unable to load invites');

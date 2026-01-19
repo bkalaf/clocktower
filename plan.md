@@ -5,3 +5,6 @@
 * I removed voteHolders from RoomMachine since that's already defined in the MatchMachine.
 * We need to migrate MatchMachine to GameMachine.
 * Added displayName to AppShell.
+* Next logical implementation : wire /login + /logout to set/clear authUserId, and on successful join/start, set lastRoomId/lastGameId.
+* Add a property called pronouns to User (string) that is optional.
+* SessionState should also have displayName (for the Avatar UI piece), pronouns, and username at a minimum so it can be easily accessed since it will be accessed in the main view page.

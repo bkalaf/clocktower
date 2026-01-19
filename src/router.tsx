@@ -2,6 +2,7 @@
 import { createRouter } from '@tanstack/react-router';
 import { setupRouterSsrQueryIntegration } from '@tanstack/react-router-ssr-query';
 import * as TanstackQuery from './integrations/tanstack-query/root-provider';
+import { createDefaultSessionContextValue } from './session/SessionProvider';
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
@@ -13,7 +14,8 @@ export const getRouter = () => {
     const router = createRouter({
         routeTree,
         context: {
-            ...rqContext
+            ...rqContext,
+            session: createDefaultSessionContextValue()
         },
 
         defaultPreload: 'intent'

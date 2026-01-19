@@ -1,119 +1,257 @@
 // src/machines/RoomMachine.ts
-import { setup, createMachine } from 'xstate';
+import { assign, createMachine, setup } from 'xstate';
+import type { GameRoles, GameSpeed } from '../types/game';
+import type { MatchPhase, MatchStatus, MatchSubphase } from '../types/match';
+import type { Room, RoomLobbySettings, RoomStatus, RoomVisibility } from '../types/room';
+
+type HostGraceState = {
+    hostUserId: string;
+    untilTs: number;
+};
+
+type PresencePayload = {
+    connectedUserIds: string[];
+    userId: string;
+    status: 'connected' | 'disconnected';
+};
+
+type RoomUpdatePayload = {
+    room: Room;
+    memberRole: GameRoles;
+    storytellerCount: number;
+};
+
+type MatchPhaseSummary = {
+    matchId: string;
+    phase: MatchPhase;
+    subphase: MatchSubphase;
+    dayNumber?: number;
+    nominationsOpen?: boolean;
+    breakoutWhispersEnabled?: boolean;
+};
+
+export type RoomContext = {
+    room?: Room;
+    roomId?: string;
+    scriptId?: string;
+    hostUserId?: string;
+    status: RoomStatus;
+    visibility: RoomVisibility;
+    speed: GameSpeed;
+    maxPlayers: PcPlayerCount;
+    minPlayers: PcPlayerCount;
+    customScript?: CharacterRoles[];
+    storytellerMode: StorytellerMode;
+    acceptingPlayers: boolean;
+    readyByUserId: Record<string, boolean>;
+    connectedUserIds: string[];
+    storytellerUserIds: string[];
+    pendingSeatsInviteCount: number;
+    beenNominated: string[];
+    nominated: string[];
+    history: unknown[];
+    lobbySettings?: RoomLobbySettings | null;
+    memberRole?: GameRoles | null;
+    storytellerCount: number;
+    currentMatchId?: string;
+    matchPhase?: MatchPhase;
+    matchSubphase?: MatchSubphase;
+    dayNumber: number;
+    nominationsOpen?: boolean;
+    hostGrace?: HostGraceState | null;
+    matchStatus: MatchStatus;
+};
+
+type RoomEvent =
+    | { type: 'OPEN_ROOM' }
+    | { type: 'CLOSE_ROOM' }
+    | { type: 'MATCH_ENDED' }
+    | { type: 'START_MATCH' }
+    | { type: 'ARCHIVE_ROOM' }
+    | { type: 'CONDITION_MET' }
+    | { type: 'READY_CHANGED' }
+    | { type: 'COOLDOWN_EXPIRED' }
+    | { type: 'HOST_RECONNECTED' }
+    | { type: 'HOST_DISCONNECTED' }
+    | { type: 'HOST_GRACE_EXPIRED' }
+    | { type: 'ROOM_UPDATED'; payload: RoomUpdatePayload }
+    | { type: 'PRESENCE_CHANGED'; payload: PresencePayload }
+    | { type: 'MEMBER_READY_CHANGED'; payload: { userId: string; isReady: boolean } }
+    | { type: 'HOST_CHANGED'; payload: { hostUserId: string } }
+    | { type: 'HOST_GRACE_STARTED'; payload: HostGraceState }
+    | { type: 'HOST_GRACE_CANCELED' }
+    | { type: 'MATCH_STARTED'; payload: { matchId: string } }
+    | { type: 'MATCH_PHASE_CHANGED'; payload: MatchPhaseSummary }
+    | { type: 'MATCH_RESET' };
+
+const initialContext: RoomContext = {
+    room: undefined,
+    roomId: undefined,
+    scriptId: undefined,
+    hostUserId: undefined,
+    status: 'open',
+    visibility: 'public',
+    speed: 'moderate',
+    maxPlayers: 15,
+    minPlayers: 5,
+    customScript: undefined,
+    storytellerMode: 'ai',
+    acceptingPlayers: true,
+    readyByUserId: {},
+    connectedUserIds: [],
+    storytellerUserIds: [],
+    pendingSeatsInviteCount: 0,
+    beenNominated: [],
+    nominated: [],
+    history: [],
+    lobbySettings: undefined,
+    memberRole: null,
+    storytellerCount: 0,
+    currentMatchId: undefined,
+    matchPhase: undefined,
+    matchSubphase: undefined,
+    dayNumber: 1,
+    nominationsOpen: false,
+    hostGrace: null,
+    matchStatus: 'setup'
+};
 
 export const machine = setup({
     types: {
-        context: {
-            speed: 'moderate',
-            maxPlayers: 15,
-            minPlayers: 5,
-            visibility: 'public',
-            readyByUserId: {},
-            storytellerMode: 'ai',
-            acceptingPlayers: true,
-            connectedUserIds: [],
-            storytellerUserIds: [],
-            pendingSeatsInviteCount: 0,
-            beenNominated: [],
-            nominated: [],
-            history: []
-        } as {
-            speed: GameSpeed;
-            roomId?: string;
-            scriptId?: string;
-            hostUserId?: string;
-            maxPlayers: PcPlayerCount;
-            minPlayers: PcPlayerCount;
-            visibility: RoomVisibility;
-            customScript?: CharacterRoles[];
-            readyByUserId: Record<string, boolean>;
-            currentMatchId?: string;
-            storytellerMode: StorytellerMode;
-            acceptingPlayers: boolean;
-            connectedUserIds: string[];
-            plannedStartTime?: number;
-            storytellerUserIds: string[];
-            pendingSeatsInviteCount: number;
-            beenNominated: string[];
-            nominated: string[];
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            history: any[];
-        },
-        events: {} as
-            | { type: 'OPEN_ROOM' }
-            | { type: 'CLOSE_ROOM' }
-            | { type: 'MATCH_ENDED' }
-            | { type: 'START_MATCH' }
-            | { type: 'ARCHIVE_ROOM' }
-            | { type: 'CONDITION_MET' }
-            | { type: 'READY_CHANGED' }
-            | { type: 'COOLDOWN_EXPIRED' }
-            | { type: 'HOST_RECONNECTED' }
-            | { type: 'HOST_DISCONNECTED' }
-            | { type: 'HOST_GRACE_EXPIRED' }
+        context: initialContext,
+        events: {} as RoomEvent
     },
     actions: {
-        startTimer: function ({ context, event }, params) {
-            // Add your action code here
-            // ...
+        startTimer: () => {
+            // Placeholder for timer integration.
         },
-        cancelTimer: function ({ context, event }, params) {
-            // Add your action code here
-            // ...
+        cancelTimer: () => {
+            // Placeholder for timer integration.
         },
-        reassignHost: function ({ context, event }, params) {
-            // Add your action code here
-            // ...
+        reassignHost: () => {
+            // Placeholder for host reassignment side effects.
         },
-        sendReminderPickStoryteller: function ({ context, event }, params) {
-            // Add your action code here
-            // ...
-        }
-    },
-    actors: {
-        MatchMachine: createMachine({
-            /*
-             * MatchMachine
-             * https://stately.ai/registry/editor/5c3a42d7-840a-4cca-8642-37b14bdead8a?machine=65b9098f-063f-42b0-8940-fd108d8455f8
-             */
-        })
+        sendReminderPickStoryteller: () => {
+            // Placeholder for reminder logic.
+        },
+        applyRoomUpdate: assign((context, event) => {
+            if (event.type !== 'ROOM_UPDATED') return {};
+            const { room, memberRole, storytellerCount } = event.payload;
+            return {
+                room,
+                roomId: room._id,
+                scriptId: room.scriptId,
+                hostUserId: room.hostUserId,
+                status: room.status,
+                visibility: room.visibility,
+                lobbySettings: room.lobbySettings ?? context.lobbySettings,
+                memberRole,
+                storytellerCount
+            };
+        }),
+        applyPresence: assign((context, event) => {
+            if (event.type !== 'PRESENCE_CHANGED') return {};
+            return {
+                connectedUserIds: event.payload.connectedUserIds
+            };
+        }),
+        applyMemberReady: assign((context, event) => {
+            if (event.type !== 'MEMBER_READY_CHANGED') return {};
+            return {
+                readyByUserId: {
+                    ...context.readyByUserId,
+                    [event.payload.userId]: event.payload.isReady
+                }
+            };
+        }),
+        applyHostChanged: assign((_, event) => {
+            if (event.type !== 'HOST_CHANGED') return {};
+            return {
+                hostUserId: event.payload.hostUserId
+            };
+        }),
+        applyHostGraceStarted: assign((_, event) => {
+            if (event.type !== 'HOST_GRACE_STARTED') return {};
+            return {
+                hostGrace: event.payload
+            };
+        }),
+        applyHostGraceCanceled: assign(() => ({
+            hostGrace: null
+        })),
+        applyMatchStart: assign((context, event) => {
+            if (event.type !== 'MATCH_STARTED') return {};
+            return {
+                currentMatchId: event.payload.matchId,
+                matchStatus: 'in_progress',
+                status: 'in_match'
+            };
+        }),
+        applyMatchPhase: assign((context, event) => {
+            if (event.type !== 'MATCH_PHASE_CHANGED') return {};
+            return {
+                currentMatchId: event.payload.matchId,
+                matchPhase: event.payload.phase,
+                matchSubphase: event.payload.subphase,
+                dayNumber: event.payload.dayNumber ?? context.dayNumber,
+                nominationsOpen: event.payload.nominationsOpen ?? context.nominationsOpen,
+                matchStatus: 'in_progress'
+            };
+        }),
+        clearMatch: assign(() => ({
+            currentMatchId: undefined,
+            matchPhase: undefined,
+            matchSubphase: undefined,
+            nominationsOpen: false,
+            matchStatus: 'complete'
+        }))
     },
     guards: {
-        canStartMatch: function ({ context, event }) {
-            // Add your guard condition here
-            return true;
-        },
-        zeroConnected: function ({ context, event }) {
-            // Add your guard condition here
-            return true;
-        },
-        shouldRemindPickST: function ({ context, event }) {
-            // Add your guard condition here
-            return true;
-        },
-        allReady: function ({ context, event }) {
-            // Add your guard condition here
-            return true;
+        canStartMatch: ({ context }) => context.connectedUserIds.length >= context.minPlayers,
+        zeroConnected: ({ context }) => context.connectedUserIds.length === 0,
+        shouldRemindPickST: ({ context }) =>
+            context.storytellerCount === 0 && context.connectedUserIds.length >= context.minPlayers,
+        allReady: ({ context }) => {
+            if (context.connectedUserIds.length === 0) return false;
+            return context.connectedUserIds.every((id) => context.readyByUserId[id] === true);
         }
     }
 }).createMachine({
-    context: {
-        speed: 'moderate',
-        maxPlayers: 15,
-        minPlayers: 5,
-        visibility: 'public',
-        readyByUserId: {},
-        storytellerMode: 'ai',
-        acceptingPlayers: true,
-        connectedUserIds: [],
-        storytellerUserIds: [],
-        pendingSeatsInviteCount: 0,
-        beenNominated: [],
-        nominated: [],
-        history: []
-    },
+    context: initialContext,
     id: 'RoomMachine',
     type: 'parallel',
+    on: {
+        ROOM_UPDATED: {
+            actions: 'applyRoomUpdate'
+        },
+        PRESENCE_CHANGED: {
+            actions: 'applyPresence'
+        },
+        MEMBER_READY_CHANGED: {
+            actions: 'applyMemberReady'
+        },
+        HOST_CHANGED: {
+            actions: 'applyHostChanged'
+        },
+        HOST_GRACE_STARTED: {
+            actions: 'applyHostGraceStarted'
+        },
+        HOST_GRACE_CANCELED: {
+            actions: 'applyHostGraceCanceled'
+        },
+        MATCH_STARTED: {
+            actions: 'applyMatchStart'
+        },
+        MATCH_PHASE_CHANGED: {
+            actions: 'applyMatchPhase'
+        },
+        MATCH_ENDED: {
+            actions: 'clearMatch'
+        },
+        MATCH_RESET: {
+            actions: 'clearMatch'
+        }
+    },
     states: {
         hostContinuity: {
             initial: 'host_present',
@@ -196,6 +334,9 @@ export const machine = setup({
                         },
                         START_MATCH: {
                             target: 'in_match'
+                        },
+                        MATCH_STARTED: {
+                            target: 'in_match'
                         }
                     }
                 },
@@ -214,17 +355,17 @@ export const machine = setup({
                             },
                             description:
                                 'playerCount between minPlayers/maxPlayers AND storyteller selection rules:\n\nif storyteller mode is human: actor must be storyteller\n\nif storyteller mode is ai: actor must be host\n\nIf scriptId is set'
+                        },
+                        MATCH_STARTED: {
+                            target: 'in_match'
                         }
                     }
                 },
                 in_match: {
-                    invoke: {
-                        id: 'match',
-                        input: {},
-                        onDone: {
+                    on: {
+                        MATCH_ENDED: {
                             target: 'closed'
-                        },
-                        src: 'MatchMachine'
+                        }
                     }
                 },
                 archived: {}

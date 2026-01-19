@@ -1,5 +1,6 @@
 // src/machines/MatchMachine.ts
 import { assign, setup } from 'xstate';
+import type { Match, MatchPhase, MatchStatus, MatchSubphase } from '../types/match';
 
 type CurrentNomination = {
     nominatorId: string;
@@ -37,17 +38,18 @@ type PendingTravellerRequest = {
     userId: string;
 };
 
-type MatchContext = {
+export type MatchContext = {
     phase: string;
-    roomId?: string;
-    matchId?: string;
-    scriptId?: string;
+    roomId: string;
+    matchId: string;
+    matchStatus: MatchStatus;
+    scriptId: string;
     subphase: string;
     dayNumber: number;
     playerSeatMap: Record<string, unknown>;
     stStateVersion: Record<string, unknown>;
     customScriptRoles: CharacterRoles[];
-    publicStateVersion?: number;
+    publicStateVersion: Record<string, unknown>;
     storytellerUserIds: string[];
     allowTravelers: boolean;
     travelerCountUsed: PcTravelerCount;
@@ -55,14 +57,29 @@ type MatchContext = {
     pendingTravelerRequests: PendingTravellerRequest[];
     dayNominated: string[];
     dayNominators: string[];
-    currentNomination?: CurrentNomination;
+    currentNomination: CurrentNomination;
     currentVotes: Record<string, VoteChoice>;
     currentVoteGhostUsage: Record<string, boolean>;
     isAliveById: Record<string, boolean>;
     isTravelerById: Record<string, boolean>;
     ghostVoteAvailableById: Record<string, boolean>;
-    onTheBlock?: OnTheBlockStatus;
+    onTheBlock: OnTheBlockStatus;
     voteHistory: VoteHistoryEntry[];
+};
+
+type MatchPhasePayload = {
+    matchId: string;
+    phase: MatchPhase;
+    subphase: MatchSubphase;
+    dayNumber?: number;
+    nominationsOpen?: boolean;
+    breakoutWhispersEnabled?: boolean;
+    playerSeatMap?: MatchContext['playerSeatMap'];
+    aliveById?: MatchContext['aliveById'];
+    isTravelerById?: MatchContext['isTravelerById'];
+    ghostVoteAvailableById?: MatchContext['ghostVoteAvailableById'];
+    voteHistory?: MatchContext['voteHistory'];
+    onTheBlock?: MatchContext['onTheBlock'];
 };
 
 type MatchEvent =
@@ -83,7 +100,10 @@ type MatchEvent =
           payload: { nominatorId: string; nomineeId: string; nominationType: NominationType };
       }
     | { type: 'VOTE_CAST'; payload: { voterId: string; choice: VoteChoice } }
-    | { type: 'VOTE_CLOSED' };
+    | { type: 'VOTE_CLOSED' }
+    | { type: 'MATCH_DATA_LOADED'; payload: Match }
+    | { type: 'MATCH_PHASE_CHANGED'; payload: MatchPhasePayload }
+    | { type: 'MATCH_RESET' };
 
 type GuardMeta = {
     context: MatchContext;
@@ -91,13 +111,32 @@ type GuardMeta = {
 };
 
 const initialContext: MatchContext = {
+    roomId: '',
+    matchId: '',
+    matchStatus: 'setup',
+    scriptId: '',
+    voteHistory: [],
+    ghostVoteAvailableById: {},
+    isTravelerById: {},
+    isAliveById: {},
+    onTheBlock: {
+        nomineeId: '',
+        votesFor: 0,
+        nominatorId: ''
+    },
+    currentNomination: {
+        nominatorId: '',
+        nomineeId: '',
+        nominationType: 'execution',
+        openedAt: 0
+    },
     phase: 'setup',
     subphase: 'day.dawn_announcements',
     dayNumber: 1,
     playerSeatMap: {},
     stStateVersion: {},
     customScriptRoles: [],
-    publicStateVersion: 0,
+    publicStateVersion: {},
     storytellerUserIds: [],
     allowTravelers: false,
     travelerCountUsed: 0,
@@ -106,11 +145,7 @@ const initialContext: MatchContext = {
     dayNominated: [],
     dayNominators: [],
     currentVotes: {},
-    currentVoteGhostUsage: {},
-    isAliveById: {},
-    isTravelerById: {},
-    ghostVoteAvailableById: {},
-    voteHistory: []
+    currentVoteGhostUsage: {}
 };
 
 const canNominateGuard = ({ context, event }: GuardMeta) => {
@@ -148,7 +183,7 @@ const canVoteGuard = ({ context, event }: GuardMeta) => {
     const isAlive = context.isAliveById[voterId] ?? false;
     if (isAlive) return true;
     if (!isExecution) return true;
-    if (choice === 'abstain') return true;
+    if (choice == null) return true;
     const hasGlobalGhost = context.ghostVoteAvailableById[voterId] !== false;
     const usedGhostAlready = Boolean(context.currentVoteGhostUsage[voterId]);
     return hasGlobalGhost || usedGhostAlready;
@@ -160,6 +195,58 @@ export const machine = setup({
         events: {} as MatchEvent
     },
     actions: {
+        loadMatchData: assign((_, event) => {
+            if (event.type !== 'MATCH_DATA_LOADED') return {};
+            const match = event.payload;
+            return {
+                roomId: match.roomId,
+                matchId: match._id,
+                matchStatus: match.status,
+                phase: match.phase,
+                subphase: match.subphase,
+                dayNumber: match.dayNumber,
+                allowTravelers: match.allowTravelers,
+                travelerCountUsed: match.travelerCountUsed,
+                travelerUserIds: match.travelerUserIds ?? [],
+                playerSeatMap: match.playerSeatMap ?? {},
+                nominationsOpen: match.nominationsOpen,
+                breakoutWhispersEnabled: match.breakoutWhispersEnabled,
+                dayNominated: match.dayNominated ?? [],
+                dayNominators: match.dayNominators ?? [],
+                aliveById: match.aliveById ?? {},
+                isTravelerById: match.isTravelerById ?? {},
+                ghostVoteAvailableById: match.ghostVoteAvailableById ?? {},
+                voteHistory: match.voteHistory ?? [],
+                onTheBlock: match.onTheBlock ?? undefined,
+                currentNomination: undefined,
+                currentVotes: {},
+                currentVoteGhostUsage: {}
+            };
+        }),
+        updateMatchPhase: assign((context, event) => {
+            if (event.type !== 'MATCH_PHASE_CHANGED') return {};
+            const payload = event.payload;
+            return {
+                matchId: payload.matchId,
+                phase: payload.phase,
+                subphase: payload.subphase,
+                dayNumber: payload.dayNumber ?? context.dayNumber,
+                nominationsOpen: payload.nominationsOpen ?? context.nominationsOpen,
+                breakoutWhispersEnabled: payload.breakoutWhispersEnabled ?? context.breakoutWhispersEnabled,
+                playerSeatMap: payload.playerSeatMap ?? context.playerSeatMap,
+                aliveById: payload.aliveById ?? context.aliveById,
+                isTravelerById: payload.isTravelerById ?? context.isTravelerById,
+                ghostVoteAvailableById: payload.ghostVoteAvailableById ?? context.ghostVoteAvailableById,
+                voteHistory: payload.voteHistory ?? context.voteHistory,
+                onTheBlock: payload.onTheBlock ?? context.onTheBlock,
+                matchStatus: 'in_progress'
+            };
+        }),
+        resetMatch: assign((context) => ({
+            ...initialContext,
+            roomId: context.roomId,
+            scriptId: context.scriptId
+        })),
         autoDenyNotAccepting: function ({ context, event }, params) {
             // Add your action code here
             // ...
@@ -310,6 +397,17 @@ export const machine = setup({
     context: initialContext,
     id: 'MatchMachine',
     initial: 'setup',
+    on: {
+        MATCH_DATA_LOADED: {
+            actions: 'loadMatchData'
+        },
+        MATCH_PHASE_CHANGED: {
+            actions: 'updateMatchPhase'
+        },
+        MATCH_RESET: {
+            actions: 'resetMatch'
+        }
+    },
     states: {
         setup: {
             on: {
