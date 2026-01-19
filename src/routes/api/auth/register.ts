@@ -9,11 +9,12 @@ import { UserModel } from '../../../db/models/User';
 import { HttpError } from '../../../errors';
 import { createSession } from '../../../server/session/createSession';
 import { setSessionCookie } from '../../../server/auth/cookies';
+import { useSession } from '@tanstack/react-start/server';
 
 const RegisterBodySchema = z
     .object({
         email: z.email().min(1),
-        name: z.string().min(1).max(64),
+        username: z.string().min(1).max(64),
         password: z.string().min(8).max(200),
         verificationPassword: z.string().min(8).max(200)
     })
@@ -41,10 +42,10 @@ export const Route = createFileRoute('/api/auth/register')({
                 const userId = randomUUID();
                 const passwordHash = await hashPassword(body.password);
 
-                const doc = await UserModel.create({
+                await UserModel.create({
                     _id: userId,
                     email: body.email.toLowerCase(),
-                    name: body.name,
+                    username: body.username,
                     passwordHash,
                     userRoles: ['user']
                 });

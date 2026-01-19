@@ -37,7 +37,7 @@
     }
 
     * {
-        @apply font-permanent-marker border-gray-200 dark:border-gray-800;
+        @apply font-rubik border-gray-200 dark:border-gray-800;
     }
 
     html,
@@ -61,11 +61,22 @@
     span,
     div,
     p {
-        @apply font-rubik;
+        font-family: 'Rubik', 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 }
 
-@layer utilities;
+@layer utilities {
+    .font-rubik {
+        font-family: 'Rubik', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    .font-open-sans {
+        font-family: Open Sans; 
+    }
+    .font-cinzel {
+        font-family: 'Cinzel', serif;
+    }
+}
+
 
 @custom-variant aria-invalid (&[aria-invalid="true"]);
 @custom-variant data-dirty (&[data-dirty="true"]);
@@ -77,3 +88,7 @@
 @custom-variant data-group-a (&[data-group-id="a"]);
 @custom-variant data-group-b (&[data-group-id="b"]);
 @custom-variant data-group-c (&[data-group-id="c"]);
+
+html, body {
+    @apply font-rubik;
+}

@@ -6,7 +6,8 @@ import * as React from 'react';
 export type ReminderTokenMeta = {
     key: string;
     label: string;
-    color: string;
+    color?: string;
+    backgroundImage?: string;
     icon?: string;
     description?: string;
 };
@@ -39,14 +40,17 @@ export function ReminderToken({ reminder, size = 34, draggableId, instanceId, cl
         <span
             ref={setNodeRef}
             className={cn(
-                'flex items-center justify-center rounded-full border border-white/30 bg-gradient-to-tr from-slate-900/90 to-black/60 text-xs font-semibold uppercase tracking-[0.25em] text-white shadow-lg transition-all',
+                'flex items-center justify-center rounded-full border border-white/30 text-xs font-semibold uppercase tracking-[0.25em] text-white shadow-lg transition-all',
                 isDragging && 'shadow-[0_0_25px_rgba(255,255,255,0.45)] scale-110',
                 className
             )}
             style={{
                 width: size,
                 height: size,
-                backgroundColor: reminder.color,
+                backgroundColor: reminder.color ?? 'transparent',
+                backgroundImage: reminder.backgroundImage ? `url(${reminder.backgroundImage})` : undefined,
+                backgroundSize: reminder.backgroundImage ? 'cover' : undefined,
+                backgroundPosition: reminder.backgroundImage ? 'center' : undefined,
                 ...dragStyle,
                 ...(style ?? {})
             }}

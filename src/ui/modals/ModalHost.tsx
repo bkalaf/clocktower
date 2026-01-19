@@ -1,3 +1,4 @@
+// src/ui/modals/ModalHost.tsx
 import * as React from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
@@ -5,6 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import type { ModalKind, NightCardType } from '../../router/search';
 import { Invites } from './Invites';
 import { Preferences } from './Preferences';
+import { modalBackgroundStyle } from '@/components/modals/modalStyles';
 
 type Props = {
     modal?: ModalKind;
@@ -33,7 +35,10 @@ export function ModalHost({ modal, type }: Props) {
             open
             onOpenChange={(isOpen) => !isOpen && close()}
         >
-            <DialogContent className='w-full max-w-3xl space-y-6'>
+            <DialogContent
+                className='w-full max-w-3xl space-y-6 rounded-3xl border border-white/20 bg-black/70 shadow-[0_25px_70px_rgba(0,0,0,0.65)] backdrop-blur-xl'
+                style={modalBackgroundStyle}
+            >
                 {modal === 'invites' && <Invites onClose={close} />}
                 {modal === 'preferences' && <Preferences onClose={close} />}
                 {modal === 'reveal' && (

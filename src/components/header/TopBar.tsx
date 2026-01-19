@@ -2,16 +2,15 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useCallback } from 'react';
-import { ChevronDown, Gears, LogIn, LogOut, Menu, Moon, Sparkles, User, UserPlus } from 'lucide-react';
+import { ChevronDown, Settings, LogIn, LogOut, Menu, Moon, Sparkles, User, UserPlus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { InvitesButton } from './InvitesButton';
-import { usePreferences } from '@/state/usePreferences';
-import { useModal } from '@/hooks/useModal';
+import { usePreferences } from '@/hooks/usePreferences';
 import type { AuthedUser } from '@/types/game';
-import type { NightCardType } from '@/router/search';
+import { useModal } from '../../hooks/useModal';
 
 export type TopBarProps = {
     user?: AuthedUser | null;
@@ -163,7 +162,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onLogout }: TopBarProp
                                 onClick={() => open('preferences')}
                                 aria-label='Open preferences'
                             >
-                                <Gears size={16} />
+                                <Settings size={16} />
                             </Button>
                         </TooltipTrigger>
                         <TooltipContent side='bottom'>Open UI preferences</TooltipContent>

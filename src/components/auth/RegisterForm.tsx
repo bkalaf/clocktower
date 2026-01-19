@@ -12,7 +12,7 @@ import { register as registerRequest } from '@/lib/api';
 
 const registerSchema = z
     .object({
-        name: z.string().min(2, 'Full name is required'),
+        username: z.string().min(2, 'Full name is required'),
         email: z.email('Invalid email'),
         password: z.string().min(8, 'Password must be at least 8 characters'),
         verificationPassword: z.string().min(8, 'Password confirmation is required')
@@ -40,7 +40,7 @@ export function RegisterForm({ onSuccess, returnTo }: RegisterFormProps) {
     } = useForm<RegisterFormValues>({
         resolver: zodResolver(registerSchema),
         defaultValues: {
-            name: '',
+            username: '',
             email: '',
             password: '',
             verificationPassword: ''
@@ -53,7 +53,7 @@ export function RegisterForm({ onSuccess, returnTo }: RegisterFormProps) {
             onSubmit={handleSubmit(async (values) => {
                 setServerError(null);
                 try {
-                    await registerRequest(values.name, values.email, values.password, values.verificationPassword);
+                    await registerRequest(values.username, values.email, values.password, values.verificationPassword);
                     reset();
                     await onSuccess();
                 } catch (error) {
@@ -67,22 +67,22 @@ export function RegisterForm({ onSuccess, returnTo }: RegisterFormProps) {
                     htmlFor='register-name'
                     className='font-semibold text-white'
                 >
-                    Full name
+                    Your user name
                 </Label>
                 <Input
-                    id='register-name'
+                    id='register-username'
                     type='text'
                     autoComplete='name'
-                    {...register('name')}
+                    {...register('username')}
                 />
-                {errors.name && <p className='text-xs text-red-500'>{errors.name.message}</p>}
+                {errors.username && <p className='text-xs text-red-500'>{errors.username.message}</p>}
             </div>
             <div className='space-y-1 text-sm'>
                 <Label
                     htmlFor='register-email'
                     className='font-semibold text-white'
                 >
-                    Email
+                    E-mail
                 </Label>
                 <Input
                     id='register-email'

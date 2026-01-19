@@ -11,6 +11,7 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import * as React from 'react';
+import { modalBackgroundStyle } from '@/components/modals/modalStyles';
 
 export type ScriptOption = {
     scriptId: string;
@@ -43,7 +44,10 @@ export function SelectScriptDialog({
             open={open}
             onOpenChange={onOpenChange}
         >
-            <DialogContent className='max-w-3xl bg-black/70 border border-white/10'>
+            <DialogContent
+                className='max-w-3xl rounded-3xl border border-white/10 bg-black/80 shadow-[0_30px_60px_rgba(0,0,0,0.65)]'
+                style={modalBackgroundStyle}
+            >
                 <DialogHeader>
                     <DialogTitle className='text-2xl text-white font-semibold'>Select a Script</DialogTitle>
                     <DialogDescription className='text-sm text-slate-300'>

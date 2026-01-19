@@ -1,10 +1,12 @@
+// src/client.tsx
 import { startTransition, StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { Await, RouterProvider } from '@tanstack/react-router';
 import { hydrateStart } from '@tanstack/start-client-core/client';
 import type { AnyRouter } from '@tanstack/router-core';
 import { Provider as TanstackQueryProvider } from './integrations/tanstack-query/root-provider';
-import { SessionProvider, useSession } from './session/SessionProvider';
+import { SessionProvider } from './session/SessionProvider';
+import { useSession } from './hooks/useSession';
 
 let hydrationPromise: Promise<AnyRouter> | null = null;
 

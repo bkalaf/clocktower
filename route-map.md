@@ -63,7 +63,7 @@
 
 src/routes/
 
-    __root.tsx
+    __root.tsx                      #/
 
     _splash.tsx
     _splash/

@@ -1,7 +1,8 @@
+// src/components/header/BottomBar.tsx
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { Clock, Moon, Sun, User, Users } from 'lucide-react';
 
-import { usePreferences } from '@/state/usePreferences';
+import { usePreferences } from '@/hooks/usePreferences';
 import { useRoomMatchState } from '@/state/useRoomMatchState';
 
 type StatsWidgetProps = {

@@ -1,3 +1,4 @@
+// src/components/header/NavigationDrawer.tsx
 import { Link } from '@tanstack/react-router';
 import { Home, Lock, LogIn, Mail, Settings, UserPlus, X } from 'lucide-react';
 

@@ -1,6 +1,7 @@
+// src/ui/modals/Preferences.tsx
 import { Button } from '@/components/ui/button';
 import { DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { usePreferences } from '@/state/usePreferences';
+import { usePreferences } from '@/hooks/usePreferences';
 import { USER_PREFERENCE_DEFINITIONS } from '@/types/preferences';
 
 export function Preferences({ onClose }: { onClose: () => void }) {

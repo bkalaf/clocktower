@@ -58,7 +58,7 @@ export function ForgotPasswordForm({ onSuccess, returnTo }: ForgotPasswordFormPr
                     htmlFor='forgot-password-email'
                     className='font-semibold text-white'
                 >
-                    Email
+                    E-mail
                 </Label>
                 <Input
                     id='forgot-password-email'

@@ -58,7 +58,7 @@ export function LoginForm({ onSuccess, returnTo }: LoginFormProps) {
                     htmlFor='login-email'
                     className='font-semibold text-white'
                 >
-                    Email
+                    E-mail
                 </Label>
                 <Input
                     id='login-email'

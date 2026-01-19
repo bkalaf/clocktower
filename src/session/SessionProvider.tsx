@@ -1,3 +1,4 @@
+// src/session/SessionProvider.tsx
 import * as React from 'react';
 
 type SessionState = {
@@ -13,7 +14,7 @@ export type SessionContextValue = SessionState & {
     clear: () => void;
 };
 
-const SessionContext = React.createContext<SessionContextValue | null>(null);
+export const SessionContext = React.createContext<SessionContextValue | null>(null);
 const STORAGE_KEY = 'botc.session.v1';
 
 function load(): SessionState {
@@ -57,14 +58,6 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
     );
 
     return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
-}
-
-export function useSession() {
-    const context = React.useContext(SessionContext);
-    if (!context) {
-        throw new Error('useSession must be used within a SessionProvider');
-    }
-    return context;
 }
 
 export function createDefaultSessionContextValue(): SessionContextValue {

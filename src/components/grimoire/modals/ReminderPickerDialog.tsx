@@ -11,6 +11,7 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ReminderToken, type ReminderTokenMeta } from '../ReminderToken';
 import * as React from 'react';
+import { modalBackgroundStyle } from '@/components/modals/modalStyles';
 
 export type ReminderPickerDialogProps = {
     open: boolean;
@@ -24,7 +25,10 @@ export function ReminderPickerDialog({ open, onOpenChange, reminders }: Reminder
             open={open}
             onOpenChange={onOpenChange}
         >
-            <DialogContent className='max-w-3xl bg-black/70 border border-white/10'>
+            <DialogContent
+                className='max-w-3xl rounded-3xl border border-white/10 bg-black/80 shadow-[0_30px_60px_rgba(0,0,0,0.65)]'
+                style={modalBackgroundStyle}
+            >
                 <DialogHeader>
                     <DialogTitle className='text-2xl text-white font-semibold'>Reminder Tokens</DialogTitle>
                     <DialogDescription className='text-sm text-slate-300'>

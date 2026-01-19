@@ -5,7 +5,7 @@ const { aliases, enums } = schemas;
 
 export const zAuthedUser = z.object({
     _id: z.string('Must be a UUID'),
-    name: aliases.name.meta({ description: 'Your displayed username.' }),
+    username: aliases.name.meta({ description: 'Your displayed username.' }),
     email: aliases.email.meta({ description: 'Your e-mail (this is private and not shown to others).' }),
     userRoles: z
         .array(enums.globalRoles)
