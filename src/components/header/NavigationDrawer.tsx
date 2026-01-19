@@ -3,7 +3,7 @@ import { Home, Lock, LogIn, Mail, Settings, UserPlus, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetClose, SheetContent } from '@/components/ui/sheet';
-import { useModal } from '@/ui/modals/useModal';
+import { useModal } from '@/hooks/useModal';
 
 import demonHead from '@/assets/images/demon-head.png';
 

@@ -1,3 +1,4 @@
+// src/components/header/TopBar.tsx
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useCallback } from 'react';
@@ -8,7 +9,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { InvitesButton } from './InvitesButton';
 import { usePreferences } from '@/state/usePreferences';
-import { useModal } from '@/ui/modals/useModal';
+import { useModal } from '@/hooks/useModal';
 import type { AuthedUser } from '@/types/game';
 import type { NightCardType } from '@/router/search';
 
@@ -69,7 +70,10 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onLogout }: TopBarProp
                 className='flex items-center gap-2 rounded-xl px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-100 hover:bg-white/5 focus:bg-white/5'
                 onSelect={() => open('nightCards', { type: option.type })}
             >
-                <Moon size={14} className='text-slate-300' />
+                <Moon
+                    size={14}
+                    className='text-slate-300'
+                />
                 {option.label}
             </DropdownMenu.Item>
         ),
@@ -77,7 +81,9 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onLogout }: TopBarProp
     );
 
     return (
-        <header className={`sticky top-0 z-20 flex w-full items-center justify-between px-4 text-white backdrop-blur-sm ${spacingClass} ${toneClass}`}>
+        <header
+            className={`sticky top-0 z-20 flex w-full items-center justify-between px-4 text-white backdrop-blur-sm ${spacingClass} ${toneClass}`}
+        >
             <div className='flex items-center gap-2'>
                 <Button
                     variant='ghost'
@@ -104,13 +110,14 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onLogout }: TopBarProp
                             className='flex items-center gap-2 rounded-xl px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-[0.25em] text-slate-100 hover:bg-white/5 focus:bg-white/5'
                             onSelect={() => open('reveal')}
                         >
-                            <Sparkles size={14} className='text-slate-300' />
+                            <Sparkles
+                                size={14}
+                                className='text-slate-300'
+                            />
                             Reveal
                         </DropdownMenu.Item>
                         <DropdownMenu.Separator className='my-1 h-px bg-white/5' />
-                        <span className='px-3 text-[10px] uppercase tracking-[0.6em] text-slate-500'>
-                            Night Cards
-                        </span>
+                        <span className='px-3 text-[10px] uppercase tracking-[0.6em] text-slate-500'>Night Cards</span>
                         {nightCardOptions.map((option) => renderNightCardItem(option))}
                     </DropdownMenu.Content>
                 </DropdownMenu.Root>
@@ -125,9 +132,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onLogout }: TopBarProp
             <div className='flex items-center gap-2'>
                 <InvitesButton />
                 <div className='flex items-center gap-2'>
-                    {!user && isAuthLoading && (
-                        <span className='text-[11px] text-slate-300'>Checking session…</span>
-                    )}
+                    {!user && isAuthLoading && <span className='text-[11px] text-slate-300'>Checking session…</span>}
                     {!user && !isAuthLoading && (
                         <>
                             <Button
@@ -161,9 +166,7 @@ export function TopBar({ user, isAuthLoading, onMenuOpen, onLogout }: TopBarProp
                                 <Gears size={16} />
                             </Button>
                         </TooltipTrigger>
-                        <TooltipContent side='bottom'>
-                            Open UI preferences
-                        </TooltipContent>
+                        <TooltipContent side='bottom'>Open UI preferences</TooltipContent>
                     </Tooltip>
                     {user && (
                         <DropdownMenu.Root>

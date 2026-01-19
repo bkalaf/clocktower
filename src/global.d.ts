@@ -1,5 +1,10 @@
 // src/global.d.ts
+import { NavigateOptions } from '@tanstack/react-router';
+
 declare global {
+    export type LooseNavigateOptions = NavigateOptions & {
+        search?: Record<string, unknown>; // or Record<string, any>
+    };
     export type Alignments = 'good' | 'evil';
     export type CharacterRoles =
         | 'gardener'

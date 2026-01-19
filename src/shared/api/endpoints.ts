@@ -22,7 +22,7 @@ const zAuthSessionOutput = z.object({
 });
 
 const zAuthLoginInput = z.object({
-    email: z.string().email(),
+    email: z.email(),
     password: z.string()
 });
 

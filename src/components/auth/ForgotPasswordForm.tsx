@@ -7,10 +7,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { forgotPassword } from '@/lib/api';
 
 const forgotPasswordSchema = z.object({
-    email: z.string().email('Invalid email')
+    email: z.email('Invalid email')
 });
 
 type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
@@ -53,12 +54,12 @@ export function ForgotPasswordForm({ onSuccess, returnTo }: ForgotPasswordFormPr
             })}
         >
             <div className='space-y-1 text-sm'>
-                <label
+                <Label
                     htmlFor='forgot-password-email'
                     className='font-semibold text-white'
                 >
                     Email
-                </label>
+                </Label>
                 <Input
                     id='forgot-password-email'
                     type='email'

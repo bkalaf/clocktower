@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { fetchInvites } from '@/client/api/invites';
-import { useModal } from '@/ui/modals/useModal';
+import { useModal } from '@/hooks/useModal';
 
 export function InvitesButton() {
     const { data, isLoading } = useQuery({

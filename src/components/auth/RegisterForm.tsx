@@ -7,12 +7,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { register as registerRequest } from '@/lib/api';
 
 const registerSchema = z
     .object({
         name: z.string().min(2, 'Full name is required'),
-        email: z.string().email('Invalid email'),
+        email: z.email('Invalid email'),
         password: z.string().min(8, 'Password must be at least 8 characters'),
         verificationPassword: z.string().min(8, 'Password confirmation is required')
     })
@@ -62,12 +63,12 @@ export function RegisterForm({ onSuccess, returnTo }: RegisterFormProps) {
             })}
         >
             <div className='space-y-1 text-sm'>
-                <label
+                <Label
                     htmlFor='register-name'
                     className='font-semibold text-white'
                 >
                     Full name
-                </label>
+                </Label>
                 <Input
                     id='register-name'
                     type='text'
@@ -77,12 +78,12 @@ export function RegisterForm({ onSuccess, returnTo }: RegisterFormProps) {
                 {errors.name && <p className='text-xs text-red-500'>{errors.name.message}</p>}
             </div>
             <div className='space-y-1 text-sm'>
-                <label
+                <Label
                     htmlFor='register-email'
                     className='font-semibold text-white'
                 >
                     Email
-                </label>
+                </Label>
                 <Input
                     id='register-email'
                     type='email'
@@ -92,12 +93,12 @@ export function RegisterForm({ onSuccess, returnTo }: RegisterFormProps) {
                 {errors.email && <p className='text-xs text-red-500'>{errors.email.message}</p>}
             </div>
             <div className='space-y-1 text-sm'>
-                <label
+                <Label
                     htmlFor='register-password'
                     className='font-semibold text-white'
                 >
                     Password
-                </label>
+                </Label>
                 <Input
                     id='register-password'
                     type='password'
@@ -107,12 +108,12 @@ export function RegisterForm({ onSuccess, returnTo }: RegisterFormProps) {
                 {errors.password && <p className='text-xs text-red-500'>{errors.password.message}</p>}
             </div>
             <div className='space-y-1 text-sm'>
-                <label
+                <Label
                     htmlFor='register-verification-password'
                     className='font-semibold text-white'
                 >
                     Confirm password
-                </label>
+                </Label>
                 <Input
                     id='register-verification-password'
                     type='password'

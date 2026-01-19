@@ -43,7 +43,8 @@ const toneStyles: Record<string, string> = {
 
 const accentStyles: Record<string, string> = {
     ember: 'border border-amber-500/50 bg-gradient-to-br from-amber-500/10 to-black text-amber-200 shadow-[0_0_15px_rgba(251,191,36,0.3)]',
-    glacier: 'border border-cyan-400/50 bg-gradient-to-br from-cyan-500/10 to-black text-cyan-200 shadow-[0_0_15px_rgba(56,189,248,0.3)]',
+    glacier:
+        'border border-cyan-400/50 bg-gradient-to-br from-cyan-500/10 to-black text-cyan-200 shadow-[0_0_15px_rgba(56,189,248,0.3)]',
     violet: 'border border-violet-500/50 bg-gradient-to-br from-violet-500/10 to-black text-violet-200 shadow-[0_0_15px_rgba(139,92,246,0.3)]'
 };
 
@@ -73,13 +74,10 @@ export function BottomBar() {
     const playerCount = `${connectedCount}/${maxPlayers || '—'}`;
     const role = roomState.memberRole ?? 'spectator';
     const phase = matchState.phase ?? 'setup';
-    const normalizedPhase = phase
-        .toLowerCase()
-        .includes('night')
-        ? 'Night'
-        : phase.toLowerCase().includes('day')
-            ? 'Day'
-            : phase.charAt(0).toUpperCase() + phase.slice(1);
+    const normalizedPhase =
+        phase.toLowerCase().includes('night') ? 'Night'
+        : phase.toLowerCase().includes('day') ? 'Day'
+        : phase.charAt(0).toUpperCase() + phase.slice(1);
     const dayNumber = matchState.dayNumber ?? 1;
     const phaseIcon = normalizedPhase === 'Night' ? <Moon size={16} /> : <Sun size={16} />;
 

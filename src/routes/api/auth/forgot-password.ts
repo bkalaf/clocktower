@@ -5,7 +5,7 @@ import { randomUUID } from 'crypto';
 import { parseJsonBody } from '../../../server/parseJsonBody';
 
 const ForgotPasswordBodySchema = z.object({
-    email: z.string().email('Enter a valid email address')
+    email: z.email('Enter a valid email address')
 });
 
 export const Route = createFileRoute('/api/auth/forgot-password')({

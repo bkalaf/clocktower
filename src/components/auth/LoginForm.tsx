@@ -7,10 +7,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { login } from '@/lib/api';
 
 const loginSchema = z.object({
-    email: z.string().email('Invalid email'),
+    email: z.email('Invalid email'),
     password: z.string().min(8, 'Password must be at least 8 characters')
 });
 
@@ -53,12 +54,12 @@ export function LoginForm({ onSuccess, returnTo }: LoginFormProps) {
             })}
         >
             <div className='space-y-1 text-sm'>
-                <label
+                <Label
                     htmlFor='login-email'
                     className='font-semibold text-white'
                 >
                     Email
-                </label>
+                </Label>
                 <Input
                     id='login-email'
                     type='email'
@@ -69,12 +70,12 @@ export function LoginForm({ onSuccess, returnTo }: LoginFormProps) {
                 {errors.email && <p className='text-xs text-red-500'>{errors.email.message}</p>}
             </div>
             <div className='space-y-1 text-sm'>
-                <label
+                <Label
                     htmlFor='login-password'
                     className='font-semibold text-white'
                 >
                     Password
-                </label>
+                </Label>
                 <Input
                     id='login-password'
                     type='password'

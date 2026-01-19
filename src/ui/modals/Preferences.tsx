@@ -38,30 +38,28 @@ export function Preferences({ onClose }: { onClose: () => void }) {
                                 </span>
                             </div>
                             <div className='mt-3 flex flex-wrap gap-2'>
-                        {preference.options.map((option) => {
-                            const selected = values[preference.id] === option.value;
-                            return (
-                                <Button
-                                    key={option.value}
-                                    size='sm'
-                                    variant={selected ? 'default' : 'outline'}
-                                    className='text-xs font-semibold uppercase tracking-[0.3em]'
-                                    onClick={() => setPreference(preference.id, option.value)}
-                                >
-                                    {option.label}
-                                </Button>
-                            );
-                        })}
-                    </div>
-                        {(() => {
-                            const selectedOption = preference.options.find(
-                                (option) => option.value === values[preference.id]
-                            );
-                            if (!selectedOption?.helper) return null;
-                            return (
-                                <div className='mt-2 text-[11px] text-slate-500'>{selectedOption.helper}</div>
-                            );
-                        })()}
+                                {preference.options.map((option) => {
+                                    const selected = values[preference.id] === option.value;
+                                    return (
+                                        <Button
+                                            key={option.value}
+                                            size='sm'
+                                            variant={selected ? 'default' : 'outline'}
+                                            className='text-xs font-semibold uppercase tracking-[0.3em]'
+                                            onClick={() => setPreference(preference.id, option.value)}
+                                        >
+                                            {option.label}
+                                        </Button>
+                                    );
+                                })}
+                            </div>
+                            {(() => {
+                                const selectedOption = preference.options.find(
+                                    (option) => option.value === values[preference.id]
+                                );
+                                if (!selectedOption?.helper) return null;
+                                return <div className='mt-2 text-[11px] text-slate-500'>{selectedOption.helper}</div>;
+                            })()}
                         </section>
                     );
                 })}

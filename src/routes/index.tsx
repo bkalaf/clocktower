@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Settings, Sparkles, Clock3, ShieldCheck, Moon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { useModal } from '@/ui/modals/useModal';
+import { useModal } from '@/hooks/useModal';
 import { usePreferences } from '@/state/usePreferences';
 import type { NightCardType } from '@/router/search';
 
@@ -26,7 +26,7 @@ function DashboardRoute() {
     const { open } = useModal();
     const { values } = usePreferences();
 
-    const handleAction = (action: typeof quickActions[number]['action']) => {
+    const handleAction = (action: (typeof quickActions)[number]['action']) => {
         open(action);
     };
 
@@ -36,7 +36,8 @@ function DashboardRoute() {
                 <p className='text-[11px] uppercase tracking-[0.6em] text-slate-400'>Clocktower Command</p>
                 <h1 className='text-3xl font-semibold text-white sm:text-4xl'>Command Bridge</h1>
                 <p className='max-w-2xl text-sm text-slate-300'>
-                    Manage invites, night cards, and UI preference chips from the drawer and the chrome. The deck keeps things compact by default and surfaces only the essentials until you open the modals you care about.
+                    Manage invites, night cards, and UI preference chips from the drawer and the chrome. The deck keeps
+                    things compact by default and surfaces only the essentials until you open the modals you care about.
                 </p>
             </header>
 
@@ -84,12 +85,13 @@ function DashboardRoute() {
                 </article>
 
                 <article className='rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-slate-200 backdrop-blur'>
-                <div className='flex items-center gap-2 text-xs uppercase tracking-[0.4em] text-slate-400'>
-                    <Moon size={16} />
-                    Night Cards
-                </div>
+                    <div className='flex items-center gap-2 text-xs uppercase tracking-[0.4em] text-slate-400'>
+                        <Moon size={16} />
+                        Night Cards
+                    </div>
                     <p className='mt-2 text-[11px] text-slate-400'>
-                        Press a card to load it as a modal so the storyteller can prompt players without leaving the current scene.
+                        Press a card to load it as a modal so the storyteller can prompt players without leaving the
+                        current scene.
                     </p>
                     <div className='mt-3 flex flex-wrap gap-2'>
                         {nightCardHighlights.map((card) => (
