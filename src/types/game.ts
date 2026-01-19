@@ -1,5 +1,5 @@
 // src/types/game.ts
-import z from 'zod';
+import z from 'zod/v4';
 import { $STATUS_CODES } from '../errors';
 import { RoomStatus } from './room';
 

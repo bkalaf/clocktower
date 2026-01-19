@@ -1,6 +1,6 @@
 // src/server/chatItem/createChatItem.ts
 import { createServerFn } from '@tanstack/react-start';
-import z from 'zod';
+import z from 'zod/v4';
 import { ChatItemModel } from '@/db/models/ChatItem';
 import { created } from '../../utils/http';
 

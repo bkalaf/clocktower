@@ -1,6 +1,6 @@
 // src/routes/api/auth/login.ts
 import { createFileRoute } from '@tanstack/react-router';
-import z from 'zod';
+import z from 'zod/v4';
 import { parseJsonBody } from '../../../server/parseJsonBody';
 import { connectMongoose } from '../../../db/connectMongoose';
 import { UserModel } from '../../../db/models/User';

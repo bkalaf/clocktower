@@ -1,6 +1,6 @@
 // src/serverFns/authorize.ts
 import { createServerFn } from '@tanstack/react-start';
-import z from 'zod';
+import z from 'zod/v4';
 import { GameRoles } from '../types/game';
 import { $keys } from '../keys';
 import { listWhisperTopicsForUser } from './listWhisperTopicsForUser';

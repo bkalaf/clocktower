@@ -1,5 +1,5 @@
 // src/server/schemas/gameSchemas.ts
-import z from 'zod';
+import z from 'zod/v4';
 import { zGameId, zUserId } from '../../schemas';
 
 export const zPromoteStorytellerInput = z.object({

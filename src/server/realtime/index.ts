@@ -1,5 +1,5 @@
 // src/server/realtime/index.ts
-import z from 'zod';
+import z from 'zod/v4';
 
 export const zJoinGame = z.object({
     t: z.literal('joinGame'),

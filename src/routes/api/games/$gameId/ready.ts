@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { HttpError } from '../../../../errors';
 import { parseParams } from '../../../../server/parseParams';
 import { zGameId } from '../../../../schemas';
-import z from 'zod';
+import z from 'zod/v4';
 import { parseJsonBody } from '../../../../server/parseJsonBody';
 import { zReadyInput } from '../../../../server/schemas/gameSchemas';
 import { connectMongoose } from '../../../../db/connectMongoose';

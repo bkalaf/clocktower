@@ -3,6 +3,7 @@ import { zRoomStatus } from '@/schemas/enums/zRoomStatus';
 import { zRoomVisibility } from '@/schemas/enums/zRoomVisibility';
 import { zRoomDto, zRoomIdInput, zRoomListResponse, zRoomPatch, zRoomLobbySettings } from '@/schemas/api/rooms';
 import type { Game } from '@/db/models/Game';
+import z from 'zod/v4';
 
 export type RoomStatus = z.infer<typeof zRoomStatus>;
 export type RoomVisibility = z.infer<typeof zRoomVisibility>;

@@ -1,6 +1,6 @@
 // src/server/whisper/findWhisper.ts
 import { createServerFn } from '@tanstack/react-start';
-import z from 'zod';
+import z from 'zod/v4';
 import { HttpError } from '../../errors';
 import { WhisperDocument, WhisperModel } from '@/db/models/Whisper';
 import { success } from '../../utils/http';

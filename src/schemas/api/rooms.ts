@@ -1,5 +1,5 @@
 // src/schemas/api/rooms.ts
-import z from 'zod';
+import z from 'zod/v4';
 import aliases from '../aliases';
 import enums from '../enums';
 

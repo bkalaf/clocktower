@@ -1,5 +1,5 @@
 // src/utils/http.ts
-import z from 'zod';
+import z from 'zod/v4';
 import { $ctor, Result } from '../types/game';
 
 export const listWhisperTopicsInput = z.object({
