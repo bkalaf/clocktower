@@ -3,26 +3,39 @@ import { setup, createMachine } from 'xstate';
 
 export const machine = setup({
     types: {
-        context: {} as {
+        context: {
+            speed: 'moderate',
+            maxPlayers: 15,
+            minPlayers: 5,
+            visibility: 'public',
+            readyByUserId: {},
+            storytellerMode: 'ai',
+            acceptingPlayers: true,
+            connectedUserIds: [],
+            storytellerUserIds: [],
+            pendingSeatsInviteCount: 0,
+            beenNominated: [],
+            nominated: [],
+            history: []
+        } as {
             speed: GameSpeed;
-            roomId: string;
-            scriptId: string;
-            hostUserId: string;
+            roomId?: string;
+            scriptId?: string;
+            hostUserId?: string;
             maxPlayers: PcPlayerCount;
             minPlayers: PcPlayerCount;
             visibility: RoomVisibility;
-            customScript: CharacterRoles[];
+            customScript?: CharacterRoles[];
             readyByUserId: Record<string, boolean>;
-            currentMatchId: string;
+            currentMatchId?: string;
             storytellerMode: StorytellerMode;
             acceptingPlayers: boolean;
             connectedUserIds: string[];
-            plannedStartTime: number;
+            plannedStartTime?: number;
             storytellerUserIds: string[];
             pendingSeatsInviteCount: number;
             beenNominated: string[];
             nominated: string[];
-            voteHolders: string[];
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             history: any[];
         },
@@ -84,7 +97,21 @@ export const machine = setup({
         }
     }
 }).createMachine({
-    context: {},
+    context: {
+        speed: 'moderate',
+        maxPlayers: 15,
+        minPlayers: 5,
+        visibility: 'public',
+        readyByUserId: {},
+        storytellerMode: 'ai',
+        acceptingPlayers: true,
+        connectedUserIds: [],
+        storytellerUserIds: [],
+        pendingSeatsInviteCount: 0,
+        beenNominated: [],
+        nominated: [],
+        history: []
+    },
     id: 'RoomMachine',
     type: 'parallel',
     states: {

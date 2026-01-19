@@ -49,13 +49,7 @@ export async function login(email: string, password: string) {
 }
 
 export async function register(name: string, email: string, password: string, verificationPassword: string) {
-    return apiFetch<{
-        ok: boolean;
-        userId: string;
-        name: string;
-        email: string;
-        userRoles: string[];
-    }>('/api/auth/register', {
+    return apiFetch<{ ok: boolean }>('/api/auth/register', {
         method: 'POST',
         body: JSON.stringify({ name, email, password, verificationPassword })
     });

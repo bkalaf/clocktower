@@ -40,7 +40,7 @@ declare global {
     export type Demons = 'imp';
     export type Editions = 'tb' | 'bmr' | 'snv' | 'custom';
     export type Fabled = 'spiritofivory' | 'sentinel' | 'fibbin';
-    export type GameSpeed = 'slow' | 'medium' | 'fast';
+    export type GameSpeed = 'slow' | 'moderate' | 'fast';
     export type Loric = 'gardener' | 'bootlegger';
     export type MatchPhase = 'night' | 'day';
     export type MatchStatus = 'setup' | 'in_progress' | 'reveal' | 'complete';
@@ -82,6 +82,8 @@ declare global {
     export type TbDemons = 'imp';
     export type TbMinions = 'spy' | 'scarletwoman' | 'baron' | 'poisoner';
     export type TbOutsiders = 'drunk' | 'saint' | 'recluse' | 'butler';
+    export type NominationType = 'execution' | 'exile';
+    export type VoteChoice = 'yes' | 'no' | null;
     export type TbPlayerCharacters =
         | 'imp'
         | 'spy'

@@ -2,9 +2,15 @@
 
 import { setup } from 'xstate';
 
+const initialContext = {
+    name: '',
+    displayName: '',
+    userId: undefined,
+    currentRoomId: undefined
+};
 export const machine = setup({
     types: {
-        context: {} as { name: string; userId: string; currentRoomId: string },
+        context: initialContext as { name: string; displayName: string; userId?: string; currentRoomId?: string },
         events: {} as
             | { type: 'LOGOUT' }
             | { type: 'LEAVE_ROOM' }
@@ -12,7 +18,7 @@ export const machine = setup({
             | { type: 'ENTER_ROOM'; roomId: string }
     }
 }).createMachine({
-    context: {},
+    context: initialContext,
     id: 'AppShell',
     initial: 'unauthenticated',
     states: {

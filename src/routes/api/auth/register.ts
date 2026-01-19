@@ -56,19 +56,10 @@ export const Route = createFileRoute('/api/auth/register')({
                 setSessionCookie(sessionId, expiresAt);
                 // setSessionCookie2(headers, sessionId, expiresAt);
 
-                return new Response(
-                    JSON.stringify({
-                        ok: true,
-                        userId: doc._id,
-                        name: doc.name,
-                        email: doc.email,
-                        userRoles: doc.userRoles
-                    }),
-                    {
-                        status: 200,
-                        headers
-                    }
-                );
+                return new Response(JSON.stringify({ ok: true }), {
+                    status: 200,
+                    headers
+                });
             }
         }
     }

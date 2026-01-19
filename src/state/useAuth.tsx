@@ -45,14 +45,15 @@ function useProvideAuth(): AuthContextValue {
     }, [refreshWhoami]);
 
     const logoutAndClear = useCallback(async () => {
+        setUser(null);
         try {
             await logoutRequest();
         } catch (error) {
             console.error(error);
         } finally {
-            setUser(null);
+            await refreshWhoami();
         }
-    }, []);
+    }, [refreshWhoami]);
 
     return useMemo(
         () => ({

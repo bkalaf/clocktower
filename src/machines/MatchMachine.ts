@@ -1,9 +1,6 @@
 // src/machines/MatchMachine.ts
 import { assign, setup } from 'xstate';
 
-export type NominationType = 'execution' | 'exile';
-export type VoteChoice = 'yes' | 'no' | 'abstain';
-
 type CurrentNomination = {
     nominatorId: string;
     nomineeId: string;
@@ -35,22 +32,27 @@ type OnTheBlockStatus = {
     nominatorId: string;
 };
 
+type PendingTravellerRequest = {
+    requestId: string;
+    userId: string;
+};
+
 type MatchContext = {
     phase: string;
-    roomId: string;
-    matchId: string;
-    scriptId: string;
+    roomId?: string;
+    matchId?: string;
+    scriptId?: string;
     subphase: string;
     dayNumber: number;
     playerSeatMap: Record<string, unknown>;
     stStateVersion: Record<string, unknown>;
-    customScriptRoles: unknown[];
-    publicStateVersion: number;
+    customScriptRoles: CharacterRoles[];
+    publicStateVersion?: number;
     storytellerUserIds: string[];
     allowTravelers: boolean;
-    travelerCountUsed: number;
-    availableTravelers: unknown[];
-    pendingTravelerRequests: unknown[];
+    travelerCountUsed: PcTravelerCount;
+    availableTravelers: Travellers[];
+    pendingTravelerRequests: PendingTravellerRequest[];
     dayNominated: string[];
     dayNominators: string[];
     currentNomination?: CurrentNomination;
@@ -90,9 +92,6 @@ type GuardMeta = {
 
 const initialContext: MatchContext = {
     phase: 'setup',
-    roomId: '',
-    matchId: '',
-    scriptId: '',
     subphase: 'day.dawn_announcements',
     dayNumber: 1,
     playerSeatMap: {},
@@ -106,13 +105,11 @@ const initialContext: MatchContext = {
     pendingTravelerRequests: [],
     dayNominated: [],
     dayNominators: [],
-    currentNomination: undefined,
     currentVotes: {},
     currentVoteGhostUsage: {},
     isAliveById: {},
     isTravelerById: {},
     ghostVoteAvailableById: {},
-    onTheBlock: undefined,
     voteHistory: []
 };
 
@@ -159,7 +156,7 @@ const canVoteGuard = ({ context, event }: GuardMeta) => {
 
 export const machine = setup({
     types: {
-        context: {} as MatchContext,
+        context: initialContext as MatchContext,
         events: {} as MatchEvent
     },
     actions: {
@@ -183,8 +180,7 @@ export const machine = setup({
             dayNominated: [],
             dayNominators: [],
             currentNomination: undefined,
-            currentVotes: {},
-            currentVoteGhostUsage: {}
+            currentVotes: {}
         })),
         startNomination: assign(({ context, event }) => {
             if (event.type !== 'NOMINATION_ATTEMPTED') return {};
@@ -208,7 +204,7 @@ export const machine = setup({
                 currentVoteGhostUsage: {}
             };
         }),
-        recordVote: assign(({context, event}) => {
+        recordVote: assign(({ context, event }) => {
             if (event.type !== 'VOTE_CAST') return {};
             if (!context.currentNomination) return {};
             const { voterId, choice } = event.payload;
@@ -240,7 +236,7 @@ export const machine = setup({
             }
             return assignments;
         }),
-        resolveNomination: assign(({context}) => {
+        resolveNomination: assign(({ context }) => {
             const nomination = context.currentNomination;
             if (!nomination) return {};
             const aliveNonTraveler = Object.entries(context.isAliveById).reduce((count, [id, alive]) => {

@@ -1,6 +1,6 @@
 // src/db/models/Game.ts
 import mongoose from 'mongoose';
-import z from 'zod/v4';
+import z from 'zod';
 import { getTypesFor } from '../../utils/zodToMongoose';
 import schemas from '../../schemas/index';
 const { refs, aliases, enums } = schemas;
