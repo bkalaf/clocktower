@@ -1,7 +1,7 @@
 // src/routes/login.tsx
 import { useCallback, useEffect, useMemo } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { LoginForm } from '../components/auth/LoginForm';
+import { LoginForm } from '../components/forms/LoginForm';
 import { authReturnToSearchSchema } from './auth/-common';
 
 export const Route = createFileRoute('/login')({

@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 
-import { RegisterForm } from '../components/auth/RegisterForm';
+import { RegisterForm } from '../components/forms/RegisterForm';
 import { authReturnToSearchSchema } from './auth/-common';
 
 export const Route = createFileRoute('/register')({

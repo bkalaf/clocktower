@@ -1,11 +1,11 @@
-// src/components/auth/RegisterForm.tsx
+// src/components/forms/RegisterForm.tsx
 import { useCallback } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 import { Link } from '@tanstack/react-router';
 import { z } from 'zod';
 
 import { register as registerRequest } from '@/lib/api';
-import { FormControl } from '../FormControl';
+import { FormControl } from './FormControl';
 import { Modal } from '../Modal';
 import { useInvalidateAuth } from '../useInvalidateAuth';
 

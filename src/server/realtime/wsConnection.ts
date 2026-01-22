@@ -6,6 +6,8 @@ import type WebSocket from 'ws';
 import { markConnected, markDisconnected, getConnectedUserIds } from './presence';
 import { onUserConnected, onUserDisconnected } from './hostGrace';
 import { zChat, zJoinGame, zJoinTopic, zPing } from '.';
+import { zRoom } from '@/schemas/api/rooms';
+import { createRoomActor } from '@/server/roomService';
 import { connectMongoose } from '../../db/connectMongoose';
 import { getRedis } from '../../redis';
 import { getRoomIdFromTopic, streamKeyForTopic, timestampFromStreamId } from './topicStreams';
@@ -156,6 +158,8 @@ export async function handleWsConnection(
             return;
         }
 
+        const normalizedType = msg?.t ?? msg?.type;
+
         // joinGame
         if (msg?.t === 'joinGame') {
             const parsed = zJoinGame.safeParse(msg);
@@ -185,9 +189,9 @@ export async function handleWsConnection(
             conn.role = member.role;
 
             await cleanupSubscriber();
-            const topics = [$keys.publicTopic(gameId)];
+            const topics = [$keys.publicTopic(gameId), $keys.roomPublicTopic(gameId)];
             if (member.role === 'storyteller') {
-                topics.push($keys.stTopic(gameId));
+                topics.push($keys.stTopic(gameId), $keys.roomStTopic(gameId));
             }
 
             if (topics.length > 0) {
@@ -236,6 +240,39 @@ export async function handleWsConnection(
             });
 
             await replayFromLastStreamIds(ws, parsed.data.lastStreamIds);
+            return;
+        }
+
+        if (normalizedType === 'CREATE_ROOM') {
+            if (!conn.gameId) {
+                send(ws, { t: 'error', code: 'not_in_game', message: 'Join a game first' });
+                return;
+            }
+            const roomResult = zRoom.safeParse(msg?.room);
+            if (!roomResult.success) {
+                send(ws, { t: 'error', code: 'bad_msg', message: 'Invalid room payload' });
+                return;
+            }
+            const room = roomResult.data;
+            if (room._id !== conn.gameId) {
+                send(ws, {
+                    t: 'error',
+                    code: 'room_mismatch',
+                    message: 'Room data does not match connected game'
+                });
+                return;
+            }
+            try {
+                createRoomActor(room);
+                send(ws, { t: 'roomCreated', roomId: room._id });
+            } catch (error) {
+                console.error('[realtime] CREATE_ROOM failed', error);
+                send(ws, {
+                    t: 'error',
+                    code: 'create_room_failed',
+                    message: 'Unable to initialize room state'
+                });
+            }
             return;
         }
 

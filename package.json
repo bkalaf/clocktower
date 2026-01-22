@@ -12,6 +12,7 @@
         "check": "prettier --write . && eslint --fix",
         "api:print": "node --import=tsx scripts/print-api-registry.ts",
         "cir": "madge --circular --extensions ts,tsx ./src",
+        "orphans": "madge --orphans --extensions ts,tsx ./src",
         "test:jest": "jest"
     },
     "dependencies": {

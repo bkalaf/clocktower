@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// src/components/auth/LoginForm.tsx
+// src/components/forms/LoginForm.tsx
 import { useCallback, useState } from 'react';
 import { FieldValues, RegisterOptions, useForm, UseFormRegisterReturn, UseFormReturn } from 'react-hook-form';
 import { Link, LinkProps } from '@tanstack/react-router';
@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { login } from '@/lib/api';
-import { FormControl } from '../FormControl';
+import { FormControl } from './FormControl';
 import { Modal } from '../Modal';
 import { useInvalidateAuth } from '../useInvalidateAuth';
 

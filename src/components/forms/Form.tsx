@@ -1,11 +1,11 @@
-// src/components/Form.tsx
+// src/components/forms/Form.tsx
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from '@tanstack/react-router';
 import { useTransition, useCallback } from 'react';
 import { DeepPartial, UseFormReturn, useForm } from 'react-hook-form';
 import z from 'zod/v4';
-import { DialogFooter } from './ui';
+import { DialogFooter } from '../ui';
 import { Button } from '@/components/ui/button';
 import React from 'react';
 
@@ -19,6 +19,7 @@ export type FormProps<TSchema extends z.ZodObject<any>> = {
     serverError: string | null;
     setServerError: (error: string | null) => void;
     returnTo?: string;
+    closeOnSubmit?: boolean;
 };
 
 export function Form<TSchema extends z.ZodObject<any>>({
@@ -29,13 +30,15 @@ export function Form<TSchema extends z.ZodObject<any>>({
     defaultErrorMsg,
     onSubmit,
     defaultValues,
-    zodSchema
+    zodSchema,
+    returnTo,
+    closeOnSubmit = true
 }: FormProps<TSchema>) {
     const navigate = useNavigate();
     const [, startTransition] = useTransition();
     const closeForm = useCallback(() => {
-        navigate({ to: '..', replace: true });
-    }, [navigate]);
+        navigate({ to: returnTo ?? '..', replace: true });
+    }, [navigate, returnTo]);
     const form = useForm<z.infer<TSchema>>({
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         resolver: zodResolver(zodSchema) as any,
@@ -55,7 +58,9 @@ export function Form<TSchema extends z.ZodObject<any>>({
                 try {
                     await onSubmit(values, form);
                     reset();
-                    startTransition(closeForm);
+                    if (closeOnSubmit) {
+                        startTransition(closeForm);
+                    }
                     await invalidate();
                 } catch (error) {
                     const message = (error instanceof Error ? error.message : defaultErrorMsg) ?? '';

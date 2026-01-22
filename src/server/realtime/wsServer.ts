@@ -5,6 +5,7 @@ import { WebSocketServer } from 'ws';
 import { env } from '../../env';
 import { publish } from './publish';
 import { handleWsConnection } from './wsConnection';
+import { rehydrateAllRooms } from '@/server/rehydrateRooms';
 
 let startPromise: Promise<void> | null = null;
 
@@ -30,44 +31,52 @@ export function startRealtimeServer() {
         return (startPromise = Promise.resolve());
     }
 
-    startPromise = new Promise((resolve, reject) => {
-        const server = http.createServer();
-        const wss = new WebSocketServer({ noServer: true });
+    startPromise = (async () => {
+        try {
+            await rehydrateAllRooms();
+        } catch (error) {
+            console.error('[realtime] failed to rehydrate rooms', error);
+        }
 
-        wss.on('connection', (ws, request) => {
-            if (!request) {
-                ws.close();
-                return;
-            }
-            handleWsConnection(ws, createRequestFromIncoming(request), publish).catch((error) => {
-                console.error('[realtime] connection error', error);
-                if (ws.readyState === ws.OPEN) {
+        return new Promise<void>((resolve, reject) => {
+            const server = http.createServer();
+            const wss = new WebSocketServer({ noServer: true });
+
+            wss.on('connection', (ws, request) => {
+                if (!request) {
                     ws.close();
+                    return;
                 }
+                handleWsConnection(ws, createRequestFromIncoming(request), publish).catch((error) => {
+                    console.error('[realtime] connection error', error);
+                    if (ws.readyState === ws.OPEN) {
+                        ws.close();
+                    }
+                });
+            });
+
+            server.on('upgrade', (request, socket, head) => {
+                const handlerUrl = new URL(request.url ?? '/', `http://${request.headers.host ?? 'localhost'}`);
+                if (handlerUrl.pathname !== '/ws') {
+                    socket.write('HTTP/1.1 404 Not Found\r\n\r\n');
+                    socket.destroy();
+                    return;
+                }
+                wss.handleUpgrade(request, socket, head, (ws) => {
+                    wss.emit('connection', ws, request);
+                });
+            });
+
+            server.on('error', (error) => {
+                reject(error);
+            });
+
+            server.listen(port, () => {
+                console.log(`[realtime] listening on ws://localhost:${port}/ws`);
+                resolve();
             });
         });
-
-        server.on('upgrade', (request, socket, head) => {
-            const handlerUrl = new URL(request.url ?? '/', `http://${request.headers.host ?? 'localhost'}`);
-            if (handlerUrl.pathname !== '/ws') {
-                socket.write('HTTP/1.1 404 Not Found\r\n\r\n');
-                socket.destroy();
-                return;
-            }
-            wss.handleUpgrade(request, socket, head, (ws) => {
-                wss.emit('connection', ws, request);
-            });
-        });
-
-        server.on('error', (error) => {
-            reject(error);
-        });
-
-        server.listen(port, () => {
-            console.log(`[realtime] listening on ws://localhost:${port}/ws`);
-            resolve();
-        });
-    });
+    })();
 
     return startPromise;
 }

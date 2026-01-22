@@ -1,4 +1,4 @@
-// src/components/FormControl.tsx
+// src/components/forms/FormControl.tsx
 import { useMemo } from 'react';
 import { FieldValues, UseFormRegister, FieldErrors, Path } from 'react-hook-form';
 import { Input } from '@/components/ui/input';

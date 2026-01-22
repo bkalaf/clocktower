@@ -1,11 +1,11 @@
 // src/components/Modal.tsx
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useNavigate } from '@tanstack/react-router';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, type ReactNode } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from './ui/dialog';
 import { dialogBackgroundClassName, dialogBackgroundStyle } from './header/dialogBackground';
 import z from 'zod/v4';
-import { Form, FormProps } from './Form';
+import { Form, FormProps } from './forms/Form';
 
 export type ModalProps<TSchema extends z.ZodObject<any>> = {
     children: FormProps<TSchema>['children'];
@@ -15,6 +15,9 @@ export type ModalProps<TSchema extends z.ZodObject<any>> = {
     onSubmit: FormProps<TSchema>['onSubmit'];
     defaultValues: FormProps<TSchema>['defaultValues'];
     defaultErrorMsg: FormProps<TSchema>['defaultErrorMsg'];
+    title?: ReactNode;
+    description?: ReactNode;
+    closeOnSubmit?: boolean;
 };
 export function Modal<TSchema extends z.ZodObject<any>>({
     children,
@@ -23,7 +26,10 @@ export function Modal<TSchema extends z.ZodObject<any>>({
     onSubmit,
     zodSchema,
     defaultValues,
-    defaultErrorMsg
+    defaultErrorMsg,
+    title = 'Welcome back',
+    description = 'Sign in to continue',
+    closeOnSubmit = true
 }: ModalProps<TSchema>) {
     const navigate = useNavigate();
     const closeModal = useCallback(() => {
@@ -44,8 +50,8 @@ export function Modal<TSchema extends z.ZodObject<any>>({
                 style={dialogBackgroundStyle}
             >
                 <DialogHeader>
-                    <DialogTitle className='text-white'>Welcome back</DialogTitle>
-                    <DialogDescription className='text-white/80'>Sign in to continue</DialogDescription>
+                    <DialogTitle className='text-white'>{title}</DialogTitle>
+                    <DialogDescription className='text-white/80'>{description}</DialogDescription>
                 </DialogHeader>
                 <Form
                     onSubmit={onSubmit}
@@ -56,6 +62,7 @@ export function Modal<TSchema extends z.ZodObject<any>>({
                     zodSchema={zodSchema}
                     defaultValues={defaultValues}
                     defaultErrorMsg={defaultErrorMsg}
+                    closeOnSubmit={closeOnSubmit}
                 >
                     {children}
                 </Form>

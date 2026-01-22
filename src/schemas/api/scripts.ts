@@ -12,6 +12,16 @@ export const zScript = z.object({
     isOfficial: z.boolean().default(false)
 });
 
+export type Script = {
+    _id: string;
+    edition?: Editions;
+    skillLevel: SkillLevel;
+    roles: CharacterRoles[];
+    name: string;
+    isOfficial: boolean;
+    isPlayable: boolean;
+};
+
 export const zScriptDto = z.object({
     _id: aliases.scriptId,
     edition: enums.editions.nullable().optional(),

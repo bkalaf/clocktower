@@ -1,10 +1,10 @@
 // src/client/api/rooms.ts
 import type { GameRoles } from '@/types/game';
 import type { Match } from '@/types/match';
-import type { Room } from '@/types/room';
+import type { Room, RoomStatus } from '@/types/room';
 
 export type RoomPayload = {
-    room: Room;
+    room: Room & { status?: RoomStatus };
     memberRole: GameRoles;
     storytellerCount: number;
 };
