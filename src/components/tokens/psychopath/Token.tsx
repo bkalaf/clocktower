@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/psychopath.png?url';
 export type PsychopathTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function PsychopathToken(props: PsychopathTokenProps) {
-    return <Token name='Psychopath' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Psychopath'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default PsychopathToken;
-

@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderLeviathanGoodPlayerExecutedProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderLeviathanGoodPlayerExecuted(props: ReminderLeviathanGoodPlayerExecutedProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderLeviathanGoodPlayerExecuted;
-

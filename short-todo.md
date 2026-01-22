@@ -57,7 +57,7 @@
 [ ] Keep this theme going! This theme, Four of Cups (Reversed) tarot card (remember, no tarot text) and "Neutral"
 [x] Keep this theme going! This theme, Five of Cups tarot card (remember, no tarot text) and "No"
 [x] Keep this theme going! This theme, Ace of Swords tarot card (remember, no tarot text) and "This character is in play"
-[ ] Keep this theme going! This theme, Ace of Swords tarot card (remember, no tarot text) and "This character selected you"
+[x] Keep this theme going! This theme, Ace of Swords tarot card (remember, no tarot text) and "This character selected you"
 [x] Keep this theme going! This theme, Two of Swords tarot card (remember, no tarot text) and "Choose a player"
 [x] Keep this theme going! This theme, Eight of Swords tarot card (remember, no tarot text) and "You are"
 [ ] Keep this theme going! This theme, Ten of Swords tarot card (remember, no tarot text) and "I made a mistake this is my correction"

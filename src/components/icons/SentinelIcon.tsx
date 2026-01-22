@@ -17,4 +17,3 @@ export function SentinelIcon({ className, alt, ...props }: SentinelIconProps) {
 }
 
 export default SentinelIcon;
-

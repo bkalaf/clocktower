@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/snakecharmer.png?url';
 export type SnakecharmerTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function SnakecharmerToken(props: SnakecharmerTokenProps) {
-    return <Token name='Snake Charmer' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Snake Charmer'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default SnakecharmerToken;
-

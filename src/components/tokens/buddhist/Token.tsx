@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/buddhist.png?url';
 export type BuddhistTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function BuddhistToken(props: BuddhistTokenProps) {
-    return <Token name='Buddhist' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Buddhist'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default BuddhistToken;
-

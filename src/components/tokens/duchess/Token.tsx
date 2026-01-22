@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/duchess.png?url';
 export type DuchessTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function DuchessToken(props: DuchessTokenProps) {
-    return <Token name='Duchess' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Duchess'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default DuchessToken;
-

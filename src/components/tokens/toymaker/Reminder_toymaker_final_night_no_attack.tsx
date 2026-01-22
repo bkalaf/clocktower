@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderToymakerFinalNightNoAttackProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderToymakerFinalNightNoAttack(props: ReminderToymakerFinalNightNoAttackProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderToymakerFinalNightNoAttack;
-

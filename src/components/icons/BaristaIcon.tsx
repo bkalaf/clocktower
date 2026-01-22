@@ -17,4 +17,3 @@ export function BaristaIcon({ className, alt, ...props }: BaristaIconProps) {
 }
 
 export default BaristaIcon;
-

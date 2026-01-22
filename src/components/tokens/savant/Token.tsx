@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/savant.png?url';
 export type SavantTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function SavantToken(props: SavantTokenProps) {
-    return <Token name='Savant' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Savant'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default SavantToken;
-

@@ -17,4 +17,3 @@ export function DamselIcon({ className, alt, ...props }: DamselIconProps) {
 }
 
 export default DamselIcon;
-

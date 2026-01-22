@@ -32,9 +32,10 @@ export function snapshotToUpsertArgs(actor: ActorRefFrom<typeof roomMachine>): R
         _id: context._id,
         allowTravellers: context.allowTravellers,
         banner: context.banner,
-        connectedUserIds: Array.isArray(context.connectedUserIds)
-            ? context.connectedUserIds
-            : Array.from(context.connectedUserIds ?? []),
+        connectedUserIds:
+            Array.isArray(context.connectedUserIds) ?
+                context.connectedUserIds
+            :   Array.from(context.connectedUserIds ?? []),
         endedAt: context.endedAt,
         hostUserId: context.hostUserId,
         maxPlayers: context.maxPlayers,

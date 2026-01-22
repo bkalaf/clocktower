@@ -17,4 +17,3 @@ export function ProfessorIcon({ className, alt, ...props }: ProfessorIconProps) 
 }
 
 export default ProfessorIcon;
-

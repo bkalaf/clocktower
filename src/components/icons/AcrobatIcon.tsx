@@ -17,4 +17,3 @@ export function AcrobatIcon({ className, alt, ...props }: AcrobatIconProps) {
 }
 
 export default AcrobatIcon;
-

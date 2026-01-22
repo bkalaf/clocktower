@@ -17,4 +17,3 @@ export function DeusexfiascoIcon({ className, alt, ...props }: DeusexfiascoIconP
 }
 
 export default DeusexfiascoIcon;
-

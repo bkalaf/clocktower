@@ -17,4 +17,3 @@ export function GunslingerIcon({ className, alt, ...props }: GunslingerIconProps
 }
 
 export default GunslingerIcon;
-

@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/scarletwoman.png?url';
 export type ScarletwomanTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function ScarletwomanToken(props: ScarletwomanTokenProps) {
-    return <Token name='Scarlet Woman' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Scarlet Woman'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default ScarletwomanToken;
-

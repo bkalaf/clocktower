@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/magician.png?url';
 export type MagicianTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function MagicianToken(props: MagicianTokenProps) {
-    return <Token name='Magician' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Magician'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default MagicianToken;
-

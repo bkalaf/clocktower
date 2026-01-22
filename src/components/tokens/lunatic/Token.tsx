@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/lunatic.png?url';
 export type LunaticTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function LunaticToken(props: LunaticTokenProps) {
-    return <Token name='Lunatic' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Lunatic'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default LunaticToken;
-

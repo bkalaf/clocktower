@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderWitchCursedProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderWitchCursed(props: ReminderWitchCursedProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderWitchCursed;
-

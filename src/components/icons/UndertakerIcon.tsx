@@ -17,4 +17,3 @@ export function UndertakerIcon({ className, alt, ...props }: UndertakerIconProps
 }
 
 export default UndertakerIcon;
-

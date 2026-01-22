@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/fortuneteller.png?url';
 export type FortunetellerTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function FortunetellerToken(props: FortunetellerTokenProps) {
-    return <Token name='Fortune Teller' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Fortune Teller'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default FortunetellerToken;
-

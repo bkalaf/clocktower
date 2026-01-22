@@ -17,4 +17,3 @@ export function EviltwinIcon({ className, alt, ...props }: EviltwinIconProps) {
 }
 
 export default EviltwinIcon;
-

@@ -17,4 +17,3 @@ export function ImpIcon({ className, alt, ...props }: ImpIconProps) {
 }
 
 export default ImpIcon;
-

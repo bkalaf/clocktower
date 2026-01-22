@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderFishermanNoAbilityProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderFishermanNoAbility(props: ReminderFishermanNoAbilityProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderFishermanNoAbility;
-

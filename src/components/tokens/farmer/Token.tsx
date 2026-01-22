@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/farmer.png?url';
 export type FarmerTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function FarmerToken(props: FarmerTokenProps) {
-    return <Token name='Farmer' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Farmer'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default FarmerToken;
-

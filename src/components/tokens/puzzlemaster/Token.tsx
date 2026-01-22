@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/puzzlemaster.png?url';
 export type PuzzlemasterTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function PuzzlemasterToken(props: PuzzlemasterTokenProps) {
-    return <Token name='Puzzlemaster' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Puzzlemaster'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default PuzzlemasterToken;
-

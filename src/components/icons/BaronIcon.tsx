@@ -17,4 +17,3 @@ export function BaronIcon({ className, alt, ...props }: BaronIconProps) {
 }
 
 export default BaronIcon;
-

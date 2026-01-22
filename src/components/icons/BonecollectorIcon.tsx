@@ -17,4 +17,3 @@ export function BonecollectorIcon({ className, alt, ...props }: BonecollectorIco
 }
 
 export default BonecollectorIcon;
-

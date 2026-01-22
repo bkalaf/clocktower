@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 // src/routes/_splash/_rooms/rooms/index.tsx
 import { createFileRoute } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';

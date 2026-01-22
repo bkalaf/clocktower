@@ -17,4 +17,3 @@ export function PukkaIcon({ className, alt, ...props }: PukkaIconProps) {
 }
 
 export default PukkaIcon;
-

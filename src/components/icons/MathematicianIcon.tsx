@@ -17,4 +17,3 @@ export function MathematicianIcon({ className, alt, ...props }: MathematicianIco
 }
 
 export default MathematicianIcon;
-

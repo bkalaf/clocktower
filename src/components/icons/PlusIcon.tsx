@@ -17,4 +17,3 @@ export function PlusIcon({ className, alt, ...props }: PlusIconProps) {
 }
 
 export default PlusIcon;
-

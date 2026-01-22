@@ -17,4 +17,3 @@ export function SnitchIcon({ className, alt, ...props }: SnitchIconProps) {
 }
 
 export default SnitchIcon;
-

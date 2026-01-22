@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/poisoner.png?url';
 export type PoisonerTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function PoisonerToken(props: PoisonerTokenProps) {
-    return <Token name='Poisoner' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Poisoner'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default PoisonerToken;
-

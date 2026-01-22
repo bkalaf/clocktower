@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderMezephelesTurnsEvilProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderMezephelesTurnsEvil(props: ReminderMezephelesTurnsEvilProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderMezephelesTurnsEvil;
-

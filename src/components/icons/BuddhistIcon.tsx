@@ -17,4 +17,3 @@ export function BuddhistIcon({ className, alt, ...props }: BuddhistIconProps) {
 }
 
 export default BuddhistIcon;
-

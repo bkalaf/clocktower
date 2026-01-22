@@ -17,4 +17,3 @@ export function SailorIcon({ className, alt, ...props }: SailorIconProps) {
 }
 
 export default SailorIcon;
-

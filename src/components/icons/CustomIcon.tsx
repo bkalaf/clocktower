@@ -17,4 +17,3 @@ export function CustomIcon({ className, alt, ...props }: CustomIconProps) {
 }
 
 export default CustomIcon;
-

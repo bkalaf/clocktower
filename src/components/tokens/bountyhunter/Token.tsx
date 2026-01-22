@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/bountyhunter.png?url';
 export type BountyhunterTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function BountyhunterToken(props: BountyhunterTokenProps) {
-    return <Token name='Bounty Hunter' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Bounty Hunter'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default BountyhunterToken;
-

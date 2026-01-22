@@ -17,4 +17,3 @@ export function ButlerIcon({ className, alt, ...props }: ButlerIconProps) {
 }
 
 export default ButlerIcon;
-

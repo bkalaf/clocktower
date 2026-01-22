@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/empath.png?url';
 export type EmpathTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function EmpathToken(props: EmpathTokenProps) {
-    return <Token name='Empath' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Empath'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default EmpathToken;
-

@@ -17,4 +17,3 @@ export function PacifistIcon({ className, alt, ...props }: PacifistIconProps) {
 }
 
 export default PacifistIcon;
-

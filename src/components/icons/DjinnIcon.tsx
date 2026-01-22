@@ -17,4 +17,3 @@ export function DjinnIcon({ className, alt, ...props }: DjinnIconProps) {
 }
 
 export default DjinnIcon;
-

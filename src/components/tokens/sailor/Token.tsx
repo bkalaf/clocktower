@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/sailor.png?url';
 export type SailorTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function SailorToken(props: SailorTokenProps) {
-    return <Token name='Sailor' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Sailor'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default SailorToken;
-

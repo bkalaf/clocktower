@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/spy.png?url';
 export type SpyTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function SpyToken(props: SpyTokenProps) {
-    return <Token name='Spy' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Spy'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default SpyToken;
-

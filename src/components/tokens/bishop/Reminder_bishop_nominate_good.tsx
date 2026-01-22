@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderBishopNominateGoodProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderBishopNominateGood(props: ReminderBishopNominateGoodProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderBishopNominateGood;
-

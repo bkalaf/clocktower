@@ -17,4 +17,3 @@ export function BountyhunterIcon({ className, alt, ...props }: BountyhunterIconP
 }
 
 export default BountyhunterIcon;
-

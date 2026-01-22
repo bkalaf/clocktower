@@ -17,4 +17,3 @@ export function ButcherIcon({ className, alt, ...props }: ButcherIconProps) {
 }
 
 export default ButcherIcon;
-

@@ -17,4 +17,3 @@ export function PoliticianIcon({ className, alt, ...props }: PoliticianIconProps
 }
 
 export default PoliticianIcon;
-

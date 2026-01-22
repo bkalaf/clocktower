@@ -17,4 +17,3 @@ export function FabledIcon({ className, alt, ...props }: FabledIconProps) {
 }
 
 export default FabledIcon;
-

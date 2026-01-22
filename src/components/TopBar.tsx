@@ -42,7 +42,7 @@ export function CreateRoomButton() {
 export function TopBar({ isAuth, username }: { isAuth: boolean; username?: string }) {
     const navigate = useNavigate();
     const { open } = useModal();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     console.log(`isAuth`, isAuth);
     const handleLogin = useCallback(() => {
         navigate({

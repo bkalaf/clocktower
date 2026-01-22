@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/po.png?url';
 export type PoTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function PoToken(props: PoTokenProps) {
-    return <Token name='Po' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Po'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default PoToken;
-

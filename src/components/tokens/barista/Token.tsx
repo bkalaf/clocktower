@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/barista.png?url';
 export type BaristaTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function BaristaToken(props: BaristaTokenProps) {
-    return <Token name='Barista' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Barista'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default BaristaToken;
-

@@ -3,11 +3,7 @@
 import { UseFormReturn } from 'react-hook-form';
 import z from 'zod';
 
-const CreateRoomFormInput = z.object({
-    
-})
+const CreateRoomFormInput = z.object({});
 function CreateRoomForm() {
-    return function (form: UseFormReturn<CreateRoomFormInput>) {
-        
-    }
+    return function (form: UseFormReturn<CreateRoomFormInput>) {};
 }

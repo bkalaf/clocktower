@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/philosopher.png?url';
 export type PhilosopherTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function PhilosopherToken(props: PhilosopherTokenProps) {
-    return <Token name='Philosopher' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Philosopher'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default PhilosopherToken;
-

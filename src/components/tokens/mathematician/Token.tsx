@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/mathematician.png?url';
 export type MathematicianTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function MathematicianToken(props: MathematicianTokenProps) {
-    return <Token name='Mathematician' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Mathematician'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default MathematicianToken;
-

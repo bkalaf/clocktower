@@ -17,4 +17,3 @@ export function ShabalothIcon({ className, alt, ...props }: ShabalothIconProps) 
 }
 
 export default ShabalothIcon;
-

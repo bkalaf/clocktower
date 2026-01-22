@@ -17,4 +17,3 @@ export function LeviathanIcon({ className, alt, ...props }: LeviathanIconProps) 
 }
 
 export default LeviathanIcon;
-

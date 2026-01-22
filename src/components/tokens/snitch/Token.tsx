@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/snitch.png?url';
 export type SnitchTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function SnitchToken(props: SnitchTokenProps) {
-    return <Token name='Snitch' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Snitch'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default SnitchToken;
-

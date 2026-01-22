@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/gunslinger.png?url';
 export type GunslingerTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function GunslingerToken(props: GunslingerTokenProps) {
-    return <Token name='Gunslinger' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Gunslinger'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default GunslingerToken;
-

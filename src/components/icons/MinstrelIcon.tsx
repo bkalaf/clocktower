@@ -17,4 +17,3 @@ export function MinstrelIcon({ className, alt, ...props }: MinstrelIconProps) {
 }
 
 export default MinstrelIcon;
-

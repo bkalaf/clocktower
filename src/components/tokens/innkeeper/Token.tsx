@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/innkeeper.png?url';
 export type InnkeeperTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function InnkeeperToken(props: InnkeeperTokenProps) {
-    return <Token name='Innkeeper' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Innkeeper'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default InnkeeperToken;
-

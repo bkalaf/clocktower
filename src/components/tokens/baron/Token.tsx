@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/baron.png?url';
 export type BaronTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function BaronToken(props: BaronTokenProps) {
-    return <Token name='Baron' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Baron'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default BaronToken;
-

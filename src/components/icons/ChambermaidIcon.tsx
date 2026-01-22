@@ -17,4 +17,3 @@ export function ChambermaidIcon({ className, alt, ...props }: ChambermaidIconPro
 }
 
 export default ChambermaidIcon;
-

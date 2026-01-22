@@ -17,4 +17,3 @@ export function GangsterIcon({ className, alt, ...props }: GangsterIconProps) {
 }
 
 export default GangsterIcon;
-

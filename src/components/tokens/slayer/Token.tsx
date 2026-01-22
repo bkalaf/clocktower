@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/slayer.png?url';
 export type SlayerTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function SlayerToken(props: SlayerTokenProps) {
-    return <Token name='Slayer' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Slayer'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default SlayerToken;
-

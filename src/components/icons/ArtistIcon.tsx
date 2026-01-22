@@ -17,4 +17,3 @@ export function ArtistIcon({ className, alt, ...props }: ArtistIconProps) {
 }
 
 export default ArtistIcon;
-

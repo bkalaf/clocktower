@@ -17,4 +17,3 @@ export function BalloonistIcon({ className, alt, ...props }: BalloonistIconProps
 }
 
 export default BalloonistIcon;
-

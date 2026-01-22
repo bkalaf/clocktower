@@ -1,7 +1,14 @@
 // src/components/townsquare/modals/RolesModal.tsx
 import * as React from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from '@/components/ui/dialog';
 import { modalBackgroundStyle } from '@/components/modals/modalStyles';
 import { useTownSquare } from '@/state/TownSquareContext';
 
@@ -14,7 +21,10 @@ export function RolesModal({ open, onOpenChange }: Props) {
     const { players, actions } = useTownSquare();
 
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog
+            open={open}
+            onOpenChange={onOpenChange}
+        >
             <DialogContent
                 className='max-w-3xl rounded-3xl border border-white/20 bg-black/80'
                 style={modalBackgroundStyle}
@@ -31,7 +41,9 @@ export function RolesModal({ open, onOpenChange }: Props) {
                             key={player.id}
                             className='flex flex-col rounded-2xl border border-white/10 bg-slate-900/40 p-4 text-sm text-white/80'
                         >
-                            <div className='text-[0.65rem] uppercase tracking-[0.3em] text-slate-400'>{player.name}</div>
+                            <div className='text-[0.65rem] uppercase tracking-[0.3em] text-slate-400'>
+                                {player.name}
+                            </div>
                             <div className='flex items-center justify-between text-lg font-semibold uppercase tracking-[0.25em]'>
                                 <span>{player.role.name}</span>
                                 <Button
@@ -47,7 +59,10 @@ export function RolesModal({ open, onOpenChange }: Props) {
                     ))}
                 </div>
                 <DialogFooter className='mt-4 gap-2'>
-                    <Button variant='outline' onClick={() => onOpenChange(false)}>
+                    <Button
+                        variant='outline'
+                        onClick={() => onOpenChange(false)}
+                    >
                         Close
                     </Button>
                 </DialogFooter>

@@ -17,4 +17,3 @@ export function RevolutionaryIcon({ className, alt, ...props }: RevolutionaryIco
 }
 
 export default RevolutionaryIcon;
-

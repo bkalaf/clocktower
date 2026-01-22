@@ -17,4 +17,3 @@ export function ScapegoatIcon({ className, alt, ...props }: ScapegoatIconProps) 
 }
 
 export default ScapegoatIcon;
-

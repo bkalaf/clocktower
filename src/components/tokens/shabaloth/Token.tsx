@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/shabaloth.png?url';
 export type ShabalothTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function ShabalothToken(props: ShabalothTokenProps) {
-    return <Token name='Shabaloth' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Shabaloth'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default ShabalothToken;
-

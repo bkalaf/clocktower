@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderDuchessFalseInfoProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderDuchessFalseInfo(props: ReminderDuchessFalseInfoProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderDuchessFalseInfo;
-

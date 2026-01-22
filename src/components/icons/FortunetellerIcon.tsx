@@ -17,4 +17,3 @@ export function FortunetellerIcon({ className, alt, ...props }: FortunetellerIco
 }
 
 export default FortunetellerIcon;
-

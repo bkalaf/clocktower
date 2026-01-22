@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderCourtierNoAbilityProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderCourtierNoAbility(props: ReminderCourtierNoAbilityProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderCourtierNoAbility;
-

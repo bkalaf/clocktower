@@ -17,4 +17,3 @@ export function MezephelesIcon({ className, alt, ...props }: MezephelesIconProps
 }
 
 export default MezephelesIcon;
-

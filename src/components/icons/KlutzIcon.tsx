@@ -17,4 +17,3 @@ export function KlutzIcon({ className, alt, ...props }: KlutzIconProps) {
 }
 
 export default KlutzIcon;
-

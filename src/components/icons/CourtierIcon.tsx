@@ -17,4 +17,3 @@ export function CourtierIcon({ className, alt, ...props }: CourtierIconProps) {
 }
 
 export default CourtierIcon;
-

@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/angel.png?url';
 export type AngelTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function AngelToken(props: AngelTokenProps) {
-    return <Token name='Angel' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Angel'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default AngelToken;
-

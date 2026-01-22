@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/vigormortis.png?url';
 export type VigormortisTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function VigormortisToken(props: VigormortisTokenProps) {
-    return <Token name='Vigormortis' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Vigormortis'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default VigormortisToken;
-

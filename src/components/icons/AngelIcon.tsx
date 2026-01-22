@@ -17,4 +17,3 @@ export function AngelIcon({ className, alt, ...props }: AngelIconProps) {
 }
 
 export default AngelIcon;
-

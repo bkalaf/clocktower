@@ -17,4 +17,3 @@ export function BoomdandyIcon({ className, alt, ...props }: BoomdandyIconProps) 
 }
 
 export default BoomdandyIcon;
-

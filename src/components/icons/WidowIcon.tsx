@@ -17,4 +17,3 @@ export function WidowIcon({ className, alt, ...props }: WidowIconProps) {
 }
 
 export default WidowIcon;
-

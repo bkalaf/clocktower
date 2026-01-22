@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderLunaticAttack1Props = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderLunaticAttack1(props: ReminderLunaticAttack1Props) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderLunaticAttack1;
-

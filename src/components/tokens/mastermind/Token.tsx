@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/mastermind.png?url';
 export type MastermindTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function MastermindToken(props: MastermindTokenProps) {
-    return <Token name='Mastermind' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Mastermind'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default MastermindToken;
-

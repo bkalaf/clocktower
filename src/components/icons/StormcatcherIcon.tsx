@@ -17,4 +17,3 @@ export function StormcatcherIcon({ className, alt, ...props }: StormcatcherIconP
 }
 
 export default StormcatcherIcon;
-

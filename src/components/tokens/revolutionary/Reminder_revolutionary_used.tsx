@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderRevolutionaryUsedProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderRevolutionaryUsed(props: ReminderRevolutionaryUsedProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderRevolutionaryUsed;
-

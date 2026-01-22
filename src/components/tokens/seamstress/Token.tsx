@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/seamstress.png?url';
 export type SeamstressTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function SeamstressToken(props: SeamstressTokenProps) {
-    return <Token name='Seamstress' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Seamstress'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default SeamstressToken;
-

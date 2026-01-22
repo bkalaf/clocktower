@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderGrandmotherGrandchildProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderGrandmotherGrandchild(props: ReminderGrandmotherGrandchildProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderGrandmotherGrandchild;
-

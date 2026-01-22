@@ -17,4 +17,3 @@ export function MatronIcon({ className, alt, ...props }: MatronIconProps) {
 }
 
 export default MatronIcon;
-

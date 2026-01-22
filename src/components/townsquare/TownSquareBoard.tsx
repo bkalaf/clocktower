@@ -116,24 +116,34 @@ export function TownSquareBoard() {
             </div>
 
             <div className='grid gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80'>
-                {selectedPlayer ? (
+                {selectedPlayer ?
                     <>
                         <p className='font-semibold uppercase tracking-[0.3em]'>{selectedPlayer.name}</p>
                         <div className='flex flex-wrap gap-2'>
-                            <Button variant='outline' size='sm' onClick={handleToggleDead}>
+                            <Button
+                                variant='outline'
+                                size='sm'
+                                onClick={handleToggleDead}
+                            >
                                 {selectedPlayer.isDead ? 'Revive' : 'Mark Dead'}
                             </Button>
-                            <Button variant='outline' size='sm' onClick={handleToggleMarked}>
+                            <Button
+                                variant='outline'
+                                size='sm'
+                                onClick={handleToggleMarked}
+                            >
                                 {selectedPlayer.isMarked ? 'Unmark' : 'Mark for attention'}
                             </Button>
-                            <Button variant='outline' size='sm' onClick={handleAddReminder}>
+                            <Button
+                                variant='outline'
+                                size='sm'
+                                onClick={handleAddReminder}
+                            >
                                 Add Reminder
                             </Button>
                         </div>
                     </>
-                ) : (
-                    <p className='uppercase tracking-[0.3em] text-white/70'>Select a seat to inspect a player.</p>
-                )}
+                :   <p className='uppercase tracking-[0.3em] text-white/70'>Select a seat to inspect a player.</p>}
             </div>
         </div>
     );
@@ -159,7 +169,11 @@ function SeatToken({ player, style, nightOrder, onClick }: SeatTokenProps) {
                     onClick={onClick}
                     className='relative flex items-center justify-center rounded-full border-4 border-slate-900/80 p-2 shadow-[0_15px_30px_rgba(0,0,0,0.5)] transition hover:border-emerald-400/80'
                 >
-                    <Token name={player.role.name} image={iconSrc} size={150} />
+                    <Token
+                        name={player.role.name}
+                        image={iconSrc}
+                        size={150}
+                    />
                 </button>
                 {nightOrder && (
                     <div className='pointer-events-none absolute bottom-2 flex gap-1 text-[0.55rem] uppercase tracking-[0.35em] text-white/70'>

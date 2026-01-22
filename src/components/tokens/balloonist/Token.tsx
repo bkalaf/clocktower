@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/balloonist.png?url';
 export type BalloonistTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function BalloonistToken(props: BalloonistTokenProps) {
-    return <Token name='Balloonist' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Balloonist'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default BalloonistToken;
-

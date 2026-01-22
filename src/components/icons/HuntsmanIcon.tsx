@@ -17,4 +17,3 @@ export function HuntsmanIcon({ className, alt, ...props }: HuntsmanIconProps) {
 }
 
 export default HuntsmanIcon;
-

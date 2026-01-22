@@ -17,4 +17,3 @@ export function SweetheartIcon({ className, alt, ...props }: SweetheartIconProps
 }
 
 export default SweetheartIcon;
-

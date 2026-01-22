@@ -17,4 +17,3 @@ export function HereticIcon({ className, alt, ...props }: HereticIconProps) {
 }
 
 export default HereticIcon;
-

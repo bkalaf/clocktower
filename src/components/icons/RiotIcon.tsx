@@ -17,4 +17,3 @@ export function RiotIcon({ className, alt, ...props }: RiotIconProps) {
 }
 
 export default RiotIcon;
-

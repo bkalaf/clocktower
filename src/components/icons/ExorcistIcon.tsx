@@ -17,4 +17,3 @@ export function ExorcistIcon({ className, alt, ...props }: ExorcistIconProps) {
 }
 
 export default ExorcistIcon;
-

@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/engineer.png?url';
 export type EngineerTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function EngineerToken(props: EngineerTokenProps) {
-    return <Token name='Engineer' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Engineer'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default EngineerToken;
-

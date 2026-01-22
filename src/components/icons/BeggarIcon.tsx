@@ -17,4 +17,3 @@ export function BeggarIcon({ className, alt, ...props }: BeggarIconProps) {
 }
 
 export default BeggarIcon;
-

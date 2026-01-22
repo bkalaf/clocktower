@@ -17,4 +17,3 @@ export function PuzzlemasterIcon({ className, alt, ...props }: PuzzlemasterIconP
 }
 
 export default PuzzlemasterIcon;
-

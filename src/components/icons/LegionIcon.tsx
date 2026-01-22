@@ -17,4 +17,3 @@ export function LegionIcon({ className, alt, ...props }: LegionIconProps) {
 }
 
 export default LegionIcon;
-

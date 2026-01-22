@@ -29,15 +29,42 @@ type Props = {
 export function TownSquareModalHost({ modalKind, onClose }: Props) {
     return (
         <>
-            <EditionModal open={modalKind === 'edition'} onOpenChange={(open) => !open && onClose()} />
-            <FabledModal open={modalKind === 'fabled'} onOpenChange={(open) => !open && onClose()} />
-            <GameStateModal open={modalKind === 'gameState'} onOpenChange={(open) => !open && onClose()} />
-            <NightOrderModal open={modalKind === 'nightOrder'} onOpenChange={(open) => !open && onClose()} />
-            <ReferenceModal open={modalKind === 'reference'} onOpenChange={(open) => !open && onClose()} />
-            <ReminderModal open={modalKind === 'reminder'} onOpenChange={(open) => !open && onClose()} />
-            <RoleModal open={modalKind === 'role'} onOpenChange={(open) => !open && onClose()} />
-            <RolesModal open={modalKind === 'roles'} onOpenChange={(open) => !open && onClose()} />
-            <VoteHistoryModal open={modalKind === 'voteHistory'} onOpenChange={(open) => !open && onClose()} />
+            <EditionModal
+                open={modalKind === 'edition'}
+                onOpenChange={(open) => !open && onClose()}
+            />
+            <FabledModal
+                open={modalKind === 'fabled'}
+                onOpenChange={(open) => !open && onClose()}
+            />
+            <GameStateModal
+                open={modalKind === 'gameState'}
+                onOpenChange={(open) => !open && onClose()}
+            />
+            <NightOrderModal
+                open={modalKind === 'nightOrder'}
+                onOpenChange={(open) => !open && onClose()}
+            />
+            <ReferenceModal
+                open={modalKind === 'reference'}
+                onOpenChange={(open) => !open && onClose()}
+            />
+            <ReminderModal
+                open={modalKind === 'reminder'}
+                onOpenChange={(open) => !open && onClose()}
+            />
+            <RoleModal
+                open={modalKind === 'role'}
+                onOpenChange={(open) => !open && onClose()}
+            />
+            <RolesModal
+                open={modalKind === 'roles'}
+                onOpenChange={(open) => !open && onClose()}
+            />
+            <VoteHistoryModal
+                open={modalKind === 'voteHistory'}
+                onOpenChange={(open) => !open && onClose()}
+            />
         </>
     );
 }

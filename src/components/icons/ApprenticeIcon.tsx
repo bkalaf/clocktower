@@ -17,4 +17,3 @@ export function ApprenticeIcon({ className, alt, ...props }: ApprenticeIconProps
 }
 
 export default ApprenticeIcon;
-

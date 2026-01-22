@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/djinn.png?url';
 export type DjinnTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function DjinnToken(props: DjinnTokenProps) {
-    return <Token name='Djinn' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Djinn'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default DjinnToken;
-

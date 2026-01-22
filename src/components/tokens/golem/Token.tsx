@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/golem.png?url';
 export type GolemTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function GolemToken(props: GolemTokenProps) {
-    return <Token name='Golem' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Golem'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default GolemToken;
-

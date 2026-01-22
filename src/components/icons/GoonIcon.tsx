@@ -17,4 +17,3 @@ export function GoonIcon({ className, alt, ...props }: GoonIconProps) {
 }
 
 export default GoonIcon;
-

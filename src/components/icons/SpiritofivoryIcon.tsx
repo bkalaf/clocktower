@@ -17,4 +17,3 @@ export function SpiritofivoryIcon({ className, alt, ...props }: SpiritofivoryIco
 }
 
 export default SpiritofivoryIcon;
-

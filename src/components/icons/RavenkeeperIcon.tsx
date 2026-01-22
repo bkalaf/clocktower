@@ -17,4 +17,3 @@ export function RavenkeeperIcon({ className, alt, ...props }: RavenkeeperIconPro
 }
 
 export default RavenkeeperIcon;
-

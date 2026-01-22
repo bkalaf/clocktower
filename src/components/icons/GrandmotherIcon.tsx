@@ -17,4 +17,3 @@ export function GrandmotherIcon({ className, alt, ...props }: GrandmotherIconPro
 }
 
 export default GrandmotherIcon;
-

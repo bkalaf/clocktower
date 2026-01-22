@@ -17,4 +17,3 @@ export function HarlotIcon({ className, alt, ...props }: HarlotIconProps) {
 }
 
 export default HarlotIcon;
-

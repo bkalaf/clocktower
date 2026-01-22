@@ -49,23 +49,43 @@ export function TownSquareVote() {
             <div className='mt-4 flex flex-wrap gap-2'>
                 {!session.isVoteInProgress && (
                     <>
-                        <Button variant='outline' size='sm' onClick={() => actions.lockVote(0)}>
+                        <Button
+                            variant='outline'
+                            size='sm'
+                            onClick={() => actions.lockVote(0)}
+                        >
                             Countdown
                         </Button>
-                        <Button variant='outline' size='sm' onClick={() => actions.setVoteInProgress(true)}>
+                        <Button
+                            variant='outline'
+                            size='sm'
+                            onClick={() => actions.setVoteInProgress(true)}
+                        >
                             Start Vote
                         </Button>
                     </>
                 )}
                 {session.isVoteInProgress && (
                     <>
-                        <Button variant='outline' size='sm' onClick={() => actions.lockVote()}>
+                        <Button
+                            variant='outline'
+                            size='sm'
+                            onClick={() => actions.lockVote()}
+                        >
                             Lock Next
                         </Button>
-                        <Button variant='outline' size='sm' onClick={() => actions.setVoteInProgress(false)}>
+                        <Button
+                            variant='outline'
+                            size='sm'
+                            onClick={() => actions.setVoteInProgress(false)}
+                        >
                             Pause
                         </Button>
-                        <Button variant='ghost' size='sm' onClick={() => actions.setVoteInProgress(false)}>
+                        <Button
+                            variant='ghost'
+                            size='sm'
+                            onClick={() => actions.setVoteInProgress(false)}
+                        >
                             Reset
                         </Button>
                     </>
@@ -81,9 +101,7 @@ export function TownSquareVote() {
                             nominee: nominee.name,
                             type: 'execution',
                             majority,
-                            votes: players
-                                .filter((player, index) => session.votes[index])
-                                .map((player) => player.name)
+                            votes: players.filter((player, index) => session.votes[index]).map((player) => player.name)
                         };
                         actions.addHistory(entry);
                         actions.setVoteInProgress(false);
@@ -96,10 +114,18 @@ export function TownSquareVote() {
             <div className='mt-3 flex items-center justify-between text-[0.65rem] text-slate-400'>
                 <span>Hand gestures</span>
                 <div className='flex gap-2'>
-                    <Button variant='outline' size='sm' onClick={() => handleVote(false)}>
+                    <Button
+                        variant='outline'
+                        size='sm'
+                        onClick={() => handleVote(false)}
+                    >
                         Hand DOWN
                     </Button>
-                    <Button variant='outline' size='sm' onClick={() => handleVote(true)}>
+                    <Button
+                        variant='outline'
+                        size='sm'
+                        onClick={() => handleVote(true)}
+                    >
                         Hand UP
                     </Button>
                 </div>

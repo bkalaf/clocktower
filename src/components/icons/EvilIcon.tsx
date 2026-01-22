@@ -17,4 +17,3 @@ export function EvilIcon({ className, alt, ...props }: EvilIconProps) {
 }
 
 export default EvilIcon;
-

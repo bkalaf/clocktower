@@ -17,4 +17,3 @@ export function InnkeeperIcon({ className, alt, ...props }: InnkeeperIconProps) 
 }
 
 export default InnkeeperIcon;
-

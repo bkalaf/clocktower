@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/mutant.png?url';
 export type MutantTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function MutantToken(props: MutantTokenProps) {
-    return <Token name='Mutant' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Mutant'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default MutantToken;
-

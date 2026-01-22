@@ -17,4 +17,3 @@ export function GoblinIcon({ className, alt, ...props }: GoblinIconProps) {
 }
 
 export default GoblinIcon;
-

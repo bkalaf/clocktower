@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/spiritofivory.png?url';
 export type SpiritofivoryTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function SpiritofivoryToken(props: SpiritofivoryTokenProps) {
-    return <Token name='Spirit of Ivory' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Spirit of Ivory'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default SpiritofivoryToken;
-

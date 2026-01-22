@@ -17,4 +17,3 @@ export function NobleIcon({ className, alt, ...props }: NobleIconProps) {
 }
 
 export default NobleIcon;
-

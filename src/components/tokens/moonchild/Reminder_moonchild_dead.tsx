@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderMoonchildDeadProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderMoonchildDead(props: ReminderMoonchildDeadProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderMoonchildDead;
-

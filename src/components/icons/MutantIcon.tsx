@@ -17,4 +17,3 @@ export function MutantIcon({ className, alt, ...props }: MutantIconProps) {
 }
 
 export default MutantIcon;
-

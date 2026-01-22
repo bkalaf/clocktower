@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/leviathan.png?url';
 export type LeviathanTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function LeviathanToken(props: LeviathanTokenProps) {
-    return <Token name='Leviathan' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Leviathan'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default LeviathanToken;
-

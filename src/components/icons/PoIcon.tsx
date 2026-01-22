@@ -17,4 +17,3 @@ export function PoIcon({ className, alt, ...props }: PoIconProps) {
 }
 
 export default PoIcon;
-

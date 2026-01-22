@@ -17,4 +17,3 @@ export function GolemIcon({ className, alt, ...props }: GolemIconProps) {
 }
 
 export default GolemIcon;
-

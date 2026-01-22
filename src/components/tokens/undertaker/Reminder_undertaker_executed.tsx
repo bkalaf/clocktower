@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderUndertakerExecutedProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderUndertakerExecuted(props: ReminderUndertakerExecutedProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderUndertakerExecuted;
-

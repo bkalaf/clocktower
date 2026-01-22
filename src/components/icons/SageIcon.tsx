@@ -17,4 +17,3 @@ export function SageIcon({ className, alt, ...props }: SageIconProps) {
 }
 
 export default SageIcon;
-

@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/king.png?url';
 export type KingTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function KingToken(props: KingTokenProps) {
-    return <Token name='King' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='King'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default KingToken;
-

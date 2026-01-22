@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderDamselGuessUsedProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderDamselGuessUsed(props: ReminderDamselGuessUsedProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderDamselGuessUsed;
-

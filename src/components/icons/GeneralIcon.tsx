@@ -17,4 +17,3 @@ export function GeneralIcon({ className, alt, ...props }: GeneralIconProps) {
 }
 
 export default GeneralIcon;
-

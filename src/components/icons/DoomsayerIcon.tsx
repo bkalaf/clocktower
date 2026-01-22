@@ -17,4 +17,3 @@ export function DoomsayerIcon({ className, alt, ...props }: DoomsayerIconProps) 
 }
 
 export default DoomsayerIcon;
-

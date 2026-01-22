@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/poppygrower.png?url';
 export type PoppygrowerTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function PoppygrowerToken(props: PoppygrowerTokenProps) {
-    return <Token name='Poppy Grower' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Poppy Grower'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default PoppygrowerToken;
-

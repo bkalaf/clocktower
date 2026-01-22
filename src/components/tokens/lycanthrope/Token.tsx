@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/lycanthrope.png?url';
 export type LycanthropeTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function LycanthropeToken(props: LycanthropeTokenProps) {
-    return <Token name='Lycanthrope' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Lycanthrope'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default LycanthropeToken;
-

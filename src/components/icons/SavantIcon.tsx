@@ -17,4 +17,3 @@ export function SavantIcon({ className, alt, ...props }: SavantIconProps) {
 }
 
 export default SavantIcon;
-

@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/sentinel.png?url';
 export type SentinelTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function SentinelToken(props: SentinelTokenProps) {
-    return <Token name='Sentinel' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Sentinel'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default SentinelToken;
-

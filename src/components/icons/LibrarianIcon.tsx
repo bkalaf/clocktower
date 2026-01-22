@@ -17,4 +17,3 @@ export function LibrarianIcon({ className, alt, ...props }: LibrarianIconProps) 
 }
 
 export default LibrarianIcon;
-

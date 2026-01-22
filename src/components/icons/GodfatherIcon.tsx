@@ -17,4 +17,3 @@ export function GodfatherIcon({ className, alt, ...props }: GodfatherIconProps) 
 }
 
 export default GodfatherIcon;
-

@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/oracle.png?url';
 export type OracleTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function OracleToken(props: OracleTokenProps) {
-    return <Token name='Oracle' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Oracle'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default OracleToken;
-

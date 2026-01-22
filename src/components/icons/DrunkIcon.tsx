@@ -17,4 +17,3 @@ export function DrunkIcon({ className, alt, ...props }: DrunkIconProps) {
 }
 
 export default DrunkIcon;
-

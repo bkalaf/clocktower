@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/minstrel.png?url';
 export type MinstrelTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function MinstrelToken(props: MinstrelTokenProps) {
-    return <Token name='Minstrel' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Minstrel'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default MinstrelToken;
-

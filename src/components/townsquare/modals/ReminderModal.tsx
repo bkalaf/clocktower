@@ -1,7 +1,14 @@
 // src/components/townsquare/modals/ReminderModal.tsx
 import * as React from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from '@/components/ui/dialog';
 import { ReminderToken } from '@/components/grimoire/ReminderToken';
 import { modalBackgroundStyle } from '@/components/modals/modalStyles';
 
@@ -29,7 +36,10 @@ type Props = {
 
 export function ReminderModal({ open, onOpenChange }: Props) {
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog
+            open={open}
+            onOpenChange={onOpenChange}
+        >
             <DialogContent
                 className='max-w-3xl rounded-3xl border border-white/20 bg-black/80'
                 style={modalBackgroundStyle}
@@ -57,7 +67,10 @@ export function ReminderModal({ open, onOpenChange }: Props) {
                     ))}
                 </div>
                 <DialogFooter className='mt-4 gap-2'>
-                    <Button variant='outline' onClick={() => onOpenChange(false)}>
+                    <Button
+                        variant='outline'
+                        onClick={() => onOpenChange(false)}
+                    >
                         Close
                     </Button>
                 </DialogFooter>

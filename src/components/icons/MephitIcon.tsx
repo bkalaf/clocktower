@@ -17,4 +17,3 @@ export function MephitIcon({ className, alt, ...props }: MephitIconProps) {
 }
 
 export default MephitIcon;
-

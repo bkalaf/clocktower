@@ -17,4 +17,3 @@ export function MinionIcon({ className, alt, ...props }: MinionIconProps) {
 }
 
 export default MinionIcon;
-

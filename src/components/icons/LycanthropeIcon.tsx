@@ -17,4 +17,3 @@ export function LycanthropeIcon({ className, alt, ...props }: LycanthropeIconPro
 }
 
 export default LycanthropeIcon;
-

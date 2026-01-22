@@ -17,4 +17,3 @@ export function BishopIcon({ className, alt, ...props }: BishopIconProps) {
 }
 
 export default BishopIcon;
-

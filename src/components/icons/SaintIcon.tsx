@@ -17,4 +17,3 @@ export function SaintIcon({ className, alt, ...props }: SaintIconProps) {
 }
 
 export default SaintIcon;
-

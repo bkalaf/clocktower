@@ -17,4 +17,3 @@ export function SlayerIcon({ className, alt, ...props }: SlayerIconProps) {
 }
 
 export default SlayerIcon;
-

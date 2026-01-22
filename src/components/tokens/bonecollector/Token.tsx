@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/bonecollector.png?url';
 export type BonecollectorTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function BonecollectorToken(props: BonecollectorTokenProps) {
-    return <Token name='Bone Collector' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Bone Collector'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default BonecollectorToken;
-

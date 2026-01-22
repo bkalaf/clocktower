@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/fool.png?url';
 export type FoolTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function FoolToken(props: FoolTokenProps) {
-    return <Token name='Fool' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Fool'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default FoolToken;
-

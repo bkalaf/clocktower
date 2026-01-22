@@ -17,4 +17,3 @@ export function ThiefIcon({ className, alt, ...props }: ThiefIconProps) {
 }
 
 export default ThiefIcon;
-

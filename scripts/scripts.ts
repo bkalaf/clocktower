@@ -171,7 +171,7 @@ async function main() {
         // 3) Extract scripts + normalize
         const items = extractScripts(parsed).map(toScriptish);
 
-        for await (const element of items.map(el => ScriptModel.insertOne(el))) {
+        for await (const element of items.map((el) => ScriptModel.insertOne(el))) {
             console.log(element);
         }
         // // 4) Insert

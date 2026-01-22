@@ -17,4 +17,3 @@ export function AlhadikhiaIcon({ className, alt, ...props }: AlhadikhiaIconProps
 }
 
 export default AlhadikhiaIcon;
-

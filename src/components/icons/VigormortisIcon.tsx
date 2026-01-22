@@ -17,4 +17,3 @@ export function VigormortisIcon({ className, alt, ...props }: VigormortisIconPro
 }
 
 export default VigormortisIcon;
-

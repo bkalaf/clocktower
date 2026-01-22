@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/grandmother.png?url';
 export type GrandmotherTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function GrandmotherToken(props: GrandmotherTokenProps) {
-    return <Token name='Grandmother' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Grandmother'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default GrandmotherToken;
-

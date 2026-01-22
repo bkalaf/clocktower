@@ -17,4 +17,3 @@ export function PoisonerIcon({ className, alt, ...props }: PoisonerIconProps) {
 }
 
 export default PoisonerIcon;
-

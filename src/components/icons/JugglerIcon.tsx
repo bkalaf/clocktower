@@ -17,4 +17,3 @@ export function JugglerIcon({ className, alt, ...props }: JugglerIconProps) {
 }
 
 export default JugglerIcon;
-

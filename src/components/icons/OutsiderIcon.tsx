@@ -17,4 +17,3 @@ export function OutsiderIcon({ className, alt, ...props }: OutsiderIconProps) {
 }
 
 export default OutsiderIcon;
-

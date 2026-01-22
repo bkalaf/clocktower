@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderBureaucrat3VotesProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderBureaucrat3Votes(props: ReminderBureaucrat3VotesProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderBureaucrat3Votes;
-

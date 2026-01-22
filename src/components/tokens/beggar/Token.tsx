@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/beggar.png?url';
 export type BeggarTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function BeggarToken(props: BeggarTokenProps) {
-    return <Token name='Beggar' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Beggar'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default BeggarToken;
-

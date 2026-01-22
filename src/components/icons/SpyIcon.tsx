@@ -17,4 +17,3 @@ export function SpyIcon({ className, alt, ...props }: SpyIconProps) {
 }
 
 export default SpyIcon;
-

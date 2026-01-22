@@ -17,4 +17,3 @@ export function ChefIcon({ className, alt, ...props }: ChefIconProps) {
 }
 
 export default ChefIcon;
-

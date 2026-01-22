@@ -17,4 +17,3 @@ export function MagicianIcon({ className, alt, ...props }: MagicianIconProps) {
 }
 
 export default MagicianIcon;
-

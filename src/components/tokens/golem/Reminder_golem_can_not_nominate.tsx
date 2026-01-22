@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderGolemCanNotNominateProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderGolemCanNotNominate(props: ReminderGolemCanNotNominateProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderGolemCanNotNominate;
-

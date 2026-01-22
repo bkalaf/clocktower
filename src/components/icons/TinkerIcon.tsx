@@ -17,4 +17,3 @@ export function TinkerIcon({ className, alt, ...props }: TinkerIconProps) {
 }
 
 export default TinkerIcon;
-

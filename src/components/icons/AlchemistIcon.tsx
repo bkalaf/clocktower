@@ -17,4 +17,3 @@ export function AlchemistIcon({ className, alt, ...props }: AlchemistIconProps) 
 }
 
 export default AlchemistIcon;
-

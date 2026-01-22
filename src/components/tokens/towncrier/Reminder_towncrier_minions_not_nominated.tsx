@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderTowncrierMinionsNotNominatedProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderTowncrierMinionsNotNominated(props: ReminderTowncrierMinionsNotNominatedProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderTowncrierMinionsNotNominated;
-

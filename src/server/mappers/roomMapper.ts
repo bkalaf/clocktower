@@ -3,7 +3,6 @@ import { idToString, omitUndefined, toIsoDate } from '@/server/db/dto';
 import type { RoomDocument, RoomDTO, RoomStatus, RoomVisibility } from '@/types/room';
 
 export function mapRoom(doc: RoomDocument): RoomDTO {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const anyDoc = doc;
     return omitUndefined({
         _id: idToString(anyDoc._id ?? anyDoc._id),

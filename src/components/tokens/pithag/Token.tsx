@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/pithag.png?url';
 export type PithagTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function PithagToken(props: PithagTokenProps) {
-    return <Token name='Pit-Hag' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Pit-Hag'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default PithagToken;
-

@@ -17,4 +17,3 @@ export function SeamstressIcon({ className, alt, ...props }: SeamstressIconProps
 }
 
 export default SeamstressIcon;
-

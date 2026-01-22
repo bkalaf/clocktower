@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/boomdandy.png?url';
 export type BoomdandyTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function BoomdandyToken(props: BoomdandyTokenProps) {
-    return <Token name='Boomdandy' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Boomdandy'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default BoomdandyToken;
-

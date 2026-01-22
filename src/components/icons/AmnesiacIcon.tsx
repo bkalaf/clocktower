@@ -17,4 +17,3 @@ export function AmnesiacIcon({ className, alt, ...props }: AmnesiacIconProps) {
 }
 
 export default AmnesiacIcon;
-

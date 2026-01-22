@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/klutz.png?url';
 export type KlutzTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function KlutzToken(props: KlutzTokenProps) {
-    return <Token name='Klutz' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Klutz'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default KlutzToken;
-

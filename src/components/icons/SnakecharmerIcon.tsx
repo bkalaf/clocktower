@@ -17,4 +17,3 @@ export function SnakecharmerIcon({ className, alt, ...props }: SnakecharmerIconP
 }
 
 export default SnakecharmerIcon;
-

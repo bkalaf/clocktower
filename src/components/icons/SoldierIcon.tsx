@@ -17,4 +17,3 @@ export function SoldierIcon({ className, alt, ...props }: SoldierIconProps) {
 }
 
 export default SoldierIcon;
-

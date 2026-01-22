@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderFibbinUsedProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderFibbinUsed(props: ReminderFibbinUsedProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderFibbinUsed;
-

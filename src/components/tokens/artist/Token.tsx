@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/artist.png?url';
 export type ArtistTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function ArtistToken(props: ArtistTokenProps) {
-    return <Token name='Artist' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Artist'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default ArtistToken;
-

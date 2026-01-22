@@ -17,4 +17,3 @@ export function FiddlerIcon({ className, alt, ...props }: FiddlerIconProps) {
 }
 
 export default FiddlerIcon;
-

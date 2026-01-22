@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/virgin.png?url';
 export type VirginTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function VirginToken(props: VirginTokenProps) {
-    return <Token name='Virgin' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Virgin'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default VirginToken;
-

@@ -17,4 +17,3 @@ export function GossipIcon({ className, alt, ...props }: GossipIconProps) {
 }
 
 export default GossipIcon;
-

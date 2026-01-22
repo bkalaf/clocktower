@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderMephitNoAbilityProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderMephitNoAbility(props: ReminderMephitNoAbilityProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderMephitNoAbility;
-

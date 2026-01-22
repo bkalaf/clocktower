@@ -17,4 +17,3 @@ export function XIcon({ className, alt, ...props }: XIconProps) {
 }
 
 export default XIcon;
-

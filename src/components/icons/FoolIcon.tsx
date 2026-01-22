@@ -17,4 +17,3 @@ export function FoolIcon({ className, alt, ...props }: FoolIconProps) {
 }
 
 export default FoolIcon;
-

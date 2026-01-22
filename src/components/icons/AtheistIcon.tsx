@@ -17,4 +17,3 @@ export function AtheistIcon({ className, alt, ...props }: AtheistIconProps) {
 }
 
 export default AtheistIcon;
-

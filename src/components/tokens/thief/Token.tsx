@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/thief.png?url';
 export type ThiefTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function ThiefToken(props: ThiefTokenProps) {
-    return <Token name='Thief' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Thief'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default ThiefToken;
-

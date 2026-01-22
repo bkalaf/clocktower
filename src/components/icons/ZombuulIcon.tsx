@@ -17,4 +17,3 @@ export function ZombuulIcon({ className, alt, ...props }: ZombuulIconProps) {
 }
 
 export default ZombuulIcon;
-

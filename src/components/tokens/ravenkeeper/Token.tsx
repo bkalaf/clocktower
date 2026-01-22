@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/ravenkeeper.png?url';
 export type RavenkeeperTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function RavenkeeperToken(props: RavenkeeperTokenProps) {
-    return <Token name='Ravenkeeper' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Ravenkeeper'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default RavenkeeperToken;
-

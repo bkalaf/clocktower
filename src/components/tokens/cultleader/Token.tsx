@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/cultleader.png?url';
 export type CultleaderTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function CultleaderToken(props: CultleaderTokenProps) {
-    return <Token name='Cult Leader' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Cult Leader'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default CultleaderToken;
-

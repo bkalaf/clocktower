@@ -17,4 +17,3 @@ export function TowncrierIcon({ className, alt, ...props }: TowncrierIconProps) 
 }
 
 export default TowncrierIcon;
-

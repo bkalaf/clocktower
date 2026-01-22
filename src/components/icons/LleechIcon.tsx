@@ -17,4 +17,3 @@ export function LleechIcon({ className, alt, ...props }: LleechIconProps) {
 }
 
 export default LleechIcon;
-

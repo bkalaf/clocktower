@@ -17,4 +17,3 @@ export function PixieIcon({ className, alt, ...props }: PixieIconProps) {
 }
 
 export default PixieIcon;
-

@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/goblin.png?url';
 export type GoblinTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function GoblinToken(props: GoblinTokenProps) {
-    return <Token name='Goblin' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Goblin'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default GoblinToken;
-

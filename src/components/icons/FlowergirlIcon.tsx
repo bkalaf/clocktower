@@ -17,4 +17,3 @@ export function FlowergirlIcon({ className, alt, ...props }: FlowergirlIconProps
 }
 
 export default FlowergirlIcon;
-

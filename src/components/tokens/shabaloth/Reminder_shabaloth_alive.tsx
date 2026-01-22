@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderShabalothAliveProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderShabalothAlive(props: ReminderShabalothAliveProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderShabalothAlive;
-

@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderStormcatcherSafeProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderStormcatcherSafe(props: ReminderStormcatcherSafeProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderStormcatcherSafe;
-

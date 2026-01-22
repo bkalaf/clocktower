@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/sage.png?url';
 export type SageTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function SageToken(props: SageTokenProps) {
-    return <Token name='Sage' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Sage'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default SageToken;
-

@@ -17,4 +17,3 @@ export function EngineerIcon({ className, alt, ...props }: EngineerIconProps) {
 }
 
 export default EngineerIcon;
-

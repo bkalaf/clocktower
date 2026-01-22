@@ -17,4 +17,3 @@ export function WitchIcon({ className, alt, ...props }: WitchIconProps) {
 }
 
 export default WitchIcon;
-

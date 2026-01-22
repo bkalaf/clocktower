@@ -17,4 +17,3 @@ export function KingIcon({ className, alt, ...props }: KingIconProps) {
 }
 
 export default KingIcon;
-

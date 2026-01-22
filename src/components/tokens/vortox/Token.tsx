@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/vortox.png?url';
 export type VortoxTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function VortoxToken(props: VortoxTokenProps) {
-    return <Token name='Vortox' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Vortox'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default VortoxToken;
-

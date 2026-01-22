@@ -17,4 +17,3 @@ export function GoodIcon({ className, alt, ...props }: GoodIconProps) {
 }
 
 export default GoodIcon;
-

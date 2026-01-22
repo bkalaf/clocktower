@@ -17,4 +17,3 @@ export function LunaticIcon({ className, alt, ...props }: LunaticIconProps) {
 }
 
 export default LunaticIcon;
-

@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderLibrarianOutsiderProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderLibrarianOutsider(props: ReminderLibrarianOutsiderProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderLibrarianOutsider;
-

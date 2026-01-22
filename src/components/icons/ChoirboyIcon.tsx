@@ -17,4 +17,3 @@ export function ChoirboyIcon({ className, alt, ...props }: ChoirboyIconProps) {
 }
 
 export default ChoirboyIcon;
-

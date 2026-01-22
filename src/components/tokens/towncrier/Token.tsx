@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/towncrier.png?url';
 export type TowncrierTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function TowncrierToken(props: TowncrierTokenProps) {
-    return <Token name='Town Crier' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Town Crier'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default TowncrierToken;
-

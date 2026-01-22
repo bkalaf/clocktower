@@ -17,4 +17,3 @@ export function FearmongerIcon({ className, alt, ...props }: FearmongerIconProps
 }
 
 export default FearmongerIcon;
-

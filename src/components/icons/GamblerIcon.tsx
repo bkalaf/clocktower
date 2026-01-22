@@ -17,4 +17,3 @@ export function GamblerIcon({ className, alt, ...props }: GamblerIconProps) {
 }
 
 export default GamblerIcon;
-

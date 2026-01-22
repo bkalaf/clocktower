@@ -17,4 +17,3 @@ export function DevilsadvocateIcon({ className, alt, ...props }: DevilsadvocateI
 }
 
 export default DevilsadvocateIcon;
-

@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/general.png?url';
 export type GeneralTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function GeneralToken(props: GeneralTokenProps) {
-    return <Token name='General' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='General'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default GeneralToken;
-

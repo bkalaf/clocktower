@@ -17,4 +17,3 @@ export function AssassinIcon({ className, alt, ...props }: AssassinIconProps) {
 }
 
 export default AssassinIcon;
-

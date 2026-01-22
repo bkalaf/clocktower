@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderPreacherAtASermonProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderPreacherAtASermon(props: ReminderPreacherAtASermonProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderPreacherAtASermon;
-

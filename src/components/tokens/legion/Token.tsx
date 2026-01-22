@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/legion.png?url';
 export type LegionTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function LegionToken(props: LegionTokenProps) {
-    return <Token name='Legion' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Legion'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default LegionToken;
-

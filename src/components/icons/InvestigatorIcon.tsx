@@ -17,4 +17,3 @@ export function InvestigatorIcon({ className, alt, ...props }: InvestigatorIconP
 }
 
 export default InvestigatorIcon;
-

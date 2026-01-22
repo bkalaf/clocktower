@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/damsel.png?url';
 export type DamselTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function DamselToken(props: DamselTokenProps) {
-    return <Token name='Damsel' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Damsel'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default DamselToken;
-

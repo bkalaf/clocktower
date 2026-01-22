@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/noble.png?url';
 export type NobleTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function NobleToken(props: NobleTokenProps) {
-    return <Token name='Noble' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Noble'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default NobleToken;
-

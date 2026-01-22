@@ -17,4 +17,3 @@ export function PithagIcon({ className, alt, ...props }: PithagIconProps) {
 }
 
 export default PithagIcon;
-

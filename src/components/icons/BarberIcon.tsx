@@ -17,4 +17,3 @@ export function BarberIcon({ className, alt, ...props }: BarberIconProps) {
 }
 
 export default BarberIcon;
-

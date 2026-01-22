@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/voudon.png?url';
 export type VoudonTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function VoudonToken(props: VoudonTokenProps) {
-    return <Token name='Voudon' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Voudon'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default VoudonToken;
-

@@ -17,4 +17,3 @@ export function TealadyIcon({ className, alt, ...props }: TealadyIconProps) {
 }
 
 export default TealadyIcon;
-

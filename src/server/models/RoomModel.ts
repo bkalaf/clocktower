@@ -143,4 +143,5 @@ roomSnapshotSchema.index({ endedAt: 1 });
 
 export type RoomSnapshotDocument = mongoose.HydratedDocument<RoomSnapshotDoc>;
 export type RoomSnapshotLean = mongoose.LeanDocument<RoomSnapshotDoc>;
-export const RoomModel = mongoose.models.RoomSnapshot ?? mongoose.model<RoomSnapshotDocument>('RoomSnapshot', roomSnapshotSchema);
+export const RoomModel =
+    mongoose.models.RoomSnapshot ?? mongoose.model<RoomSnapshotDocument>('RoomSnapshot', roomSnapshotSchema);

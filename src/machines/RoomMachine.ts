@@ -211,12 +211,12 @@ export const machine = setup({
     id: 'RoomMachine',
     type: 'parallel',
     on: {
-        ROOM_UPDATED: [{
-            type: 'applyRoomUpdate',
-            params: ({ context }) => ({
-                
-            })
-        }],
+        ROOM_UPDATED: [
+            {
+                type: 'applyRoomUpdate',
+                params: ({ context }) => ({})
+            }
+        ],
         PRESENCE_CHANGED: {
             actions: 'applyPresence'
         },

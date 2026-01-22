@@ -17,4 +17,3 @@ export function PreacherIcon({ className, alt, ...props }: PreacherIconProps) {
 }
 
 export default PreacherIcon;
-

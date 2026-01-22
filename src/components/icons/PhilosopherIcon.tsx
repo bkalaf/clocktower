@@ -17,4 +17,3 @@ export function PhilosopherIcon({ className, alt, ...props }: PhilosopherIconPro
 }
 
 export default PhilosopherIcon;
-

@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderInvestigatorMinionProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderInvestigatorMinion(props: ReminderInvestigatorMinionProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderInvestigatorMinion;
-

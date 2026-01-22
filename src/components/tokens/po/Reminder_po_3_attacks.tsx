@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderPo3AttacksProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderPo3Attacks(props: ReminderPo3AttacksProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderPo3Attacks;
-

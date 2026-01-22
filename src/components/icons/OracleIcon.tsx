@@ -17,4 +17,3 @@ export function OracleIcon({ className, alt, ...props }: OracleIconProps) {
 }
 
 export default OracleIcon;
-

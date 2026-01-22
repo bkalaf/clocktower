@@ -17,4 +17,3 @@ export function PsychopathIcon({ className, alt, ...props }: PsychopathIconProps
 }
 
 export default PsychopathIcon;
-

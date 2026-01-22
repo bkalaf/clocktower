@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/choirboy.png?url';
 export type ChoirboyTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function ChoirboyToken(props: ChoirboyTokenProps) {
-    return <Token name='Choirboy' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Choirboy'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default ChoirboyToken;
-

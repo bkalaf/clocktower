@@ -17,4 +17,3 @@ export function NightwatchmanIcon({ className, alt, ...props }: NightwatchmanIco
 }
 
 export default NightwatchmanIcon;
-

@@ -17,4 +17,3 @@ export function MayorIcon({ className, alt, ...props }: MayorIconProps) {
 }
 
 export default MayorIcon;
-

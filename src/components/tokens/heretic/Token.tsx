@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/heretic.png?url';
 export type HereticTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function HereticToken(props: HereticTokenProps) {
-    return <Token name='Heretic' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Heretic'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default HereticToken;
-

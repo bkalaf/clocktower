@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderJugglerCorrectProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderJugglerCorrect(props: ReminderJugglerCorrectProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderJugglerCorrect;
-

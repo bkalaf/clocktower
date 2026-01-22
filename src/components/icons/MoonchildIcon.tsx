@@ -17,4 +17,3 @@ export function MoonchildIcon({ className, alt, ...props }: MoonchildIconProps) 
 }
 
 export default MoonchildIcon;
-

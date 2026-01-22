@@ -17,4 +17,3 @@ export function CerenovusIcon({ className, alt, ...props }: CerenovusIconProps) 
 }
 
 export default CerenovusIcon;
-

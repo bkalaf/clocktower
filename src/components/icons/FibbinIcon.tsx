@@ -17,4 +17,3 @@ export function FibbinIcon({ className, alt, ...props }: FibbinIconProps) {
 }
 
 export default FibbinIcon;
-

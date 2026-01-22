@@ -17,4 +17,3 @@ export function RecluseIcon({ className, alt, ...props }: RecluseIconProps) {
 }
 
 export default RecluseIcon;
-

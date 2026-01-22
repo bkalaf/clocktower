@@ -291,7 +291,7 @@ export type TownSquareContextValue = {
 const TownSquareContext = React.createContext<TownSquareContextValue | undefined>(undefined);
 
 export function TownSquareProvider({ children }: { children: React.ReactNode }) {
-    console.log(`TownSquareProvider`)
+    console.log(`TownSquareProvider`);
     const [players, dispatchPlayers] = React.useReducer(playersReducer, initialPlayers);
     const [session, dispatchSession] = React.useReducer(sessionReducer, {
         ...initialSession,

@@ -17,4 +17,3 @@ export function FangguIcon({ className, alt, ...props }: FangguIconProps) {
 }
 
 export default FangguIcon;
-

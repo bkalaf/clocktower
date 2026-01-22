@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderPixieHasAbilityProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderPixieHasAbility(props: ReminderPixieHasAbilityProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderPixieHasAbility;
-

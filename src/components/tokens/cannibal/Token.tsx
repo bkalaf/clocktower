@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/cannibal.png?url';
 export type CannibalTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function CannibalToken(props: CannibalTokenProps) {
-    return <Token name='Cannibal' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Cannibal'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default CannibalToken;
-

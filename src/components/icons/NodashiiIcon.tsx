@@ -17,4 +17,3 @@ export function NodashiiIcon({ className, alt, ...props }: NodashiiIconProps) {
 }
 
 export default NodashiiIcon;
-

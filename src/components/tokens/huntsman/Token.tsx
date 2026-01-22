@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/huntsman.png?url';
 export type HuntsmanTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function HuntsmanToken(props: HuntsmanTokenProps) {
-    return <Token name='Huntsman' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Huntsman'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default HuntsmanToken;
-

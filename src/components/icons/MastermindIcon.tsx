@@ -17,4 +17,3 @@ export function MastermindIcon({ className, alt, ...props }: MastermindIconProps
 }
 
 export default MastermindIcon;
-

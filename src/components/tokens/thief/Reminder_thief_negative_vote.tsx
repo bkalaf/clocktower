@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderThiefNegativeVoteProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderThiefNegativeVote(props: ReminderThiefNegativeVoteProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderThiefNegativeVote;
-

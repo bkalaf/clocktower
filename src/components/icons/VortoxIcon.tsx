@@ -17,4 +17,3 @@ export function VortoxIcon({ className, alt, ...props }: VortoxIconProps) {
 }
 
 export default VortoxIcon;
-

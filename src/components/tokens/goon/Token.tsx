@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/goon.png?url';
 export type GoonTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function GoonToken(props: GoonTokenProps) {
-    return <Token name='Goon' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Goon'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default GoonToken;
-

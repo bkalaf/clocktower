@@ -17,4 +17,3 @@ export function MarionetteIcon({ className, alt, ...props }: MarionetteIconProps
 }
 
 export default MarionetteIcon;
-

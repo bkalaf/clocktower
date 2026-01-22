@@ -17,4 +17,3 @@ export function LilmonstaIcon({ className, alt, ...props }: LilmonstaIconProps) 
 }
 
 export default LilmonstaIcon;
-

@@ -17,4 +17,3 @@ export function EmpathIcon({ className, alt, ...props }: EmpathIconProps) {
 }
 
 export default EmpathIcon;
-

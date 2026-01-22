@@ -17,4 +17,3 @@ export function CannibalIcon({ className, alt, ...props }: CannibalIconProps) {
 }
 
 export default CannibalIcon;
-

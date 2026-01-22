@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/cerenovus.png?url';
 export type CerenovusTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function CerenovusToken(props: CerenovusTokenProps) {
-    return <Token name='Cerenovus' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Cerenovus'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default CerenovusToken;
-

@@ -17,4 +17,3 @@ export function JudgeIcon({ className, alt, ...props }: JudgeIconProps) {
 }
 
 export default JudgeIcon;
-

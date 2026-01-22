@@ -40,9 +40,8 @@ export function Form<TSchema extends z.ZodObject<any>>({
         navigate({ to: returnTo ?? '..', replace: true });
     }, [navigate, returnTo]);
     const form = useForm<z.infer<TSchema>>({
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         resolver: zodResolver(zodSchema) as any,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         defaultValues: defaultValues as any
     });
     const {

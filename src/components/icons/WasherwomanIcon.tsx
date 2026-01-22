@@ -17,4 +17,3 @@ export function WasherwomanIcon({ className, alt, ...props }: WasherwomanIconPro
 }
 
 export default WasherwomanIcon;
-

@@ -17,4 +17,3 @@ export function VirginIcon({ className, alt, ...props }: VirginIconProps) {
 }
 
 export default VirginIcon;
-

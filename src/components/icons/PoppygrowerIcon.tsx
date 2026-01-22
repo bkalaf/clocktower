@@ -17,4 +17,3 @@ export function PoppygrowerIcon({ className, alt, ...props }: PoppygrowerIconPro
 }
 
 export default PoppygrowerIcon;
-

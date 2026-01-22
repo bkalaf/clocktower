@@ -17,4 +17,3 @@ export function DeviantIcon({ className, alt, ...props }: DeviantIconProps) {
 }
 
 export default DeviantIcon;
-

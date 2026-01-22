@@ -17,4 +17,3 @@ export function CultleaderIcon({ className, alt, ...props }: CultleaderIconProps
 }
 
 export default CultleaderIcon;
-

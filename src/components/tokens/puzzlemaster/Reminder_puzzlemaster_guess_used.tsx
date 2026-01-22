@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderPuzzlemasterGuessUsedProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderPuzzlemasterGuessUsed(props: ReminderPuzzlemasterGuessUsedProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderPuzzlemasterGuessUsed;
-

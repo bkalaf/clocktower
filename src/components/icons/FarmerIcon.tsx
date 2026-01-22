@@ -17,4 +17,3 @@ export function FarmerIcon({ className, alt, ...props }: FarmerIconProps) {
 }
 
 export default FarmerIcon;
-

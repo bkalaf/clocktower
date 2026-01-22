@@ -17,4 +17,3 @@ export function VoudonIcon({ className, alt, ...props }: VoudonIconProps) {
 }
 
 export default VoudonIcon;
-

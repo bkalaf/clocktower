@@ -17,4 +17,3 @@ export function FishermanIcon({ className, alt, ...props }: FishermanIconProps) 
 }
 
 export default FishermanIcon;
-

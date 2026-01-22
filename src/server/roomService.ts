@@ -82,7 +82,8 @@ export function getRoomActor(roomId: string) {
 function createRoomMachine(room: Room) {
     const baseContext = roomMachine.getInitialState().context;
     const connectedUserIds = Array.isArray(room.connectedUserIds) ? room.connectedUserIds : [];
-    const storytellerUserIds = Array.isArray(room.storytellerUserIds) ? room.storytellerUserIds : baseContext.storytellerUserIds;
+    const storytellerUserIds =
+        Array.isArray(room.storytellerUserIds) ? room.storytellerUserIds : baseContext.storytellerUserIds;
     const plannedStartTime = room.plannedStartTime ?? baseContext.plannedStartTime;
 
     const context: RoomContext = {

@@ -17,4 +17,3 @@ export function BureaucratIcon({ className, alt, ...props }: BureaucratIconProps
 }
 
 export default BureaucratIcon;
-

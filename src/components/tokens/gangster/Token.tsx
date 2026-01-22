@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/gangster.png?url';
 export type GangsterTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function GangsterToken(props: GangsterTokenProps) {
-    return <Token name='Gangster' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Gangster'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default GangsterToken;
-

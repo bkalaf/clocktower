@@ -17,4 +17,3 @@ export function MonkIcon({ className, alt, ...props }: MonkIconProps) {
 }
 
 export default MonkIcon;
-

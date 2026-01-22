@@ -1,7 +1,14 @@
 // src/components/townsquare/modals/RoleModal.tsx
 import * as React from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle
+} from '@/components/ui/dialog';
 import { modalBackgroundStyle } from '@/components/modals/modalStyles';
 import { useTownSquare } from '@/state/TownSquareContext';
 
@@ -17,7 +24,10 @@ export function RoleModal({ open, onOpenChange }: Props) {
     if (!player) return null;
 
     return (
-        <Dialog open={open} onOpenChange={onOpenChange}>
+        <Dialog
+            open={open}
+            onOpenChange={onOpenChange}
+        >
             <DialogContent
                 className='max-w-3xl rounded-3xl border border-white/20 bg-black/80'
                 style={modalBackgroundStyle}
@@ -38,7 +48,10 @@ export function RoleModal({ open, onOpenChange }: Props) {
                     </div>
                 </div>
                 <DialogFooter className='mt-4 gap-2'>
-                    <Button variant='outline' onClick={() => onOpenChange(false)}>
+                    <Button
+                        variant='outline'
+                        onClick={() => onOpenChange(false)}
+                    >
                         Close
                     </Button>
                 </DialogFooter>

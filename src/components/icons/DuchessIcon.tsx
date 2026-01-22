@@ -17,4 +17,3 @@ export function DuchessIcon({ className, alt, ...props }: DuchessIconProps) {
 }
 
 export default DuchessIcon;
-

@@ -12,8 +12,12 @@ const reminderMeta = {
 export type ReminderLleechPoisonedProps = Omit<ReminderTokenProps, 'reminder'>;
 
 export function ReminderLleechPoisoned(props: ReminderLleechPoisonedProps) {
-    return <ReminderToken reminder={reminderMeta} {...props} />;
+    return (
+        <ReminderToken
+            reminder={reminderMeta}
+            {...props}
+        />
+    );
 }
 
 export default ReminderLleechPoisoned;
-

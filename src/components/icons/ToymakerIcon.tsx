@@ -17,4 +17,3 @@ export function ToymakerIcon({ className, alt, ...props }: ToymakerIconProps) {
 }
 
 export default ToymakerIcon;
-

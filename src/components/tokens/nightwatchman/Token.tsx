@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/nightwatchman.png?url';
 export type NightwatchmanTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function NightwatchmanToken(props: NightwatchmanTokenProps) {
-    return <Token name='Nightwatchman' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Nightwatchman'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default NightwatchmanToken;
-

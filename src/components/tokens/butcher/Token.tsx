@@ -6,8 +6,13 @@ import iconSrc from '@/assets/icons/butcher.png?url';
 export type ButcherTokenProps = Omit<TokenProps, 'name' | 'image'>;
 
 export function ButcherToken(props: ButcherTokenProps) {
-    return <Token name='Butcher' image={iconSrc} {...props} />;
+    return (
+        <Token
+            name='Butcher'
+            image={iconSrc}
+            {...props}
+        />
+    );
 }
 
 export default ButcherToken;
-
