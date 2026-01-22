@@ -1,5 +1,5 @@
 // src/components/tokens/thief/Reminder_thief_negative_vote.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/thief.png?url';
 

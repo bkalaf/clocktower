@@ -1,5 +1,5 @@
 // src/components/tokens/pixie/Reminder_pixie_has_ability.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/pixie.png?url';
 

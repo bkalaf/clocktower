@@ -1,5 +1,5 @@
 // src/components/tokens/tinker/Reminder_tinker_dead.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/tinker.png?url';
 

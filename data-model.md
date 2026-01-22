@@ -1,12 +1,14 @@
 # Data Model Map (Proposed)
 
 ## Core Naming Changes
+
 - **Room** → **Game** (user-facing). Use `game` consistently in UI/routes.
 - **Match** → **Round** or **Session** (internal), but UI should just say “game.”
 
 ## Entities
 
 ### User
+
 - `_id: UUID`
 - `username: string` (unique, searchable)
 - `displayName: string`
@@ -19,16 +21,19 @@
 - `penaltyUntil?: timestamp`
 
 **Notes**
+
 - Rename existing `name` → `displayName`.
 - Add `username` for lobby search.
 - Email is never shown in public profile.
 
 ### Session
+
 - `_id: UUID`
 - `userId: UUID`
 - `expiresAt: timestamp`
 
 ### Game (Room)
+
 - `_id: UUID`
 - `hostUserId: UUID`
 - `scriptId: string`
@@ -40,6 +45,7 @@
 - `endedAt?: timestamp`
 
 ### GameMember
+
 - `_id: "${gameId}:${userId}"`
 - `gameId: UUID`
 - `userId: UUID`
@@ -48,6 +54,7 @@
 - `isSeated: boolean`
 
 ### Match (Round/Session)
+
 - `_id: UUID`
 - `gameId: UUID`
 - `scriptId: string`
@@ -61,6 +68,7 @@
 - `endedAt?: timestamp`
 
 ### ChatItem
+
 - `_id: UUID`
 - `gameId: UUID`
 - `topicId: string`
@@ -70,6 +78,7 @@
 - `streamId: string`
 
 ### Replay
+
 - `_id: UUID`
 - `gameId: UUID`
 - `createdByUserId: UUID`
@@ -78,12 +87,14 @@
 - `createdAt`
 
 ### ReplayEvent
+
 - `ts: timestamp`
 - `type: string`
 - `payload: object`
 - `summary?: string` (for public discussion summaries)
 
 ### UserStats (Aggregate)
+
 - `_id: userId`
 - `gamesPlayed: number`
 - `gamesWon: number`
@@ -98,10 +109,12 @@
 - `nightDeaths: number`
 
 ## Privacy Rules
+
 - Public profile returns: `username`, `displayName`, `avatarUrl`, `bio`, and `UserStats`.
 - Private profile (self) returns email + all edit fields.
 
 ## Recorder / Replay Notes
+
 - Record major game state events, phase changes, nominations, and execution outcomes.
 - Summarize public discussions into timeline entries; exclude private whispers.
 - Replays should be reconstructable via `ReplayEvent[]` without sensitive chat.

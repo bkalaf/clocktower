@@ -1,5 +1,5 @@
 // src/components/tokens/cerenovus/Reminder_cerenovus_mad.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/cerenovus.png?url';
 

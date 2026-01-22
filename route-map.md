@@ -1,6 +1,7 @@
 # Route Map
 
 ## Public (Unauthenticated)
+
 - `/` — Splash / marketing landing (CTA to log in / register)
 - `/login` — Login dialog/page (includes forgot password flow)
 - `/register` — Registration dialog/page (optional if not inline on login)
@@ -8,22 +9,24 @@
 - `/reset-password/:token` — Password reset confirmation (token + new password)
 
 ## Core App (Authenticated SPA)
+
 - `/lobby` — Lobby list of rooms/games
-  - Query params:
-    - `q` — search users/rooms
-    - `status` — filter: `starting | in_progress | ended`
+    - Query params:
+        - `q` — search users/rooms
+        - `status` — filter: `starting | in_progress | ended`
 - `/games/:gameId` — Game room (Grimoire + match controls + chat)
-  - Sub-routes (optional, can be tabs)
-    - `/games/:gameId/grimoire`
-    - `/games/:gameId/chat`
-    - `/games/:gameId/storyteller`
-    - `/games/:gameId/players`
+    - Sub-routes (optional, can be tabs)
+        - `/games/:gameId/grimoire`
+        - `/games/:gameId/chat`
+        - `/games/:gameId/storyteller`
+        - `/games/:gameId/players`
 - `/replays` — Replay index
 - `/replays/:replayId` — Replay viewer
 - `/profile/me` — Editable self-profile
 - `/profile/:userId` — Read-only profile (public stats, no email)
 
 ## API Routes (Server)
+
 - `POST /api/auth/login`
 - `POST /api/auth/logout`
 - `POST /api/auth/register`
@@ -55,8 +58,9 @@
 - `GET /api/users/:userId/stats` — Profile stats
 
 ## Notes
+
 - Top bar dropdown menus should surface the primary page routes:
-  - Lobby, Game (if in one), Replays, Profile.
+    - Lobby, Game (if in one), Replays, Profile.
 - Demo routes should be hidden behind a dev flag or moved under `/dev`.
 
 ## FOLDERS
@@ -73,7 +77,7 @@ src/routes/
         register.tsx
         forgot-password.tsx
         reset-password.$token.tsx
-        
+
         index.tsx
 
     user.tsx
@@ -150,23 +154,23 @@ GET /api/replays/:replayId
 What each file corresponds to (mapped to your spec)
 Root + Splash
 
-__root.tsx → <Root><Outlet /> + global modal host (Invites/Reveal/NightCards)
+\_\_root.tsx → <Root><Outlet /> + global modal host (Invites/Reveal/NightCards)
 
-index.tsx → / renders <Splash> (or you can keep / under _splash; see note below)
+index.tsx → / renders <Splash> (or you can keep / under \_splash; see note below)
 
-_splash.tsx → pathless <Splash><Outlet /></Splash>
+\_splash.tsx → pathless <Splash><Outlet /></Splash>
 
-_splash/login.tsx → /login → <Root><Splash><Login>
+\_splash/login.tsx → /login → <Root><Splash><Login>
 
-_splash/logout.tsx → /logout → <Root><Splash><Logout>
+\_splash/logout.tsx → /logout → <Root><Splash><Logout>
 
-_splash/register.tsx → /register → <Root><Splash><Register>
+\_splash/register.tsx → /register → <Root><Splash><Register>
 
-_splash/forgot-password.tsx → /forgot-password → <Root><Splash><ForgotPassword>
+\_splash/forgot-password.tsx → /forgot-password → <Root><Splash><ForgotPassword>
 
-_splash/reset-password.$token.tsx → /reset-password/:token → <Root><Splash><ForgotPasswordToken>
+\_splash/reset-password.$token.tsx → /reset-password/:token → <Root><Splash><ForgotPasswordToken>
 
-Note: If you want / to also be under <Splash>, you can put / at _splash/index.tsx instead of routes/index.tsx. If you do, your tree becomes slightly cleaner. Right now I showed index.tsx separately because you explicitly listed / as <Root><Splash>—either way works.
+Note: If you want / to also be under <Splash>, you can put / at \_splash/index.tsx instead of routes/index.tsx. If you do, your tree becomes slightly cleaner. Right now I showed index.tsx separately because you explicitly listed / as <Root><Splash>—either way works.
 
 Users / Public profile / Self profile
 
@@ -249,7 +253,6 @@ replays.$replayId.tsx → /replays/:replayId → <Root><Replays><ReplayViewer>
 If you want <Replays> as a layout wrapper with an outlet:
 
 Make replays.tsx a layout and put replays/index.tsx as the list page. But the “flat” version above is fine to start.
-
 
 Auth
 Keep (good)

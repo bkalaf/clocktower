@@ -1,5 +1,5 @@
 // src/components/icons/SpiritofivoryIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/spiritofivory.png?url';
 

@@ -1,5 +1,6 @@
+// src/server/roomService.ts
 import { randomUUID } from 'crypto';
-import { createActor, type ActorRefFrom, type Snapshot } from 'xstate';
+import { createActor, type ActorOptions, type ActorRefFrom, type Snapshot, createMachineSnapshot } from 'xstate';
 import type { Room } from '@/types/room';
 import { machine as roomMachine, type RoomContext } from '@/machines/RoomMachine';
 import type { SnapshotMsg } from '@/types/game';
@@ -51,9 +52,10 @@ export function createRoomActor(
         return roomActors.get(room._id)!;
     }
 
-    const machine = createRoomMachine(room);
-    const actorOptions = options?.snapshot ? { snapshot: options.snapshot } : undefined;
-    const actor = createActor(machine, actorOptions);
+    const actorOptions: ActorOptions<typeof roomMachine> = {
+        snapshot: options?.snapshot ?? createRoomSnapshot(room)
+    };
+    const actor = createActor(roomMachine, actorOptions);
 
     actor.subscribe((state) => {
         const payload = { roomId: room._id, snapshot: { value: state.value, context: state.context } };
@@ -79,8 +81,8 @@ export function getRoomActor(roomId: string) {
     return roomActors.get(roomId);
 }
 
-function createRoomMachine(room: Room) {
-    const baseContext = roomMachine.getInitialState().context;
+function createRoomSnapshot(room: Room): Snapshot<unknown> {
+    const baseContext = roomMachine.config.context as RoomContext;
     const connectedUserIds = Array.isArray(room.connectedUserIds) ? room.connectedUserIds : [];
     const storytellerUserIds =
         Array.isArray(room.storytellerUserIds) ? room.storytellerUserIds : baseContext.storytellerUserIds;
@@ -106,7 +108,17 @@ function createRoomMachine(room: Room) {
         storytellerCount: storytellerUserIds.length
     };
 
-    return roomMachine.withContext(context);
+    const baseSnapshot = createMachineSnapshot(roomMachine.config, roomMachine);
+    const resolvedSnapshot = roomMachine.resolveState({
+        value: baseSnapshot.value,
+        context,
+        historyValue: baseSnapshot.historyValue,
+        status: baseSnapshot.status,
+        output: baseSnapshot.output,
+        error: baseSnapshot.error
+    });
+
+    return roomMachine.getPersistedSnapshot(resolvedSnapshot);
 }
 
 function schedulePersistence(actor: ActorRefFrom<typeof roomMachine>, roomId: string) {

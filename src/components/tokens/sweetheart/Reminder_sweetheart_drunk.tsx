@@ -1,5 +1,5 @@
 // src/components/tokens/sweetheart/Reminder_sweetheart_drunk.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/sweetheart.png?url';
 

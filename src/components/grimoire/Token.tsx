@@ -1,7 +1,6 @@
 // src/components/grimoire/Token.tsx
 import { cn } from '@/lib/utils';
 import tokenBase from '@/assets/images/token.png?url';
-import * as React from 'react';
 
 export type TokenBadge = {
     label: string;

@@ -13,15 +13,17 @@ import { getRedis } from '../../redis';
 import { getRoomIdFromTopic, streamKeyForTopic, timestampFromStreamId } from './topicStreams';
 import { $keys } from '../../keys';
 import { listWhisperTopicsForUser } from '../../serverFns/listWhisperTopicsForUser';
-import { AuthedUser, GameRoles, ChatMsg } from '../../types/game';
+import { GameRoles, ChatMsg } from '../../types/game';
 import { maybeRemindPickStoryteller } from './reminder';
-import { getUserFromCookie } from '../../serverFns/getId/getUserFromCookie';
 import $gameMember from '../../serverFns/gameMember';
 import $game from '../../serverFns/game';
 import { parseCookie } from '../parseCookie';
 import { cookieName } from '../auth/cookies';
 import $session from '../../serverFns/session';
 import { shouldAllowWhisper } from './whisperGate';
+import { sendGameEvent } from '@/server/gameService';
+import { MatchModel } from '@/db/models/Match';
+import type { GameEvents } from '@/machines/GameMachine';
 
 type Conn = {
     ws: WebSocket;
@@ -29,6 +31,7 @@ type Conn = {
     name: string;
     gameId?: string;
     role?: GameRoles;
+    matchId?: string;
     subscriber?: RedisClientType;
     topics: Set<string>;
 };
@@ -43,6 +46,15 @@ function parsePubsubMessage(raw: string) {
     } catch {
         return raw;
     }
+}
+
+async function ensureMatchId(conn: Conn) {
+    if (conn.matchId) return conn.matchId;
+    if (!conn.gameId) return undefined;
+    const match = await MatchModel.findOne({ roomId: conn.gameId, status: 'in_progress' }).lean();
+    if (!match) return undefined;
+    conn.matchId = match._id;
+    return match._id;
 }
 
 async function publishPresenceUpdate(
@@ -352,6 +364,26 @@ export async function handleWsConnection(
                 }
             }
             send(ws, { t: 'chatSent', topicId, event: eventToSend });
+            return;
+        }
+
+        if (msg?.t === 'gameEvent') {
+            if (!conn.gameId) {
+                send(ws, { t: 'error', code: 'not_in_game', message: 'Join a game first' });
+                return;
+            }
+            const matchId = await ensureMatchId(conn);
+            if (!matchId) {
+                send(ws, { t: 'error', code: 'match_not_active', message: 'No active match' });
+                return;
+            }
+            const eventPayload = msg.event;
+            if (!eventPayload || typeof eventPayload.type !== 'string') {
+                send(ws, { t: 'error', code: 'bad_msg', message: 'Invalid game event' });
+                return;
+            }
+            void sendGameEvent(matchId, eventPayload as GameEvents);
+            send(ws, { t: 'gameEventAck', matchId, type: eventPayload.type });
             return;
         }
 

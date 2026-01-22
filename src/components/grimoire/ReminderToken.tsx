@@ -1,7 +1,6 @@
 // src/components/grimoire/ReminderToken.tsx
 import { cn } from '@/lib/utils';
 import { useDraggable } from '@dnd-kit/core';
-import * as React from 'react';
 
 export type ReminderTokenMeta = {
     key: string;

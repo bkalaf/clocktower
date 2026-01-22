@@ -1,5 +1,5 @@
 // src/components/tokens/gossip/Reminder_gossip_dead.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/gossip.png?url';
 

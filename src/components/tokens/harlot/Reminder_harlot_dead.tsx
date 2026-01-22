@@ -1,5 +1,5 @@
 // src/components/tokens/harlot/Reminder_harlot_dead.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/harlot.png?url';
 

@@ -1,5 +1,5 @@
 // src/components/tokens/legion/Reminder_legion_about_to_die.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/legion.png?url';
 

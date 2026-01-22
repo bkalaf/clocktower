@@ -1,5 +1,5 @@
 // src/components/tokens/butler/Reminder_butler_master.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/butler.png?url';
 

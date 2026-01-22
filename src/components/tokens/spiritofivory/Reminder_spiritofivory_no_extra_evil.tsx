@@ -1,5 +1,5 @@
 // src/components/tokens/spiritofivory/Reminder_spiritofivory_no_extra_evil.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/spiritofivory.png?url';
 

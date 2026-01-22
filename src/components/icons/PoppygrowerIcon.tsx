@@ -1,5 +1,5 @@
 // src/components/icons/PoppygrowerIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/poppygrower.png?url';
 

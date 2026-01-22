@@ -1,5 +1,5 @@
 // src/components/tokens/bishop/Reminder_bishop_nominate_good.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/bishop.png?url';
 

@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Token } from '../Token';
-import * as React from 'react';
+
 import { modalBackgroundStyle } from '@/components/modals/modalStyles';
 
 export type AssignTokensDialogProps = {

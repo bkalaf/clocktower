@@ -1,5 +1,5 @@
 // src/components/tokens/scarletwoman/Reminder_scarletwoman_demon.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/scarletwoman.png?url';
 

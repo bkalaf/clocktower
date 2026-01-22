@@ -1,9 +1,5 @@
 // src/components/AuthProvider.tsx
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { whoamiFn } from '../lib/api';
-import { AuthedUser } from '../types/game';
-import React, { useCallback, useMemo } from 'react';
-import { useRouteContext } from '@tanstack/react-router';
+import React from 'react';
 
 // src/components/AuthProvider.tsx
 export type AuthIdContext = {

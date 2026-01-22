@@ -1,13 +1,14 @@
 // src/components/forms/ForgotPasswordForm.tsx
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from '@tanstack/react-router';
-import { UseFormReturn } from 'react-hook-form';
 import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { forgotPassword } from '@/lib/api';
-import { FormControl } from './FormControl';
-import { Modal } from '../Modal';
-import { useInvalidateAuth } from '../useInvalidateAuth';
 
 const forgotPasswordSchema = z.object({
     email: z.email('Invalid email')
@@ -20,82 +21,76 @@ type ForgotPasswordFormProps = {
     returnTo?: string;
 };
 
-type ForgotPasswordControlsProps = {
-    formName: string;
-    safeReturnTo: string;
-    submitted: boolean;
-};
-
-function ForgotPasswordControls({ formName, safeReturnTo, submitted }: ForgotPasswordControlsProps) {
-    return function RenderForgotPasswordControls(form: UseFormReturn<ForgotPasswordFormValues>) {
-        const {
-            register,
-            formState: { errors }
-        } = form;
-        return (
-            <>
-                <div className='space-y-1 text-sm'>
-                    <FormControl
-                        label='E-mail'
-                        formName={formName}
-                        register={register}
-                        errors={errors}
-                        name='email'
-                        type='email'
-                        autoComplete='email'
-                        placeholder='you@example.com'
-                    />
-                </div>
-                <div className='flex justify-end text-sm'>
-                    <Link
-                        to='/login'
-                        search={{ returnTo: safeReturnTo }}
-                        className='text-cyan-400 hover:text-cyan-300'
-                    >
-                        Back to login
-                    </Link>
-                </div>
-                {submitted && (
-                    <p className='text-sm text-emerald-300'>
-                        If an account exists, you will receive an email with reset instructions shortly.
-                    </p>
-                )}
-            </>
-        );
-    };
-}
-
 export function ForgotPasswordForm({ onSuccess, returnTo }: ForgotPasswordFormProps) {
-    const invalidate = useInvalidateAuth();
-    const [submitted, setSubmitted] = useState(false);
     const safeReturnTo = returnTo ?? '/';
-    const onSubmit = useCallback(
-        async (values: ForgotPasswordFormValues) => {
-            setSubmitted(false);
-            await forgotPassword(values.email);
-            setSubmitted(true);
-            onSuccess?.();
-        },
-        [onSuccess]
-    );
+    const [serverError, setServerError] = useState<string | null>(null);
+    const [submitted, setSubmitted] = useState(false);
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors, isSubmitting }
+    } = useForm<ForgotPasswordFormValues>({
+        resolver: zodResolver(forgotPasswordSchema),
+        defaultValues: {
+            email: ''
+        }
+    });
 
     return (
-        <Modal
-            title='Reset your password'
-            description="Enter your email and we'll send you reset instructions."
-            zodSchema={forgotPasswordSchema}
-            defaultValues={{ email: '' }}
-            defaultErrorMsg='Unable to send reset email'
-            invalidate={invalidate}
-            onSubmit={onSubmit}
-            returnTo={returnTo}
-            closeOnSubmit={false}
-        >
-            {ForgotPasswordControls({
-                formName: 'forgot-password',
-                safeReturnTo,
-                submitted
+        <form
+            className='space-y-4'
+            onSubmit={handleSubmit(async (values) => {
+                setServerError(null);
+                try {
+                    await forgotPassword(values.email);
+                    reset();
+                    setSubmitted(true);
+                    onSuccess?.();
+                } catch (error) {
+                    const message = error instanceof Error ? error.message : 'Unable to send reset email';
+                    setServerError(message);
+                }
             })}
-        </Modal>
+        >
+            <div className='space-y-1 text-sm'>
+                <Label
+                    htmlFor='forgot-password-email'
+                    className='font-semibold text-white'
+                >
+                    E-mail
+                </Label>
+                <Input
+                    id='forgot-password-email'
+                    type='email'
+                    autoComplete='email'
+                    placeholder='you@example.com'
+                    {...register('email')}
+                />
+                {errors.email && <p className='text-xs text-red-500'>{errors.email.message}</p>}
+            </div>
+            <div className='flex justify-end text-sm'>
+                <Link
+                    to='/login'
+                    search={{ returnTo: safeReturnTo }}
+                    className='text-cyan-400 hover:text-cyan-300'
+                >
+                    Back to login
+                </Link>
+            </div>
+            {serverError && <p className='text-sm text-red-500'>{serverError}</p>}
+            {submitted && (
+                <p className='text-sm text-emerald-300'>
+                    If an account exists, you will receive an email with reset instructions shortly.
+                </p>
+            )}
+            <Button
+                type='submit'
+                disabled={isSubmitting || submitted}
+                className='w-full'
+            >
+                {submitted ? 'Email Sent' : 'Send reset link'}
+            </Button>
+        </form>
     );
 }

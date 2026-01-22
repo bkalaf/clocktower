@@ -1,5 +1,5 @@
 // src/components/tokens/sweetheart/Token.tsx
-import * as React from 'react';
+
 import { Token, type TokenProps } from '@/components/grimoire/Token';
 import iconSrc from '@/assets/icons/sweetheart.png?url';
 

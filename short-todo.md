@@ -1,15 +1,18 @@
 # ACTION ITEMS
 
 ## UI
-* Clock in bottom bar doesn't update
-* Add auth pieces to TopBar
-* Add demon icon to sidebar (temporary)
-* Change title to Clocktower
+
+- Clock in bottom bar doesn't update
+- Add auth pieces to TopBar
+- Add demon icon to sidebar (temporary)
+- Change title to Clocktower
 
 ## ERRORS
-* The glob option "as" has been deprecated in favour of "query". Please update `as: 'url'` to `query: '?url', import: 'default'`.
+
+- The glob option "as" has been deprecated in favour of "query". Please update `as: 'url'` to `query: '?url', import: 'default'`.
 
 ## IMAGES
+
 [x] Keep this theme going! This theme, The Fool tarot card (remember, no tarot text) and "Go back to sleep"
 [x] Keep this theme going! This theme, The Magician tarot card (remember, no tarot text) and "Use your ability?"
 [x] Keep this theme going! This theme, The Magician tarot card (remember, no tarot text) and "Use your ability tonight?"

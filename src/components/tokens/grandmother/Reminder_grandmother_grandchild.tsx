@@ -1,5 +1,5 @@
 // src/components/tokens/grandmother/Reminder_grandmother_grandchild.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/grandmother.png?url';
 

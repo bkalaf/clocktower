@@ -1,9 +1,11 @@
 // src/machines/GameMachine.ts
 import path from 'node:path';
 import { readFile } from 'node:fs/promises';
-import { assign, fromPromise, send, sendParent, setup } from 'xstate';
+import { assign, fromPromise, sendParent, setup } from 'xstate';
+import type { ActionArgs } from 'xstate';
 import { ScriptModel } from '../db/models/Script';
 import { UserModel } from '../db/models/User';
+import type { GameNomination, GameTaskEntry } from '../types/game';
 
 type TrustModels = 'all_trusting' | 'cautiously_trusting' | 'skeptical' | 'guarded' | 'doubting_thomas';
 type TableImpactStyles = 'disruptive' | 'provocative' | 'stabilizing' | 'organized' | 'procedural';
@@ -39,14 +41,6 @@ type RolesDefinition = {
 
 type RolesDefined = Omit<RolesDefinition, 'team'> & { characterType: string };
 
-type Hatred = {
-    id: string;
-    hatred: {
-        id: string;
-        reason: string;
-    }[];
-}[];
-
 interface SetupPopulations {
     townsfolk: number;
     outsider: number;
@@ -63,7 +57,8 @@ type VoteOutcome = {
     success: VoteSuccess;
 };
 type VoteComplete = Omit<VoteOutcome, 'success' | 'voteCount'>;
-type Nomination = { nominator: number; nominee: number };
+
+type Nomination = GameNomination;
 type HumanOrAi = 'human' | 'ai';
 type Phase = 'night' | 'day';
 
@@ -75,75 +70,20 @@ type Seat = {
     personality?: Personality;
 };
 
-type TaskEntry = [string, unknown];
+type TaskEntry = GameTaskEntry;
 type RoleCategory = 'demon' | 'minion' | 'outsider' | 'townsfolk';
 type ExtraPopulation = Record<RoleCategory, number>;
 type AvailableRoles = Record<RoleCategory, RolesDefined[]>;
 
-type GameMachineInput = {
-    maxPlayers: number;
-    connectedUserIds: Record<string, GameRoles>;
-    storytellerMode: StorytellerMode;
-    scriptId: string;
-    deps?: {
-        wsEmit?: (msg: unknown) => void;
-    };
-};
-
-type GameContext = {
-    seats: Record<number, Seat>;
-    tokens: Record<number, RolesDefined>;
-    alivePlayers: number[];
-    tasks: TaskEntry[];
-    currentTask?: TaskEntry;
-    pendingDeaths: number[];
-    canNominate: number[];
-    canBeNominated: number[];
-    nomination?: Nomination;
-    markedForExecution?: VoteOutcome;
-    toBeExecuted?: number[];
-    votingHistory: Record<number, VoteOutcome[]>;
-    dailyVotingHistory: VoteOutcome[];
-    ghostVotes: number[];
-    waitingFor: string[];
-    day: number;
-    phase: Phase;
-    nominationsOpen: boolean;
-    pendingTasks: TaskEntry[];
-    maxPlayers: GameMachineInput['maxPlayers'];
-    connectedUserIds: GameMachineInput['connectedUserIds'];
-    storytellerMode: GameMachineInput['storytellerMode'];
-    scriptId: GameMachineInput['scriptId'];
-    deps?: GameMachineInput['deps'];
-    availableTravellers?: RolesDefined[];
-    initialPopulation?: SetupPopulations;
-    modifiedPopulation?: SetupPopulations & { extra: ExtraPopulation };
-    availableRoles?: AvailableRoles;
-    bag?: RolesDefined[];
-    setupArgs: GameMachineInput;
-};
-
-type GameEvents =
-    | { type: 'SETUP_COMPLETE'; payload: Partial<GameContext> }
-    | { type: 'END_GAME' }
-    | { type: 'END_REVEAL' }
-    | { type: 'EXECUTION' }
-    | { type: 'CONFIRM_READY'; payload: string }
-    | { type: 'OVERRIDE_WAIT' }
-    | { type: 'TIMER_STARTED'; payload: number }
-    | { type: 'TIMER_EXPIRED' }
-    | { type: 'GONG' }
-    | { type: 'NOMINATION'; payload: Nomination }
-    | { type: 'REQUEST_STATEMENT'; payload: number }
-    | { type: 'STATEMENT_RECEIVED'; payload: string }
-    | { type: 'NEXT_STATEMENT' }
-    | { type: 'VOTE_COMPLETE'; payload: VoteComplete }
-    | { type: 'ADD_TASK'; payload: TaskEntry }
-    | { type: 'TASK_COMPLETE' }
-    | { type: 'PAUSE_TASKS' }
-    | { type: 'RESUME_TASKS' }
-    | { type: 'START_TASKS' }
-    | { type: 'ACCUSATION_COMPLETE' };
+export type GameMachineWsEvent =
+    | { type: 'dawnBreak'; requireConfirm: boolean }
+    | { type: 'deathsRevealed'; payload: number[] }
+    | { type: 'requestStatement'; payload: number }
+    | { type: 'statementBroadcast'; payload: { statement: string; nomination: Nomination } }
+    | { type: 'voteStarted'; payload: Nomination }
+    | { type: 'nominationRejected'; payload: Nomination }
+    | { type: 'gong' }
+    | { type: 'taskStarted'; payload: TaskEntry };
 
 const ROLE_CATEGORIES: RoleCategory[] = ['demon', 'minion', 'outsider', 'townsfolk'];
 
@@ -176,30 +116,6 @@ const AI_NAMES = [
     'Fable'
 ];
 
-const TRUST_MODEL_OPTIONS: TrustModels[] = [
-    'all_trusting',
-    'cautiously_trusting',
-    'skeptical',
-    'guarded',
-    'doubting_thomas'
-];
-const TABLE_IMPACT_OPTIONS: TableImpactStyles[] = [
-    'disruptive',
-    'provocative',
-    'stabilizing',
-    'organized',
-    'procedural'
-];
-const REASONING_OPTIONS: ReasoningModes[] = ['deductive', 'systematic', 'associative', 'intuitive', 'surface'];
-const INFORMATION_OPTIONS: InformationHandlingStyle[] = [
-    'archivist',
-    'curator',
-    'impressionistic',
-    'triage',
-    'signal_driven'
-];
-const VOICE_OPTIONS: VoiceStyles[] = ['quiet', 'reserved', 'conversational', 'assertive', 'dominant'];
-
 const rolesFilePath = path.join(process.cwd(), 'src', 'assets', 'data', 'roles.json');
 const populationsFilePath = path.join(process.cwd(), 'src', 'assets', 'data', 'game.json');
 
@@ -213,17 +129,80 @@ const shuffle = <T>(items: T[]): T[] => {
 };
 
 const randomChoice = <T>(items: readonly T[]): T => items[Math.floor(Math.random() * items.length)];
-
-const buildNamePool = () => shuffle([...AI_NAMES]);
-const popAiName = (pool: string[]) => pool.pop() ?? `AI-${Math.floor(Math.random() * 9_999)}`;
-
+const uniqueNamePool = () => shuffle([...AI_NAMES]);
+const popName = (pool: string[]) => pool.pop() ?? `AI-${Math.floor(Math.random() * 9_999)}`;
 const randomPersonality = (): Personality => ({
-    trustModel: randomChoice(TRUST_MODEL_OPTIONS),
-    tableImpact: randomChoice(TABLE_IMPACT_OPTIONS),
-    reasoningMode: randomChoice(REASONING_OPTIONS),
-    informationHandling: randomChoice(INFORMATION_OPTIONS),
-    voiceStyle: randomChoice(VOICE_OPTIONS)
+    trustModel: randomChoice(['all_trusting', 'cautiously_trusting', 'skeptical', 'guarded', 'doubting_thomas']),
+    tableImpact: randomChoice(['disruptive', 'provocative', 'stabilizing', 'organized', 'procedural']),
+    reasoningMode: randomChoice(['deductive', 'systematic', 'associative', 'intuitive', 'surface']),
+    informationHandling: randomChoice(['archivist', 'curator', 'impressionistic', 'triage', 'signal_driven']),
+    voiceStyle: randomChoice(['quiet', 'reserved', 'conversational', 'assertive', 'dominant'])
 });
+
+type GameMachineInput = {
+    maxPlayers: number;
+    connectedUserIds: Record<string, GameRoles>;
+    storytellerMode: StorytellerMode;
+    scriptId: string;
+    deps?: {
+        wsEmit?: (event: GameMachineWsEvent) => void;
+    };
+};
+
+type GameContext = {
+    seats: Record<number, Seat>;
+    tokens: Record<number, RolesDefined>;
+    alivePlayers: number[];
+    tasks: TaskEntry[];
+    currentTask?: TaskEntry;
+    pendingDeaths: number[];
+    canNominate: number[];
+    canBeNominated: number[];
+    nomination?: Nomination;
+    markedForExecution?: VoteOutcome;
+    toBeExecuted?: number[];
+    votingHistory: Record<number, VoteOutcome[]>;
+    dailyVotingHistory: VoteOutcome[];
+    ghostVotes: number[];
+    waitingFor: string[];
+    day: number;
+    phase: Phase;
+    nominationsOpen: boolean;
+    pendingTasks: TaskEntry[];
+    maxPlayers: number;
+    connectedUserIds: Record<string, GameRoles>;
+    storytellerMode: StorytellerMode;
+    scriptId: string;
+    deps?: GameMachineInput['deps'];
+    setupArgs: GameMachineInput;
+    availableTravellers?: RolesDefined[];
+    initialPopulation?: SetupPopulations;
+    modifiedPopulation?: SetupPopulations & { extra: ExtraPopulation };
+    availableRoles?: AvailableRoles;
+    bag?: RolesDefined[];
+};
+
+type GameEvents =
+    | { type: 'SETUP_COMPLETE'; payload: Partial<GameContext> }
+    | { type: 'END_GAME' }
+    | { type: 'END_REVEAL' }
+    | { type: 'EXECUTION' }
+    | { type: 'CONFIRM_READY'; payload: string }
+    | { type: 'OVERRIDE_WAIT' }
+    | { type: 'TIMER_STARTED'; payload: number }
+    | { type: 'TIMER_EXPIRED' }
+    | { type: 'GONG' }
+    | { type: 'NOMINATION'; payload: Nomination }
+    | { type: 'REQUEST_STATEMENT'; payload: number }
+    | { type: 'STATEMENT_RECEIVED'; payload: string }
+    | { type: 'NEXT_STATEMENT' }
+    | { type: 'VOTE_COMPLETE'; payload: VoteComplete }
+    | { type: 'ADD_TASK'; payload: TaskEntry }
+    | { type: 'TASK_COMPLETE' }
+    | { type: 'PAUSE_TASKS' }
+    | { type: 'RESUME_TASKS' }
+    | { type: 'START_TASKS' }
+    | { type: 'ACCUSATION_COMPLETE' };
 
 const createInitialContext = ({ input }: { input: GameMachineInput }): GameContext => ({
     seats: {},
@@ -249,6 +228,8 @@ const createInitialContext = ({ input }: { input: GameMachineInput }): GameConte
     setupArgs: input
 });
 
+const assignGame = assign<GameContext, GameEvents>;
+
 const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput>(async ({ input, emit }) => {
     const { maxPlayers, connectedUserIds, storytellerMode, scriptId } = input;
     if (storytellerMode === 'human') {
@@ -259,7 +240,7 @@ const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput>(async
     }
 
     const humanEntries = Object.entries(connectedUserIds).filter(([, role]) => role === 'player');
-    const humanSeats = await Promise.all(
+    const humankind = await Promise.all(
         humanEntries.map(async ([userId]) => {
             const user = await UserModel.findById(userId).lean();
             return {
@@ -270,49 +251,52 @@ const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput>(async
         })
     );
 
-    const aiPlayers = Math.max(0, maxPlayers - humanSeats.length);
-    const aiNames = buildNamePool();
+    const aiPlayers = Math.max(0, maxPlayers - humankind.length);
+    const namePool = uniqueNamePool();
     const aiSeats: Omit<Seat, 'id'>[] = [];
     for (let i = 0; i < aiPlayers; i += 1) {
         aiSeats.push({
             type: 'ai',
-            username: popAiName(aiNames),
+            username: popName(namePool),
             personality: randomPersonality()
         });
     }
 
-    const seatCandidates = shuffle([...humanSeats, ...aiSeats]);
-    const seats = seatCandidates.reduce<Record<number, Seat>>((acc, seat, index) => {
-        acc[index + 1] = { ...seat, id: index + 1 };
-        return acc;
-    }, {});
+    const shuffledSeats = shuffle([...humankind, ...aiSeats]);
+    const seats = shuffledSeats.reduce<Record<number, Seat>>(
+        (acc, seat, index) => {
+            acc[index + 1] = { ...seat, id: index + 1 };
+            return acc;
+        },
+        {} as Record<number, Seat>
+    );
 
     const script = await ScriptModel.findById(scriptId).lean();
     if (!script) {
         throw new Error('script not found');
     }
 
-    const rolesPayload = JSON.parse(await readFile(rolesFilePath, 'utf8')) as RolesDefinition[];
-    const populations = JSON.parse(await readFile(populationsFilePath, 'utf8')) as SetupPopulations[];
-    const normalizedRoles: RolesDefined[] = rolesPayload.map((definition) => {
-        const { team, ...rest } = definition;
-        return {
-            ...rest,
-            characterType: team
-        };
-    });
+    const rolesPayload = (await readFile(rolesFilePath, 'utf8')) as string;
+    const populationsData = (await readFile(populationsFilePath, 'utf8')) as string;
+    const rolesList = JSON.parse(rolesPayload) as RolesDefinition[];
+    const populationList = JSON.parse(populationsData) as SetupPopulations[];
+
+    const normalizedRoles: RolesDefined[] = rolesList.map(({ team, ...rest }) => ({
+        ...rest,
+        characterType: team
+    }));
 
     const scriptRoles = script.roles.map((roleId) => {
-        const definition = normalizedRoles.find((candidate) => candidate.id === roleId);
-        if (!definition) {
-            throw new Error(`role ${roleId} missing from definition set`);
+        const match = normalizedRoles.find((role) => role.id === roleId);
+        if (!match) {
+            throw new Error(`role ${roleId} missing from definitions`);
         }
-        return definition;
+        return match;
     });
 
     const availableTravellers = scriptRoles.filter((role) => role.characterType === 'traveller');
-
     const eligibleRoles = scriptRoles.filter((role) => ROLE_CATEGORIES.includes(role.characterType as RoleCategory));
+
     const availableRoles: AvailableRoles = {
         demon: shuffle(eligibleRoles.filter((role) => role.characterType === 'demon')),
         minion: shuffle(eligibleRoles.filter((role) => role.characterType === 'minion')),
@@ -320,16 +304,13 @@ const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput>(async
         townsfolk: shuffle(eligibleRoles.filter((role) => role.characterType === 'townsfolk'))
     };
 
-    const initialPopulation = populations[maxPlayers - 5];
+    const initialPopulation = populationList[maxPlayers - 5];
     if (!initialPopulation) {
-        throw new Error('no population data for player count');
+        throw new Error('missing population data for player count');
     }
 
     const modifiedPopulation: SetupPopulations & { extra: ExtraPopulation } = {
-        townsfolk: initialPopulation.townsfolk,
-        outsider: initialPopulation.outsider,
-        minion: initialPopulation.minion,
-        demon: initialPopulation.demon,
+        ...initialPopulation,
         extra: { demon: 0, minion: 0, outsider: 0, townsfolk: 0 }
     };
 
@@ -340,8 +321,9 @@ const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput>(async
         if (!token.setup) return;
         if (token.id === 'baron') {
             const maxOutsider = availableRoles.outsider.length;
-            const proposed = modifiedPopulation.outsider + 2;
-            const delta = proposed <= maxOutsider ? 2 : Math.max(0, 2 - (proposed - maxOutsider));
+            const newOutsider = modifiedPopulation.outsider + 2;
+            let delta = newOutsider <= maxOutsider ? 2 : 2 - (newOutsider - maxOutsider);
+            if (delta <= 0) delta = 0;
             modifiedPopulation.outsider += delta;
             modifiedPopulation.townsfolk = Math.max(0, modifiedPopulation.townsfolk - delta);
         }
@@ -358,7 +340,7 @@ const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput>(async
         if (count <= 0) return;
         const pool = availableRoles[category];
         if (count > pool.length) {
-            throw new Error(`not enough ${category} tokens for population`);
+            throw new Error(`not enough ${category} roles for population`);
         }
         const tokens = pool.splice(0, count);
         tokens.forEach((token) => {
@@ -411,43 +393,48 @@ const builder = setup({
         onSetupStart: gameSetupActor
     },
     actions: {
-        applySetupResult: assign((_, event) => {
+        applySetupResult: assignGame((_, event) => {
             if (event.type !== 'SETUP_COMPLETE') return {};
             return { ...event.payload };
         }),
-        addTask: assign((context, event) => {
+        addTask: assignGame((context, event) => {
             if (event.type !== 'ADD_TASK') return {};
             return {
                 tasks: [...context.tasks, event.payload],
                 pendingTasks: [...context.pendingTasks, event.payload]
             };
         }),
-        clearCurrentTask: assign(() => ({ currentTask: undefined })),
-        runNextTask: assign((context) => {
-            if (context.currentTask || context.tasks.length === 0) {
-                return {};
-            }
+        clearCurrentTask: assignGame(() => ({ currentTask: undefined })),
+        runNextTask: assignGame((context) => {
+            if (context.currentTask || context.tasks.length === 0) return {};
             const [next, ...rest] = context.tasks;
-            context.deps?.wsEmit?.({ type: 'TASK_STARTED', payload: next });
+            context.deps?.wsEmit?.({ type: 'taskStarted', payload: next });
             return {
                 tasks: rest,
                 currentTask: next
             };
         }),
-        scheduleTimer: send(() => ({ type: 'TIMER_EXPIRED' }), {
-            delay: (_context, event) => (event.type === 'TIMER_STARTED' ? event.payload * 60_000 : 0)
-        }),
+        scheduleTimer: ({ event, self }: ActionArgs<GameContext, GameEvents>) => {
+            if (event.type !== 'TIMER_STARTED') return;
+            const timerId = setTimeout(() => {
+                self.send({ type: 'TIMER_EXPIRED' });
+            }, event.payload * 60_000);
+            return () => clearTimeout(timerId);
+        },
         emitGong: sendParent(() => ({ type: 'GONG' })),
+        broadcastGong: ({ context }: ActionArgs<GameContext, GameEvents>) => {
+            context.deps?.wsEmit?.({ type: 'gong' });
+        },
         startPrivateTimer: sendParent(() => ({ type: 'TIMER_STARTED', payload: 7 })),
         startPublicTimer: sendParent(() => ({ type: 'TIMER_STARTED', payload: 2 })),
-        handleRequestStatement: (context, event) => {
+        handleRequestStatement: ({ context, event }: ActionArgs<GameContext, GameEvents>) => {
             if (event.type !== 'REQUEST_STATEMENT') return;
-            context.deps?.wsEmit?.({ type: 'REQUEST_STATEMENT', payload: event.payload });
+            context.deps?.wsEmit?.({ type: 'requestStatement', payload: event.payload });
         },
-        broadcastStatement: (context, event) => {
+        broadcastStatement: ({ context, event }: ActionArgs<GameContext, GameEvents>) => {
             if (event.type !== 'STATEMENT_RECEIVED' || !context.nomination) return;
             context.deps?.wsEmit?.({
-                type: 'STATEMENT_BROADCAST',
+                type: 'statementBroadcast',
                 payload: {
                     statement: event.payload,
                     nomination: context.nomination
@@ -455,11 +442,11 @@ const builder = setup({
             });
         },
         emitNextStatement: sendParent(() => ({ type: 'NEXT_STATEMENT' })),
-        runVote: (context) => {
+        runVote: ({ context }: ActionArgs<GameContext, GameEvents>) => {
             if (!context.nomination) return;
-            context.deps?.wsEmit?.({ type: 'VOTE_STARTED', payload: context.nomination });
+            context.deps?.wsEmit?.({ type: 'voteStarted', payload: context.nomination });
         },
-        resolveVote: assign((context, event) => {
+        resolveVote: assignGame((context, event) => {
             if (event.type !== 'VOTE_COMPLETE') return {};
             const minimumVoteRequired = Math.ceil(context.alivePlayers.length / 2);
             const toBeat = context.markedForExecution?.voteCount ?? 0;
@@ -487,9 +474,9 @@ const builder = setup({
             };
         }),
         emitAccusationComplete: sendParent(() => ({ type: 'ACCUSATION_COMPLETE' })),
-        openNominations: assign(() => ({ nominationsOpen: true })),
-        closeNominations: assign(() => ({ nominationsOpen: false })),
-        setNomination: assign((context, event) => {
+        openNominations: assignGame(() => ({ nominationsOpen: true })),
+        closeNominations: assignGame(() => ({ nominationsOpen: false })),
+        setNomination: assignGame((context, event) => {
             if (event.type !== 'NOMINATION') return {};
             return {
                 nomination: event.payload,
@@ -497,27 +484,27 @@ const builder = setup({
                 canBeNominated: context.canBeNominated.filter((id) => id !== event.payload.nominee)
             };
         }),
-        rejectNomination: (context, event) => {
+        rejectNomination: ({ context, event }: ActionArgs<GameContext, GameEvents>) => {
             if (event.type !== 'NOMINATION') return;
-            context.deps?.wsEmit?.({ type: 'NOMINATION_REJECTED', payload: event.payload });
+            context.deps?.wsEmit?.({ type: 'nominationRejected', payload: event.payload });
         },
-        setDawnWaiting: assign((context) => ({
+        setDawnWaiting: assignGame((context) => ({
             waitingFor: Object.values(context.seats)
                 .filter((seat) => seat.type === 'human' && seat.userId)
                 .map((seat) => seat.userId!)
         })),
-        confirmReady: assign((context, event) => {
+        confirmReady: assignGame((context, event) => {
             if (event.type !== 'CONFIRM_READY') return {};
             return { waitingFor: context.waitingFor.filter((userId) => userId !== event.payload) };
         }),
-        clearWaitingFor: assign(() => ({ waitingFor: [] })),
-        announceDawnWaiting: (context) => {
-            context.deps?.wsEmit?.({ type: 'SHOW_DAWN_BREAK_DIALOG', requireConfirm: true });
+        clearWaitingFor: assignGame(() => ({ waitingFor: [] })),
+        announceDawnWaiting: ({ context }: ActionArgs<GameContext, GameEvents>) => {
+            context.deps?.wsEmit?.({ type: 'dawnBreak', requireConfirm: true });
         },
-        announceDawnRunning: (context) => {
-            context.deps?.wsEmit?.({ type: 'SHOW_DAWN_BREAK_DIALOG', requireConfirm: false });
+        announceDawnRunning: ({ context }: ActionArgs<GameContext, GameEvents>) => {
+            context.deps?.wsEmit?.({ type: 'dawnBreak', requireConfirm: false });
         },
-        dayReset: assign((context) => {
+        dayReset: assignGame((context) => {
             const survivors = context.alivePlayers.filter((id) => !context.pendingDeaths.includes(id));
             return {
                 dailyVotingHistory: [],
@@ -527,26 +514,23 @@ const builder = setup({
                 phase: 'day'
             };
         }),
-        announceDeaths: assign((context) => {
-            const deaths = context.pendingDeaths;
-            if (deaths.length) {
-                context.deps?.wsEmit?.({ type: 'DEATHS_REVEALED', payload: deaths });
+        announceDeaths: assignGame((context) => {
+            if (context.pendingDeaths.length) {
+                context.deps?.wsEmit?.({ type: 'deathsRevealed', payload: context.pendingDeaths });
             }
             return {
-                alivePlayers: context.alivePlayers.filter((id) => !deaths.includes(id)),
+                alivePlayers: context.alivePlayers.filter((id) => !context.pendingDeaths.includes(id)),
                 pendingDeaths: [],
                 waitingFor: []
             };
         }),
-        setPhaseNight: assign(() => ({ phase: 'night' })),
-        processExecution: assign((context) => {
+        setPhaseNight: assignGame(() => ({ phase: 'night' })),
+        processExecution: assignGame((context) => {
             const removals =
                 context.toBeExecuted?.length ? context.toBeExecuted
                 : context.markedForExecution ? [context.markedForExecution.nominee]
                 : [];
-            if (removals.length === 0) {
-                return {};
-            }
+            if (removals.length === 0) return {};
             return {
                 alivePlayers: context.alivePlayers.filter((id) => !removals.includes(id)),
                 pendingDeaths: removals,
@@ -564,8 +548,10 @@ const builder = setup({
         waitingForEmpty: ({ context }) => context.waitingFor.length === 0,
         isValidNomination: ({ context, event }) => {
             if (event.type !== 'NOMINATION') return false;
-            const { nominator, nominee } = event.payload;
-            return context.canNominate.includes(nominator) && context.canBeNominated.includes(nominee);
+            return (
+                context.canNominate.includes(event.payload.nominator) &&
+                context.canBeNominated.includes(event.payload.nominee)
+            );
         }
     }
 });
@@ -573,8 +559,6 @@ const builder = setup({
 export const GameMachine = builder.createMachine({
     id: 'GameMachine',
     type: 'parallel',
-    predictableActionArguments: true,
-    preserveActionOrder: true,
     context: ({ input }) => createInitialContext({ input }),
     states: {
         gameStatus: {
@@ -582,7 +566,8 @@ export const GameMachine = builder.createMachine({
             states: {
                 setup: {
                     invoke: {
-                        src: 'onSetupStart'
+                        src: 'onSetupStart',
+                        input: (context) => context.setupArgs
                     },
                     on: {
                         SETUP_COMPLETE: {
@@ -601,9 +586,7 @@ export const GameMachine = builder.createMachine({
                             entry: 'setPhaseNight',
                             initial: 'first_night',
                             states: {
-                                first_night: {
-                                    on: {}
-                                },
+                                first_night: {},
                                 other_night: {}
                             }
                         },
@@ -626,7 +609,7 @@ export const GameMachine = builder.createMachine({
                                             },
                                             always: {
                                                 target: 'running',
-                                                cond: 'waitingForEmpty'
+                                                guard: 'waitingForEmpty'
                                             }
                                         },
                                         running: {
@@ -651,7 +634,7 @@ export const GameMachine = builder.createMachine({
                                                     }
                                                 },
                                                 expired: {
-                                                    entry: 'emitGong',
+                                                    entry: ['emitGong', 'broadcastGong'],
                                                     on: {
                                                         TIMER_STARTED: {
                                                             target: 'running',
@@ -690,7 +673,7 @@ export const GameMachine = builder.createMachine({
                                                             on: {
                                                                 NOMINATION: [
                                                                     {
-                                                                        cond: 'isValidNomination',
+                                                                        guard: 'isValidNomination',
                                                                         target: 'accusation',
                                                                         actions: ['setNomination']
                                                                     },
@@ -735,9 +718,8 @@ export const GameMachine = builder.createMachine({
                                                                     states: {
                                                                         accuser: {
                                                                             entry: sendParent((context) => {
-                                                                                if (!context.nomination) {
+                                                                                if (!context.nomination)
                                                                                     return { type: 'NEXT_STATEMENT' };
-                                                                                }
                                                                                 return {
                                                                                     type: 'REQUEST_STATEMENT',
                                                                                     payload:
@@ -750,9 +732,8 @@ export const GameMachine = builder.createMachine({
                                                                         },
                                                                         accused: {
                                                                             entry: sendParent((context) => {
-                                                                                if (!context.nomination) {
+                                                                                if (!context.nomination)
                                                                                     return { type: 'NEXT_STATEMENT' };
-                                                                                }
                                                                                 return {
                                                                                     type: 'REQUEST_STATEMENT',
                                                                                     payload: context.nomination.nominee
@@ -775,7 +756,7 @@ export const GameMachine = builder.createMachine({
                                                                             }
                                                                         },
                                                                         resolve: {
-                                                                            on: {}
+                                                                            always: 'open'
                                                                         }
                                                                     }
                                                                 }
@@ -815,7 +796,7 @@ export const GameMachine = builder.createMachine({
                 },
                 START_TASKS: [
                     {
-                        cond: 'hasPendingTasks',
+                        guard: 'hasPendingTasks',
                         target: 'running'
                     },
                     {
@@ -824,7 +805,7 @@ export const GameMachine = builder.createMachine({
                 ],
                 RESUME_TASKS: [
                     {
-                        cond: 'hasPendingTasks',
+                        guard: 'hasPendingTasks',
                         target: 'running'
                     },
                     {
@@ -838,7 +819,7 @@ export const GameMachine = builder.createMachine({
                     on: {
                         START_TASKS: [
                             {
-                                cond: 'hasPendingTasks',
+                                guard: 'hasPendingTasks',
                                 target: 'running'
                             }
                         ]
@@ -848,7 +829,7 @@ export const GameMachine = builder.createMachine({
                     entry: 'runNextTask',
                     always: [
                         {
-                            cond: 'hasCurrentTask',
+                            guard: 'hasCurrentTask',
                             target: 'waiting'
                         },
                         {
@@ -860,7 +841,7 @@ export const GameMachine = builder.createMachine({
                     on: {
                         TASK_COMPLETE: [
                             {
-                                cond: 'hasPendingTasks',
+                                guard: 'hasPendingTasks',
                                 target: 'running',
                                 actions: 'clearCurrentTask'
                             },
@@ -876,7 +857,7 @@ export const GameMachine = builder.createMachine({
                     on: {
                         START_TASKS: [
                             {
-                                cond: 'hasPendingTasks',
+                                guard: 'hasPendingTasks',
                                 target: 'running'
                             }
                         ]
@@ -886,3 +867,5 @@ export const GameMachine = builder.createMachine({
         }
     }
 });
+
+export type { GameEvents, GameMachineInput, GameMachineWsEvent };

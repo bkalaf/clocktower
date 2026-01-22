@@ -1,5 +1,5 @@
 // src/components/tokens/barber/Reminder_barber_haircuts_tonight.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/barber.png?url';
 

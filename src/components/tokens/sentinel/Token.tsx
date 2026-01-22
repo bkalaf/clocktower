@@ -1,5 +1,5 @@
 // src/components/tokens/sentinel/Token.tsx
-import * as React from 'react';
+
 import { Token, type TokenProps } from '@/components/grimoire/Token';
 import iconSrc from '@/assets/icons/sentinel.png?url';
 

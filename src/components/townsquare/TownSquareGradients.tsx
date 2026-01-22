@@ -1,5 +1,4 @@
 // src/components/townsquare/TownSquareGradients.tsx
-import * as React from 'react';
 
 const gradients = [
     ['demon', '#ce0100', '#000'],

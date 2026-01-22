@@ -6,9 +6,6 @@ import { SidebarMenuLinks } from './sidebar/SidebarMenuLinks';
 import {
     Sidebar,
     SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarGroupLabel,
     SidebarFooter,
     SidebarHeader
 } from './ui/sidebar';

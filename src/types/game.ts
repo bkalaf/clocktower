@@ -47,6 +47,11 @@ export type Snapshot = object;
 export type GameMemberId = `${GameId}:${UserId}`;
 export type TopicId = `game:${GameId}:whisper:${WhisperId}`;
 export type ChatItemId = string;
+export type GameNomination = {
+    nominator: number;
+    nominee: number;
+};
+export type GameTaskEntry = [string, unknown];
 export type GlobalRoles = 'moderator' | 'user' | 'admin';
 export type GameRoles = 'player' | 'storyteller' | 'spectator';
 export type TopicTypes = 'public' | 'st' | 'whisper';
@@ -148,7 +153,15 @@ export type EventOperations =
     | 'game/endTimer'
     | 'game/pauseTimer'
     | 'game/resumeTimer'
-    | 'game/timerExpired';
+    | 'game/timerExpired'
+    | 'game/dawnBreak'
+    | 'game/deathsRevealed'
+    | 'game/requestStatement'
+    | 'game/statementBroadcast'
+    | 'game/voteStarted'
+    | 'game/nominationRejected'
+    | 'game/gong'
+    | 'game/taskStarted';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type EventMsg<TOperation extends EventOperations = EventOperations, TArgs = any> = {
@@ -168,6 +181,14 @@ export type GameEvents =
     | EventMsg<'game/night', void>
     | EventMsg<'game/startTimer', { min?: number }>
     | EventMsg<'game/endTimer', void>
-    | EventMsg<'game/timerExpired', void>;
+    | EventMsg<'game/timerExpired', void>
+    | EventMsg<'game/dawnBreak', { requireConfirm: boolean }>
+    | EventMsg<'game/deathsRevealed', { deaths: number[] }>
+    | EventMsg<'game/requestStatement', { seatId: number }>
+    | EventMsg<'game/statementBroadcast', { statement: string; nomination: GameNomination }>
+    | EventMsg<'game/voteStarted', GameNomination>
+    | EventMsg<'game/nominationRejected', GameNomination>
+    | EventMsg<'game/gong', void>
+    | EventMsg<'game/taskStarted', { task: GameTaskEntry }>;
 
 export type AppEvents = ChatMsg | GameEvents | SnapshotMsg;

@@ -1,5 +1,5 @@
 // src/components/tokens/innkeeper/Reminder_innkeeper_protected.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/innkeeper.png?url';
 

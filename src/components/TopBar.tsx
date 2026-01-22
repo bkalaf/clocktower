@@ -23,7 +23,6 @@ import { UserNameSpan } from './UserNameSpan';
 import { MatchRoute } from '@tanstack/react-router';
 
 export function CreateRoomButton() {
-    const navigate = useNavigate();
     return (
         <MatchRoute
             to='/rooms'

@@ -1,14 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // src/components/forms/LoginForm.tsx
-import { useCallback, useState } from 'react';
-import { FieldValues, RegisterOptions, useForm, UseFormRegisterReturn, UseFormReturn } from 'react-hook-form';
+import { useCallback } from 'react';
+import { UseFormReturn } from 'react-hook-form';
 import { Link, LinkProps } from '@tanstack/react-router';
 import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 import { login } from '@/lib/api';
 import { FormControl } from './FormControl';
 import { Modal } from '../Modal';

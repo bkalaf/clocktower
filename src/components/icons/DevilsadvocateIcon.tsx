@@ -1,5 +1,5 @@
 // src/components/icons/DevilsadvocateIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/devilsadvocate.png?url';
 

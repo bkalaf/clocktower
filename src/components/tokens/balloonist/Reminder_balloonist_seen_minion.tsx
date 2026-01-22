@@ -1,5 +1,5 @@
 // src/components/tokens/balloonist/Reminder_balloonist_seen_minion.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/balloonist.png?url';
 

@@ -1,5 +1,5 @@
 // src/components/tokens/lilmonsta/Reminder_lilmonsta_is_the_demon.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/lilmonsta.png?url';
 

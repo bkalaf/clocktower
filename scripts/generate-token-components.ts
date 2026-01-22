@@ -51,7 +51,7 @@ async function generateIconComponents() {
         const filePath = path.join(iconsComponentDir, `${componentName}.tsx`);
         const title = iconName.replace(/[-_]/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
         const fileContent = `// src/components/icons/${componentName}.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/${iconFile}?url';
 
@@ -103,7 +103,7 @@ async function generateTokenDirectory(role: RoleDefinition) {
     const tokenComponentName = `${toPascalCase(role.id)}Token`;
     const tokenFilePath = path.join(roleDir, 'Token.tsx');
     const tokenImports = `// src/components/tokens/${role.id}/Token.tsx
-import * as React from 'react';
+
 import { Token, type TokenProps } from '@/components/grimoire/Token';
 import iconSrc from '@/assets/icons/${iconFile}?url';
 
@@ -131,7 +131,7 @@ export default ${tokenComponentName};
         const componentName = `Reminder${toPascalCase(role.id)}${toPascalCase(snake)}`;
         const reminderFilePath = path.join(roleDir, fileName);
         const reminderContent = `// src/components/tokens/${role.id}/${fileName}
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/${iconFile}?url';
 

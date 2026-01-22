@@ -1,5 +1,5 @@
 // src/components/tokens/towncrier/Reminder_towncrier_minion_nominated.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/towncrier.png?url';
 

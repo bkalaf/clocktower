@@ -1,5 +1,5 @@
 // src/components/icons/SnitchIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/snitch.png?url';
 

@@ -1,5 +1,5 @@
 // src/components/tokens/puzzlemaster/Reminder_puzzlemaster_guess_used.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/puzzlemaster.png?url';
 

@@ -1,5 +1,5 @@
 // src/components/tokens/golem/Reminder_golem_can_not_nominate.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/golem.png?url';
 

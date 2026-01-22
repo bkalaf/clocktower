@@ -1,5 +1,5 @@
 // src/components/tokens/goblin/Reminder_goblin_claimed.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/goblin.png?url';
 

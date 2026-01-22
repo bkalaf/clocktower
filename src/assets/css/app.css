@@ -71,7 +71,8 @@
 }
 
 @layer components {
-    td, th {
+    td,
+    th {
         @apply border border-black text-center;
     }
 }

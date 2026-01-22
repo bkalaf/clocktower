@@ -93,16 +93,14 @@ Key Findings (Issues & Gaps)
    wsConnection.ts
    If you want, I can follow up with a proposed route map + data model changes that align the “game” naming and UI structure.
 
-
 ## 1/19/2026
 
-* Swap the existing server functions over to the shared specs/bindings so every handler returns DTO-mapped data and exposes queryOptions/mutationOptions.
-* Update the TanStack Router routes to call makeBeforeLoadEnsure/makeLoaderFromEnsure (and actions where needed) so the query cache is consistently warmed.
-* Build out DTO mappers for each model and start invalidating/updating caches via the new bindings whenever commands execute.
-* Wire the actual routes/loaders/actions to use rooms/roomsCrud (ensuring loader data matches the DTO and invalidating via invalidateRoom after commands).
-* Reuse makeMongooseCrud in other domains and add scope filters or validators so only authenticated owners can hit update/delete.
-* Consider extending the factory with optional list/create bindings (or scoped sanitizers) once more domains rely on it.
-
+- Swap the existing server functions over to the shared specs/bindings so every handler returns DTO-mapped data and exposes queryOptions/mutationOptions.
+- Update the TanStack Router routes to call makeBeforeLoadEnsure/makeLoaderFromEnsure (and actions where needed) so the query cache is consistently warmed.
+- Build out DTO mappers for each model and start invalidating/updating caches via the new bindings whenever commands execute.
+- Wire the actual routes/loaders/actions to use rooms/roomsCrud (ensuring loader data matches the DTO and invalidating via invalidateRoom after commands).
+- Reuse makeMongooseCrud in other domains and add scope filters or validators so only authenticated owners can hit update/delete.
+- Consider extending the factory with optional list/create bindings (or scoped sanitizers) once more domains rely on it.
 
 Refactor one vertical slice (e.g. rooms.get, rooms.updateOne, rooms.deleteOne) onto:
 
@@ -116,19 +114,17 @@ route beforeLoad/loader using ensure
 
 Once one slice compiles and runs, the rest is a mechanical conversion.
 
-1) Correct ServerFn pattern (current TanStack Start)
+1. Correct ServerFn pattern (current TanStack Start)
 
 Old (wrong now):
 
 createServerFn({ method: "POST" })
-  .validator((input) => schema.parse(input))
-
+.validator((input) => schema.parse(input))
 
 New (correct):
 
 createServerFn({ method: "POST" })
-  .inputValidator(schema)
-
+.inputValidator(schema)
 
 inputValidator:
 
@@ -142,7 +138,7 @@ types input correctly inside handler
 
 This is exactly what we want.
 
-2) Updated CRUD factory using inputValidator
+2. Updated CRUD factory using inputValidator
 
 Here is the corrected, future-proof version of makeMongooseCrud, using your Zod schemas properly.
 
@@ -156,40 +152,41 @@ import type { EndpointSpec } from "../../shared/api/endpoint";
 type AnyObj = Record<string, any>;
 
 export function makeMongooseCrud<
-  TDoc extends AnyObj,
-  TDto,
-  TIdKey extends string,
-  TGet extends EndpointSpec<"query", any, any>,
-  TUpdate extends EndpointSpec<"command", any, any>,
-  TDelete extends EndpointSpec<"command", any, any>
->(opts: {
-  getEndpoint: TGet;
-  updateEndpoint: TUpdate;
-  deleteEndpoint: TDelete;
+TDoc extends AnyObj,
+TDto,
+TIdKey extends string,
+TGet extends EndpointSpec<"query", any, any>,
+TUpdate extends EndpointSpec<"command", any, any>,
+TDelete extends EndpointSpec<"command", any, any>
 
-  idKey: TIdKey;
-  Model: Model<TDoc>;
-  mapDto: (doc: TDoc) => TDto;
+> (opts: {
+> getEndpoint: TGet;
+> updateEndpoint: TUpdate;
+> deleteEndpoint: TDelete;
 
-  scopeFilter?: (input: z.infer<TGet["input"]>, ctx: AnyObj) => AnyObj | Promise<AnyObj>;
+idKey: TIdKey;
+Model: Model<TDoc>;
+mapDto: (doc: TDoc) => TDto;
+
+scopeFilter?: (input: z.infer<TGet["input"]>, ctx: AnyObj) => AnyObj | Promise<AnyObj>;
 }) {
-  const { getEndpoint, updateEndpoint, deleteEndpoint, idKey, Model, mapDto, scopeFilter } = opts;
+const { getEndpoint, updateEndpoint, deleteEndpoint, idKey, Model, mapDto, scopeFilter } = opts;
 
-  const getOneFn = createServerFn({ method: "GET" })
-    .inputValidator(getEndpoint.input)
-    .handler(async ({ input, context }) => {
-      const id = input[idKey];
-      const extra = scopeFilter ? await scopeFilter(input, context) : {};
-      const doc = await Model.findOne({ _id: id, ...extra }).lean();
-      if (!doc) throw new Error("Not found");
-      return getEndpoint.output.parse({ item: mapDto(doc as TDoc) });
-    });
+const getOneFn = createServerFn({ method: "GET" })
+.inputValidator(getEndpoint.input)
+.handler(async ({ input, context }) => {
+const id = input[idKey];
+const extra = scopeFilter ? await scopeFilter(input, context) : {};
+const doc = await Model.findOne({ \_id: id, ...extra }).lean();
+if (!doc) throw new Error("Not found");
+return getEndpoint.output.parse({ item: mapDto(doc as TDoc) });
+});
 
-  const updateOneFn = createServerFn({ method: "POST" })
-    .inputValidator(updateEndpoint.input)
-    .handler(async ({ input, context }) => {
-      const id = input[idKey];
-      const extra = scopeFilter ? await scopeFilter(input, context) : {};
+const updateOneFn = createServerFn({ method: "POST" })
+.inputValidator(updateEndpoint.input)
+.handler(async ({ input, context }) => {
+const id = input[idKey];
+const extra = scopeFilter ? await scopeFilter(input, context) : {};
 
       const updated = await Model.findOneAndUpdate(
         { _id: id, ...extra },
@@ -201,34 +198,33 @@ export function makeMongooseCrud<
       return updateEndpoint.output.parse({ item: mapDto(updated as TDoc) });
     });
 
-  const deleteOneFn = createServerFn({ method: "POST" })
-    .inputValidator(deleteEndpoint.input)
-    .handler(async ({ input, context }) => {
-      const id = input[idKey];
-      const extra = scopeFilter ? await scopeFilter(input, context) : {};
+const deleteOneFn = createServerFn({ method: "POST" })
+.inputValidator(deleteEndpoint.input)
+.handler(async ({ input, context }) => {
+const id = input[idKey];
+const extra = scopeFilter ? await scopeFilter(input, context) : {};
 
       const res = await Model.deleteOne({ _id: id, ...extra });
       if (!res.deletedCount) throw new Error("Not found or not permitted");
       return deleteEndpoint.output.parse({ ok: true });
     });
 
-  return {
-    getOne: bindQueryZod({
-      endpoint: getEndpoint,
-      fn: getOneFn,
-      getParams: (i) => ({ [idKey]: i[idKey] }),
-    }),
-    updateOne: bindCommandZod({
-      endpoint: updateEndpoint,
-      fn: updateOneFn,
-    }),
-    deleteOne: bindCommandZod({
-      endpoint: deleteEndpoint,
-      fn: deleteOneFn,
-    }),
-  };
+return {
+getOne: bindQueryZod({
+endpoint: getEndpoint,
+fn: getOneFn,
+getParams: (i) => ({ [idKey]: i[idKey] }),
+}),
+updateOne: bindCommandZod({
+endpoint: updateEndpoint,
+fn: updateOneFn,
+}),
+deleteOne: bindCommandZod({
+endpoint: deleteEndpoint,
+fn: deleteOneFn,
+}),
+};
 }
-
 
 This version is:
 
@@ -242,8 +238,8 @@ This version is:
 
 ✅ future-proof against Start updates
 
-3) Why this actually improves your architecture (not just correctness)
-You now have four layers of defense, all aligned:
+3. Why this actually improves your architecture (not just correctness)
+   You now have four layers of defense, all aligned:
 
 Endpoint registry
 
@@ -265,7 +261,7 @@ Makes refactors loud, not subtle
 
 This is how you keep a long-lived game server sane.
 
-4) Small but important recommendation
+4. Small but important recommendation
 
 For commands that mutate state and return the updated snapshot (especially games.action):
 
@@ -283,7 +279,7 @@ BOTC is state-machine-heavy and benefits from atomic updates
 
 Your bindings already support this cleanly.
 
-5) Final alignment checklist (we’re locked in now)
+5. Final alignment checklist (we’re locked in now)
 
 ✔ ServerFns use inputValidator(zodSchema)
 

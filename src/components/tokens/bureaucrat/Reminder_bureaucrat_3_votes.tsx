@@ -1,5 +1,5 @@
 // src/components/tokens/bureaucrat/Reminder_bureaucrat_3_votes.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/bureaucrat.png?url';
 

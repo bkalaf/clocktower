@@ -2,7 +2,6 @@
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { Clock, Moon, Sun, User, Users } from 'lucide-react';
 
-import { usePreferences } from '@/hooks/usePreferences';
 import { useRoomMatchState } from '@/state/useRoomMatchState';
 import { ClientOnly } from '@tanstack/react-router';
 
@@ -31,27 +30,7 @@ function StatsWidget({ label, value, meta, icon, accentClass = '' }: StatsWidget
     );
 }
 
-const densitySpacing: Record<string, string> = {
-    compact: 'gap-2 py-2',
-    balanced: 'gap-3 py-2.5',
-    airy: 'gap-4 py-3'
-};
-
-const toneStyles: Record<string, string> = {
-    soft: 'border-t border-white/10 bg-slate-950/80',
-    outline: 'border-t border-white/20 bg-slate-950/75',
-    flat: 'border-t border-white/5 bg-slate-950/70'
-};
-
-const accentStyles: Record<string, string> = {
-    ember: 'border border-amber-500/50 bg-gradient-to-br from-amber-500/10 to-black text-amber-200 shadow-[0_0_15px_rgba(251,191,36,0.3)]',
-    glacier:
-        'border border-cyan-400/50 bg-gradient-to-br from-cyan-500/10 to-black text-cyan-200 shadow-[0_0_15px_rgba(56,189,248,0.3)]',
-    violet: 'border border-violet-500/50 bg-gradient-to-br from-violet-500/10 to-black text-violet-200 shadow-[0_0_15px_rgba(139,92,246,0.3)]'
-};
-
 export function BottomBar() {
-    const { values } = { values: {} }; // usePreferences();
     const { roomState, matchState } = useRoomMatchState();
     const [now, setNow] = useState(() => new Date());
 

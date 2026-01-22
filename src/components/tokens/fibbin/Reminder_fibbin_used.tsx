@@ -1,5 +1,5 @@
 // src/components/tokens/fibbin/Reminder_fibbin_used.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/fibbin.png?url';
 

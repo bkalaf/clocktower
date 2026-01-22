@@ -1,5 +1,5 @@
 // src/components/icons/ExorcistIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/exorcist.png?url';
 

@@ -1,5 +1,5 @@
 // src/components/icons/CourtierIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/courtier.png?url';
 

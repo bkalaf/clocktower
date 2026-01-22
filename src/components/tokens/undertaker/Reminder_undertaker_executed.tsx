@@ -1,5 +1,5 @@
 // src/components/tokens/undertaker/Reminder_undertaker_executed.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/undertaker.png?url';
 

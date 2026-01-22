@@ -1,3 +1,4 @@
+// src/server/models/RoomModel.ts
 import mongoose from 'mongoose';
 
 type ConnectedUsers = Record<string, unknown> | string[];
@@ -25,7 +26,9 @@ export type RoomSnapshotDoc = {
     persistedSnapshot?: unknown;
 };
 
-const roomSnapshotSchema = new mongoose.Schema<RoomSnapshotDoc>(
+export type RoomSnapshotDocument = mongoose.Document<unknown, {}, RoomSnapshotDoc> & RoomSnapshotDoc;
+
+const roomSnapshotSchema = new mongoose.Schema<RoomSnapshotDocument>(
     {
         _id: {
             required: true,
@@ -58,19 +61,19 @@ const roomSnapshotSchema = new mongoose.Schema<RoomSnapshotDoc>(
         maxPlayers: {
             required: true,
             enum: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-            type: mongoose.Schema.Types.Int32,
+            type: Number,
             default: 15
         },
         minPlayers: {
             required: true,
             enum: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-            type: mongoose.Schema.Types.Int32,
+            type: Number,
             default: 5
         },
         maxTravellers: {
             required: true,
             enum: [0, 1, 2, 3, 4, 5],
-            type: mongoose.Schema.Types.Int32,
+            type: Number,
             default: 0
         },
         plannedStartTime: {
@@ -141,7 +144,6 @@ roomSnapshotSchema.index({ visibility: 1 });
 roomSnapshotSchema.index({ plannedStartTime: 1 });
 roomSnapshotSchema.index({ endedAt: 1 });
 
-export type RoomSnapshotDocument = mongoose.HydratedDocument<RoomSnapshotDoc>;
-export type RoomSnapshotLean = mongoose.LeanDocument<RoomSnapshotDoc>;
+export type RoomSnapshotLean = RoomSnapshotDoc;
 export const RoomModel =
     mongoose.models.RoomSnapshot ?? mongoose.model<RoomSnapshotDocument>('RoomSnapshot', roomSnapshotSchema);

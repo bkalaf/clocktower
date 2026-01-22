@@ -1,5 +1,5 @@
 // src/components/tokens/judge/Reminder_judge_no_ability.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/judge.png?url';
 

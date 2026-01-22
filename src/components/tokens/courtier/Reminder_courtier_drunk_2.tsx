@@ -1,5 +1,5 @@
 // src/components/tokens/courtier/Reminder_courtier_drunk_2.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/courtier.png?url';
 

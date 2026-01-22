@@ -1,5 +1,5 @@
 // src/components/tokens/assassin/Token.tsx
-import * as React from 'react';
+
 import { Token, type TokenProps } from '@/components/grimoire/Token';
 import iconSrc from '@/assets/icons/assassin.png?url';
 

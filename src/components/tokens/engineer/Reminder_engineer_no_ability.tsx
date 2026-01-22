@@ -1,5 +1,5 @@
 // src/components/tokens/engineer/Reminder_engineer_no_ability.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/engineer.png?url';
 

@@ -1,5 +1,5 @@
 // src/components/tokens/cannibal/Reminder_cannibal_poisoned.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/cannibal.png?url';
 

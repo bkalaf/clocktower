@@ -1,5 +1,5 @@
 // src/components/icons/MatronIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/matron.png?url';
 

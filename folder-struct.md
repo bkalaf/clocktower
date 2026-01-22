@@ -59,5 +59,6 @@
 ```
 
 ## Notes
+
 - Keep demo routes under `src/routes/dev` or guard behind `import.meta.env.DEV`.
 - Prefer route co-location in `routes/` for page-level state and API handlers.

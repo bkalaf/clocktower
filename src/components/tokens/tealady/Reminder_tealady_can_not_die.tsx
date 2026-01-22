@@ -1,5 +1,5 @@
 // src/components/tokens/tealady/Reminder_tealady_can_not_die.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/tealady.png?url';
 

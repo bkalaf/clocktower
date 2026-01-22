@@ -1,5 +1,5 @@
 // src/components/tokens/bonecollector/Reminder_bonecollector_no_ability.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/bonecollector.png?url';
 

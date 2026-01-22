@@ -1,5 +1,5 @@
 // src/components/tokens/juggler/Reminder_juggler_correct.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/juggler.png?url';
 

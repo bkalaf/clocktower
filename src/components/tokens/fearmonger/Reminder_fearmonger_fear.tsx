@@ -1,5 +1,5 @@
 // src/components/tokens/fearmonger/Reminder_fearmonger_fear.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/fearmonger.png?url';
 

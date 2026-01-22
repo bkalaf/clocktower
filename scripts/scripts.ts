@@ -9,7 +9,6 @@
 
 import mongoose, { Schema, model } from 'mongoose';
 import fs from 'node:fs/promises';
-import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 
 // ---- Types (match your global.d.ts) ----
@@ -65,41 +64,6 @@ const EDITIONS_JSON = '/home/bobby/clocktower/src/assets/data/editions.json';
 
 // ---- Enums for Mongoose validation ----
 const SkillLevelEnum: readonly SkillLevel[] = ['beginner', 'intermediate', 'advanced', 'expert', 'veteran'] as const;
-
-const CharacterRolesEnum: readonly CharacterRoles[] = [
-    'gardener',
-    'bootlegger',
-    'spiritofivory',
-    'sentinel',
-    'fibbin',
-    'imp',
-    'spy',
-    'scarletwoman',
-    'baron',
-    'poisoner',
-    'drunk',
-    'saint',
-    'recluse',
-    'butler',
-    'chef',
-    'librarian',
-    'washerwoman',
-    'investigator',
-    'fortuneteller',
-    'empath',
-    'monk',
-    'undertaker',
-    'ravenkeeper',
-    'soldier',
-    'virgin',
-    'mayor',
-    'slayer',
-    'gunslinger',
-    'beggar',
-    'thief',
-    'bureaucrat',
-    'scapegoat'
-] as const;
 
 // ---- Mongoose schema/model ----
 const scriptSchema = new Schema<Script>(

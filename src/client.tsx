@@ -2,7 +2,7 @@
 import { startTransition, StrictMode } from 'react';
 import { hydrateRoot } from 'react-dom/client';
 import { Await, RouterProvider } from '@tanstack/react-router';
-import { hydrateStart } from '@tanstack/start-client-core/client';
+import { hydrateStart } from '@tanstack/react-start-client';
 import type { AnyRouter } from '@tanstack/router-core';
 import { Provider as TanstackQueryProvider } from './integrations/tanstack-query/root-provider';
 import { AuthProvider } from './state/useAuth';

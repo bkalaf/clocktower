@@ -1,5 +1,5 @@
 // src/components/tokens/devilsadvocate/Reminder_devilsadvocate_survives_execution.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/devilsadvocate.png?url';
 

@@ -1,5 +1,5 @@
 // src/components/tokens/godfather/Reminder_godfather_dead.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/godfather.png?url';
 

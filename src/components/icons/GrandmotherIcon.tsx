@@ -1,5 +1,5 @@
 // src/components/icons/GrandmotherIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/grandmother.png?url';
 

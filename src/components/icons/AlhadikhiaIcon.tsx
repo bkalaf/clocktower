@@ -1,5 +1,5 @@
 // src/components/icons/AlhadikhiaIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/alhadikhia.png?url';
 

@@ -1,5 +1,5 @@
 // src/components/tokens/poisoner/Reminder_poisoner_poisoned.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/poisoner.png?url';
 

@@ -1,5 +1,5 @@
 // src/components/tokens/mephit/Reminder_mephit_turns_evil.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/mephit.png?url';
 

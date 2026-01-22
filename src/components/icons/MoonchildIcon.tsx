@@ -1,5 +1,5 @@
 // src/components/icons/MoonchildIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/moonchild.png?url';
 

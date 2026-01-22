@@ -1,5 +1,5 @@
 // src/components/townsquare/TownSquareModalHost.tsx
-import * as React from 'react';
+
 import { EditionModal } from './modals/EditionModal';
 import { FabledModal } from './modals/FabledModal';
 import { GameStateModal } from './modals/GameStateModal';

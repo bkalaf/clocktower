@@ -1,5 +1,5 @@
 // src/components/tokens/fanggu/Reminder_fanggu_once.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/fanggu.png?url';
 

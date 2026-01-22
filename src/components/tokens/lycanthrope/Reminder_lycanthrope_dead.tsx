@@ -1,5 +1,5 @@
 // src/components/tokens/lycanthrope/Reminder_lycanthrope_dead.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/lycanthrope.png?url';
 

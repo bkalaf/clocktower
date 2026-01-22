@@ -1,5 +1,5 @@
 // src/components/tokens/noble/Reminder_noble_seen.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/noble.png?url';
 

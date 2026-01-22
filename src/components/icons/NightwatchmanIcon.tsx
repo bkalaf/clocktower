@@ -1,5 +1,5 @@
 // src/components/icons/NightwatchmanIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/nightwatchman.png?url';
 

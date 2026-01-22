@@ -8,882 +8,867 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as RegisterRouteImport } from './routes/register'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as SplashRouteImport } from './routes/_splash'
-import { Route as SplashIndexRouteImport } from './routes/_splash/index'
-import { Route as GamesGameIdRouteImport } from './routes/games/$gameId'
-import { Route as ApiWhoamiRouteImport } from './routes/api/whoami'
-import { Route as ApiHealthRouteImport } from './routes/api/health'
-import { Route as SplashRoomsRouteImport } from './routes/_splash/_rooms'
-import { Route as ApiScriptsIndexRouteImport } from './routes/api/scripts/index'
-import { Route as ApiRoomsIndexRouteImport } from './routes/api/rooms/index'
-import { Route as ApiInvitesIndexRouteImport } from './routes/api/invites/index'
-import { Route as ApiDevGrimoireRouteImport } from './routes/api/dev/grimoire'
-import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
-import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
-import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
-import { Route as ApiAuthForgotPasswordRouteImport } from './routes/api/auth/forgot-password'
-import { Route as ApiRoomsRoomIdIndexRouteImport } from './routes/api/rooms/$roomId/index'
-import { Route as ApiMatchesMatchIdIndexRouteImport } from './routes/api/matches/$matchId/index'
-import { Route as SplashRoomsRoomsIndexRouteImport } from './routes/_splash/_rooms/rooms/index'
-import { Route as ApiRoomsRoomIdStartMatchRouteImport } from './routes/api/rooms/$roomId/start-match'
-import { Route as ApiRoomsRoomIdScriptRouteImport } from './routes/api/rooms/$roomId/script'
-import { Route as ApiRoomsRoomIdRemovePlayerRouteImport } from './routes/api/rooms/$roomId/remove-player'
-import { Route as ApiRoomsRoomIdMatchRouteImport } from './routes/api/rooms/$roomId/match'
-import { Route as ApiRoomsRoomIdInvitesRouteImport } from './routes/api/rooms/$roomId/invites'
-import { Route as ApiRoomsRoomIdEmptySeatRouteImport } from './routes/api/rooms/$roomId/empty-seat'
-import { Route as ApiMatchesMatchIdTravelRequestRouteImport } from './routes/api/matches/$matchId/travel-request'
-import { Route as ApiMatchesMatchIdTravelDenyRouteImport } from './routes/api/matches/$matchId/travel-deny'
-import { Route as ApiMatchesMatchIdTravelApproveRouteImport } from './routes/api/matches/$matchId/travel-approve'
-import { Route as ApiMatchesMatchIdPhaseRouteImport } from './routes/api/matches/$matchId/phase'
-import { Route as ApiInvitesInviteIdRejectRouteImport } from './routes/api/invites/$inviteId/reject'
-import { Route as ApiInvitesInviteIdCancelRouteImport } from './routes/api/invites/$inviteId/cancel'
-import { Route as ApiInvitesInviteIdAcceptRouteImport } from './routes/api/invites/$inviteId/accept'
-import { Route as ApiGamesGameIdWhispersRouteImport } from './routes/api/games/$gameId/whispers'
-import { Route as ApiGamesGameIdStorytellersRouteImport } from './routes/api/games/$gameId/storytellers'
-import { Route as ApiGamesGameIdStartSetupRouteImport } from './routes/api/games/$gameId/start-setup'
-import { Route as ApiGamesGameIdReadyRouteImport } from './routes/api/games/$gameId/ready'
-import { Route as ApiGamesGameIdHostRouteImport } from './routes/api/games/$gameId/host'
-import { Route as SplashRoomsRoomsNewRouteImport } from './routes/_splash/_rooms/rooms/new'
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as RegisterRouteImport } from './routes/register';
+import { Route as LoginRouteImport } from './routes/login';
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password';
+import { Route as SplashRouteImport } from './routes/_splash';
+import { Route as SplashIndexRouteImport } from './routes/_splash/index';
+import { Route as GamesGameIdRouteImport } from './routes/games/$gameId';
+import { Route as ApiWhoamiRouteImport } from './routes/api/whoami';
+import { Route as ApiHealthRouteImport } from './routes/api/health';
+import { Route as SplashRoomsRouteImport } from './routes/_splash/_rooms';
+import { Route as ApiScriptsIndexRouteImport } from './routes/api/scripts/index';
+import { Route as ApiRoomsIndexRouteImport } from './routes/api/rooms/index';
+import { Route as ApiInvitesIndexRouteImport } from './routes/api/invites/index';
+import { Route as ApiDevGrimoireRouteImport } from './routes/api/dev/grimoire';
+import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register';
+import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout';
+import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login';
+import { Route as ApiAuthForgotPasswordRouteImport } from './routes/api/auth/forgot-password';
+import { Route as ApiRoomsRoomIdIndexRouteImport } from './routes/api/rooms/$roomId/index';
+import { Route as ApiMatchesMatchIdIndexRouteImport } from './routes/api/matches/$matchId/index';
+import { Route as SplashRoomsRoomsIndexRouteImport } from './routes/_splash/_rooms/rooms/index';
+import { Route as ApiRoomsRoomIdStartMatchRouteImport } from './routes/api/rooms/$roomId/start-match';
+import { Route as ApiRoomsRoomIdScriptRouteImport } from './routes/api/rooms/$roomId/script';
+import { Route as ApiRoomsRoomIdRemovePlayerRouteImport } from './routes/api/rooms/$roomId/remove-player';
+import { Route as ApiRoomsRoomIdMatchRouteImport } from './routes/api/rooms/$roomId/match';
+import { Route as ApiRoomsRoomIdInvitesRouteImport } from './routes/api/rooms/$roomId/invites';
+import { Route as ApiRoomsRoomIdEmptySeatRouteImport } from './routes/api/rooms/$roomId/empty-seat';
+import { Route as ApiMatchesMatchIdTravelRequestRouteImport } from './routes/api/matches/$matchId/travel-request';
+import { Route as ApiMatchesMatchIdTravelDenyRouteImport } from './routes/api/matches/$matchId/travel-deny';
+import { Route as ApiMatchesMatchIdTravelApproveRouteImport } from './routes/api/matches/$matchId/travel-approve';
+import { Route as ApiMatchesMatchIdPhaseRouteImport } from './routes/api/matches/$matchId/phase';
+import { Route as ApiInvitesInviteIdRejectRouteImport } from './routes/api/invites/$inviteId/reject';
+import { Route as ApiInvitesInviteIdCancelRouteImport } from './routes/api/invites/$inviteId/cancel';
+import { Route as ApiInvitesInviteIdAcceptRouteImport } from './routes/api/invites/$inviteId/accept';
+import { Route as ApiGamesGameIdWhispersRouteImport } from './routes/api/games/$gameId/whispers';
+import { Route as ApiGamesGameIdStorytellersRouteImport } from './routes/api/games/$gameId/storytellers';
+import { Route as ApiGamesGameIdStartSetupRouteImport } from './routes/api/games/$gameId/start-setup';
+import { Route as ApiGamesGameIdReadyRouteImport } from './routes/api/games/$gameId/ready';
+import { Route as ApiGamesGameIdHostRouteImport } from './routes/api/games/$gameId/host';
+import { Route as SplashRoomsRoomsNewRouteImport } from './routes/_splash/_rooms/rooms/new';
 
 const RegisterRoute = RegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/register',
+    path: '/register',
+    getParentRoute: () => rootRouteImport
+} as any);
 const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/login',
+    path: '/login',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/forgot-password',
+    path: '/forgot-password',
+    getParentRoute: () => rootRouteImport
+} as any);
 const SplashRoute = SplashRouteImport.update({
-  id: '/_splash',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/_splash',
+    getParentRoute: () => rootRouteImport
+} as any);
 const SplashIndexRoute = SplashIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => SplashRoute,
-} as any)
+    id: '/',
+    path: '/',
+    getParentRoute: () => SplashRoute
+} as any);
 const GamesGameIdRoute = GamesGameIdRouteImport.update({
-  id: '/games/$gameId',
-  path: '/games/$gameId',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/games/$gameId',
+    path: '/games/$gameId',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiWhoamiRoute = ApiWhoamiRouteImport.update({
-  id: '/api/whoami',
-  path: '/api/whoami',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/whoami',
+    path: '/api/whoami',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiHealthRoute = ApiHealthRouteImport.update({
-  id: '/api/health',
-  path: '/api/health',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/health',
+    path: '/api/health',
+    getParentRoute: () => rootRouteImport
+} as any);
 const SplashRoomsRoute = SplashRoomsRouteImport.update({
-  id: '/_rooms',
-  getParentRoute: () => SplashRoute,
-} as any)
+    id: '/_rooms',
+    getParentRoute: () => SplashRoute
+} as any);
 const ApiScriptsIndexRoute = ApiScriptsIndexRouteImport.update({
-  id: '/api/scripts/',
-  path: '/api/scripts/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/scripts/',
+    path: '/api/scripts/',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiRoomsIndexRoute = ApiRoomsIndexRouteImport.update({
-  id: '/api/rooms/',
-  path: '/api/rooms/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/rooms/',
+    path: '/api/rooms/',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiInvitesIndexRoute = ApiInvitesIndexRouteImport.update({
-  id: '/api/invites/',
-  path: '/api/invites/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/invites/',
+    path: '/api/invites/',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiDevGrimoireRoute = ApiDevGrimoireRouteImport.update({
-  id: '/api/dev/grimoire',
-  path: '/api/dev/grimoire',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/dev/grimoire',
+    path: '/api/dev/grimoire',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
-  id: '/api/auth/register',
-  path: '/api/auth/register',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/auth/register',
+    path: '/api/auth/register',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiAuthLogoutRoute = ApiAuthLogoutRouteImport.update({
-  id: '/api/auth/logout',
-  path: '/api/auth/logout',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/auth/logout',
+    path: '/api/auth/logout',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
-  id: '/api/auth/login',
-  path: '/api/auth/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/auth/login',
+    path: '/api/auth/login',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiAuthForgotPasswordRoute = ApiAuthForgotPasswordRouteImport.update({
-  id: '/api/auth/forgot-password',
-  path: '/api/auth/forgot-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/auth/forgot-password',
+    path: '/api/auth/forgot-password',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiRoomsRoomIdIndexRoute = ApiRoomsRoomIdIndexRouteImport.update({
-  id: '/api/rooms/$roomId/',
-  path: '/api/rooms/$roomId/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/rooms/$roomId/',
+    path: '/api/rooms/$roomId/',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiMatchesMatchIdIndexRoute = ApiMatchesMatchIdIndexRouteImport.update({
-  id: '/api/matches/$matchId/',
-  path: '/api/matches/$matchId/',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/matches/$matchId/',
+    path: '/api/matches/$matchId/',
+    getParentRoute: () => rootRouteImport
+} as any);
 const SplashRoomsRoomsIndexRoute = SplashRoomsRoomsIndexRouteImport.update({
-  id: '/rooms/',
-  path: '/rooms/',
-  getParentRoute: () => SplashRoomsRoute,
-} as any)
-const ApiRoomsRoomIdStartMatchRoute =
-  ApiRoomsRoomIdStartMatchRouteImport.update({
+    id: '/rooms/',
+    path: '/rooms/',
+    getParentRoute: () => SplashRoomsRoute
+} as any);
+const ApiRoomsRoomIdStartMatchRoute = ApiRoomsRoomIdStartMatchRouteImport.update({
     id: '/api/rooms/$roomId/start-match',
     path: '/api/rooms/$roomId/start-match',
-    getParentRoute: () => rootRouteImport,
-  } as any)
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiRoomsRoomIdScriptRoute = ApiRoomsRoomIdScriptRouteImport.update({
-  id: '/api/rooms/$roomId/script',
-  path: '/api/rooms/$roomId/script',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiRoomsRoomIdRemovePlayerRoute =
-  ApiRoomsRoomIdRemovePlayerRouteImport.update({
+    id: '/api/rooms/$roomId/script',
+    path: '/api/rooms/$roomId/script',
+    getParentRoute: () => rootRouteImport
+} as any);
+const ApiRoomsRoomIdRemovePlayerRoute = ApiRoomsRoomIdRemovePlayerRouteImport.update({
     id: '/api/rooms/$roomId/remove-player',
     path: '/api/rooms/$roomId/remove-player',
-    getParentRoute: () => rootRouteImport,
-  } as any)
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiRoomsRoomIdMatchRoute = ApiRoomsRoomIdMatchRouteImport.update({
-  id: '/api/rooms/$roomId/match',
-  path: '/api/rooms/$roomId/match',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/rooms/$roomId/match',
+    path: '/api/rooms/$roomId/match',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiRoomsRoomIdInvitesRoute = ApiRoomsRoomIdInvitesRouteImport.update({
-  id: '/api/rooms/$roomId/invites',
-  path: '/api/rooms/$roomId/invites',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/rooms/$roomId/invites',
+    path: '/api/rooms/$roomId/invites',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiRoomsRoomIdEmptySeatRoute = ApiRoomsRoomIdEmptySeatRouteImport.update({
-  id: '/api/rooms/$roomId/empty-seat',
-  path: '/api/rooms/$roomId/empty-seat',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiMatchesMatchIdTravelRequestRoute =
-  ApiMatchesMatchIdTravelRequestRouteImport.update({
+    id: '/api/rooms/$roomId/empty-seat',
+    path: '/api/rooms/$roomId/empty-seat',
+    getParentRoute: () => rootRouteImport
+} as any);
+const ApiMatchesMatchIdTravelRequestRoute = ApiMatchesMatchIdTravelRequestRouteImport.update({
     id: '/api/matches/$matchId/travel-request',
     path: '/api/matches/$matchId/travel-request',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiMatchesMatchIdTravelDenyRoute =
-  ApiMatchesMatchIdTravelDenyRouteImport.update({
+    getParentRoute: () => rootRouteImport
+} as any);
+const ApiMatchesMatchIdTravelDenyRoute = ApiMatchesMatchIdTravelDenyRouteImport.update({
     id: '/api/matches/$matchId/travel-deny',
     path: '/api/matches/$matchId/travel-deny',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiMatchesMatchIdTravelApproveRoute =
-  ApiMatchesMatchIdTravelApproveRouteImport.update({
+    getParentRoute: () => rootRouteImport
+} as any);
+const ApiMatchesMatchIdTravelApproveRoute = ApiMatchesMatchIdTravelApproveRouteImport.update({
     id: '/api/matches/$matchId/travel-approve',
     path: '/api/matches/$matchId/travel-approve',
-    getParentRoute: () => rootRouteImport,
-  } as any)
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiMatchesMatchIdPhaseRoute = ApiMatchesMatchIdPhaseRouteImport.update({
-  id: '/api/matches/$matchId/phase',
-  path: '/api/matches/$matchId/phase',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiInvitesInviteIdRejectRoute =
-  ApiInvitesInviteIdRejectRouteImport.update({
+    id: '/api/matches/$matchId/phase',
+    path: '/api/matches/$matchId/phase',
+    getParentRoute: () => rootRouteImport
+} as any);
+const ApiInvitesInviteIdRejectRoute = ApiInvitesInviteIdRejectRouteImport.update({
     id: '/api/invites/$inviteId/reject',
     path: '/api/invites/$inviteId/reject',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiInvitesInviteIdCancelRoute =
-  ApiInvitesInviteIdCancelRouteImport.update({
+    getParentRoute: () => rootRouteImport
+} as any);
+const ApiInvitesInviteIdCancelRoute = ApiInvitesInviteIdCancelRouteImport.update({
     id: '/api/invites/$inviteId/cancel',
     path: '/api/invites/$inviteId/cancel',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiInvitesInviteIdAcceptRoute =
-  ApiInvitesInviteIdAcceptRouteImport.update({
+    getParentRoute: () => rootRouteImport
+} as any);
+const ApiInvitesInviteIdAcceptRoute = ApiInvitesInviteIdAcceptRouteImport.update({
     id: '/api/invites/$inviteId/accept',
     path: '/api/invites/$inviteId/accept',
-    getParentRoute: () => rootRouteImport,
-  } as any)
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiGamesGameIdWhispersRoute = ApiGamesGameIdWhispersRouteImport.update({
-  id: '/api/games/$gameId/whispers',
-  path: '/api/games/$gameId/whispers',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiGamesGameIdStorytellersRoute =
-  ApiGamesGameIdStorytellersRouteImport.update({
+    id: '/api/games/$gameId/whispers',
+    path: '/api/games/$gameId/whispers',
+    getParentRoute: () => rootRouteImport
+} as any);
+const ApiGamesGameIdStorytellersRoute = ApiGamesGameIdStorytellersRouteImport.update({
     id: '/api/games/$gameId/storytellers',
     path: '/api/games/$gameId/storytellers',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ApiGamesGameIdStartSetupRoute =
-  ApiGamesGameIdStartSetupRouteImport.update({
+    getParentRoute: () => rootRouteImport
+} as any);
+const ApiGamesGameIdStartSetupRoute = ApiGamesGameIdStartSetupRouteImport.update({
     id: '/api/games/$gameId/start-setup',
     path: '/api/games/$gameId/start-setup',
-    getParentRoute: () => rootRouteImport,
-  } as any)
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiGamesGameIdReadyRoute = ApiGamesGameIdReadyRouteImport.update({
-  id: '/api/games/$gameId/ready',
-  path: '/api/games/$gameId/ready',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/games/$gameId/ready',
+    path: '/api/games/$gameId/ready',
+    getParentRoute: () => rootRouteImport
+} as any);
 const ApiGamesGameIdHostRoute = ApiGamesGameIdHostRouteImport.update({
-  id: '/api/games/$gameId/host',
-  path: '/api/games/$gameId/host',
-  getParentRoute: () => rootRouteImport,
-} as any)
+    id: '/api/games/$gameId/host',
+    path: '/api/games/$gameId/host',
+    getParentRoute: () => rootRouteImport
+} as any);
 const SplashRoomsRoomsNewRoute = SplashRoomsRoomsNewRouteImport.update({
-  id: '/rooms/new',
-  path: '/rooms/new',
-  getParentRoute: () => SplashRoomsRoute,
-} as any)
+    id: '/rooms/new',
+    path: '/rooms/new',
+    getParentRoute: () => SplashRoomsRoute
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
-  '/api/health': typeof ApiHealthRoute
-  '/api/whoami': typeof ApiWhoamiRoute
-  '/games/$gameId': typeof GamesGameIdRoute
-  '/': typeof SplashIndexRoute
-  '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
-  '/api/auth/login': typeof ApiAuthLoginRoute
-  '/api/auth/logout': typeof ApiAuthLogoutRoute
-  '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/dev/grimoire': typeof ApiDevGrimoireRoute
-  '/api/invites': typeof ApiInvitesIndexRoute
-  '/api/rooms': typeof ApiRoomsIndexRoute
-  '/api/scripts': typeof ApiScriptsIndexRoute
-  '/rooms/new': typeof SplashRoomsRoomsNewRoute
-  '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
-  '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
-  '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
-  '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute
-  '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute
-  '/api/invites/$inviteId/accept': typeof ApiInvitesInviteIdAcceptRoute
-  '/api/invites/$inviteId/cancel': typeof ApiInvitesInviteIdCancelRoute
-  '/api/invites/$inviteId/reject': typeof ApiInvitesInviteIdRejectRoute
-  '/api/matches/$matchId/phase': typeof ApiMatchesMatchIdPhaseRoute
-  '/api/matches/$matchId/travel-approve': typeof ApiMatchesMatchIdTravelApproveRoute
-  '/api/matches/$matchId/travel-deny': typeof ApiMatchesMatchIdTravelDenyRoute
-  '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute
-  '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute
-  '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute
-  '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute
-  '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
-  '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
-  '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
-  '/rooms': typeof SplashRoomsRoomsIndexRoute
-  '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute
-  '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute
+    '/forgot-password': typeof ForgotPasswordRoute;
+    '/login': typeof LoginRoute;
+    '/register': typeof RegisterRoute;
+    '/api/health': typeof ApiHealthRoute;
+    '/api/whoami': typeof ApiWhoamiRoute;
+    '/games/$gameId': typeof GamesGameIdRoute;
+    '/': typeof SplashIndexRoute;
+    '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute;
+    '/api/auth/login': typeof ApiAuthLoginRoute;
+    '/api/auth/logout': typeof ApiAuthLogoutRoute;
+    '/api/auth/register': typeof ApiAuthRegisterRoute;
+    '/api/dev/grimoire': typeof ApiDevGrimoireRoute;
+    '/api/invites': typeof ApiInvitesIndexRoute;
+    '/api/rooms': typeof ApiRoomsIndexRoute;
+    '/api/scripts': typeof ApiScriptsIndexRoute;
+    '/rooms/new': typeof SplashRoomsRoomsNewRoute;
+    '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute;
+    '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute;
+    '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute;
+    '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute;
+    '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute;
+    '/api/invites/$inviteId/accept': typeof ApiInvitesInviteIdAcceptRoute;
+    '/api/invites/$inviteId/cancel': typeof ApiInvitesInviteIdCancelRoute;
+    '/api/invites/$inviteId/reject': typeof ApiInvitesInviteIdRejectRoute;
+    '/api/matches/$matchId/phase': typeof ApiMatchesMatchIdPhaseRoute;
+    '/api/matches/$matchId/travel-approve': typeof ApiMatchesMatchIdTravelApproveRoute;
+    '/api/matches/$matchId/travel-deny': typeof ApiMatchesMatchIdTravelDenyRoute;
+    '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute;
+    '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute;
+    '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute;
+    '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute;
+    '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute;
+    '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute;
+    '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute;
+    '/rooms': typeof SplashRoomsRoomsIndexRoute;
+    '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute;
+    '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute;
 }
 export interface FileRoutesByTo {
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
-  '/api/health': typeof ApiHealthRoute
-  '/api/whoami': typeof ApiWhoamiRoute
-  '/games/$gameId': typeof GamesGameIdRoute
-  '/': typeof SplashIndexRoute
-  '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
-  '/api/auth/login': typeof ApiAuthLoginRoute
-  '/api/auth/logout': typeof ApiAuthLogoutRoute
-  '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/dev/grimoire': typeof ApiDevGrimoireRoute
-  '/api/invites': typeof ApiInvitesIndexRoute
-  '/api/rooms': typeof ApiRoomsIndexRoute
-  '/api/scripts': typeof ApiScriptsIndexRoute
-  '/rooms/new': typeof SplashRoomsRoomsNewRoute
-  '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
-  '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
-  '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
-  '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute
-  '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute
-  '/api/invites/$inviteId/accept': typeof ApiInvitesInviteIdAcceptRoute
-  '/api/invites/$inviteId/cancel': typeof ApiInvitesInviteIdCancelRoute
-  '/api/invites/$inviteId/reject': typeof ApiInvitesInviteIdRejectRoute
-  '/api/matches/$matchId/phase': typeof ApiMatchesMatchIdPhaseRoute
-  '/api/matches/$matchId/travel-approve': typeof ApiMatchesMatchIdTravelApproveRoute
-  '/api/matches/$matchId/travel-deny': typeof ApiMatchesMatchIdTravelDenyRoute
-  '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute
-  '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute
-  '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute
-  '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute
-  '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
-  '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
-  '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
-  '/rooms': typeof SplashRoomsRoomsIndexRoute
-  '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute
-  '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute
+    '/forgot-password': typeof ForgotPasswordRoute;
+    '/login': typeof LoginRoute;
+    '/register': typeof RegisterRoute;
+    '/api/health': typeof ApiHealthRoute;
+    '/api/whoami': typeof ApiWhoamiRoute;
+    '/games/$gameId': typeof GamesGameIdRoute;
+    '/': typeof SplashIndexRoute;
+    '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute;
+    '/api/auth/login': typeof ApiAuthLoginRoute;
+    '/api/auth/logout': typeof ApiAuthLogoutRoute;
+    '/api/auth/register': typeof ApiAuthRegisterRoute;
+    '/api/dev/grimoire': typeof ApiDevGrimoireRoute;
+    '/api/invites': typeof ApiInvitesIndexRoute;
+    '/api/rooms': typeof ApiRoomsIndexRoute;
+    '/api/scripts': typeof ApiScriptsIndexRoute;
+    '/rooms/new': typeof SplashRoomsRoomsNewRoute;
+    '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute;
+    '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute;
+    '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute;
+    '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute;
+    '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute;
+    '/api/invites/$inviteId/accept': typeof ApiInvitesInviteIdAcceptRoute;
+    '/api/invites/$inviteId/cancel': typeof ApiInvitesInviteIdCancelRoute;
+    '/api/invites/$inviteId/reject': typeof ApiInvitesInviteIdRejectRoute;
+    '/api/matches/$matchId/phase': typeof ApiMatchesMatchIdPhaseRoute;
+    '/api/matches/$matchId/travel-approve': typeof ApiMatchesMatchIdTravelApproveRoute;
+    '/api/matches/$matchId/travel-deny': typeof ApiMatchesMatchIdTravelDenyRoute;
+    '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute;
+    '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute;
+    '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute;
+    '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute;
+    '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute;
+    '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute;
+    '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute;
+    '/rooms': typeof SplashRoomsRoomsIndexRoute;
+    '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute;
+    '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/_splash': typeof SplashRouteWithChildren
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
-  '/_splash/_rooms': typeof SplashRoomsRouteWithChildren
-  '/api/health': typeof ApiHealthRoute
-  '/api/whoami': typeof ApiWhoamiRoute
-  '/games/$gameId': typeof GamesGameIdRoute
-  '/_splash/': typeof SplashIndexRoute
-  '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
-  '/api/auth/login': typeof ApiAuthLoginRoute
-  '/api/auth/logout': typeof ApiAuthLogoutRoute
-  '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/dev/grimoire': typeof ApiDevGrimoireRoute
-  '/api/invites/': typeof ApiInvitesIndexRoute
-  '/api/rooms/': typeof ApiRoomsIndexRoute
-  '/api/scripts/': typeof ApiScriptsIndexRoute
-  '/_splash/_rooms/rooms/new': typeof SplashRoomsRoomsNewRoute
-  '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
-  '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
-  '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
-  '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute
-  '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute
-  '/api/invites/$inviteId/accept': typeof ApiInvitesInviteIdAcceptRoute
-  '/api/invites/$inviteId/cancel': typeof ApiInvitesInviteIdCancelRoute
-  '/api/invites/$inviteId/reject': typeof ApiInvitesInviteIdRejectRoute
-  '/api/matches/$matchId/phase': typeof ApiMatchesMatchIdPhaseRoute
-  '/api/matches/$matchId/travel-approve': typeof ApiMatchesMatchIdTravelApproveRoute
-  '/api/matches/$matchId/travel-deny': typeof ApiMatchesMatchIdTravelDenyRoute
-  '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute
-  '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute
-  '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute
-  '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute
-  '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
-  '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
-  '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
-  '/_splash/_rooms/rooms/': typeof SplashRoomsRoomsIndexRoute
-  '/api/matches/$matchId/': typeof ApiMatchesMatchIdIndexRoute
-  '/api/rooms/$roomId/': typeof ApiRoomsRoomIdIndexRoute
+    __root__: typeof rootRouteImport;
+    '/_splash': typeof SplashRouteWithChildren;
+    '/forgot-password': typeof ForgotPasswordRoute;
+    '/login': typeof LoginRoute;
+    '/register': typeof RegisterRoute;
+    '/_splash/_rooms': typeof SplashRoomsRouteWithChildren;
+    '/api/health': typeof ApiHealthRoute;
+    '/api/whoami': typeof ApiWhoamiRoute;
+    '/games/$gameId': typeof GamesGameIdRoute;
+    '/_splash/': typeof SplashIndexRoute;
+    '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute;
+    '/api/auth/login': typeof ApiAuthLoginRoute;
+    '/api/auth/logout': typeof ApiAuthLogoutRoute;
+    '/api/auth/register': typeof ApiAuthRegisterRoute;
+    '/api/dev/grimoire': typeof ApiDevGrimoireRoute;
+    '/api/invites/': typeof ApiInvitesIndexRoute;
+    '/api/rooms/': typeof ApiRoomsIndexRoute;
+    '/api/scripts/': typeof ApiScriptsIndexRoute;
+    '/_splash/_rooms/rooms/new': typeof SplashRoomsRoomsNewRoute;
+    '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute;
+    '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute;
+    '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute;
+    '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute;
+    '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute;
+    '/api/invites/$inviteId/accept': typeof ApiInvitesInviteIdAcceptRoute;
+    '/api/invites/$inviteId/cancel': typeof ApiInvitesInviteIdCancelRoute;
+    '/api/invites/$inviteId/reject': typeof ApiInvitesInviteIdRejectRoute;
+    '/api/matches/$matchId/phase': typeof ApiMatchesMatchIdPhaseRoute;
+    '/api/matches/$matchId/travel-approve': typeof ApiMatchesMatchIdTravelApproveRoute;
+    '/api/matches/$matchId/travel-deny': typeof ApiMatchesMatchIdTravelDenyRoute;
+    '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute;
+    '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute;
+    '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute;
+    '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute;
+    '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute;
+    '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute;
+    '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute;
+    '/_splash/_rooms/rooms/': typeof SplashRoomsRoomsIndexRoute;
+    '/api/matches/$matchId/': typeof ApiMatchesMatchIdIndexRoute;
+    '/api/rooms/$roomId/': typeof ApiRoomsRoomIdIndexRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/forgot-password'
-    | '/login'
-    | '/register'
-    | '/api/health'
-    | '/api/whoami'
-    | '/games/$gameId'
-    | '/'
-    | '/api/auth/forgot-password'
-    | '/api/auth/login'
-    | '/api/auth/logout'
-    | '/api/auth/register'
-    | '/api/dev/grimoire'
-    | '/api/invites'
-    | '/api/rooms'
-    | '/api/scripts'
-    | '/rooms/new'
-    | '/api/games/$gameId/host'
-    | '/api/games/$gameId/ready'
-    | '/api/games/$gameId/start-setup'
-    | '/api/games/$gameId/storytellers'
-    | '/api/games/$gameId/whispers'
-    | '/api/invites/$inviteId/accept'
-    | '/api/invites/$inviteId/cancel'
-    | '/api/invites/$inviteId/reject'
-    | '/api/matches/$matchId/phase'
-    | '/api/matches/$matchId/travel-approve'
-    | '/api/matches/$matchId/travel-deny'
-    | '/api/matches/$matchId/travel-request'
-    | '/api/rooms/$roomId/empty-seat'
-    | '/api/rooms/$roomId/invites'
-    | '/api/rooms/$roomId/match'
-    | '/api/rooms/$roomId/remove-player'
-    | '/api/rooms/$roomId/script'
-    | '/api/rooms/$roomId/start-match'
-    | '/rooms'
-    | '/api/matches/$matchId'
-    | '/api/rooms/$roomId'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/forgot-password'
-    | '/login'
-    | '/register'
-    | '/api/health'
-    | '/api/whoami'
-    | '/games/$gameId'
-    | '/'
-    | '/api/auth/forgot-password'
-    | '/api/auth/login'
-    | '/api/auth/logout'
-    | '/api/auth/register'
-    | '/api/dev/grimoire'
-    | '/api/invites'
-    | '/api/rooms'
-    | '/api/scripts'
-    | '/rooms/new'
-    | '/api/games/$gameId/host'
-    | '/api/games/$gameId/ready'
-    | '/api/games/$gameId/start-setup'
-    | '/api/games/$gameId/storytellers'
-    | '/api/games/$gameId/whispers'
-    | '/api/invites/$inviteId/accept'
-    | '/api/invites/$inviteId/cancel'
-    | '/api/invites/$inviteId/reject'
-    | '/api/matches/$matchId/phase'
-    | '/api/matches/$matchId/travel-approve'
-    | '/api/matches/$matchId/travel-deny'
-    | '/api/matches/$matchId/travel-request'
-    | '/api/rooms/$roomId/empty-seat'
-    | '/api/rooms/$roomId/invites'
-    | '/api/rooms/$roomId/match'
-    | '/api/rooms/$roomId/remove-player'
-    | '/api/rooms/$roomId/script'
-    | '/api/rooms/$roomId/start-match'
-    | '/rooms'
-    | '/api/matches/$matchId'
-    | '/api/rooms/$roomId'
-  id:
-    | '__root__'
-    | '/_splash'
-    | '/forgot-password'
-    | '/login'
-    | '/register'
-    | '/_splash/_rooms'
-    | '/api/health'
-    | '/api/whoami'
-    | '/games/$gameId'
-    | '/_splash/'
-    | '/api/auth/forgot-password'
-    | '/api/auth/login'
-    | '/api/auth/logout'
-    | '/api/auth/register'
-    | '/api/dev/grimoire'
-    | '/api/invites/'
-    | '/api/rooms/'
-    | '/api/scripts/'
-    | '/_splash/_rooms/rooms/new'
-    | '/api/games/$gameId/host'
-    | '/api/games/$gameId/ready'
-    | '/api/games/$gameId/start-setup'
-    | '/api/games/$gameId/storytellers'
-    | '/api/games/$gameId/whispers'
-    | '/api/invites/$inviteId/accept'
-    | '/api/invites/$inviteId/cancel'
-    | '/api/invites/$inviteId/reject'
-    | '/api/matches/$matchId/phase'
-    | '/api/matches/$matchId/travel-approve'
-    | '/api/matches/$matchId/travel-deny'
-    | '/api/matches/$matchId/travel-request'
-    | '/api/rooms/$roomId/empty-seat'
-    | '/api/rooms/$roomId/invites'
-    | '/api/rooms/$roomId/match'
-    | '/api/rooms/$roomId/remove-player'
-    | '/api/rooms/$roomId/script'
-    | '/api/rooms/$roomId/start-match'
-    | '/_splash/_rooms/rooms/'
-    | '/api/matches/$matchId/'
-    | '/api/rooms/$roomId/'
-  fileRoutesById: FileRoutesById
+    fileRoutesByFullPath: FileRoutesByFullPath;
+    fullPaths:
+        | '/forgot-password'
+        | '/login'
+        | '/register'
+        | '/api/health'
+        | '/api/whoami'
+        | '/games/$gameId'
+        | '/'
+        | '/api/auth/forgot-password'
+        | '/api/auth/login'
+        | '/api/auth/logout'
+        | '/api/auth/register'
+        | '/api/dev/grimoire'
+        | '/api/invites'
+        | '/api/rooms'
+        | '/api/scripts'
+        | '/rooms/new'
+        | '/api/games/$gameId/host'
+        | '/api/games/$gameId/ready'
+        | '/api/games/$gameId/start-setup'
+        | '/api/games/$gameId/storytellers'
+        | '/api/games/$gameId/whispers'
+        | '/api/invites/$inviteId/accept'
+        | '/api/invites/$inviteId/cancel'
+        | '/api/invites/$inviteId/reject'
+        | '/api/matches/$matchId/phase'
+        | '/api/matches/$matchId/travel-approve'
+        | '/api/matches/$matchId/travel-deny'
+        | '/api/matches/$matchId/travel-request'
+        | '/api/rooms/$roomId/empty-seat'
+        | '/api/rooms/$roomId/invites'
+        | '/api/rooms/$roomId/match'
+        | '/api/rooms/$roomId/remove-player'
+        | '/api/rooms/$roomId/script'
+        | '/api/rooms/$roomId/start-match'
+        | '/rooms'
+        | '/api/matches/$matchId'
+        | '/api/rooms/$roomId';
+    fileRoutesByTo: FileRoutesByTo;
+    to:
+        | '/forgot-password'
+        | '/login'
+        | '/register'
+        | '/api/health'
+        | '/api/whoami'
+        | '/games/$gameId'
+        | '/'
+        | '/api/auth/forgot-password'
+        | '/api/auth/login'
+        | '/api/auth/logout'
+        | '/api/auth/register'
+        | '/api/dev/grimoire'
+        | '/api/invites'
+        | '/api/rooms'
+        | '/api/scripts'
+        | '/rooms/new'
+        | '/api/games/$gameId/host'
+        | '/api/games/$gameId/ready'
+        | '/api/games/$gameId/start-setup'
+        | '/api/games/$gameId/storytellers'
+        | '/api/games/$gameId/whispers'
+        | '/api/invites/$inviteId/accept'
+        | '/api/invites/$inviteId/cancel'
+        | '/api/invites/$inviteId/reject'
+        | '/api/matches/$matchId/phase'
+        | '/api/matches/$matchId/travel-approve'
+        | '/api/matches/$matchId/travel-deny'
+        | '/api/matches/$matchId/travel-request'
+        | '/api/rooms/$roomId/empty-seat'
+        | '/api/rooms/$roomId/invites'
+        | '/api/rooms/$roomId/match'
+        | '/api/rooms/$roomId/remove-player'
+        | '/api/rooms/$roomId/script'
+        | '/api/rooms/$roomId/start-match'
+        | '/rooms'
+        | '/api/matches/$matchId'
+        | '/api/rooms/$roomId';
+    id:
+        | '__root__'
+        | '/_splash'
+        | '/forgot-password'
+        | '/login'
+        | '/register'
+        | '/_splash/_rooms'
+        | '/api/health'
+        | '/api/whoami'
+        | '/games/$gameId'
+        | '/_splash/'
+        | '/api/auth/forgot-password'
+        | '/api/auth/login'
+        | '/api/auth/logout'
+        | '/api/auth/register'
+        | '/api/dev/grimoire'
+        | '/api/invites/'
+        | '/api/rooms/'
+        | '/api/scripts/'
+        | '/_splash/_rooms/rooms/new'
+        | '/api/games/$gameId/host'
+        | '/api/games/$gameId/ready'
+        | '/api/games/$gameId/start-setup'
+        | '/api/games/$gameId/storytellers'
+        | '/api/games/$gameId/whispers'
+        | '/api/invites/$inviteId/accept'
+        | '/api/invites/$inviteId/cancel'
+        | '/api/invites/$inviteId/reject'
+        | '/api/matches/$matchId/phase'
+        | '/api/matches/$matchId/travel-approve'
+        | '/api/matches/$matchId/travel-deny'
+        | '/api/matches/$matchId/travel-request'
+        | '/api/rooms/$roomId/empty-seat'
+        | '/api/rooms/$roomId/invites'
+        | '/api/rooms/$roomId/match'
+        | '/api/rooms/$roomId/remove-player'
+        | '/api/rooms/$roomId/script'
+        | '/api/rooms/$roomId/start-match'
+        | '/_splash/_rooms/rooms/'
+        | '/api/matches/$matchId/'
+        | '/api/rooms/$roomId/';
+    fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  SplashRoute: typeof SplashRouteWithChildren
-  ForgotPasswordRoute: typeof ForgotPasswordRoute
-  LoginRoute: typeof LoginRoute
-  RegisterRoute: typeof RegisterRoute
-  ApiHealthRoute: typeof ApiHealthRoute
-  ApiWhoamiRoute: typeof ApiWhoamiRoute
-  GamesGameIdRoute: typeof GamesGameIdRoute
-  ApiAuthForgotPasswordRoute: typeof ApiAuthForgotPasswordRoute
-  ApiAuthLoginRoute: typeof ApiAuthLoginRoute
-  ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
-  ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
-  ApiDevGrimoireRoute: typeof ApiDevGrimoireRoute
-  ApiInvitesIndexRoute: typeof ApiInvitesIndexRoute
-  ApiRoomsIndexRoute: typeof ApiRoomsIndexRoute
-  ApiScriptsIndexRoute: typeof ApiScriptsIndexRoute
-  ApiGamesGameIdHostRoute: typeof ApiGamesGameIdHostRoute
-  ApiGamesGameIdReadyRoute: typeof ApiGamesGameIdReadyRoute
-  ApiGamesGameIdStartSetupRoute: typeof ApiGamesGameIdStartSetupRoute
-  ApiGamesGameIdStorytellersRoute: typeof ApiGamesGameIdStorytellersRoute
-  ApiGamesGameIdWhispersRoute: typeof ApiGamesGameIdWhispersRoute
-  ApiInvitesInviteIdAcceptRoute: typeof ApiInvitesInviteIdAcceptRoute
-  ApiInvitesInviteIdCancelRoute: typeof ApiInvitesInviteIdCancelRoute
-  ApiInvitesInviteIdRejectRoute: typeof ApiInvitesInviteIdRejectRoute
-  ApiMatchesMatchIdPhaseRoute: typeof ApiMatchesMatchIdPhaseRoute
-  ApiMatchesMatchIdTravelApproveRoute: typeof ApiMatchesMatchIdTravelApproveRoute
-  ApiMatchesMatchIdTravelDenyRoute: typeof ApiMatchesMatchIdTravelDenyRoute
-  ApiMatchesMatchIdTravelRequestRoute: typeof ApiMatchesMatchIdTravelRequestRoute
-  ApiRoomsRoomIdEmptySeatRoute: typeof ApiRoomsRoomIdEmptySeatRoute
-  ApiRoomsRoomIdInvitesRoute: typeof ApiRoomsRoomIdInvitesRoute
-  ApiRoomsRoomIdMatchRoute: typeof ApiRoomsRoomIdMatchRoute
-  ApiRoomsRoomIdRemovePlayerRoute: typeof ApiRoomsRoomIdRemovePlayerRoute
-  ApiRoomsRoomIdScriptRoute: typeof ApiRoomsRoomIdScriptRoute
-  ApiRoomsRoomIdStartMatchRoute: typeof ApiRoomsRoomIdStartMatchRoute
-  ApiMatchesMatchIdIndexRoute: typeof ApiMatchesMatchIdIndexRoute
-  ApiRoomsRoomIdIndexRoute: typeof ApiRoomsRoomIdIndexRoute
+    SplashRoute: typeof SplashRouteWithChildren;
+    ForgotPasswordRoute: typeof ForgotPasswordRoute;
+    LoginRoute: typeof LoginRoute;
+    RegisterRoute: typeof RegisterRoute;
+    ApiHealthRoute: typeof ApiHealthRoute;
+    ApiWhoamiRoute: typeof ApiWhoamiRoute;
+    GamesGameIdRoute: typeof GamesGameIdRoute;
+    ApiAuthForgotPasswordRoute: typeof ApiAuthForgotPasswordRoute;
+    ApiAuthLoginRoute: typeof ApiAuthLoginRoute;
+    ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute;
+    ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute;
+    ApiDevGrimoireRoute: typeof ApiDevGrimoireRoute;
+    ApiInvitesIndexRoute: typeof ApiInvitesIndexRoute;
+    ApiRoomsIndexRoute: typeof ApiRoomsIndexRoute;
+    ApiScriptsIndexRoute: typeof ApiScriptsIndexRoute;
+    ApiGamesGameIdHostRoute: typeof ApiGamesGameIdHostRoute;
+    ApiGamesGameIdReadyRoute: typeof ApiGamesGameIdReadyRoute;
+    ApiGamesGameIdStartSetupRoute: typeof ApiGamesGameIdStartSetupRoute;
+    ApiGamesGameIdStorytellersRoute: typeof ApiGamesGameIdStorytellersRoute;
+    ApiGamesGameIdWhispersRoute: typeof ApiGamesGameIdWhispersRoute;
+    ApiInvitesInviteIdAcceptRoute: typeof ApiInvitesInviteIdAcceptRoute;
+    ApiInvitesInviteIdCancelRoute: typeof ApiInvitesInviteIdCancelRoute;
+    ApiInvitesInviteIdRejectRoute: typeof ApiInvitesInviteIdRejectRoute;
+    ApiMatchesMatchIdPhaseRoute: typeof ApiMatchesMatchIdPhaseRoute;
+    ApiMatchesMatchIdTravelApproveRoute: typeof ApiMatchesMatchIdTravelApproveRoute;
+    ApiMatchesMatchIdTravelDenyRoute: typeof ApiMatchesMatchIdTravelDenyRoute;
+    ApiMatchesMatchIdTravelRequestRoute: typeof ApiMatchesMatchIdTravelRequestRoute;
+    ApiRoomsRoomIdEmptySeatRoute: typeof ApiRoomsRoomIdEmptySeatRoute;
+    ApiRoomsRoomIdInvitesRoute: typeof ApiRoomsRoomIdInvitesRoute;
+    ApiRoomsRoomIdMatchRoute: typeof ApiRoomsRoomIdMatchRoute;
+    ApiRoomsRoomIdRemovePlayerRoute: typeof ApiRoomsRoomIdRemovePlayerRoute;
+    ApiRoomsRoomIdScriptRoute: typeof ApiRoomsRoomIdScriptRoute;
+    ApiRoomsRoomIdStartMatchRoute: typeof ApiRoomsRoomIdStartMatchRoute;
+    ApiMatchesMatchIdIndexRoute: typeof ApiMatchesMatchIdIndexRoute;
+    ApiRoomsRoomIdIndexRoute: typeof ApiRoomsRoomIdIndexRoute;
 }
 
 declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/register': {
-      id: '/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
+    interface FileRoutesByPath {
+        '/register': {
+            id: '/register';
+            path: '/register';
+            fullPath: '/register';
+            preLoaderRoute: typeof RegisterRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/login': {
+            id: '/login';
+            path: '/login';
+            fullPath: '/login';
+            preLoaderRoute: typeof LoginRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/forgot-password': {
+            id: '/forgot-password';
+            path: '/forgot-password';
+            fullPath: '/forgot-password';
+            preLoaderRoute: typeof ForgotPasswordRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/_splash': {
+            id: '/_splash';
+            path: '';
+            fullPath: '';
+            preLoaderRoute: typeof SplashRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/_splash/': {
+            id: '/_splash/';
+            path: '/';
+            fullPath: '/';
+            preLoaderRoute: typeof SplashIndexRouteImport;
+            parentRoute: typeof SplashRoute;
+        };
+        '/games/$gameId': {
+            id: '/games/$gameId';
+            path: '/games/$gameId';
+            fullPath: '/games/$gameId';
+            preLoaderRoute: typeof GamesGameIdRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/whoami': {
+            id: '/api/whoami';
+            path: '/api/whoami';
+            fullPath: '/api/whoami';
+            preLoaderRoute: typeof ApiWhoamiRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/health': {
+            id: '/api/health';
+            path: '/api/health';
+            fullPath: '/api/health';
+            preLoaderRoute: typeof ApiHealthRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/_splash/_rooms': {
+            id: '/_splash/_rooms';
+            path: '';
+            fullPath: '';
+            preLoaderRoute: typeof SplashRoomsRouteImport;
+            parentRoute: typeof SplashRoute;
+        };
+        '/api/scripts/': {
+            id: '/api/scripts/';
+            path: '/api/scripts';
+            fullPath: '/api/scripts';
+            preLoaderRoute: typeof ApiScriptsIndexRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/rooms/': {
+            id: '/api/rooms/';
+            path: '/api/rooms';
+            fullPath: '/api/rooms';
+            preLoaderRoute: typeof ApiRoomsIndexRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/invites/': {
+            id: '/api/invites/';
+            path: '/api/invites';
+            fullPath: '/api/invites';
+            preLoaderRoute: typeof ApiInvitesIndexRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/dev/grimoire': {
+            id: '/api/dev/grimoire';
+            path: '/api/dev/grimoire';
+            fullPath: '/api/dev/grimoire';
+            preLoaderRoute: typeof ApiDevGrimoireRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/auth/register': {
+            id: '/api/auth/register';
+            path: '/api/auth/register';
+            fullPath: '/api/auth/register';
+            preLoaderRoute: typeof ApiAuthRegisterRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/auth/logout': {
+            id: '/api/auth/logout';
+            path: '/api/auth/logout';
+            fullPath: '/api/auth/logout';
+            preLoaderRoute: typeof ApiAuthLogoutRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/auth/login': {
+            id: '/api/auth/login';
+            path: '/api/auth/login';
+            fullPath: '/api/auth/login';
+            preLoaderRoute: typeof ApiAuthLoginRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/auth/forgot-password': {
+            id: '/api/auth/forgot-password';
+            path: '/api/auth/forgot-password';
+            fullPath: '/api/auth/forgot-password';
+            preLoaderRoute: typeof ApiAuthForgotPasswordRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/rooms/$roomId/': {
+            id: '/api/rooms/$roomId/';
+            path: '/api/rooms/$roomId';
+            fullPath: '/api/rooms/$roomId';
+            preLoaderRoute: typeof ApiRoomsRoomIdIndexRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/matches/$matchId/': {
+            id: '/api/matches/$matchId/';
+            path: '/api/matches/$matchId';
+            fullPath: '/api/matches/$matchId';
+            preLoaderRoute: typeof ApiMatchesMatchIdIndexRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/_splash/_rooms/rooms/': {
+            id: '/_splash/_rooms/rooms/';
+            path: '/rooms';
+            fullPath: '/rooms';
+            preLoaderRoute: typeof SplashRoomsRoomsIndexRouteImport;
+            parentRoute: typeof SplashRoomsRoute;
+        };
+        '/api/rooms/$roomId/start-match': {
+            id: '/api/rooms/$roomId/start-match';
+            path: '/api/rooms/$roomId/start-match';
+            fullPath: '/api/rooms/$roomId/start-match';
+            preLoaderRoute: typeof ApiRoomsRoomIdStartMatchRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/rooms/$roomId/script': {
+            id: '/api/rooms/$roomId/script';
+            path: '/api/rooms/$roomId/script';
+            fullPath: '/api/rooms/$roomId/script';
+            preLoaderRoute: typeof ApiRoomsRoomIdScriptRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/rooms/$roomId/remove-player': {
+            id: '/api/rooms/$roomId/remove-player';
+            path: '/api/rooms/$roomId/remove-player';
+            fullPath: '/api/rooms/$roomId/remove-player';
+            preLoaderRoute: typeof ApiRoomsRoomIdRemovePlayerRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/rooms/$roomId/match': {
+            id: '/api/rooms/$roomId/match';
+            path: '/api/rooms/$roomId/match';
+            fullPath: '/api/rooms/$roomId/match';
+            preLoaderRoute: typeof ApiRoomsRoomIdMatchRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/rooms/$roomId/invites': {
+            id: '/api/rooms/$roomId/invites';
+            path: '/api/rooms/$roomId/invites';
+            fullPath: '/api/rooms/$roomId/invites';
+            preLoaderRoute: typeof ApiRoomsRoomIdInvitesRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/rooms/$roomId/empty-seat': {
+            id: '/api/rooms/$roomId/empty-seat';
+            path: '/api/rooms/$roomId/empty-seat';
+            fullPath: '/api/rooms/$roomId/empty-seat';
+            preLoaderRoute: typeof ApiRoomsRoomIdEmptySeatRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/matches/$matchId/travel-request': {
+            id: '/api/matches/$matchId/travel-request';
+            path: '/api/matches/$matchId/travel-request';
+            fullPath: '/api/matches/$matchId/travel-request';
+            preLoaderRoute: typeof ApiMatchesMatchIdTravelRequestRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/matches/$matchId/travel-deny': {
+            id: '/api/matches/$matchId/travel-deny';
+            path: '/api/matches/$matchId/travel-deny';
+            fullPath: '/api/matches/$matchId/travel-deny';
+            preLoaderRoute: typeof ApiMatchesMatchIdTravelDenyRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/matches/$matchId/travel-approve': {
+            id: '/api/matches/$matchId/travel-approve';
+            path: '/api/matches/$matchId/travel-approve';
+            fullPath: '/api/matches/$matchId/travel-approve';
+            preLoaderRoute: typeof ApiMatchesMatchIdTravelApproveRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/matches/$matchId/phase': {
+            id: '/api/matches/$matchId/phase';
+            path: '/api/matches/$matchId/phase';
+            fullPath: '/api/matches/$matchId/phase';
+            preLoaderRoute: typeof ApiMatchesMatchIdPhaseRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/invites/$inviteId/reject': {
+            id: '/api/invites/$inviteId/reject';
+            path: '/api/invites/$inviteId/reject';
+            fullPath: '/api/invites/$inviteId/reject';
+            preLoaderRoute: typeof ApiInvitesInviteIdRejectRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/invites/$inviteId/cancel': {
+            id: '/api/invites/$inviteId/cancel';
+            path: '/api/invites/$inviteId/cancel';
+            fullPath: '/api/invites/$inviteId/cancel';
+            preLoaderRoute: typeof ApiInvitesInviteIdCancelRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/invites/$inviteId/accept': {
+            id: '/api/invites/$inviteId/accept';
+            path: '/api/invites/$inviteId/accept';
+            fullPath: '/api/invites/$inviteId/accept';
+            preLoaderRoute: typeof ApiInvitesInviteIdAcceptRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/games/$gameId/whispers': {
+            id: '/api/games/$gameId/whispers';
+            path: '/api/games/$gameId/whispers';
+            fullPath: '/api/games/$gameId/whispers';
+            preLoaderRoute: typeof ApiGamesGameIdWhispersRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/games/$gameId/storytellers': {
+            id: '/api/games/$gameId/storytellers';
+            path: '/api/games/$gameId/storytellers';
+            fullPath: '/api/games/$gameId/storytellers';
+            preLoaderRoute: typeof ApiGamesGameIdStorytellersRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/games/$gameId/start-setup': {
+            id: '/api/games/$gameId/start-setup';
+            path: '/api/games/$gameId/start-setup';
+            fullPath: '/api/games/$gameId/start-setup';
+            preLoaderRoute: typeof ApiGamesGameIdStartSetupRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/games/$gameId/ready': {
+            id: '/api/games/$gameId/ready';
+            path: '/api/games/$gameId/ready';
+            fullPath: '/api/games/$gameId/ready';
+            preLoaderRoute: typeof ApiGamesGameIdReadyRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/api/games/$gameId/host': {
+            id: '/api/games/$gameId/host';
+            path: '/api/games/$gameId/host';
+            fullPath: '/api/games/$gameId/host';
+            preLoaderRoute: typeof ApiGamesGameIdHostRouteImport;
+            parentRoute: typeof rootRouteImport;
+        };
+        '/_splash/_rooms/rooms/new': {
+            id: '/_splash/_rooms/rooms/new';
+            path: '/rooms/new';
+            fullPath: '/rooms/new';
+            preLoaderRoute: typeof SplashRoomsRoomsNewRouteImport;
+            parentRoute: typeof SplashRoomsRoute;
+        };
     }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forgot-password': {
-      id: '/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_splash': {
-      id: '/_splash'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof SplashRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_splash/': {
-      id: '/_splash/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof SplashIndexRouteImport
-      parentRoute: typeof SplashRoute
-    }
-    '/games/$gameId': {
-      id: '/games/$gameId'
-      path: '/games/$gameId'
-      fullPath: '/games/$gameId'
-      preLoaderRoute: typeof GamesGameIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/whoami': {
-      id: '/api/whoami'
-      path: '/api/whoami'
-      fullPath: '/api/whoami'
-      preLoaderRoute: typeof ApiWhoamiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/health': {
-      id: '/api/health'
-      path: '/api/health'
-      fullPath: '/api/health'
-      preLoaderRoute: typeof ApiHealthRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_splash/_rooms': {
-      id: '/_splash/_rooms'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof SplashRoomsRouteImport
-      parentRoute: typeof SplashRoute
-    }
-    '/api/scripts/': {
-      id: '/api/scripts/'
-      path: '/api/scripts'
-      fullPath: '/api/scripts'
-      preLoaderRoute: typeof ApiScriptsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/rooms/': {
-      id: '/api/rooms/'
-      path: '/api/rooms'
-      fullPath: '/api/rooms'
-      preLoaderRoute: typeof ApiRoomsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/invites/': {
-      id: '/api/invites/'
-      path: '/api/invites'
-      fullPath: '/api/invites'
-      preLoaderRoute: typeof ApiInvitesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/dev/grimoire': {
-      id: '/api/dev/grimoire'
-      path: '/api/dev/grimoire'
-      fullPath: '/api/dev/grimoire'
-      preLoaderRoute: typeof ApiDevGrimoireRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/auth/register': {
-      id: '/api/auth/register'
-      path: '/api/auth/register'
-      fullPath: '/api/auth/register'
-      preLoaderRoute: typeof ApiAuthRegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/auth/logout': {
-      id: '/api/auth/logout'
-      path: '/api/auth/logout'
-      fullPath: '/api/auth/logout'
-      preLoaderRoute: typeof ApiAuthLogoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/auth/login': {
-      id: '/api/auth/login'
-      path: '/api/auth/login'
-      fullPath: '/api/auth/login'
-      preLoaderRoute: typeof ApiAuthLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/auth/forgot-password': {
-      id: '/api/auth/forgot-password'
-      path: '/api/auth/forgot-password'
-      fullPath: '/api/auth/forgot-password'
-      preLoaderRoute: typeof ApiAuthForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/rooms/$roomId/': {
-      id: '/api/rooms/$roomId/'
-      path: '/api/rooms/$roomId'
-      fullPath: '/api/rooms/$roomId'
-      preLoaderRoute: typeof ApiRoomsRoomIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/matches/$matchId/': {
-      id: '/api/matches/$matchId/'
-      path: '/api/matches/$matchId'
-      fullPath: '/api/matches/$matchId'
-      preLoaderRoute: typeof ApiMatchesMatchIdIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_splash/_rooms/rooms/': {
-      id: '/_splash/_rooms/rooms/'
-      path: '/rooms'
-      fullPath: '/rooms'
-      preLoaderRoute: typeof SplashRoomsRoomsIndexRouteImport
-      parentRoute: typeof SplashRoomsRoute
-    }
-    '/api/rooms/$roomId/start-match': {
-      id: '/api/rooms/$roomId/start-match'
-      path: '/api/rooms/$roomId/start-match'
-      fullPath: '/api/rooms/$roomId/start-match'
-      preLoaderRoute: typeof ApiRoomsRoomIdStartMatchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/rooms/$roomId/script': {
-      id: '/api/rooms/$roomId/script'
-      path: '/api/rooms/$roomId/script'
-      fullPath: '/api/rooms/$roomId/script'
-      preLoaderRoute: typeof ApiRoomsRoomIdScriptRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/rooms/$roomId/remove-player': {
-      id: '/api/rooms/$roomId/remove-player'
-      path: '/api/rooms/$roomId/remove-player'
-      fullPath: '/api/rooms/$roomId/remove-player'
-      preLoaderRoute: typeof ApiRoomsRoomIdRemovePlayerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/rooms/$roomId/match': {
-      id: '/api/rooms/$roomId/match'
-      path: '/api/rooms/$roomId/match'
-      fullPath: '/api/rooms/$roomId/match'
-      preLoaderRoute: typeof ApiRoomsRoomIdMatchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/rooms/$roomId/invites': {
-      id: '/api/rooms/$roomId/invites'
-      path: '/api/rooms/$roomId/invites'
-      fullPath: '/api/rooms/$roomId/invites'
-      preLoaderRoute: typeof ApiRoomsRoomIdInvitesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/rooms/$roomId/empty-seat': {
-      id: '/api/rooms/$roomId/empty-seat'
-      path: '/api/rooms/$roomId/empty-seat'
-      fullPath: '/api/rooms/$roomId/empty-seat'
-      preLoaderRoute: typeof ApiRoomsRoomIdEmptySeatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/matches/$matchId/travel-request': {
-      id: '/api/matches/$matchId/travel-request'
-      path: '/api/matches/$matchId/travel-request'
-      fullPath: '/api/matches/$matchId/travel-request'
-      preLoaderRoute: typeof ApiMatchesMatchIdTravelRequestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/matches/$matchId/travel-deny': {
-      id: '/api/matches/$matchId/travel-deny'
-      path: '/api/matches/$matchId/travel-deny'
-      fullPath: '/api/matches/$matchId/travel-deny'
-      preLoaderRoute: typeof ApiMatchesMatchIdTravelDenyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/matches/$matchId/travel-approve': {
-      id: '/api/matches/$matchId/travel-approve'
-      path: '/api/matches/$matchId/travel-approve'
-      fullPath: '/api/matches/$matchId/travel-approve'
-      preLoaderRoute: typeof ApiMatchesMatchIdTravelApproveRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/matches/$matchId/phase': {
-      id: '/api/matches/$matchId/phase'
-      path: '/api/matches/$matchId/phase'
-      fullPath: '/api/matches/$matchId/phase'
-      preLoaderRoute: typeof ApiMatchesMatchIdPhaseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/invites/$inviteId/reject': {
-      id: '/api/invites/$inviteId/reject'
-      path: '/api/invites/$inviteId/reject'
-      fullPath: '/api/invites/$inviteId/reject'
-      preLoaderRoute: typeof ApiInvitesInviteIdRejectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/invites/$inviteId/cancel': {
-      id: '/api/invites/$inviteId/cancel'
-      path: '/api/invites/$inviteId/cancel'
-      fullPath: '/api/invites/$inviteId/cancel'
-      preLoaderRoute: typeof ApiInvitesInviteIdCancelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/invites/$inviteId/accept': {
-      id: '/api/invites/$inviteId/accept'
-      path: '/api/invites/$inviteId/accept'
-      fullPath: '/api/invites/$inviteId/accept'
-      preLoaderRoute: typeof ApiInvitesInviteIdAcceptRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/games/$gameId/whispers': {
-      id: '/api/games/$gameId/whispers'
-      path: '/api/games/$gameId/whispers'
-      fullPath: '/api/games/$gameId/whispers'
-      preLoaderRoute: typeof ApiGamesGameIdWhispersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/games/$gameId/storytellers': {
-      id: '/api/games/$gameId/storytellers'
-      path: '/api/games/$gameId/storytellers'
-      fullPath: '/api/games/$gameId/storytellers'
-      preLoaderRoute: typeof ApiGamesGameIdStorytellersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/games/$gameId/start-setup': {
-      id: '/api/games/$gameId/start-setup'
-      path: '/api/games/$gameId/start-setup'
-      fullPath: '/api/games/$gameId/start-setup'
-      preLoaderRoute: typeof ApiGamesGameIdStartSetupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/games/$gameId/ready': {
-      id: '/api/games/$gameId/ready'
-      path: '/api/games/$gameId/ready'
-      fullPath: '/api/games/$gameId/ready'
-      preLoaderRoute: typeof ApiGamesGameIdReadyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/games/$gameId/host': {
-      id: '/api/games/$gameId/host'
-      path: '/api/games/$gameId/host'
-      fullPath: '/api/games/$gameId/host'
-      preLoaderRoute: typeof ApiGamesGameIdHostRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_splash/_rooms/rooms/new': {
-      id: '/_splash/_rooms/rooms/new'
-      path: '/rooms/new'
-      fullPath: '/rooms/new'
-      preLoaderRoute: typeof SplashRoomsRoomsNewRouteImport
-      parentRoute: typeof SplashRoomsRoute
-    }
-  }
 }
 
 interface SplashRoomsRouteChildren {
-  SplashRoomsRoomsNewRoute: typeof SplashRoomsRoomsNewRoute
-  SplashRoomsRoomsIndexRoute: typeof SplashRoomsRoomsIndexRoute
+    SplashRoomsRoomsNewRoute: typeof SplashRoomsRoomsNewRoute;
+    SplashRoomsRoomsIndexRoute: typeof SplashRoomsRoomsIndexRoute;
 }
 
 const SplashRoomsRouteChildren: SplashRoomsRouteChildren = {
-  SplashRoomsRoomsNewRoute: SplashRoomsRoomsNewRoute,
-  SplashRoomsRoomsIndexRoute: SplashRoomsRoomsIndexRoute,
-}
+    SplashRoomsRoomsNewRoute: SplashRoomsRoomsNewRoute,
+    SplashRoomsRoomsIndexRoute: SplashRoomsRoomsIndexRoute
+};
 
-const SplashRoomsRouteWithChildren = SplashRoomsRoute._addFileChildren(
-  SplashRoomsRouteChildren,
-)
+const SplashRoomsRouteWithChildren = SplashRoomsRoute._addFileChildren(SplashRoomsRouteChildren);
 
 interface SplashRouteChildren {
-  SplashRoomsRoute: typeof SplashRoomsRouteWithChildren
-  SplashIndexRoute: typeof SplashIndexRoute
+    SplashRoomsRoute: typeof SplashRoomsRouteWithChildren;
+    SplashIndexRoute: typeof SplashIndexRoute;
 }
 
 const SplashRouteChildren: SplashRouteChildren = {
-  SplashRoomsRoute: SplashRoomsRouteWithChildren,
-  SplashIndexRoute: SplashIndexRoute,
-}
+    SplashRoomsRoute: SplashRoomsRouteWithChildren,
+    SplashIndexRoute: SplashIndexRoute
+};
 
-const SplashRouteWithChildren =
-  SplashRoute._addFileChildren(SplashRouteChildren)
+const SplashRouteWithChildren = SplashRoute._addFileChildren(SplashRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
-  SplashRoute: SplashRouteWithChildren,
-  ForgotPasswordRoute: ForgotPasswordRoute,
-  LoginRoute: LoginRoute,
-  RegisterRoute: RegisterRoute,
-  ApiHealthRoute: ApiHealthRoute,
-  ApiWhoamiRoute: ApiWhoamiRoute,
-  GamesGameIdRoute: GamesGameIdRoute,
-  ApiAuthForgotPasswordRoute: ApiAuthForgotPasswordRoute,
-  ApiAuthLoginRoute: ApiAuthLoginRoute,
-  ApiAuthLogoutRoute: ApiAuthLogoutRoute,
-  ApiAuthRegisterRoute: ApiAuthRegisterRoute,
-  ApiDevGrimoireRoute: ApiDevGrimoireRoute,
-  ApiInvitesIndexRoute: ApiInvitesIndexRoute,
-  ApiRoomsIndexRoute: ApiRoomsIndexRoute,
-  ApiScriptsIndexRoute: ApiScriptsIndexRoute,
-  ApiGamesGameIdHostRoute: ApiGamesGameIdHostRoute,
-  ApiGamesGameIdReadyRoute: ApiGamesGameIdReadyRoute,
-  ApiGamesGameIdStartSetupRoute: ApiGamesGameIdStartSetupRoute,
-  ApiGamesGameIdStorytellersRoute: ApiGamesGameIdStorytellersRoute,
-  ApiGamesGameIdWhispersRoute: ApiGamesGameIdWhispersRoute,
-  ApiInvitesInviteIdAcceptRoute: ApiInvitesInviteIdAcceptRoute,
-  ApiInvitesInviteIdCancelRoute: ApiInvitesInviteIdCancelRoute,
-  ApiInvitesInviteIdRejectRoute: ApiInvitesInviteIdRejectRoute,
-  ApiMatchesMatchIdPhaseRoute: ApiMatchesMatchIdPhaseRoute,
-  ApiMatchesMatchIdTravelApproveRoute: ApiMatchesMatchIdTravelApproveRoute,
-  ApiMatchesMatchIdTravelDenyRoute: ApiMatchesMatchIdTravelDenyRoute,
-  ApiMatchesMatchIdTravelRequestRoute: ApiMatchesMatchIdTravelRequestRoute,
-  ApiRoomsRoomIdEmptySeatRoute: ApiRoomsRoomIdEmptySeatRoute,
-  ApiRoomsRoomIdInvitesRoute: ApiRoomsRoomIdInvitesRoute,
-  ApiRoomsRoomIdMatchRoute: ApiRoomsRoomIdMatchRoute,
-  ApiRoomsRoomIdRemovePlayerRoute: ApiRoomsRoomIdRemovePlayerRoute,
-  ApiRoomsRoomIdScriptRoute: ApiRoomsRoomIdScriptRoute,
-  ApiRoomsRoomIdStartMatchRoute: ApiRoomsRoomIdStartMatchRoute,
-  ApiMatchesMatchIdIndexRoute: ApiMatchesMatchIdIndexRoute,
-  ApiRoomsRoomIdIndexRoute: ApiRoomsRoomIdIndexRoute,
-}
-export const routeTree = rootRouteImport
-  ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+    SplashRoute: SplashRouteWithChildren,
+    ForgotPasswordRoute: ForgotPasswordRoute,
+    LoginRoute: LoginRoute,
+    RegisterRoute: RegisterRoute,
+    ApiHealthRoute: ApiHealthRoute,
+    ApiWhoamiRoute: ApiWhoamiRoute,
+    GamesGameIdRoute: GamesGameIdRoute,
+    ApiAuthForgotPasswordRoute: ApiAuthForgotPasswordRoute,
+    ApiAuthLoginRoute: ApiAuthLoginRoute,
+    ApiAuthLogoutRoute: ApiAuthLogoutRoute,
+    ApiAuthRegisterRoute: ApiAuthRegisterRoute,
+    ApiDevGrimoireRoute: ApiDevGrimoireRoute,
+    ApiInvitesIndexRoute: ApiInvitesIndexRoute,
+    ApiRoomsIndexRoute: ApiRoomsIndexRoute,
+    ApiScriptsIndexRoute: ApiScriptsIndexRoute,
+    ApiGamesGameIdHostRoute: ApiGamesGameIdHostRoute,
+    ApiGamesGameIdReadyRoute: ApiGamesGameIdReadyRoute,
+    ApiGamesGameIdStartSetupRoute: ApiGamesGameIdStartSetupRoute,
+    ApiGamesGameIdStorytellersRoute: ApiGamesGameIdStorytellersRoute,
+    ApiGamesGameIdWhispersRoute: ApiGamesGameIdWhispersRoute,
+    ApiInvitesInviteIdAcceptRoute: ApiInvitesInviteIdAcceptRoute,
+    ApiInvitesInviteIdCancelRoute: ApiInvitesInviteIdCancelRoute,
+    ApiInvitesInviteIdRejectRoute: ApiInvitesInviteIdRejectRoute,
+    ApiMatchesMatchIdPhaseRoute: ApiMatchesMatchIdPhaseRoute,
+    ApiMatchesMatchIdTravelApproveRoute: ApiMatchesMatchIdTravelApproveRoute,
+    ApiMatchesMatchIdTravelDenyRoute: ApiMatchesMatchIdTravelDenyRoute,
+    ApiMatchesMatchIdTravelRequestRoute: ApiMatchesMatchIdTravelRequestRoute,
+    ApiRoomsRoomIdEmptySeatRoute: ApiRoomsRoomIdEmptySeatRoute,
+    ApiRoomsRoomIdInvitesRoute: ApiRoomsRoomIdInvitesRoute,
+    ApiRoomsRoomIdMatchRoute: ApiRoomsRoomIdMatchRoute,
+    ApiRoomsRoomIdRemovePlayerRoute: ApiRoomsRoomIdRemovePlayerRoute,
+    ApiRoomsRoomIdScriptRoute: ApiRoomsRoomIdScriptRoute,
+    ApiRoomsRoomIdStartMatchRoute: ApiRoomsRoomIdStartMatchRoute,
+    ApiMatchesMatchIdIndexRoute: ApiMatchesMatchIdIndexRoute,
+    ApiRoomsRoomIdIndexRoute: ApiRoomsRoomIdIndexRoute
+};
+export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)._addFileTypes<FileRouteTypes>();
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { getRouter } from './router.tsx';
+import type { createStart } from '@tanstack/react-start';
 declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
+    interface Register {
+        ssr: true;
+        router: Awaited<ReturnType<typeof getRouter>>;
+    }
 }

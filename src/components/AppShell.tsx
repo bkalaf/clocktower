@@ -1,5 +1,4 @@
 // src/components/AppShell.tsx
-import { ThemeProvider } from 'next-themes';
 import { AppSidebar } from './AppSidebar';
 import { SidebarProvider, SidebarInset } from './ui/sidebar';
 import { TopBar } from './TopBar';

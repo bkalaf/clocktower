@@ -1,5 +1,5 @@
 // src/components/tokens/vigormortis/Reminder_vigormortis_has_ability.tsx
-import * as React from 'react';
+
 import { ReminderToken, type ReminderTokenProps } from '@/components/grimoire/ReminderToken';
 import iconSrc from '@/assets/icons/vigormortis.png?url';
 

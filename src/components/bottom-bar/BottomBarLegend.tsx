@@ -1,3 +1,4 @@
+// src/components/bottom-bar/BottomBarLegend.tsx
 const legendItems = [
     {
         id: 'demon-evil',

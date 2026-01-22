@@ -7,7 +7,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { List, FileText, ChevronDown } from 'lucide-react';
-import * as React from 'react';
 
 export type ScriptDropdownProps = {
     scriptName: string;

@@ -7,9 +7,14 @@ import { HttpError } from '../../../../errors';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { GameModel } from '../../../../db/models/Game';
 import { MatchModel } from '../../../../db/models/Match';
+import { GameMemberModel } from '../../../../db/models/GameMember';
 import { requireHost } from '../../../../server/authz/gameAuth';
 import { randomUUID } from 'crypto';
 import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { getConnectedUserIds } from '../../../../server/realtime/presence';
+import { getRoomDoc } from '../../../../server/persistence/roomPersistence';
+import { startGameMachine } from '../../../../server/gameService';
+import { GameRoles, StorytellerMode } from '../../../../types/game';
 
 export const Route = createFileRoute('/api/rooms/$roomId/start-match')({
     server: {
@@ -34,6 +39,16 @@ export const Route = createFileRoute('/api/rooms/$roomId/start-match')({
                     return Response.json({ error: 'missing_script' }, { status: 409 });
                 }
 
+                const connectedIds = await getConnectedUserIds(room._id);
+                const members = await GameMemberModel.find({ gameId: room._id, userId: { $in: connectedIds } }).lean();
+                const connectedUserIds = connectedIds.reduce<Record<string, GameRoles>>((acc, userId) => {
+                    const member = members.find((entry) => entry.userId === userId);
+                    acc[userId] = (member?.role ?? 'spectator') as GameRoles;
+                    return acc;
+                }, {});
+                const snapshot = await getRoomDoc(room._id);
+                const storytellerMode = (snapshot?.storytellerMode ?? 'ai') as StorytellerMode;
+
                 const travelerLimit = room.lobbySettings?.maxTravelers ?? 5;
                 const newMatch = await MatchModel.create({
                     _id: randomUUID(),
@@ -51,6 +66,15 @@ export const Route = createFileRoute('/api/rooms/$roomId/start-match')({
                 });
 
                 await GameModel.updateOne({ _id: room._id }, { $set: { status: 'in_match' } });
+
+                await startGameMachine({
+                    roomId: room._id,
+                    matchId: newMatch._id,
+                    maxPlayers: room.maxPlayers,
+                    connectedUserIds,
+                    storytellerMode,
+                    scriptId: room.scriptId
+                });
 
                 const payload = {
                     kind: 'event',

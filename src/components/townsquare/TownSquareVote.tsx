@@ -1,5 +1,5 @@
 // src/components/townsquare/TownSquareVote.tsx
-import * as React from 'react';
+
 import { Button } from '@/components/ui/button';
 import { useTownSquare } from '@/state/TownSquareContext';
 import { VoteYea } from 'lucide-react';

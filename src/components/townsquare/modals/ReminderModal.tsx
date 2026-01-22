@@ -1,5 +1,5 @@
 // src/components/townsquare/modals/ReminderModal.tsx
-import * as React from 'react';
+
 import { Button } from '@/components/ui/button';
 import {
     Dialog,

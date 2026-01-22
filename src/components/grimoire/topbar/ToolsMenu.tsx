@@ -7,7 +7,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { Briefcase, ShieldAlert, CircleDashed, Settings, Sparkles } from 'lucide-react';
-import * as React from 'react';
 
 export type ToolsMenuProps = {
     onOpenReminders: () => void;

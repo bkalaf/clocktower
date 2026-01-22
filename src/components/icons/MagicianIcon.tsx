@@ -1,5 +1,5 @@
 // src/components/icons/MagicianIcon.tsx
-import * as React from 'react';
+
 import { cn } from '@/lib/utils';
 import iconSrc from '@/assets/icons/magician.png?url';
 
