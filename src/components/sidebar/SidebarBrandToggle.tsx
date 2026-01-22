@@ -1,6 +1,6 @@
-// src/components/header/sidebar/SidebarBrandToggle.tsx
-import { Button } from '../../ui';
-import { useSidebar } from '../../ui/sidebar';
+// src/components/sidebar/SidebarBrandToggle.tsx
+import { Button } from '../ui';
+import { useSidebar } from '../ui/sidebar';
 import demonHead from '@/assets/images/demon-head.png';
 
 export function SidebarBrandToggle() {

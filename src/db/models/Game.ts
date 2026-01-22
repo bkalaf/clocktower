@@ -10,7 +10,7 @@ export const zLobbySettings = z.object({
     maxPlayers: aliases.pcPlayerCount.default(15),
     maxTravelers: aliases.pcTraverCount.default(0),
     edition: enums.editions.default('tb'),
-    skillLevel: enums.skillLevel.default('novice'),
+    skillLevel: enums.skillLevel.default('beginner'),
     plannedStartTime: aliases.timestamp.optional().nullable(),
     gameSpeed: enums.gameSpeed.default('moderate'),
     isPrivate: z.boolean().default(false),
@@ -26,7 +26,7 @@ export const zGame = z.object({
     scriptId: aliases.scriptId,
     allowTravelers: z.boolean().default(false),
     visibility: enums.roomVisibility.default('public'),
-    endedAt: aliases.timestamp.optional().nullable(),
+    endedAt: aliases.timestamp,
     lobbySettings: zLobbySettings.optional().nullable()
 });
 
@@ -37,6 +37,6 @@ const gameModels = getTypesFor('game', zGame, { timestamps: true, collection: 'g
 
 export type Game = z.infer<typeof zGame>;
 export type GameType = mongoose.InferRawDocType<Game>;
-export type GameDocument = mongoose.HydratedDocument<GameType>;
+export type GameDocument = mongoose.HydratedDocument<Game>;
 export const GameModel = gameModels.model;
 export default gameModels;

@@ -1,19 +1,45 @@
 // src/components/AppSidebar.tsx
-import { SidebarBrandToggle } from './header/sidebar/SidebarBrandToggle';
-import { SidebarMenuLinks } from './header/sidebar/SidebarMenuLinks';
-import { SidebarHeader, SidebarContent, Sidebar } from './ui/sidebar';
+import { Link } from '@tanstack/react-router';
 
-// src/components/AppSidebar.tsx
+import { SidebarBrandToggle } from './sidebar/SidebarBrandToggle';
+import { SidebarMenuLinks } from './sidebar/SidebarMenuLinks';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarGroupLabel,
+    SidebarFooter,
+    SidebarHeader
+} from './ui/sidebar';
+
 export function AppSidebar() {
     return (
         <Sidebar collapsible='icon'>
-            <SidebarHeader className='flex h-14 items-center justify-center px-3'>
-                <SidebarBrandToggle />
+            <SidebarHeader className='flex items-center justify-between gap-3 px-3 py-4'>
+                <div className='flex items-center gap-3'>
+                    <SidebarBrandToggle />
+                    <div>
+                        <div className='text-xs font-semibold uppercase tracking-[0.4em] text-slate-400'>
+                            Clocktower
+                        </div>
+                        <Link
+                            to='/'
+                            className='text-[11px] uppercase tracking-[0.35em] text-slate-300'
+                        >
+                            Command Deck
+                        </Link>
+                    </div>
+                </div>
             </SidebarHeader>
 
-            <SidebarContent>
+            <SidebarContent className='space-y-3'>
                 <SidebarMenuLinks />
             </SidebarContent>
+
+            <SidebarFooter className='border-t border-white/10 px-3 py-2 text-[11px] uppercase tracking-[0.35em] text-slate-500'>
+                <p>Live setup</p>
+            </SidebarFooter>
         </Sidebar>
     );
 }

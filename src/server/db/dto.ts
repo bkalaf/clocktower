@@ -1,3 +1,4 @@
+// src/server/db/dto.ts
 import { Types } from 'mongoose';
 
 export type IdString = string;
@@ -14,7 +15,7 @@ export function omitUndefined<T extends object>(obj: T): T {
     return Object.fromEntries(Object.entries(obj).filter(([, value]) => value !== undefined)) as T;
 }
 
-export function toIsoDate(value: unknown): string | null {
+export function toIsoDate(value?: Date | null): string | null {
     if (!value) return null;
     const date = value instanceof Date ? value : new Date(String(value));
     return Number.isNaN(date.valueOf()) ? null : date.toISOString();

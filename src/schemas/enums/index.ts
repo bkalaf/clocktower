@@ -12,8 +12,43 @@ import { zRoomVisibility } from './zRoomVisibility';
 import { zGameSpeed } from './zGameSpeed';
 import { zSkillLevel } from './zSkillLevel';
 import { zEditions } from './zEditions';
+import z from 'zod/v4';
 
 const enums = {
+    characterRoles: z.enum([
+        'gardener',
+        'bootlegger',
+        'spiritofivory',
+        'sentinel',
+        'fibbin',
+        'imp',
+        'spy',
+        'scarletwoman',
+        'baron',
+        'poisoner',
+        'drunk',
+        'saint',
+        'recluse',
+        'butler',
+        'chef',
+        'librarian',
+        'washerwoman',
+        'investigator',
+        'fortuneteller',
+        'empath',
+        'monk',
+        'undertaker',
+        'ravenkeeper',
+        'soldier',
+        'virgin',
+        'mayor',
+        'slayer',
+        'gunslinger',
+        'beggar',
+        'thief',
+        'bureaucrat',
+        'scapegoat'
+    ]),
     topicTypes: zTopicTypes,
     roomStatus: zRoomStatus,
     matchStatus: zMatchStatus,

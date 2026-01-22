@@ -5,8 +5,7 @@ import { Await, RouterProvider } from '@tanstack/react-router';
 import { hydrateStart } from '@tanstack/start-client-core/client';
 import type { AnyRouter } from '@tanstack/router-core';
 import { Provider as TanstackQueryProvider } from './integrations/tanstack-query/root-provider';
-import { SessionProvider } from './session/SessionProvider';
-import { useSession } from './hooks/useSession';
+import { AuthProvider } from './state/useAuth';
 
 let hydrationPromise: Promise<AnyRouter> | null = null;
 
@@ -18,8 +17,6 @@ function getHydrationPromise() {
 }
 
 function AppRouter() {
-    const session = useSession();
-
     return (
         <Await promise={getHydrationPromise()}>
             {(router) => {
@@ -32,7 +29,7 @@ function AppRouter() {
                     <TanstackQueryProvider queryClient={queryClient}>
                         <RouterProvider
                             router={router}
-                            context={{ session }}
+                            context={{}}
                         />
                     </TanstackQueryProvider>
                 );
@@ -43,9 +40,9 @@ function AppRouter() {
 
 function App() {
     return (
-        <SessionProvider>
+        <AuthProvider>
             <AppRouter />
-        </SessionProvider>
+        </AuthProvider>
     );
 }
 

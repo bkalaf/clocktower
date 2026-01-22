@@ -1,6 +1,7 @@
-// src/components/header/sidebar/SidebarMenuLinks.tsx
-import { Home, Users, Settings, BookOpen, Clock, ClipboardList, Link, History } from 'lucide-react';
-import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '../../ui/sidebar';
+// src/components/sidebar/SidebarMenuLinks.tsx
+import { Home, Users, Settings, BookOpen, Clock, ClipboardList, History } from 'lucide-react';
+import { SidebarMenu, SidebarMenuItem, SidebarMenuButton } from '../ui/sidebar';
+import { Link as RouterLink } from '@tanstack/react-router';
 
 const sidebarMenuItems = [
     {
@@ -65,10 +66,13 @@ export function SidebarMenuLinks() {
                             asChild
                             tooltip={item.tooltip}
                         >
-                            <Link to={item.to}>
-                                <Icon className='h-4 w-4' />
+                            <RouterLink
+                                to={item.to}
+                                className='flex items-center gap-2'
+                            >
+                                <Icon className='h-4 w-4 shrink-0' />
                                 <span>{item.label}</span>
-                            </Link>
+                            </RouterLink>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 );

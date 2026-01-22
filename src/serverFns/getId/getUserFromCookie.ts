@@ -16,5 +16,5 @@ export const getUserFromCookie = createServerFn({
             return (session.userId as any).toObject();
         }
     }
-    throw new Error(`no sessionId`);
+    return null;
 });

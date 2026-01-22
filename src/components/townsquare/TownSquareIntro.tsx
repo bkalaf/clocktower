@@ -1,6 +1,5 @@
 // src/components/townsquare/TownSquareIntro.tsx
 import * as React from 'react';
-import gstoneLogo from '@/assets/images/gstone.png?url';
 
 export function TownSquareIntro() {
     const [language] = React.useState(() => {
@@ -10,13 +9,18 @@ export function TownSquareIntro() {
 
     return (
         <div className='relative w-full rounded-2xl border border-white/10 bg-black/60 p-5 text-[0.9rem] leading-relaxed text-slate-100 shadow-[0_20px_60px_rgba(0,0,0,0.65)]'>
-            <div className='mb-3 text-[0.65rem] uppercase tracking-[0.35em] text-slate-500'>Welcome to Virtual Town Square</div>
+            <div className='mb-3 text-[0.65rem] uppercase tracking-[0.35em] text-slate-500'>
+                Welcome to Virtual Town Square
+            </div>
             <p className='text-[1rem]'>
-                This unofficial virtual Grimoire and Town Square for Blood on the Clocktower lets you manage seats, roles, and vote
-                flow inside a single scene. Add more players with the menu or press <strong>[A]</strong> to invite new participants.
-                Use <strong>[J]</strong> to join a running session or <strong>[H]</strong> to host one.
+                This unofficial virtual Grimoire and Town Square for Blood on the Clocktower lets you manage seats,
+                roles, and vote flow inside a single scene. Add more players with the menu or press <strong>[A]</strong>{' '}
+                to invite new participants. Use <strong>[J]</strong> to join a running session or <strong>[H]</strong>{' '}
+                to host one.
             </p>
-            <p className='mt-4 text-[0.65rem] uppercase tracking-[0.35em] text-emerald-300'>Open-source and community maintained</p>
+            <p className='mt-4 text-[0.65rem] uppercase tracking-[0.35em] text-emerald-300'>
+                Open-source and community maintained
+            </p>
             <p className='text-[0.65rem] text-slate-400'>
                 The experience mirrors the Townsquare interface from{' '}
                 <a
@@ -29,17 +33,6 @@ export function TownSquareIntro() {
                 </a>{' '}
                 and uses the assets you provide.
             </p>
-            {language === 'zh-CN' && (
-                <a
-                    href='https://clocktower.gstonegames.com'
-                    target='_blank'
-                    rel='noreferrer'
-                    className='pointer flex items-center gap-2 pt-4 text-[0.75rem] text-amber-300'
-                >
-                    <img src={gstoneLogo} alt='G Stone' className='h-16 w-16 rounded-full border border-white/20 p-1' />
-                    你想使用中文版魔典吗？
-                </a>
-            )}
         </div>
     );
 }

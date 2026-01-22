@@ -1,5 +1,9 @@
 // src/lib/api.ts
+import { createServerFn } from '@tanstack/react-start';
 import type { AuthedUser } from '../types/game';
+import { getUserFromCookie } from '../serverFns/getId/getUserFromCookie';
+import z from 'zod/v4';
+import { UserModel } from '../db/models/User';
 
 const defaultHeaders = {
     'Content-Type': 'application/json'
@@ -35,6 +39,17 @@ export async function apiFetch<T = unknown>(path: string, options: RequestInit =
     return data as T;
 }
 
+export const whoamiFn = createServerFn({
+    method: 'GET'
+}).handler(async () => {
+    const user: AuthedUser | null = await getUserFromCookie();
+    if (!user) {
+        return { user: null };
+    } else {
+        return { user };
+    }
+});
+
 export async function whoami() {
     return apiFetch<{ user: AuthedUser | null }>('/api/whoami', {
         method: 'GET'
@@ -48,10 +63,43 @@ export async function login(email: string, password: string) {
     });
 }
 
-export async function register(name: string, email: string, password: string, verificationPassword: string) {
-    return apiFetch<{ ok: boolean }>('/api/auth/register', {
+const checkUserNameInput = z.object({
+    username: z.string().min(5, 'Must be over 5 characters')
+});
+const checkEmailInput = z.object({
+    email: z.email()
+});
+
+export const checkUserName = createServerFn({
+    method: 'GET'
+})
+    .inputValidator(checkUserNameInput)
+    .handler(async ({ data }) => {
+        const result = await UserModel.find(data).countDocuments();
+        if (result > 0) return { ok: false, msg: 'Username already in use.' };
+        return { ok: true };
+    });
+export const checkEmail = createServerFn({
+    method: 'GET'
+})
+    .inputValidator(checkEmailInput)
+    .handler(async ({ data }) => {
+        const result = await UserModel.find(data).countDocuments();
+        if (result > 0) return { ok: false, msg: 'E-mail already in use.' };
+        return { ok: true };
+    });
+
+export async function register(username: string, email: string, password: string, verificationPassword: string) {
+    const emailResult = await checkEmail({ data: { email } });
+    const usernameResult = await checkUserName({ data: { username } });
+    if (!emailResult.ok) {
+        return emailResult;
+    } else if (!usernameResult.ok) {
+        return usernameResult;
+    }
+    return apiFetch<{ ok: boolean; msg?: string }>('/api/auth/register', {
         method: 'POST',
-        body: JSON.stringify({ name, email, password, verificationPassword })
+        body: JSON.stringify({ username, email, password, verificationPassword })
     });
 }
 

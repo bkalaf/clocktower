@@ -1,7 +1,52 @@
 // src/global.d.ts
+import z from 'zod/v4';
 import { NavigateOptions } from '@tanstack/react-router';
 
 declare global {
+    export type ZodObjects<
+        TPlural extends string,
+        TDto extends z.ZodTypeAny,
+        TType extends z.ZodTypeAny,
+        TListInput extends z.ZodTypeAny,
+        TPatch extends z.ZodObject<{
+            _id: z.ZodString;
+        }>,
+        TCreateInput extends z.ZodTypeAny
+    > = {
+        type: TType;
+        dto: TDto;
+        listInput: TListInput;
+        listOutput: z.ZodObject<{
+            [P in TPlural]: z.ZodArray<TDto>;
+        }>;
+        patch: TPatch;
+        createInput: TCreateInput;
+        createOutput: z.ZodObject<{
+            _id: z.ZodString;
+        }>;
+        itemOutput: z.ZodObject<{
+            item: TDto;
+        }>;
+        deleteOutput: z.ZodObject<{
+            ok: z.ZodLiteral<true>;
+        }>;
+    };
+    export type FK<T, TKey extends keyof T, TForeign> = Omit<T, TKey> & { [P in TKey]: TForeign };
+
+    export type SessionState = {
+        authUserId?: string;
+        lastRoomId?: string;
+        lastGameId?: string;
+        userName?: string;
+    };
+
+    export type SessionContextValue = SessionState & {
+        setAuthUserId: (id?: string) => void;
+        setLastRoomId: (id?: string) => void;
+        setLastGameId: (id?: string) => void;
+        setUsername: (name?: string) => void;
+        clear: () => void;
+    };
     export type NightCardType =
         | 'you_are_evil'
         | 'you_are_good'
@@ -13,7 +58,22 @@ declare global {
         | 'you_are';
 
     export type ModalKind = 'invites' | 'reveal' | 'nightCards' | 'preferences';
-
+    export type Room = {
+        _id: string;
+        allowTravellers: boolean;
+        banner: string;
+        connectedUserIds: Record<string, GameRoles>;
+        endedAt?: Date;
+        hostUserId: string;
+        maxPlayers: PcPlayerCount;
+        minPlayers: PcPlayerCount;
+        maxTravellers: PcTravellerCount;
+        plannedStartTime?: Date;
+        scriptId?: string;
+        skillLevel: SkillLevel;
+        speed: GameSpeed;
+        visibility: RoomVisibility;
+    };
     export type RootSearch = {
         modal?: ModalKind;
         type?: NightCardType;
@@ -71,7 +131,7 @@ declare global {
     export type NightSubphase = 'resolve_first_night_order' | 'resolve_night_order';
     export type Outsiders = 'drunk' | 'saint' | 'recluse' | 'butler';
     export type PcPlayerCount = 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15;
-    export type PcTravelerCount = 0 | 1 | 2 | 3 | 4 | 5;
+    export type PcTravellerCount = 0 | 1 | 2 | 3 | 4 | 5;
     export type PlayerCharacterRoles =
         | 'imp'
         | 'spy'

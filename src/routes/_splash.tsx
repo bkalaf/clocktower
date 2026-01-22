@@ -1,7 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Outlet } from '@tanstack/react-router';
 // src/routes/_splash.tsx
 export function Component() {
-    return <div className='text-6xl text-wrap font-extrabold font-rubik'>WELCOME TO CLOCKTOWER</div>;
+    return (
+        <div className='w-full h-full flex justify-center items-center px-6'>
+            <Outlet />
+        </div>
+    );
 }
 
 export const Route = createFileRoute('/_splash')({

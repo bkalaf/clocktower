@@ -10,9 +10,9 @@ import {
     zRoomItemOutput,
     zRoomListInput,
     zRoomListResponse,
-    zRoomPatch,
-    zRoomStartGameInput,
-    zRoomStartGameOutput
+    zRoomPatch
+    // zRoomStartGameInput,
+    // zRoomStartGameOutput
 } from '@/schemas/api/rooms';
 
 const zAuthSessionOutput = z.object({
@@ -85,8 +85,8 @@ export const api = {
             z.object({ roomId: aliases.gameId, patch: zRoomPatch }),
             zRoomItemOutput
         ),
-        deleteOne: defineCommand('/rooms/:roomId/delete', zRoomIdInput, zRoomDeleteOutput),
-        startGame: defineCommand('/rooms/:roomId/start', zRoomStartGameInput, zRoomStartGameOutput)
+        deleteOne: defineCommand('/rooms/:roomId/delete', zRoomIdInput, zRoomDeleteOutput)
+        // startGame: defineCommand('/rooms/:roomId/start', zRoomStartGameInput, zRoomStartGameOutput)
     },
     games: {
         get: defineQuery('/games/:gameId', zGameIdInput, zGameResponse),

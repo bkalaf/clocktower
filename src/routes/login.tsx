@@ -1,12 +1,8 @@
 // src/routes/login.tsx
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { LoginForm } from '../components/auth/LoginForm';
-import { dialogBackgroundClassName, dialogBackgroundStyle } from '@/components/header/dialogBackground';
-import { useAuth } from '@/state/useAuth';
-import { authReturnToSearchSchema, normalizeReturnTo } from './auth/-common';
+import { authReturnToSearchSchema } from './auth/-common';
 
 export const Route = createFileRoute('/login')({
     component: LoginRoute,
@@ -17,48 +13,44 @@ export const Route = createFileRoute('/login')({
 });
 
 function LoginRoute() {
+    const context = Route.useRouteContext();
+    const isAuth = useMemo(() => context.userId !== null, [context.userId]);
     const navigate = useNavigate();
-    const { refreshWhoami, user, loading } = useAuth();
     const { returnTo } = Route.useSearch();
-    const normalizedReturnTo = normalizeReturnTo(returnTo);
 
     const closeModal = useCallback(() => {
-        navigate({ to: normalizedReturnTo, replace: true });
-    }, [navigate, normalizedReturnTo]);
+        navigate({ to: returnTo ?? '..', replace: true });
+    }, [navigate, returnTo]);
 
     useEffect(() => {
-        if (!loading && user) {
+        if (isAuth) {
             closeModal();
         }
-    }, [user, loading, closeModal]);
-
-    const handleSuccess = useCallback(async () => {
-        await refreshWhoami();
-        closeModal();
-    }, [refreshWhoami, closeModal]);
+    }, [closeModal, isAuth]);
 
     return (
-        <Dialog
-            open
-            onOpenChange={(isOpen) => {
-                if (!isOpen) {
-                    closeModal();
-                }
-            }}
-        >
-            <DialogContent
-                className={dialogBackgroundClassName}
-                style={dialogBackgroundStyle}
-            >
-                <DialogHeader>
-                    <DialogTitle className='text-white'>Welcome back</DialogTitle>
-                    <DialogDescription className='text-white/80'>Sign in to continue</DialogDescription>
-                </DialogHeader>
-                <LoginForm
-                    onSuccess={handleSuccess}
-                    returnTo={normalizedReturnTo}
-                />
-            </DialogContent>
-        </Dialog>
+        <LoginForm />
+        // <Dialog
+        //     open
+        //     onOpenChange={(isOpen) => {
+        //         if (!isOpen) {
+        //             closeModal();
+        //         }
+        //     }}
+        // >
+        //     <DialogContent
+        //         className={dialogBackgroundClassName}
+        //         style={dialogBackgroundStyle}
+        //     >
+        //         <DialogHeader>
+        //             <DialogTitle className='text-white'>Welcome back</DialogTitle>
+        //             <DialogDescription className='text-white/80'>Sign in to continue</DialogDescription>
+        //         </DialogHeader>
+        //         <LoginForm
+        //             onSuccess={invalidateAuth}
+        //             returnTo={normalizedReturnTo}
+        //         />
+        //     </DialogContent>
+        // </Dialog>
     );
 }

@@ -1,19 +1,6 @@
 // src/session/SessionProvider.tsx
 import * as React from 'react';
 
-type SessionState = {
-    authUserId?: string;
-    lastRoomId?: string;
-    lastGameId?: string;
-};
-
-export type SessionContextValue = SessionState & {
-    setAuthUserId: (id?: string) => void;
-    setLastRoomId: (id?: string) => void;
-    setLastGameId: (id?: string) => void;
-    clear: () => void;
-};
-
 export const SessionContext = React.createContext<SessionContextValue | null>(null);
 const STORAGE_KEY = 'botc.session.v1';
 
@@ -52,6 +39,7 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
             setAuthUserId: (authUserId?: string) => setState((current) => ({ ...current, authUserId })),
             setLastRoomId: (lastRoomId?: string) => setState((current) => ({ ...current, lastRoomId })),
             setLastGameId: (lastGameId?: string) => setState((current) => ({ ...current, lastGameId })),
+            setUsername: (username?: string) => setState((current) => ({ ...current, username })),
             clear: () => setState({})
         }),
         [state]
@@ -68,6 +56,7 @@ export function createDefaultSessionContextValue(): SessionContextValue {
         setAuthUserId: () => {},
         setLastRoomId: () => {},
         setLastGameId: () => {},
+        setUsername: () => {},
         clear: () => {}
     };
 }

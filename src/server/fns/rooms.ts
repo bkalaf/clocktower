@@ -1,17 +1,17 @@
+// src/server/fns/rooms.ts
 import { api } from '@/shared/api/endpoints';
-import { RoomModel } from '@/db/models/Room';
 import { mapRoom } from '@/server/mappers/roomMapper';
 import { makeMongooseCrud } from '@/server/fns/crudFactory';
-import type { RoomId } from '@/types/room';
+import type { Room, RoomDTO, RoomId } from '@/types/room';
 import type { QueryClient } from '@tanstack/react-query';
 
 export const roomsCrud = makeMongooseCrud({
     getEndpoint: api.rooms.get,
     updateEndpoint: api.rooms.updateOne,
     deleteEndpoint: api.rooms.deleteOne,
-    idKey: 'roomId',
+    idKey: '_id',
     Model: RoomModel,
-    mapDto: mapRoom
+    mapDto: mapRoom as (doc: RoomDocument) => RoomDTO
 });
 
 export const rooms = {

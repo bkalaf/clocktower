@@ -8,7 +8,7 @@ export type ServerFn<I, O> = (input: I) => Promise<O>;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function bindQueryZod<E extends EndpointSpec<'query', any, any>>(opts: {
     endpoint: E;
-    fn: ServerFn<InferInput<E>, InferOutput<E>>;
+    fn: ServerFn<{ data: InferInput<E> }, string>;
     getParams: (input: InferInput<E>) => Record<string, unknown>;
 }) {
     const { endpoint, fn, getParams } = opts;

@@ -49,3 +49,5 @@ export const pcTravelerCount = [0, 1, 2, 3, 4, 5];
 export const storytellerMode = ['ai', 'human'];
 export const nominationType = ['execution', 'exile'];
 export const voteChoice = ['yes', 'no', 'abstain'];
+
+// console.log(characterRoles)

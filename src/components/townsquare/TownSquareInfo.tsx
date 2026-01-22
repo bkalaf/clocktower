@@ -19,10 +19,7 @@ export function TownSquareInfo({ onOpenModal }: { onOpenModal: (modal: string) =
         () => players.filter((player) => player.role.team !== 'traveler').length,
         [players]
     );
-    const alive = React.useMemo(
-        () => players.filter((player) => !player.isDead).length,
-        [players]
-    );
+    const alive = React.useMemo(() => players.filter((player) => !player.isDead).length, [players]);
     const thoughts = React.useMemo(() => {
         const entry = gameData[Math.max(0, Math.min(gameData.length - 1, nonTravelers - 5))] as TeamBreakdown;
         return entry;

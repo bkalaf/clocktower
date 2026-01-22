@@ -1,8 +1,9 @@
 // src/machines/RoomMachine.ts
-import { assign, createMachine, setup } from 'xstate';
+import { assign, AssignArgs, createMachine, setup } from 'xstate';
 import type { GameRoles, GameSpeed } from '../types/game';
 import type { MatchPhase, MatchStatus, MatchSubphase } from '../types/match';
-import type { Room, RoomLobbySettings, RoomStatus, RoomVisibility } from '../types/room';
+import type { Room, RoomStatus, RoomVisibility } from '../types/room';
+import { randomUUID } from 'crypto';
 
 type HostGraceState = {
     hostUserId: string;
@@ -31,38 +32,31 @@ type MatchPhaseSummary = {
 };
 
 export type RoomContext = {
-    room?: Room;
-    roomId?: string;
-    scriptId?: string;
-    hostUserId?: string;
-    status: RoomStatus;
-    visibility: RoomVisibility;
-    speed: GameSpeed;
-    maxPlayers: PcPlayerCount;
-    minPlayers: PcPlayerCount;
-    customScript?: CharacterRoles[];
-    storytellerMode: StorytellerMode;
     acceptingPlayers: boolean;
-    readyByUserId: Record<string, boolean>;
+    allowTravellers: boolean;
+    banner: string;
     connectedUserIds: string[];
-    storytellerUserIds: string[];
-    pendingSeatsInviteCount: number;
-    beenNominated: string[];
-    nominated: string[];
-    history: unknown[];
-    lobbySettings?: RoomLobbySettings | null;
-    memberRole?: GameRoles | null;
-    storytellerCount: number;
     currentMatchId?: string;
-    matchPhase?: MatchPhase;
-    matchSubphase?: MatchSubphase;
-    dayNumber: number;
-    nominationsOpen?: boolean;
-    hostGrace?: HostGraceState | null;
-    matchStatus: MatchStatus;
+    endedAt?: Date;
+    hostUserId: string;
+    maxPlayers: PcPlayerCount;
+    maxTravellers: PcTravellerCount;
+    memberRole?: GameRoles | null;
+    minPlayers: PcPlayerCount;
+    pendingSeatsInviteCount: number;
+    plannedStartTime: Date;
+    readyByUserId: Record<string, boolean>;
+    _id: string;
+    scriptId?: string;
+    skillLevel?: SkillLevel;
+    speed: GameSpeed;
+    storytellerCount: number;
+    storytellerMode: StorytellerMode;
+    storytellerUserIds: string[];
+    visibility: RoomVisibility;
 };
 
-type RoomEvent =
+type RoomEvents =
     | { type: 'OPEN_ROOM' }
     | { type: 'CLOSE_ROOM' }
     | { type: 'MATCH_ENDED' }
@@ -85,41 +79,33 @@ type RoomEvent =
     | { type: 'MATCH_RESET' };
 
 const initialContext: RoomContext = {
-    room: undefined,
-    roomId: undefined,
+    _id: randomUUID(),
     scriptId: undefined,
-    hostUserId: undefined,
-    status: 'open',
+    hostUserId: '',
     visibility: 'public',
     speed: 'moderate',
     maxPlayers: 15,
     minPlayers: 5,
-    customScript: undefined,
     storytellerMode: 'ai',
     acceptingPlayers: true,
     readyByUserId: {},
     connectedUserIds: [],
     storytellerUserIds: [],
     pendingSeatsInviteCount: 0,
-    beenNominated: [],
-    nominated: [],
-    history: [],
-    lobbySettings: undefined,
-    memberRole: null,
+    memberRole: 'player',
     storytellerCount: 0,
     currentMatchId: undefined,
-    matchPhase: undefined,
-    matchSubphase: undefined,
-    dayNumber: 1,
-    nominationsOpen: false,
-    hostGrace: null,
-    matchStatus: 'setup'
+    allowTravellers: false,
+    banner: '',
+    maxTravellers: 0,
+    skillLevel: 'intermediate',
+    plannedStartTime: new Date(Date.now())
 };
 
 export const machine = setup({
     types: {
         context: initialContext,
-        events: {} as RoomEvent
+        events: {} as RoomEvents
     },
     actions: {
         startTimer: () => {
@@ -128,13 +114,17 @@ export const machine = setup({
         cancelTimer: () => {
             // Placeholder for timer integration.
         },
-        reassignHost: () => {
-            // Placeholder for host reassignment side effects.
-        },
+        reassignHost: assign(({ context, event }: AssignArgs<RoomContext, RoomEvents>) => {
+            if (event.type === 'HOST_CHANGED') {
+                return {
+                    hostUserId: event.payload.hostUserId
+                };
+            }
+        }),
         sendReminderPickStoryteller: () => {
             // Placeholder for reminder logic.
         },
-        applyRoomUpdate: assign((context, event) => {
+        applyRoomUpdate: assign((context, event: RoomEvents) => {
             if (event.type !== 'ROOM_UPDATED') return {};
             const { room, memberRole, storytellerCount } = event.payload;
             return {
@@ -144,7 +134,6 @@ export const machine = setup({
                 hostUserId: room.hostUserId,
                 status: room.status,
                 visibility: room.visibility,
-                lobbySettings: room.lobbySettings ?? context.lobbySettings,
                 memberRole,
                 storytellerCount
             };
@@ -217,13 +206,17 @@ export const machine = setup({
         }
     }
 }).createMachine({
+    /** @xstate-layout N4IgpgJg5mDOIC5QCUD2qC2BZAhgYwAsBLAOzAGJkB5KrAfQFUAFAEQEEAVAURYG0AGALqJQAB1SwiAFyKoSIkAA9EAdgCMAJgB0KgGwBWXQGYVADg2n++gCzWANCACeiU3q2GN13dYCcazRr6GgC+wQ5omLiEpBRMyFwAylwAcgDCXHSpABJsyQDiPALCSCDikjJyCsoIuj7aumoqGpo+Prq6gQ7OCGb8Wr6tuqaWrSoqPqHh6Nj4xGTkWFxYAEJcyHTxbCwAmpk5+YVCCmXSsvIl1boqff7qPkYa-Kat-GpdiEPW-SbWTdeuRn4ukmIAiM2i8yyVASHD2uQKfCOJROFXOoGq6iMWn4Rh8-DqTX0bRU+neCH0wy0Px8el0-BU1lMRmsILBUTmFChMLoeWQbHSdBhbGQ3ERxTEElOlQuH1MXzlJk+TNxmjJvm0Rk0jKsQI0RgaKlZ03ZMXIXNhvP5GVSuXSABlDuLSpLUVUPmZsbino19BSgqSnIhcbotJ5WnLrPxfMMfCywqDjbNTVhONlBRxhaKiscXWc3T01H1rGpI-dTGojEE1LoyYCbq5GUycQzGkbIkn5imOGmmDkknCDmKc+U8zKamMqdYTGZTEN6TiyY8vlrWhpHmHbIb42yOxQu2mUixHcOpWilKo1D5sWpDF4b79NDXAwhC6ZsR1fA1Xp4mkY2+COQWVMsg2RIuA4bNkVzaV0VUR5QwMAwND8axmhvMlNH-E0yC0AgJCkVI5BkEgAFdpEcXD8LoUQACc4DAEgpDNaFYRYABJBJUioZJki4VIsyRCURxg88XzUJl3C8e5NTGRpTAwxltAGHw-TpVDiyw3dKNgAiiNIMipAovCdOoujYAYpjzTodjOO43j+MKNQnRRUdYIQQI+keTVPwaJDUIwoxNS0e4GTpWojABYFt0TCEwG03TGP08j4roKAaPwTkWNArieL4gTnOgs9qhMNRsSk5lL0bIkML1fQtAbNprCJDQOm8TTYviwjEtI5LjKkVL0rwTLuUtAUuAADSYNj4iHKDhKK1RAuC-QZOeCxzF+Gqp2WpsTH0MYVD-aL2w6vquuIgyjKouicFgSQoDICByEgoTT3zYZtH28t9pMctfg0DD-BDD82gsaN9X0dqOS0OiMFICAwBo2AtEkAAbCzyBy9iODY7i6EWCDBOdeb80aK9WlGWd+FecYmowoY3wpml9VeX1GShmIYbAOGSARpGtCkAgaNQKQpHRp6uKoO0WCoAB1ZI6AmqaZpe4m3rHQLtB8BViwaVDY3sZ9qwi-oKe8b19Ew46AM54XMASKQcCkEjkdQUQGMxu1oQyahaFVlyROqZoviZsw6Rp2MA26CwgXqpq8UCBlfjjKYTuhu2MAdp2Xa0N2PaFEV8eA-3CvzYPgopsPqbJunn08J530CS82meUx9o5nCM6z53XfdkggO7ECC-yk9XTHcvQ6piPa+j+4vg8fbxIZCKVI7uKu8dnutDwVGJEgchhWyNiADUfZoLAS5JscVrq82iRJbVXiMRcgjfctAh-ZDqaaNeYembuc47z3k9KgTAUgbHPpfdWblPBviJCVOogJbDU2fnXEkIZmQUnuFYWwmpf4b2zsjIB5knrDyLoPKBY83I3y0HfGkNhLBP0XB0K878bCKjxPcfB-9N6AN3iQgeaZh7HjmtA0SNC6EP0YRWRc5YsRsKuP4KcnxuH214cjUgdAMBO0IIIkCh4RGvSoaJQ6V5DpTkCjiGwtR5J132leTUgRmRhisPgsAOAIAxDutvVAqN0Z4GIlASgXAti7GyPCQxatjFB1eNeQwLNNSXgpIbbolU6oLxxNWQIQRQjxhIKgBG8ASg7liqPVyokAC0l4ySxlKiDSsNhjbGF-mdPSPVDJlMDogZCGF+DIS0CuVC5hLAaEOi0-C50kqGRSrReijFOkLR6CoQGLVaEMmJGYUZbcQjW2wnFVp3VLopTShlBZ+YiTkyBI4y2lgSRR0QI+FQoZcQrSnC0duuytIHIur1a67i7pEAepAM5Y56FUgsFkqw6h-A+BWVif4FhWp6kCkdVONtO7c3hojIpRjylB1hUbX0fQma1BWlYFUbieZ82RmjCyIK3JjHprYdwyp6S+DJmYSlWL+aC2FqLcW9LxF0grqMQE1Z6SaiZU8p4lj1kctMKozO6jBXVFsIuB4fQPDKQfHoSGnyOoEK3nnM8AdFl1EXHUT6j4xWMgiinBMadbY8MIdvfhwLRHRMQKWAZ+JnHNHxLOAwsjYl6ECHKYw+g+m-EVQAjRJAtE6IICqxA9xgaRiJJeYwzx7nuVqFeBeWoH42C3GivZf81EupwDRaIAA3d1uKukIFTbQ9Nfg2grxzR-bQuo6SWCapoNQbiPFeJxVEvF3SCWpLbm+XUrynieHvEOzxZBvF4F8f4wJyalkYVjCGWdN5njjGuIO-V6d3HLrgMjHAfi6A3QgN0BtizGRfHMZGdQupKxPlSbuxuXhfAeBpFFUIQA */
     context: initialContext,
     id: 'RoomMachine',
     type: 'parallel',
     on: {
-        ROOM_UPDATED: {
-            actions: 'applyRoomUpdate'
-        },
+        ROOM_UPDATED: [{
+            type: 'applyRoomUpdate',
+            params: ({ context }) => ({
+                
+            })
+        }],
         PRESENCE_CHANGED: {
             actions: 'applyPresence'
         },

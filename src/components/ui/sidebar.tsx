@@ -126,7 +126,7 @@ function SidebarProvider({
                         } as React.CSSProperties
                     }
                     className={cn(
-                        'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full',
+                        'group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex min-h-svh w-full bg-slate-900/80 backdrop-blur-[12px]',
                         className
                     )}
                     {...props}
@@ -150,7 +150,7 @@ function Sidebar({
     variant?: 'sidebar' | 'floating' | 'inset';
     collapsible?: 'offcanvas' | 'icon' | 'none';
 }) {
-    const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+    const { isMobile, state, openMobile, setOpenMobile, open } = useSidebar();
 
     if (collapsible === 'none') {
         return (
@@ -195,7 +195,7 @@ function Sidebar({
 
     return (
         <div
-            className='group peer text-sidebar-foreground hidden md:block'
+            className={cn('group peer text-sidebar-foreground', open ? 'md:block' : 'md:hidden')}
             data-state={state}
             data-collapsible={state === 'collapsed' ? collapsible : ''}
             data-variant={variant}

@@ -41,6 +41,7 @@ export const $coll = {
 };
 
 const aliases = {
+    _id: z.string().min(24, 'Must be 24 characters'),
     chatItemId: z.string('Must be a UUID'),
     email: zEmail,
     gameId: z.string('Must be a UUID'),
@@ -57,11 +58,11 @@ const aliases = {
     userId: z.string('Must be a UUID'),
     version: zVersion,
     whisperId: z.string('Must be a UUID'),
-    scriptId: zScriptId,
-    matchId: zMatchId,
-    inviteId: zInviteId,
+    scriptId: z.string('Must be a UUID'),
+    matchId: z.string('Must be a UUID'),
+    inviteId: z.string('Must be a UUID'),
     moderationLogId: zModerationLogId,
-    travelerRequestId: zTravelerRequestId
+    travelerRequestId: z.string('Must be a UUID')
 };
 
 export default aliases;

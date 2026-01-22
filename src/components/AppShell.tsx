@@ -3,30 +3,43 @@ import { ThemeProvider } from 'next-themes';
 import { AppSidebar } from './AppSidebar';
 import { SidebarProvider, SidebarInset } from './ui/sidebar';
 import { TopBar } from './TopBar';
-import tokenTable from '@/assets/images/token-table.png';
 import { BottomBar } from './header/BottomBar';
+import tokensDeskWindow from '@/assets/images/tokens-desk-window.png?url';
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+const rootBackgroundStyle: React.CSSProperties = {
+    backgroundImage: `url(${tokensDeskWindow})`,
+    backgroundSize: 'contain',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+    // backgroundAttachment: 'fixed'
+};
+export function AppShell({
+    children,
+    username,
+    isAuth
+}: {
+    children: React.ReactNode;
+    isAuth: boolean;
+    username?: string;
+}) {
     return (
-        <ThemeProvider
-            defaultTheme='dark'
-            storageKey='vite-ui-theme'
-        >
-            <SidebarProvider>
-                <AppSidebar />
+        <SidebarProvider defaultOpen={false}>
+            <AppSidebar />
 
-                {/* The ONLY place that touches viewport height */}
-                <SidebarInset className='h-svh'>
-                    {/* Chrome + content column */}
-                    <div className='flex h-full flex-col overflow-hidden p-0'>
-                        <TopBar />
-                        <AppSidebar />
-                        {/* This is the remaining usable space */}
-                        <main
-                            style={{ backgroundImage: `url(${tokenTable})` }}
-                            className='min-h-0 bg-cover bg-center flex-1 overflow-hidden'
-                        >
-                            {/* <div className='absolute inset-0'>
+            {/* The ONLY place that touches viewport height */}
+            <SidebarInset className='h-svh w-svh'>
+                {/* Chrome + content column */}
+                {/* <div className='flex h-full flex-col overflow-hidden p-0'> */}
+                <TopBar
+                    username={username}
+                    isAuth={isAuth}
+                />
+                {/* This is the remaining usable space */}
+                <main
+                    className='min-h-0 bg-cover bg-center flex-1 overflow-hidden object-contain items-center justify-center'
+                    style={rootBackgroundStyle}
+                >
+                    {/* <div className='absolute inset-0'>
                                 <img
                                     src={tokenTable}
                                     alt=''
@@ -34,12 +47,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                                 />
                                 <div className='absolute inset-0 bg-linear-to-br from-slate-950/75 via-slate-950/60 to-slate-950/80' />
                             </div> */}
-                            {children}
-                        </main>
-                        <BottomBar />
-                    </div>
-                </SidebarInset>
-            </SidebarProvider>
-        </ThemeProvider>
+                    {children}
+                </main>
+                <BottomBar />
+                {/* </div> */}
+            </SidebarInset>
+        </SidebarProvider>
     );
 }

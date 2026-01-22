@@ -52,7 +52,7 @@ export type MatchContext = {
     publicStateVersion: Record<string, unknown>;
     storytellerUserIds: string[];
     allowTravelers: boolean;
-    travelerCountUsed: PcTravelerCount;
+    travelerCountUsed: PcTravellerCount;
     availableTravelers: Travellers[];
     pendingTravelerRequests: PendingTravellerRequest[];
     dayNominated: string[];

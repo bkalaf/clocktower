@@ -31,7 +31,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-@layer base, components {
+@layer base {
     html {
         color-scheme: dark;
     }
@@ -61,22 +61,37 @@
     span,
     div,
     p {
-        font-family: 'Rubik', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        font-family:
+            'Rubik',
+            'Segoe UI',
+            system-ui,
+            -apple-system,
+            sans-serif;
+    }
+}
+
+@layer components {
+    td, th {
+        @apply border border-black text-center;
     }
 }
 
 @layer utilities {
     .font-rubik {
-        font-family: 'Rubik', 'Segoe UI', system-ui, -apple-system, sans-serif;
+        font-family:
+            'Rubik',
+            'Segoe UI',
+            system-ui,
+            -apple-system,
+            sans-serif;
     }
     .font-open-sans {
-        font-family: Open Sans; 
+        font-family: Open Sans;
     }
     .font-cinzel {
         font-family: 'Cinzel', serif;
     }
 }
-
 
 @custom-variant aria-invalid (&[aria-invalid="true"]);
 @custom-variant data-dirty (&[data-dirty="true"]);
@@ -89,6 +104,7 @@
 @custom-variant data-group-b (&[data-group-id="b"]);
 @custom-variant data-group-c (&[data-group-id="c"]);
 
-html, body {
+html,
+body {
     @apply font-rubik;
 }

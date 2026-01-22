@@ -1,4 +1,4 @@
-// src/state/useAuth.ts
+// src/state/useAuth.tsx
 import {
     createContext,
     useCallback,

@@ -4,6 +4,7 @@ import { Clock, Moon, Sun, User, Users } from 'lucide-react';
 
 import { usePreferences } from '@/hooks/usePreferences';
 import { useRoomMatchState } from '@/state/useRoomMatchState';
+import { ClientOnly } from '@tanstack/react-router';
 
 type StatsWidgetProps = {
     label: string;
@@ -50,7 +51,7 @@ const accentStyles: Record<string, string> = {
 };
 
 export function BottomBar() {
-    const { values } = usePreferences();
+    const { values } = { values: {} }; // usePreferences();
     const { roomState, matchState } = useRoomMatchState();
     const [now, setNow] = useState(() => new Date());
 
@@ -82,39 +83,42 @@ export function BottomBar() {
     const dayNumber = matchState.dayNumber ?? 1;
     const phaseIcon = normalizedPhase === 'Night' ? <Moon size={16} /> : <Sun size={16} />;
 
-    const accentClass = accentStyles[values.accent] ?? accentStyles.ember;
-    const toneClass = toneStyles[values.panelTone] ?? toneStyles.soft;
-    const spacing = densitySpacing[values.density] ?? densitySpacing.compact;
-
+    // const accentClass =  accentStyles[values.accent] ?? accentStyles.ember;
+    // const toneClass =  toneStyles[values.panelTone] ?? toneStyles.soft;
+    // const spacing =  densitySpacing[values.density] ?? densitySpacing.compact;
+    const toneClass = '';
+    const spacing = '';
     return (
-        <footer className={`flex flex-wrap gap-3 px-4 ${toneClass} ${spacing} sm:px-6`}>
-            <StatsWidget
-                label='Current time'
-                value={timeLabel}
-                meta='Local'
-                icon={<Clock size={16} />}
-                accentClass={accentClass}
-            />
+        <footer className={`flex flex-wrap gap-3 px-4 ${toneClass ?? ''} ${spacing} sm:px-6`}>
+            <ClientOnly>
+                <StatsWidget
+                    label='Current time'
+                    value={timeLabel}
+                    meta='Local'
+                    icon={<Clock size={16} />}
+                    // accentClass={accentClass}
+                />
+            </ClientOnly>
             <StatsWidget
                 label='Players'
                 value={playerCount}
                 meta='Connected / Seats'
                 icon={<Users size={16} />}
-                accentClass={accentClass}
+                // accentClass={accentClass}
             />
             <StatsWidget
                 label='Role'
                 value={role}
                 meta='Assignment'
                 icon={<User size={16} />}
-                accentClass={accentClass}
+                // accentClass={accentClass}
             />
             <StatsWidget
                 label='Phase'
                 value={normalizedPhase}
                 meta={`Day ${dayNumber}`}
                 icon={phaseIcon}
-                accentClass={accentClass}
+                // accentClass={accentClass}
             />
         </footer>
     );

@@ -2,31 +2,46 @@
 import z from 'zod/v4';
 import aliases from '../aliases';
 import enums from '../enums';
+import refs from '../refs';
 
 export const zRoomIdInput = z.object({
     roomId: aliases.gameId
 });
 
-export const zRoomLobbySettings = z.object({
-    minPlayers: aliases.pcPlayerCount.default(5),
+export const zRoom = z.object({
+    _id: aliases.gameId,
+    allowTravellers: z.boolean(),
+    banner: z.string().default(''),
+    connectedUserIds: z.array(aliases.userId).default([]),
+    endedAt: aliases.timestamp.optional(),
+    hostUserId: refs.user,
     maxPlayers: aliases.pcPlayerCount.default(15),
-    maxTravelers: aliases.pcTraverCount.default(0),
-    edition: enums.editions.optional().nullable(),
-    skillLevel: enums.skillLevel.optional().nullable(),
-    plannedStartTime: aliases.timestamp.optional().nullable()
+    maxTravellers: aliases.pcTraverCount.default(0),
+    minPlayers: aliases.pcPlayerCount.default(5),
+    plannedStartTime: aliases.timestamp.optional(),
+    scriptId: refs.script.optional(),
+    skillLevel: enums.skillLevel.default('beginner'),
+    storytellerUserIds: z.array(aliases.userId).default([]),
+    speed: enums.gameSpeed.default('moderate'),
+    visibility: enums.roomVisibility
 });
 
 export const zRoomDto = z.object({
-    id: aliases.gameId,
-    hostUserId: aliases.userId,
-    status: enums.roomStatus,
-    scriptId: aliases.scriptId,
-    allowTravelers: z.boolean(),
+    _id: aliases.gameId,
+    allowTravellers: z.boolean(),
+    banner: z.string().default(''),
+    endedAt: z.string().optional(),
+    hostUserId: refs.user.optional(),
+    maxPlayers: aliases.pcPlayerCount.default(15),
+    maxTravellers: aliases.pcTraverCount.default(0),
+    minPlayers: aliases.pcPlayerCount.default(5),
+    plannedStartTime: aliases.timestamp.optional(),
+    scriptId: refs.script.optional(),
+    skillLevel: enums.skillLevel.optional(),
+    storytellerUserIds: z.array(aliases.userId).default([]),
+    speed: enums.gameSpeed.optional(),
     visibility: enums.roomVisibility,
-    endedAt: aliases.timestamp.optional().nullable(),
-    lobbySettings: zRoomLobbySettings.optional().nullable(),
-    createdAt: aliases.timestamp.optional().nullable(),
-    updatedAt: aliases.timestamp.optional().nullable()
+    connectedUserIds: z.array(z.string()).default([])
 });
 
 export const zRoomListInput = z.object({
@@ -40,24 +55,37 @@ export const zRoomListResponse = z.object({
 
 export const zRoomPatch = z
     .object({
-        allowTravelers: z.boolean().optional(),
-        visibility: enums.roomVisibility.optional(),
-        lobbySettings: zRoomLobbySettings.optional().nullable(),
-        scriptId: z.union([aliases.scriptId, z.null()]).optional(),
-        status: enums.roomStatus.optional(),
-        endedAt: aliases.timestamp.optional().nullable()
+        _id: z.string(),
+        allowTravelers: z.boolean().optional().nullable(),
+        visibility: enums.roomVisibility.optional().nullable(),
+        scriptId: aliases.scriptId.optional().nullable(),
+        status: enums.roomStatus.optional().nullable(),
+        endedAt: aliases.timestamp.optional().nullable(),
+        minPlayers: aliases.pcPlayerCount.optional().nullable(),
+        maxPlayers: aliases.pcPlayerCount.optional().nullable(),
+        maxTravelers: aliases.pcTraverCount.optional().nullable(),
+        skillLevel: enums.skillLevel.optional().nullable(),
+        plannedStartTime: aliases.timestamp.optional().nullable(),
+        hostUserId: aliases.userId.optional().nullable()
     })
     .strict();
 
 export const zCreateRoomInput = z.object({
-    scriptId: aliases.scriptId,
+    scriptId: aliases.scriptId.optional().nullable(),
     visibility: enums.roomVisibility.default('public'),
-    allowTravelers: z.boolean().default(false),
-    lobbySettings: zRoomLobbySettings.optional()
+    status: enums.roomStatus.default('closed'),
+    endedAt: aliases.timestamp.optional().nullable(),
+    minPlayers: aliases.pcPlayerCount.default(5),
+    maxPlayers: aliases.pcPlayerCount.default(15),
+    maxTravelers: aliases.pcTraverCount.default(5),
+    skillLevel: enums.skillLevel.default('beginner'),
+    plannedStartTime: aliases.timestamp.optional().nullable(),
+    hostUserId: aliases.userId.optional().nullable(),
+    allowTravelers: z.boolean()
 });
 
 export const zCreateRoomOutput = z.object({
-    roomId: aliases.gameId
+    _id: aliases.gameId
 });
 
 export const zRoomItemOutput = z.object({
@@ -68,10 +96,31 @@ export const zRoomDeleteOutput = z.object({
     ok: z.literal(true)
 });
 
-export const zRoomStartGameInput = z.object({
-    roomId: aliases.gameId
-});
+// export const zRoomStartGameInput = z.object({
+//     roomId: aliases.gameId
+// });
 
-export const zRoomStartGameOutput = z.object({
-    gameId: aliases.gameId
-});
+// export const zRoomStartGameOutput = z.object({
+//     gameId: aliases.gameId
+// });
+
+export default {
+    type: zRoom,
+    dto: zRoomDto,
+    listInput: zRoomListInput,
+    listOutput: zRoomListResponse,
+    patch: zRoomPatch,
+    createInput: zCreateRoomInput,
+    createOutput: zCreateRoomOutput,
+    itemOutput: zRoomItemOutput,
+    deleteOutput: zRoomDeleteOutput
+    // startGameInput: zRoomStartGameInput,
+    // startGameOutput: zRoomStartGameOutput
+} as ZodObjects<
+    'rooms',
+    typeof zRoomDto,
+    typeof zRoom,
+    typeof zRoomListInput,
+    typeof zRoomPatch,
+    typeof zCreateRoomInput
+>;

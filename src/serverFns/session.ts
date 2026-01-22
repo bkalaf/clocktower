@@ -5,7 +5,6 @@ import { SessionModel } from '../db/models/Session';
 import { clearSessionCookie, getSessionCookie } from '../server/auth/cookies';
 import { AuthedUser, SessionId } from '../types/game';
 import $models from '../db/models';
-import { PopulatedDoc } from 'mongoose';
 
 export interface ISession<T> {
     _id: string;
@@ -20,7 +19,7 @@ const findOne = async (_id: SessionId, expiresAt: number = Date.now()) => {
     // console.log(`expiresAt`, expiresAt);
     const res = await $models.SessionModel.findOne({ _id, expiresAt: { $gt: new Date(expiresAt) } }).populate(
         'userId',
-        '_id name email userRoles'
+        '_id username email userRoles'
     );
     // console.log(`res`, res);
     if (res?.userId && typeof res?.userId !== 'string') {
