@@ -16,3 +16,5 @@ export type RoleDefinition = {
 };
 
 export type FabledDefinition = RoleDefinition;
+
+export {};

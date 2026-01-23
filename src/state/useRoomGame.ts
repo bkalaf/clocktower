@@ -1,8 +1,8 @@
 // src/state/useRoomGame.ts
 import { useEffect, useRef, useState } from 'react';
 import { useSelector, useActorRef } from '@xstate/react';
-import { machine as roomMachine, type RoomContext } from '@/machines/RoomMachine';
-import { machine as matchMachine, type MatchContext } from '@/machines/MatchMachine';
+import { machine as roomMachine, type RoomContext } from '@/server/machines/RoomMachine';
+import { machine as gameMachine, type GameContext } from '@/machines/GameMachine';
 import { RoomPayload, fetchCurrentMatch, fetchRoom } from '@/client/api/rooms';
 import type { Room } from '@/types/room';
 import type { GameRoles, SnapshotMsg } from '@/types/game';
@@ -11,7 +11,7 @@ import { $keys } from '@/keys';
 
 type UseRoomGameResult = {
     roomState: RoomContext;
-    matchState: MatchContext;
+    gameState: GameContext;
     loading: boolean;
     error: string | null;
 };
@@ -124,9 +124,9 @@ function roomContextToRoom(context: RoomContext): Room {
 
 export function useRoomGame(roomId?: string): UseRoomGameResult {
     const roomService = useActorRef(roomMachine);
-    const matchService = useActorRef(matchMachine);
+    const gameService = useActorRef(gameMachine);
     const roomState = useSelector(roomService, (state) => state.context);
-    const matchState = useSelector(matchService, (state) => state.context);
+    const gameState = useSelector(gameService, (state) => state.context);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const realtimeStateRef = useRef<{
@@ -152,7 +152,7 @@ export function useRoomGame(roomId?: string): UseRoomGameResult {
         if (!roomId) {
             setLoading(true);
             setError(null);
-            matchService.send({ type: 'MATCH_RESET' });
+            gameService.send({ type: 'MATCH_RESET' });
             roomService.send({ type: 'MATCH_ENDED' });
             return;
         }
@@ -160,7 +160,7 @@ export function useRoomGame(roomId?: string): UseRoomGameResult {
         let active = true;
         setLoading(true);
         setError(null);
-        matchService.send({ type: 'MATCH_RESET' });
+        gameService.send({ type: 'MATCH_RESET' });
         roomService.send({ type: 'MATCH_ENDED' });
 
         const load = async () => {
@@ -175,7 +175,7 @@ export function useRoomGame(roomId?: string): UseRoomGameResult {
                     try {
                         const match = await fetchCurrentMatch(roomId);
                         if (!active) return;
-                        matchService.send({ type: 'MATCH_DATA_LOADED', payload: match });
+                        gameService.send({ type: 'MATCH_DATA_LOADED', payload: match });
                         roomService.send({ type: 'MATCH_STARTED', payload: { matchId: match._id } });
                     } catch (matchError) {
                         console.error('Failed to load current match', matchError);
@@ -198,7 +198,7 @@ export function useRoomGame(roomId?: string): UseRoomGameResult {
         return () => {
             active = false;
         };
-    }, [roomId, roomService, matchService]);
+    }, [roomId, roomService, gameService]);
 
     useEffect(() => {
         if (!roomId || typeof window === 'undefined') return;
@@ -213,7 +213,7 @@ export function useRoomGame(roomId?: string): UseRoomGameResult {
             try {
                 const match = await fetchCurrentMatch(roomId);
                 if (!active) return;
-                matchService.send({ type: 'MATCH_DATA_LOADED', payload: match });
+                gameService.send({ type: 'MATCH_DATA_LOADED', payload: match });
                 roomService.send({ type: 'MATCH_STARTED', payload: { matchId: match._id } });
             } catch (err) {
                 console.error('Unable to refresh match data', err);
@@ -268,7 +268,7 @@ export function useRoomGame(roomId?: string): UseRoomGameResult {
                 }
                 case 'matchPhaseChanged': {
                     if (isMatchPhaseSummary(eventPayload)) {
-                        matchService.send({ type: 'MATCH_PHASE_CHANGED', payload: eventPayload });
+                        gameService.send({ type: 'MATCH_PHASE_CHANGED', payload: eventPayload });
                         roomService.send({ type: 'MATCH_PHASE_CHANGED', payload: eventPayload });
                     }
                     break;
@@ -346,11 +346,11 @@ export function useRoomGame(roomId?: string): UseRoomGameResult {
             localRealtimeState.createRoomSent = false;
             roleRef.current = undefined;
         };
-    }, [roomId, roomService, matchService]);
+    }, [roomId, roomService, gameService]);
 
     return {
         roomState,
-        matchState,
+        gameState,
         loading,
         error
     };

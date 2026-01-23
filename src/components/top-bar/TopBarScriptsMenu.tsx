@@ -14,7 +14,7 @@ import editions from '@/assets/data/editions.json';
 // import { useCallback } from 'react';
 
 const popularScriptIds = ['tb', 'snv'];
-const popularScripts = editions.filter((script) => popularScriptIds.includes(script.id));
+const popularScripts = editions.filter((script) => popularScriptIds.includes(script._id));
 const officialScripts = editions.filter((script) => script.isOfficial);
 
 export function TopBarScriptsMenu() {
@@ -44,7 +44,7 @@ export function TopBarScriptsMenu() {
                 <DropdownMenuGroup>
                     {popularScripts.map((script) => (
                         <DropdownMenuItem
-                            key={script.id}
+                            key={script._id}
                             // onClick={loadScript(script.roles)}
                         >
                             {script.name}
@@ -56,7 +56,7 @@ export function TopBarScriptsMenu() {
                 <DropdownMenuLabel>Official scripts</DropdownMenuLabel>
                 <DropdownMenuGroup>
                     {officialScripts.map((script) => (
-                        <DropdownMenuItem key={script.id}>
+                        <DropdownMenuItem key={script._id}>
                             {script.name}
                             <DropdownMenuShortcut>Load to setup</DropdownMenuShortcut>
                         </DropdownMenuItem>

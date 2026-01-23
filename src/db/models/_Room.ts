@@ -1,6 +1,4 @@
-// src/db/models/Room.ts
-import z from 'zod/v4';
-import { zRoom } from '../../schemas/api/rooms';
+// src/db/models/_Room.ts
 import mongoose from 'mongoose';
 
 const roomSchema = new mongoose.Schema(
@@ -101,8 +99,3 @@ const roomSchema = new mongoose.Schema(
 roomSchema.index({ hostUserId: 1 });
 roomSchema.index({ scriptId: 1 });
 roomSchema.index({ connectedUserIds: 1 });
-
-export type Room = z.infer<typeof zRoom>;
-export type RoomType = mongoose.InferRawDocType<Room>;
-export type RoomDocument = mongoose.HydratedDocument<Room>;
-export const RoomModel = mongoose.model<RoomDocument>('Room', roomSchema);

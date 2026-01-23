@@ -1,871 +1,660 @@
 // src/machines/GameMachine.ts
-import path from 'node:path';
-import { readFile } from 'node:fs/promises';
-import { assign, fromPromise, sendParent, setup } from 'xstate';
-import type { ActionArgs } from 'xstate';
-import { ScriptModel } from '../db/models/Script';
-import { UserModel } from '../db/models/User';
-import type { GameNomination, GameTaskEntry } from '../types/game';
+// import { assign, setup } from 'xstate';
+// import type { Match, MatchPhase, MatchStatus, MatchSubphase } from '../types/match';
 
-type TrustModels = 'all_trusting' | 'cautiously_trusting' | 'skeptical' | 'guarded' | 'doubting_thomas';
-type TableImpactStyles = 'disruptive' | 'provocative' | 'stabilizing' | 'organized' | 'procedural';
-type ReasoningModes = 'deductive' | 'systematic' | 'associative' | 'intuitive' | 'surface';
-type InformationHandlingStyle = 'archivist' | 'curator' | 'impressionistic' | 'triage' | 'signal_driven';
-type VoiceStyles = 'quiet' | 'reserved' | 'conversational' | 'assertive' | 'dominant';
+// type CurrentNomination = {
+//     nominatorId: string;
+//     nomineeId: string;
+//     nominationType: NominationType;
+//     openedAt: number;
+// };
 
-type Personality = {
-    trustModel: TrustModels;
-    tableImpact: TableImpactStyles;
-    reasoningMode: ReasoningModes;
-    informationHandling: InformationHandlingStyle;
-    voiceStyle: VoiceStyles;
-};
+// type VoteRecord = {
+//     voterId: string;
+//     choice: VoteChoice;
+//     usedGhost?: boolean;
+// };
 
-type GameRoles = 'storyteller' | 'player' | 'spectator';
-type StorytellerMode = 'ai' | 'human';
+// type VoteHistoryEntry = {
+//     day: number;
+//     nominationType: NominationType;
+//     nominatorId: string;
+//     nomineeId: string;
+//     votesFor: number;
+//     threshold: number;
+//     passed: boolean;
+//     votes: VoteRecord[];
+//     ts: number;
+// };
 
-type RolesDefinition = {
-    id: string;
-    name: string;
-    edition: string;
-    team: string;
-    firstNight: number;
-    firstNightReminder: string;
-    otherNight: number;
-    otherNightReminder: string;
-    reminders: string[];
-    setup: boolean;
-    ability: string;
-    remindersGlobal?: string[];
-};
+// type OnTheBlockStatus = {
+//     nomineeId: string;
+//     votesFor: number;
+//     nominatorId: string;
+// };
 
-type RolesDefined = Omit<RolesDefinition, 'team'> & { characterType: string };
+// type PendingTravellerRequest = {
+//     requestId: string;
+//     userId: string;
+// };
 
-interface SetupPopulations {
-    townsfolk: number;
-    outsider: number;
-    minion: number;
-    demon: number;
-}
+// export type GameContext = {
+//     phase: string;
+//     roomId: string;
+//     matchId: string;
+//     matchStatus: MatchStatus;
+//     scriptId: string;
+//     subphase: string;
+//     dayNumber: number;
+//     playerSeatMap: Record<string, unknown>;
+//     stStateVersion: Record<string, unknown>;
+//     customScriptRoles: CharacterRoles[];
+//     publicStateVersion: Record<string, unknown>;
+//     storytellerUserIds: string[];
+//     allowTravelers: boolean;
+//     travelerCountUsed: PcTravellerCount;
+//     availableTravelers: Travellers[];
+//     pendingTravelerRequests: PendingTravellerRequest[];
+//     dayNominated: string[];
+//     dayNominators: string[];
+//     currentNomination: CurrentNomination;
+//     currentVotes: Record<string, VoteChoice>;
+//     currentVoteGhostUsage: Record<string, boolean>;
+//     isAliveById: Record<string, boolean>;
+//     isTravelerById: Record<string, boolean>;
+//     ghostVoteAvailableById: Record<string, boolean>;
+//     onTheBlock: OnTheBlockStatus;
+//     voteHistory: VoteHistoryEntry[];
+// };
 
-type VoteSuccess = 'fail' | 'success' | 'tied';
-type VoteOutcome = {
-    nominator: number;
-    nominee: number;
-    votes: number[];
-    voteCount: number;
-    success: VoteSuccess;
-};
-type VoteComplete = Omit<VoteOutcome, 'success' | 'voteCount'>;
+// type GamePhasePayload = {
+//     matchId: string;
+//     phase: MatchPhase;
+//     subphase: MatchSubphase;
+//     dayNumber?: number;
+//     nominationsOpen?: boolean;
+//     breakoutWhispersEnabled?: boolean;
+//     playerSeatMap?: GameContext['playerSeatMap'];
+//     aliveById?: GameContext['aliveById'];
+//     isTravelerById?: GameContext['isTravelerById'];
+//     ghostVoteAvailableById?: GameContext['ghostVoteAvailableById'];
+//     voteHistory?: GameContext['voteHistory'];
+//     onTheBlock?: GameContext['onTheBlock'];
+// };
 
-type Nomination = GameNomination;
-type HumanOrAi = 'human' | 'ai';
-type Phase = 'night' | 'day';
+// type GameEvent =
+//     | { type: 'DAWN' }
+//     | { type: 'DUSK' }
+//     | { type: 'CLOCKTOWER_GONG' }
+//     | { type: 'REVEAL_COMPLETE' }
+//     | { type: 'OPEN_NOMINATIONS' }
+//     | { type: 'CLOSE_NOMINATIONS' }
+//     | { type: 'GAME_OVER'; payload: { winner: string } }
+//     | { type: 'EXECUTION_OCCURRED' }
+//     | { type: 'ANNOUNCEMENTS_COMPLETE' }
+//     | { type: 'SETUP_COMPLETE' }
+//     | { type: 'TRAVELER_REQUESTED'; requestId: string; userId: string }
+//     | { type: 'DECIDE_TRAVELER'; requestId: string; decision: string; characterRole: string }
+//     | {
+//           type: 'NOMINATION_ATTEMPTED';
+//           payload: { nominatorId: string; nomineeId: string; nominationType: NominationType };
+//       }
+//     | { type: 'VOTE_CAST'; payload: { voterId: string; choice: VoteChoice } }
+//     | { type: 'VOTE_CLOSED' }
+//     | { type: 'MATCH_DATA_LOADED'; payload: Match }
+//     | { type: 'MATCH_PHASE_CHANGED'; payload: GamePhasePayload }
+//     | { type: 'MATCH_RESET' };
 
-type Seat = {
-    id: number;
-    userId?: string;
-    username: string;
-    type: HumanOrAi;
-    personality?: Personality;
-};
+// type GameGuardMeta = {
+//     context: GameContext;
+//     event: GameEvent;
+// };
 
-type TaskEntry = GameTaskEntry;
-type RoleCategory = 'demon' | 'minion' | 'outsider' | 'townsfolk';
-type ExtraPopulation = Record<RoleCategory, number>;
-type AvailableRoles = Record<RoleCategory, RolesDefined[]>;
+// const initialContext: GameContext = {
+//     roomId: '',
+//     matchId: '',
+//     matchStatus: 'setup',
+//     scriptId: '',
+//     voteHistory: [],
+//     ghostVoteAvailableById: {},
+//     isTravelerById: {},
+//     isAliveById: {},
+//     onTheBlock: {
+//         nomineeId: '',
+//         votesFor: 0,
+//         nominatorId: ''
+//     },
+//     currentNomination: {
+//         nominatorId: '',
+//         nomineeId: '',
+//         nominationType: 'execution',
+//         openedAt: 0
+//     },
+//     phase: 'setup',
+//     subphase: 'day.dawn_announcements',
+//     dayNumber: 1,
+//     playerSeatMap: {},
+//     stStateVersion: {},
+//     customScriptRoles: [],
+//     publicStateVersion: {},
+//     storytellerUserIds: [],
+//     allowTravelers: false,
+//     travelerCountUsed: 0,
+//     availableTravelers: [],
+//     pendingTravelerRequests: [],
+//     dayNominated: [],
+//     dayNominators: [],
+//     currentVotes: {},
+//     currentVoteGhostUsage: {}
+// };
 
-export type GameMachineWsEvent =
-    | { type: 'dawnBreak'; requireConfirm: boolean }
-    | { type: 'deathsRevealed'; payload: number[] }
-    | { type: 'requestStatement'; payload: number }
-    | { type: 'statementBroadcast'; payload: { statement: string; nomination: Nomination } }
-    | { type: 'voteStarted'; payload: Nomination }
-    | { type: 'nominationRejected'; payload: Nomination }
-    | { type: 'gong' }
-    | { type: 'taskStarted'; payload: TaskEntry };
+// const canNominateGuard = ({ context, event }: GameGuardMeta) => {
+//     if (event.type !== 'NOMINATION_ATTEMPTED') return false;
+//     const { nominatorId } = event.payload;
+//     const isAlive = context.isAliveById[nominatorId] ?? false;
+//     const isTraveler = context.isTravelerById[nominatorId] ?? false;
+//     const alreadyNominated = context.dayNominators.includes(nominatorId);
+//     const hasActiveNomination = Boolean(context.currentNomination);
+//     return isAlive && !isTraveler && !alreadyNominated && !hasActiveNomination;
+// };
 
-const ROLE_CATEGORIES: RoleCategory[] = ['demon', 'minion', 'outsider', 'townsfolk'];
+// const canBeNominatedGuard = ({ context, event }: GameGuardMeta) => {
+//     if (event.type !== 'NOMINATION_ATTEMPTED') return false;
+//     const { nomineeId, nominationType } = event.payload;
+//     if (context.dayNominated.includes(nomineeId)) return false;
+//     const nomineeIsTraveler = context.isTravelerById[nomineeId] ?? false;
+//     const nomineeIsAlive = context.isAliveById[nomineeId] ?? false;
+//     if (nominationType === 'execution') {
+//         return nomineeIsAlive && !nomineeIsTraveler;
+//     }
+//     if (nominationType === 'exile') {
+//         return nomineeIsTraveler;
+//     }
+//     return false;
+// };
 
-const AI_NAMES = [
-    'Nightshade',
-    'Ashen Mira',
-    'Rook Ember',
-    'Velvet Lantern',
-    'Briar Hallow',
-    'Marrow',
-    'Hollow Finch',
-    'Thornwick',
-    'Fen Whisper',
-    'Cindervale',
-    'Nocturne',
-    'Grimble',
-    'Canvas',
-    'Tidecall',
-    'Sable',
-    'Morrow',
-    'Aster Vale',
-    'Hawthorn',
-    'Crowley',
-    'Drift',
-    'Quill',
-    'Bracken',
-    'Corvus',
-    'Wilder',
-    'Galen',
-    'Fable'
-];
+// const canNominateAndBeNominatedGuard = (meta: GameGuardMeta) => canNominateGuard(meta) && canBeNominatedGuard(meta);
 
-const rolesFilePath = path.join(process.cwd(), 'src', 'assets', 'data', 'roles.json');
-const populationsFilePath = path.join(process.cwd(), 'src', 'assets', 'data', 'game.json');
+// const canVoteGuard = ({ context, event }: GameGuardMeta) => {
+//     if (event.type !== 'VOTE_CAST') return false;
+//     if (!context.currentNomination) return false;
+//     const { voterId, choice } = event.payload;
+//     const isExecution = context.currentNomination.nominationType === 'execution';
+//     const isAlive = context.isAliveById[voterId] ?? false;
+//     if (isAlive) return true;
+//     if (!isExecution) return true;
+//     if (choice == null) return true;
+//     const hasGlobalGhost = context.ghostVoteAvailableById[voterId] !== false;
+//     const usedGhostAlready = Boolean(context.currentVoteGhostUsage[voterId]);
+//     return hasGlobalGhost || usedGhostAlready;
+// };
 
-const shuffle = <T>(items: T[]): T[] => {
-    const copy = [...items];
-    for (let i = copy.length - 1; i > 0; i -= 1) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
-    return copy;
-};
+// export const machine = setup({
+//     types: {
+//         context: initialContext as GameContext,
+//         events: {} as GameEvent
+//     },
+//     actions: {
+//         loadMatchData: assign((_, event) => {
+//             if (event.type !== 'MATCH_DATA_LOADED') return {};
+//             const match = event.payload;
+//             return {
+//                 roomId: match.roomId,
+//                 matchId: match._id,
+//                 matchStatus: match.status,
+//                 phase: match.phase,
+//                 subphase: match.subphase,
+//                 dayNumber: match.dayNumber,
+//                 allowTravelers: match.allowTravelers,
+//                 travelerCountUsed: match.travelerCountUsed,
+//                 travelerUserIds: match.travelerUserIds ?? [],
+//                 playerSeatMap: match.playerSeatMap ?? {},
+//                 nominationsOpen: match.nominationsOpen,
+//                 breakoutWhispersEnabled: match.breakoutWhispersEnabled,
+//                 dayNominated: match.dayNominated ?? [],
+//                 dayNominators: match.dayNominators ?? [],
+//                 aliveById: match.aliveById ?? {},
+//                 isTravelerById: match.isTravelerById ?? {},
+//                 ghostVoteAvailableById: match.ghostVoteAvailableById ?? {},
+//                 voteHistory: match.voteHistory ?? [],
+//                 onTheBlock: match.onTheBlock ?? undefined,
+//                 currentNomination: undefined,
+//                 currentVotes: {},
+//                 currentVoteGhostUsage: {}
+//             };
+//         }),
+//         updateMatchPhase: assign((context, event) => {
+//             if (event.type !== 'MATCH_PHASE_CHANGED') return {};
+//             const payload = event.payload;
+//             return {
+//                 matchId: payload.matchId,
+//                 phase: payload.phase,
+//                 subphase: payload.subphase,
+//                 dayNumber: payload.dayNumber ?? context.dayNumber,
+//                 nominationsOpen: payload.nominationsOpen ?? context.nominationsOpen,
+//                 breakoutWhispersEnabled: payload.breakoutWhispersEnabled ?? context.breakoutWhispersEnabled,
+//                 playerSeatMap: payload.playerSeatMap ?? context.playerSeatMap,
+//                 aliveById: payload.aliveById ?? context.aliveById,
+//                 isTravelerById: payload.isTravelerById ?? context.isTravelerById,
+//                 ghostVoteAvailableById: payload.ghostVoteAvailableById ?? context.ghostVoteAvailableById,
+//                 voteHistory: payload.voteHistory ?? context.voteHistory,
+//                 onTheBlock: payload.onTheBlock ?? context.onTheBlock,
+//                 matchStatus: 'in_progress'
+//             };
+//         }),
+//         resetMatch: assign((context) => ({
+//             ...initialContext,
+//             roomId: context.roomId,
+//             scriptId: context.scriptId
+//         })),
+//         autoDenyNotAccepting: function ({ context, event }, params) {
+//             // Add your action code here
+//             // ...
+//         },
+//         enqueueRequest: function ({ context, event }, params) {
+//             // Add your action code here
+//             // ...
+//         },
+//         autoDenyIneligible: function ({ context, event }, params) {
+//             // Add your action code here
+//             // ...
+//         },
+//         approveTraveler: function ({ context, event }, params) {
+//             // Add your action code here
+//             // ...
+//         },
+//         resetDailyNominationLimits: assign((context) => ({
+//             dayNominated: [],
+//             dayNominators: [],
+//             currentNomination: undefined,
+//             currentVotes: {}
+//         })),
+//         startNomination: assign(({ context, event }) => {
+//             if (event.type !== 'NOMINATION_ATTEMPTED') return {};
+//             const { nominatorId, nomineeId, nominationType } = event.payload;
+//             const nextNominators =
+//                 context.dayNominators.includes(nominatorId) ?
+//                     context.dayNominators
+//                 :   [...context.dayNominators, nominatorId];
+//             const nextNominated =
+//                 context.dayNominated.includes(nomineeId) ? context.dayNominated : [...context.dayNominated, nomineeId];
+//             return {
+//                 dayNominators: nextNominators,
+//                 dayNominated: nextNominated,
+//                 currentNomination: {
+//                     nominatorId,
+//                     nomineeId,
+//                     nominationType,
+//                     openedAt: Date.now()
+//                 },
+//                 currentVotes: {},
+//                 currentVoteGhostUsage: {}
+//             };
+//         }),
+//         recordVote: assign(({ context, event }) => {
+//             if (event.type !== 'VOTE_CAST') return {};
+//             if (!context.currentNomination) return {};
+//             const { voterId, choice } = event.payload;
+//             const isExecution = context.currentNomination.nominationType === 'execution';
+//             const isAlive = context.isAliveById[voterId] ?? false;
+//             const isDead = !isAlive;
+//             const consumesGhostVote = isExecution && isDead && choice !== 'abstain';
+//             const updatedVotes = {
+//                 ...context.currentVotes,
+//                 [voterId]: choice
+//             };
+//             const updatedGhostUsage = { ...context.currentVoteGhostUsage };
+//             if (consumesGhostVote) {
+//                 updatedGhostUsage[voterId] = true;
+//             }
+//             const assignments: Partial<GameContext> = {
+//                 currentVotes: updatedVotes,
+//                 currentVoteGhostUsage: updatedGhostUsage
+//             };
+//             if (consumesGhostVote) {
+//                 const alreadyUsed = Boolean(context.currentVoteGhostUsage[voterId]);
+//                 const hasGhostAvailable = context.ghostVoteAvailableById[voterId] !== false;
+//                 if (!alreadyUsed && hasGhostAvailable) {
+//                     assignments.ghostVoteAvailableById = {
+//                         ...context.ghostVoteAvailableById,
+//                         [voterId]: false
+//                     };
+//                 }
+//             }
+//             return assignments;
+//         }),
+//         resolveNomination: assign(({ context }) => {
+//             const nomination = context.currentNomination;
+//             if (!nomination) return {};
+//             const aliveNonTraveler = Object.entries(context.isAliveById).reduce((count, [id, alive]) => {
+//                 if (!alive) return count;
+//                 if (context.isTravelerById[id]) return count;
+//                 return count + 1;
+//             }, 0);
+//             const threshold = Math.ceil(aliveNonTraveler / 2);
+//             const votes: VoteRecord[] = Object.entries(context.currentVotes).map(([voterId, choice]) => ({
+//                 voterId,
+//                 choice,
+//                 ...(context.currentVoteGhostUsage[voterId] ? { usedGhost: true } : {})
+//             }));
+//             const votesFor = votes.filter((vote) => vote.choice === 'yes').length;
+//             const passed = votesFor >= threshold;
+//             const historyEntry: VoteHistoryEntry = {
+//                 day: context.dayNumber,
+//                 nominationType: nomination.nominationType,
+//                 nominatorId: nomination.nominatorId,
+//                 nomineeId: nomination.nomineeId,
+//                 votesFor,
+//                 threshold,
+//                 passed,
+//                 votes,
+//                 ts: Date.now()
+//             };
+//             let updatedOnTheBlock = context.onTheBlock;
+//             if (passed && nomination.nominationType === 'execution') {
+//                 if (!context.onTheBlock || votesFor > context.onTheBlock.votesFor) {
+//                     updatedOnTheBlock = {
+//                         nomineeId: nomination.nomineeId,
+//                         votesFor,
+//                         nominatorId: nomination.nominatorId
+//                     };
+//                 }
+//             }
+//             return {
+//                 voteHistory: [...context.voteHistory, historyEntry],
+//                 onTheBlock: updatedOnTheBlock
+//             };
+//         }),
+//         clearNomination: assign(() => ({
+//             currentNomination: undefined,
+//             currentVotes: {},
+//             currentVoteGhostUsage: {}
+//         }))
+//     },
+//     guards: {
+//         isAllowingTravelers: function ({ context, event }, params) {
+//             // Add your guard code here
+//             return context.allowTravelers === true;
+//         },
+//         hasCapacity: function ({ context, event }) {
+//             // Add your guard condition here
+//             return true;
+//         },
+//         eligibleTraveler: function ({ context, event }) {
+//             // Add your guard condition here
+//             return true;
+//         },
+//         approved: function ({ context, event }) {
+//             // Add your guard condition here
+//             return true;
+//         },
+//         canNominate: canNominateGuard,
+//         canBeNominated: canBeNominatedGuard,
+//         canNominateAndBeNominated: canNominateAndBeNominatedGuard,
+//         canVote: canVoteGuard
+//     }
+// }).createMachine({
+//     context: initialContext,
+//     id: 'GameMachine',
+//     initial: 'setup',
+//     on: {
+//         MATCH_DATA_LOADED: {
+//             actions: 'loadMatchData'
+//         },
+//         MATCH_PHASE_CHANGED: {
+//             actions: 'updateMatchPhase'
+//         },
+//         MATCH_RESET: {
+//             actions: 'resetMatch'
+//         }
+//     },
+//     states: {
+//         setup: {
+//             on: {
+//                 SETUP_COMPLETE: {
+//                     target: 'in_progress'
+//                 }
+//             }
+//         },
+//         in_progress: {
+//             type: 'parallel',
+//             on: {
+//                 GAME_OVER: {
+//                     target: 'reveal'
+//                 }
+//             },
+//             states: {
+//                 phase: {
+//                     initial: 'night',
+//                     states: {
+//                         night: {
+//                             initial: 'resolve_first_night_order',
+//                             on: {
+//                                 DAWN: {
+//                                     target: '#GameMachine.in_progress.phase.day.dawn_announcements'
+//                                 }
+//                             },
+//                             states: {
+//                                 resolve_first_night_order: {},
+//                                 resolve_night_order: {}
+//                             }
+//                         },
+//                         day: {
+//                             type: 'parallel',
+//                             initial: 'dawn_announcements',
+//                             on: {
+//                                 DUSK: {
+//                                     target: '#GameMachine.in_progress.phase.night.resolve_night_order'
+//                                 }
+//                             },
+//                             states: {
+//                                 dawn_announcements: {
+//                                     entry: 'resetDailyNominationLimits',
+//                                     on: {
+//                                         EXECUTION_OCCURRED: {
+//                                             target: 'execution_resolution'
+//                                         },
+//                                         ANNOUNCEMENTS_COMPLETE: {
+//                                             target: 'discussions'
+//                                         }
+//                                     }
+//                                 },
+//                                 execution_resolution: {
+//                                     always: {
+//                                         target: '#GameMachine.in_progress.phase.night'
+//                                     }
+//                                 },
+//                                 discussions: {
+//                                     initial: 'private_conversations',
+//                                     on: {
+//                                         EXECUTION_OCCURRED: {
+//                                             target: 'execution_resolution'
+//                                         }
+//                                     },
+//                                     states: {
+//                                         private_conversations: {
+//                                             on: {
+//                                                 CLOCKTOWER_GONG: {
+//                                                     target: 'public_conversation'
+//                                                 }
+//                                             }
+//                                         },
+//                                         public_conversation: {
+//                                             on: {
+//                                                 OPEN_NOMINATIONS: {
+//                                                     target: 'nominations'
+//                                                 },
+//                                                 EXECUTION_OCCURRED: {
+//                                                     target: '#GameMachine.in_progress.phase.day.execution_resolution'
+//                                                 }
+//                                             }
+//                                         },
+//                                         nominations: {
+//                                             initial: 'nominations_open',
+//                                             on: {
+//                                                 CLOSE_NOMINATIONS: {
+//                                                     target: '#GameMachine.in_progress.phase.day.discussions.public_conversation'
+//                                                 },
+//                                                 EXECUTION_OCCURRED: {
+//                                                     target: '#GameMachine.in_progress.phase.day.execution_resolution'
+//                                                 }
+//                                             },
+//                                             states: {
+//                                                 nominations_open: {
+//                                                     on: {
+//                                                         NOMINATION_ATTEMPTED: {
+//                                                             target: 'vote_in_progress',
+//                                                             guard: {
+//                                                                 type: 'canNominateAndBeNominated'
+//                                                             },
+//                                                             actions: {
+//                                                                 type: 'startNomination'
+//                                                             }
+//                                                         }
+//                                                     }
+//                                                 },
+//                                                 vote_in_progress: {
+//                                                     on: {
+//                                                         VOTE_CAST: {
+//                                                             actions: {
+//                                                                 type: 'recordVote'
+//                                                             },
+//                                                             guard: {
+//                                                                 type: 'canVote'
+//                                                             }
+//                                                         },
+//                                                         VOTE_CLOSED: {
+//                                                             target: 'nomination_resolve'
+//                                                         }
+//                                                     }
+//                                                 },
+//                                                 nomination_resolve: {
+//                                                     entry: ['resolveNomination', 'clearNomination'],
+//                                                     always: {
+//                                                         target: 'nominations_open'
+//                                                     }
+//                                                 }
+//                                             }
+//                                         }
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 },
+//                 traveler_admission: {
+//                     initial: 'routing',
+//                     states: {
+//                         routing: {
+//                             always: [
+//                                 {
+//                                     target: 'accepting',
+//                                     guard: {
+//                                         type: 'isAllowingTravelers'
+//                                     }
+//                                 },
+//                                 {
+//                                     target: 'not_accepting'
+//                                 }
+//                             ]
+//                         },
+//                         accepting: {
+//                             initial: 'routing',
+//                             states: {
+//                                 routing: {
+//                                     always: [
+//                                         {
+//                                             target: 'capacity_available',
+//                                             guard: {
+//                                                 type: 'hasCapacity'
+//                                             }
+//                                         },
+//                                         {
+//                                             target: 'limit_reached'
+//                                         }
+//                                     ]
+//                                 },
+//                                 capacity_available: {
+//                                     on: {
+//                                         TRAVELER_REQUESTED: [
+//                                             {
+//                                                 target: 'capacity_available',
+//                                                 actions: {
+//                                                     type: 'enqueueRequest'
+//                                                 },
+//                                                 guard: {
+//                                                     type: 'eligibleTraveler'
+//                                                 }
+//                                             },
+//                                             {
+//                                                 target: 'capacity_available',
+//                                                 actions: {
+//                                                     type: 'autoDenyIneligible'
+//                                                 }
+//                                             }
+//                                         ],
+//                                         DECIDE_TRAVELER: [
+//                                             {
+//                                                 target: 'capacity_available',
+//                                                 actions: {
+//                                                     type: 'approveTraveler'
+//                                                 },
+//                                                 guard: {
+//                                                     type: 'approved'
+//                                                 }
+//                                             },
+//                                             {
+//                                                 target: 'capacity_available'
+//                                             }
+//                                         ]
+//                                     },
+//                                     always: [
+//                                         {
+//                                             target: 'capacity_available',
+//                                             guard: {
+//                                                 type: 'hasCapacity'
+//                                             }
+//                                         },
+//                                         {
+//                                             target: 'limit_reached'
+//                                         }
+//                                     ]
+//                                 },
+//                                 limit_reached: {
+//                                     always: {
+//                                         target: '#GameMachine.in_progress.traveler_admission.not_accepting'
+//                                     }
+//                                 }
+//                             }
+//                         },
+//                         not_accepting: {
+//                             on: {
+//                                 TRAVELER_REQUESTED: {
+//                                     target: 'not_accepting',
+//                                     actions: {
+//                                         type: 'autoDenyNotAccepting',
+//                                         params: {
+//                                             requestId: 'string'
+//                                         }
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         },
+//         reveal: {
+//             on: {
+//                 REVEAL_COMPLETE: {
+//                     target: 'complete'
+//                 }
+//             }
+//         },
+//         complete: {
+//             type: 'final'
+//         }
+//     }
+// });
 
-const randomChoice = <T>(items: readonly T[]): T => items[Math.floor(Math.random() * items.length)];
-const uniqueNamePool = () => shuffle([...AI_NAMES]);
-const popName = (pool: string[]) => pool.pop() ?? `AI-${Math.floor(Math.random() * 9_999)}`;
-const randomPersonality = (): Personality => ({
-    trustModel: randomChoice(['all_trusting', 'cautiously_trusting', 'skeptical', 'guarded', 'doubting_thomas']),
-    tableImpact: randomChoice(['disruptive', 'provocative', 'stabilizing', 'organized', 'procedural']),
-    reasoningMode: randomChoice(['deductive', 'systematic', 'associative', 'intuitive', 'surface']),
-    informationHandling: randomChoice(['archivist', 'curator', 'impressionistic', 'triage', 'signal_driven']),
-    voiceStyle: randomChoice(['quiet', 'reserved', 'conversational', 'assertive', 'dominant'])
-});
-
-type GameMachineInput = {
-    maxPlayers: number;
-    connectedUserIds: Record<string, GameRoles>;
-    storytellerMode: StorytellerMode;
-    scriptId: string;
-    deps?: {
-        wsEmit?: (event: GameMachineWsEvent) => void;
-    };
-};
-
-type GameContext = {
-    seats: Record<number, Seat>;
-    tokens: Record<number, RolesDefined>;
-    alivePlayers: number[];
-    tasks: TaskEntry[];
-    currentTask?: TaskEntry;
-    pendingDeaths: number[];
-    canNominate: number[];
-    canBeNominated: number[];
-    nomination?: Nomination;
-    markedForExecution?: VoteOutcome;
-    toBeExecuted?: number[];
-    votingHistory: Record<number, VoteOutcome[]>;
-    dailyVotingHistory: VoteOutcome[];
-    ghostVotes: number[];
-    waitingFor: string[];
-    day: number;
-    phase: Phase;
-    nominationsOpen: boolean;
-    pendingTasks: TaskEntry[];
-    maxPlayers: number;
-    connectedUserIds: Record<string, GameRoles>;
-    storytellerMode: StorytellerMode;
-    scriptId: string;
-    deps?: GameMachineInput['deps'];
-    setupArgs: GameMachineInput;
-    availableTravellers?: RolesDefined[];
-    initialPopulation?: SetupPopulations;
-    modifiedPopulation?: SetupPopulations & { extra: ExtraPopulation };
-    availableRoles?: AvailableRoles;
-    bag?: RolesDefined[];
-};
-
-type GameEvents =
-    | { type: 'SETUP_COMPLETE'; payload: Partial<GameContext> }
-    | { type: 'END_GAME' }
-    | { type: 'END_REVEAL' }
-    | { type: 'EXECUTION' }
-    | { type: 'CONFIRM_READY'; payload: string }
-    | { type: 'OVERRIDE_WAIT' }
-    | { type: 'TIMER_STARTED'; payload: number }
-    | { type: 'TIMER_EXPIRED' }
-    | { type: 'GONG' }
-    | { type: 'NOMINATION'; payload: Nomination }
-    | { type: 'REQUEST_STATEMENT'; payload: number }
-    | { type: 'STATEMENT_RECEIVED'; payload: string }
-    | { type: 'NEXT_STATEMENT' }
-    | { type: 'VOTE_COMPLETE'; payload: VoteComplete }
-    | { type: 'ADD_TASK'; payload: TaskEntry }
-    | { type: 'TASK_COMPLETE' }
-    | { type: 'PAUSE_TASKS' }
-    | { type: 'RESUME_TASKS' }
-    | { type: 'START_TASKS' }
-    | { type: 'ACCUSATION_COMPLETE' };
-
-const createInitialContext = ({ input }: { input: GameMachineInput }): GameContext => ({
-    seats: {},
-    tokens: {},
-    alivePlayers: [],
-    tasks: [],
-    pendingDeaths: [],
-    canNominate: [],
-    canBeNominated: [],
-    votingHistory: {},
-    dailyVotingHistory: [],
-    ghostVotes: [],
-    waitingFor: [],
-    day: 1,
-    phase: 'night',
-    nominationsOpen: false,
-    pendingTasks: [],
-    maxPlayers: input.maxPlayers,
-    connectedUserIds: input.connectedUserIds,
-    storytellerMode: input.storytellerMode,
-    scriptId: input.scriptId,
-    deps: input.deps,
-    setupArgs: input
-});
-
-const assignGame = assign<GameContext, GameEvents>;
-
-const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput>(async ({ input, emit }) => {
-    const { maxPlayers, connectedUserIds, storytellerMode, scriptId } = input;
-    if (storytellerMode === 'human') {
-        throw new Error('unsupported at this time');
-    }
-    if (maxPlayers < 5 || maxPlayers > 15) {
-        throw new Error('maxPlayers out of range');
-    }
-
-    const humanEntries = Object.entries(connectedUserIds).filter(([, role]) => role === 'player');
-    const humankind = await Promise.all(
-        humanEntries.map(async ([userId]) => {
-            const user = await UserModel.findById(userId).lean();
-            return {
-                userId,
-                type: 'human' as const,
-                username: user?.username ?? `Player-${userId.slice(-4)}`
-            };
-        })
-    );
-
-    const aiPlayers = Math.max(0, maxPlayers - humankind.length);
-    const namePool = uniqueNamePool();
-    const aiSeats: Omit<Seat, 'id'>[] = [];
-    for (let i = 0; i < aiPlayers; i += 1) {
-        aiSeats.push({
-            type: 'ai',
-            username: popName(namePool),
-            personality: randomPersonality()
-        });
-    }
-
-    const shuffledSeats = shuffle([...humankind, ...aiSeats]);
-    const seats = shuffledSeats.reduce<Record<number, Seat>>(
-        (acc, seat, index) => {
-            acc[index + 1] = { ...seat, id: index + 1 };
-            return acc;
-        },
-        {} as Record<number, Seat>
-    );
-
-    const script = await ScriptModel.findById(scriptId).lean();
-    if (!script) {
-        throw new Error('script not found');
-    }
-
-    const rolesPayload = (await readFile(rolesFilePath, 'utf8')) as string;
-    const populationsData = (await readFile(populationsFilePath, 'utf8')) as string;
-    const rolesList = JSON.parse(rolesPayload) as RolesDefinition[];
-    const populationList = JSON.parse(populationsData) as SetupPopulations[];
-
-    const normalizedRoles: RolesDefined[] = rolesList.map(({ team, ...rest }) => ({
-        ...rest,
-        characterType: team
-    }));
-
-    const scriptRoles = script.roles.map((roleId) => {
-        const match = normalizedRoles.find((role) => role.id === roleId);
-        if (!match) {
-            throw new Error(`role ${roleId} missing from definitions`);
-        }
-        return match;
-    });
-
-    const availableTravellers = scriptRoles.filter((role) => role.characterType === 'traveller');
-    const eligibleRoles = scriptRoles.filter((role) => ROLE_CATEGORIES.includes(role.characterType as RoleCategory));
-
-    const availableRoles: AvailableRoles = {
-        demon: shuffle(eligibleRoles.filter((role) => role.characterType === 'demon')),
-        minion: shuffle(eligibleRoles.filter((role) => role.characterType === 'minion')),
-        outsider: shuffle(eligibleRoles.filter((role) => role.characterType === 'outsider')),
-        townsfolk: shuffle(eligibleRoles.filter((role) => role.characterType === 'townsfolk'))
-    };
-
-    const initialPopulation = populationList[maxPlayers - 5];
-    if (!initialPopulation) {
-        throw new Error('missing population data for player count');
-    }
-
-    const modifiedPopulation: SetupPopulations & { extra: ExtraPopulation } = {
-        ...initialPopulation,
-        extra: { demon: 0, minion: 0, outsider: 0, townsfolk: 0 }
-    };
-
-    const pendingTasks: TaskEntry[] = [['demon_bluffs', undefined]];
-    const bag: RolesDefined[] = [];
-
-    const modifySetup = (token: RolesDefined) => {
-        if (!token.setup) return;
-        if (token.id === 'baron') {
-            const maxOutsider = availableRoles.outsider.length;
-            const newOutsider = modifiedPopulation.outsider + 2;
-            let delta = newOutsider <= maxOutsider ? 2 : 2 - (newOutsider - maxOutsider);
-            if (delta <= 0) delta = 0;
-            modifiedPopulation.outsider += delta;
-            modifiedPopulation.townsfolk = Math.max(0, modifiedPopulation.townsfolk - delta);
-        }
-        if (token.id === 'drunk') {
-            modifiedPopulation.extra.townsfolk += 1;
-            pendingTasks.push(['mask_drunk', token]);
-        }
-        if (token.id === 'fortuneteller') {
-            pendingTasks.push(['fortuneteller_redherring', token]);
-        }
-    };
-
-    const takeRoles = (count: number, category: RoleCategory) => {
-        if (count <= 0) return;
-        const pool = availableRoles[category];
-        if (count > pool.length) {
-            throw new Error(`not enough ${category} roles for population`);
-        }
-        const tokens = pool.splice(0, count);
-        tokens.forEach((token) => {
-            bag.push(token);
-            modifySetup(token);
-        });
-    };
-
-    ROLE_CATEGORIES.forEach((category) => takeRoles(modifiedPopulation[category], category));
-    ROLE_CATEGORIES.forEach((category) => takeRoles(modifiedPopulation.extra[category], category));
-
-    const randomizedBag = shuffle(bag);
-    if (randomizedBag.length !== maxPlayers) {
-        throw new Error('bag length mismatch');
-    }
-
-    const tokens = Object.fromEntries(randomizedBag.map((token, index) => [index + 1, token] as const)) as Record<
-        number,
-        RolesDefined
-    >;
-
-    const alivePlayers = Object.keys(seats).map((seatId) => Number(seatId));
-    const ghostVotes = [...alivePlayers];
-
-    const result: Partial<GameContext> = {
-        seats,
-        tokens,
-        alivePlayers,
-        ghostVotes,
-        pendingTasks: [...pendingTasks],
-        tasks: [...pendingTasks],
-        availableTravellers,
-        initialPopulation,
-        modifiedPopulation,
-        availableRoles,
-        bag: randomizedBag
-    };
-
-    emit({ type: 'SETUP_COMPLETE', payload: result });
-    return result;
-});
-
-const builder = setup({
-    types: {
-        context: {} as GameContext,
-        events: {} as GameEvents,
-        input: {} as GameMachineInput
-    },
-    actors: {
-        onSetupStart: gameSetupActor
-    },
-    actions: {
-        applySetupResult: assignGame((_, event) => {
-            if (event.type !== 'SETUP_COMPLETE') return {};
-            return { ...event.payload };
-        }),
-        addTask: assignGame((context, event) => {
-            if (event.type !== 'ADD_TASK') return {};
-            return {
-                tasks: [...context.tasks, event.payload],
-                pendingTasks: [...context.pendingTasks, event.payload]
-            };
-        }),
-        clearCurrentTask: assignGame(() => ({ currentTask: undefined })),
-        runNextTask: assignGame((context) => {
-            if (context.currentTask || context.tasks.length === 0) return {};
-            const [next, ...rest] = context.tasks;
-            context.deps?.wsEmit?.({ type: 'taskStarted', payload: next });
-            return {
-                tasks: rest,
-                currentTask: next
-            };
-        }),
-        scheduleTimer: ({ event, self }: ActionArgs<GameContext, GameEvents>) => {
-            if (event.type !== 'TIMER_STARTED') return;
-            const timerId = setTimeout(() => {
-                self.send({ type: 'TIMER_EXPIRED' });
-            }, event.payload * 60_000);
-            return () => clearTimeout(timerId);
-        },
-        emitGong: sendParent(() => ({ type: 'GONG' })),
-        broadcastGong: ({ context }: ActionArgs<GameContext, GameEvents>) => {
-            context.deps?.wsEmit?.({ type: 'gong' });
-        },
-        startPrivateTimer: sendParent(() => ({ type: 'TIMER_STARTED', payload: 7 })),
-        startPublicTimer: sendParent(() => ({ type: 'TIMER_STARTED', payload: 2 })),
-        handleRequestStatement: ({ context, event }: ActionArgs<GameContext, GameEvents>) => {
-            if (event.type !== 'REQUEST_STATEMENT') return;
-            context.deps?.wsEmit?.({ type: 'requestStatement', payload: event.payload });
-        },
-        broadcastStatement: ({ context, event }: ActionArgs<GameContext, GameEvents>) => {
-            if (event.type !== 'STATEMENT_RECEIVED' || !context.nomination) return;
-            context.deps?.wsEmit?.({
-                type: 'statementBroadcast',
-                payload: {
-                    statement: event.payload,
-                    nomination: context.nomination
-                }
-            });
-        },
-        emitNextStatement: sendParent(() => ({ type: 'NEXT_STATEMENT' })),
-        runVote: ({ context }: ActionArgs<GameContext, GameEvents>) => {
-            if (!context.nomination) return;
-            context.deps?.wsEmit?.({ type: 'voteStarted', payload: context.nomination });
-        },
-        resolveVote: assignGame((context, event) => {
-            if (event.type !== 'VOTE_COMPLETE') return {};
-            const minimumVoteRequired = Math.ceil(context.alivePlayers.length / 2);
-            const toBeat = context.markedForExecution?.voteCount ?? 0;
-            const voteCount = event.payload.votes.length;
-            const success: VoteSuccess =
-                voteCount < minimumVoteRequired ? 'fail'
-                : voteCount < toBeat ? 'fail'
-                : voteCount === toBeat ? 'tied'
-                : 'success';
-            const result: VoteOutcome = {
-                ...event.payload,
-                voteCount,
-                success
-            };
-            const nextDailyHistory = [...context.dailyVotingHistory, result];
-            const updatedVotingHistory = {
-                ...context.votingHistory,
-                [result.nominee]: [...(context.votingHistory[result.nominee] ?? []), result]
-            };
-            return {
-                dailyVotingHistory: nextDailyHistory,
-                votingHistory: updatedVotingHistory,
-                markedForExecution: result.success === 'success' ? result : context.markedForExecution,
-                nomination: undefined
-            };
-        }),
-        emitAccusationComplete: sendParent(() => ({ type: 'ACCUSATION_COMPLETE' })),
-        openNominations: assignGame(() => ({ nominationsOpen: true })),
-        closeNominations: assignGame(() => ({ nominationsOpen: false })),
-        setNomination: assignGame((context, event) => {
-            if (event.type !== 'NOMINATION') return {};
-            return {
-                nomination: event.payload,
-                canNominate: context.canNominate.filter((id) => id !== event.payload.nominator),
-                canBeNominated: context.canBeNominated.filter((id) => id !== event.payload.nominee)
-            };
-        }),
-        rejectNomination: ({ context, event }: ActionArgs<GameContext, GameEvents>) => {
-            if (event.type !== 'NOMINATION') return;
-            context.deps?.wsEmit?.({ type: 'nominationRejected', payload: event.payload });
-        },
-        setDawnWaiting: assignGame((context) => ({
-            waitingFor: Object.values(context.seats)
-                .filter((seat) => seat.type === 'human' && seat.userId)
-                .map((seat) => seat.userId!)
-        })),
-        confirmReady: assignGame((context, event) => {
-            if (event.type !== 'CONFIRM_READY') return {};
-            return { waitingFor: context.waitingFor.filter((userId) => userId !== event.payload) };
-        }),
-        clearWaitingFor: assignGame(() => ({ waitingFor: [] })),
-        announceDawnWaiting: ({ context }: ActionArgs<GameContext, GameEvents>) => {
-            context.deps?.wsEmit?.({ type: 'dawnBreak', requireConfirm: true });
-        },
-        announceDawnRunning: ({ context }: ActionArgs<GameContext, GameEvents>) => {
-            context.deps?.wsEmit?.({ type: 'dawnBreak', requireConfirm: false });
-        },
-        dayReset: assignGame((context) => {
-            const survivors = context.alivePlayers.filter((id) => !context.pendingDeaths.includes(id));
-            return {
-                dailyVotingHistory: [],
-                canBeNominated: survivors,
-                canNominate: survivors,
-                nominationsOpen: false,
-                phase: 'day'
-            };
-        }),
-        announceDeaths: assignGame((context) => {
-            if (context.pendingDeaths.length) {
-                context.deps?.wsEmit?.({ type: 'deathsRevealed', payload: context.pendingDeaths });
-            }
-            return {
-                alivePlayers: context.alivePlayers.filter((id) => !context.pendingDeaths.includes(id)),
-                pendingDeaths: [],
-                waitingFor: []
-            };
-        }),
-        setPhaseNight: assignGame(() => ({ phase: 'night' })),
-        processExecution: assignGame((context) => {
-            const removals =
-                context.toBeExecuted?.length ? context.toBeExecuted
-                : context.markedForExecution ? [context.markedForExecution.nominee]
-                : [];
-            if (removals.length === 0) return {};
-            return {
-                alivePlayers: context.alivePlayers.filter((id) => !removals.includes(id)),
-                pendingDeaths: removals,
-                toBeExecuted: undefined,
-                markedForExecution:
-                    context.markedForExecution && removals.includes(context.markedForExecution.nominee) ?
-                        undefined
-                    :   context.markedForExecution
-            };
-        })
-    },
-    guards: {
-        hasPendingTasks: ({ context }) => context.tasks.length > 0,
-        hasCurrentTask: ({ context }) => Boolean(context.currentTask),
-        waitingForEmpty: ({ context }) => context.waitingFor.length === 0,
-        isValidNomination: ({ context, event }) => {
-            if (event.type !== 'NOMINATION') return false;
-            return (
-                context.canNominate.includes(event.payload.nominator) &&
-                context.canBeNominated.includes(event.payload.nominee)
-            );
-        }
-    }
-});
-
-export const GameMachine = builder.createMachine({
-    id: 'GameMachine',
-    type: 'parallel',
-    context: ({ input }) => createInitialContext({ input }),
-    states: {
-        gameStatus: {
-            initial: 'setup',
-            states: {
-                setup: {
-                    invoke: {
-                        src: 'onSetupStart',
-                        input: (context) => context.setupArgs
-                    },
-                    on: {
-                        SETUP_COMPLETE: {
-                            target: 'in_progress',
-                            actions: 'applySetupResult'
-                        }
-                    }
-                },
-                in_progress: {
-                    type: 'parallel',
-                    on: {
-                        END_GAME: '#GameMachine.gameStatus.reveal'
-                    },
-                    states: {
-                        night: {
-                            entry: 'setPhaseNight',
-                            initial: 'first_night',
-                            states: {
-                                first_night: {},
-                                other_night: {}
-                            }
-                        },
-                        day: {
-                            initial: 'dawn',
-                            states: {
-                                dawn: {
-                                    initial: 'waiting',
-                                    states: {
-                                        waiting: {
-                                            entry: ['announceDawnWaiting', 'setDawnWaiting'],
-                                            on: {
-                                                CONFIRM_READY: {
-                                                    actions: 'confirmReady'
-                                                },
-                                                OVERRIDE_WAIT: {
-                                                    actions: 'clearWaitingFor',
-                                                    target: 'running'
-                                                }
-                                            },
-                                            always: {
-                                                target: 'running',
-                                                guard: 'waitingForEmpty'
-                                            }
-                                        },
-                                        running: {
-                                            entry: ['announceDawnRunning', 'clearWaitingFor'],
-                                            always: 'day'
-                                        }
-                                    }
-                                },
-                                day: {
-                                    type: 'parallel',
-                                    entry: ['dayReset', 'announceDeaths'],
-                                    states: {
-                                        timer: {
-                                            initial: 'running',
-                                            states: {
-                                                running: {
-                                                    on: {
-                                                        TIMER_STARTED: {
-                                                            actions: 'scheduleTimer'
-                                                        },
-                                                        TIMER_EXPIRED: 'expired'
-                                                    }
-                                                },
-                                                expired: {
-                                                    entry: ['emitGong', 'broadcastGong'],
-                                                    on: {
-                                                        TIMER_STARTED: {
-                                                            target: 'running',
-                                                            actions: 'scheduleTimer'
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        discussion: {
-                                            initial: 'pre_nominations',
-                                            states: {
-                                                pre_nominations: {
-                                                    initial: 'private',
-                                                    states: {
-                                                        private: {
-                                                            entry: 'startPrivateTimer',
-                                                            on: {
-                                                                TIMER_EXPIRED: 'public'
-                                                            }
-                                                        },
-                                                        public: {
-                                                            entry: 'startPublicTimer',
-                                                            on: {
-                                                                TIMER_EXPIRED: '../../nominations.open'
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                nominations: {
-                                                    initial: 'open',
-                                                    states: {
-                                                        open: {
-                                                            entry: 'openNominations',
-                                                            exit: 'closeNominations',
-                                                            on: {
-                                                                NOMINATION: [
-                                                                    {
-                                                                        guard: 'isValidNomination',
-                                                                        target: 'accusation',
-                                                                        actions: ['setNomination']
-                                                                    },
-                                                                    {
-                                                                        actions: 'rejectNomination'
-                                                                    }
-                                                                ]
-                                                            }
-                                                        },
-                                                        accusation: {
-                                                            type: 'parallel',
-                                                            on: {
-                                                                ACCUSATION_COMPLETE: 'open'
-                                                            },
-                                                            states: {
-                                                                messages: {
-                                                                    initial: 'idle',
-                                                                    states: {
-                                                                        idle: {
-                                                                            on: {
-                                                                                REQUEST_STATEMENT: {
-                                                                                    target: 'waiting',
-                                                                                    actions: 'handleRequestStatement'
-                                                                                }
-                                                                            }
-                                                                        },
-                                                                        waiting: {
-                                                                            on: {
-                                                                                STATEMENT_RECEIVED: {
-                                                                                    target: 'idle',
-                                                                                    actions: [
-                                                                                        'broadcastStatement',
-                                                                                        'emitNextStatement'
-                                                                                    ]
-                                                                                }
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                },
-                                                                parties: {
-                                                                    initial: 'accuser',
-                                                                    states: {
-                                                                        accuser: {
-                                                                            entry: sendParent((context) => {
-                                                                                if (!context.nomination)
-                                                                                    return { type: 'NEXT_STATEMENT' };
-                                                                                return {
-                                                                                    type: 'REQUEST_STATEMENT',
-                                                                                    payload:
-                                                                                        context.nomination.nominator
-                                                                                };
-                                                                            }),
-                                                                            on: {
-                                                                                NEXT_STATEMENT: 'accused'
-                                                                            }
-                                                                        },
-                                                                        accused: {
-                                                                            entry: sendParent((context) => {
-                                                                                if (!context.nomination)
-                                                                                    return { type: 'NEXT_STATEMENT' };
-                                                                                return {
-                                                                                    type: 'REQUEST_STATEMENT',
-                                                                                    payload: context.nomination.nominee
-                                                                                };
-                                                                            }),
-                                                                            on: {
-                                                                                NEXT_STATEMENT: 'vote_in_progress'
-                                                                            }
-                                                                        },
-                                                                        vote_in_progress: {
-                                                                            entry: 'runVote',
-                                                                            on: {
-                                                                                VOTE_COMPLETE: {
-                                                                                    target: 'resolve',
-                                                                                    actions: [
-                                                                                        'resolveVote',
-                                                                                        'emitAccusationComplete'
-                                                                                    ]
-                                                                                }
-                                                                            }
-                                                                        },
-                                                                        resolve: {
-                                                                            always: 'open'
-                                                                        }
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                },
-                                execution: {
-                                    entry: ['processExecution']
-                                }
-                            },
-                            on: {
-                                EXECUTION: 'execution'
-                            }
-                        }
-                    }
-                },
-                reveal: {
-                    on: {
-                        END_REVEAL: 'complete'
-                    }
-                },
-                complete: {
-                    type: 'final'
-                }
-            }
-        },
-        taskQueue: {
-            initial: 'paused',
-            on: {
-                ADD_TASK: {
-                    actions: 'addTask'
-                },
-                START_TASKS: [
-                    {
-                        guard: 'hasPendingTasks',
-                        target: 'running'
-                    },
-                    {
-                        target: 'empty'
-                    }
-                ],
-                RESUME_TASKS: [
-                    {
-                        guard: 'hasPendingTasks',
-                        target: 'running'
-                    },
-                    {
-                        target: 'empty'
-                    }
-                ],
-                PAUSE_TASKS: 'paused'
-            },
-            states: {
-                paused: {
-                    on: {
-                        START_TASKS: [
-                            {
-                                guard: 'hasPendingTasks',
-                                target: 'running'
-                            }
-                        ]
-                    }
-                },
-                running: {
-                    entry: 'runNextTask',
-                    always: [
-                        {
-                            guard: 'hasCurrentTask',
-                            target: 'waiting'
-                        },
-                        {
-                            target: 'empty'
-                        }
-                    ]
-                },
-                waiting: {
-                    on: {
-                        TASK_COMPLETE: [
-                            {
-                                guard: 'hasPendingTasks',
-                                target: 'running',
-                                actions: 'clearCurrentTask'
-                            },
-                            {
-                                target: 'empty',
-                                actions: 'clearCurrentTask'
-                            }
-                        ],
-                        PAUSE_TASKS: 'paused'
-                    }
-                },
-                empty: {
-                    on: {
-                        START_TASKS: [
-                            {
-                                guard: 'hasPendingTasks',
-                                target: 'running'
-                            }
-                        ]
-                    }
-                }
-            }
-        }
-    }
-});
-
-export type { GameEvents, GameMachineInput, GameMachineWsEvent };
+// export type { GameContext };

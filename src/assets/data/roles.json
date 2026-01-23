@@ -73,7 +73,7 @@
         "firstNightReminder": "The Fortune Teller points to two players. Give the head signal (nod yes, shake no) for whether one of those players is the Demon. ",
         "otherNight": 54,
         "otherNightReminder": "The Fortune Teller points to two players. Show the head signal (nod 'yes', shake 'no') for whether one of those players is the Demon.",
-        "reminders": ["Red herring"],
+        "reminders": ["Red Herring"],
         "setup": true,
         "ability": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you."
     },
@@ -112,7 +112,7 @@
         "firstNightReminder": "",
         "otherNight": 52,
         "otherNightReminder": "If the Ravenkeeper died tonight: The Ravenkeeper points to a player. Show that player\u2019s character token.",
-        "reminders": [],
+        "reminders": ["Died Tonight"],
         "setup": false,
         "ability": "If you die at night, you are woken to choose a player: you learn their character."
     },
@@ -125,7 +125,7 @@
         "firstNightReminder": "",
         "otherNight": 0,
         "otherNightReminder": "",
-        "reminders": ["No ability"],
+        "reminders": ["No Ability"],
         "setup": false,
         "ability": "The 1st time you are nominated, if the nominator is a Townsfolk, they are executed immediately."
     },
@@ -138,7 +138,7 @@
         "firstNightReminder": "",
         "otherNight": 0,
         "otherNightReminder": "",
-        "reminders": ["No ability"],
+        "reminders": ["No Ability"],
         "setup": false,
         "ability": "Once per game, during the day, publicly choose a player: if they are the Demon, they die."
     },
@@ -191,7 +191,7 @@
         "otherNight": 0,
         "otherNightReminder": "",
         "reminders": [],
-        "remindersGlobal": ["Drunk"],
+        "remindersGlobal": ["Is the Drunk"],
         "setup": true,
         "ability": "You do not know you are the Drunk. You think you are a Townsfolk character, but you are not."
     },
@@ -256,7 +256,7 @@
         "firstNightReminder": "",
         "otherNight": 19,
         "otherNightReminder": "If the Scarlet Woman became the Demon today: Show the 'You are' card, then the demon token.",
-        "reminders": ["Demon"],
+        "reminders": ["Is the Demon"],
         "setup": false,
         "ability": "If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don\u2019t count)"
     },
@@ -295,7 +295,7 @@
         "firstNightReminder": "The Bureaucrat points to a player. Put the Bureaucrat's '3 votes' reminder by the chosen player's character token.",
         "otherNight": 1,
         "otherNightReminder": "The Bureaucrat points to a player. Put the Bureaucrat's '3 votes' reminder by the chosen player's character token.",
-        "reminders": ["3 votes"],
+        "reminders": ["3 Votes"],
         "setup": false,
         "ability": "Each night, choose a player (not yourself): their vote counts as 3 votes tomorrow."
     },
@@ -308,7 +308,7 @@
         "firstNightReminder": "The Thief points to a player. Put the Thief's 'Negative vote' reminder by the chosen player's character token.",
         "otherNight": 1,
         "otherNightReminder": "The Thief points to a player. Put the Thief's 'Negative vote' reminder by the chosen player's character token.",
-        "reminders": ["Negative vote"],
+        "reminders": ["-1 Vote"],
         "setup": false,
         "ability": "Each night, choose a player (not yourself): their vote counts negatively tomorrow."
     },
@@ -451,7 +451,7 @@
         "firstNightReminder": "The Courtier either shows a 'no' head signal, or points to a character on the sheet. If the Courtier used their ability: If that character is in play, that player is drunk.",
         "otherNight": 8,
         "otherNightReminder": "Reduce the remaining number of days the marked player is poisoned. If the Courtier has not yet used their ability: The Courtier either shows a 'no' head signal, or points to a character on the sheet. If the Courtier used their ability: If that character is in play, that player is drunk.",
-        "reminders": ["Drunk 3", "Drunk 2", "Drunk 1", "No ability"],
+        "reminders": ["Drunk 3", "Drunk 2", "Drunk 1", "No Ability"],
         "setup": false,
         "ability": "Once per game, at night, choose a character: they are drunk for 3 nights & 3 days."
     },
@@ -464,7 +464,7 @@
         "firstNightReminder": "",
         "otherNight": 43,
         "otherNightReminder": "If the Professor has not used their ability: The Professor either shakes their head no, or points to a player. If that player is a Townsfolk, they are now alive.",
-        "reminders": ["Alive", "No ability"],
+        "reminders": ["Alive", "No Ability"],
         "setup": false,
         "ability": "Once per game, at night*, choose a dead player: if they are a Townsfolk, they are resurrected."
     },
@@ -516,7 +516,7 @@
         "firstNightReminder": "",
         "otherNight": 0,
         "otherNightReminder": "",
-        "reminders": ["No ability"],
+        "reminders": ["No Ability"],
         "setup": false,
         "ability": "The first time you die, you don't."
     },
@@ -607,7 +607,7 @@
         "firstNightReminder": "",
         "otherNight": 36,
         "otherNightReminder": "If the Assassin has not yet used their ability: The Assassin either shows the 'no' head signal, or points to a player. That player dies.",
-        "reminders": ["Dead", "No ability"],
+        "reminders": ["Dead", "No Ability"],
         "setup": false,
         "ability": "Once per game, at night*, choose a player: they die, even if for some reason they could not."
     },
@@ -711,7 +711,7 @@
         "firstNightReminder": "",
         "otherNight": 0,
         "otherNightReminder": "",
-        "reminders": ["No ability"],
+        "reminders": ["No Ability"],
         "setup": false,
         "ability": "Once per game, if another player nominated, you may choose to force the current execution to pass or fail."
     },
@@ -854,7 +854,7 @@
         "firstNightReminder": "The Seamstress either shows a 'no' head signal, or points to two other players. If the Seamstress chose players , nod 'yes' or shake 'no' for whether they are of same alignment.",
         "otherNight": 60,
         "otherNightReminder": "If the Seamstress has not yet used their ability: the Seamstress either shows a 'no' head signal, or points to two other players. If the Seamstress chose players , nod 'yes' or shake 'no' for whether they are of same alignment.",
-        "reminders": ["No ability"],
+        "reminders": ["No Ability"],
         "setup": false,
         "ability": "Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment."
     },
@@ -880,7 +880,7 @@
         "firstNightReminder": "",
         "otherNight": 0,
         "otherNightReminder": "",
-        "reminders": ["No ability"],
+        "reminders": ["No Ability"],
         "setup": false,
         "ability": "Once per game, during the day, privately ask the Storyteller any yes/no question."
     },
@@ -1114,7 +1114,7 @@
         "firstNightReminder": "",
         "otherNight": 1,
         "otherNightReminder": "The Bone Collector either shakes their head no or points at any dead player. If they pointed at any dead player, put the Bone Collector's 'Has Ability' reminder by the chosen player's character token. (They may need to be woken tonight to use it.)",
-        "reminders": ["No ability", "Has ability"],
+        "reminders": ["No Ability", "Has ability"],
         "setup": false,
         "ability": "Once per game, at night, choose a dead player: they regain their ability until dusk."
     },
@@ -1270,7 +1270,7 @@
         "firstNightReminder": "The Nightwatchman may point to a player. Wake that player, show the 'This character selected you' card and the Nightwatchman token, then point to the Nightwatchman player.",
         "otherNight": 65,
         "otherNightReminder": "The Nightwatchman may point to a player. Wake that player, show the 'This character selected you' card and the Nightwatchman token, then point to the Nightwatchman player.",
-        "reminders": ["No ability"],
+        "reminders": ["No Ability"],
         "setup": false,
         "ability": "Once per game, at night, choose a player: they learn who you are."
     },
@@ -1283,7 +1283,7 @@
         "firstNightReminder": "The Engineer shows a 'no' head signal, or points to a Demon or points to the relevant number of Minions. If the Engineer chose characters, replace the Demon or Minions with the choices, then wake the relevant players and show them the You are card and the relevant character tokens.",
         "otherNight": 5,
         "otherNightReminder": "The Engineer shows a 'no' head signal, or points to a Demon or points to the relevant number of Minions. If the Engineer chose characters, replace the Demon or Minions with the choices, then wake the relevant players and show them the 'You are' card and the relevant character tokens.",
-        "reminders": ["No ability"],
+        "reminders": ["No Ability"],
         "setup": false,
         "ability": "Once per game, at night, choose which Minions or which Demon is in play."
     },
@@ -1296,7 +1296,7 @@
         "firstNightReminder": "",
         "otherNight": 0,
         "otherNightReminder": "",
-        "reminders": ["No ability"],
+        "reminders": ["No Ability"],
         "setup": false,
         "ability": "Once per game, during the day, visit the Storyteller for some advice to help you win."
     },
@@ -1309,7 +1309,7 @@
         "firstNightReminder": "The Huntsman shakes their head 'no' or points to a player. If they point to the Damsel, wake that player, show the 'You are' card and a not-in-play character token.",
         "otherNight": 45,
         "otherNightReminder": "The Huntsman shakes their head 'no' or points to a player. If they point to the Damsel, wake that player, show the 'You are' card and a not-in-play character token.",
-        "reminders": ["No ability"],
+        "reminders": ["No Ability"],
         "setup": true,
         "ability": "Once per game, at night, choose a living player: the Damsel, if chosen, becomes a not-in-play Townsfolk. [+the Damsel]"
     },
@@ -1558,7 +1558,7 @@
         "firstNightReminder": "Show the Mephit their secret word.",
         "otherNight": 18,
         "otherNightReminder": "Wake the 1st good player that said the Mephit's secret word and show them the 'You are' card and the thumbs down evil signal.",
-        "reminders": ["Turns evil", "No ability"],
+        "reminders": ["Turns evil", "No Ability"],
         "setup": false,
         "ability": "You start knowing a secret word. The 1st good player to say this word becomes evil that night."
     },
@@ -1571,7 +1571,7 @@
         "firstNightReminder": "Show the Mezepheles their secret word.",
         "otherNight": 18,
         "otherNightReminder": "Wake the 1st good player that said the Mezepheles' secret word and show them the 'You are' card and the thumbs down evil signal.",
-        "reminders": ["Turns evil", "No ability"],
+        "reminders": ["Turns evil", "No Ability"],
         "setup": false,
         "ability": "You start knowing a secret word. The 1st good player to say this word becomes evil that night."
     },

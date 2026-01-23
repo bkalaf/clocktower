@@ -12,7 +12,7 @@ Key Findings (Issues & Gaps)
    The Grimoire UI exists but is only mounted under a demo route (/demo/grimoire), not a real game/room page.
    The Script dropdown expects roomId to be supplied via query params, but there’s no routing structure enforcing a room/game context (e.g., /rooms/:id), and it uses a custom hook that is detached from TanStack Router’s state.
 4. State machines exist but are not connected to UI or server flow
-   The AppShell, RoomMachine, and MatchMachine state machines are fully defined but not referenced by any client or server integration code. They are currently inert and won’t drive UI or game logic without wiring.
+   The AppShell, RoomMachine, and GameMachine state machines are fully defined but not referenced by any client or server integration code. They are currently inert and won’t drive UI or game logic without wiring.
 5. Naming mismatch: “room”, “game”, and “match” are used inconsistently
    API routes and data models interchange “rooms,” “games,” and “matches” (e.g., /api/rooms uses GameModel, but match-specific endpoints live under /api/matches). This will make it harder to align with the desired “game” nomenclature and user-facing UI labels.
 6. User model does not support profile + stats requirements
@@ -38,7 +38,7 @@ Key Findings (Issues & Gaps)
    Build lobby UI with search (by username/email) and room list cards.
    Add user search endpoints and extend user schema to include username and displayName (rename name → displayName).
 4) Hook the Room/Game page to core UI + state machines
-   Wire RoomMachine/MatchMachine into UI state and realtime updates (websocket + API events).
+   Wire RoomMachine/GameMachine into UI state and realtime updates (websocket + API events).
    Use router params instead of useRoomParams so room state is derived from route structure, not query strings.
    Move GrimoireBoard from the demo route into the real room/game page view.
 5) Profile + stats model
@@ -71,8 +71,8 @@ Key Findings (Issues & Gaps)
    ls src/machines
    AppShell.ts
    RoomMachine.ts
-   MatchMachine.ts
-   rg "MatchMachine|RoomMachine|AppShell" -n src
+   GameMachine.ts
+   rg "GameMachine|RoomMachine|AppShell" -n src
    rg "serverFns|\\$game|\\$user|\\$session|\\$whisper|\\$gameMember|\\$chatItem" -n src
    useAuthUser.ts
    whoAmI.ts
@@ -294,3 +294,5 @@ Your bindings already support this cleanly.
 ✔ Zod eliminates patch whitelists and input footguns
 
 At this point, your API layer is boringly correct, which is exactly what you want before adding clever AI storytellers on top of it.
+
+

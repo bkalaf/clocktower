@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 import { createActor, type ActorRefFrom } from 'xstate';
 import { publish } from '@/server/realtime/publish';
 import { $keys } from '@/keys';
-import { GameMachine, type GameEvents, type GameMachineWsEvent } from '@/machines/GameMachine';
+import { GameMachine, type GameEvents, type GameMachineWsEvent } from '@/server/machines/GameMachine';
 import { GameRoles, StorytellerMode, AppEvents } from '@/types/game';
 
 const actors = new Map<string, ActorRefFrom<typeof GameMachine>>();

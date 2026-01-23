@@ -1,56 +1,48 @@
-import type { ActorRefFrom } from 'xstate';
-import { machine as roomMachine } from '@/machines/RoomMachine';
+// src/server/persistence/snapshotToDoc.ts
+import { ActorRefFrom } from 'xstate';
+import { createRoomMachine } from '../machines/RoomMachine';
 
-export type RoomSnapshotUpsertArgs = {
-    _id: string;
-    allowTravellers: boolean;
-    banner: string;
-    connectedUserIds: string[];
-    endedAt?: Date;
-    hostUserId: string;
-    maxPlayers: PcPlayerCount;
-    minPlayers: PcPlayerCount;
-    maxTravellers: PcTravellerCount;
-    plannedStartTime?: Date;
-    scriptId?: string;
-    skillLevel?: SkillLevel;
-    speed: GameSpeed;
-    visibility: RoomVisibility;
-    acceptingPlayers: boolean;
-    currentMatchId?: string;
-    readyByUserId: Record<string, boolean>;
-    storytellerMode: StorytellerMode;
-    stateValue: unknown;
-    persistedSnapshot?: unknown;
-};
-
-export function snapshotToUpsertArgs(actor: ActorRefFrom<typeof roomMachine>): RoomSnapshotUpsertArgs {
-    const snap = actor.getSnapshot();
-    const context = snap.context;
+/**
+ * Convert a running RoomMachine actor into the flattened persistence shape.
+ * Assumes the actor snapshot context includes:
+ *   context.room (Room)
+ *   context.acceptingPlayers
+ *   context.currentMatchId
+ *   context.readyByUserId
+ *   context.storytellerMode
+ */
+export function snapshotToUpsertArgs(actor: ActorRefFrom<typeof createRoomMachine>): UpsertRoomArgs {
+    const snap = actor.getSnapshot() as RoomSnapshotPayload;
+    const r = snap.context.room;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const persistedSnapshot = actor.getPersistedSnapshot() as any as RoomSnapshotPayload;
 
     return {
-        _id: context._id,
-        allowTravellers: context.allowTravellers,
-        banner: context.banner,
-        connectedUserIds:
-            Array.isArray(context.connectedUserIds) ?
-                context.connectedUserIds
-            :   Array.from(context.connectedUserIds ?? []),
-        endedAt: context.endedAt,
-        hostUserId: context.hostUserId,
-        maxPlayers: context.maxPlayers,
-        minPlayers: context.minPlayers,
-        maxTravellers: context.maxTravellers,
-        plannedStartTime: context.plannedStartTime,
-        scriptId: context.scriptId,
-        skillLevel: context.skillLevel,
-        speed: context.speed,
-        visibility: context.visibility,
-        acceptingPlayers: context.acceptingPlayers,
-        currentMatchId: context.currentMatchId,
-        readyByUserId: context.readyByUserId ?? {},
-        storytellerMode: context.storytellerMode,
+        _id: r._id,
+
+        // Room fields
+        allowTravellers: r.allowTravellers,
+        banner: r.banner,
+        connectedUserIds: r.connectedUserIds ?? {},
+        endedAt: r.endedAt,
+        hostUserId: r.hostUserId,
+        maxPlayers: r.maxPlayers,
+        minPlayers: r.minPlayers,
+        maxTravellers: r.maxTravellers,
+        plannedStartTime: r.plannedStartTime,
+        scriptId: r.scriptId,
+        skillLevel: r.skillLevel,
+        speed: r.speed,
+        visibility: r.visibility,
+
+        // Extras
+        acceptingPlayers: snap.context.acceptingPlayers,
+        currentMatchId: snap.context.currentMatchId,
+        readyByUserId: snap.context.readyByUserId ?? {},
+        storytellerMode: snap.context.storytellerMode,
+
+        // Snapshot metadata
         stateValue: snap.value,
-        persistedSnapshot: actor.getPersistedSnapshot() ?? null
+        persistedSnapshot
     };
 }

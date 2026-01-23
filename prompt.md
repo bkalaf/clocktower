@@ -388,309 +388,130 @@ on START_TASKS it should
 if (tasks.length === 0) move to empty
 move to running
 
-Property 'id' does not exist on type '{ _id: string; name: string; author: string; description: string; skillLevel: string; roles: string[]; isOfficial: boolean; isPlayable: boolean; } | { _id: string; name: string; author: string; description: string; skillLevel: string; roles: string[]; isPlayable: boolean; isOfficial?: undefined; }'.
-Property 'level' does not exist on type '{ _id: string; name: string; author: string; description: string; skillLevel: string; roles: string[]; isOfficial: boolean; isPlayable: boolean; } | { _id: string; name: string; author: string; description: string; skillLevel: string; roles: string[]; isPlayable: boolean; isOfficial?: undefined; }'.
-Property 'id' does not exist on type '{ _id: string; name: string; author: string; description: string; skillLevel: string; roles: string[]; isOfficial: boolean; isPlayable: boolean; } | { _id: string; name: string; author: string; description: string; skillLevel: string; roles: string[]; isPlayable: boolean; isOfficial?: undefined; }'.
-Type '"xs"' is not assignable to type '"default" | "sm" | "lg" | "icon" | "icon-sm" | "icon-lg" | null | undefined'.
-Module '"lucide-react"' has no exported member 'Heartbeat'.
-Module '"lucide-react"' has no exported member 'VoteYea'.
-Property 'id' does not exist on type '{ _id: string; name: string; author: string; description: string; skillLevel: string; roles: string[]; isOfficial: boolean; isPlayable: boolean; } | { _id: string; name: string; author: string; description: string; skillLevel: string; roles: string[]; isPlayable: boolean; isOfficial?: undefined; }'.
-  Property 'id' does not exist on type '{ _id: string; name: string; author: string; description: string; skillLevel: string; roles: string[]; isOfficial: boolean; isPlayable: boolean; }'.
-'session' is declared but its value is never read.
-'language' is declared but its value is never read.
-Type '(kind: TownSquareModalKind) => void' is not assignable to type '(modal: string) => void'.
-Module '"lucide-react"' has no exported member 'VoteYea'.
-'player' is declared but its value is never read.
-Argument of type '{ timestamp: number; nominator: string; nominee: string; type: string; majority: number; votes: string[]; }' is not assignable to parameter of type '{ timestamp: number; nominator: string; nominee: string; type: "execution" | "exile"; majority: number; votes: string[]; }'.
-Property 'PanelGroup' does not exist on type 'typeof import("/home/bobby/clocktower/node_modules/react-resizable-panels/dist/react-resizable-panels")'.
-Property 'PanelGroup' does not exist on type 'typeof import("/home/bobby/clocktower/node_modules/react-resizable-panels/dist/react-resizable-panels")'.
-Property 'PanelResizeHandle' does not exist on type 'typeof import("/home/bobby/clocktower/node_modules/react-resizable-panels/dist/react-resizable-panels")'.
-Property 'PanelResizeHandle' does not exist on type 'typeof import("/home/bobby/clocktower/node_modules/react-resizable-panels/dist/react-resizable-panels")'.
-Property 'PanelResizeHandle' does not exist on type 'typeof import("/home/bobby/clocktower/node_modules/react-resizable-panels/dist/react-resizable-panels")'.
-Cannot redeclare block-scoped variable 'connectMock'.
-'enums' is declared but its value is never read.
-'zodToJSONSchema' is declared but its value is never read.
-'jsonSchemaToMongoose' is declared but its value is never read.
-'zWhisperId' is declared but its value is never read.
-'zPCPlayerCount' is declared but its value is never read.
-'obj' is declared but its value is never read.
-'name' is declared but its value is never read.
-Object literal may only specify known properties, and 'roomId' does not exist in type '{ unique?: boolean | undefined; sparse?: boolean | undefined; expireAfterSeconds?: number | undefined; }'.
-Type '<TContext extends MachineContext, TExpressionEvent extends AnyEventObject, TParams extends ParameterizedObject["params"] | undefined, TEvent extends EventObject, TActor extends ProvidedActor>(assignment: Assigner<LowInfer<TContext>, TExpressionEvent, TParams, TEvent, TActor> | PropertyAssigner<...>) => ActionFunctio...' has no signatures for which the type argument list is applicable.
-Object literal may only specify known properties, and 'payload' does not exist in type 'EventObject'.
-This expression is not callable.
-  Type '{}' has no call signatures.
-Parameter '_' implicitly has an 'any' type.
-Parameter 'event' implicitly has an 'any' type.
-This expression is not callable.
-  Type '{}' has no call signatures.
-Parameter 'context' implicitly has an 'any' type.
-Parameter 'event' implicitly has an 'any' type.
-This expression is not callable.
-  Type '{}' has no call signatures.
-This expression is not callable.
-  Type '{}' has no call signatures.
-Parameter 'context' implicitly has an 'any' type.
-Generic type 'ActionArgs<TContext, TExpressionEvent, TEvent>' requires 3 type argument(s).
-Generic type 'ActionArgs<TContext, TExpressionEvent, TEvent>' requires 3 type argument(s).
-Generic type 'ActionArgs<TContext, TExpressionEvent, TEvent>' requires 3 type argument(s).
-Generic type 'ActionArgs<TContext, TExpressionEvent, TEvent>' requires 3 type argument(s).
-Generic type 'ActionArgs<TContext, TExpressionEvent, TEvent>' requires 3 type argument(s).
-This expression is not callable.
-  Type '{}' has no call signatures.
-Parameter 'context' implicitly has an 'any' type.
-Parameter 'event' implicitly has an 'any' type.
-This expression is not callable.
-  Type '{}' has no call signatures.
-This expression is not callable.
-  Type '{}' has no call signatures.
-This expression is not callable.
-  Type '{}' has no call signatures.
-Parameter 'context' implicitly has an 'any' type.
-Parameter 'event' implicitly has an 'any' type.
-Parameter 'id' implicitly has an 'any' type.
-Parameter 'id' implicitly has an 'any' type.
-Generic type 'ActionArgs<TContext, TExpressionEvent, TEvent>' requires 3 type argument(s).
-This expression is not callable.
-  Type '{}' has no call signatures.
-Parameter 'context' implicitly has an 'any' type.
-'seat' is of type 'unknown'.
-'seat' is of type 'unknown'.
-'seat' is of type 'unknown'.
-This expression is not callable.
-  Type '{}' has no call signatures.
-Parameter 'context' implicitly has an 'any' type.
-Parameter 'event' implicitly has an 'any' type.
-Parameter 'userId' implicitly has an 'any' type.
-This expression is not callable.
-  Type '{}' has no call signatures.
-Generic type 'ActionArgs<TContext, TExpressionEvent, TEvent>' requires 3 type argument(s).
-Generic type 'ActionArgs<TContext, TExpressionEvent, TEvent>' requires 3 type argument(s).
-This expression is not callable.
-  Type '{}' has no call signatures.
-Parameter 'context' implicitly has an 'any' type.
-Parameter 'id' implicitly has an 'any' type.
-This expression is not callable.
-  Type '{}' has no call signatures.
-Parameter 'context' implicitly has an 'any' type.
-Parameter 'id' implicitly has an 'any' type.
-This expression is not callable.
-  Type '{}' has no call signatures.
-This expression is not callable.
-  Type '{}' has no call signatures.
-Parameter 'context' implicitly has an 'any' type.
-Parameter 'id' implicitly has an 'any' type.
-Property 'setupArgs' does not exist on type '{ context: GameContext; event: { type: "SETUP_COMPLETE"; payload: Partial<GameContext>; } | { type: "END_GAME"; } | { type: "END_REVEAL"; } | { type: "EXECUTION"; } | ... 15 more ... | { ...; }; self: ActorRef<...>; }'.
-Property 'nomination' does not exist on type 'ActionArgs<GameContext, { type: "SETUP_COMPLETE"; payload: Partial<GameContext>; } | { type: "END_GAME"; } | { type: "END_REVEAL"; } | { type: "EXECUTION"; } | ... 15 more ... | { ...; }, { ...; } | ... 18 more ... | { ...; }>'.
-Property 'nomination' does not exist on type 'ActionArgs<GameContext, { type: "SETUP_COMPLETE"; payload: Partial<GameContext>; } | { type: "END_GAME"; } | { type: "END_REVEAL"; } | { type: "EXECUTION"; } | ... 15 more ... | { ...; }, { ...; } | ... 18 more ... | { ...; }>'.
-Property 'nomination' does not exist on type 'ActionArgs<GameContext, { type: "SETUP_COMPLETE"; payload: Partial<GameContext>; } | { type: "END_GAME"; } | { type: "END_REVEAL"; } | { type: "EXECUTION"; } | ... 15 more ... | { ...; }, { ...; } | ... 18 more ... | { ...; }>'.
-Property 'nomination' does not exist on type 'ActionArgs<GameContext, { type: "SETUP_COMPLETE"; payload: Partial<GameContext>; } | { type: "END_GAME"; } | { type: "END_REVEAL"; } | { type: "EXECUTION"; } | ... 15 more ... | { ...; }, { ...; } | ... 18 more ... | { ...; }>'.
-Export declaration conflicts with exported declaration of 'GameMachineWsEvent'.
-Property 'aliveById' does not exist on type 'MatchContext'.
-'event' is possibly 'null' or 'undefined'.
-Property 'type' does not exist on type '{}'.
-'event' is possibly 'null' or 'undefined'.
-Property 'payload' does not exist on type '{}'.
-'event' is possibly 'null' or 'undefined'.
-Property 'type' does not exist on type '{}'.
-'event' is possibly 'null' or 'undefined'.
-Property 'payload' does not exist on type '{}'.
-Property 'dayNumber' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-Property 'nominationsOpen' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-Property 'breakoutWhispersEnabled' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-Property 'playerSeatMap' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-Property 'aliveById' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-Property 'isTravelerById' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-Property 'ghostVoteAvailableById' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-Property 'voteHistory' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-Property 'onTheBlock' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-Property 'roomId' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-Property 'scriptId' does not exist on type 'AssignArgs<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, { ...; } | ... 16 more ... | { ...; }, never>'.
-All destructured elements are unused.
-'params' is declared but its value is never read.
-All destructured elements are unused.
-'params' is declared but its value is never read.
-All destructured elements are unused.
-'params' is declared but its value is never read.
-All destructured elements are unused.
-'params' is declared but its value is never read.
-'context' is declared but its value is never read.
-This comparison appears to be unintentional because the types 'VoteChoice' and '"abstain"' have no overlap.
-'event' is declared but its value is never read.
-'params' is declared but its value is never read.
-All destructured elements are unused.
-All destructured elements are unused.
-All destructured elements are unused.
-Type '{ actions: string; }' is not assignable to type 'TransitionConfigOrTarget<MatchContext, { type: "MATCH_DATA_LOADED"; payload: { _id: string; roomId: string; status: "setup" | "in_progress" | "reveal" | "complete"; phase: "night" | "day"; subphase: "day.dawn_announcements" | ... 7 more ... | "night.resolve_night_order"; ... 14 more ...; voteHistory?: { ...; }[] | ....'.
-Type '{ actions: string; }' is not assignable to type 'TransitionConfigOrTarget<MatchContext, { type: "MATCH_PHASE_CHANGED"; payload: MatchPhasePayload; }, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { ...; } | ... 13 more ... | { ...; }, ... 5 more ..., MetaObject>'.
-Type '{ actions: string; }' is not assignable to type 'TransitionConfigOrTarget<MatchContext, { type: "MATCH_RESET"; }, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | ... 12 more ... | { ...; }, ... 5 more ..., MetaObject>'.
-Type 'string' is not assignable to type 'Actions<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, ... 6 more ..., EventObject> | undefined'.
-Type '{ target: string; guard: { type: "canNominateAndBeNominated"; }; actions: { type: string; }; }' is not assignable to type 'TransitionConfigOrTarget<MatchContext, { type: "NOMINATION_ATTEMPTED"; payload: { nominatorId: string; nomineeId: string; nominationType: NominationType; }; }, { type: "DAWN"; } | ... 16 more ... | { ...; }, ... 5 more ..., MetaObject>'.
-Type '{ actions: { type: string; }; guard: { type: "canVote"; }; }' is not assignable to type 'TransitionConfigOrTarget<MatchContext, { type: "VOTE_CAST"; payload: { voterId: string; choice: VoteChoice; }; }, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { ...; } | ... 13 more ... | { ...; }, ... 5 more ..., MetaObject>'.
-Type 'string' is not assignable to type 'ActionFunction<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, ... 6 more ..., EventObject>'.
-Type 'string' is not assignable to type 'ActionFunction<MatchContext, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | { type: "OPEN_NOMINATIONS"; } | { type: "CLOSE_NOMINATIONS"; } | ... 11 more ... | { ...; }, ... 6 more ..., EventObject>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'Actions<MatchContext, { type: "TRAVELER_REQUESTED"; requestId: string; userId: string; }, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | ... 13 more ... | { ...; }, ... 5 more ..., EventObject>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'Actions<MatchContext, { type: "TRAVELER_REQUESTED"; requestId: string; userId: string; }, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | ... 13 more ... | { ...; }, ... 5 more ..., EventObject>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'Actions<MatchContext, { type: "DECIDE_TRAVELER"; requestId: string; decision: string; characterRole: string; }, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | ... 14 more ... | { ...; }, ... 5 more ..., EventObject>'.
-Type '{ target: string; actions: { type: string; params: { requestId: string; }; }; }' is not assignable to type 'TransitionConfigOrTarget<MatchContext, { type: "TRAVELER_REQUESTED"; requestId: string; userId: string; }, { type: "DAWN"; } | { type: "DUSK"; } | { type: "CLOCKTOWER_GONG"; } | { type: "REVEAL_COMPLETE"; } | ... 13 more ... | { ...; }, ... 5 more ..., MetaObject>'.
-'createMachine' is declared but its value is never read.
-'MatchStatus' is declared but never used.
-'RoomStatus' is declared but never used.
-Argument of type '({ context, event }: AssignArgs<RoomContext, RoomEvents>) => { hostUserId: any; } | undefined' is not assignable to parameter of type 'Assigner<RoomContext, { type: "OPEN_ROOM"; } | { type: "CLOSE_ROOM"; } | { type: "MATCH_ENDED"; } | { type: "START_MATCH"; } | { type: "ARCHIVE_ROOM"; } | { type: "CONDITION_MET"; } | ... 13 more ... | { ...; }, unknown, { ...; } | ... 18 more ... | { ...; }, never> | PropertyAssigner<...>'.
-'context' is declared but its value is never read.
-Generic type 'AssignArgs<TContext, TExpressionEvent, TEvent, TActor>' requires 4 type argument(s).
-'context' is declared but its value is never read.
-Property 'status' does not exist on type '{ _id: string; allowTravellers: boolean; banner: string; connectedUserIds: string[]; hostUserId: string; maxPlayers: 13 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 15; maxTravellers: 0 | 2 | 1 | 5 | 3 | 4; ... 7 more ...; scriptId?: string | undefined; }'.
-'context' is declared but its value is never read.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-Property 'readyByUserId' does not exist on type 'AssignArgs<RoomContext, { type: "OPEN_ROOM"; } | { type: "CLOSE_ROOM"; } | { type: "MATCH_ENDED"; } | { type: "START_MATCH"; } | { type: "ARCHIVE_ROOM"; } | { type: "CONDITION_MET"; } | { ...; } | ... 12 more ... | { ...; }, { ...; } | ... 18 more ... | { ...; }, never>'.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-Argument of type '(_: AssignArgs<RoomContext, { type: "OPEN_ROOM"; } | { type: "CLOSE_ROOM"; } | { type: "MATCH_ENDED"; } | { type: "START_MATCH"; } | { type: "ARCHIVE_ROOM"; } | { type: "CONDITION_MET"; } | ... 13 more ... | { ...; }, { ...; } | ... 18 more ... | { ...; }, never>, event: unknown) => { ...; } | { ...; }' is not assignable to parameter of type 'Assigner<RoomContext, { type: "OPEN_ROOM"; } | { type: "CLOSE_ROOM"; } | { type: "MATCH_ENDED"; } | { type: "START_MATCH"; } | { type: "ARCHIVE_ROOM"; } | { type: "CONDITION_MET"; } | ... 13 more ... | { ...; }, unknown, { ...; } | ... 18 more ... | { ...; }, never> | PropertyAssigner<...>'.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-Argument of type '() => { hostGrace: null; }' is not assignable to parameter of type 'Assigner<RoomContext, { type: "OPEN_ROOM"; } | { type: "CLOSE_ROOM"; } | { type: "MATCH_ENDED"; } | { type: "START_MATCH"; } | { type: "ARCHIVE_ROOM"; } | { type: "CONDITION_MET"; } | ... 13 more ... | { ...; }, unknown, { ...; } | ... 18 more ... | { ...; }, never> | PropertyAssigner<...>'.
-'context' is declared but its value is never read.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-'event' is of type 'unknown'.
-Property 'dayNumber' does not exist on type 'AssignArgs<RoomContext, { type: "OPEN_ROOM"; } | { type: "CLOSE_ROOM"; } | { type: "MATCH_ENDED"; } | { type: "START_MATCH"; } | { type: "ARCHIVE_ROOM"; } | { type: "CONDITION_MET"; } | { ...; } | ... 12 more ... | { ...; }, { ...; } | ... 18 more ... | { ...; }, never>'.
-'event' is of type 'unknown'.
-Property 'nominationsOpen' does not exist on type 'AssignArgs<RoomContext, { type: "OPEN_ROOM"; } | { type: "CLOSE_ROOM"; } | { type: "MATCH_ENDED"; } | { type: "START_MATCH"; } | { type: "ARCHIVE_ROOM"; } | { type: "CONDITION_MET"; } | { ...; } | ... 12 more ... | { ...; }, { ...; } | ... 18 more ... | { ...; }, never>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'TransitionConfig<RoomContext, { type: "ROOM_UPDATED"; payload: RoomUpdatePayload; }, { type: "OPEN_ROOM"; } | { type: "CLOSE_ROOM"; } | { type: "MATCH_ENDED"; } | { type: "START_MATCH"; } | ... 15 more ... | { ...; }, ... 5 more ..., MetaObject>'.
-'context' is declared but its value is never read.
-Binding element 'context' implicitly has an 'any' type.
-Cannot redeclare block-scoped variable 'connectMock'.
-'useMemo' is declared but its value is never read.
-'redirect' is declared but its value is never read.
-'useSession' is declared but its value is never read.
-'data' is declared but its value is never read.
-Cannot find name 'zAuthUser'.
-Property 'makeReadyInput' does not exist on type '{ gameMember: { schema: Schema<{ role: "player" | "storyteller" | "spectator"; isSeated: boolean; _id: string; gameId: string; userId: string; joinedAt: Date; }, Model<{ role: "player" | "storyteller" | "spectator"; ... 4 more ...; joinedAt: Date; }, ... 5 more ..., { ...; }>, ... 8 more ..., { ...; }>; model: Model...'.
-'isReady' is declared but its value is never read.
-'$params' is declared but its value is never read.
-Cannot find name 'gameId'. Did you mean 'zGameId'?
-Cannot find name 'gameId'. Did you mean 'zGameId'?
-Property 'data' does not exist on type 'ParseErr | ParseOk<{ gameId: string; isReady: boolean; }>'.
-Cannot find name 'gameId'. Did you mean 'zGameId'?
-Property 'data' does not exist on type 'ParseErr | ParseOk<{ gameId: string; isReady: boolean; }>'.
-Cannot find name 'gameId'. Did you mean 'zGameId'?
-'request' is declared but its value is never read.
-Cannot find name 'getUserFromCookie'.
-Cannot find name 'requireRole'.
-Cannot find name 'created'.
-Type '() => Promise<Result<{ ok: boolean; }>>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/invites/$inviteId/accept", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/invites/$inviteId/cancel", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/invites/$inviteId/reject", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/matches/$matchId", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params, request }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/matches/$matchId/phase", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Conversion of type '{ day: number; nominationType: "execution" | "exile"; nominatorId: string; nomineeId: string; votesFor: number; threshold: number; passed: boolean; votes: { voterId: string; choice: "yes" | "no" | "abstain"; usedGhost?: boolean | undefined; }[]; ts: Date; }[]' to type 'VoteHistoryRecord[]' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
-Type '({ params, request }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/matches/$matchId/travel-approve", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params, request }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/matches/$matchId/travel-deny", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params, request }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/matches/$matchId/travel-request", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/rooms/$roomId", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params, request }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/rooms/$roomId/invites", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/rooms/$roomId/match", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Type '({ params, request }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/rooms/$roomId/script", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Property 'scriptId' does not exist on type '{ _id: string; skillLevel: "beginner" | "intermediate" | "advanced" | "expert" | "veteran"; roles: ("gardener" | "bootlegger" | "spiritofivory" | "sentinel" | "fibbin" | "imp" | ... 25 more ... | "scapegoat")[]; name: string; isOfficial: boolean; edition?: "tb" | ... 3 more ... | undefined; } & Required<...> & { ......'.
-Property 'scriptId' does not exist on type '{ _id: string; skillLevel: "beginner" | "intermediate" | "advanced" | "expert" | "veteran"; roles: ("gardener" | "bootlegger" | "spiritofivory" | "sentinel" | "fibbin" | "imp" | ... 25 more ... | "scapegoat")[]; name: string; isOfficial: boolean; edition?: "tb" | ... 3 more ... | undefined; } & Required<...> & { ......'.
-Module '"../../../../types/game"' has no exported member 'StorytellerMode'.
-Type '({ params }: RouteMethodHandlerCtx<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, ... 7 more ..., undefined>, "/api/rooms/$roomId/start-match", ResolveParams<...>, unknown, any>) => Promise<...>' is not assignable to type 'RouteMethodHandlerFn<Register, RootRoute<Register, (search: Record<string, unknown>) => RootSearch, MyRouterContext, AnyContext, AnyContext, ... 6 more ..., undefined>, ... 4 more ..., any>'.
-Property 'maxPlayers' does not exist on type '{ _id: string; version: number; snapshot: any; hostUserId: string; status: "open" | "closed" | "in_match" | "archived"; scriptId: string; allowTravelers: boolean; visibility: "public" | "private"; endedAt: Date; lobbySettings?: { ...; } | ... 1 more ... | undefined; } & Required<...> & { ...; }'.
-Argument of type 'string | null | undefined' is not assignable to parameter of type 'string'.
-No overload matches this call.
-No overload matches this call.
-Property 'lobbySettings' does not exist on type '{ visibility: "public" | "private"; status: "open" | "closed" | "in_match" | "archived"; minPlayers: 13 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 15; maxPlayers: 13 | 5 | 6 | 7 | 8 | 9 | ... 4 more ... | 15; ... 6 more ...; hostUserId?: string | ... 1 more ... | undefined; }'.
-Property 'room' does not exist on type 'RoomContext'.
-Property 'roomId' does not exist on type 'RoomContext'.
-Property 'status' does not exist on type 'RoomContext'.
-Property 'allowTravelers' does not exist on type 'RoomContext'. Did you mean 'allowTravellers'?
-Property 'travelerUserIds' does not exist on type 'MatchContext'.
-'zGameId' is declared but its value is never read.
-'zUserId' is declared but its value is never read.
-'zSessionId' is declared but its value is never read.
-'zTopicId' is declared but its value is never read.
-'zWhisperId' is declared but its value is never read.
-'zChatItemId' is declared but its value is never read.
-'zGameMemberId' is declared but its value is never read.
-'zScriptId' is declared but its value is never read.
-'zMatchId' is declared but its value is never read.
-'zInviteId' is declared but its value is never read.
-'zTravelerRequestId' is declared but its value is never read.
-Type 'ZodObject<{ edition: ZodOptional<ZodNullable<ZodEnum<{ tb: "tb"; bmr: "bmr"; snv: "snv"; }>>>; skillLevel: ZodOptional<ZodNullable<ZodEnum<{ beginner: "beginner"; intermediate: "intermediate"; advanced: "advanced"; expert: "expert"; veteran: "veteran"; }>>>; roles: ZodOptional<...>; name: ZodOptional<...>; isOfficia...' does not satisfy the constraint 'ZodObject<{ _id: ZodString; }, $strip>'.
-'zNightSubphase' is declared but its value is never read.
-Argument of type '({ data }: ServerFnCtx<Register, undefined, (data: unknown) => { _id: string; gameId: string; topicId: string; ts: number | Date; streamId: string; from: string; name: string; text?: string | null | undefined; }>) => Promise<...>' is not assignable to parameter of type 'ServerFn<Register, "POST", undefined, (data: unknown) => { _id: string; gameId: string; topicId: string; ts: number | Date; streamId: string; from: string; name: string; text?: string | null | undefined; }, Promise<...>>'.
-'data' is declared but its value is never read.
-Cannot find name 'input'. Did you mean 'oninput'?
-Cannot find name 'input'. Did you mean 'oninput'?
-Property 'input' does not exist on type 'ServerFnCtx<Register, undefined, any>'.
-Property 'patch' does not exist on type 'output<TIn>'.
-Property 'input' does not exist on type 'ServerFnCtx<Register, undefined, any>'.
-Cannot find name 'RoomModel'.
-Cannot find name 'RoomDocument'. Did you mean 'Document'?
-'Room' is declared but never used.
-Type 'number' is not assignable to type 'Date'.
-Argument of type '({ data }: ServerFnCtx<Register, undefined, (data: unknown) => { gameId: string; userId: string; }>) => Promise<Result<Document<unknown, {}, { _id?: unknown; gameId?: unknown; userId?: unknown; role?: unknown; joinedAt?: ({ toString?: ({} & Required<...>) | ... 1 more ... | undefined; ... 42 more ...; toISOString?: ...' is not assignable to parameter of type 'ServerFn<Register, "POST", undefined, (data: unknown) => { gameId: string; userId: string; }, Promise<Result<Document<unknown, {}, { _id?: unknown; gameId?: unknown; userId?: unknown; role?: unknown; joinedAt?: ({ toString?: ({} & Required<{ _id: unknown; }>) | null | undefined; ... 42 more ...; toISOString?: ({} & ...'.
-Conversion of type '({ role: "player" | "storyteller" | "spectator"; isSeated: boolean; _id: string; gameId: string; userId: string; joinedAt: Date; } & Required<{ _id: string; }> & { __v: number; }) | null' to type 'Document<unknown, {}, { _id?: unknown; gameId?: unknown; userId?: unknown; role?: unknown; joinedAt?: ({ toString?: ({} & Required<{ _id: unknown; }>) | null | undefined; toLocaleString?: ({} & Required<{ _id: unknown; }>) | null | undefined; ... 41 more ...; toISOString?: ({} & Required<...>) | ... 1 more ... | und...' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
-Module '"@/types/game"' has no exported member 'StorytellerMode'.
-Object literal may only specify known properties, and 'type' does not exist in type 'EventMsg<"st/phaseChanged", void> | EventMsg<"st/setReminderToken", { key: string; sourceId: number; targetId: number; isChanneled: boolean; }> | EventMsg<"st/assignSeat", { ...; }> | ... 12 more ... | EventMsg<...>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'EventMsg<"st/phaseChanged", void> | EventMsg<"st/setReminderToken", { key: string; sourceId: number; targetId: number; isChanneled: boolean; }> | EventMsg<"st/assignSeat", { ...; }> | ... 12 more ... | EventMsg<...>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'EventMsg<"st/phaseChanged", void> | EventMsg<"st/setReminderToken", { key: string; sourceId: number; targetId: number; isChanneled: boolean; }> | EventMsg<"st/assignSeat", { ...; }> | ... 12 more ... | EventMsg<...>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'EventMsg<"st/phaseChanged", void> | EventMsg<"st/setReminderToken", { key: string; sourceId: number; targetId: number; isChanneled: boolean; }> | EventMsg<"st/assignSeat", { ...; }> | ... 12 more ... | EventMsg<...>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'EventMsg<"st/phaseChanged", void> | EventMsg<"st/setReminderToken", { key: string; sourceId: number; targetId: number; isChanneled: boolean; }> | EventMsg<"st/assignSeat", { ...; }> | ... 12 more ... | EventMsg<...>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'EventMsg<"st/phaseChanged", void> | EventMsg<"st/setReminderToken", { key: string; sourceId: number; targetId: number; isChanneled: boolean; }> | EventMsg<"st/assignSeat", { ...; }> | ... 12 more ... | EventMsg<...>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'EventMsg<"st/phaseChanged", void> | EventMsg<"st/setReminderToken", { key: string; sourceId: number; targetId: number; isChanneled: boolean; }> | EventMsg<"st/assignSeat", { ...; }> | ... 12 more ... | EventMsg<...>'.
-Object literal may only specify known properties, and 'type' does not exist in type 'EventMsg<"st/phaseChanged", void> | EventMsg<"st/setReminderToken", { key: string; sourceId: number; targetId: number; isChanneled: boolean; }> | EventMsg<"st/assignSeat", { ...; }> | ... 12 more ... | EventMsg<...>'.
-Property 'event' does not exist on type 'MachineSnapshot<GameContext, { type: "SETUP_COMPLETE"; payload: Partial<GameContext>; } | { type: "END_GAME"; } | { type: "END_REVEAL"; } | { type: "EXECUTION"; } | ... 15 more ... | { ...; }, ... 5 more ..., ToStateSchema<...>>'.
-Argument of type '"gameStatus.complete"' is not assignable to parameter of type '"gameStatus" | "taskQueue" | { gameStatus?: "setup" | "in_progress" | "reveal" | "complete" | { in_progress?: "night" | "day" | { night?: NonNullable<"first_night" | "other_night"> | undefined; day?: "day" | ... 4 more ... | undefined; } | undefined; } | undefined; taskQueue?: NonNullable<...> | undefined; }'.
-Type '{ _id: string; hostUserId: string; status: "open" | "closed" | "in_match" | "archived"; scriptId: string; allowTravelers: boolean; visibility: "public" | "private"; endedAt: string | null; ... 5 more ...; plannedStartTime: string | null; }' is missing the following properties from type '{ _id: string; allowTravellers: boolean; banner: string; maxPlayers: 13 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 15; maxTravellers: 0 | 2 | 1 | 5 | 3 | 4; minPlayers: 13 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 15; ... 8 more ...; speed?: "slow" | ... 2 more ... | undefined; }': allowTravellers, banner, maxTravellers, storytellerUserIds, connectedUserIds
-Property 'status' does not exist on type 'Document<unknown, {}, { _id: string; allowTravellers: boolean; banner: string; connectedUserIds: string[]; hostUserId: string; maxPlayers: 13 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 15; maxTravellers: 0 | ... 4 more ... | 4; ... 7 more ...; scriptId?: string | undefined; }, {}, DefaultSchemaOptions> & { ...; } & R...'.
-Property 'allowTravelers' does not exist on type 'Document<unknown, {}, { _id: string; allowTravellers: boolean; banner: string; connectedUserIds: string[]; hostUserId: string; maxPlayers: 13 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 15; maxTravellers: 0 | ... 4 more ... | 4; ... 7 more ...; scriptId?: string | undefined; }, {}, DefaultSchemaOptions> & { ...; } & R...'. Did you mean 'allowTravellers'?
-Property 'maxTravelers' does not exist on type 'Document<unknown, {}, { _id: string; allowTravellers: boolean; banner: string; connectedUserIds: string[]; hostUserId: string; maxPlayers: 13 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 15; maxTravellers: 0 | ... 4 more ... | 4; ... 7 more ...; scriptId?: string | undefined; }, {}, DefaultSchemaOptions> & { ...; } & R...'. Did you mean 'maxTravellers'?
-Property 'edition' does not exist on type 'Document<unknown, {}, { _id: string; allowTravellers: boolean; banner: string; connectedUserIds: string[]; hostUserId: string; maxPlayers: 13 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 14 | 15; maxTravellers: 0 | ... 4 more ... | 4; ... 7 more ...; scriptId?: string | undefined; }, {}, DefaultSchemaOptions> & { ...; } & R...'.
-The `{}` ("empty object") type allows any non-nullish value, including literals like `0` and `""`.
-- If that's what you want, disable this lint rule with an inline comment or configure the 'allowObjectTypes' rule option.
-- If you want a type meaning "any object", you probably want `object` instead.
-- If you want a type meaning "any value", you probably want `unknown` instead.
-Property 'name' does not exist on type 'AuthedUser'.
-Type '{ kind: string; id: `${string}-${string}-${string}-${string}-${string}`; ts: number; from: { userId: string; name: string; }; text: string; }' is not assignable to type 'ChatMsg | (ChatMsg & { streamId: string; })'.
-  Type '{ kind: string; id: `${string}-${string}-${string}-${string}-${string}`; ts: number; from: { userId: string; name: string; }; text: string; }' is not assignable to type 'ChatMsg & { streamId: string; }'.
-    Type '{ kind: string; id: `${string}-${string}-${string}-${string}-${string}`; ts: number; from: { userId: string; name: string; }; text: string; }' is not assignable to type 'ChatMsg'.
-      Types of property 'kind' are incompatible.
-        Type 'string' is not assignable to type '"chat"'.
-Type 'void' is not assignable to type 'ChatMsg | (ChatMsg & { streamId: string; })'.
-Type '{ id: string; message: { [x: string]: string; }; millisElapsedFromDelivery?: number | undefined; deliveriesCounter?: number | undefined; }[]' is not assignable to type '[string, Record<string, string>][]'.
-  Type '{ id: string; message: { [x: string]: string; }; millisElapsedFromDelivery?: number | undefined; deliveriesCounter?: number | undefined; }' is not assignable to type '[string, Record<string, string>]'.
-Type '{ id: string; message: { [x: string]: string; }; millisElapsedFromDelivery?: number | undefined; deliveriesCounter?: number | undefined; }[]' is not assignable to type '[string, Record<string, string>][]'.
-  Type '{ id: string; message: { [x: string]: string; }; millisElapsedFromDelivery?: number | undefined; deliveriesCounter?: number | undefined; }' is not assignable to type '[string, Record<string, string>]'.
-Type 'Record<string, string | string[]>' is not assignable to type 'HeadersInit | undefined'.
-Argument of type '(topic: string, msg: AppEvents) => Promise<AppEvents & { streamId: string; roomId: string; matchId: string | null; }>' is not assignable to parameter of type '(topic: string, msg: any) => Promise<void>'.
-Argument of type '{ snapshot: Snapshot<unknown>; } | undefined' is not assignable to parameter of type 'ActorOptions<any> & { [x: string]: unknown; }'.
-  Type 'undefined' is not assignable to type 'ActorOptions<any> & { [x: string]: unknown; }'.
-    Type 'undefined' is not assignable to type 'ActorOptions<any>'.
-Property 'getInitialState' does not exist on type 'StateMachine<RoomContext, { type: "OPEN_ROOM"; } | { type: "CLOSE_ROOM"; } | { type: "MATCH_ENDED"; } | { type: "START_MATCH"; } | { type: "ARCHIVE_ROOM"; } | { type: "CONDITION_MET"; } | { ...; } | ... 12 more ... | { ...; }, ... 11 more ..., ToStateSchema<...>>'.
-Property 'withContext' does not exist on type 'StateMachine<RoomContext, { type: "OPEN_ROOM"; } | { type: "CLOSE_ROOM"; } | { type: "MATCH_ENDED"; } | { type: "START_MATCH"; } | { type: "ARCHIVE_ROOM"; } | { type: "CONDITION_MET"; } | { ...; } | ... 12 more ... | { ...; }, ... 11 more ..., ToStateSchema<...>>'.
-Argument of type 'RoomSnapshotUpsertArgs' is not assignable to parameter of type 'RoomSnapshotDoc'.
-  Types of property 'skillLevel' are incompatible.
-    Type 'SkillLevel | undefined' is not assignable to type 'SkillLevel'.
-      Type 'undefined' is not assignable to type 'SkillLevel'.
-Argument of type '({ data }: ServerFnCtx<Register, undefined, (data: unknown) => { gameId: string; whisperId: string; isActive: boolean; }>) => Promise<Result<Document<unknown, {}, { members: unknown[]; meta?: unknown; _id?: unknown; gameId?: unknown; topicId?: unknown; isActive?: unknown; creatorId?: unknown; } & Required<...>, {}, ...' is not assignable to parameter of type 'ServerFn<Register, "POST", undefined, (data: unknown) => { gameId: string; whisperId: string; isActive: boolean; }, Promise<Result<Document<unknown, {}, { members: unknown[]; meta?: unknown; _id?: unknown; gameId?: unknown; topicId?: unknown; isActive?: unknown; creatorId?: unknown; } & Required<...>, {}, DefaultSch...'.
-'createServerFn' is declared but its value is never read.
-'GameRoles' is declared but its value is never read.
-'$keys' is declared but its value is never read.
-'listWhisperTopicsForUser' is declared but its value is never read.
-'getUserFromCookie' is declared but its value is never read.
-'inputs' is declared but its value is never read.
-Parameter 'entry' implicitly has an 'any' type.
+[{
+	"resource": "/home/bobby/clocktower/src/components/ui/resizable.tsx",
+	"owner": "typescript",
+	"code": "2339",
+	"severity": 8,
+	"message": "Property 'PanelGroup' does not exist on type 'typeof import(\"/home/bobby/clocktower/node_modules/react-resizable-panels/dist/react-resizable-panels\")'.",
+	"source": "ts",
+	"startLineNumber": 6,
+	"startColumn": 102,
+	"endLineNumber": 6,
+	"endColumn": 102
+},{
+	"resource": "/home/bobby/clocktower/src/components/ui/resizable.tsx",
+	"owner": "typescript",
+	"code": "2339",
+	"severity": 8,
+	"message": "Property 'PanelGroup' does not exist on type 'typeof import(\"/home/bobby/clocktower/node_modules/react-resizable-panels/dist/react-resizable-panels\")'.",
+	"source": "ts",
+	"startLineNumber": 8,
+	"startColumn": 29,
+	"endLineNumber": 8,
+	"endColumn": 29
+},{
+	"resource": "/home/bobby/clocktower/src/components/ui/resizable.tsx",
+	"owner": "typescript",
+	"code": "2339",
+	"severity": 8,
+	"message": "Property 'PanelResizeHandle' does not exist on type 'typeof import(\"/home/bobby/clocktower/node_modules/react-resizable-panels/dist/react-resizable-panels\")'.",
+	"source": "ts",
+	"startLineNumber": 29,
+	"startColumn": 51,
+	"endLineNumber": 29,
+	"endColumn": 51
+},{
+	"resource": "/home/bobby/clocktower/src/components/ui/resizable.tsx",
+	"owner": "typescript",
+	"code": "2339",
+	"severity": 8,
+	"message": "Property 'PanelResizeHandle' does not exist on type 'typeof import(\"/home/bobby/clocktower/node_modules/react-resizable-panels/dist/react-resizable-panels\")'.",
+	"source": "ts",
+	"startLineNumber": 33,
+	"startColumn": 29,
+	"endLineNumber": 33,
+	"endColumn": 29
+},{
+	"resource": "/home/bobby/clocktower/src/components/ui/resizable.tsx",
+	"owner": "typescript",
+	"code": "2339",
+	"severity": 8,
+	"message": "Property 'PanelResizeHandle' does not exist on type 'typeof import(\"/home/bobby/clocktower/node_modules/react-resizable-panels/dist/react-resizable-panels\")'.",
+	"source": "ts",
+	"startLineNumber": 46,
+	"startColumn": 30,
+	"endLineNumber": 46,
+	"endColumn": 30
+},{
+	"resource": "/home/bobby/clocktower/src/db/connectMongoose.test.ts",
+	"owner": "typescript",
+	"code": "2451",
+	"severity": 8,
+	"message": "Cannot redeclare block-scoped variable 'connectMock'.",
+	"source": "ts",
+	"startLineNumber": 1,
+	"startColumn": 7,
+	"endLineNumber": 1,
+	"endColumn": 7
+},{
+	"resource": "/home/bobby/clocktower/src/db/models/ChatItem.ts",
+	"owner": "typescript",
+	"code": "6133",
+	"severity": 8,
+	"message": "'enums' is declared but its value is never read.",
+	"source": "ts",
+	"startLineNumber": 6,
+	"startColumn": 24,
+	"endLineNumber": 6,
+	"endColumn": 24
+},{
+	"resource": "/home/bobby/clocktower/src/db/models/test.ts",
+	"owner": "typescript",
+	"code": "6133",
+	"severity": 8,
+	"message": "'zodToJSONSchema' is declared but its value is never read.",
+	"source": "ts",
+	"startLineNumber": 4,
+	"startColumn": 1,
+	"endLineNumber": 4,
+	"endColumn": 1
+},{
+	"resource": "/home/bobby/clocktower/src/db/models/test.ts",
+	"owner": "typescript",
+	"code": "6133",
+	"severity": 8,
+	"message": "'jsonSchemaToMongoose' is declared but its value is never read.",
+	"source": "ts",
+	"startLineNumber": 5,
+	"startColumn": 1,
+	"endLineNumber": 5,
+	"endColumn": 1
+},{
+	"resource": "/home/bobby/clocktower/src/db/models/test.ts",
+	"owner": "typescript",
+	"code": "6133",
+	"severity": 8,
+	"message": "'zWhisperId' is declared but its value is never read.",
+	"source": "ts",
+	"startLineNumber": 8,
+	"startColumn": 1,
+	"endLineNumber": 8,
+	"endColumn": 1
+},
+{
+	"resource": "/home/bobby/clocktower/src/state/TownSquareContext.tsx",
+	"owner": "typescript",
+	"code": "7006",
+	"severity": 8,
+	"message": "Parameter 'entry' implicitly has an 'any' type.",
+	"source": "ts",
+	"startLineNumber": 336,
+	"startColumn": 26,
+	"endLineNumber": 336,
+	"endColumn": 26
+}
+]
 
 
 src/components/forms/CreateRoomForm.tsx
@@ -698,3 +519,24 @@ src/components/forms/CreateRoomForm.tsx
 'CreateRoomFormInput' is declared but its value is never read.
 'CreateRoomForm' is declared but its value is never read.
 'form' is declared but its value is never read.
+
+## Update GameMachine
+
+* in gameSetupActor after we load scriptRoles
+    * let's determine the night order and set these in the context (they should be immutable after this point if possible)
+    * create two lists, one ordered by firstNight ascending called firstNightOrderFromScript and the second by otherNight called otherNightOrderFromScript. Then map firstNightOrderFromScript to x => ({ id: x.id, order: x.firstNight, reminder: x.firstNightReminder }) and otherNightOrderFromScript to x => ({ id: x.id, order: x.otherNight, reminder: x.otherNightReminder }) and then set firstNightOrderFromScript and otherNightOrderFromScript in context. the type should be { id: CharacterRoles; order: number; reminder: string }[]
+    
+    * create a function to get the nightOrder number that's current and set this to be called on entry to first_night and other_night. let's first get alivePlayers and tokens and let's run these steps:
+        * create a variable called aliveRoles and take alivePlayers.map(x => tokens[x].id)
+        * take firstNightOrderFromScript.filter(x => aliveRoles.includes(x.id)).map((x, ix) => ({ ...x, index: ix + 1 })) and set this as firstNightOrder in context
+        * take otherNightOrderFromScript.filter(x => aliveRoles.includes(x.id)).map((x, ix) => ({ ...x, index: ix + 1 })) and set this as otherNightOrder in context
+        * set this to on entry for first_night and other_night
+
+    * create an event called END_NIGHT_PHASE -> day that should be set for first_night and other_night
+
+## Update RoomMachine
+
+
+* let's add to the night state
+
+

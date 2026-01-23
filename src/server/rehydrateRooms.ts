@@ -1,28 +1,19 @@
-import type { Snapshot } from 'xstate';
-import type { Room } from '@/types/room';
-import type { RoomSnapshotDoc } from '@/server/models/RoomModel';
-import { createRoomActor } from '@/server/roomService';
-import { listRoomDocs } from '@/server/persistence/roomPersistence';
+// src/server/rehydrateRooms.ts
+import { createActor } from 'xstate';
+import { RoomModel } from '../models/RoomModel';
+import { createRoomMachine } from '../machines/RoomMachine';
+import { roomActors } from './roomService';
+import { upsertRoomSnapshot } from '../persistence/roomPersistence';
+import { snapshotToUpsertArgs } from '../persistence/snapshotToDoc';
 
-export async function rehydrateAllRooms() {
-    const docs = await listRoomDocs();
-    for (const doc of docs) {
-        const room = docToRoom(doc);
-        const snapshot = (doc.persistedSnapshot as Snapshot<unknown>) ?? undefined;
-        try {
-            createRoomActor(room, undefined, snapshot ? { snapshot } : undefined);
-        } catch (error) {
-            console.error('[rehydrateRooms] Unable to restart room actor', doc._id, error);
-        }
-    }
-}
+type Broadcast = (msg: unknown) => void;
 
-function docToRoom(doc: RoomSnapshotDoc): Room {
+function docToRoom(doc: any): Room {
     return {
         _id: doc._id,
         allowTravellers: doc.allowTravellers,
         banner: doc.banner,
-        connectedUserIds: extractConnectedIds(doc.connectedUserIds),
+        connectedUserIds: doc.connectedUserIds ?? {},
         endedAt: doc.endedAt,
         hostUserId: doc.hostUserId,
         maxPlayers: doc.maxPlayers,
@@ -32,17 +23,42 @@ function docToRoom(doc: RoomSnapshotDoc): Room {
         scriptId: doc.scriptId,
         skillLevel: doc.skillLevel,
         speed: doc.speed,
-        visibility: doc.visibility,
-        storytellerUserIds: []
+        visibility: doc.visibility
     };
 }
 
-function extractConnectedIds(value: RoomSnapshotDoc['connectedUserIds']) {
-    if (Array.isArray(value)) {
-        return value;
+/**
+ * Rehydrate all room actors on server startup:
+ * - Load docs from Mongo (backup)
+ * - Recreate RoomMachine actors from `persistedSnapshot`
+ * - Wire broadcast + persistence just like fresh actors
+ */
+export async function rehydrateAllRooms(broadcast: Broadcast) {
+    const docs = await RoomModel.find({}).lean().exec();
+
+    for (const doc of docs) {
+        const room = docToRoom(doc);
+        const machine = createRoomMachine(room);
+
+        // XState v5: rehydrate actor from persisted snapshot
+        const actor = createActor(machine, { snapshot: doc.persistedSnapshot });
+        actor.start();
+
+        roomActors.set(doc._id, actor);
+
+        // Broadcast + persist on every transition
+        actor.subscribe((snap: any) => {
+            broadcast({
+                type: 'ROOM_SNAPSHOT',
+                roomId: snap.context.room._id,
+                snapshot: { value: snap.value, context: snap.context }
+            });
+            void upsertRoomSnapshot(snapshotToUpsertArgs(actor));
+        });
+
+        // Optional: immediately re-upsert (helps migrations/normalization)
+        void upsertRoomSnapshot(snapshotToUpsertArgs(actor));
     }
-    if (value && typeof value === 'object') {
-        return Object.keys(value);
-    }
-    return [];
+
+    return roomActors;
 }

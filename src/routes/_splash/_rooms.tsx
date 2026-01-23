@@ -2,7 +2,7 @@
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 import z from 'zod';
-import { RoomModel } from '../../db/models/Room';
+import { RoomModel } from '../../server/models/RoomModel';
 
 const getCurrentRoomInput = z.object({
     userId: z.string().min(1, 'Must be a uuid').nullable().optional()

@@ -20,7 +20,8 @@ const travelerRequestModels = getTypesFor(
     zTravelerRequest,
     { timestamps: true, collection: 'traveler_request' },
     {},
-    [{ matchId: 1 }, { roomId: 1 }],
+    [{ matchId: 1 }],
+    [{ roomId: 1 }],
     [{ expiresAt: 1 }, { expireAfterSeconds: 0 }]
 );
 

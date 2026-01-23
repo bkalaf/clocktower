@@ -1,31 +1,7 @@
 // src/server/models/RoomModel.ts
 import mongoose from 'mongoose';
 
-type ConnectedUsers = Record<string, unknown> | string[];
-
-export type RoomSnapshotDoc = {
-    _id: string;
-    allowTravellers: boolean;
-    banner: string;
-    connectedUserIds: ConnectedUsers;
-    endedAt?: Date;
-    hostUserId: string;
-    maxPlayers: PcPlayerCount;
-    minPlayers: PcPlayerCount;
-    maxTravellers: PcTravellerCount;
-    plannedStartTime?: Date;
-    scriptId?: string;
-    skillLevel: SkillLevel;
-    speed: GameSpeed;
-    visibility: RoomVisibility;
-    acceptingPlayers: boolean;
-    currentMatchId?: string;
-    readyByUserId: Record<string, boolean>;
-    storytellerMode: StorytellerMode;
-    stateValue: unknown;
-    persistedSnapshot?: unknown;
-};
-
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export type RoomSnapshotDocument = mongoose.Document<unknown, {}, RoomSnapshotDoc> & RoomSnapshotDoc;
 
 const roomSnapshotSchema = new mongoose.Schema<RoomSnapshotDocument>(
@@ -134,7 +110,7 @@ const roomSnapshotSchema = new mongoose.Schema<RoomSnapshotDocument>(
         }
     },
     {
-        collection: 'room_snapshot',
+        collection: 'room',
         timestamps: true
     }
 );

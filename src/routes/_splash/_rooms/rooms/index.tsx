@@ -2,13 +2,12 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 import { connectMongoose } from '../../../../db/connectMongoose';
-import { Room, RoomModel } from '../../../../db/models/Room';
 import { AuthedUser } from '../../../../types/game';
 import { Script } from '../../../../db/models/Script';
-import { useMemo } from 'react';
-import { MRT_ColumnDef } from 'material-react-table';
 import { createColumnHeader } from '../../../../hooks/createColumnHeader';
 import { createColumnData } from '../../../../hooks/createColumnData';
+import { RoomModel } from '../../../../server/models/RoomModel';
+import { MRT_ColumnDef } from 'material-react-table';
 
 export const getAll = createServerFn({
     method: 'GET'

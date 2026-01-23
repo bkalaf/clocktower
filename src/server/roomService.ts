@@ -1,149 +1,71 @@
 // src/server/roomService.ts
-import { randomUUID } from 'crypto';
-import { createActor, type ActorOptions, type ActorRefFrom, type Snapshot, createMachineSnapshot } from 'xstate';
-import type { Room } from '@/types/room';
-import { machine as roomMachine, type RoomContext } from '@/machines/RoomMachine';
-import type { SnapshotMsg } from '@/types/game';
-import { publish } from '@/server/realtime/publish';
-import { $keys } from '@/keys';
-import { snapshotToUpsertArgs } from '@/server/persistence/snapshotToDoc';
-import { upsertRoomSnapshot } from '@/server/persistence/roomPersistence';
+import { ActorRefFrom, createActor } from 'xstate';
+import _ from 'lodash';
+import { createRoomMachine } from './machines/RoomMachine';
+import { upsertRoomSnapshot } from './persistence/roomPersistence';
+import { snapshotToUpsertArgs } from './persistence/snapshotToDoc';
 
-const CRITICAL_EVENTS = new Set(['MATCH_STARTED', 'MATCH_ENDED', 'ARCHIVE_ROOM', 'MATCH_RESET']);
-const PERSIST_DEBOUNCE_MS = 250;
+type Broadcast = (msg: unknown) => void;
 
-export type RoomSnapshot = { value: unknown; context: RoomContext };
-export type RoomSnapshotBroadcaster = (args: { roomId: string; snapshot: RoomSnapshot }) => Promise<void>;
+// In-memory: roomId -> RoomMachine actor
+export const roomActors = new Map<string, ActorRefFrom<typeof createRoomMachine>>();
 
-const roomActors = new Map<string, ActorRefFrom<typeof roomMachine>>();
-const persistenceTimers = new Map<string, ReturnType<typeof setTimeout>>();
+function shouldFlush(event: RoomEvents) {
+    return (
+        event.type === 'MATCH_STARTED' ||
+        event.type === 'MATCH_ENDED' ||
+        event.type === 'ARCHIVE_ROOM' ||
+        event.type === 'MATCH_RESET'
+    );
+}
 
-export const broadcastRoomSnapshot: RoomSnapshotBroadcaster = async ({ roomId, snapshot }) => {
-    const message: SnapshotMsg = {
-        kind: 'snapshot',
-        id: randomUUID(),
-        ts: Date.now(),
-        version: 0,
-        snapshot
-    };
-    const topics = [
-        $keys.publicTopic(roomId),
-        $keys.stTopic(roomId),
-        $keys.roomPublicTopic(roomId),
-        $keys.roomStTopic(roomId)
-    ];
-    try {
-        await Promise.all(topics.map((topic) => publish(topic, message)));
-    } catch (error) {
-        console.error('[roomService] Failed to publish room snapshot', roomId, error);
-    }
-};
-
-export type CreateRoomActorOptions = {
-    snapshot?: Snapshot<unknown>;
-};
-
-export function createRoomActor(
-    room: Room,
-    broadcast: RoomSnapshotBroadcaster = broadcastRoomSnapshot,
-    options?: CreateRoomActorOptions
-) {
-    if (roomActors.has(room._id)) {
-        return roomActors.get(room._id)!;
-    }
-
-    const actorOptions: ActorOptions<typeof roomMachine> = {
-        snapshot: options?.snapshot ?? createRoomSnapshot(room)
-    };
-    const actor = createActor(roomMachine, actorOptions);
-
-    actor.subscribe((state) => {
-        const payload = { roomId: room._id, snapshot: { value: state.value, context: state.context } };
-        void broadcast(payload).catch((error) => {
-            console.error('[roomService] Snapshot broadcast error', room._id, error);
-        });
-
-        const eventType = state.event?.type;
-        if (eventType && CRITICAL_EVENTS.has(eventType)) {
-            void persistSnapshot(actor, room._id);
-            return;
-        }
-        schedulePersistence(actor, room._id);
+/**
+ * Create and start a RoomMachine actor, wire:
+ * - broadcast snapshots to all subscribers (via broadcast hook)
+ * - persist snapshots to Mongo (debounced, plus immediate flush on critical events)
+ */
+export function createRoomActor(room: Room, broadcast: Broadcast) {
+    const machine = createRoomMachine(room);
+    const actor = createActor(machine, {
+        input: { room }
     });
+    actor.start();
 
     roomActors.set(room._id, actor);
-    actor.start();
-    void persistSnapshot(actor, room._id);
+
+    const persistDebounced = _.debounce(async () => {
+        await upsertRoomSnapshot(snapshotToUpsertArgs(actor));
+    }, 250);
+
+    // Broadcast + persist on every transition
+    actor.subscribe((snap: RoomSnapshot) => {
+        broadcast({
+            type: 'ROOM_SNAPSHOT',
+            roomId: snap.context.room._id,
+            snapshot: { value: snap.value, context: snap.context }
+        });
+        persistDebounced();
+    });
+
+    // Intercept send to optionally flush persistence for critical events
+    const originalSend = actor.send.bind(actor);
+    actor.send = (event: RoomEvents) => {
+        originalSend(event);
+        if (shouldFlush(event)) {
+            persistDebounced.flush?.();
+            void upsertRoomSnapshot(snapshotToUpsertArgs(actor));
+        }
+    };
+
+    // Persist initial snapshot immediately
+    void upsertRoomSnapshot(snapshotToUpsertArgs(actor));
+
     return actor;
 }
 
+/**
+ * Get an existing actor by roomId
+ */
 export function getRoomActor(roomId: string) {
     return roomActors.get(roomId);
-}
-
-function createRoomSnapshot(room: Room): Snapshot<unknown> {
-    const baseContext = roomMachine.config.context as RoomContext;
-    const connectedUserIds = Array.isArray(room.connectedUserIds) ? room.connectedUserIds : [];
-    const storytellerUserIds =
-        Array.isArray(room.storytellerUserIds) ? room.storytellerUserIds : baseContext.storytellerUserIds;
-    const plannedStartTime = room.plannedStartTime ?? baseContext.plannedStartTime;
-
-    const context: RoomContext = {
-        ...baseContext,
-        _id: room._id,
-        allowTravellers: room.allowTravellers,
-        banner: room.banner ?? baseContext.banner,
-        connectedUserIds,
-        endedAt: room.endedAt ?? baseContext.endedAt,
-        hostUserId: room.hostUserId,
-        maxPlayers: room.maxPlayers,
-        minPlayers: room.minPlayers,
-        maxTravellers: room.maxTravellers,
-        plannedStartTime,
-        scriptId: room.scriptId,
-        skillLevel: room.skillLevel ?? baseContext.skillLevel,
-        speed: room.speed,
-        visibility: room.visibility,
-        storytellerUserIds,
-        storytellerCount: storytellerUserIds.length
-    };
-
-    const baseSnapshot = createMachineSnapshot(roomMachine.config, roomMachine);
-    const resolvedSnapshot = roomMachine.resolveState({
-        value: baseSnapshot.value,
-        context,
-        historyValue: baseSnapshot.historyValue,
-        status: baseSnapshot.status,
-        output: baseSnapshot.output,
-        error: baseSnapshot.error
-    });
-
-    return roomMachine.getPersistedSnapshot(resolvedSnapshot);
-}
-
-function schedulePersistence(actor: ActorRefFrom<typeof roomMachine>, roomId: string) {
-    const existing = persistenceTimers.get(roomId);
-    if (existing) {
-        clearTimeout(existing);
-    }
-    const timer = setTimeout(() => {
-        persistenceTimers.delete(roomId);
-        void persistSnapshot(actor, roomId);
-    }, PERSIST_DEBOUNCE_MS);
-    persistenceTimers.set(roomId, timer);
-}
-
-async function persistSnapshot(actor: ActorRefFrom<typeof roomMachine>, roomId: string) {
-    const timer = persistenceTimers.get(roomId);
-    if (timer) {
-        clearTimeout(timer);
-        persistenceTimers.delete(roomId);
-    }
-
-    try {
-        const args = snapshotToUpsertArgs(actor);
-        await upsertRoomSnapshot(args);
-    } catch (error) {
-        console.error('[roomService] Failed to persist snapshot', roomId, error);
-    }
 }

@@ -13,7 +13,7 @@ function GameRoute() {
     const navigate = useNavigate();
     const { user, loading: authLoading } = useAuth();
     const { gameId } = Route.useParams();
-    const { roomState, matchState, loading, error } = useRoomGame(gameId);
+    const { roomState, gameState, loading, error } = useRoomGame(gameId);
 
     useEffect(() => {
         if (!authLoading && !user) {
@@ -97,26 +97,26 @@ function GameRoute() {
 
                     <article className='rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3'>
                         <h2 className='text-lg font-semibold text-white'>Match status</h2>
-                        <p className='text-sm text-slate-300'>Match ID: {matchState.matchId ?? 'waiting'}</p>
+                        <p className='text-sm text-slate-300'>Match ID: {gameState.matchId ?? 'waiting'}</p>
                         <p className='text-sm text-slate-300'>
-                            Phase: {matchState.phase} → {matchState.subphase}
+                            Phase: {gameState.phase} → {gameState.subphase}
                         </p>
                         <p className='text-sm text-slate-300'>
-                            Day: {matchState.dayNumber} · Status: {matchState.matchStatus}
+                            Day: {gameState.dayNumber} · Status: {gameState.matchStatus}
                         </p>
-                        <p className='text-sm text-slate-300'>Votes stored: {matchState.voteHistory.length}</p>
+                        <p className='text-sm text-slate-300'>Votes stored: {gameState.voteHistory.length}</p>
                         <p className='text-sm text-slate-300'>
-                            Travelers admitted: {matchState.travelerUserIds.length}
+                            Travelers admitted: {gameState.travelerUserIds.length}
                         </p>
                     </article>
                 </div>
 
                 <article className='rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3'>
                     <h2 className='text-lg font-semibold text-white'>Match log</h2>
-                    {matchState.voteHistory.length === 0 ?
+                    {gameState.voteHistory.length === 0 ?
                         <p className='text-sm text-slate-300'>No nominations recorded yet.</p>
                     :   <ul className='space-y-2 text-sm text-slate-200'>
-                            {matchState.voteHistory.slice(-5).map((entry) => (
+                            {gameState.voteHistory.slice(-5).map((entry) => (
                                 <li
                                     key={`${entry.day}-${entry.nomineeId}-${entry.ts}`}
                                     className='rounded-xl bg-slate-900/50 p-3 border border-white/5'

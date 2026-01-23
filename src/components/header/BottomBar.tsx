@@ -2,7 +2,7 @@
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { Clock, Moon, Sun, User, Users } from 'lucide-react';
 
-import { useRoomMatchState } from '@/state/useRoomMatchState';
+import { useRoomGameState } from '@/state/useRoomGameState';
 import { ClientOnly } from '@tanstack/react-router';
 
 type StatsWidgetProps = {
@@ -31,7 +31,7 @@ function StatsWidget({ label, value, meta, icon, accentClass = '' }: StatsWidget
 }
 
 export function BottomBar() {
-    const { roomState, matchState } = useRoomMatchState();
+    const { roomState, gameState } = useRoomGameState();
     const [now, setNow] = useState(() => new Date());
 
     useEffect(() => {
@@ -54,12 +54,12 @@ export function BottomBar() {
     const maxPlayers = roomState.maxPlayers ?? 0;
     const playerCount = `${connectedCount}/${maxPlayers || '—'}`;
     const role = roomState.memberRole ?? 'spectator';
-    const phase = matchState.phase ?? 'setup';
+    const phase = gameState.phase ?? 'setup';
     const normalizedPhase =
         phase.toLowerCase().includes('night') ? 'Night'
         : phase.toLowerCase().includes('day') ? 'Day'
         : phase.charAt(0).toUpperCase() + phase.slice(1);
-    const dayNumber = matchState.dayNumber ?? 1;
+    const dayNumber = gameState.dayNumber ?? 1;
     const phaseIcon = normalizedPhase === 'Night' ? <Moon size={16} /> : <Sun size={16} />;
 
     // const accentClass =  accentStyles[values.accent] ?? accentStyles.ember;
