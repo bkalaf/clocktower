@@ -38,7 +38,7 @@ export function createRoomActor(room: Room, broadcast: Broadcast) {
     }, 250);
 
     // Broadcast + persist on every transition
-    actor.subscribe((snap: RoomSnapshot) => {
+    actor.subscribe((snap: RoomSnapshotPayload) => {
         broadcast({
             type: 'ROOM_SNAPSHOT',
             roomId: snap.context.room._id,

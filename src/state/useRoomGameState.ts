@@ -1,8 +1,8 @@
 // src/state/useRoomGameState.ts
 import { useActorRef, useSelector } from '@xstate/react';
 
-import { machine as gameMachine } from '@/machines/GameMachine';
-import { machine as roomMachine } from '@/server/machines/RoomMachine';
+import { gameMachine } from '@/server/machines/GameMachine';
+import { roomMachine } from '@/server/machines/RoomMachine';
 
 export function useRoomGameState() {
     const roomService = useActorRef(roomMachine);

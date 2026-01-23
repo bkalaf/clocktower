@@ -665,6 +665,9 @@ export const GameMachine = builder.createMachine({
                             initial: 'dawn',
                             states: {
                                 dawn: {
+                                    on: {
+                                        EXECUTION: 'execution'
+                                    },
                                     initial: 'idle',
                                     states: {
                                         idle: {
@@ -692,7 +695,7 @@ export const GameMachine = builder.createMachine({
                                                 }
                                             },
                                             always: {
-                                                target: 'running',
+                                                target: 'waiting',
                                                 guard: 'waitingIsEmpty'
                                             }
                                         },
@@ -705,6 +708,9 @@ export const GameMachine = builder.createMachine({
                                     }
                                 },
                                 noon: {
+                                    on: {
+                                        EXECUTION: 'execution'
+                                    },
                                     type: 'parallel',
                                     entry: ['dayReset', 'announceDeaths'],
                                     states: {
@@ -851,7 +857,7 @@ export const GameMachine = builder.createMachine({
                                                                             }
                                                                         },
                                                                         resolve: {
-                                                                            always: 'open'
+                                                                            always: '#GameMachine.gameStatus.in_progress.day.noon.discussion.nominations.open'
                                                                         }
                                                                     }
                                                                 }
@@ -866,9 +872,6 @@ export const GameMachine = builder.createMachine({
                                 execution: {
                                     entry: ['processExecution']
                                 }
-                            },
-                            on: {
-                                EXECUTION: 'execution'
                             }
                         }
                     }

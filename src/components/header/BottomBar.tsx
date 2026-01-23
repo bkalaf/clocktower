@@ -31,7 +31,6 @@ function StatsWidget({ label, value, meta, icon, accentClass = '' }: StatsWidget
 }
 
 export function BottomBar() {
-    const { roomState, gameState } = useRoomGameState();
     const [now, setNow] = useState(() => new Date());
 
     useEffect(() => {

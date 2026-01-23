@@ -55,7 +55,7 @@ export function createWsConnection(opts: {
             case 'CREATE_ROOM': {
                 try {
                     const room = msg.room;
-                    const actor = createRoomActor(room, { broadcast });
+                    const actor = createRoomActor(room, broadcast);
 
                     // auto-join creator
                     subscribe(room._id, ws);
@@ -68,6 +68,7 @@ export function createWsConnection(opts: {
                         roomId: room._id,
                         snapshot: { value: snap.value, context: snap.context }
                     });
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 } catch (e: any) {
                     safeSend(ws, {
                         type: 'ERROR',
@@ -124,6 +125,7 @@ export function createWsConnection(opts: {
             }
 
             default: {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 safeSend(ws, { type: 'ERROR', requestId: (msg as any).requestId, message: 'Unknown message type' });
                 return;
             }
