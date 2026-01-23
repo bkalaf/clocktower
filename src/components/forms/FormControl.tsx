@@ -1,5 +1,6 @@
 // src/components/forms/FormControl.tsx
 import { useMemo } from 'react';
+import type { ReactNode } from 'react';
 import { FieldValues, UseFormRegister, FieldErrors, Path } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -12,7 +13,8 @@ export function FormControl<T extends FieldValues>({
     placeholder,
     register,
     errors,
-    name
+    name,
+    children
 }: {
     label: string;
     formName: string;
@@ -22,6 +24,7 @@ export function FormControl<T extends FieldValues>({
     register: UseFormRegister<T>;
     errors: FieldErrors<T>;
     name: Path<T>;
+    children?: (props: { id: string }) => ReactNode;
 }) {
     const id = useMemo(() => `${formName}-${name}`, [formName, name]);
     const err = useMemo(() => errors[name], [errors, name]);
@@ -34,13 +37,16 @@ export function FormControl<T extends FieldValues>({
             >
                 {label}
             </Label>
-            <Input
-                id={id}
-                type={type}
-                autoComplete={autoComplete}
-                placeholder={placeholder}
-                {...register(name)}
-            />
+            {children ?
+                children({ id })
+            :   <Input
+                    id={id}
+                    type={type}
+                    autoComplete={autoComplete}
+                    placeholder={placeholder}
+                    {...register(name)}
+                />
+            }
             {err && <p className='text-xs text-red-500'>{errMsg as string}</p>}
         </div>
     );

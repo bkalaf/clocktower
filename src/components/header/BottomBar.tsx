@@ -2,7 +2,6 @@
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { Clock, Moon, Sun, User, Users } from 'lucide-react';
 
-import { useRoomGameState } from '@/state/useRoomGameState';
 import { ClientOnly } from '@tanstack/react-router';
 
 type StatsWidgetProps = {

@@ -46,7 +46,14 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     validateSearch: (search: Record<string, unknown>): RootSearch => {
         const modal = typeof search.modal === 'string' ? search.modal : undefined;
         const type = typeof search.type === 'string' ? search.type : undefined;
-        return { modal: modal as RootSearch['modal'], type: type as RootSearch['type'] };
+        const returnTo = typeof search.returnTo === 'string' ? search.returnTo : undefined;
+        const scriptId = typeof search.scriptId === 'string' ? search.scriptId : undefined;
+        return {
+            modal: modal as RootSearch['modal'],
+            type: type as RootSearch['type'],
+            returnTo,
+            scriptId
+        };
     },
     component: RootLayout,
     shellComponent: RootShellComponent,

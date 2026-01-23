@@ -14,9 +14,10 @@ export type TokenProps = {
     badges?: TokenBadge[];
     className?: string;
     onClick?: () => void;
+    hideInnerBorder?: boolean;
 };
 
-export function Token({ name, image, size = 130, badges = [], className, onClick }: TokenProps) {
+export function Token({ name, image, size = 130, badges = [], className, onClick, hideInnerBorder }: TokenProps) {
     const bgImage = image || tokenBase;
 
     return (
@@ -33,12 +34,17 @@ export function Token({ name, image, size = 130, badges = [], className, onClick
             }}
             onClick={onClick}
         >
-            <span
-                className='absolute inset-2 rounded-[50%] border border-slate-900/60 bg-center bg-cover shadow-[inset_0_0_25px_rgba(0,0,0,0.7)]'
-                style={{
-                    backgroundImage: `url(${bgImage})`
-                }}
-            />
+        <span
+            className={cn(
+                'absolute inset-2 rounded-[50%] bg-center bg-cover shadow-[inset_0_0_25px_rgba(0,0,0,0.7)]',
+                {
+                    'border border-slate-900/60': !hideInnerBorder
+                }
+            )}
+            style={{
+                backgroundImage: `url(${bgImage})`
+            }}
+        />
             <span className='pointer-events-none relative z-10 mt-auto font-cinzel text-[0.8rem] uppercase tracking-[0.25em] text-white drop-shadow-[0_0_10px_rgba(0,0,0,0.8)]'>
                 {name}
             </span>

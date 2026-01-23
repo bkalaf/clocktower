@@ -3,17 +3,18 @@ import * as React from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import type { ModalKind, NightCardType } from '../../router/search';
 import { Invites } from './Invites';
 import { Preferences } from './Preferences';
 import { modalBackgroundStyle } from '@/components/modals/modalStyles';
+import { CreateScriptForm } from '@/components/forms/RenderCreateScriptControls';
 
 type Props = {
     modal?: ModalKind;
     type?: NightCardType;
+    returnTo?: string;
 };
 
-export function ModalHost({ modal, type }: Props) {
+export function ModalHost({ modal, type, returnTo }: Props) {
     const navigate = useNavigate();
 
     const close = React.useCallback(() => {
@@ -22,6 +23,8 @@ export function ModalHost({ modal, type }: Props) {
                 const next = { ...(prev ?? {}) };
                 delete next.modal;
                 delete next.type;
+                delete next.returnTo;
+                delete next.scriptId;
                 return next;
             },
             replace: true
@@ -29,6 +32,10 @@ export function ModalHost({ modal, type }: Props) {
     }, [navigate]);
 
     if (!modal) return null;
+
+    if (modal === 'createScript') {
+        return <CreateScriptForm returnTo={returnTo} />;
+    }
 
     return (
         <Dialog

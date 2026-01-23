@@ -10,6 +10,7 @@ export function ChefToken(props: ChefTokenProps) {
         <Token
             name='Chef'
             image={iconSrc}
+            hideInnerBorder
             {...props}
         />
     );

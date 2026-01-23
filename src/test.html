@@ -1,0 +1,62 @@
+<!-- src/test.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Acrobat Token Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap" />
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;500;700&display=swap"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            color-scheme: dark;
+            font-family: 'Rubik', 'Space Grotesk', system-ui, -apple-system, sans-serif;
+            background-color: #07070b;
+            color: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-image: url('./assets/tokens/background2.png'),
+                radial-gradient(circle at top, rgba(20, 184, 166, 0.35), transparent 45%),
+                radial-gradient(circle at 20% 20%, rgba(14, 116, 144, 0.5), transparent 50%),
+                #05060a;
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            padding: 3rem;
+        }
+
+        #token-lab-root {
+            width: min(1200px, 100%);
+            min-height: 100vh;
+        }
+
+        .fallback {
+            text-align: center;
+            font-size: 1rem;
+            color: #94a3b8;
+        }
+
+    </style>
+</head>
+<body>
+    <main id="token-lab-root">
+        <p class="fallback">Loading Acrobat tokens...</p>
+    </main>
+    <script type="module" src="./test-bundle.js"></script>
+</body>
+</html>

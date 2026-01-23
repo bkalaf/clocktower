@@ -14,6 +14,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as SplashRouteImport } from './routes/_splash'
 import { Route as SplashIndexRouteImport } from './routes/_splash/index'
+import { Route as ScriptsNewRouteImport } from './routes/scripts/new'
 import { Route as GamesGameIdRouteImport } from './routes/games/$gameId'
 import { Route as ApiWhoamiRouteImport } from './routes/api/whoami'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
@@ -72,6 +73,11 @@ const SplashIndexRoute = SplashIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => SplashRoute,
+} as any)
+const ScriptsNewRoute = ScriptsNewRouteImport.update({
+  id: '/scripts/new',
+  path: '/scripts/new',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const GamesGameIdRoute = GamesGameIdRouteImport.update({
   id: '/games/$gameId',
@@ -260,6 +266,7 @@ export interface FileRoutesByFullPath {
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/games/$gameId': typeof GamesGameIdRoute
+  '/scripts/new': typeof ScriptsNewRoute
   '/': typeof SplashIndexRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -299,6 +306,7 @@ export interface FileRoutesByTo {
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/games/$gameId': typeof GamesGameIdRoute
+  '/scripts/new': typeof ScriptsNewRoute
   '/': typeof SplashIndexRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -341,6 +349,7 @@ export interface FileRoutesById {
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/games/$gameId': typeof GamesGameIdRoute
+  '/scripts/new': typeof ScriptsNewRoute
   '/_splash/': typeof SplashIndexRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -382,6 +391,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/whoami'
     | '/games/$gameId'
+    | '/scripts/new'
     | '/'
     | '/api/auth/forgot-password'
     | '/api/auth/login'
@@ -421,6 +431,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/whoami'
     | '/games/$gameId'
+    | '/scripts/new'
     | '/'
     | '/api/auth/forgot-password'
     | '/api/auth/login'
@@ -462,6 +473,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/whoami'
     | '/games/$gameId'
+    | '/scripts/new'
     | '/_splash/'
     | '/api/auth/forgot-password'
     | '/api/auth/login'
@@ -503,6 +515,7 @@ export interface RootRouteChildren {
   ApiHealthRoute: typeof ApiHealthRoute
   ApiWhoamiRoute: typeof ApiWhoamiRoute
   GamesGameIdRoute: typeof GamesGameIdRoute
+  ScriptsNewRoute: typeof ScriptsNewRoute
   ApiAuthForgotPasswordRoute: typeof ApiAuthForgotPasswordRoute
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
@@ -569,6 +582,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof SplashIndexRouteImport
       parentRoute: typeof SplashRoute
+    }
+    '/scripts/new': {
+      id: '/scripts/new'
+      path: '/scripts/new'
+      fullPath: '/scripts/new'
+      preLoaderRoute: typeof ScriptsNewRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/games/$gameId': {
       id: '/games/$gameId'
@@ -846,6 +866,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiHealthRoute: ApiHealthRoute,
   ApiWhoamiRoute: ApiWhoamiRoute,
   GamesGameIdRoute: GamesGameIdRoute,
+  ScriptsNewRoute: ScriptsNewRoute,
   ApiAuthForgotPasswordRoute: ApiAuthForgotPasswordRoute,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,

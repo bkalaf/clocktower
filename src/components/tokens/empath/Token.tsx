@@ -10,6 +10,7 @@ export function EmpathToken(props: EmpathTokenProps) {
         <Token
             name='Empath'
             image={iconSrc}
+            hideInnerBorder
             {...props}
         />
     );

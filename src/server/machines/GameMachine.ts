@@ -2,7 +2,7 @@
 import path from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { assign, fromPromise, raise, sendParent, setup } from 'xstate';
-import type { ActionArgs } from 'xstate';
+import type { ActionArgs, OutputFrom } from 'xstate';
 import { ScriptModel } from '../../db/models/Script';
 import { UserModel } from '../../db/models/User';
 import type { GameNomination, GameTaskEntry } from '../../types/game';
@@ -417,6 +417,8 @@ const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput, GameE
     return result;
 });
 
+type GameSetupActorReturn = OutputFrom<typeof gameSetupActor>;
+
 const builder = setup({
     types: {
         context: {} as GameContext,
@@ -428,6 +430,7 @@ const builder = setup({
     },
     actions: {
         setSetupResults: assign(({ event }) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const data = (event as any).output as Partial<GameContext>;
             return data;
         }),

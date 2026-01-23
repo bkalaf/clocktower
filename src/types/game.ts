@@ -53,7 +53,6 @@ export type GameNomination = {
 };
 export type GameTaskEntry = [string, unknown];
 export type GlobalRoles = 'moderator' | 'user' | 'admin';
-export type GameRoles = 'player' | 'storyteller' | 'spectator';
 export type TopicTypes = 'public' | 'st' | 'whisper';
 
 export type CursorMap = Record<string, string>;

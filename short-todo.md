@@ -919,3 +919,68 @@
 [x] Keep this theme going! This theme, Three of Pentacles tarot card (remember, no tarot text) and "3". Keep the image clean, avoid nudity, this is for a video game targeting a G-rated audience.
 [x] Keep this theme going! This theme, Two of Pentacles tarot card (remember, no tarot text) and "2". Keep the image clean, avoid nudity, this is for a video game targeting a G-rated audience.
 [x] Keep this theme going! This theme, Two of Swords tarot card (remember, no tarot text) and "2". Keep the image clean, avoid nudity, this is for a video game targeting a G-rated audience.
+
+Generate a 1024×1024 PNG of a rounded-square token for the Acrobat role, center a highly detailed cinematic Acrobat figure in layered teal/indigo lighting with engraved metallic edges, keep the hero crisp at 100 px, and leave a clean band across the bottom for uppercase white text. Use a photorealistic-but-illustrative style, dark background, and subtle glow so it can be tripod-mapped into our token UI.
+
+For reminder icons, ask for simple glyph-style icons (skull, beaker, etc.) with matching mood, so you can layer them behind “ROLE STATUS” text.
+
+Artwork / asset prompt guidance
+
+Token art (character role) prompt
+
+“Create a rounded-square token portrait (1024×1024 PNG) for the Acrobat role. The artwork must look crisp at ~100 px, with layered metallic teal/cyan lighting, exaggerated rim shine, and plenty of contrast so a white uppercase “Acrobat” banner can sit flush below it. Leave space at the bottom for a thin trapezoid banner and keep the surrounding stroke compatible with blue/rose/amber outlines. Keep the style illustrative-cinematic, detailed, and centered. Do NOT put the banner in the actual image.”
+
+Create a rounded-square token portrait (1024×1024 PNG) for the Poisoner role. The artwork must look crisp at ~100 px, with layered metallic teal/cyan lighting, exaggerated rim shine, and plenty of contrast so a white uppercase "Poisoner" banner can sit flush below it. Leave space at the bottom for a thin trapezoid banner and keep the surrounding stroke compatible with blue/rose/amber outlines. Keep the style illustrative-cinematic, detailed, and centered. Do NOT put the banner in the actual image.
+
+Background “alignment shell” prompt
+
+“Generate a subtle background frame/border texture that works behind any character token. The asset should be a dark, gradient canvas with a softly glowing border that can switch between blue (good), red (evil), or yellow (neutral) without clashing. Include faint circuitry or glyph motifs and a spot where a white text banner could overlay the character name. Deliver a 4:3 or square image with a transparent center so we can composite individual tokens on top.”
+
+Reminder icon prompts (per status)
+
+Reminder Tokens
+
+“Produce a minimal skull icon on a dark sapphire glow background for the Dead reminder; keep the icon bold but not photorealistic so it reads at 50 px, and drop a subtle radial halo so white role text stays legible. Do not put any text in the image.”
+
+“Produce a neon beaker icon with bubbling liquid for the Poisoner Poisoned reminder, with a soft lime glow and geometric accents, sized so it remains sharp at 50 px; keep the background dark with gradient lighting so uppercase status text can sit below. Do not put any text in the image.”
+
+Let me know when you have the new imagery so I can show how they slot into the squares/reminder grid.
+
+Token back art (shared black reverse)
+
+“Generate a 2048×2048 rounded-square illustration that will serve as the reverse side of our character token. It should have a matte black canvas with a matching alignment-aware border (blue/rose/amber) and subtle metallic patterning, leaving enough contrast for bold gold serif text (uppercase, centrally aligned) that will spell out the ability description. Keep the overall look consistent with cinematic tabletop RPG art so it can sit behind any character token without clashing.”
+
+Character token overlay (front art)
+
+“Render a detailed 1:1 portrait for the Acrobat role: rounded square layout, teal-and-indigo lighting, crisp detail that stays legible at 100 px, with a soft highlight at the top and a subtle banner area reserved at the bottom for white uppercase text. Use an illustrative-cinematic style with layered textures and a transparent background.”
+
+Create a rounded-square token portrait (1024×1024 PNG) for the Poisoner role. The artwork must look crisp at ~100 px, with layered metallic teal/cyan lighting, exaggerated rim shine, and plenty of contrast so a white uppercase "Poisoner" banner can sit flush below it. Leave space at the bottom for a thin trapezoid banner and keep the surrounding stroke compatible with blue/rose/amber outlines. Use an illustrative-cinematic style with layered textures and a transparent background. Do NOT put the banner or text in the actual image.
+
+Render a detailed 1:1 portrait for the Acrobat role: rounded square layout, teal-and-indigo lighting, crisp detail that stays legible at 100 px, with a soft highlight at the top and a subtle banner area reserved at the bottom for white uppercase text. Use an illustrative-cinematic style with layered textures and a transparent background. Do not put the actual banner or text in the image just leave space for it.
+
+Produce a neon beaker icon with bubbling liquid for the Poisoner Poisoned reminder, with a soft lime glow and geometric accents, sized so it remains sharp at 50 px; keep the background dark with gradient lighting so uppercase status text can sit below. Do not put any text in the image.
+
+Render a detailed 1:1 portrait for the Washerwoman role: rounded square layout, teal-and-indigo lighting, crisp detail that stays legible at 100 px, with a soft highlight at the top and a subtle banner area reserved at the bottom for white uppercase text. Use an illustrative-cinematic style with layered textures and a transparent background. Do not put the actual banner or text in the image just leave space for it.
+
+Render a detailed 1:1 portrait for the Librarian role: rounded square layout, teal-and-indigo lighting, crisp detail that stays legible at 100 px, with a soft highlight at the top and a subtle banner area reserved at the bottom for white uppercase text. Use an illustrative-cinematic style with layered textures and a transparent background. Do not put the actual banner or text in the image just leave space for it.
+
+Washerwoman Townsfolk (Right)
+
+Create a 512×512 (or larger) icon depicting a checkmark, accented with mint/teal glow. Keep it stylized so it’s clear at 50 px, with clean lines and a soft halo, and leave the background dark so white text ‘WASHERWOMAN TOWNSFOLK’ can sit below.
+
+Washerwoman Wrong
+
+Create a 512×512 (or larger) icon depicting a checkmark, accented with mint/teal glow. Keep it stylized so it’s clear at 50 px, with clean lines and a soft halo, and leave the background dark so white text ‘WASHERWOMAN TOWNSFOLK’ can sit below.
+
+Investigator Minion (Right)
+“Produce an icon of a magnifying glass over a subtle eye or detective’s silhouette with emerald highlights, representing a successful investigation for the Investigator minion team; render it flat enough to read at 50 px while still feeling detailed, and ensure it plays well with white text such as ‘INVESTIGATOR MINION.’”
+Investigator Wrong
+“Create a similar magnifier/icon but fractured or glowing red, with broken shards or question mark accent to show a wrong finding; keep the piece sharp at 50 px so the phrase ‘INVESTIGATOR WRONG’ can be layered on top without losing readability.”
+Librarian Outsider (Right)
+“Illustrate an open book or tome with mystical glyphs and a soft gold glow to represent a successful Librarian outsider finding; keep the artwork crisp at 50 px with a dark background and a subtle halo for the text ‘LIBRARIAN OUTSIDER.’”
+Librarian Wrong
+“Design a similar book icon but tinged with cold blue/purple, maybe with a dropped quill or fractured page, to signal a wrong read; again ensure it’s still legible at 50 px so the label ‘LIBRARIAN WRONG’ stands out clearly.”
+
+
+Generate all images in the style of baseline-prime.png, baseline.png and baseline2.png.
+Create a rounded-square token portrait (1024×1024 PNG) for the Empath role. The artwork must look crisp at ~100 px, with layered metallic teal/cyan lighting, exaggerated rim shine, and plenty of contrast so a white uppercase "Empath" banner can sit flush below it. Leave space at the bottom for a thin trapezoid banner and keep the surrounding stroke compatible with blue/rose/amber outlines. Keep the style illustrative-cinematic, detailed, and centered. Do NOT put the banner in the actual image. Use the ornate frame from previous images and make sure it's on a transparent background like the other images.

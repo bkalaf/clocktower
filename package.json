@@ -13,7 +13,8 @@
         "api:print": "node --import=tsx scripts/print-api-registry.ts",
         "cir": "madge --circular --extensions ts,tsx ./src",
         "orphans": "madge --orphans --extensions ts,tsx ./src",
-        "test:jest": "jest"
+        "test:jest": "jest",
+        "build:test": "node ./scripts/build-test-tokens.mjs"
     },
     "dependencies": {
         "@dnd-kit/core": "^6.3.1",

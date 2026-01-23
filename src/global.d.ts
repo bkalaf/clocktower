@@ -57,7 +57,7 @@ declare global {
         | 'this_is_the_demon'
         | 'you_are';
 
-    export type ModalKind = 'invites' | 'reveal' | 'nightCards' | 'preferences';
+    export type ModalKind = 'invites' | 'reveal' | 'nightCards' | 'preferences' | 'createScript';
     export type Room = {
         _id: string;
         allowTravellers: boolean;
@@ -80,6 +80,7 @@ declare global {
     };
     type Readiness = 'collecting' | 'all_ready';
     type RoomStatus = 'open' | 'closed' | 'in_game' | 'archived';
+    type GameRoles = 'player' | 'storyteller' | 'spectator';
     type RoomStates = {
         readiness: Readiness;
         roomStatus: RoomStatus;
@@ -175,6 +176,8 @@ declare global {
     export type RootSearch = {
         modal?: ModalKind;
         type?: NightCardType;
+        returnTo?: string;
+        scriptId?: string;
     };
     export type GameMachineInput = {
         maxPlayers: number;

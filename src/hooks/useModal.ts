@@ -6,12 +6,13 @@ export function useModal() {
     const navigate = useNavigate();
 
     const open = React.useCallback(
-        (modal: ModalKind, opts?: { type?: NightCardType }) => {
+        (modal: ModalKind, opts?: { type?: NightCardType; search?: Record<string, unknown> }) => {
             navigate({
                 search: (prev: Record<string, unknown>) => ({
                     ...prev,
                     modal,
-                    ...(opts?.type ? { type: opts.type } : {})
+                    ...(opts?.type ? { type: opts.type } : {}),
+                    ...(opts?.search ?? {})
                 }),
                 replace: true
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,6 +27,8 @@ export function useModal() {
                 const next = { ...(prev ?? {}) };
                 delete next.modal;
                 delete next.type;
+                delete next.returnTo;
+                delete next.scriptId;
                 return next;
             },
             replace: true
