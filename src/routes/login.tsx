@@ -28,29 +28,5 @@ function LoginRoute() {
         }
     }, [closeModal, isAuth]);
 
-    return (
-        <LoginForm />
-        // <Dialog
-        //     open
-        //     onOpenChange={(isOpen) => {
-        //         if (!isOpen) {
-        //             closeModal();
-        //         }
-        //     }}
-        // >
-        //     <DialogContent
-        //         className={dialogBackgroundClassName}
-        //         style={dialogBackgroundStyle}
-        //     >
-        //         <DialogHeader>
-        //             <DialogTitle className='text-white'>Welcome back</DialogTitle>
-        //             <DialogDescription className='text-white/80'>Sign in to continue</DialogDescription>
-        //         </DialogHeader>
-        //         <LoginForm
-        //             onSuccess={invalidateAuth}
-        //             returnTo={normalizedReturnTo}
-        //         />
-        //     </DialogContent>
-        // </Dialog>
-    );
+    return <LoginForm />;
 }

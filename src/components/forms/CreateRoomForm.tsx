@@ -9,7 +9,7 @@ import { Plus } from 'lucide-react';
 import { listScripts } from '@/lib/scripts';
 import { FormControl } from './FormControl';
 import { Modal } from '../Modal';
-import { useAuth } from '@/state/useAuth';
+import { useAuth } from '@/state/_useAuth';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useCreateRoom } from '@/client/state/hooks';

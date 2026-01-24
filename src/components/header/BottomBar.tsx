@@ -30,6 +30,58 @@ function StatsWidget({ label, value, meta, icon, accentClass = '' }: StatsWidget
     );
 }
 
+type RealtimeStatsProps = {
+    timeLabel: string;
+};
+
+function RealtimeStats({ timeLabel }: RealtimeStatsProps) {
+    const { snapshot } = useRealtimeCurrentRoom();
+    const room = snapshot?.context.room;
+    const connectedCount = room ? Object.keys(room.connectedUserIds ?? {}).length : 0;
+    const maxPlayers = room?.maxPlayers ?? 0;
+    const playerCount = room ? `${connectedCount}/${maxPlayers || '—'}` : '— / —';
+    const roomName = room?.banner ?? 'No room';
+    const status = snapshot?.value.roomStatus ?? 'waiting';
+    const normalizedStatus = (status as string)
+        .split('_')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    const statusIcon = status === 'in_game' ? <Moon size={16} /> : <Sun size={16} />;
+
+    return (
+        <>
+            <StatsWidget
+                label='Current time'
+                value={timeLabel}
+                meta='Local'
+                icon={<Clock size={16} />}
+                // accentClass={''}
+            />
+            <StatsWidget
+                label='Players'
+                value={playerCount}
+                meta='Connected / Seats'
+                icon={<Users size={16} />}
+                // accentClass={''}
+            />
+            <StatsWidget
+                label='Room'
+                value={roomName}
+                meta='Banner'
+                icon={<User size={16} />}
+                // accentClass={''}
+            />
+            <StatsWidget
+                label='Status'
+                value={normalizedStatus}
+                meta='Realtime'
+                icon={statusIcon}
+                // accentClass={''}
+            />
+        </>
+    );
+}
+
 export function BottomBar() {
     const [now, setNow] = useState(() => new Date());
 
@@ -49,19 +101,6 @@ export function BottomBar() {
         [now]
     );
 
-    const { snapshot } = useRealtimeCurrentRoom();
-    const room = snapshot?.context.room;
-    const connectedCount = room ? Object.keys(room.connectedUserIds ?? {}).length : 0;
-    const maxPlayers = room?.maxPlayers ?? 0;
-    const playerCount = room ? `${connectedCount}/${maxPlayers || '—'}` : '— / —';
-    const roomName = room?.banner ?? 'No room';
-    const status = snapshot?.value.roomStatus ?? 'waiting';
-    const normalizedStatus = status
-        .split('_')
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-    const statusIcon = status === 'in_game' ? <Moon size={16} /> : <Sun size={16} />;
-
     // const accentClass =  accentStyles[values.accent] ?? accentStyles.ember;
     // const toneClass =  toneStyles[values.panelTone] ?? toneStyles.soft;
     // const spacing =  densitySpacing[values.density] ?? densitySpacing.compact;
@@ -70,35 +109,8 @@ export function BottomBar() {
     return (
         <footer className={`flex flex-wrap gap-3 px-4 ${toneClass ?? ''} ${spacing} sm:px-6`}>
             <ClientOnly>
-                <StatsWidget
-                    label='Current time'
-                    value={timeLabel}
-                    meta='Local'
-                    icon={<Clock size={16} />}
-                    // accentClass={accentClass}
-                />
+                <RealtimeStats timeLabel={timeLabel} />
             </ClientOnly>
-            <StatsWidget
-                label='Players'
-                value={playerCount}
-                meta='Connected / Seats'
-                icon={<Users size={16} />}
-                // accentClass={accentClass}
-            />
-            <StatsWidget
-                label='Room'
-                value={roomName}
-                meta='Banner'
-                icon={<User size={16} />}
-                // accentClass={accentClass}
-            />
-            <StatsWidget
-                label='Status'
-                value={normalizedStatus}
-                meta='Realtime'
-                icon={statusIcon}
-                // accentClass={accentClass}
-            />
         </footer>
     );
 }

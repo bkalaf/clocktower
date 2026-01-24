@@ -12,15 +12,7 @@ const rootBackgroundStyle: React.CSSProperties = {
     backgroundRepeat: 'no-repeat'
     // backgroundAttachment: 'fixed'
 };
-export function AppShell({
-    children,
-    username,
-    isAuth
-}: {
-    children: React.ReactNode;
-    isAuth: boolean;
-    username?: string;
-}) {
+export function AppShell({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider defaultOpen={false}>
             <AppSidebar />

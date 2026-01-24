@@ -1,9 +1,11 @@
+// src/components/RealtimeConnector.tsx
 import { useEffect } from 'react';
 import { ClientOnly } from '@tanstack/react-router';
 
-import { useAppDispatch } from '@/client/state/hooks';
+import { useAppDispatch, useAppSelector } from '@/client/state/hooks';
 import { getRealtimeUrl } from '@/lib/realtime';
 import { wsConnect, wsDisconnect } from '@/client/state/wsMiddleware';
+import { authSelectors } from '../client/state/authSlice';
 
 function RealtimeConnectorClient({ userId }: { userId?: string }) {
     const dispatch = useAppDispatch();
@@ -29,7 +31,8 @@ function RealtimeConnectorClient({ userId }: { userId?: string }) {
     return null;
 }
 
-export function RealtimeConnector({ userId }: { userId?: string }) {
+export function RealtimeConnector() {
+    const userId = useAppSelector(authSelectors.selectUserId);
     return (
         <ClientOnly fallback={null}>
             <RealtimeConnectorClient userId={userId} />

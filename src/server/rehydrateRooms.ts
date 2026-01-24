@@ -1,10 +1,10 @@
 // src/server/rehydrateRooms.ts
 import { createActor } from 'xstate';
-import { RoomModel } from '../models/RoomModel';
-import { createRoomMachine } from '../machines/RoomMachine';
 import { roomActors } from './roomService';
-import { upsertRoomSnapshot } from '../persistence/roomPersistence';
-import { snapshotToUpsertArgs } from '../persistence/snapshotToDoc';
+import { createRoomMachine } from './machines/RoomMachine';
+import { RoomModel } from './models/RoomModel';
+import { upsertRoomSnapshot } from './persistence/roomPersistence';
+import { snapshotToUpsertArgs } from './persistence/snapshotToDoc';
 
 type Broadcast = (msg: unknown) => void;
 

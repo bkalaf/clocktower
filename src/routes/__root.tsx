@@ -12,6 +12,8 @@ import { NotFound } from '../components/NotFound';
 import { AppShell } from '../components/AppShell';
 import { ModalHost } from '../ui/modals/ModalHost';
 import { whoamiFn } from '../lib/api';
+import { store } from '../client/state/store';
+import { authActions } from '../client/state/authSlice';
 
 interface MyRouterContext {
     queryClient: QueryClient;
@@ -67,7 +69,15 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
             }
         });
         const { user } = data;
-        return { userId: user?._id, username: user?.username };
+        const state = store.getState();
+        if (state.auth.userId !== user?._id) {
+            store.dispatch(
+                authActions.login({
+                    userId: user?._id,
+                    username: user?.username
+                })
+            );
+        }
     }
 });
 
@@ -99,15 +109,10 @@ function RootShellComponent({ children }: { children: React.ReactNode }) {
 
 function RootLayout() {
     const search = Route.useSearch();
-    const context = Route.useLoaderData();
-    const isAuth = React.useMemo(() => context.userId !== undefined, [context.userId]);
     return (
         <div className='relative flex min-h-screen w-full overflow-hidden bg-slate-950 text-white'>
-            <RealtimeConnector userId={context.userId} />
-            <AppShell
-                isAuth={isAuth}
-                username={context.username}
-            >
+            <RealtimeConnector />
+            <AppShell>
                 <Outlet />
                 <ModalHost {...search} />
             </AppShell>

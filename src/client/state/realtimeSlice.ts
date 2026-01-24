@@ -1,5 +1,6 @@
+// src/client/state/realtimeSlice.ts
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { RoomSnapshotPayload, RoomSummary } from '@/shared/realtime/messages';
+import type { RoomSummary } from '@/shared/realtime/messages';
 
 export type RealtimeStatus = 'disconnected' | 'connecting' | 'connected';
 
@@ -41,10 +42,7 @@ const realtimeSlice = createSlice({
         setCurrentRoomId(state, action: PayloadAction<string | undefined>) {
             state.currentRoomId = action.payload;
         },
-        setSnapshot(
-            state,
-            action: PayloadAction<{ roomId: string; snapshot: RoomSnapshotPayload }>
-        ) {
+        setSnapshot(state, action: PayloadAction<{ roomId: string; snapshot: RoomSnapshotPayload }>) {
             const { roomId, snapshot } = action.payload;
             state.snapshotsByRoomId[roomId] = snapshot;
         },

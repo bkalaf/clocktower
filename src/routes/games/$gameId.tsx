@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 
-import { useAuth } from '@/state/useAuth';
+import { useAuth } from '@/state/_useAuth';
 
 export const Route = createFileRoute('/games/$gameId')({
     component: GameRoute
