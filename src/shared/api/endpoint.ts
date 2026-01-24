@@ -35,6 +35,6 @@ export function defineCommand<TIn extends z.ZodTypeAny, TOut extends z.ZodTypeAn
     return { kind: 'command', path, input, output };
 }
 
-export function keyFor<TInput>(endpoint: { path: string }, params?: Record<string, unknown>, input?: TInput): QueryKey {
-    return makeQueryKey(endpoint.path, params, input);
-}
+// export function keyFor<TInput>(endpoint: { path: string }, params?: Record<string, unknown>, input?: TInput): QueryKey {
+//     return makeQueryKey(endpoint.path, params, input);
+// }

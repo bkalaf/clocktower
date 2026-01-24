@@ -1,5 +1,5 @@
-// src/state/useRoomGame.ts
-import { machine as roomMachine, type RoomContext } from '@/server/machines/RoomMachine';
+// src/state/_useRoomGame.ts
+// import { machine as roomMachine, type RoomContext } from '@/server/machines/RoomMachine';
 // import { machine as gameMachine, type GameContext } from '@/machines/GameMachine';
 
 

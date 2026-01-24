@@ -5,7 +5,9 @@ import { Await, RouterProvider } from '@tanstack/react-router';
 import { hydrateStart } from '@tanstack/react-start-client';
 import type { AnyRouter } from '@tanstack/router-core';
 import { Provider as TanstackQueryProvider } from './integrations/tanstack-query/root-provider';
+import { Provider as ReduxProvider } from 'react-redux';
 import { AuthProvider } from './state/useAuth';
+import { store } from './client/state/store';
 
 let hydrationPromise: Promise<AnyRouter> | null = null;
 
@@ -40,9 +42,11 @@ function AppRouter() {
 
 function App() {
     return (
-        <AuthProvider>
-            <AppRouter />
-        </AuthProvider>
+        <ReduxProvider store={store}>
+            <AuthProvider>
+                <AppRouter />
+            </AuthProvider>
+        </ReduxProvider>
     );
 }
 

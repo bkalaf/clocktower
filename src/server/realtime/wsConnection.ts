@@ -1,19 +1,10 @@
 // src/server/realtime/wsConnection.ts
 import type { WebSocket } from 'ws';
+import type { IncomingMessage, OutgoingMessage } from '@/shared/realtime/messages';
+import { RoomSummary } from '@/shared/realtime/messages';
 import { createRoomActor, roomActors } from '../roomService';
 
 export type WsClient = WebSocket & { id?: string };
-
-export type IncomingMessage =
-    | { type: 'CREATE_ROOM'; room: Room; requestId?: string }
-    | { type: 'JOIN_ROOM'; roomId: string; userId?: string; requestId?: string }
-    | { type: 'LEAVE_ROOM'; roomId: string; requestId?: string }
-    | { type: 'ROOM_EVENT'; roomId: string; event: RoomEvents; requestId?: string };
-
-export type OutgoingMessage =
-    | { type: 'ROOM_SNAPSHOT'; roomId: string; snapshot: RoomSnapshotPayload }
-    | { type: 'JOINED_ROOM'; roomId: string }
-    | { type: 'ERROR'; requestId?: string; message: string };
 
 export type RoomBroadcaster = (roomId: string, msg: OutgoingMessage) => void;
 export type SubscribeFn = (roomId: string, ws: WsClient) => void;
@@ -35,12 +26,23 @@ export function createWsConnection(opts: {
     subscribe: SubscribeFn;
     unsubscribe: UnsubscribeFn;
     unsubscribeAll: UnsubscribeAllFn;
+    listRooms: () => RoomSummary[];
+    broadcastRoomsList: (rooms: RoomSummary[]) => void;
 
     // Broadcast hook passed to roomService when creating an actor.
     // roomService will call it with {type:'ROOM_SNAPSHOT', ...} and wsServer should route it to subscribers.
     broadcast: (msg: unknown) => void;
 }) {
-    const { ws, subscribe, unsubscribe, unsubscribeAll, broadcast } = opts;
+    const { ws, subscribe, unsubscribe, unsubscribeAll, broadcast, listRooms, broadcastRoomsList } = opts;
+    const sendRoomsList = (requestId?: string) => {
+        const rooms = listRooms();
+        safeSend(ws, {
+            type: 'ROOMS_LIST',
+            rooms,
+            requestId
+        });
+    };
+    sendRoomsList();
 
     ws.on('message', async (raw) => {
         let msg: IncomingMessage;
@@ -68,6 +70,16 @@ export function createWsConnection(opts: {
                         roomId: room._id,
                         snapshot: { value: snap.value, context: snap.context }
                     });
+                    const createdRooms = listRooms();
+                    const createdRoom =
+                        createdRooms.find((candidate) => candidate.roomId === room._id) ??
+                        ({ roomId: room._id, playerCount: 0 } as RoomSummary);
+                    safeSend(ws, {
+                        type: 'ROOM_CREATED',
+                        room: createdRoom,
+                        requestId: msg.requestId
+                    });
+                    broadcastRoomsList(createdRooms);
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 } catch (e: any) {
                     safeSend(ws, {
@@ -121,6 +133,11 @@ export function createWsConnection(opts: {
                 }
 
                 actor.send(msg.event);
+                return;
+            }
+
+            case 'LIST_ROOMS': {
+                sendRoomsList(msg.requestId);
                 return;
             }
 

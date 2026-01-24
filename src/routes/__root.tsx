@@ -7,6 +7,7 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 import appCss from './../assets/css/app.css?url';
 import type { QueryClient } from '@tanstack/react-query';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import { RealtimeConnector } from '@/components/RealtimeConnector';
 import { NotFound } from '../components/NotFound';
 import { AppShell } from '../components/AppShell';
 import { ModalHost } from '../ui/modals/ModalHost';
@@ -102,6 +103,7 @@ function RootLayout() {
     const isAuth = React.useMemo(() => context.userId !== undefined, [context.userId]);
     return (
         <div className='relative flex min-h-screen w-full overflow-hidden bg-slate-950 text-white'>
+            <RealtimeConnector userId={context.userId} />
             <AppShell
                 isAuth={isAuth}
                 username={context.username}

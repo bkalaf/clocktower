@@ -10,9 +10,9 @@ import { listScripts } from '@/lib/scripts';
 import { FormControl } from './FormControl';
 import { Modal } from '../Modal';
 import { useAuth } from '@/state/useAuth';
-import { getRealtimeUrl } from '@/lib/realtime';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useCreateRoom } from '@/client/state/hooks';
 
 const parseIntegerField = (label: string, min: number, max: number) =>
     z.preprocess(
@@ -218,14 +218,11 @@ export function CreateRoomForm({ defaultScriptId }: CreateRoomFormProps) {
         [defaultScriptId]
     );
 
+    const createRoom = useCreateRoom();
     const onSubmit = useCallback(
         async (values: CreateRoomFormValues) => {
             if (!user) {
                 throw new Error('You must be signed in to create a room.');
-            }
-            const realtimeUrl = getRealtimeUrl();
-            if (!realtimeUrl) {
-                throw new Error('Realtime connection is not available yet.');
             }
             const roomId =
                 globalThis.crypto?.randomUUID?.() ?? `room-${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -249,65 +246,10 @@ export function CreateRoomForm({ defaultScriptId }: CreateRoomFormProps) {
                 visibility: values.visibility
             };
 
-            const createdRoomId = await new Promise<string>((resolve, reject) => {
-                const socket = new WebSocket(realtimeUrl);
-                let settled = false;
-
-                const cleanup = () => {
-                    socket.removeEventListener('open', handleOpen);
-                    socket.removeEventListener('message', handleMessage);
-                    socket.removeEventListener('error', handleError);
-                    socket.removeEventListener('close', handleClose);
-                    if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
-                        socket.close();
-                    }
-                };
-
-                const settle = (fn: () => void) => {
-                    if (settled) return;
-                    settled = true;
-                    cleanup();
-                    fn();
-                };
-
-                const handleOpen = () => {
-                    socket.send(JSON.stringify({ type: 'CREATE_ROOM', room }));
-                };
-
-                const handleMessage = (event: MessageEvent) => {
-                    let parsed;
-                    try {
-                        parsed = JSON.parse(event.data);
-                    } catch {
-                        return;
-                    }
-                    if (!parsed || typeof parsed !== 'object') return;
-                    if (parsed.type === 'ROOM_SNAPSHOT' && parsed.roomId === roomId) {
-                        settle(() => resolve(parsed.roomId));
-                        return;
-                    }
-                    if (parsed.type === 'ERROR') {
-                        settle(() => reject(new Error(parsed.message ?? 'Unable to create room')));
-                    }
-                };
-
-                const handleError = () => {
-                    settle(() => reject(new Error('Realtime connection failed')));
-                };
-
-                const handleClose = () => {
-                    settle(() => reject(new Error('Realtime connection closed before room creation')));
-                };
-
-                socket.addEventListener('open', handleOpen);
-                socket.addEventListener('message', handleMessage);
-                socket.addEventListener('error', handleError);
-                socket.addEventListener('close', handleClose);
-            });
-
-            navigate({ to: `/rooms/${createdRoomId}` });
+            const createdRoom = await createRoom(room);
+            navigate({ to: `/rooms/${createdRoom.roomId}` });
         },
-        [navigate, user]
+        [navigate, user, createRoom]
     );
 
     return (

@@ -3,6 +3,7 @@ import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { Clock, Moon, Sun, User, Users } from 'lucide-react';
 
 import { ClientOnly } from '@tanstack/react-router';
+import { useRealtimeCurrentRoom } from '@/client/state/hooks';
 
 type StatsWidgetProps = {
     label: string;
@@ -48,17 +49,18 @@ export function BottomBar() {
         [now]
     );
 
-    const connectedCount = roomState.connectedUserIds.length;
-    const maxPlayers = roomState.maxPlayers ?? 0;
-    const playerCount = `${connectedCount}/${maxPlayers || '—'}`;
-    const role = roomState.memberRole ?? 'spectator';
-    const phase = gameState.phase ?? 'setup';
-    const normalizedPhase =
-        phase.toLowerCase().includes('night') ? 'Night'
-        : phase.toLowerCase().includes('day') ? 'Day'
-        : phase.charAt(0).toUpperCase() + phase.slice(1);
-    const dayNumber = gameState.dayNumber ?? 1;
-    const phaseIcon = normalizedPhase === 'Night' ? <Moon size={16} /> : <Sun size={16} />;
+    const { snapshot } = useRealtimeCurrentRoom();
+    const room = snapshot?.context.room;
+    const connectedCount = room ? Object.keys(room.connectedUserIds ?? {}).length : 0;
+    const maxPlayers = room?.maxPlayers ?? 0;
+    const playerCount = room ? `${connectedCount}/${maxPlayers || '—'}` : '— / —';
+    const roomName = room?.banner ?? 'No room';
+    const status = snapshot?.value.roomStatus ?? 'waiting';
+    const normalizedStatus = status
+        .split('_')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    const statusIcon = status === 'in_game' ? <Moon size={16} /> : <Sun size={16} />;
 
     // const accentClass =  accentStyles[values.accent] ?? accentStyles.ember;
     // const toneClass =  toneStyles[values.panelTone] ?? toneStyles.soft;
@@ -84,17 +86,17 @@ export function BottomBar() {
                 // accentClass={accentClass}
             />
             <StatsWidget
-                label='Role'
-                value={role}
-                meta='Assignment'
+                label='Room'
+                value={roomName}
+                meta='Banner'
                 icon={<User size={16} />}
                 // accentClass={accentClass}
             />
             <StatsWidget
-                label='Phase'
-                value={normalizedPhase}
-                meta={`Day ${dayNumber}`}
-                icon={phaseIcon}
+                label='Status'
+                value={normalizedStatus}
+                meta='Realtime'
+                icon={statusIcon}
                 // accentClass={accentClass}
             />
         </footer>

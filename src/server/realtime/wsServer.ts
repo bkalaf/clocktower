@@ -1,4 +1,4 @@
-// src/server/wsServer.ts
+// src/server/realtime/wsServer.ts
 //
 // A practical WebSocket server for your architecture:
 // - UI never reads Mongo; UI only receives snapshots via WS.
@@ -27,46 +27,37 @@
 // You can add requestId correlation as needed.
 
 import http from 'node:http';
-import { WebSocketServer, WebSocket } from 'ws';
+import { WebSocketServer } from 'ws';
 import mongoose from 'mongoose';
 
-import { createRoomActor, roomActors } from './roomService';
-import { rehydrateAllRooms } from './rehydrateRooms';
-
-type WsClient = WebSocket & { id?: string };
-
-type Incoming =
-    | { type: 'CREATE_ROOM'; room: Room; requestId?: string }
-    | { type: 'JOIN_ROOM'; roomId: string; userId?: string; requestId?: string }
-    | { type: 'LEAVE_ROOM'; roomId: string; requestId?: string }
-    | { type: 'ROOM_EVENT'; roomId: string; event: RoomEvents; requestId?: string };
-
-type Outgoing =
-    | { type: 'ROOM_SNAPSHOT'; roomId: string; snapshot: { value: any; context: any } }
-    | { type: 'JOINED_ROOM'; roomId: string }
-    | { type: 'ERROR'; requestId?: string; message: string };
+import { createWsConnection, type WsClient } from './wsConnection';
+import { getRoomSummaries } from './roomList';
+import type { OutgoingMessage } from '@/shared/realtime/messages';
+import { RoomSummary, RoomsListMessage } from '@/shared/realtime/messages';
+import { rehydrateAllRooms } from '../rehydrateRooms';
 
 // ---- in-memory subscriptions: roomId -> ws clients
 const roomSubscribers = new Map<string, Set<WsClient>>();
+const connectedClients = new Set<WsClient>();
 
-function safeSend(ws: WsClient, msg: Outgoing) {
+function safeSend(ws: WsClient, msg: OutgoingMessage) {
     if (ws.readyState !== ws.OPEN) return;
     ws.send(JSON.stringify(msg));
 }
 
-function broadcastToRoom(roomId: string, msg: Outgoing) {
+function broadcastToRoom(roomId: string, msg: OutgoingMessage) {
     const subs = roomSubscribers.get(roomId);
     if (!subs) return;
     for (const ws of subs) safeSend(ws, msg);
 }
 
-function subscribe(ws: WsClient, roomId: string) {
+function subscribe(roomId: string, ws: WsClient) {
     const subs = roomSubscribers.get(roomId) ?? new Set<WsClient>();
     subs.add(ws);
     roomSubscribers.set(roomId, subs);
 }
 
-function unsubscribe(ws: WsClient, roomId: string) {
+function unsubscribe(roomId: string, ws: WsClient) {
     const subs = roomSubscribers.get(roomId);
     if (!subs) return;
     subs.delete(ws);
@@ -80,10 +71,12 @@ function unsubscribeAll(ws: WsClient) {
     }
 }
 
-function parseIncoming(raw: WebSocket.RawData): Incoming {
-    const text = typeof raw === 'string' ? raw : raw.toString('utf8');
-    const msg = JSON.parse(text);
-    return msg as Incoming;
+function broadcastRoomsList(rooms: RoomSummary[]) {
+    if (rooms.length === 0 && connectedClients.size === 0) return;
+    const msg: RoomsListMessage = { type: 'ROOMS_LIST', rooms };
+    for (const client of connectedClients) {
+        safeSend(client, msg);
+    }
 }
 
 export async function startWsServer(opts: { port: number; mongoUri: string; dbName?: string }) {
@@ -101,9 +94,10 @@ export async function startWsServer(opts: { port: number; mongoUri: string; dbNa
         // We only care about ROOM_SNAPSHOT shape here.
         // Your roomService should broadcast snapshots using:
         // { type:'ROOM_SNAPSHOT', roomId, snapshot:{ value, context } }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const m = msg as any;
         if (m?.type === 'ROOM_SNAPSHOT' && typeof m.roomId === 'string') {
-            broadcastToRoom(m.roomId, m as Outgoing);
+            broadcastToRoom(m.roomId, m as OutgoingMessage);
         } else {
             // optionally: global broadcast or ignore
         }
@@ -113,105 +107,21 @@ export async function startWsServer(opts: { port: number; mongoUri: string; dbNa
     await rehydrateAllRooms(broadcast);
 
     wss.on('connection', (ws: WsClient) => {
-        ws.on('message', (raw) => {
-            let msg: Incoming;
-            try {
-                msg = parseIncoming(raw);
-            } catch (e) {
-                safeSend(ws, { type: 'ERROR', message: 'Invalid JSON message' });
-                return;
-            }
+        connectedClients.add(ws);
+        const removeClient = () => {
+            connectedClients.delete(ws);
+        };
+        ws.on('close', removeClient);
+        ws.on('error', removeClient);
 
-            switch (msg.type) {
-                case 'CREATE_ROOM': {
-                    try {
-                        const room = msg.room;
-
-                        // create actor in-memory + start persisting + broadcasting
-                        const actor = createRoomActor(room, broadcast);
-
-                        // auto-subscribe creator to the room
-                        subscribe(ws, room._id);
-
-                        // send joined ack + immediate snapshot
-                        safeSend(ws, { type: 'JOINED_ROOM', roomId: room._id });
-                        const snap = actor.getSnapshot();
-                        safeSend(ws, {
-                            type: 'ROOM_SNAPSHOT',
-                            roomId: room._id,
-                            snapshot: { value: snap.value, context: snap.context }
-                        });
-                    } catch (e: any) {
-                        safeSend(ws, {
-                            type: 'ERROR',
-                            requestId: msg.requestId,
-                            message: e?.message ?? 'Failed to create room'
-                        });
-                    }
-                    return;
-                }
-
-                case 'JOIN_ROOM': {
-                    const { roomId } = msg;
-                    const actor = roomActors.get(roomId);
-
-                    if (!actor) {
-                        safeSend(ws, {
-                            type: 'ERROR',
-                            requestId: msg.requestId,
-                            message: `Room not found: ${roomId}`
-                        });
-                        return;
-                    }
-
-                    subscribe(ws, roomId);
-                    safeSend(ws, { type: 'JOINED_ROOM', roomId });
-
-                    // send current snapshot immediately
-                    const snap = actor.getSnapshot();
-                    safeSend(ws, {
-                        type: 'ROOM_SNAPSHOT',
-                        roomId,
-                        snapshot: { value: snap.value, context: snap.context }
-                    });
-                    return;
-                }
-
-                case 'LEAVE_ROOM': {
-                    unsubscribe(ws, msg.roomId);
-                    return;
-                }
-
-                case 'ROOM_EVENT': {
-                    const actor = roomActors.get(msg.roomId);
-                    if (!actor) {
-                        safeSend(ws, {
-                            type: 'ERROR',
-                            requestId: msg.requestId,
-                            message: `Room not found: ${msg.roomId}`
-                        });
-                        return;
-                    }
-
-                    // Forward event into RoomMachine actor
-                    // (RoomMachine will broadcast snapshots via subscription in roomService)
-                    actor.send(msg.event);
-                    return;
-                }
-
-                default: {
-                    safeSend(ws, { type: 'ERROR', requestId: (msg as any).requestId, message: 'Unknown message type' });
-                    return;
-                }
-            }
-        });
-
-        ws.on('close', () => {
-            unsubscribeAll(ws);
-        });
-
-        ws.on('error', () => {
-            unsubscribeAll(ws);
+        createWsConnection({
+            ws,
+            subscribe,
+            unsubscribe,
+            unsubscribeAll,
+            broadcast,
+            listRooms: getRoomSummaries,
+            broadcastRoomsList
         });
     });
 
