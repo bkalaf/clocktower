@@ -1,5 +1,5 @@
 // src/server/game/index.ts
-import { GameModel } from '../../db/models/Game';
+import { GameModel } from '../../db/models/_Game';
 import { GameId, UserId } from '../../types/game';
 import type { Room } from '../../types/room';
 import { RoomStatus } from '../../types/room';

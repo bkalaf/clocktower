@@ -1,12 +1,4 @@
 // src/shared/realtime/messages.ts
-export type RoomSummary = {
-    roomId: string;
-    playerCount: number;
-    name?: string;
-    createdAt?: number;
-    status?: string;
-};
-
 export type RoomsListMessage = {
     type: 'ROOMS_LIST';
     rooms: RoomSummary[];

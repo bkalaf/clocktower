@@ -21,27 +21,16 @@ import { TopBarScriptsMenu } from './top-bar/TopBarScriptsMenu';
 import { TopBarSidebarTrigger } from './TopBarSidebarTrigger';
 import { UserNameSpan } from './UserNameSpan';
 import { MatchRoute } from '@tanstack/react-router';
+import { useAppSelector } from '../client/state/hooks';
+import { authSelectors } from '../client/state/authSlice';
 
-export function CreateRoomButton() {
-    return (
-        <MatchRoute
-            to='/rooms'
-            fuzzy={false}
-        >
-            <Button
-                className='uppercase'
-                variant='outline'
-                size='sm'
-            >
-                Create Room
-            </Button>
-        </MatchRoute>
-    );
-}
-export function TopBar({ isAuth, username }: { isAuth: boolean; username?: string }) {
+
+
+export function TopBar() {
     const navigate = useNavigate();
     const { open } = useModal();
-
+    const isAuth = useAppSelector(authSelectors.isAuth);
+    const username = useAppSelector(authSelectors.selectUsername);
     console.log(`isAuth`, isAuth);
     const handleLogin = useCallback(() => {
         navigate({

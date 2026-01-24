@@ -1,5 +1,5 @@
 // src/server/realtime/whisperGate.ts
-import { MatchModel } from '@/db/models/Match';
+import { MatchModel } from '@/db/models/Game';
 import { WhisperModel } from '@/db/models/Whisper';
 
 function toGameTopic(topicId: string) {

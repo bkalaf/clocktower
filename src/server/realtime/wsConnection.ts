@@ -1,7 +1,6 @@
 // src/server/realtime/wsConnection.ts
 import type { WebSocket } from 'ws';
 import type { IncomingMessage, OutgoingMessage } from '@/shared/realtime/messages';
-import { RoomSummary } from '@/shared/realtime/messages';
 import { createRoomActor, roomActors } from '../roomService';
 
 export type WsClient = WebSocket & { id?: string };
@@ -26,7 +25,7 @@ export function createWsConnection(opts: {
     subscribe: SubscribeFn;
     unsubscribe: UnsubscribeFn;
     unsubscribeAll: UnsubscribeAllFn;
-    listRooms: () => RoomSummary[];
+    listRooms: () => Promise<RoomSummary[]>;
     broadcastRoomsList: (rooms: RoomSummary[]) => void;
 
     // Broadcast hook passed to roomService when creating an actor.
@@ -35,14 +34,14 @@ export function createWsConnection(opts: {
 }) {
     const { ws, subscribe, unsubscribe, unsubscribeAll, broadcast, listRooms, broadcastRoomsList } = opts;
     const sendRoomsList = (requestId?: string) => {
-        const rooms = listRooms();
-        safeSend(ws, {
-            type: 'ROOMS_LIST',
-            rooms,
-            requestId
-        });
+        listRooms().then((rooms) =>
+            safeSend(ws, {
+                type: 'ROOMS_LIST',
+                rooms,
+                requestId
+            })
+        );
     };
-    sendRoomsList();
 
     ws.on('message', async (raw) => {
         let msg: IncomingMessage;
@@ -70,7 +69,7 @@ export function createWsConnection(opts: {
                         roomId: room._id,
                         snapshot: { value: snap.value, context: snap.context }
                     });
-                    const createdRooms = listRooms();
+                    const createdRooms = await listRooms();
                     const createdRoom =
                         createdRooms.find((candidate) => candidate.roomId === room._id) ??
                         ({ roomId: room._id, playerCount: 0 } as RoomSummary);

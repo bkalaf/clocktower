@@ -74,6 +74,29 @@ declare global {
         speed: GameSpeed;
         visibility: RoomVisibility;
     };
+    export type RoomSummary = {
+        roomId: string;
+        playerCount: number;
+        name?: string;
+        createdAt?: number;
+        status?: string;
+        // From Room
+        banner: string;
+        allowTravellers: boolean;
+        connectedUserIds: ConnectedUsers;
+        hostUserId: string;
+        hostUsername: string;
+        minPlayers: PcPlayerCount;
+        maxPlayers: PcPlayerCount;
+        maxTravellers: PcTravellerCount;
+        plannedStartTime?: string;
+        scriptId?: string;
+        scriptName?: string;
+        roles: CharacterRoles[];
+        skillLevel: SkillLevel;
+        speed: GameSpeed;
+        visibility: RoomVisibility;
+    };
     type CreateRoomRequest = {
         type: 'CREATE_ROOM';
         room: Room;

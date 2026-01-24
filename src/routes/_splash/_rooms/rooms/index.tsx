@@ -1,9 +1,15 @@
+// src/routes/_splash/_rooms/rooms/index.tsx
 import { useEffect } from 'react';
 import { createFileRoute } from '@tanstack/react-router';
 
-import { useRealtimeRooms, useRequestRoomsList } from '@/client/state/hooks';
+import { useRequestRoomsList } from '@/client/state/hooks';
+import { useRealtimeRooms } from '@/client/state/useRealtimeRooms';
+import { checkAuth } from '../../../../client/state/checkAuth';
 
 export const Route = createFileRoute('/_splash/_rooms/rooms/')({
+    beforeLoad: () => {
+        checkAuth();
+    },
     component: RouteComponent
 });
 
@@ -42,7 +48,7 @@ function RouteComponent() {
                         </tr>
                     </thead>
                     <tbody>
-                        {rooms.length === 0 ? (
+                        {rooms.length === 0 ?
                             <tr>
                                 <td
                                     colSpan={4}
@@ -51,27 +57,18 @@ function RouteComponent() {
                                     No active rooms yet.
                                 </td>
                             </tr>
-                        ) : (
-                            rooms.map((room) => (
+                        :   rooms.map((room) => (
                                 <tr
                                     key={room.roomId}
                                     className='border-b border-white/5 last:border-b-0'
                                 >
-                                    <td className='px-4 py-3 text-sm font-medium text-white'>
-                                        {room.roomId}
-                                    </td>
-                                    <td className='px-4 py-3 text-sm text-slate-200'>
-                                        {room.name ?? 'unlabeled'}
-                                    </td>
-                                    <td className='px-4 py-3 text-sm text-slate-200'>
-                                        {room.playerCount}
-                                    </td>
-                                    <td className='px-4 py-3 text-sm text-slate-200'>
-                                        {room.status ?? 'unknown'}
-                                    </td>
+                                    <td className='px-4 py-3 text-sm font-medium text-white'>{room.roomId}</td>
+                                    <td className='px-4 py-3 text-sm text-slate-200'>{room.name ?? 'unlabeled'}</td>
+                                    <td className='px-4 py-3 text-sm text-slate-200'>{room.playerCount}</td>
+                                    <td className='px-4 py-3 text-sm text-slate-200'>{room.status ?? 'unknown'}</td>
                                 </tr>
                             ))
-                        )}
+                        }
                     </tbody>
                 </table>
             </div>

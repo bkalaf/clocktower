@@ -1,6 +1,6 @@
 // src/server/authz/gameAuth.ts
 import { connectMongoose } from '../../db/connectMongoose';
-import { GameModel } from '../../db/models/Game';
+import { GameModel } from '../../db/models/_Game';
 import { GameMemberModel } from '../../db/models/GameMember';
 import { AuthedUser, GameId, UserId } from '../../types/game';
 

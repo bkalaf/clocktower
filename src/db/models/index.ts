@@ -1,16 +1,16 @@
 // src/db/models/index.ts
 import { UserModel } from './User';
 import { SessionModel } from './Session';
-import { GameModel } from './Game';
+import { GameModel } from './_Game';
 import { GameMemberModel } from './GameMember';
 import { ChatItemModel } from './ChatItem';
 import { WhisperModel } from './Whisper';
 import { StreamMessageModel } from './StreamMessage';
 import { ScriptModel } from './Script';
-import { MatchModel } from './Match';
+import { MatchModel } from './Game';
 import { InviteModel } from './Invite';
 import { ModerationLogModel } from './ModerationLog';
-import { TravelerRequestModel } from './TravelerRequest';
+import { TravellerRequestModel } from './TravellerRequest';
 
 const $models = {
     UserModel,
@@ -24,7 +24,7 @@ const $models = {
     MatchModel,
     InviteModel,
     ModerationLogModel,
-    TravelerRequestModel
+    TravellerRequestModel
 };
 
 export default $models;

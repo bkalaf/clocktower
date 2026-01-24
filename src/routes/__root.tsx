@@ -14,6 +14,7 @@ import { ModalHost } from '../ui/modals/ModalHost';
 import { whoamiFn } from '../lib/api';
 import { store } from '../client/state/store';
 import { authActions } from '../client/state/authSlice';
+import { Provider } from 'react-redux';
 
 interface MyRouterContext {
     queryClient: QueryClient;
@@ -88,7 +89,9 @@ function RootShellComponent({ children }: { children: React.ReactNode }) {
                 <HeadContent />
             </head>
             <body>
-                <SidebarProvider>{children}</SidebarProvider>
+                <Provider store={store}>
+                    <SidebarProvider>{children}</SidebarProvider>
+                </Provider>
                 <TanStackDevtools
                     config={{
                         position: 'bottom-right'
@@ -111,11 +114,11 @@ function RootLayout() {
     const search = Route.useSearch();
     return (
         <div className='relative flex min-h-screen w-full overflow-hidden bg-slate-950 text-white'>
-            <RealtimeConnector />
             <AppShell>
                 <Outlet />
                 <ModalHost {...search} />
             </AppShell>
+            {/* <RealtimeConnector /> */}
             {/* <AppSidebar />
             <div className='flex flex-1 flex-shrink flex-col'>
                 <TopBar />

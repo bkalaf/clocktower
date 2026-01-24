@@ -2,7 +2,7 @@
 import sessionModels from '../../db/models/Session';
 import gameMemberModels from '../../db/models/GameMember';
 import userModels from '../../db/models/User';
-import gameModels from '../../db/models/Game';
+import gameModels from '../../db/models/_Game';
 import chatItemModels from '../../db/models/ChatItem';
 import whisperModels from '../../db/models/Whisper';
 
@@ -23,6 +23,9 @@ import whisperModels from '../../db/models/Whisper';
 //     }
 // };
 
+/**
+* @deprecated
+*/
 export const $z = {
     gameMember: gameMemberModels,
     session: sessionModels,

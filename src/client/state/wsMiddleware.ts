@@ -1,6 +1,10 @@
+// src/client/state/wsMiddleware.ts
 import { createAction, type Middleware, type Dispatch } from '@reduxjs/toolkit';
-import type { IncomingMessage, OutgoingMessage, RoomSummary } from '@/shared/realtime/messages';
-import { realtimeActions } from './realtimeSlice';
+import type { IncomingMessage, OutgoingMessage } from '@/shared/realtime/messages';
+import { realtimeActions, realtimeSelectors } from './realtimeSlice';
+import { authActions } from './authSlice';
+import { getRealtimeUrl } from '../../lib/realtime';
+import { Brackets } from 'lucide-react';
 
 type PendingRequest = {
     resolve: (value: RoomSummary) => void;
@@ -60,10 +64,12 @@ export function requestRoomsList(dispatch: Dispatch) {
 }
 
 const wsMiddleware: Middleware = (store) => {
+    console.log(`in wsMiddleware`);
     let socket: WebSocket | null = null;
     let cleanup: (() => void) | null = null;
 
     const handleMessage = (raw: string) => {
+        console.log(`raw message: `, raw);
         let parsed: unknown;
         try {
             parsed = JSON.parse(raw);
@@ -80,6 +86,8 @@ const wsMiddleware: Middleware = (store) => {
         const message = parsed as OutgoingMessage;
         switch (message.type) {
             case 'ROOMS_LIST':
+                const roomsList = realtimeSelectors.selectRoomsList(store.getState());
+                if (roomsList.length === message.rooms.length) break;
                 store.dispatch(realtimeActions.setRooms(message.rooms));
                 break;
             case 'ROOM_CREATED': {
@@ -159,7 +167,12 @@ const wsMiddleware: Middleware = (store) => {
     };
 
     return (next) => (action) => {
-        if (wsConnect.match(action)) {
+        if (authActions.login.match(action)) {
+            console.log(`ws.url`);
+            connectSocket('ws://localhost:3001/ws');
+        } else if (authActions.logout.match(action)) {
+            disconnectSocket();
+        } else if (wsConnect.match(action)) {
             connectSocket(action.payload.url);
         } else if (wsDisconnect.match(action)) {
             disconnectSocket();

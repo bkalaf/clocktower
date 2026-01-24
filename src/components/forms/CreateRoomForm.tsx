@@ -82,7 +82,8 @@ function RenderCreateRoomControls({ formName, defaultScriptId }: { formName: str
                 to: '/scripts/new',
                 state: {
                     returnTo: `${location.pathname}${location.search}`
-                }
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                } as any
             });
         }, [location.pathname, location.search, navigate]);
 

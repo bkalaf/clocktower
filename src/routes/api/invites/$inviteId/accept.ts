@@ -5,7 +5,7 @@ import { zInviteIdParams } from '../../../../server/schemas/roomSchemas';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { HttpError } from '../../../../errors';
 import { InviteModel } from '../../../../db/models/Invite';
-import { GameModel } from '../../../../db/models/Game';
+import { GameModel } from '../../../../db/models/_Game';
 import { GameMemberModel } from '../../../../db/models/GameMember';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { availableSeats } from '../../../../server/rooms/helpers';

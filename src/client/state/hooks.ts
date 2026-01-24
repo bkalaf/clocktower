@@ -1,3 +1,4 @@
+// src/client/state/hooks.ts
 import { useCallback } from 'react';
 import { useDispatch, useSelector, type TypedUseSelectorHook } from 'react-redux';
 import { requestRoomsList, sendCreateRoom } from './wsMiddleware';
@@ -12,10 +13,6 @@ export function useRealtimeState() {
 
 export function useRealtimeStatus() {
     return useAppSelector((state) => state.realtime.status);
-}
-
-export function useRealtimeRooms() {
-    return useAppSelector((state) => state.realtime.rooms);
 }
 
 export function useRealtimeCurrentRoom() {

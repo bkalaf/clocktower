@@ -1,6 +1,5 @@
 // src/client/state/realtimeSlice.ts
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { RoomSummary } from '@/shared/realtime/messages';
 
 export type RealtimeStatus = 'disconnected' | 'connecting' | 'connected';
 
@@ -49,9 +48,16 @@ const realtimeSlice = createSlice({
         setLastError(state, action: PayloadAction<string | undefined>) {
             state.lastError = action.payload;
         }
+    },
+    selectors: {
+        selectRoomsList: (state: RealtimeState) => state.rooms,
+        selectCurrentRoomId: (state: RealtimeState) => state.currentRoomId,
+        selectSnapshot: (state: RealtimeState) => (roomId: string) => state.snapshotsByRoomId[roomId],
+        selectLastError: (state: RealtimeState) => state.lastError
     }
 });
 
 export const realtimeActions = realtimeSlice.actions;
+export const realtimeSelectors = realtimeSlice.selectors;
 
 export default realtimeSlice.reducer;

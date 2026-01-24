@@ -33,7 +33,7 @@ import mongoose from 'mongoose';
 import { createWsConnection, type WsClient } from './wsConnection';
 import { getRoomSummaries } from './roomList';
 import type { OutgoingMessage } from '@/shared/realtime/messages';
-import { RoomSummary, RoomsListMessage } from '@/shared/realtime/messages';
+import { RoomsListMessage } from '@/shared/realtime/messages';
 import { rehydrateAllRooms } from '../rehydrateRooms';
 
 // ---- in-memory subscriptions: roomId -> ws clients

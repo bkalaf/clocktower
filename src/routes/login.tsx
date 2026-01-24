@@ -3,6 +3,8 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
 import { LoginForm } from '../components/forms/LoginForm';
 import { authReturnToSearchSchema } from './auth/-common';
+import { useAppSelector } from '../client/state/hooks';
+import { authSelectors } from '../client/state/authSlice';
 
 export const Route = createFileRoute('/login')({
     component: LoginRoute,
@@ -14,7 +16,7 @@ export const Route = createFileRoute('/login')({
 
 function LoginRoute() {
     const context = Route.useRouteContext();
-    const isAuth = useMemo(() => context.userId !== null, [context.userId]);
+    const isAuth = useAppSelector(authSelectors.isAuth)
     const navigate = useNavigate();
     const { returnTo } = Route.useSearch();
 

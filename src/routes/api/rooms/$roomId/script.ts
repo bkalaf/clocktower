@@ -5,7 +5,7 @@ import { parseJsonBody } from '../../../../server/parseJsonBody';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { HttpError } from '../../../../errors';
 import { zRoomIdParams, zChangeScriptInput } from '../../../../server/schemas/roomSchemas';
-import { GameModel } from '../../../../db/models/Game';
+import { GameModel } from '../../../../db/models/_Game';
 import { getScript } from '../../../../server/scripts';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { requireHost, requireStoryteller, storytellerCount } from '../../../../server/authz/gameAuth';

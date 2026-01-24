@@ -6,8 +6,8 @@ import { zMatchIdParams, zTravelerDecisionInput } from '../../../../server/schem
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { HttpError } from '../../../../errors';
 import { connectMongoose } from '../../../../db/connectMongoose';
-import { MatchModel } from '../../../../db/models/Match';
-import { TravelerRequestModel } from '../../../../db/models/TravelerRequest';
+import { MatchModel } from '../../../../db/models/Game';
+import { TravellerRequestModel } from '../../../../db/models/TravellerRequest';
 import { requireHost, requireStoryteller } from '../../../../server/authz/gameAuth';
 import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
 
@@ -44,7 +44,7 @@ export const Route = createFileRoute('/api/matches/$matchId/travel-deny')({
                     return HttpError.FORBIDDEN('not_st_or_host');
                 }
 
-                const requestDoc = await TravelerRequestModel.findById(bodyResult.data.requestId).lean();
+                const requestDoc = await TravellerRequestModel.findById(bodyResult.data.requestId).lean();
                 if (!requestDoc || requestDoc.matchId !== match._id) {
                     return HttpError.NOT_FOUND('request');
                 }
@@ -52,7 +52,7 @@ export const Route = createFileRoute('/api/matches/$matchId/travel-deny')({
                     return Response.json({ error: 'request_invalid' }, { status: 409 });
                 }
 
-                await TravelerRequestModel.updateOne({ _id: requestDoc._id }, { $set: { status: 'rejected' } });
+                await TravellerRequestModel.updateOne({ _id: requestDoc._id }, { $set: { status: 'rejected' } });
 
                 const payload = {
                     kind: 'event',

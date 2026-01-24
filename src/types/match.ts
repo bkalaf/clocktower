@@ -2,7 +2,7 @@
 import { zMatchStatus } from '@/schemas/enums/zMatchStatus';
 import { zMatchPhase } from '@/schemas/enums/zMatchPhase';
 import { zMatchSubphase } from '@/schemas/enums/zMatchSubphase';
-import type { Match as MatchModel } from '@/db/models/Match';
+import type { Match as MatchModel } from '@/db/models/Game';
 import z from 'zod/v4';
 
 export type MatchStatus = z.infer<typeof zMatchStatus>;

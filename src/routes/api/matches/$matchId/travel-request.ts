@@ -6,8 +6,8 @@ import { parseJsonBody } from '../../../../server/parseJsonBody';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { HttpError } from '../../../../errors';
 import { connectMongoose } from '../../../../db/connectMongoose';
-import { MatchModel } from '../../../../db/models/Match';
-import { TravelerRequestModel } from '../../../../db/models/TravelerRequest';
+import { MatchModel } from '../../../../db/models/Game';
+import { TravellerRequestModel } from '../../../../db/models/TravellerRequest';
 import { GameMemberModel } from '../../../../db/models/GameMember';
 import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
 import { randomUUID } from 'crypto';
@@ -44,7 +44,7 @@ export const Route = createFileRoute('/api/matches/$matchId/travel-request')({
                     return Response.json({ error: 'penalized' }, { status: 403 });
                 }
 
-                const already = await TravelerRequestModel.findOne({
+                const already = await TravellerRequestModel.findOne({
                     matchId: match._id,
                     userId: user._id,
                     status: 'pending',
@@ -55,7 +55,7 @@ export const Route = createFileRoute('/api/matches/$matchId/travel-request')({
                 }
 
                 const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
-                await TravelerRequestModel.create({
+                await TravellerRequestModel.create({
                     _id: randomUUID(),
                     matchId: match._id,
                     roomId: match.roomId,

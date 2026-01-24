@@ -4,7 +4,7 @@ import { randomUUID } from 'crypto';
 import { parseJsonBody } from '../../../server/parseJsonBody';
 import { zCreateRoomInput } from '@/schemas/api/rooms';
 import { HttpError } from '../../../errors';
-import { GameModel } from '../../../db/models/Game';
+import { GameModel } from '../../../db/models/_Game';
 import { getUserFromCookie } from '../../../serverFns/getId/getUserFromCookie';
 import { connectMongoose } from '../../../db/connectMongoose';
 import { getScript } from '../../../server/scripts';

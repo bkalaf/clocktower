@@ -12,6 +12,7 @@ const rootBackgroundStyle: React.CSSProperties = {
     backgroundRepeat: 'no-repeat'
     // backgroundAttachment: 'fixed'
 };
+
 export function AppShell({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider defaultOpen={false}>
@@ -21,10 +22,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <SidebarInset className='h-svh w-svh'>
                 {/* Chrome + content column */}
                 {/* <div className='flex h-full flex-col overflow-hidden p-0'> */}
-                <TopBar
-                    username={username}
-                    isAuth={isAuth}
-                />
+                <TopBar />
                 {/* This is the remaining usable space */}
                 <main
                     className='min-h-0 bg-cover bg-center flex-1 overflow-hidden object-contain items-center justify-center'

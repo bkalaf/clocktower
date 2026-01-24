@@ -5,7 +5,7 @@ import { zMatchIdParams } from '../../../../server/schemas/roomSchemas';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { HttpError } from '../../../../errors';
 import { connectMongoose } from '../../../../db/connectMongoose';
-import { MatchModel } from '../../../../db/models/Match';
+import { MatchModel } from '../../../../db/models/Game';
 import { requireMember } from '../../../../server/authz/gameAuth';
 
 export const Route = createFileRoute('/api/matches/$matchId/')({

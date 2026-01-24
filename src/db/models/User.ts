@@ -1,28 +1,51 @@
 // src/db/models/User.ts
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import z from 'zod/v4';
-import { getTypesFor } from '../../utils/zodToMongoose';
 import aliases from '../../schemas/aliases';
+import enums from '../../schemas/enums';
 import { zAuthedUser } from './AuthedUser';
 
-const zUser = z.object({
+export const zUser = z.object({
     ...zAuthedUser.shape,
     passwordHash: aliases.password
 });
 
-const userModels = getTypesFor(
-    'user',
-    zUser,
+export type User = z.infer<typeof zUser>;
+
+const globalRoleValues = enums.globalRoles.options;
+
+const userSchema = new Schema<User>(
+    {
+        _id: { type: String, required: true },
+        username: { type: String, required: true, trim: true },
+        email: { type: String, required: true, lowercase: true, trim: true },
+        userRoles: {
+            type: [String],
+            enum: globalRoleValues,
+            required: true,
+            default: ['user']
+        },
+        penaltyUntil: { type: Date, default: null },
+        passwordHash: { type: String, required: true, minlength: 8, maxlength: 64 }
+    },
     {
         timestamps: true,
         collection: 'user'
-    },
-    {},
-    [{ email: 1 }, { unique: true }]
+    }
 );
 
-export type User = z.infer<typeof zUser>;
-export type UserType = mongoose.InferRawDocType<User>;
-export type UserDocument = mongoose.HydratedDocument<UserType>;
-export const UserModel = userModels.model;
+userSchema.index({ email: 1 }, { unique: true });
+
+const modelName = 'user';
+const existingModel = mongoose.models[modelName] as mongoose.Model<User> | undefined;
+const initializedModel = existingModel ?? mongoose.model<User>(modelName, userSchema);
+
+export const UserModel = initializedModel;
+
+const userModels = {
+    schema: userSchema,
+    model: initializedModel,
+    insert: zUser
+};
+
 export default userModels;

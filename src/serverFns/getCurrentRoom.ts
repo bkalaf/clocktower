@@ -17,7 +17,7 @@ export const getCurrentRoom = createServerFn({
         if (!userId) {
             return null;
         }
-        
+
         await connectMongoose();
         const query = {
             $or: [

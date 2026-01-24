@@ -3,7 +3,7 @@
 import { HostGraceDeps } from '.';
 import { $keys } from '../../keys';
 import { connectMongoose } from '../../db/connectMongoose';
-import { GameModel } from '../../db/models/Game';
+import { GameModel } from '../../db/models/_Game';
 import { GameMemberModel } from '../../db/models/GameMember';
 import { getRedis } from '../../redis';
 import { GameId, UserId } from '../../types/game';

@@ -1,6 +1,6 @@
 // src/server/rooms/helpers.ts
 import { connectMongoose } from '../../db/connectMongoose';
-import { GameModel } from '../../db/models/Game';
+import { GameModel } from '../../db/models/_Game';
 import { GameMemberModel } from '../../db/models/GameMember';
 import { InviteModel } from '../../db/models/Invite';
 

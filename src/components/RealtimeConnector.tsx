@@ -8,6 +8,7 @@ import { wsConnect, wsDisconnect } from '@/client/state/wsMiddleware';
 import { authSelectors } from '../client/state/authSlice';
 
 function RealtimeConnectorClient({ userId }: { userId?: string }) {
+    console.log(`RealmtimeConnectorClient`);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -17,6 +18,7 @@ function RealtimeConnectorClient({ userId }: { userId?: string }) {
         }
 
         const url = getRealtimeUrl();
+        console.log(`realtime url`, url);
         if (!url) {
             return;
         }

@@ -10,7 +10,14 @@ const initialContext = {
 };
 export const machine = setup({
     types: {
-        context: initialContext as { name: string; displayName: string; userId?: string; currentRoomId?: string },
+        context: initialContext as {
+            name: string;
+            displayName: string;
+            userId?: string;
+            currentRoomId?: string;
+            currentGameId?: string;
+            sessionId?: string;
+        },
         events: {} as
             | { type: 'LOGOUT' }
             | { type: 'LEAVE_ROOM' }
@@ -32,8 +39,7 @@ export const machine = setup({
         lobby: {
             on: {
                 ENTER_ROOM: {
-                    target: 'in_room',
-                    description: '{ roomId: string }'
+                    target: 'in_room'
                 },
                 LOGOUT: {
                     target: 'unauthenticated'

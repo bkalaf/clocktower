@@ -1,4 +1,4 @@
-// src/db/models/_Room.ts
+// src/db/models/Room.ts
 import mongoose from 'mongoose';
 
 const roomSchema = new mongoose.Schema(

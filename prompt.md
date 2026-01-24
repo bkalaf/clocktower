@@ -540,3 +540,8 @@ src/components/forms/CreateRoomForm.tsx
 * let's add to the night state
 
 
+I need to create a selector from authSlice and realtimeSlice called selectCurrentRoom. It should basically be this:
+	authSelectors.selectUserId
+
+
+I need to update src/machines/AppShell.ts. First let's move it with the rest of the machines to src/server/machines/SessionMachine.ts and rename the machine SessionMachine. Also, we'll need to add an event called CREATE_ROOM with a body of { room: Room } that moves from lobby to in_room. This needs to invoke an actor (RoomMachine) by calling createRoomActor from src/server/roomService.ts. Also, we should update the LOGIN_SUCCESS event to include a guard of isInRoom which should check all the roomActors from roomService.ts to see if the userId which is a string and we should add that to the LOGIN_SUCESS event's payload along with username as a string and assing those in context as well. Check that userId vs. those roomActors to see if hostUserId = userId or if connectUserId's keys = userId. If it is we should take that roomId and assign that to context.currentRoomId (and we should add to context isRoomHost (boolean) initial state false, and set that to true if hostUserId = userId). We need to wire the client to start using snapshots from this machine as well. 

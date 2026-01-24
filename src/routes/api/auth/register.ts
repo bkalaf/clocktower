@@ -5,7 +5,7 @@ import { hashPassword } from '../../../server/auth/password';
 import { randomUUID } from 'crypto';
 import { parseJsonBody } from '../../../server/parseJsonBody';
 import { connectMongoose } from '../../../db/connectMongoose';
-import { UserModel } from '../../../db/models/User';
+import {     } from '../../../db/models/User';
 import { HttpError } from '../../../errors';
 import { createSession } from '../../../server/session/createSession';
 import { setSessionCookie } from '../../../server/auth/cookies';
