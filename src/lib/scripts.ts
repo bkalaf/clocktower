@@ -1,3 +1,4 @@
+// src/lib/scripts.ts
 import { createServerFn } from '@tanstack/react-start';
 import { connectMongoose } from '@/db/connectMongoose';
 import { listAvailableScripts } from '@/server/scripts';
@@ -22,7 +23,6 @@ export const listScripts = createServerFn({
 }).handler(async () => {
     await connectMongoose();
     const scripts = await listAvailableScripts();
-    return {
         scripts: scripts.map((script) => ({
             _id: script._id,
             name: script.name,

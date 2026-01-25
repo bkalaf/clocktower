@@ -1,6 +1,8 @@
 // src/lib/api.ts
 import { createServerFn } from '@tanstack/react-start';
 import type { AuthedUser } from '../types/game';
+import { getSessionCookie } from '../server/auth/cookies';
+import { ensureSessionActor, stopSessionActor } from '../server/sessionService';
 import { getUserFromCookie } from '../serverFns/getId/getUserFromCookie';
 import z from 'zod/v4';
 import { UserModel } from '../db/models/User';
@@ -43,11 +45,20 @@ export const whoamiFn = createServerFn({
     method: 'GET'
 }).handler(async () => {
     const user: AuthedUser | null = await getUserFromCookie();
+    const sessionId = getSessionCookie();
     if (!user) {
+        if (sessionId) {
+            stopSessionActor(sessionId);
+        }
         return { user: null };
-    } else {
-        return { user };
     }
+
+    if (sessionId) {
+        const sessionActor = ensureSessionActor(sessionId);
+        sessionActor.send({ type: 'LOGIN_SUCCESS', userId: user._id, username: user.username });
+    }
+
+    return { user };
 });
 
 export async function whoami() {

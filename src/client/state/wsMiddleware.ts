@@ -3,8 +3,6 @@ import { createAction, type Middleware, type Dispatch } from '@reduxjs/toolkit';
 import type { IncomingMessage, OutgoingMessage } from '@/shared/realtime/messages';
 import { realtimeActions, realtimeSelectors } from './realtimeSlice';
 import { authActions } from './authSlice';
-import { getRealtimeUrl } from '../../lib/realtime';
-import { Brackets } from 'lucide-react';
 
 type PendingRequest = {
     resolve: (value: RoomSummary) => void;

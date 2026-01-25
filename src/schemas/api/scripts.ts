@@ -9,7 +9,8 @@ export const zScript = z.object({
     skillLevel: enums.skillLevel.default('beginner'),
     roles: z.array(enums.characterRoles).min(20, 'Script must have at least 20 roles'),
     name: z.string().min(1, 'Name is required').max(60, 'Name must be 60 characters or less'),
-    isOfficial: z.boolean().default(false)
+    isOfficial: z.boolean().default(false),
+    isPlayable: z.boolean().default(false)
 });
 
 export type Script = {
@@ -83,11 +84,4 @@ export default {
     createOutput: zCreateScriptOutput,
     itemOutput: zScriptItemOutput,
     deleteOutput: zScriptDeleteOutput
-} as ZodObjects<
-    'scripts',
-    typeof zScriptDto,
-    typeof zScript,
-    typeof zScriptListInput,
-    typeof zScriptPatch,
-    typeof zCreateScriptInput
->;
+};

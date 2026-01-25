@@ -1,0 +1,1902 @@
+[
+  {
+    "_id": "ai_ironmike",
+    "username": "ironmike",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_lunakitty",
+    "username": "lunakitty",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_void_nomad",
+    "username": "void_nomad",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 5,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "american_indian"
+    }
+  },
+  {
+    "_id": "ai_sircritsalot",
+    "username": "sircritsalot",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 5,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "nobility",
+      "socialPosition": "middle",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_pixel_priestess",
+    "username": "pixel_priestess",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 5,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "clergy",
+      "socialPosition": "upper",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_neonoracle",
+    "username": "neonoracle",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 4
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "clergy",
+      "socialPosition": "upper",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_grim_ledger",
+    "username": "grim_ledger",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 3,
+      "reasoningMode": 5,
+      "informationHandling": 5,
+      "voiceStyle": 1
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_missclick",
+    "username": "missclick",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_patch_notes",
+    "username": "patch_notes",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 5,
+      "informationHandling": 5,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_backstabben",
+    "username": "backstabben",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 5,
+      "reasoningMode": 2,
+      "informationHandling": 1,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "college_aged",
+      "socialClass": "wanderer",
+      "socialPosition": "lower",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_amberarc",
+    "username": "amberarc",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_midnightmono",
+    "username": "midnightmono",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 2,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 2
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_dadbodpaladin",
+    "username": "dadbodpaladin",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 4,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "married_with_children",
+      "socialClass": "nobility",
+      "socialPosition": "upper",
+      "geographicOrigin": "southeast_asian"
+    }
+  },
+  {
+    "_id": "ai_salt_empress",
+    "username": "salt_empress",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 5,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "empty_nester",
+      "socialClass": "nobility",
+      "socialPosition": "middle",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_rng_saint",
+    "username": "rng_saint",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "clergy",
+      "socialPosition": "upper",
+      "geographicOrigin": "american_indian"
+    }
+  },
+  {
+    "_id": "ai_goblinbroker",
+    "username": "goblinbroker",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 4,
+      "reasoningMode": 3,
+      "informationHandling": 2,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "college_aged",
+      "socialClass": "wanderer",
+      "socialPosition": "lower",
+      "geographicOrigin": "latino_south_american"
+    }
+  },
+  {
+    "_id": "ai_asternina",
+    "username": "asternina",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_theycallmehex",
+    "username": "theycallmehex",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 2,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "wanderer",
+      "socialPosition": "lower",
+      "geographicOrigin": "middle_eastern_persian"
+    }
+  },
+  {
+    "_id": "ai_bonechill",
+    "username": "bonechill",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 4,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "american_indian"
+    }
+  },
+  {
+    "_id": "ai_nova_nurse",
+    "username": "nova_nurse",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 5,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "clergy",
+      "socialPosition": "upper",
+      "geographicOrigin": "middle_eastern_persian"
+    }
+  },
+  {
+    "_id": "ai_cryptid_coder",
+    "username": "cryptid_coder",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 5,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_tiltproof",
+    "username": "tiltproof",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 1,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_lady_lag",
+    "username": "lady_lag",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 3,
+      "voiceStyle": 4
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "american_indian"
+    }
+  },
+  {
+    "_id": "ai_quiet_quasar",
+    "username": "quiet_quasar",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 1,
+      "reasoningMode": 5,
+      "informationHandling": 4,
+      "voiceStyle": 1
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_crit_champion",
+    "username": "crit_champion",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 4,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "middle_eastern_persian"
+    }
+  },
+  {
+    "_id": "ai_bubblebard",
+    "username": "bubblebard",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 5,
+      "reasoningMode": 2,
+      "informationHandling": 3,
+      "voiceStyle": 5
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_dice_diplomat",
+    "username": "dice_diplomat",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 3,
+      "reasoningMode": 5,
+      "informationHandling": 5,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "jewish"
+    }
+  },
+  {
+    "_id": "ai_rustyknife",
+    "username": "rustyknife",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 4,
+      "reasoningMode": 3,
+      "informationHandling": 1,
+      "voiceStyle": 1
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "college_aged",
+      "socialClass": "wanderer",
+      "socialPosition": "lower",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_moonmilk",
+    "username": "moonmilk",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 2,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_spectrum_sage",
+    "username": "spectrum_sage",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 5,
+      "informationHandling": 5,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_bossfightben",
+    "username": "bossfightben",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 5,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "southeast_asian"
+    }
+  },
+  {
+    "_id": "ai_queenofpings",
+    "username": "queenofpings",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 5,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 4
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "married_with_children",
+      "socialClass": "nobility",
+      "socialPosition": "upper",
+      "geographicOrigin": "jewish"
+    }
+  },
+  {
+    "_id": "ai_greyglitch",
+    "username": "greyglitch",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 2,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "middle_eastern_persian"
+    }
+  },
+  {
+    "_id": "ai_dungeon_dad",
+    "username": "dungeon_dad",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "married_with_children",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_madamecrit",
+    "username": "madamecrit",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 5,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "empty_nester",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_softreset",
+    "username": "softreset",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 1,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "latino_south_american"
+    }
+  },
+  {
+    "_id": "ai_kingslayer77",
+    "username": "kingslayer77",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 5,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 4
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "college_aged",
+      "socialClass": "nobility",
+      "socialPosition": "lower",
+      "geographicOrigin": "southeast_asian"
+    }
+  },
+  {
+    "_id": "ai_iris_inferno",
+    "username": "iris_inferno",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 5,
+      "reasoningMode": 4,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "college_aged",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_their_turn",
+    "username": "their_turn",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_axeandtax",
+    "username": "axeandtax",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 2,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_sunlitsera",
+    "username": "sunlitsera",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 4,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "american_indian"
+    }
+  },
+  {
+    "_id": "ai_nullpotion",
+    "username": "nullpotion",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 2,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 1
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_broodmaster",
+    "username": "broodmaster",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 4,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "college_aged",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_fairygig",
+    "username": "fairygig",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 2,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "jewish"
+    }
+  },
+  {
+    "_id": "ai_sidequestx",
+    "username": "sidequestx",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_giga_chadwick",
+    "username": "giga_chadwick",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 5,
+      "reasoningMode": 2,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_melodymana",
+    "username": "melodymana",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 5
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_theycallitluck",
+    "username": "theycallitluck",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 2,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "latino_south_american"
+    }
+  },
+  {
+    "_id": "ai_sneakysquire",
+    "username": "sneakysquire",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "american_indian"
+    }
+  },
+  {
+    "_id": "ai_starriest",
+    "username": "starriest",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 5,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "american_indian"
+    }
+  },
+  {
+    "_id": "ai_cryptic_cas",
+    "username": "cryptic_cas",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_warlockwayne",
+    "username": "warlockwayne",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 4,
+      "reasoningMode": 3,
+      "informationHandling": 2,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "college_aged",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_zenjen",
+    "username": "zenjen",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 1,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_prism_pilot",
+    "username": "prism_pilot",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 5,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_bardbarian",
+    "username": "bardbarian",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 5,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 5
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_lilacloot",
+    "username": "lilacloot",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 1,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "jewish"
+    }
+  },
+  {
+    "_id": "ai_modular_myth",
+    "username": "modular_myth",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 3,
+      "reasoningMode": 5,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "american_indian"
+    }
+  },
+  {
+    "_id": "ai_metalmarv",
+    "username": "metalmarv",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 4
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_queenbee99",
+    "username": "queenbee99",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 5,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 5
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "married_with_children",
+      "socialClass": "nobility",
+      "socialPosition": "upper",
+      "geographicOrigin": "american_indian"
+    }
+  },
+  {
+    "_id": "ai_theyarewatching",
+    "username": "theyarewatching",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 2
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "germanic_french"
+    }
+  },
+  {
+    "_id": "ai_sheriffstack",
+    "username": "sheriffstack",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_karaoke_kiara",
+    "username": "karaoke_kiara",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 4,
+      "voiceStyle": 5
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_neutral_nyx",
+    "username": "neutral_nyx",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 1,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_pocketrogue",
+    "username": "pocketrogue",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 1,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "wanderer",
+      "socialPosition": "lower",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_sugarbyte",
+    "username": "sugarbyte",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 1
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_parallelplayer",
+    "username": "parallelplayer",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 2,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "southeast_asian"
+    }
+  },
+  {
+    "_id": "ai_ogre_logic",
+    "username": "ogre_logic",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_aria_arcana",
+    "username": "aria_arcana",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 5
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "southeast_asian"
+    }
+  },
+  {
+    "_id": "ai_theythemthunder",
+    "username": "theythemthunder",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 4
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_drakon_duke",
+    "username": "drakon_duke",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "nobility",
+      "socialPosition": "lower",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_venusvial",
+    "username": "venusvial",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 1,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_ghost_of_lag",
+    "username": "ghost_of_lag",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 2,
+      "reasoningMode": 4,
+      "informationHandling": 2,
+      "voiceStyle": 2
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "jewish"
+    }
+  },
+  {
+    "_id": "ai_ragequitron",
+    "username": "ragequitron",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 5,
+      "reasoningMode": 1,
+      "informationHandling": 1,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "college_aged",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "southeast_asian"
+    }
+  },
+  {
+    "_id": "ai_missmoxie",
+    "username": "missmoxie",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 5
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "jewish"
+    }
+  },
+  {
+    "_id": "ai_they_know",
+    "username": "they_know",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 2,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "middle_eastern_persian"
+    }
+  },
+  {
+    "_id": "ai_tanktop_tim",
+    "username": "tanktop_tim",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 2,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "germanic_french"
+    }
+  },
+  {
+    "_id": "ai_sylphysim",
+    "username": "sylphysim",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 4
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "middle_eastern_persian"
+    }
+  },
+  {
+    "_id": "ai_oddson",
+    "username": "oddson",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 2,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 2
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "north_african"
+    }
+  },
+  {
+    "_id": "ai_knife_math",
+    "username": "knife_math",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 4,
+      "reasoningMode": 5,
+      "informationHandling": 2,
+      "voiceStyle": 2
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "college_aged",
+      "socialClass": "wanderer",
+      "socialPosition": "lower",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_lavenderlaguna",
+    "username": "lavenderlaguna",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 2,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_theythemtempo",
+    "username": "theythemtempo",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 2,
+      "reasoningMode": 3,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "jewish"
+    }
+  },
+  {
+    "_id": "ai_broadswordbro",
+    "username": "broadswordbro",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 5,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_ladyhexidecimal",
+    "username": "ladyhexidecimal",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 2,
+      "voiceStyle": 4
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "wanderer",
+      "socialPosition": "middle",
+      "geographicOrigin": "middle_eastern_persian"
+    }
+  },
+  {
+    "_id": "ai_thirdperson",
+    "username": "thirdperson",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 1,
+      "voiceStyle": 2
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "southeast_asian"
+    }
+  },
+  {
+    "_id": "ai_crunchygriff",
+    "username": "crunchygriff",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 4,
+      "reasoningMode": 2,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_heraheals",
+    "username": "heraheals",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "clergy",
+      "socialPosition": "upper",
+      "geographicOrigin": "latino_south_american"
+    }
+  },
+  {
+    "_id": "ai_nullalignment",
+    "username": "nullalignment",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 2,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 1
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_greataxe_gary",
+    "username": "greataxe_gary",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 2
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_mirage_mina",
+    "username": "mirage_mina",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 5,
+      "reasoningMode": 2,
+      "informationHandling": 2,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "college_aged",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "middle_eastern_persian"
+    }
+  },
+  {
+    "_id": "ai_theyforge",
+    "username": "theyforge",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 1,
+      "reasoningMode": 3,
+      "informationHandling": 2,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "middle_eastern_persian"
+    }
+  },
+  {
+    "_id": "ai_banhammerben",
+    "username": "banhammerben",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 2,
+      "tableImpactStyle": 5,
+      "reasoningMode": 3,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "college_aged",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "germanic_french"
+    }
+  },
+  {
+    "_id": "ai_sparklesnare",
+    "username": "sparklesnare",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 2,
+      "informationHandling": 3,
+      "voiceStyle": 5
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_theythemthesis",
+    "username": "theythemthesis",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 4,
+      "tableImpactStyle": 3,
+      "reasoningMode": 5,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_mana_mason",
+    "username": "mana_mason",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 5,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "latino_south_american"
+    }
+  },
+  {
+    "_id": "ai_aurora_aggro",
+    "username": "aurora_aggro",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 4,
+      "reasoningMode": 2,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "viking_dane"
+    }
+  },
+  {
+    "_id": "ai_theyseektruth",
+    "username": "theyseektruth",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 5,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 5,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "upper",
+      "geographicOrigin": "latino_south_american"
+    }
+  },
+  {
+    "_id": "ai_suspectsteve",
+    "username": "suspectsteve",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 3,
+      "reasoningMode": 3,
+      "informationHandling": 2,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "american_indian"
+    }
+  },
+  {
+    "_id": "ai_glimmer_gwen",
+    "username": "glimmer_gwen",
+    "pronouns": "she/her/hers",
+    "personality": {
+      "trustModel": 3,
+      "tableImpactStyle": 3,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 5
+    },
+    "avatarType": {
+      "gender": "traditional_female",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "middle",
+      "geographicOrigin": "black_south_african"
+    }
+  },
+  {
+    "_id": "ai_theyrolls",
+    "username": "theyrolls",
+    "pronouns": "they/them/their",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 2,
+      "reasoningMode": 3,
+      "informationHandling": 3,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "non_binary",
+      "ageGroup": "single_young_adult",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "japanese_east_asian"
+    }
+  },
+  {
+    "_id": "ai_endboss_ed",
+    "username": "endboss_ed",
+    "pronouns": "he/him/his",
+    "personality": {
+      "trustModel": 1,
+      "tableImpactStyle": 5,
+      "reasoningMode": 4,
+      "informationHandling": 4,
+      "voiceStyle": 3
+    },
+    "avatarType": {
+      "gender": "traditional_male",
+      "ageGroup": "college_aged",
+      "socialClass": "worker",
+      "socialPosition": "lower",
+      "geographicOrigin": "middle_eastern_persian"
+    }
+  }
+]

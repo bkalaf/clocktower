@@ -46,8 +46,9 @@ export function Modal<TSchema extends z.ZodObject<any>>({
             }}
         >
             <DialogContent
-                className={dialogBackgroundClassName}
-                style={dialogBackgroundStyle}
+                className='bg-slate-700 text-white'
+                // className={dialogBackgroundClassName}
+                // style={dialogBackgroundStyle}
             >
                 <DialogHeader>
                     <DialogTitle className='text-white'>{title}</DialogTitle>

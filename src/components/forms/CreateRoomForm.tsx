@@ -9,10 +9,10 @@ import { Plus } from 'lucide-react';
 import { listScripts } from '@/lib/scripts';
 import { FormControl } from './FormControl';
 import { Modal } from '../Modal';
-import { useAuth } from '@/state/_useAuth';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useCreateRoom } from '@/client/state/hooks';
+import { useAppSelector, useCreateRoom } from '@/client/state/hooks';
+import { authSelectors } from '../../client/state/authSlice';
 
 const parseIntegerField = (label: string, min: number, max: number) =>
     z.preprocess(
@@ -121,6 +121,7 @@ function RenderCreateRoomControls({ formName, defaultScriptId }: { formName: str
                                     defaultValue={defaultScriptId ?? ''}
                                     render={({ field }) => (
                                         <Select
+                                            name='scriptId'
                                             value={field.value ?? ''}
                                             onValueChange={(value) => field.onChange(value ?? '')}
                                         >
@@ -138,7 +139,7 @@ function RenderCreateRoomControls({ formName, defaultScriptId }: { formName: str
                                                 />
                                             </SelectTrigger>
                                             <SelectContent>
-                                                {scripts.length === 0 && (
+                                                {/* {scripts.length === 0 && (
                                                     <SelectItem
                                                         value=''
                                                         disabled
@@ -147,9 +148,10 @@ function RenderCreateRoomControls({ formName, defaultScriptId }: { formName: str
                                                             'Loading scripts…'
                                                         :   'No scripts available'}
                                                     </SelectItem>
-                                                )}
+                                                )} */}
                                                 {scripts.map((script) => (
                                                     <SelectItem
+                                                        className='text-black bg-white'
                                                         key={script._id}
                                                         value={script._id}
                                                     >
@@ -209,7 +211,7 @@ function RenderCreateRoomControls({ formName, defaultScriptId }: { formName: str
 
 export function CreateRoomForm({ defaultScriptId }: CreateRoomFormProps) {
     const navigate = useNavigate();
-    const { user } = useAuth();
+    const userId = useAppSelector(authSelectors.selectUserId);
     const invalidate = useCallback(async () => {}, []);
     const defaultValues = useMemo(
         () => ({
@@ -222,13 +224,13 @@ export function CreateRoomForm({ defaultScriptId }: CreateRoomFormProps) {
     const createRoom = useCreateRoom();
     const onSubmit = useCallback(
         async (values: CreateRoomFormValues) => {
-            if (!user) {
+            if (!userId) {
                 throw new Error('You must be signed in to create a room.');
             }
             const roomId =
                 globalThis.crypto?.randomUUID?.() ?? `room-${Date.now()}-${Math.random().toString(16).slice(2)}`;
             const connectedUserIds: Record<string, GameRoles> = {
-                [user._id]: 'player'
+                [userId]: 'player'
             };
             const room: Room = {
                 _id: roomId,
@@ -236,7 +238,7 @@ export function CreateRoomForm({ defaultScriptId }: CreateRoomFormProps) {
                 banner: values.banner.trim(),
                 connectedUserIds,
                 endedAt: undefined,
-                hostUserId: user._id,
+                hostUserId: userId,
                 maxPlayers: values.maxPlayers as PcPlayerCount,
                 minPlayers: values.minPlayers as PcPlayerCount,
                 maxTravellers: values.maxTravellers as PcTravellerCount,
@@ -250,7 +252,7 @@ export function CreateRoomForm({ defaultScriptId }: CreateRoomFormProps) {
             const createdRoom = await createRoom(room);
             navigate({ to: `/rooms/${createdRoom.roomId}` });
         },
-        [navigate, user, createRoom]
+        [userId, createRoom, navigate]
     );
 
     return (

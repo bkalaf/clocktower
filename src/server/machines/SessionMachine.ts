@@ -1,5 +1,5 @@
 // src/server/machines/SessionMachine.ts
-import { Action, ActionArgs, ActorRefFrom, assign, setup } from 'xstate';
+import { Action, ActionArgs, ActionFunction, ActorRefFrom, assign, setup } from 'xstate';
 import type { WebSocket } from 'ws';
 import { createRoomActor, getRoomActor, roomActors } from '../roomService';
 import { createRoomMachine } from './RoomMachine';
@@ -104,7 +104,7 @@ const notifyRoomCreation = (args: ActionArgs<SessionMachineContext, SessionEvent
     void sendRoomCreatedAndBroadcast(deps, roomId, event.requestId);
 };
 
-const assignLoginContext = assign<SessionMachineContext, SessionEvent>((context, event) => {
+const assignLoginContext = assignSession(({ context, event }) => {
     if (event.type !== 'LOGIN_SUCCESS') return {};
     const membership = membershipForUser(event.userId);
     const actor =
@@ -118,7 +118,7 @@ const assignLoginContext = assign<SessionMachineContext, SessionEvent>((context,
     };
 });
 
-const assignRoomContext = assign<SessionMachineContext, SessionEvent>((context, event) => {
+const assignRoomContext = assignSession(({ context, event }) => {
     if (event.type !== 'CREATE_ROOM') return {};
     const deps = context.deps;
     if (!deps) return {};
@@ -130,7 +130,7 @@ const assignRoomContext = assign<SessionMachineContext, SessionEvent>((context, 
     };
 });
 
-const clearRoomContext = assign<SessionMachineContext, SessionEvent>((context) => {
+const clearRoomContext = assignSession(({ context }) => {
     if (context.deps && context.currentRoomId) {
         context.deps.unsubscribe(context.currentRoomId, context.deps.ws);
     }
@@ -141,7 +141,7 @@ const clearRoomContext = assign<SessionMachineContext, SessionEvent>((context) =
     };
 });
 
-const assignEnteredRoom = assign<SessionMachineContext, SessionEvent>((context, event) => {
+const assignEnteredRoom = assignSession(({ context, event }) => {
     if (event.type !== 'ENTER_ROOM') return {};
     const actor = getRoomActor(event.roomId);
     const membership = membershipForUser(context.userId);
@@ -152,80 +152,81 @@ const assignEnteredRoom = assign<SessionMachineContext, SessionEvent>((context, 
     };
 });
 
-const logoutCleanup: Action<SessionMachineContext, SessionEvent> = (context) => {
+const logoutCleanup = ({ context }: { context: SessionMachineContext }) => {
     context.deps?.unsubscribeAll(context.deps.ws);
 };
 
-const resetSessionContext = assign<SessionMachineContext, SessionEvent>((context) => ({
+const resetSessionContext = assignSession(({ context }) => ({
     ...baseContext,
     deps: context.deps
 }));
 
+const isInRoom = ({ event }: { event: SessionEvent }) =>
+    event.type === 'LOGIN_SUCCESS' && !!membershipForUser(event.userId);
+
 export const SessionMachine = setup({
-    input: {} as SessionMachineInput,
     types: {} as {
         context: SessionMachineContext;
         events: SessionEvent;
         input: SessionMachineInput;
+    },
+    guards: {
+        hasUserId: ({ context }) => Boolean(context.userId)
     }
-}).createMachine(
-    {
-        id: 'SessionMachine',
-        context: ({ input }) => ({ ...baseContext, deps: input }),
-        initial: 'unauthenticated',
-        states: {
-            unauthenticated: {
-                on: {
-                    LOGIN_SUCCESS: [
-                        {
-                            target: 'in_room',
-                            cond: 'isInRoom',
-                            actions: assignLoginContext
-                        },
-                        {
-                            target: 'lobby',
-                            actions: assignLoginContext
-                        }
-                    ]
-                }
-            },
-            lobby: {
-                on: {
-                    CREATE_ROOM: [
-                        {
-                            target: 'in_room',
-                            cond: 'hasUserId',
-                            actions: [assignRoomContext, notifyRoomCreation]
-                        }
-                    ],
-                    ENTER_ROOM: {
+}).createMachine({
+    id: 'SessionMachine',
+    context: ({ input }) => ({ ...baseContext, deps: input }),
+    initial: 'unauthenticated',
+    states: {
+        unauthenticated: {
+            on: {
+                LOGIN_SUCCESS: [
+                    {
                         target: 'in_room',
-                        actions: assignEnteredRoom
+                        guard: isInRoom,
+                        actions: assignLoginContext
                     },
-                    LOGOUT: {
-                        target: 'unauthenticated',
-                        actions: [clearRoomContext, logoutCleanup, resetSessionContext]
-                    }
-                }
-            },
-            in_room: {
-                on: {
-                    LEAVE_ROOM: {
+                    {
                         target: 'lobby',
-                        actions: clearRoomContext
-                    },
-                    LOGOUT: {
-                        target: 'unauthenticated',
-                        actions: [clearRoomContext, logoutCleanup, resetSessionContext]
+                        actions: assignLoginContext
                     }
+                ]
+            }
+        },
+        lobby: {
+            always: {
+                guard: isInRoom,
+                target: 'in_room'
+            },
+            on: {
+                CREATE_ROOM: [
+                    {
+                        target: 'in_room',
+                        guard: 'hasUserId',
+                        actions: [assignRoomContext, notifyRoomCreation]
+                    }
+                ],
+                ENTER_ROOM: {
+                    target: 'in_room',
+                    actions: assignEnteredRoom
+                },
+                LOGOUT: {
+                    target: 'unauthenticated',
+                    actions: [clearRoomContext, logoutCleanup, resetSessionContext]
+                }
+            }
+        },
+        in_room: {
+            on: {
+                LEAVE_ROOM: {
+                    target: 'lobby',
+                    actions: clearRoomContext
+                },
+                LOGOUT: {
+                    target: 'unauthenticated',
+                    actions: [clearRoomContext, logoutCleanup, resetSessionContext]
                 }
             }
         }
-    },
-    {
-        guards: {
-            isInRoom: (_, event) => event.type === 'LOGIN_SUCCESS' && !!membershipForUser(event.userId),
-            hasUserId: (context) => Boolean(context.userId)
-        }
     }
-);
+});

@@ -13,11 +13,9 @@ export async function seedBuiltinScripts() {
 }
 
 export async function listAvailableScripts() {
-    await seedBuiltinScripts();
     return ScriptModel.find().sort({ isBuiltin: -1, name: 1 }).lean();
 }
 
 export async function getScript(scriptId: string) {
-    await seedBuiltinScripts();
     return ScriptModel.findOne({ scriptId }).lean();
 }
