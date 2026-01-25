@@ -6,20 +6,9 @@ import type { ActionArgs, OutputFrom } from 'xstate';
 import { ScriptModel } from '../../db/models/Script';
 import { UserModel } from '../../db/models/User';
 import type { GameNomination, GameTaskEntry } from '../../types/game';
-
-type TrustModels = 'all_trusting' | 'cautiously_trusting' | 'skeptical' | 'guarded' | 'doubting_thomas';
-type TableImpactStyles = 'disruptive' | 'provocative' | 'stabilizing' | 'organized' | 'procedural';
-type ReasoningModes = 'deductive' | 'systematic' | 'associative' | 'intuitive' | 'surface';
-type InformationHandlingStyle = 'archivist' | 'curator' | 'impressionistic' | 'triage' | 'signal_driven';
-type VoiceStyles = 'quiet' | 'reserved' | 'conversational' | 'assertive' | 'dominant';
-
-type Personality = {
-    trustModel: TrustModels;
-    tableImpact: TableImpactStyles;
-    reasoningMode: ReasoningModes;
-    informationHandling: InformationHandlingStyle;
-    voiceStyle: VoiceStyles;
-};
+import type { AiUserRecord } from '../models/AiUser';
+import { loadAiUsersCache, getRandomAiUsers } from '../services/aiUsers';
+import type { Personality } from '../../shared/personality';
 
 type GameRoles = 'storyteller' | 'player' | 'spectator';
 type StorytellerMode = 'ai' | 'human';
@@ -78,6 +67,8 @@ type Seat = {
     username: string;
     type: HumanOrAi;
     personality?: Personality;
+    pronouns?: string;
+    aiUserId?: string;
 };
 
 type TaskEntry = GameTaskEntry;
@@ -97,35 +88,6 @@ export type GameMachineWsEvent =
 
 const ROLE_CATEGORIES: RoleCategory[] = ['demon', 'minion', 'outsider', 'townsfolk'];
 
-const AI_NAMES = [
-    'Nightshade',
-    'Ashen Mira',
-    'Rook Ember',
-    'Velvet Lantern',
-    'Briar Hallow',
-    'Marrow',
-    'Hollow Finch',
-    'Thornwick',
-    'Fen Whisper',
-    'Cindervale',
-    'Nocturne',
-    'Grimble',
-    'Canvas',
-    'Tidecall',
-    'Sable',
-    'Morrow',
-    'Aster Vale',
-    'Hawthorn',
-    'Crowley',
-    'Drift',
-    'Quill',
-    'Bracken',
-    'Corvus',
-    'Wilder',
-    'Galen',
-    'Fable'
-];
-
 const rolesFilePath = path.join(process.cwd(), 'src', 'assets', 'data', 'roles.json');
 const populationsFilePath = path.join(process.cwd(), 'src', 'assets', 'data', 'game.json');
 
@@ -137,17 +99,6 @@ const shuffle = <T>(items: T[]): T[] => {
     }
     return copy;
 };
-
-const randomChoice = <T>(items: readonly T[]): T => items[Math.floor(Math.random() * items.length)];
-const uniqueNamePool = () => shuffle([...AI_NAMES]);
-const popName = (pool: string[]) => pool.pop() ?? `AI-${Math.floor(Math.random() * 9_999)}`;
-const randomPersonality = (): Personality => ({
-    trustModel: randomChoice(['all_trusting', 'cautiously_trusting', 'skeptical', 'guarded', 'doubting_thomas']),
-    tableImpact: randomChoice(['disruptive', 'provocative', 'stabilizing', 'organized', 'procedural']),
-    reasoningMode: randomChoice(['deductive', 'systematic', 'associative', 'intuitive', 'surface']),
-    informationHandling: randomChoice(['archivist', 'curator', 'impressionistic', 'triage', 'signal_driven']),
-    voiceStyle: randomChoice(['quiet', 'reserved', 'conversational', 'assertive', 'dominant'])
-});
 
 type GameContext = {
     seats: Record<number, Seat>;
@@ -175,6 +126,7 @@ type GameContext = {
     scriptId: string;
     deps?: GameMachineInput['deps'];
     setupArgs: GameMachineInput;
+    selectedAiUsers: AiUserRecord[];
     availableTravellers?: RolesDefined[];
     initialPopulation?: SetupPopulations;
     modifiedPopulation?: SetupPopulations & { extra: ExtraPopulation };
@@ -236,6 +188,7 @@ const createInitialContext = ({ input }: { input: GameMachineInput }): GameConte
     scriptId: input.scriptId,
     deps: input.deps,
     setupArgs: input,
+    selectedAiUsers: [],
     firstNightOrderFromScript: [],
     otherNightOrderFromScript: [],
     firstNightOrder: [],
@@ -253,6 +206,8 @@ const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput, GameE
         throw new Error('maxPlayers out of range');
     }
 
+    await loadAiUsersCache();
+
     const humanEntries = Object.entries(connectedUserIds).filter(([, role]) => role === 'player');
     const humankind = await Promise.all(
         humanEntries.map(async ([userId]) => {
@@ -266,15 +221,14 @@ const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput, GameE
     );
 
     const aiPlayers = Math.max(0, maxPlayers - humankind.length);
-    const namePool = uniqueNamePool();
-    const aiSeats: Omit<Seat, 'id'>[] = [];
-    for (let i = 0; i < aiPlayers; i += 1) {
-        aiSeats.push({
-            type: 'ai',
-            username: popName(namePool),
-            personality: randomPersonality()
-        });
-    }
+    const selectedAiUsers: AiUserRecord[] = aiPlayers > 0 ? getRandomAiUsers(aiPlayers) : [];
+    const aiSeats: Omit<Seat, 'id'>[] = selectedAiUsers.map((aiUser) => ({
+        type: 'ai',
+        username: aiUser.username,
+        pronouns: aiUser.pronouns,
+        aiUserId: aiUser._id,
+        personality: aiUser.personality
+    }));
 
     const shuffledSeats = shuffle([...humankind, ...aiSeats]);
     const seats = shuffledSeats.reduce<Record<number, Seat>>(
@@ -407,6 +361,7 @@ const gameSetupActor = fromPromise<Partial<GameContext>, GameMachineInput, GameE
         modifiedPopulation,
         availableRoles,
         bag: randomizedBag,
+        selectedAiUsers,
         firstNightOrderFromScript,
         otherNightOrderFromScript,
         firstNightOrder: [],

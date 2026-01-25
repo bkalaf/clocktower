@@ -24,8 +24,8 @@ import whisperModels from '../../db/models/Whisper';
 // };
 
 /**
-* @deprecated
-*/
+ * @deprecated
+ */
 export const $z = {
     gameMember: gameMemberModels,
     session: sessionModels,
