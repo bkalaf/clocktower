@@ -17,6 +17,23 @@ export type RoomSnapshotMessage = {
     snapshot: RoomSnapshotPayload;
 };
 
+export type SessionStateValue = 'unauthenticated' | 'lobby' | 'in_room';
+
+export type SessionSnapshotContext = {
+    userId?: string;
+    username?: string;
+    currentRoomId?: string;
+    isRoomHost: boolean;
+};
+
+export type SessionSnapshotMessage = {
+    type: 'SESSION_SNAPSHOT';
+    snapshot: {
+        value: SessionStateValue;
+        context: SessionSnapshotContext;
+    };
+};
+
 export type JoinedRoomMessage = {
     type: 'JOINED_ROOM';
     roomId: string;
@@ -33,6 +50,7 @@ export type OutgoingMessage =
     | RoomCreatedMessage
     | RoomSnapshotMessage
     | JoinedRoomMessage
+    | SessionSnapshotMessage
     | ErrorMessage;
 
 export type IncomingMessage =
@@ -40,4 +58,5 @@ export type IncomingMessage =
     | { type: 'JOIN_ROOM'; roomId: string; userId?: string; requestId?: string }
     | { type: 'LEAVE_ROOM'; roomId: string; requestId?: string }
     | { type: 'ROOM_EVENT'; roomId: string; event: RoomEvents; requestId?: string }
+    | { type: 'LOGIN_SUCCESS'; userId: string; username: string }
     | { type: 'LIST_ROOMS'; requestId?: string };

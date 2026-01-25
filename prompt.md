@@ -544,4 +544,39 @@ I need to create a selector from authSlice and realtimeSlice called selectCurren
 	authSelectors.selectUserId
 
 
-I need to update src/machines/AppShell.ts. First let's move it with the rest of the machines to src/server/machines/SessionMachine.ts and rename the machine SessionMachine. Also, we'll need to add an event called CREATE_ROOM with a body of { room: Room } that moves from lobby to in_room. This needs to invoke an actor (RoomMachine) by calling createRoomActor from src/server/roomService.ts. Also, we should update the LOGIN_SUCCESS event to include a guard of isInRoom which should check all the roomActors from roomService.ts to see if the userId which is a string and we should add that to the LOGIN_SUCESS event's payload along with username as a string and assing those in context as well. Check that userId vs. those roomActors to see if hostUserId = userId or if connectUserId's keys = userId. If it is we should take that roomId and assign that to context.currentRoomId (and we should add to context isRoomHost (boolean) initial state false, and set that to true if hostUserId = userId). We need to wire the client to start using snapshots from this machine as well. 
+Given these values for Personality:
+type TrustModels = 'all_trusting' | 'cautiously_trusting' | 'skeptical' | 'guarded' | 'doubting_thomas';
+type TableImpactStyles = 'disruptive' | 'provocative' | 'stabilizing' | 'organized' | 'procedural';
+type ReasoningModes = 'deductive' | 'systematic' | 'associative' | 'intuitive' | 'surface';
+type InformationHandlingStyle = 'archivist' | 'curator' | 'impressionistic' | 'triage' | 'signal_driven';
+type VoiceStyles = 'quiet' | 'reserved' | 'conversational' | 'assertive' | 'dominant';
+
+type Personality = {
+    trustModel: TrustModels;
+    tableImpact: TableImpactStyles;
+    reasoningMode: ReasoningModes;
+    informationHandling: InformationHandlingStyle;
+    voiceStyle: VoiceStyles;
+};
+
+This is an adjusted prompt with a couple of new constraints based on the old prompt's results, please provide a complete response as though this is a new prompt.
+
+I'd like to create an icon system so Personality can be display on an AI character's mouseover (personality should be a known to human players). Therefore I think assigning a numerical value to each of these values of 1 to 5, 1 being most "evil"/"chaotic" and 5 being the most "good"/"lawful" (think D&D scale) would be best. Then I'd like ideas for a simple icon to represent each of the 5 categories with a plan to convert this into a react component that would read like this:
+
+	Trust Model          : ***
+	Table Impact Style   : *****
+	Reasoning Mode       : *
+	Information Handling : ****
+	Voice Style          : **
+
+where the stars are representing the 1 to 5 scale. I'd like these icons to be red for 1, fuschia for 2 amber for 3 cyan for 4 and sky for 5 so these icons need to be easily colorable as well. Please suggest icons for each category and generate a codex prompt to update this in code as well as make the necessary component.
+
+Additionally, I'd like to add a collection to mongoose that models these AI's similiar to user but just have _id as a string, username to represent the ai user's name, pronouns which is an optional string, and then personality with a subdocument of it's personality. We'll need to incorporate reading that collection and picking random ai's into the GameMachine.ts file during setup instead of doing it on the fly per game.
+
+*** begin referenced sectin: no need to reproduce this step - i've attached the json document you generated this is for refrence only
+Also, can you generate 100 such documents (don't insert them into mongoose yet) using the names we already came up with in GameMachine.tx as a starting point. Go ahead and pick common gamer names (feel free to use numbers). One thing about the previously generated names and those going forward. They should be all lowercase, with no spaces, - and _ are allowed instead. Also, for each one, based on the name, work out a suitable set of pronouns for each one ['he/him/his', 'she/her/hers', 'they/them/their'] for male/female/non-binary. Return this group as mongoose ready documents for the ai collection in json format for the time being and give me a codex prompt for the new collection in mongoose and updates to GameMachine file.
+*** end refrenced section
+
+So, let's make sure each personality is unique so nothing that deepEquals would be true on. If there are, make tweaks to make them unique in the set. Also, I do like the idea of `If you want these to feel more tied to the username (e.g., “backstabben” trends toward lower trust, “patch_notes” trends toward higher info-handling), I can skew the generated personality numbers harder in that direction across the full set.` that you suggested, so do that first, and then check equality and make tweaks that make sense based on the name to ensure uniqueness and the give me the new result. (no need to give me all the text just output me a new ai.json please)
+
+Finally, go ahead and give me the personality categorys sorted and ranked 1 to 5 for each of the properties of Personality and generate typescript enums that map to this as well and update the prompts above to use these enums going forward.

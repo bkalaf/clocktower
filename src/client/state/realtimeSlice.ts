@@ -1,13 +1,21 @@
 // src/client/state/realtimeSlice.ts
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { SessionSnapshotContext, SessionStateValue } from '@/shared/realtime/messages';
 
 export type RealtimeStatus = 'disconnected' | 'connecting' | 'connected';
+
+export type SessionSnapshot = {
+    value: SessionStateValue;
+    context: SessionSnapshotContext;
+};
 
 export type RealtimeState = {
     status: RealtimeStatus;
     rooms: RoomSummary[];
     currentRoomId?: string;
     snapshotsByRoomId: Record<string, RoomSnapshotPayload>;
+    session?: SessionSnapshot;
+    isRoomHost: boolean;
     lastError?: string;
 };
 
@@ -16,6 +24,8 @@ const initialState: RealtimeState = {
     rooms: [],
     currentRoomId: undefined,
     snapshotsByRoomId: {},
+    session: undefined,
+    isRoomHost: false,
     lastError: undefined
 };
 
@@ -40,6 +50,11 @@ const realtimeSlice = createSlice({
         },
         setCurrentRoomId(state, action: PayloadAction<string | undefined>) {
             state.currentRoomId = action.payload;
+        },
+        setSessionSnapshot(state, action: PayloadAction<SessionSnapshot>) {
+            state.session = action.payload;
+            state.currentRoomId = action.payload.context.currentRoomId;
+            state.isRoomHost = action.payload.context.isRoomHost;
         },
         setSnapshot(state, action: PayloadAction<{ roomId: string; snapshot: RoomSnapshotPayload }>) {
             const { roomId, snapshot } = action.payload;

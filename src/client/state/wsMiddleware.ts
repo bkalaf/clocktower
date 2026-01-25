@@ -67,6 +67,7 @@ const wsMiddleware: Middleware = (store) => {
     console.log(`in wsMiddleware`);
     let socket: WebSocket | null = null;
     let cleanup: (() => void) | null = null;
+    let lastLoginPayload: { userId?: string; username?: string } | null = null;
 
     const handleMessage = (raw: string) => {
         console.log(`raw message: `, raw);
@@ -105,6 +106,15 @@ const wsMiddleware: Middleware = (store) => {
                     })
                 );
                 break;
+            case 'SESSION_SNAPSHOT': {
+                store.dispatch(
+                    realtimeActions.setSessionSnapshot({
+                        value: message.snapshot.value,
+                        context: message.snapshot.context
+                    })
+                );
+                break;
+            }
             case 'JOINED_ROOM':
                 store.dispatch(realtimeActions.setCurrentRoomId(message.roomId));
                 break;
@@ -129,7 +139,18 @@ const wsMiddleware: Middleware = (store) => {
         socket = new WebSocket(url);
         store.dispatch(realtimeActions.setStatus('connecting'));
 
-        const handleOpen = () => store.dispatch(realtimeActions.setStatus('connected'));
+        const handleOpen = () => {
+            store.dispatch(realtimeActions.setStatus('connected'));
+            if (lastLoginPayload) {
+                store.dispatch(
+                    wsSend({
+                        type: 'LOGIN_SUCCESS',
+                        userId: lastLoginPayload.userId ?? '',
+                        username: lastLoginPayload.username ?? ''
+                    })
+                );
+            }
+        };
         const handleClose = () => {
             store.dispatch(realtimeActions.setStatus('disconnected'));
             rejectAllPending(new Error('Realtime connection closed'));
@@ -169,8 +190,10 @@ const wsMiddleware: Middleware = (store) => {
     return (next) => (action) => {
         if (authActions.login.match(action)) {
             console.log(`ws.url`);
+            lastLoginPayload = action.payload;
             connectSocket('ws://localhost:3001/ws');
         } else if (authActions.logout.match(action)) {
+            lastLoginPayload = null;
             disconnectSocket();
         } else if (wsConnect.match(action)) {
             connectSocket(action.payload.url);

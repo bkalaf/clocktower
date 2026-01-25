@@ -26,7 +26,8 @@ export const getCurrentRoom = createServerFn({
                 { connectedUserIds: userId }
             ]
         } as const;
-        const room = await RoomModel.findOne(query).lean();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const room = await RoomModel.findOne(query as any).lean();
         return room?._id ?? null;
     });
 

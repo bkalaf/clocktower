@@ -8,6 +8,7 @@ import { snapshotToUpsertArgs } from './persistence/snapshotToDoc';
 
 type Broadcast = (msg: unknown) => void;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function docToRoom(doc: any): Room {
     return {
         _id: doc._id,
@@ -41,12 +42,13 @@ export async function rehydrateAllRooms(broadcast: Broadcast) {
         const machine = createRoomMachine(room);
 
         // XState v5: rehydrate actor from persisted snapshot
-        const actor = createActor(machine, { snapshot: doc.persistedSnapshot });
+        const actor = createActor(machine, { snapshot: doc.persistedSnapshot, input: { room } });
         actor.start();
 
         roomActors.set(doc._id, actor);
 
         // Broadcast + persist on every transition
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         actor.subscribe((snap: any) => {
             broadcast({
                 type: 'ROOM_SNAPSHOT',

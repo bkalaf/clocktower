@@ -1,7 +1,14 @@
 // src/server/realtime/wsConnection.ts
+import { createActor } from 'xstate';
 import type { WebSocket } from 'ws';
-import type { IncomingMessage, OutgoingMessage } from '@/shared/realtime/messages';
-import { createRoomActor, roomActors } from '../roomService';
+import type {
+    IncomingMessage,
+    OutgoingMessage,
+    SessionSnapshotContext,
+    SessionStateValue
+} from '@/shared/realtime/messages';
+import { roomActors } from '../roomService';
+import { SessionMachine } from '../machines/SessionMachine';
 
 export type WsClient = WebSocket & { id?: string };
 
@@ -43,6 +50,42 @@ export function createWsConnection(opts: {
         );
     };
 
+    const sessionService = createActor(SessionMachine, {
+        input: {
+            ws,
+            subscribe,
+            unsubscribe,
+            unsubscribeAll,
+            broadcast,
+            listRooms,
+            broadcastRoomsList,
+            send: (msg) => safeSend(ws, msg)
+        }
+    });
+    sessionService.start();
+
+    const sessionSnapshotSubscription = sessionService.subscribe((state) => {
+        const snapshotContext: SessionSnapshotContext = {
+            userId: state.context.userId,
+            username: state.context.username,
+            currentRoomId: state.context.currentRoomId,
+            isRoomHost: state.context.isRoomHost
+        };
+        safeSend(ws, {
+            type: 'SESSION_SNAPSHOT',
+            snapshot: {
+                value: state.value as SessionStateValue,
+                context: snapshotContext
+            }
+        });
+    });
+
+    const teardown = () => {
+        sessionSnapshotSubscription.unsubscribe();
+        sessionService.stop();
+        unsubscribeAll(ws);
+    };
+
     ws.on('message', async (raw) => {
         let msg: IncomingMessage;
         try {
@@ -54,39 +97,12 @@ export function createWsConnection(opts: {
 
         switch (msg.type) {
             case 'CREATE_ROOM': {
-                try {
-                    const room = msg.room;
-                    const actor = createRoomActor(room, broadcast);
+                sessionService.send({ type: 'CREATE_ROOM', room: msg.room, requestId: msg.requestId });
+                return;
+            }
 
-                    // auto-join creator
-                    subscribe(room._id, ws);
-
-                    safeSend(ws, { type: 'JOINED_ROOM', roomId: room._id });
-
-                    const snap = actor.getSnapshot();
-                    safeSend(ws, {
-                        type: 'ROOM_SNAPSHOT',
-                        roomId: room._id,
-                        snapshot: { value: snap.value, context: snap.context }
-                    });
-                    const createdRooms = await listRooms();
-                    const createdRoom =
-                        createdRooms.find((candidate) => candidate.roomId === room._id) ??
-                        ({ roomId: room._id, playerCount: 0 } as RoomSummary);
-                    safeSend(ws, {
-                        type: 'ROOM_CREATED',
-                        room: createdRoom,
-                        requestId: msg.requestId
-                    });
-                    broadcastRoomsList(createdRooms);
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                } catch (e: any) {
-                    safeSend(ws, {
-                        type: 'ERROR',
-                        requestId: msg.requestId,
-                        message: e?.message ?? 'Failed to create room'
-                    });
-                }
+            case 'LOGIN_SUCCESS': {
+                sessionService.send({ type: 'LOGIN_SUCCESS', userId: msg.userId, username: msg.username });
                 return;
             }
 
@@ -112,11 +128,13 @@ export function createWsConnection(opts: {
                     roomId,
                     snapshot: { value: snap.value, context: snap.context }
                 });
+                sessionService.send({ type: 'ENTER_ROOM', roomId });
                 return;
             }
 
             case 'LEAVE_ROOM': {
                 unsubscribe(msg.roomId, ws);
+                sessionService.send({ type: 'LEAVE_ROOM' });
                 return;
             }
 
@@ -148,6 +166,6 @@ export function createWsConnection(opts: {
         }
     });
 
-    ws.on('close', () => unsubscribeAll(ws));
-    ws.on('error', () => unsubscribeAll(ws));
+    ws.on('close', teardown);
+    ws.on('error', teardown);
 }
