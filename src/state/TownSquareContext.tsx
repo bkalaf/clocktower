@@ -3,8 +3,74 @@ import * as React from 'react';
 import rolesJson from '@/assets/data/roles.json';
 import fabledJson from '@/assets/data/fabled.json';
 import { RoleDefinition } from '@/types/roles';
+import {
+    Personality,
+    TableImpactStyleRank,
+    TrustModelRank,
+    ReasoningModeRank,
+    InformationHandlingRank,
+    VoiceStyleRank
+} from '@/shared/personality';
 
 const DEFAULT_PLAYER_NAMES = ['Harper', 'Cort', 'Selene', 'Morrow', 'Vale', 'Ivy', 'Finn', 'Rook'];
+const SAMPLE_PERSONALITIES: Personality[] = [
+    {
+        trustModel: TrustModelRank.Reliable,
+        tableImpactStyle: TableImpactStyleRank.Stabilizer,
+        reasoningMode: ReasoningModeRank.Analytical,
+        informationHandling: InformationHandlingRank.Careful,
+        voiceStyle: VoiceStyleRank.Warm
+    },
+    {
+        trustModel: TrustModelRank.Neutral,
+        tableImpactStyle: TableImpactStyleRank.Balanced,
+        reasoningMode: ReasoningModeRank.Practical,
+        informationHandling: InformationHandlingRank.Normal,
+        voiceStyle: VoiceStyleRank.Plain
+    },
+    {
+        trustModel: TrustModelRank.Honorbound,
+        tableImpactStyle: TableImpactStyleRank.Anchor,
+        reasoningMode: ReasoningModeRank.Deliberate,
+        informationHandling: InformationHandlingRank.Vaultlike,
+        voiceStyle: VoiceStyleRank.Gentle
+    },
+    {
+        trustModel: TrustModelRank.Wary,
+        tableImpactStyle: TableImpactStyleRank.Agitator,
+        reasoningMode: ReasoningModeRank.Intuitive,
+        informationHandling: InformationHandlingRank.Loose,
+        voiceStyle: VoiceStyleRank.Spiky
+    },
+    {
+        trustModel: TrustModelRank.Treacherous,
+        tableImpactStyle: TableImpactStyleRank.Instigator,
+        reasoningMode: ReasoningModeRank.Impulsive,
+        informationHandling: InformationHandlingRank.Leaky,
+        voiceStyle: VoiceStyleRank.Abrasive
+    },
+    {
+        trustModel: TrustModelRank.Neutral,
+        tableImpactStyle: TableImpactStyleRank.Balanced,
+        reasoningMode: ReasoningModeRank.Analytical,
+        informationHandling: InformationHandlingRank.Normal,
+        voiceStyle: VoiceStyleRank.Plain
+    },
+    {
+        trustModel: TrustModelRank.Reliable,
+        tableImpactStyle: TableImpactStyleRank.Stabilizer,
+        reasoningMode: ReasoningModeRank.Deliberate,
+        informationHandling: InformationHandlingRank.Careful,
+        voiceStyle: VoiceStyleRank.Gentle
+    },
+    {
+        trustModel: TrustModelRank.Honorbound,
+        tableImpactStyle: TableImpactStyleRank.Anchor,
+        reasoningMode: ReasoningModeRank.Analytical,
+        informationHandling: InformationHandlingRank.Vaultlike,
+        voiceStyle: VoiceStyleRank.Warm
+    }
+];
 const DEFAULT_ROLE_SEQUENCE = [
     'washerwoman',
     'librarian',
@@ -25,6 +91,8 @@ export type TownSquarePlayer = {
     isDead: boolean;
     isVoteless: boolean;
     isMarked: boolean;
+    isAi?: boolean;
+    personality?: Personality;
 };
 
 export type SessionState = {
@@ -102,7 +170,9 @@ const createInitialPlayers = (): TownSquarePlayer[] => {
         reminders: [],
         isDead: false,
         isVoteless: false,
-        isMarked: false
+        isMarked: false,
+        isAi: index < 4,
+        personality: SAMPLE_PERSONALITIES[index % SAMPLE_PERSONALITIES.length]
     }));
 };
 
@@ -151,7 +221,9 @@ const playersReducer: React.Reducer<TownSquarePlayer[], PlayersAction> = (state,
                     reminders: [],
                     isDead: false,
                     isVoteless: false,
-                    isMarked: false
+                    isMarked: false,
+                    isAi: false,
+                    personality: SAMPLE_PERSONALITIES[index % SAMPLE_PERSONALITIES.length]
                 }
             ];
         }

@@ -5,6 +5,7 @@ import tokenBase from '@/assets/images/token.png?url';
 import { Token } from '@/components/grimoire/Token';
 import { ReminderToken } from '@/components/grimoire/ReminderToken';
 import { useTownSquare } from '@/state/TownSquareContext';
+import { PersonalityTooltip } from '@/components/personality/PersonalityTooltip';
 
 const iconSources = import.meta.glob('../../assets/icons/*.png', { as: 'url' }) as Record<string, string>;
 
@@ -160,21 +161,37 @@ type SeatTokenProps = {
 function SeatToken({ player, style, nightOrder, onClick }: SeatTokenProps) {
     const iconKey = `../../assets/icons/${player.role.id}.png`;
     const iconSrc = iconSources[iconKey] ?? tokenBase;
+    const seatLabel = `Seat ${player.id} · ${player.name}${player.isAi ? ' (AI)' : ''}`;
+    const seatButton = (
+        <button
+            type='button'
+            onClick={onClick}
+            className='relative flex items-center justify-center rounded-full border-4 border-slate-900/80 p-2 shadow-[0_15px_30px_rgba(0,0,0,0.5)] transition hover:border-emerald-400/80'
+            aria-label={seatLabel}
+        >
+            <Token
+                name={player.role.name}
+                image={iconSrc}
+                size={150}
+            />
+        </button>
+    );
+    let interactiveSeat = seatButton;
+    if (player.isAi && player.personality) {
+        interactiveSeat = (
+            <PersonalityTooltip
+                personality={player.personality}
+                compact
+            >
+                {seatButton}
+            </PersonalityTooltip>
+        );
+    }
     return (
         <div style={style}>
             <div className='relative flex items-center justify-center'>
                 <div className='absolute inset-0 rounded-full border border-white/20 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),rgba(0,0,0,0.9))]' />
-                <button
-                    type='button'
-                    onClick={onClick}
-                    className='relative flex items-center justify-center rounded-full border-4 border-slate-900/80 p-2 shadow-[0_15px_30px_rgba(0,0,0,0.5)] transition hover:border-emerald-400/80'
-                >
-                    <Token
-                        name={player.role.name}
-                        image={iconSrc}
-                        size={150}
-                    />
-                </button>
+                {interactiveSeat}
                 {nightOrder && (
                     <div className='pointer-events-none absolute bottom-2 flex gap-1 text-[0.55rem] uppercase tracking-[0.35em] text-white/70'>
                         <span className='rounded-full border border-white/30 bg-black/50 px-2'>
