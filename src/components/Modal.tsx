@@ -10,7 +10,7 @@ import { Form, FormProps } from './forms/Form';
 export type ModalProps<TSchema extends z.ZodObject<any>> = {
     children: FormProps<TSchema>['children'];
     returnTo?: string;
-    invalidate: () => Promise<void>;
+    invalidate?: () => Promise<void>;
     zodSchema: FormProps<TSchema>['zodSchema'];
     onSubmit: FormProps<TSchema>['onSubmit'];
     defaultValues: FormProps<TSchema>['defaultValues'];
@@ -56,7 +56,7 @@ export function Modal<TSchema extends z.ZodObject<any>>({
                 </DialogHeader>
                 <Form
                     onSubmit={onSubmit}
-                    invalidate={invalidate}
+                    invalidate={invalidate ?? (() => Promise.resolve())}
                     returnTo={returnTo}
                     serverError={serverError}
                     setServerError={setServerError}

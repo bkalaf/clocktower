@@ -1,5 +1,4 @@
 // src/server/schemas/z.ts
-import sessionModels from '../../db/models/Session';
 import gameMemberModels from '../../db/models/GameMember';
 import userModels from '../../db/models/User';
 import gameModels from '../../db/models/_Game';
@@ -28,7 +27,6 @@ import whisperModels from '../../db/models/Whisper';
  */
 export const $z = {
     gameMember: gameMemberModels,
-    session: sessionModels,
     user: userModels,
     game: gameModels,
     chatItem: chatItemModels,

@@ -5,6 +5,15 @@ import { SessionMachine, type SessionMachineInput } from './machines/SessionMach
 
 export const sessionActors = new Map<string, ActorRefFrom<typeof SessionMachine>>();
 
+function getSessionActor(sessionId: string) {
+    if (sessionActors.has(sessionId)) {
+        return sessionActors.get(sessionId);
+    }
+    console.log(`getSessionActor`, sessionId);
+    console.log(`hasSessionActor`, sessionActors.has(sessionId));
+    console.log(`result`, sessionActors.get(sessionId));
+}
+
 export const createServerSessionInput = (): SessionMachineInput => {
     const wsPlaceholder = {} as SessionMachineInput['ws'];
     return {
@@ -20,7 +29,7 @@ export const createServerSessionInput = (): SessionMachineInput => {
 };
 
 export function ensureSessionActor(sessionId: string, input?: SessionMachineInput) {
-    const existing = sessionActors.get(sessionId);
+    const existing = getSessionActor(sessionId);
     if (existing) {
         return existing;
     }
@@ -37,12 +46,8 @@ export function createSessionActor(sessionId: string, input?: SessionMachineInpu
     return actor;
 }
 
-export function getSessionActor(sessionId: string) {
-    return sessionActors.get(sessionId);
-}
-
 export function stopSessionActor(sessionId: string) {
-    const actor = sessionActors.get(sessionId);
+    const actor = getSessionActor(sessionId);
     if (!actor) {
         return;
     }

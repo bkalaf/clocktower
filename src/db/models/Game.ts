@@ -63,7 +63,6 @@ export type GameDocument = mongoose.HydratedDocument<GameType>;
 
 const matchStatusOptions = enums.matchStatus.options;
 const matchPhaseOptions = enums.matchPhase.options;
-const matchSubphaseOptions = enums.matchSubphase.options;
 
 const voteChoiceOptions = ['yes', 'no', 'abstain'] as const;
 const nominationTypeOptions = ['execution', 'exile'] as const;

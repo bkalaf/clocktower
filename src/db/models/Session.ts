@@ -1,7 +1,6 @@
 // src/db/models/Session.ts
 import z from 'zod/v4';
 import { getTypesFor } from '../../utils/zodToMongoose';
-import mongoose from 'mongoose';
 import refs from '../../schemas/refs';
 import aliases from '../../schemas/aliases';
 
@@ -16,8 +15,4 @@ const sessionModels = getTypesFor('session', zSession, { timestamps: true, colle
     { expireAfterSeconds: 0 }
 ]);
 
-export default sessionModels;
-export type Session = z.infer<typeof zSession>;
-export type SessionType = mongoose.InferRawDocType<Session>;
-export type SessionDocument = mongoose.HydratedDocument<SessionType>;
 export const SessionModel = sessionModels.model;

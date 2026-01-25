@@ -51,20 +51,21 @@ export function Form<TSchema extends z.ZodObject<any>>({
     return (
         <form
             className='space-y-4'
-            onSubmit={handleSubmit(async (values) => {
-                setServerError(null);
-                try {
-                    await onSubmit(values, form);
-                    reset();
-                    if (closeOnSubmit) {
-                        startTransition(closeForm);
-                    }
-                    await invalidate();
-                } catch (error) {
-                    const message = (error instanceof Error ? error.message : defaultErrorMsg) ?? '';
-                    setServerError(message);
-                }
-            })}
+            onSubmit={handleSubmit((value) => onSubmit(value, form))}
+            // onSubmit={handleSubmit(async (values) => {
+            //     setServerError(null);
+            //     try {
+            //         await onSubmit(values, form);
+            //         reset();
+            //         if (closeOnSubmit) {
+            //             startTransition(closeForm);
+            //         }
+            //         await invalidate();
+            //     } catch (error) {
+            //         const message = (error instanceof Error ? error.message : defaultErrorMsg) ?? '';
+            //         setServerError(message);
+            //     }
+            // })}
         >
             {children(form)}
             {/*             

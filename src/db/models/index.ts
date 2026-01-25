@@ -1,6 +1,5 @@
 // src/db/models/index.ts
 import { UserModel } from './User';
-import { SessionModel } from './Session';
 import { GameModel } from './_Game';
 import { GameMemberModel } from './GameMember';
 import { ChatItemModel } from './ChatItem';
@@ -14,7 +13,6 @@ import { TravellerRequestModel } from './TravellerRequest';
 
 const $models = {
     UserModel,
-    SessionModel,
     GameModel,
     GameMemberModel,
     ChatItemModel,

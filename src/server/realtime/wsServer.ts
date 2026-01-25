@@ -84,10 +84,16 @@ export async function startWsServer(opts: { port: number; mongoUri: string; dbNa
 
     // ---- DB connection (server-only; UI never reads Mongo)
     await mongoose.connect(mongoUri, { dbName });
+    let server: http.Server | undefined;
+    let wss: WebSocketServer | undefined;
+    try {
+        server = http.createServer();
 
-    const server = http.createServer();
-
-    const wss = new WebSocketServer({ server });
+        wss = new WebSocketServer({ server });
+    } catch (error) {
+        console.log(`error`, (error as Error).message);
+        throw error;
+    }
 
     // ---- Room actor broadcast hook (RoomService uses this)
     const broadcast = (msg: unknown) => {

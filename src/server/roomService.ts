@@ -10,6 +10,13 @@ type Broadcast = (msg: unknown) => void;
 // In-memory: roomId -> RoomMachine actor
 export const roomActors = new Map<string, ActorRefFrom<typeof createRoomMachine>>();
 
+export function getRoomActor(roomId: string) {
+    console.log(`roomId`, roomId);
+    console.log(`hasRoomId`, roomActors.has(roomId));
+    console.log(`result`, roomActors.get(roomId));
+    return roomActors.get(roomId);
+}
+
 function shouldFlush(event: RoomEvents) {
     return (
         event.type === 'MATCH_STARTED' ||
@@ -48,24 +55,17 @@ export function createRoomActor(room: Room, broadcast: Broadcast) {
     });
 
     // Intercept send to optionally flush persistence for critical events
-    const originalSend = actor.send.bind(actor);
-    actor.send = (event: RoomEvents) => {
-        originalSend(event);
-        if (shouldFlush(event)) {
-            persistDebounced.flush?.();
-            void upsertRoomSnapshot(snapshotToUpsertArgs(actor));
-        }
-    };
+    // const originalSend = actor.send.bind(actor);
+    // actor.send = (event: RoomEvents) => {
+    //     originalSend(event);
+    //     if (shouldFlush(event)) {
+    //         persistDebounced.flush?.();
+    //         void upsertRoomSnapshot(snapshotToUpsertArgs(actor));
+    //     }
+    // };
 
     // Persist initial snapshot immediately
     void upsertRoomSnapshot(snapshotToUpsertArgs(actor));
 
     return actor;
-}
-
-/**
- * Get an existing actor by roomId
- */
-export function getRoomActor(roomId: string) {
-    return roomActors.get(roomId);
 }

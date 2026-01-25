@@ -49,6 +49,7 @@ import { Route as ApiGamesGameIdStartSetupRouteImport } from './routes/api/games
 import { Route as ApiGamesGameIdReadyRouteImport } from './routes/api/games/$gameId/ready'
 import { Route as ApiGamesGameIdHostRouteImport } from './routes/api/games/$gameId/host'
 import { Route as SplashRoomsRoomsNewRouteImport } from './routes/_splash/_rooms/rooms/new'
+import { Route as SplashRoomsRoomsRoomIdRouteImport } from './routes/_splash/_rooms/rooms/$roomId'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -258,6 +259,11 @@ const SplashRoomsRoomsNewRoute = SplashRoomsRoomsNewRouteImport.update({
   path: '/rooms/new',
   getParentRoute: () => SplashRoomsRoute,
 } as any)
+const SplashRoomsRoomsRoomIdRoute = SplashRoomsRoomsRoomIdRouteImport.update({
+  id: '/rooms/$roomId',
+  path: '/rooms/$roomId',
+  getParentRoute: () => SplashRoomsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
@@ -276,6 +282,7 @@ export interface FileRoutesByFullPath {
   '/api/invites': typeof ApiInvitesIndexRoute
   '/api/rooms': typeof ApiRoomsIndexRoute
   '/api/scripts': typeof ApiScriptsIndexRoute
+  '/rooms/$roomId': typeof SplashRoomsRoomsRoomIdRoute
   '/rooms/new': typeof SplashRoomsRoomsNewRoute
   '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
   '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
@@ -316,6 +323,7 @@ export interface FileRoutesByTo {
   '/api/invites': typeof ApiInvitesIndexRoute
   '/api/rooms': typeof ApiRoomsIndexRoute
   '/api/scripts': typeof ApiScriptsIndexRoute
+  '/rooms/$roomId': typeof SplashRoomsRoomsRoomIdRoute
   '/rooms/new': typeof SplashRoomsRoomsNewRoute
   '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
   '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
@@ -359,6 +367,7 @@ export interface FileRoutesById {
   '/api/invites/': typeof ApiInvitesIndexRoute
   '/api/rooms/': typeof ApiRoomsIndexRoute
   '/api/scripts/': typeof ApiScriptsIndexRoute
+  '/_splash/_rooms/rooms/$roomId': typeof SplashRoomsRoomsRoomIdRoute
   '/_splash/_rooms/rooms/new': typeof SplashRoomsRoomsNewRoute
   '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
   '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
@@ -401,6 +410,7 @@ export interface FileRouteTypes {
     | '/api/invites'
     | '/api/rooms'
     | '/api/scripts'
+    | '/rooms/$roomId'
     | '/rooms/new'
     | '/api/games/$gameId/host'
     | '/api/games/$gameId/ready'
@@ -441,6 +451,7 @@ export interface FileRouteTypes {
     | '/api/invites'
     | '/api/rooms'
     | '/api/scripts'
+    | '/rooms/$roomId'
     | '/rooms/new'
     | '/api/games/$gameId/host'
     | '/api/games/$gameId/ready'
@@ -483,6 +494,7 @@ export interface FileRouteTypes {
     | '/api/invites/'
     | '/api/rooms/'
     | '/api/scripts/'
+    | '/_splash/_rooms/rooms/$roomId'
     | '/_splash/_rooms/rooms/new'
     | '/api/games/$gameId/host'
     | '/api/games/$gameId/ready'
@@ -828,15 +840,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SplashRoomsRoomsNewRouteImport
       parentRoute: typeof SplashRoomsRoute
     }
+    '/_splash/_rooms/rooms/$roomId': {
+      id: '/_splash/_rooms/rooms/$roomId'
+      path: '/rooms/$roomId'
+      fullPath: '/rooms/$roomId'
+      preLoaderRoute: typeof SplashRoomsRoomsRoomIdRouteImport
+      parentRoute: typeof SplashRoomsRoute
+    }
   }
 }
 
 interface SplashRoomsRouteChildren {
+  SplashRoomsRoomsRoomIdRoute: typeof SplashRoomsRoomsRoomIdRoute
   SplashRoomsRoomsNewRoute: typeof SplashRoomsRoomsNewRoute
   SplashRoomsRoomsIndexRoute: typeof SplashRoomsRoomsIndexRoute
 }
 
 const SplashRoomsRouteChildren: SplashRoomsRouteChildren = {
+  SplashRoomsRoomsRoomIdRoute: SplashRoomsRoomsRoomIdRoute,
   SplashRoomsRoomsNewRoute: SplashRoomsRoomsNewRoute,
   SplashRoomsRoomsIndexRoute: SplashRoomsRoomsIndexRoute,
 }

@@ -224,33 +224,41 @@ export function CreateRoomForm({ defaultScriptId }: CreateRoomFormProps) {
     const createRoom = useCreateRoom();
     const onSubmit = useCallback(
         async (values: CreateRoomFormValues) => {
-            if (!userId) {
-                throw new Error('You must be signed in to create a room.');
+            try {
+                if (!userId) {
+                    throw new Error('You must be signed in to create a room.');
+                }
+                const roomId =
+                    globalThis.crypto?.randomUUID?.() ?? `room-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+                const connectedUserIds: Record<string, GameRoles> = {
+                    [userId]: 'player'
+                };
+                const room: Room = {
+                    _id: roomId,
+                    allowTravellers: values.maxTravellers > 0,
+                    banner: values.banner.trim(),
+                    connectedUserIds,
+                    endedAt: undefined,
+                    hostUserId: userId,
+                    maxPlayers: values.maxPlayers as PcPlayerCount,
+                    minPlayers: values.minPlayers as PcPlayerCount,
+                    maxTravellers: values.maxTravellers as PcTravellerCount,
+                    plannedStartTime: undefined,
+                    scriptId: values.scriptId,
+                    skillLevel: 'beginner',
+                    speed: 'moderate',
+                    visibility: values.visibility
+                };
+                console.log(`room`, room);
+                const createdRoom = await createRoom(room);
+                console.log(`createdRoom`, createdRoom);
+                navigate({ to: '/rooms/$roomId', params: { roomId: createdRoom.roomId ?? room._id } });
+            } catch (error) {
+                console.log(`error`, error);
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                console.log(`error.message`, (error as any).message);
+                throw error;
             }
-            const roomId =
-                globalThis.crypto?.randomUUID?.() ?? `room-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-            const connectedUserIds: Record<string, GameRoles> = {
-                [userId]: 'player'
-            };
-            const room: Room = {
-                _id: roomId,
-                allowTravellers: values.maxTravellers > 0,
-                banner: values.banner.trim(),
-                connectedUserIds,
-                endedAt: undefined,
-                hostUserId: userId,
-                maxPlayers: values.maxPlayers as PcPlayerCount,
-                minPlayers: values.minPlayers as PcPlayerCount,
-                maxTravellers: values.maxTravellers as PcTravellerCount,
-                plannedStartTime: undefined,
-                scriptId: values.scriptId,
-                skillLevel: 'beginner',
-                speed: 'moderate',
-                visibility: values.visibility
-            };
-
-            const createdRoom = await createRoom(room);
-            navigate({ to: `/rooms/${createdRoom.roomId}` });
         },
         [userId, createRoom, navigate]
     );
@@ -259,7 +267,7 @@ export function CreateRoomForm({ defaultScriptId }: CreateRoomFormProps) {
         <Modal
             title='Create room'
             description='Open a new game and invite players.'
-            invalidate={invalidate}
+            // invalidate={invalidate}
             zodSchema={createRoomSchema}
             onSubmit={onSubmit}
             defaultValues={defaultValues}
