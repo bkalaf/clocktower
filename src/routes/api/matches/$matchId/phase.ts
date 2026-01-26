@@ -17,7 +17,7 @@ import {
     type NominationEventPayload,
     type NominationResolvedPayload,
     type VoteHistoryRecord
-} from '../../../../server/realtime/roomBroadcast';
+} from '../../../../server/_authed.rooms.index.tsx/roomBroadcast';
 
 export const Route = createFileRoute('/api/matches/$matchId/phase')({
     server: {

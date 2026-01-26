@@ -65,6 +65,9 @@ const realtimeSlice = createSlice({
         }
     },
     selectors: {
+        selectUsername: (state: RealtimeState) => state.session?.context.username,
+        selectUserId: (state: RealtimeState) => state.session?.context.userId,
+        selectIsAuth: (state: RealtimeState) => state.session?.value !== 'unauthenticated',
         selectRoomsList: (state: RealtimeState) => state.rooms,
         selectCurrentRoomId: (state: RealtimeState) => state.currentRoomId,
         selectSnapshot: (state: RealtimeState) => (roomId: string) => state.snapshotsByRoomId[roomId],

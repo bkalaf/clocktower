@@ -9,7 +9,7 @@ import { GameModel } from '../../../../db/models/_Game';
 import { getScript } from '../../../../server/scripts';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { requireHost, requireStoryteller, storytellerCount } from '../../../../server/authz/gameAuth';
-import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { broadcastRoomEvent } from '../../../../server/_authed.rooms.index.tsx/roomBroadcast';
 
 export const Route = createFileRoute('/api/rooms/$roomId/script')({
     server: {

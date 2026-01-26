@@ -111,6 +111,13 @@ declare global {
     type Readiness = 'collecting' | 'all_ready';
     type RoomStatus = 'open' | 'closed' | 'in_game' | 'archived';
     type GameRoles = 'player' | 'storyteller' | 'spectator';
+
+    export type LooseNavigateOptions = NavigateOptions & {
+        search?: Record<string, unknown>; // or Record<string, any>
+    };
+    export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert' | 'veteran';
+    export type NominationType = 'execution' | 'exile';
+    export type VoteChoice = 'yes' | 'no' | null;
     type RoomStates = {
         readiness: Readiness;
         roomStatus: RoomStatus;
@@ -221,6 +228,9 @@ declare global {
     export type LooseNavigateOptions = NavigateOptions & {
         search?: Record<string, unknown>; // or Record<string, any>
     };
+    export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert' | 'veteran';
+    export type NominationType = 'execution' | 'exile';
+    export type VoteChoice = 'yes' | 'no' | null;
     export type Alignments = 'good' | 'evil';
     export type CharacterRoles =
         | 'gardener'
@@ -302,6 +312,8 @@ declare global {
     export type TbDemons = 'imp';
     export type TbMinions = 'spy' | 'scarletwoman' | 'baron' | 'poisoner';
     export type TbOutsiders = 'drunk' | 'saint' | 'recluse' | 'butler';
+    export type SessionRoles = 'player' | 'storyteller' | 'spectator';
+    export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert' | 'veteran';
     export type NominationType = 'execution' | 'exile';
     export type VoteChoice = 'yes' | 'no' | null;
     export type TbPlayerCharacters =

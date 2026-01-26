@@ -2,12 +2,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import realtimeReducer from './realtimeSlice';
 import wsMiddleware from './wsMiddleware';
-import authSlice from './authSlice';
 
 export const store = configureStore({
     reducer: {
-        realtime: realtimeReducer,
-        auth: authSlice
+        realtime: realtimeReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(wsMiddleware)
 });

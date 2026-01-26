@@ -1,7 +1,7 @@
 // src/server/gameService.ts
 import { randomUUID } from 'crypto';
 import { createActor, type ActorRefFrom } from 'xstate';
-import { publish } from '@/server/realtime/publish';
+import { publish } from '@/server/_authed.rooms.index.tsx/publish';
 import { $keys } from '@/keys';
 import { GameMachine, type GameEvents, type GameMachineWsEvent } from '@/server/machines/GameMachine';
 import { AppEvents } from '@/types/game';

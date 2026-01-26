@@ -58,5 +58,4 @@ export type IncomingMessage =
     | { type: 'JOIN_ROOM'; roomId: string; userId?: string; requestId?: string }
     | { type: 'LEAVE_ROOM'; roomId: string; requestId?: string }
     | { type: 'ROOM_EVENT'; roomId: string; event: RoomEvents; requestId?: string }
-    | { type: 'LOGIN_SUCCESS'; userId: string; username: string }
     | { type: 'LIST_ROOMS'; requestId?: string };

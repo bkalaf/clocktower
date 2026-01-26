@@ -9,7 +9,7 @@ import { requireHost } from '../../../../server/authz/gameAuth';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { GameMemberModel } from '../../../../db/models/GameMember';
 import { ModerationLogModel } from '../../../../db/models/ModerationLog';
-import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { broadcastRoomEvent } from '../../../../server/_authed.rooms.index.tsx/roomBroadcast';
 import { randomUUID } from 'crypto';
 
 export const Route = createFileRoute('/api/rooms/$roomId/empty-seat')({

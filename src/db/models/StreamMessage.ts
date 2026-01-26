@@ -1,7 +1,6 @@
 // src/db/models/StreamMessage.ts
-import z from 'zod/v4';
 import mongoose from 'mongoose';
-import { getTypesFor } from '../../utils/zodToMongoose';
+import z from 'zod/v4';
 import schemas from '../../schemas/index';
 
 const { aliases, refs } = schemas;
@@ -16,18 +15,41 @@ export const zStreamMessage = z.object({
     message: z.unknown()
 });
 
-const streamMessageModels = getTypesFor(
-    'stream_message',
-    zStreamMessage,
-    { timestamps: { createdAt: 'ts', updatedAt: 'updatedAt' }, collection: 'stream_message' },
-    {},
-    [{ topicId: 1 }],
-    [{ streamId: 1 }],
-    [{ gameId: 1 }]
-);
-
 export type StreamMessage = z.infer<typeof zStreamMessage>;
 export type StreamMessageType = mongoose.InferRawDocType<StreamMessage>;
 export type StreamMessageDocument = mongoose.HydratedDocument<StreamMessageType>;
-export const StreamMessageModel = streamMessageModels.model;
+
+const kindOptions = ['event', 'snapshot'] as const;
+
+const streamMessageSchema = new mongoose.Schema<StreamMessage>(
+    {
+        _id: { type: String, required: true },
+        gameId: { type: String, required: true },
+        topicId: { type: String, required: true },
+        streamId: { type: String, required: true },
+        ts: { type: Date, required: true },
+        kind: { type: String, required: true, enum: kindOptions },
+        message: { type: mongoose.Schema.Types.Mixed, required: true }
+    },
+    {
+        timestamps: { createdAt: 'ts', updatedAt: 'updatedAt' },
+        collection: 'stream_message'
+    }
+);
+
+streamMessageSchema.index({ topicId: 1 });
+streamMessageSchema.index({ streamId: 1 });
+streamMessageSchema.index({ gameId: 1 });
+
+const modelName = 'stream_message';
+const existingModel = mongoose.models[modelName] as mongoose.Model<StreamMessage> | undefined;
+export const StreamMessageModel =
+    existingModel ?? mongoose.model<StreamMessage>(modelName, streamMessageSchema);
+
+const streamMessageModels = {
+    schema: streamMessageSchema,
+    model: StreamMessageModel,
+    insert: zStreamMessage
+};
+
 export default streamMessageModels;

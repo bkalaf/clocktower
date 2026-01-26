@@ -4,11 +4,11 @@ import { requireStoryteller, requireGame } from '../../../../server/authz/gameAu
 import { HttpError } from '../../../../errors';
 import { parseParams } from '../../../../server/parseParams';
 import { zGameIdParams } from '../../../../server/schemas/gameSchemas';
-import { getConnectedUserIds } from '../../../../server/realtime/presence';
+import { getConnectedUserIds } from '../../../../server/_authed.rooms.index.tsx/presence';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { setStatus } from '../../../../server/game';
-import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { broadcastRoomEvent } from '../../../../server/_authed.rooms.index.tsx/roomBroadcast';
 
 export const Route = createFileRoute('/api/games/$gameId/start-setup')({
     server: {

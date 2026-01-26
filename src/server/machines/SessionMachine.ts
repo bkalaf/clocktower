@@ -1,15 +1,15 @@
 // src/server/machines/SessionMachine.ts
 import { Action, ActionArgs, ActionFunction, ActorRefFrom, assign, setup } from 'xstate';
-import type { WebSocket } from 'ws';
+import type { Socket } from 'socket.io';
 import { createRoomActor, getRoomActor, roomActors } from '../roomService';
 import { createRoomMachine } from './RoomMachine';
 import type { OutgoingMessage, SessionSnapshotContext } from '@/shared/realtime/messages';
 
 export type SessionMachineInput = {
-    ws: WebSocket;
-    subscribe: (roomId: string, ws: WebSocket) => void;
-    unsubscribe: (roomId: string, ws: WebSocket) => void;
-    unsubscribeAll: (ws: WebSocket) => void;
+    ws: Socket;
+    subscribe: (roomId: string, ws: Socket) => void;
+    unsubscribe: (roomId: string, ws: Socket) => void;
+    unsubscribeAll: (ws: Socket) => void;
     broadcast: (msg: unknown) => void;
     listRooms: () => Promise<RoomSummary[]>;
     broadcastRoomsList: (rooms: RoomSummary[]) => void;
@@ -152,17 +152,10 @@ const assignEnteredRoom = assignSession(({ context, event }) => {
     };
 });
 
-const logoutCleanup = ({ context }: { context: SessionMachineContext }) => {
-    context.deps?.unsubscribeAll(context.deps.ws);
-};
-
 const resetSessionContext = assignSession(({ context }) => ({
     ...baseContext,
     deps: context.deps
 }));
-
-const isInRoom = ({ event }: { event: SessionEvent }) =>
-    event.type === 'LOGIN_SUCCESS' && !!membershipForUser(event.userId);
 
 export const SessionMachine = setup({
     types: {} as {
@@ -171,7 +164,14 @@ export const SessionMachine = setup({
         input: SessionMachineInput;
     },
     guards: {
+        isInRoom: ({ event }) => {
+            if (event.type !== 'LOGIN_SUCCESS') return false;
+            return !!membershipForUser(event.userId);
+        },
         hasUserId: ({ context }) => Boolean(context.userId)
+    },
+    actions: {
+        logoutCleanup: ({ context }) => context.deps?.unsubscribeAll(context.deps.ws)
     }
 }).createMachine({
     id: 'SessionMachine',
@@ -183,19 +183,31 @@ export const SessionMachine = setup({
                 LOGIN_SUCCESS: [
                     {
                         target: 'in_room',
-                        guard: isInRoom,
+                        guard: 'isInRoom',
                         actions: assignLoginContext
                     },
                     {
                         target: 'lobby',
                         actions: assignLoginContext
                     }
-                ]
+                ],
+                states: {
+                    loggingIn: {},
+                    blocked: {},
+                    idle: {
+                        on: {
+                            LOGIN_ATTEMPT: {
+                                target: 'loggingIn',
+                                action: 'attemptLogin'
+                            }
+                        }
+                    }
+                }
             }
         },
         lobby: {
             always: {
-                guard: isInRoom,
+                guard: 'isInRoom',
                 target: 'in_room'
             },
             on: {
@@ -212,7 +224,7 @@ export const SessionMachine = setup({
                 },
                 LOGOUT: {
                     target: 'unauthenticated',
-                    actions: [clearRoomContext, logoutCleanup, resetSessionContext]
+                    actions: [clearRoomContext, 'logoutCleanup', resetSessionContext]
                 }
             }
         },
@@ -224,7 +236,7 @@ export const SessionMachine = setup({
                 },
                 LOGOUT: {
                     target: 'unauthenticated',
-                    actions: [clearRoomContext, logoutCleanup, resetSessionContext]
+                    actions: [clearRoomContext, 'logoutCleanup', resetSessionContext]
                 }
             }
         }

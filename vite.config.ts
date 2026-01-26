@@ -1,62 +1,74 @@
 import type { ViteDevServer } from 'vite';
 
+import http from 'node:http';
 import { defineConfig } from 'vite';
 import { devtools } from '@tanstack/devtools-vite';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
 import viteReact from '@vitejs/plugin-react';
 import viteTsConfigPaths from 'vite-tsconfig-paths';
 import { fileURLToPath, URL } from 'url';
-import { startWsServer } from './src/server/realtime/wsServer';
+import { attachSocketIoToHttpServer } from './src/server/_authed.rooms.index.tsx/socketServer';
 
 import tailwindcss from '@tailwindcss/vite';
 import { nitro } from 'nitro/vite';
 
 function realtimeDevPlugin() {
-    let instance: Awaited<ReturnType<typeof startWsServer>> | null = null;
+    let instance: Awaited<ReturnType<typeof attachSocketIoToHttpServer>> | null = null;
     let startPromise: Promise<void> | null = null;
+    let registeredServer: http.Server | null = null;
 
     const stop = () => {
         if (!instance) return;
-        instance.wss.close();
-        instance.server.close(() => {});
+        instance.io.close();
         instance = null;
         startPromise = null;
+        registeredServer = null;
     };
 
-    const ensureStarted = async () => {
+    const ensureStarted = async (server: ViteDevServer) => {
         if (instance) return;
+        const httpServer = server.httpServer;
+        if (!httpServer) {
+            throw new Error('Vite dev server HTTP server is not available for realtime plugin');
+        }
         const port = Number(process.env.REALTIME_PORT ?? process.env.VITE_REALTIME_PORT ?? 3001);
         const mongoUri = process.env.MONGODB_URI ?? 'mongodb://localhost:27017';
         const dbName = process.env.MONGODB_DB ?? 'clocktower';
-        instance = await startWsServer({ port, mongoUri, dbName });
+        instance = await attachSocketIoToHttpServer({
+            httpServer,
+            mongoUri,
+            dbName,
+            cors: { origin: true, credentials: true, methods: ['GET', 'POST'] }
+        });
+        registerCloseHandler(httpServer);
     };
 
-    const start = () => {
+    const start = (server: ViteDevServer) => {
+        if (instance) return Promise.resolve();
         if (startPromise) return startPromise;
-        startPromise = ensureStarted().catch((error) => {
-            console.error('Failed to start realtime server', error);
+        startPromise = ensureStarted(server).catch((error) => {
+            console.error('Failed to initialize realtime Socket.IO server', error);
             instance = null;
             startPromise = null;
         });
         return startPromise;
     };
 
-    const registerCloseHandler = (server: ViteDevServer) => {
-        const handler = () => {
+    const registerCloseHandler = (server: http.Server) => {
+        if (registeredServer === server) return;
+        registeredServer = server;
+        server.once('close', () => {
             stop();
-        };
-        server.httpServer?.once('close', handler);
+        });
     };
 
     return {
         name: 'clocktower-realtime-dev',
         configureServer(server: ViteDevServer) {
-            void start();
-            registerCloseHandler(server);
+            void start(server);
         },
         configurePreviewServer(server: ViteDevServer) {
-            void start();
-            registerCloseHandler(server);
+            void start(server);
         }
     };
 }

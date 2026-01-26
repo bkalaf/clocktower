@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { ClientOnly } from '@tanstack/react-router';
 
 import { useAppDispatch, useAppSelector } from '@/client/state/hooks';
-import { getRealtimeUrl } from '@/lib/realtime';
+import { getRealtimeSocketUrl } from '@/realtime/socket';
 import { wsConnect, wsDisconnect } from '@/client/state/wsMiddleware';
 import { authSelectors } from '../client/state/authSlice';
 
@@ -17,12 +17,7 @@ function RealtimeConnectorClient({ userId }: { userId?: string }) {
             return;
         }
 
-        const url = getRealtimeUrl();
-        console.log(`realtime url`, url);
-        if (!url) {
-            return;
-        }
-
+        const url = getRealtimeSocketUrl();
         dispatch(wsConnect({ url }));
 
         return () => {

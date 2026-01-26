@@ -1,8 +1,7 @@
-// src/client/state/wsMiddleware.ts
 import { createAction, type Middleware, type Dispatch } from '@reduxjs/toolkit';
 import type { IncomingMessage, OutgoingMessage } from '@/shared/realtime/messages';
 import { realtimeActions, realtimeSelectors } from './realtimeSlice';
-import { authActions } from './authSlice';
+import { getRealtimeSocket, resetRealtimeSocket } from '@/realtime/socket';
 
 type PendingRequest = {
     resolve: (value: RoomSummary) => void;
@@ -39,7 +38,7 @@ function rejectAllPending(error: Error) {
     pendingRequests.clear();
 }
 
-export const wsConnect = createAction<{ url: string }>('ws/connect');
+export const wsConnect = createAction<{ url?: string }>('ws/connect');
 export const wsDisconnect = createAction('ws/disconnect');
 export const wsSend = createAction<IncomingMessage>('ws/send');
 
@@ -62,19 +61,18 @@ export function requestRoomsList(dispatch: Dispatch) {
 }
 
 const wsMiddleware: Middleware = (store) => {
-    console.log(`in wsMiddleware`);
-    let socket: WebSocket | null = null;
+    let socket: ReturnType<typeof getRealtimeSocket> | null = null;
     let cleanup: (() => void) | null = null;
-    let lastLoginPayload: { userId?: string; username?: string } | null = null;
 
-    const handleMessage = (raw: string) => {
-        console.log(`raw message: `, raw);
-        let parsed: unknown;
-        try {
-            parsed = JSON.parse(raw);
-        } catch {
-            store.dispatch(realtimeActions.setLastError('Received invalid realtime payload'));
-            return;
+    const handleMessage = (raw: unknown) => {
+        let parsed: unknown = raw;
+        if (typeof raw === 'string') {
+            try {
+                parsed = JSON.parse(raw);
+            } catch {
+                store.dispatch(realtimeActions.setLastError('Received invalid realtime payload'));
+                return;
+            }
         }
 
         if (!parsed || typeof parsed !== 'object' || typeof (parsed as { type?: unknown }).type !== 'string') {
@@ -84,11 +82,12 @@ const wsMiddleware: Middleware = (store) => {
 
         const message = parsed as OutgoingMessage;
         switch (message.type) {
-            case 'ROOMS_LIST':
+            case 'ROOMS_LIST': {
                 const roomsList = realtimeSelectors.selectRoomsList(store.getState());
                 if (roomsList.length === message.rooms.length) break;
                 store.dispatch(realtimeActions.setRooms(message.rooms));
                 break;
+            }
             case 'ROOM_CREATED': {
                 store.dispatch(realtimeActions.upsertRoom(message.room));
                 if (message.requestId) {
@@ -104,7 +103,7 @@ const wsMiddleware: Middleware = (store) => {
                     })
                 );
                 break;
-            case 'SESSION_SNAPSHOT': {
+            case 'SESSION_SNAPSHOT':
                 store.dispatch(
                     realtimeActions.setSessionSnapshot({
                         value: message.snapshot.value,
@@ -112,7 +111,6 @@ const wsMiddleware: Middleware = (store) => {
                     })
                 );
                 break;
-            }
             case 'JOINED_ROOM':
                 store.dispatch(realtimeActions.setCurrentRoomId(message.roomId));
                 break;
@@ -127,28 +125,19 @@ const wsMiddleware: Middleware = (store) => {
         }
     };
 
-    const connectSocket = (url: string) => {
+    const connectSocket = (url?: string) => {
         if (socket) {
             cleanup?.();
-            socket.close();
+            socket.disconnect();
             socket = null;
+            resetRealtimeSocket();
+            cleanup = null;
         }
 
-        socket = new WebSocket(url);
+        socket = getRealtimeSocket(url);
         store.dispatch(realtimeActions.setStatus('connecting'));
 
-        const handleOpen = () => {
-            store.dispatch(realtimeActions.setStatus('connected'));
-            if (lastLoginPayload) {
-                store.dispatch(
-                    wsSend({
-                        type: 'LOGIN_SUCCESS',
-                        userId: lastLoginPayload.userId ?? '',
-                        username: lastLoginPayload.username ?? ''
-                    })
-                );
-            }
-        };
+        const handleOpen = () => store.dispatch(realtimeActions.setStatus('connected'));
         const handleClose = () => {
             store.dispatch(realtimeActions.setStatus('disconnected'));
             rejectAllPending(new Error('Realtime connection closed'));
@@ -157,54 +146,48 @@ const wsMiddleware: Middleware = (store) => {
             store.dispatch(realtimeActions.setStatus('disconnected'));
             rejectAllPending(new Error('Realtime connection error'));
         };
-        const handleIncoming = (event: MessageEvent<string>) => {
-            handleMessage(event.data);
+        const handleIncoming = (event: unknown) => {
+            handleMessage(event);
         };
 
-        socket.addEventListener('open', handleOpen);
-        socket.addEventListener('close', handleClose);
-        socket.addEventListener('error', handleError);
-        socket.addEventListener('message', handleIncoming);
+        socket.on('connect', handleOpen);
+        socket.on('disconnect', handleClose);
+        socket.on('error', handleError);
+        socket.on('message', handleIncoming);
+        socket.connect();
 
         cleanup = () => {
-            socket?.removeEventListener('open', handleOpen);
-            socket?.removeEventListener('close', handleClose);
-            socket?.removeEventListener('error', handleError);
-            socket?.removeEventListener('message', handleIncoming);
+            socket?.off('connect', handleOpen);
+            socket?.off('disconnect', handleClose);
+            socket?.off('error', handleError);
+            socket?.off('message', handleIncoming);
         };
     };
 
     const disconnectSocket = () => {
-        if (socket) {
-            cleanup?.();
-            socket.close();
-            socket = null;
-            cleanup = null;
-        }
+        if (!socket) return;
+        cleanup?.();
+        socket.disconnect();
+        socket = null;
+        resetRealtimeSocket();
+        cleanup = null;
         store.dispatch(realtimeActions.setStatus('disconnected'));
         rejectAllPending(new Error('Realtime connection disconnected'));
     };
 
     return (next) => (action) => {
-        if (authActions.login.match(action)) {
-            console.log(`ws.url`);
-            lastLoginPayload = action.payload;
-            connectSocket('ws://localhost:3001/ws');
-        } else if (authActions.logout.match(action)) {
-            lastLoginPayload = null;
-            disconnectSocket();
-        } else if (wsConnect.match(action)) {
+        if (wsConnect.match(action)) {
             connectSocket(action.payload.url);
         } else if (wsDisconnect.match(action)) {
             disconnectSocket();
         } else if (wsSend.match(action)) {
-            if (!socket || socket.readyState !== WebSocket.OPEN) {
+            if (!socket || !socket.connected) {
                 store.dispatch(realtimeActions.setLastError('Realtime socket is not connected'));
                 if (action.payload.requestId) {
                     rejectRequest(action.payload.requestId, new Error('Realtime socket is not connected'));
                 }
             } else {
-                socket.send(JSON.stringify(action.payload));
+                socket.emit('message', action.payload);
             }
         }
         return next(action);

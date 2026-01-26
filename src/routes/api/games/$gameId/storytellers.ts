@@ -7,7 +7,7 @@ import { requireHost, requireMember } from '../../../../server/authz/gameAuth';
 import { zGameIdParams, zPromoteStorytellerInput } from '../../../../server/schemas/gameSchemas';
 import { parseJsonBody } from '../../../../server/parseJsonBody';
 import { connectMongoose } from '../../../../db/connectMongoose';
-import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { broadcastRoomEvent } from '../../../../server/_authed.rooms.index.tsx/roomBroadcast';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 
 export const Route = createFileRoute('/api/games/$gameId/storytellers')({

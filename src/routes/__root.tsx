@@ -7,13 +7,10 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 import appCss from './../assets/css/app.css?url';
 import type { QueryClient } from '@tanstack/react-query';
 import { SidebarProvider } from '@/components/ui/sidebar';
-import { RealtimeConnector } from '@/components/RealtimeConnector';
 import { NotFound } from '../components/NotFound';
 import { AppShell } from '../components/AppShell';
 import { ModalHost } from '../ui/modals/ModalHost';
-import { whoamiFn } from '../lib/api';
 import { store } from '../client/state/store';
-import { authActions } from '../client/state/authSlice';
 import { Provider } from 'react-redux';
 
 interface MyRouterContext {
@@ -61,25 +58,25 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
     },
     component: RootLayout,
     shellComponent: RootShellComponent,
-    notFoundComponent: NotFound,
-    loader: async ({ context }) => {
-        const data = await context.queryClient.ensureQueryData({
-            queryKey: ['whoami'],
-            queryFn: async () => {
-                return whoamiFn();
-            }
-        });
-        const { user } = data;
-        const state = store.getState();
-        if (state.auth.userId !== user?._id) {
-            store.dispatch(
-                authActions.login({
-                    userId: user?._id,
-                    username: user?.username
-                })
-            );
-        }
-    }
+    notFoundComponent: NotFound
+    // loader: async ({ context }) => {
+    //     const data = await context.queryClient.ensureQueryData({
+    //         queryKey: ['whoami'],
+    //         queryFn: async () => {
+    //             return whoamiFn();
+    //         }
+    //     });
+    //     const { user } = data;
+    //     const state = store.getState();
+    //     if (state.realtime.session?.context.userId !== user?._id) {
+    //         store.dispatch(
+    //             authActions.login({
+    //                 userId: user?._id,
+    //                 username: user?.username
+    //             })
+    //         );
+    //     }
+    // }
 });
 
 function RootShellComponent({ children }: { children: React.ReactNode }) {
@@ -118,21 +115,6 @@ function RootLayout() {
                 <Outlet />
                 <ModalHost {...search} />
             </AppShell>
-            {/* <RealtimeConnector /> */}
-            {/* <AppSidebar />
-            <div className='flex flex-1 flex-shrink flex-col'>
-                <TopBar />
-                <main className='relative flex-1 overflow-hidden h-full w-full'>
-                    <div className='absolute inset-0 z-20 flex items-center justify-center'>
-                        <Outlet />
-                        <ModalHost
-                            modal={search.modal}
-                            type={search.type}
-                        />
-                    </div>
-                </main>
-                <BottomBar />
-            </div> */}
         </div>
     );
 }

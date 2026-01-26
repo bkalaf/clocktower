@@ -10,6 +10,8 @@ import { MatchModel } from './Game';
 import { InviteModel } from './Invite';
 import { ModerationLogModel } from './ModerationLog';
 import { TravellerRequestModel } from './TravellerRequest';
+import { RoomModel } from './Room';
+import { SessionModel } from './Session';
 
 const $models = {
     UserModel,
@@ -22,7 +24,9 @@ const $models = {
     MatchModel,
     InviteModel,
     ModerationLogModel,
-    TravellerRequestModel
+    TravellerRequestModel,
+    RoomModel,
+    SessionModel
 };
 
 export default $models;

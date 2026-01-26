@@ -7,7 +7,7 @@ import { HttpError } from '../../../../errors';
 import { InviteModel } from '../../../../db/models/Invite';
 import { requireHost } from '../../../../server/authz/gameAuth';
 import { connectMongoose } from '../../../../db/connectMongoose';
-import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { broadcastRoomEvent } from '../../../../server/_authed.rooms.index.tsx/roomBroadcast';
 
 export const Route = createFileRoute('/api/invites/$inviteId/cancel')({
     server: {

@@ -20,17 +20,14 @@ import { TopBarMobileMenu } from './top-bar/TopBarMobileMenu';
 import { TopBarScriptsMenu } from './top-bar/TopBarScriptsMenu';
 import { TopBarSidebarTrigger } from './TopBarSidebarTrigger';
 import { UserNameSpan } from './UserNameSpan';
-import { useAppSelector } from '../client/state/hooks';
-import { authSelectors } from '../client/state/authSlice';
 import { CreateRoomButton } from './CreateRoomButton';
-
-
+import { useIsAuth, useUsername } from '../client/state/useIsAuth';
 
 export function TopBar() {
     const navigate = useNavigate();
     const { open } = useModal();
-    const isAuth = useAppSelector(authSelectors.isAuth);
-    const username = useAppSelector(authSelectors.selectUsername);
+    const isAuth = useIsAuth();
+    const username = useUsername();
     console.log(`isAuth`, isAuth);
     const handleLogin = useCallback(() => {
         navigate({

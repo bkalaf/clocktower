@@ -9,6 +9,8 @@ import { login } from '@/lib/api';
 import { FormControl } from './FormControl';
 import { Modal } from '../Modal';
 import { useInvalidateAuth } from '../useInvalidateAuth';
+import { useAppDispatch } from '../../client/state/hooks';
+import { realtimeActions } from '../../client/state/realtimeSlice';
 
 const loginSchema = z.object({
     email: z.email('Invalid email'),
@@ -74,10 +76,12 @@ export function LoginFormControl({
 
 export function LoginForm({ returnTo }: LoginFormProps) {
     const invalidate = useInvalidateAuth();
+    const dispatch = useAppDispatch();
     const onSubmit = useCallback(async (values: { email: string; password: string }) => {
         const result = await login(values.email, values.password);
         if (!result.ok) {
             throw new Error('login unsuccessful');
+        } else {
         }
     }, []);
     return (

@@ -12,7 +12,7 @@ help me work out how this would work - When I go to
 - `/logout` - Logout dialog - <Root><Splash><Logout>
 - `/register` — Registration dialog/page - <Root><Splash><Register>
 - `/forgot-password` — Password reset request (email + send token) - <Root><Splash><ForgotPassword>
-- `/reset-password/:token` — Password reset confirmation (token + new password) - <Root><Splash><ForgotPasswordToken>
+- `/reset-password/:token` — Password reset confirmation (token + new password) - <Root><Splash><Fo rgotPasswordToken>
 - `/user` - User search - <Root><Users>
 - `/profile` - should redirect to /profile/me
 - `/profile/me` - should redirect to /profile/:userId/me

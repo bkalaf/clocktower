@@ -9,7 +9,7 @@ import { GameModel } from '../../../../db/models/_Game';
 import { GameMemberModel } from '../../../../db/models/GameMember';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { availableSeats } from '../../../../server/rooms/helpers';
-import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { broadcastRoomEvent } from '../../../../server/_authed.rooms.index.tsx/roomBroadcast';
 
 export const Route = createFileRoute('/api/invites/$inviteId/accept')({
     server: {

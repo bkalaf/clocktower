@@ -6,7 +6,7 @@ import { requireHost, requireMember } from '../../../../server/authz/gameAuth';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { zGameId } from '../../../../schemas';
 import { setHostUserId } from '../../../../server/game';
-import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { broadcastRoomEvent } from '../../../../server/_authed.rooms.index.tsx/roomBroadcast';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { $is } from '../../../../types/game';
 import { createServerFn } from '@tanstack/react-start';

@@ -13,7 +13,7 @@ export type PersonalityTooltipProps = {
     children: React.ReactElement;
 };
 
-export function PersonalityTooltip({ personality, compact = true, children }: PersonalityTooltipProps) {
+export function PersonalityTooltip({ personality, compact = true, children }: PcTooltipProps) {
     return (
         <Tooltip>
             <TooltipTrigger asChild>{children}</TooltipTrigger>

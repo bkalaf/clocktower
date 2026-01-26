@@ -1,6 +1,6 @@
 // src/db/models/Session.ts
+import mongoose, { Schema } from 'mongoose';
 import z from 'zod/v4';
-import { getTypesFor } from '../../utils/zodToMongoose';
 import refs from '../../schemas/refs';
 import aliases from '../../schemas/aliases';
 
@@ -10,9 +10,32 @@ export const zSession = z.object({
     expiresAt: z.date()
 });
 
-const sessionModels = getTypesFor('session', zSession, { timestamps: true, collection: 'session' }, {}, [
-    { expiresAt: 1 },
-    { expireAfterSeconds: 0 }
-]);
+export type Session = z.infer<typeof zSession>;
+export type SessionType = mongoose.InferRawDocType<Session>;
+export type SessionDocument = mongoose.HydratedDocument<SessionType>;
 
-export const SessionModel = sessionModels.model;
+const sessionSchema = new Schema<Session>(
+    {
+        _id: { type: String, required: true },
+        userId: { type: String, required: true, ref: 'user' },
+        expiresAt: { type: Date, required: true }
+    },
+    {
+        timestamps: true,
+        collection: 'session'
+    }
+);
+
+sessionSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
+
+const modelName = 'session';
+const existingModel = mongoose.models[modelName] as mongoose.Model<Session> | undefined;
+export const SessionModel = existingModel ?? mongoose.model<Session>(modelName, sessionSchema);
+
+const sessionModels = {
+    schema: sessionSchema,
+    model: SessionModel,
+    insert: zSession
+};
+
+export default sessionModels;

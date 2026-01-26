@@ -1,4 +1,6 @@
 /* src/assets/css/app.css */
+@import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap');
+
 @theme {
     --font-bitcount-grid-double: 'Bitcount Grid Double';
     --font-caesar-dressing: 'Caesar Dressing';
@@ -48,26 +50,6 @@
     .using-mouse * {
         outline: none !important;
     }
-
-    th,
-    html,
-    body,
-    table,
-    input,
-    button,
-    th,
-    td,
-    a,
-    span,
-    div,
-    p {
-        font-family:
-            'Rubik',
-            'Segoe UI',
-            system-ui,
-            -apple-system,
-            sans-serif;
-    }
 }
 
 @layer components {
@@ -92,6 +74,11 @@
     .font-cinzel {
         font-family: 'Cinzel', serif;
     }
+    .font-germania-one {
+        font-family: 'Germania One', system-ui;
+        font-weight: 400;
+        font-style: normal;
+    }
 }
 
 @custom-variant aria-invalid (&[aria-invalid="true"]);
@@ -105,7 +92,19 @@
 @custom-variant data-group-b (&[data-group-id="b"]);
 @custom-variant data-group-c (&[data-group-id="c"]);
 
+th,
 html,
-body {
-    @apply font-rubik;
+body,
+table,
+input,
+button,
+th,
+td,
+a,
+span,
+div,
+p {
+    font-family: 'Germania One', system-ui;
+    font-weight: 400;
+    font-style: normal;
 }

@@ -43,6 +43,7 @@ export function createSessionActor(sessionId: string, input?: SessionMachineInpu
     });
     actor.start();
     sessionActors.set(sessionId, actor);
+    console.log(`sessionActors`, sessionActors);
     return actor;
 }
 

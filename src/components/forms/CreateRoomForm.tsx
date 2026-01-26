@@ -12,7 +12,8 @@ import { Modal } from '../Modal';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAppSelector, useCreateRoom } from '@/client/state/hooks';
-import { authSelectors } from '../../client/state/authSlice';
+import { realtimeSelectors } from '../../client/state/realtimeSlice';
+import { useUserId } from '../../client/state/useIsAuth';
 
 const parseIntegerField = (label: string, min: number, max: number) =>
     z.preprocess(
@@ -211,8 +212,7 @@ function RenderCreateRoomControls({ formName, defaultScriptId }: { formName: str
 
 export function CreateRoomForm({ defaultScriptId }: CreateRoomFormProps) {
     const navigate = useNavigate();
-    const userId = useAppSelector(authSelectors.selectUserId);
-    const invalidate = useCallback(async () => {}, []);
+    const userId = useUserId();
     const defaultValues = useMemo(
         () => ({
             ...baseDefaultValues,

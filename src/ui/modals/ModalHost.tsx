@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Invites } from './Invites';
+// import { Invites } from './Invites';
 import { Preferences } from './Preferences';
 import { modalBackgroundStyle } from '@/components/modals/modalStyles';
 import { CreateScriptForm } from '@/components/forms/RenderCreateScriptControls';
@@ -46,7 +46,7 @@ export function ModalHost({ modal, type, returnTo }: Props) {
                 className='w-full max-w-3xl space-y-6 rounded-3xl border border-white/20 bg-black/70 shadow-[0_25px_70px_rgba(0,0,0,0.65)] backdrop-blur-xl'
                 style={modalBackgroundStyle}
             >
-                {modal === 'invites' && <Invites onClose={close} />}
+                {/* {modal === 'invites' && <Invites onClose={close} />} */}
                 {modal === 'preferences' && <Preferences onClose={close} />}
                 {modal === 'reveal' && (
                     <section className='space-y-4'>

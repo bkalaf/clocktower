@@ -9,7 +9,7 @@ import { connectMongoose } from '../../../../db/connectMongoose';
 import { MatchModel } from '../../../../db/models/Game';
 import { TravellerRequestModel } from '../../../../db/models/TravellerRequest';
 import { GameMemberModel } from '../../../../db/models/GameMember';
-import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { broadcastRoomEvent } from '../../../../server/_authed.rooms.index.tsx/roomBroadcast';
 import { randomUUID } from 'crypto';
 
 export const Route = createFileRoute('/api/matches/$matchId/travel-request')({

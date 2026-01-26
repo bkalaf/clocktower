@@ -9,27 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as RegisterRouteImport } from './routes/register'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as SplashRouteImport } from './routes/_splash'
-import { Route as SplashIndexRouteImport } from './routes/_splash/index'
-import { Route as ScriptsNewRouteImport } from './routes/scripts/new'
+import { Route as UnauthedRouteImport } from './routes/_unauthed'
+import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as GamesGameIdRouteImport } from './routes/games/$gameId'
 import { Route as ApiWhoamiRouteImport } from './routes/api/whoami'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
-import { Route as SplashRoomsRouteImport } from './routes/_splash/_rooms'
+import { Route as UnauthedLogoutRouteImport } from './routes/_unauthed.logout'
+import { Route as UnauthedLoginRouteImport } from './routes/_unauthed.login'
+import { Route as AuthedScriptsRouteImport } from './routes/_authed.scripts'
 import { Route as ApiScriptsIndexRouteImport } from './routes/api/scripts/index'
 import { Route as ApiRoomsIndexRouteImport } from './routes/api/rooms/index'
 import { Route as ApiInvitesIndexRouteImport } from './routes/api/invites/index'
 import { Route as ApiDevGrimoireRouteImport } from './routes/api/dev/grimoire'
 import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
 import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
-import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
 import { Route as ApiAuthForgotPasswordRouteImport } from './routes/api/auth/forgot-password'
+import { Route as AuthedScriptsNRouteImport } from './routes/_authed.scripts.n'
+import { Route as AuthedRoomsNRouteImport } from './routes/_authed.rooms.n'
+import { Route as AuthedAuthForgotPasswordRouteImport } from './routes/_authed.auth.forgot-password'
 import { Route as ApiRoomsRoomIdIndexRouteImport } from './routes/api/rooms/$roomId/index'
 import { Route as ApiMatchesMatchIdIndexRouteImport } from './routes/api/matches/$matchId/index'
-import { Route as SplashRoomsRoomsIndexRouteImport } from './routes/_splash/_rooms/rooms/index'
 import { Route as ApiRoomsRoomIdStartMatchRouteImport } from './routes/api/rooms/$roomId/start-match'
 import { Route as ApiRoomsRoomIdScriptRouteImport } from './routes/api/rooms/$roomId/script'
 import { Route as ApiRoomsRoomIdRemovePlayerRouteImport } from './routes/api/rooms/$roomId/remove-player'
@@ -48,36 +47,14 @@ import { Route as ApiGamesGameIdStorytellersRouteImport } from './routes/api/gam
 import { Route as ApiGamesGameIdStartSetupRouteImport } from './routes/api/games/$gameId/start-setup'
 import { Route as ApiGamesGameIdReadyRouteImport } from './routes/api/games/$gameId/ready'
 import { Route as ApiGamesGameIdHostRouteImport } from './routes/api/games/$gameId/host'
-import { Route as SplashRoomsRoomsNewRouteImport } from './routes/_splash/_rooms/rooms/new'
-import { Route as SplashRoomsRoomsRoomIdRouteImport } from './routes/_splash/_rooms/rooms/$roomId'
+import { Route as AuthedRoomsRoomRoomIdIndexRouteImport } from './routes/_authed.rooms._room.$roomId.index'
 
-const RegisterRoute = RegisterRouteImport.update({
-  id: '/register',
-  path: '/register',
+const UnauthedRoute = UnauthedRouteImport.update({
+  id: '/_unauthed',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SplashRoute = SplashRouteImport.update({
-  id: '/_splash',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SplashIndexRoute = SplashIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => SplashRoute,
-} as any)
-const ScriptsNewRoute = ScriptsNewRouteImport.update({
-  id: '/scripts/new',
-  path: '/scripts/new',
+const AuthedRoute = AuthedRouteImport.update({
+  id: '/_authed',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GamesGameIdRoute = GamesGameIdRouteImport.update({
@@ -95,9 +72,20 @@ const ApiHealthRoute = ApiHealthRouteImport.update({
   path: '/api/health',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SplashRoomsRoute = SplashRoomsRouteImport.update({
-  id: '/_rooms',
-  getParentRoute: () => SplashRoute,
+const UnauthedLogoutRoute = UnauthedLogoutRouteImport.update({
+  id: '/logout',
+  path: '/logout',
+  getParentRoute: () => UnauthedRoute,
+} as any)
+const UnauthedLoginRoute = UnauthedLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => UnauthedRoute,
+} as any)
+const AuthedScriptsRoute = AuthedScriptsRouteImport.update({
+  id: '/scripts',
+  path: '/scripts',
+  getParentRoute: () => AuthedRoute,
 } as any)
 const ApiScriptsIndexRoute = ApiScriptsIndexRouteImport.update({
   id: '/api/scripts/',
@@ -129,16 +117,27 @@ const ApiAuthLogoutRoute = ApiAuthLogoutRouteImport.update({
   path: '/api/auth/logout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
-  id: '/api/auth/login',
-  path: '/api/auth/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiAuthForgotPasswordRoute = ApiAuthForgotPasswordRouteImport.update({
   id: '/api/auth/forgot-password',
   path: '/api/auth/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthedScriptsNRoute = AuthedScriptsNRouteImport.update({
+  id: '/n',
+  path: '/n',
+  getParentRoute: () => AuthedScriptsRoute,
+} as any)
+const AuthedRoomsNRoute = AuthedRoomsNRouteImport.update({
+  id: '/rooms/n',
+  path: '/rooms/n',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedAuthForgotPasswordRoute =
+  AuthedAuthForgotPasswordRouteImport.update({
+    id: '/auth/forgot-password',
+    path: '/auth/forgot-password',
+    getParentRoute: () => AuthedRoute,
+  } as any)
 const ApiRoomsRoomIdIndexRoute = ApiRoomsRoomIdIndexRouteImport.update({
   id: '/api/rooms/$roomId/',
   path: '/api/rooms/$roomId/',
@@ -148,11 +147,6 @@ const ApiMatchesMatchIdIndexRoute = ApiMatchesMatchIdIndexRouteImport.update({
   id: '/api/matches/$matchId/',
   path: '/api/matches/$matchId/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const SplashRoomsRoomsIndexRoute = SplashRoomsRoomsIndexRouteImport.update({
-  id: '/rooms/',
-  path: '/rooms/',
-  getParentRoute: () => SplashRoomsRoute,
 } as any)
 const ApiRoomsRoomIdStartMatchRoute =
   ApiRoomsRoomIdStartMatchRouteImport.update({
@@ -254,36 +248,30 @@ const ApiGamesGameIdHostRoute = ApiGamesGameIdHostRouteImport.update({
   path: '/api/games/$gameId/host',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SplashRoomsRoomsNewRoute = SplashRoomsRoomsNewRouteImport.update({
-  id: '/rooms/new',
-  path: '/rooms/new',
-  getParentRoute: () => SplashRoomsRoute,
-} as any)
-const SplashRoomsRoomsRoomIdRoute = SplashRoomsRoomsRoomIdRouteImport.update({
-  id: '/rooms/$roomId',
-  path: '/rooms/$roomId',
-  getParentRoute: () => SplashRoomsRoute,
-} as any)
+const AuthedRoomsRoomRoomIdIndexRoute =
+  AuthedRoomsRoomRoomIdIndexRouteImport.update({
+    id: '/rooms/_room/$roomId/',
+    path: '/rooms/$roomId/',
+    getParentRoute: () => AuthedRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
+  '/scripts': typeof AuthedScriptsRouteWithChildren
+  '/login': typeof UnauthedLoginRoute
+  '/logout': typeof UnauthedLogoutRoute
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/games/$gameId': typeof GamesGameIdRoute
-  '/scripts/new': typeof ScriptsNewRoute
-  '/': typeof SplashIndexRoute
+  '/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
+  '/rooms/n': typeof AuthedRoomsNRoute
+  '/scripts/n': typeof AuthedScriptsNRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
-  '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/dev/grimoire': typeof ApiDevGrimoireRoute
   '/api/invites': typeof ApiInvitesIndexRoute
   '/api/rooms': typeof ApiRoomsIndexRoute
   '/api/scripts': typeof ApiScriptsIndexRoute
-  '/rooms/$roomId': typeof SplashRoomsRoomsRoomIdRoute
-  '/rooms/new': typeof SplashRoomsRoomsNewRoute
   '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
   '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
   '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
@@ -302,29 +290,27 @@ export interface FileRoutesByFullPath {
   '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
   '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
   '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
-  '/rooms': typeof SplashRoomsRoomsIndexRoute
   '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute
   '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute
+  '/rooms/$roomId': typeof AuthedRoomsRoomRoomIdIndexRoute
 }
 export interface FileRoutesByTo {
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
+  '/scripts': typeof AuthedScriptsRouteWithChildren
+  '/login': typeof UnauthedLoginRoute
+  '/logout': typeof UnauthedLogoutRoute
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/games/$gameId': typeof GamesGameIdRoute
-  '/scripts/new': typeof ScriptsNewRoute
-  '/': typeof SplashIndexRoute
+  '/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
+  '/rooms/n': typeof AuthedRoomsNRoute
+  '/scripts/n': typeof AuthedScriptsNRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
-  '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/dev/grimoire': typeof ApiDevGrimoireRoute
   '/api/invites': typeof ApiInvitesIndexRoute
   '/api/rooms': typeof ApiRoomsIndexRoute
   '/api/scripts': typeof ApiScriptsIndexRoute
-  '/rooms/$roomId': typeof SplashRoomsRoomsRoomIdRoute
-  '/rooms/new': typeof SplashRoomsRoomsNewRoute
   '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
   '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
   '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
@@ -343,32 +329,30 @@ export interface FileRoutesByTo {
   '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
   '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
   '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
-  '/rooms': typeof SplashRoomsRoomsIndexRoute
   '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute
   '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute
+  '/rooms/$roomId': typeof AuthedRoomsRoomRoomIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/_splash': typeof SplashRouteWithChildren
-  '/forgot-password': typeof ForgotPasswordRoute
-  '/login': typeof LoginRoute
-  '/register': typeof RegisterRoute
-  '/_splash/_rooms': typeof SplashRoomsRouteWithChildren
+  '/_authed': typeof AuthedRouteWithChildren
+  '/_unauthed': typeof UnauthedRouteWithChildren
+  '/_authed/scripts': typeof AuthedScriptsRouteWithChildren
+  '/_unauthed/login': typeof UnauthedLoginRoute
+  '/_unauthed/logout': typeof UnauthedLogoutRoute
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/games/$gameId': typeof GamesGameIdRoute
-  '/scripts/new': typeof ScriptsNewRoute
-  '/_splash/': typeof SplashIndexRoute
+  '/_authed/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
+  '/_authed/rooms/n': typeof AuthedRoomsNRoute
+  '/_authed/scripts/n': typeof AuthedScriptsNRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
-  '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/dev/grimoire': typeof ApiDevGrimoireRoute
   '/api/invites/': typeof ApiInvitesIndexRoute
   '/api/rooms/': typeof ApiRoomsIndexRoute
   '/api/scripts/': typeof ApiScriptsIndexRoute
-  '/_splash/_rooms/rooms/$roomId': typeof SplashRoomsRoomsRoomIdRoute
-  '/_splash/_rooms/rooms/new': typeof SplashRoomsRoomsNewRoute
   '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
   '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
   '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
@@ -387,31 +371,29 @@ export interface FileRoutesById {
   '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
   '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
   '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
-  '/_splash/_rooms/rooms/': typeof SplashRoomsRoomsIndexRoute
   '/api/matches/$matchId/': typeof ApiMatchesMatchIdIndexRoute
   '/api/rooms/$roomId/': typeof ApiRoomsRoomIdIndexRoute
+  '/_authed/rooms/_room/$roomId/': typeof AuthedRoomsRoomRoomIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/forgot-password'
+    | '/scripts'
     | '/login'
-    | '/register'
+    | '/logout'
     | '/api/health'
     | '/api/whoami'
     | '/games/$gameId'
-    | '/scripts/new'
-    | '/'
+    | '/auth/forgot-password'
+    | '/rooms/n'
+    | '/scripts/n'
     | '/api/auth/forgot-password'
-    | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
     | '/api/dev/grimoire'
     | '/api/invites'
     | '/api/rooms'
     | '/api/scripts'
-    | '/rooms/$roomId'
-    | '/rooms/new'
     | '/api/games/$gameId/host'
     | '/api/games/$gameId/ready'
     | '/api/games/$gameId/start-setup'
@@ -430,29 +412,27 @@ export interface FileRouteTypes {
     | '/api/rooms/$roomId/remove-player'
     | '/api/rooms/$roomId/script'
     | '/api/rooms/$roomId/start-match'
-    | '/rooms'
     | '/api/matches/$matchId'
     | '/api/rooms/$roomId'
+    | '/rooms/$roomId'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/forgot-password'
+    | '/scripts'
     | '/login'
-    | '/register'
+    | '/logout'
     | '/api/health'
     | '/api/whoami'
     | '/games/$gameId'
-    | '/scripts/new'
-    | '/'
+    | '/auth/forgot-password'
+    | '/rooms/n'
+    | '/scripts/n'
     | '/api/auth/forgot-password'
-    | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
     | '/api/dev/grimoire'
     | '/api/invites'
     | '/api/rooms'
     | '/api/scripts'
-    | '/rooms/$roomId'
-    | '/rooms/new'
     | '/api/games/$gameId/host'
     | '/api/games/$gameId/ready'
     | '/api/games/$gameId/start-setup'
@@ -471,31 +451,29 @@ export interface FileRouteTypes {
     | '/api/rooms/$roomId/remove-player'
     | '/api/rooms/$roomId/script'
     | '/api/rooms/$roomId/start-match'
-    | '/rooms'
     | '/api/matches/$matchId'
     | '/api/rooms/$roomId'
+    | '/rooms/$roomId'
   id:
     | '__root__'
-    | '/_splash'
-    | '/forgot-password'
-    | '/login'
-    | '/register'
-    | '/_splash/_rooms'
+    | '/_authed'
+    | '/_unauthed'
+    | '/_authed/scripts'
+    | '/_unauthed/login'
+    | '/_unauthed/logout'
     | '/api/health'
     | '/api/whoami'
     | '/games/$gameId'
-    | '/scripts/new'
-    | '/_splash/'
+    | '/_authed/auth/forgot-password'
+    | '/_authed/rooms/n'
+    | '/_authed/scripts/n'
     | '/api/auth/forgot-password'
-    | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/register'
     | '/api/dev/grimoire'
     | '/api/invites/'
     | '/api/rooms/'
     | '/api/scripts/'
-    | '/_splash/_rooms/rooms/$roomId'
-    | '/_splash/_rooms/rooms/new'
     | '/api/games/$gameId/host'
     | '/api/games/$gameId/ready'
     | '/api/games/$gameId/start-setup'
@@ -514,22 +492,18 @@ export interface FileRouteTypes {
     | '/api/rooms/$roomId/remove-player'
     | '/api/rooms/$roomId/script'
     | '/api/rooms/$roomId/start-match'
-    | '/_splash/_rooms/rooms/'
     | '/api/matches/$matchId/'
     | '/api/rooms/$roomId/'
+    | '/_authed/rooms/_room/$roomId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  SplashRoute: typeof SplashRouteWithChildren
-  ForgotPasswordRoute: typeof ForgotPasswordRoute
-  LoginRoute: typeof LoginRoute
-  RegisterRoute: typeof RegisterRoute
+  AuthedRoute: typeof AuthedRouteWithChildren
+  UnauthedRoute: typeof UnauthedRouteWithChildren
   ApiHealthRoute: typeof ApiHealthRoute
   ApiWhoamiRoute: typeof ApiWhoamiRoute
   GamesGameIdRoute: typeof GamesGameIdRoute
-  ScriptsNewRoute: typeof ScriptsNewRoute
   ApiAuthForgotPasswordRoute: typeof ApiAuthForgotPasswordRoute
-  ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
   ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
   ApiDevGrimoireRoute: typeof ApiDevGrimoireRoute
@@ -560,46 +534,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/register': {
-      id: '/register'
-      path: '/register'
-      fullPath: '/register'
-      preLoaderRoute: typeof RegisterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forgot-password': {
-      id: '/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/_splash': {
-      id: '/_splash'
+    '/_unauthed': {
+      id: '/_unauthed'
       path: ''
       fullPath: ''
-      preLoaderRoute: typeof SplashRouteImport
+      preLoaderRoute: typeof UnauthedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_splash/': {
-      id: '/_splash/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof SplashIndexRouteImport
-      parentRoute: typeof SplashRoute
-    }
-    '/scripts/new': {
-      id: '/scripts/new'
-      path: '/scripts/new'
-      fullPath: '/scripts/new'
-      preLoaderRoute: typeof ScriptsNewRouteImport
+    '/_authed': {
+      id: '/_authed'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/games/$gameId': {
@@ -623,12 +569,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiHealthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_splash/_rooms': {
-      id: '/_splash/_rooms'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof SplashRoomsRouteImport
-      parentRoute: typeof SplashRoute
+    '/_unauthed/logout': {
+      id: '/_unauthed/logout'
+      path: '/logout'
+      fullPath: '/logout'
+      preLoaderRoute: typeof UnauthedLogoutRouteImport
+      parentRoute: typeof UnauthedRoute
+    }
+    '/_unauthed/login': {
+      id: '/_unauthed/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof UnauthedLoginRouteImport
+      parentRoute: typeof UnauthedRoute
+    }
+    '/_authed/scripts': {
+      id: '/_authed/scripts'
+      path: '/scripts'
+      fullPath: '/scripts'
+      preLoaderRoute: typeof AuthedScriptsRouteImport
+      parentRoute: typeof AuthedRoute
     }
     '/api/scripts/': {
       id: '/api/scripts/'
@@ -672,19 +632,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthLogoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/auth/login': {
-      id: '/api/auth/login'
-      path: '/api/auth/login'
-      fullPath: '/api/auth/login'
-      preLoaderRoute: typeof ApiAuthLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/auth/forgot-password': {
       id: '/api/auth/forgot-password'
       path: '/api/auth/forgot-password'
       fullPath: '/api/auth/forgot-password'
       preLoaderRoute: typeof ApiAuthForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authed/scripts/n': {
+      id: '/_authed/scripts/n'
+      path: '/n'
+      fullPath: '/scripts/n'
+      preLoaderRoute: typeof AuthedScriptsNRouteImport
+      parentRoute: typeof AuthedScriptsRoute
+    }
+    '/_authed/rooms/n': {
+      id: '/_authed/rooms/n'
+      path: '/rooms/n'
+      fullPath: '/rooms/n'
+      preLoaderRoute: typeof AuthedRoomsNRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/auth/forgot-password': {
+      id: '/_authed/auth/forgot-password'
+      path: '/auth/forgot-password'
+      fullPath: '/auth/forgot-password'
+      preLoaderRoute: typeof AuthedAuthForgotPasswordRouteImport
+      parentRoute: typeof AuthedRoute
     }
     '/api/rooms/$roomId/': {
       id: '/api/rooms/$roomId/'
@@ -699,13 +673,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/api/matches/$matchId'
       preLoaderRoute: typeof ApiMatchesMatchIdIndexRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/_splash/_rooms/rooms/': {
-      id: '/_splash/_rooms/rooms/'
-      path: '/rooms'
-      fullPath: '/rooms'
-      preLoaderRoute: typeof SplashRoomsRoomsIndexRouteImport
-      parentRoute: typeof SplashRoomsRoute
     }
     '/api/rooms/$roomId/start-match': {
       id: '/api/rooms/$roomId/start-match'
@@ -833,63 +800,66 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGamesGameIdHostRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_splash/_rooms/rooms/new': {
-      id: '/_splash/_rooms/rooms/new'
-      path: '/rooms/new'
-      fullPath: '/rooms/new'
-      preLoaderRoute: typeof SplashRoomsRoomsNewRouteImport
-      parentRoute: typeof SplashRoomsRoute
-    }
-    '/_splash/_rooms/rooms/$roomId': {
-      id: '/_splash/_rooms/rooms/$roomId'
+    '/_authed/rooms/_room/$roomId/': {
+      id: '/_authed/rooms/_room/$roomId/'
       path: '/rooms/$roomId'
       fullPath: '/rooms/$roomId'
-      preLoaderRoute: typeof SplashRoomsRoomsRoomIdRouteImport
-      parentRoute: typeof SplashRoomsRoute
+      preLoaderRoute: typeof AuthedRoomsRoomRoomIdIndexRouteImport
+      parentRoute: typeof AuthedRoute
     }
   }
 }
 
-interface SplashRoomsRouteChildren {
-  SplashRoomsRoomsRoomIdRoute: typeof SplashRoomsRoomsRoomIdRoute
-  SplashRoomsRoomsNewRoute: typeof SplashRoomsRoomsNewRoute
-  SplashRoomsRoomsIndexRoute: typeof SplashRoomsRoomsIndexRoute
+interface AuthedScriptsRouteChildren {
+  AuthedScriptsNRoute: typeof AuthedScriptsNRoute
 }
 
-const SplashRoomsRouteChildren: SplashRoomsRouteChildren = {
-  SplashRoomsRoomsRoomIdRoute: SplashRoomsRoomsRoomIdRoute,
-  SplashRoomsRoomsNewRoute: SplashRoomsRoomsNewRoute,
-  SplashRoomsRoomsIndexRoute: SplashRoomsRoomsIndexRoute,
+const AuthedScriptsRouteChildren: AuthedScriptsRouteChildren = {
+  AuthedScriptsNRoute: AuthedScriptsNRoute,
 }
 
-const SplashRoomsRouteWithChildren = SplashRoomsRoute._addFileChildren(
-  SplashRoomsRouteChildren,
+const AuthedScriptsRouteWithChildren = AuthedScriptsRoute._addFileChildren(
+  AuthedScriptsRouteChildren,
 )
 
-interface SplashRouteChildren {
-  SplashRoomsRoute: typeof SplashRoomsRouteWithChildren
-  SplashIndexRoute: typeof SplashIndexRoute
+interface AuthedRouteChildren {
+  AuthedScriptsRoute: typeof AuthedScriptsRouteWithChildren
+  AuthedAuthForgotPasswordRoute: typeof AuthedAuthForgotPasswordRoute
+  AuthedRoomsNRoute: typeof AuthedRoomsNRoute
+  AuthedRoomsRoomRoomIdIndexRoute: typeof AuthedRoomsRoomRoomIdIndexRoute
 }
 
-const SplashRouteChildren: SplashRouteChildren = {
-  SplashRoomsRoute: SplashRoomsRouteWithChildren,
-  SplashIndexRoute: SplashIndexRoute,
+const AuthedRouteChildren: AuthedRouteChildren = {
+  AuthedScriptsRoute: AuthedScriptsRouteWithChildren,
+  AuthedAuthForgotPasswordRoute: AuthedAuthForgotPasswordRoute,
+  AuthedRoomsNRoute: AuthedRoomsNRoute,
+  AuthedRoomsRoomRoomIdIndexRoute: AuthedRoomsRoomRoomIdIndexRoute,
 }
 
-const SplashRouteWithChildren =
-  SplashRoute._addFileChildren(SplashRouteChildren)
+const AuthedRouteWithChildren =
+  AuthedRoute._addFileChildren(AuthedRouteChildren)
+
+interface UnauthedRouteChildren {
+  UnauthedLoginRoute: typeof UnauthedLoginRoute
+  UnauthedLogoutRoute: typeof UnauthedLogoutRoute
+}
+
+const UnauthedRouteChildren: UnauthedRouteChildren = {
+  UnauthedLoginRoute: UnauthedLoginRoute,
+  UnauthedLogoutRoute: UnauthedLogoutRoute,
+}
+
+const UnauthedRouteWithChildren = UnauthedRoute._addFileChildren(
+  UnauthedRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
-  SplashRoute: SplashRouteWithChildren,
-  ForgotPasswordRoute: ForgotPasswordRoute,
-  LoginRoute: LoginRoute,
-  RegisterRoute: RegisterRoute,
+  AuthedRoute: AuthedRouteWithChildren,
+  UnauthedRoute: UnauthedRouteWithChildren,
   ApiHealthRoute: ApiHealthRoute,
   ApiWhoamiRoute: ApiWhoamiRoute,
   GamesGameIdRoute: GamesGameIdRoute,
-  ScriptsNewRoute: ScriptsNewRoute,
   ApiAuthForgotPasswordRoute: ApiAuthForgotPasswordRoute,
-  ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,
   ApiAuthRegisterRoute: ApiAuthRegisterRoute,
   ApiDevGrimoireRoute: ApiDevGrimoireRoute,

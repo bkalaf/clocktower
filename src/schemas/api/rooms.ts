@@ -26,22 +26,26 @@ export const zRoom = z.object({
     visibility: enums.roomVisibility
 });
 
+export const zGameRoles = z.enum(['player', 'storyteller', 'spectator']);
+
 export const zRoomDto = z.object({
-    _id: aliases.gameId,
-    allowTravellers: z.boolean(),
-    banner: z.string().default(''),
-    endedAt: z.string().optional(),
-    hostUserId: refs.user.optional(),
-    maxPlayers: aliases.pcPlayerCount.default(15),
-    maxTravellers: aliases.pcTraverCount.default(0),
-    minPlayers: aliases.pcPlayerCount.default(5),
-    plannedStartTime: aliases.timestamp.optional(),
+    roomId: aliases.gameId,
+    banner: z.string().optional(),
+    hostUserId: refs.user,
+    hostUsername: z.string().optional(),
     scriptId: refs.script.optional(),
-    skillLevel: enums.skillLevel.optional(),
-    storytellerUserIds: z.array(aliases.userId).default([]),
-    speed: enums.gameSpeed.optional(),
+    scriptName: z.string().optional(),
+    speed: enums.gameSpeed,
     visibility: enums.roomVisibility,
-    connectedUserIds: z.array(z.string()).default([])
+    roles: z.array(z.string()).default([]),
+    skillLevel: enums.skillLevel,
+    maxPlayers: aliases.pcPlayerCount,
+    minPlayers: aliases.pcPlayerCount,
+    maxTravellers: aliases.pcTraverCount,
+    allowTravellers: z.boolean(),
+    plannedStartTime: z.string().optional(),
+    connectedUserIds: z.record(aliases.userId, zGameRoles).default({}),
+    playerCount: z.number().int().min(0)
 });
 
 export const zRoomListInput = z.object({

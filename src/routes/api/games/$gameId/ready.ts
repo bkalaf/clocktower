@@ -9,7 +9,7 @@ import { zReadyInput } from '../../../../server/schemas/gameSchemas';
 import { connectMongoose } from '../../../../db/connectMongoose';
 import { requireMember } from '../../../../server/authz/gameAuth';
 import { GameMemberModel } from '../../../../db/models/GameMember';
-import { broadcastRoomEvent } from '../../../../server/realtime/roomBroadcast';
+import { broadcastRoomEvent } from '../../../../server/_authed.rooms.index.tsx/roomBroadcast';
 import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie';
 import { createServerFn } from '@tanstack/react-start';
 import { $z } from '../../../../server/schemas/z';

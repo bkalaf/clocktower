@@ -6,6 +6,7 @@ import { ensureSessionActor, stopSessionActor } from '../server/sessionService';
 import { getUserFromCookie } from '../serverFns/getId/getUserFromCookie';
 import z from 'zod/v4';
 import { UserModel } from '../db/models/User';
+import { loginServerFn } from '../routes/api/auth/-login';
 
 const defaultHeaders = {
     'Content-Type': 'application/json'
@@ -68,10 +69,11 @@ export async function whoami() {
 }
 
 export async function login(email: string, password: string) {
-    return apiFetch<{ ok: boolean }>('/api/auth/login', {
-        method: 'POST',
-        body: JSON.stringify({ email, password })
-    });
+    return loginServerFn({ data: { email, password } });
+    // return apiFetch<{ ok: boolean }>('/api/auth/login', {
+    //     method: 'POST',
+    //     body: JSON.stringify({ email, password })
+    // });
 }
 
 const checkUserNameInput = z.object({
