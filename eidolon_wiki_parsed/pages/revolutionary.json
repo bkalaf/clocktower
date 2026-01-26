@@ -1,0 +1,40 @@
+{
+  "roleKey": "revolutionary",
+  "title": "Revolutionary",
+  "url": "https://wiki.bloodontheclocktower.com/Revolutionary",
+  "categoryHint": "fabled",
+  "categories": [
+    "Fabled"
+  ],
+  "editionTags": [],
+  "abilityText": "2 neighboring players are known to be the same alignment. Once per game, 1 of them registers falsely.",
+  "summary": "Use the Revolutionary to help disadvantaged players participate.\n-  If a player has an intellectual disability, is unable to understand the rules of the game, is blind or deaf, or is unable to communicate or participate as normal, they may still play by teaming up with a player that they trust.\n-  These two players are the same alignment and sit next to each other so they can whisper or signal to each other throughout the game. The experienced player can help the disadvantaged player in whatever way is needed, talking on their behalf or suggesting what to do.\n-  The Revolutionary is also useful for couples or good friends who wish to play, but are uncomfortable with lying to or mistrusting each other, even in a game.\n-  Once per game, the Storyteller can make either player register as a different character, alignment, or both.\n-  The Storyteller may wake both players at night, instead of just the player due to wake, if that helps understanding.\n-  If an ability would change a Revolutionary’s alignment, this ability has no effect or it changes both Revolutionaries’ alignment, Storyteller’s choice.",
+  "howToRun": "When setting up the game, before giving the bag to the players, declare that the Revolutionary is in play and which two neighboring players are Revolutionaries. Add the Revolutionary token to the Grimoire. Mark the Revolutionaries with the REGISTER FALSELY? reminder between their character tokens.\n\nGive the bag to one Revolutionary. They draw a token. Look at their token, choose a token of the same alignment from the bag, and give it to the other Revolutionary. Then, give the bag to the non-Revolutionary players to draw from.\n\nOnce per game, you can make one player marked REGISTER FALSELY? register as a different character and alignment, then remove the REGISTER FALSELY? reminder.\n\nThe Revolutionary should only be in play if both players want it to be. Ask for their consent before the game begins.",
+  "examples": [
+    "Mathew is deaf. He teams up with Davo, via the Revolutionary. Mathew draws the Poisoner, and Davo draws the Imp. They can scheme in private, using sign language, so that Mathew can still participate.",
+    "Hannah is 12 years old. She is keen to play, but does not understand many of the intricacies of how the characters work. She gets the Ravenkeeper and teams up with her father, who is the Fortune Teller."
+  ],
+  "jinxes": [],
+  "otherSections": {
+    "Explanation": "If a player is unable to understand the rules of the game, is deaf, unable to communicate, or otherwise impaired in some way, they may still participate by teaming up with a player that they trust. These two players are the same alignment, and sit next to each other, so can whisper to each other throughout the game. The experienced player can help the disadvantaged player in whatever way is needed, talking on their behalf, or suggesting what to do. \n\nThe Revolutionary is also useful for couples or good friends who wish to play, but are uncomfortable with lying or mistrusting each other, even in a game setting.\n\nOne of the Revolutionary players registers as a different character and/or alignment, once per game."
+  },
+  "signals": {
+    "eachNight": false,
+    "eachDay": false,
+    "oncePerGame": true,
+    "youLearn": false,
+    "choose": true,
+    "dies": false
+  },
+  "sections": {
+    "summary": "Use the Revolutionary to help disadvantaged players participate.\n-  If a player has an intellectual disability, is unable to understand the rules of the game, is blind or deaf, or is unable to communicate or participate as normal, they may still play by teaming up with a player that they trust.\n-  These two players are the same alignment and sit next to each other so they can whisper or signal to each other throughout the game. The experienced player can help the disadvantaged player in whatever way is needed, talking on their behalf or suggesting what to do.\n-  The Revolutionary is also useful for couples or good friends who wish to play, but are uncomfortable with lying to or mistrusting each other, even in a game.\n-  Once per game, the Storyteller can make either player register as a different character, alignment, or both.\n-  The Storyteller may wake both players at night, instead of just the player due to wake, if that helps understanding.\n-  If an ability would change a Revolutionary’s alignment, this ability has no effect or it changes both Revolutionaries’ alignment, Storyteller’s choice.",
+    "how_to_run": "When setting up the game, before giving the bag to the players, declare that the Revolutionary is in play and which two neighboring players are Revolutionaries. Add the Revolutionary token to the Grimoire. Mark the Revolutionaries with the REGISTER FALSELY? reminder between their character tokens.\n\nGive the bag to one Revolutionary. They draw a token. Look at their token, choose a token of the same alignment from the bag, and give it to the other Revolutionary. Then, give the bag to the non-Revolutionary players to draw from.\n\nOnce per game, you can make one player marked REGISTER FALSELY? register as a different character and alignment, then remove the REGISTER FALSELY? reminder.\n\nThe Revolutionary should only be in play if both players want it to be. Ask for their consent before the game begins.",
+    "examples": [
+      "Mathew is deaf. He teams up with Davo, via the Revolutionary. Mathew draws the Poisoner, and Davo draws the Imp. They can scheme in private, using sign language, so that Mathew can still participate.",
+      "Hannah is 12 years old. She is keen to play, but does not understand many of the intricacies of how the characters work. She gets the Ravenkeeper and teams up with her father, who is the Fortune Teller."
+    ],
+    "other": {
+      "Explanation": "If a player is unable to understand the rules of the game, is deaf, unable to communicate, or otherwise impaired in some way, they may still participate by teaming up with a player that they trust. These two players are the same alignment, and sit next to each other, so can whisper to each other throughout the game. The experienced player can help the disadvantaged player in whatever way is needed, talking on their behalf, or suggesting what to do. \n\nThe Revolutionary is also useful for couples or good friends who wish to play, but are uncomfortable with lying or mistrusting each other, even in a game setting.\n\nOne of the Revolutionary players registers as a different character and/or alignment, once per game."
+    }
+  }
+}

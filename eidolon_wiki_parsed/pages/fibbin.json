@@ -1,0 +1,40 @@
+{
+  "roleKey": "fibbin",
+  "title": "Fibbin",
+  "url": "https://wiki.bloodontheclocktower.com/Fibbin",
+  "categoryHint": "fabled",
+  "categories": [
+    "Fabled"
+  ],
+  "editionTags": [],
+  "abilityText": "Once per game, 1 good player might get incorrect information.",
+  "summary": "Add the Fibbin if your script has too much information or no possibility of misinformation.\n-  If you create a character list and it has no characters that cause drunkenness, poisoning, or other ways for information to be false, then you may want to add the Fibbin. Whilst it is not necessary, even a minor chance of a good player’s information being incorrect can drastically help the evil players bluff.\n-  The Fibbin does not make an ability fail in the way that drunkenness and poisoning do. It only affects abilities that provide information from the Storyteller signaling to a player during the night or telling them something.\n-  If the game ends before you have given a good player incorrect information, that’s okay.\n-  Some characters get false information due to their ability. The Fibbin can make this information true.",
+  "howToRun": "At the start of the game, declare that the Fibbin is in play. Add the Fibbin token to the Grimoire.\n\nOnce per game, when a good player gains information from an ability, you can give them incorrect information. The Fibbin loses their ability—put their NO ABILITY reminder token by their token.",
+  "examples": [
+    "On the first night, all players get correct information. On the second night, the Empath learns they are neighbouring one evil player, but both their neighbours are actually good. For the rest of the game, all good players get correct information.",
+    "The Virgin is nominated by a Townsfolk. This Townsfolk is executed immediately because the Fibbin cannot make an ability malfunction. Later, the Monk protects a player. Again, the Monk's ability cannot fail due to the Fibbin ability. Later, the Ravenkeeper dies at night and gets false information, because information from an ability can be affected by the Fibbin ability."
+  ],
+  "jinxes": [],
+  "otherSections": {
+    "Explanation": "If you create a game using the Script online character list creator, and it has no characters that cause drunkenness, poisoning or other way for information to be false, then you may want to add the Fibbin. Whilst it is not necessary, even a minor possibility of a good player's information being incorrect can drastically help the evil players bluff successfully.\n\nThe Fibbin can't make a character power fail in the way that drunkenness and poisoning do. It can only affect character abilities that gain information due to you signalling to them during the night, or telling them something verbally. \n\nIf the game ends before you have given a good player false information, that's ok."
+  },
+  "signals": {
+    "eachNight": false,
+    "eachDay": false,
+    "oncePerGame": true,
+    "youLearn": false,
+    "choose": false,
+    "dies": false
+  },
+  "sections": {
+    "summary": "Add the Fibbin if your script has too much information or no possibility of misinformation.\n-  If you create a character list and it has no characters that cause drunkenness, poisoning, or other ways for information to be false, then you may want to add the Fibbin. Whilst it is not necessary, even a minor chance of a good player’s information being incorrect can drastically help the evil players bluff.\n-  The Fibbin does not make an ability fail in the way that drunkenness and poisoning do. It only affects abilities that provide information from the Storyteller signaling to a player during the night or telling them something.\n-  If the game ends before you have given a good player incorrect information, that’s okay.\n-  Some characters get false information due to their ability. The Fibbin can make this information true.",
+    "how_to_run": "At the start of the game, declare that the Fibbin is in play. Add the Fibbin token to the Grimoire.\n\nOnce per game, when a good player gains information from an ability, you can give them incorrect information. The Fibbin loses their ability—put their NO ABILITY reminder token by their token.",
+    "examples": [
+      "On the first night, all players get correct information. On the second night, the Empath learns they are neighbouring one evil player, but both their neighbours are actually good. For the rest of the game, all good players get correct information.",
+      "The Virgin is nominated by a Townsfolk. This Townsfolk is executed immediately because the Fibbin cannot make an ability malfunction. Later, the Monk protects a player. Again, the Monk's ability cannot fail due to the Fibbin ability. Later, the Ravenkeeper dies at night and gets false information, because information from an ability can be affected by the Fibbin ability."
+    ],
+    "other": {
+      "Explanation": "If you create a game using the Script online character list creator, and it has no characters that cause drunkenness, poisoning or other way for information to be false, then you may want to add the Fibbin. Whilst it is not necessary, even a minor possibility of a good player's information being incorrect can drastically help the evil players bluff successfully.\n\nThe Fibbin can't make a character power fail in the way that drunkenness and poisoning do. It can only affect character abilities that gain information due to you signalling to them during the night, or telling them something verbally. \n\nIf the game ends before you have given a good player false information, that's ok."
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "roleKey": "bootlegger",
+  "title": "Bootlegger",
+  "url": "https://wiki.bloodontheclocktower.com/Bootlegger",
+  "categoryHint": "loric",
+  "categories": [
+    "Experimental Characters",
+    "Loric"
+  ],
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "This script has homebrew characters or rules.",
+  "summary": "Add the Bootlegger to include homebrew characters or rules.\n-  The Bootlegger allows Storytellers to use characters they, or others, have created that are not official characters or allows them to use non-standard rules in the game.\n-  If there are homebrew characters on the character sheet, or homebrew rules in effect, the Storyteller tells all players what they are before play begins.\n-  The Bootlegger allows for multiple characters or rules to be in effect at once.\n-  As long as there is at least one homebrew character on the current script, this Loric will be in play and can only be removed by switching to a script that does not contain any homebrew characters.\n-  The Bootlegger is designed for use in the official app only.\n-  Bootlegger, despite many claims to the contrary, defeated , “the people’s choice”, in a hotly contested poll to decide the Loric's name.",
+  "howToRun": "At the start of the game, if there are homebrew characters on the character sheet or you are running homebrew rules, declare that the Bootlegger is in play and inform the group of all the homebrew characters and/or rules you are using in this game.",
+  "examples": [
+    "The character sheet contains the homebrew character the . The Storyteller announces that the Bootlegger is in play and then explains how the  works.",
+    "The Storyteller has a homebrew or house rule. The Storyteller announces that the Bootlegger is in play and explains what the homebrew rule is and how it will affect the game."
+  ],
+  "jinxes": [],
+  "otherSections": {},
+  "signals": {
+    "eachNight": false,
+    "eachDay": false,
+    "oncePerGame": false,
+    "youLearn": false,
+    "choose": false,
+    "dies": false
+  },
+  "sections": {
+    "summary": "Add the Bootlegger to include homebrew characters or rules.\n-  The Bootlegger allows Storytellers to use characters they, or others, have created that are not official characters or allows them to use non-standard rules in the game.\n-  If there are homebrew characters on the character sheet, or homebrew rules in effect, the Storyteller tells all players what they are before play begins.\n-  The Bootlegger allows for multiple characters or rules to be in effect at once.\n-  As long as there is at least one homebrew character on the current script, this Loric will be in play and can only be removed by switching to a script that does not contain any homebrew characters.\n-  The Bootlegger is designed for use in the official app only.\n-  Bootlegger, despite many claims to the contrary, defeated , “the people’s choice”, in a hotly contested poll to decide the Loric's name.",
+    "how_to_run": "At the start of the game, if there are homebrew characters on the character sheet or you are running homebrew rules, declare that the Bootlegger is in play and inform the group of all the homebrew characters and/or rules you are using in this game.",
+    "examples": [
+      "The character sheet contains the homebrew character the . The Storyteller announces that the Bootlegger is in play and then explains how the  works.",
+      "The Storyteller has a homebrew or house rule. The Storyteller announces that the Bootlegger is in play and explains what the homebrew rule is and how it will affect the game."
+    ],
+    "other": {}
+  }
+}

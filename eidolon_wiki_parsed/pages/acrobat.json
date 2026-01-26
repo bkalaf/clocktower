@@ -1,0 +1,41 @@
+{
+  "roleKey": "acrobat",
+  "title": "Acrobat",
+  "url": "https://wiki.bloodontheclocktower.com/Acrobat",
+  "categoryHint": "experimental",
+  "categories": [
+    "Experimental Characters",
+    "Townsfolk"
+  ],
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night*, choose a player: if they are or become drunk or poisoned tonight, you die.",
+  "summary": "The Acrobat dies when they find a drunk or poisoned player.\n-  Each night except the first, the Acrobat chooses a player. If the chosen player is sober and healthy, nothing happens. If the player is drunk or poisoned, the Acrobat dies.\n-  If the Acrobat is drunk or poisoned, they cannot die to their own ability.\n-  The Acrobat may choose any player, dead or alive, even themself.\n-  If the chosen player is sober and healthy at the time the Acrobat picks, but becomes drunk or poisoned later in the night, the Acrobat dies.\n-  The Acrobat does not learn if the player they selected was drunk, or poisoned, or both.\n-  The Drunk registers as drunk to the Acrobat.",
+  "howToRun": "Each night except the first, wake the Acrobat. They point to a player. Put the Acrobat to sleep. \n\nIf the player the Acrobat pointed to is drunk or poisoned, or becomes drunk or poisoned at any time tonight, the Acrobat dies.",
+  "examples": [
+    "The Sailor chooses the Assassin, and the Storyteller makes the Sailor drunk. The Acrobat chooses the Sailor, and dies because the Sailor is drunk.",
+    "The Acrobat chooses the Tinker, who is sober and healthy. Nothing happens.",
+    "The Acrobat chooses the Preacher. Later that night, the Pukka poisons the Preacher. The Acrobat dies, because the Preacher is no longer healthy."
+  ],
+  "jinxes": [],
+  "otherSections": {},
+  "signals": {
+    "eachNight": true,
+    "eachDay": false,
+    "oncePerGame": false,
+    "youLearn": true,
+    "choose": true,
+    "dies": true
+  },
+  "sections": {
+    "summary": "The Acrobat dies when they find a drunk or poisoned player.\n-  Each night except the first, the Acrobat chooses a player. If the chosen player is sober and healthy, nothing happens. If the player is drunk or poisoned, the Acrobat dies.\n-  If the Acrobat is drunk or poisoned, they cannot die to their own ability.\n-  The Acrobat may choose any player, dead or alive, even themself.\n-  If the chosen player is sober and healthy at the time the Acrobat picks, but becomes drunk or poisoned later in the night, the Acrobat dies.\n-  The Acrobat does not learn if the player they selected was drunk, or poisoned, or both.\n-  The Drunk registers as drunk to the Acrobat.",
+    "how_to_run": "Each night except the first, wake the Acrobat. They point to a player. Put the Acrobat to sleep. \n\nIf the player the Acrobat pointed to is drunk or poisoned, or becomes drunk or poisoned at any time tonight, the Acrobat dies.",
+    "examples": [
+      "The Sailor chooses the Assassin, and the Storyteller makes the Sailor drunk. The Acrobat chooses the Sailor, and dies because the Sailor is drunk.",
+      "The Acrobat chooses the Tinker, who is sober and healthy. Nothing happens.",
+      "The Acrobat chooses the Preacher. Later that night, the Pukka poisons the Preacher. The Acrobat dies, because the Preacher is no longer healthy."
+    ],
+    "other": {}
+  }
+}

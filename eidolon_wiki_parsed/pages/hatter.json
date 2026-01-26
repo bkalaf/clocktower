@@ -1,0 +1,72 @@
+{
+  "roleKey": "hatter",
+  "title": "Hatter",
+  "url": "https://wiki.bloodontheclocktower.com/Hatter",
+  "categoryHint": "experimental",
+  "categories": [
+    "Experimental Characters",
+    "Outsiders"
+  ],
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "If you died today or tonight, the Minion & Demon players may choose new Minion & Demon characters to be.",
+  "summary": "The Hatter allows the evil players to change characters.  \n-  Each player with a Minion or Demon character may choose to become any character of the same type as their current character.  \n-  They may choose not to change characters.  \n-  If a player becomes a new character, they gain the new ability, even if it was a \"you start knowing\" ability or a once per game ability that had already been used.  \n-  Once a player has changed character, their previous character ability has no further effect on the game.  \n-  If a player dies then becomes the Hatter, the evil players do not change characters tonight.  \n-  Once a character has been chosen, a second player cannot choose the same character. If it is already in play, the player with that character must choose a new character.",
+  "howToRun": "If the Hatter dies, mark them with the TEA PARTY TONIGHT reminder. \n\nDuring that night, wake the Minions and Demon. Show them the THIS CHARACTER SELECTED YOU info token, then the Hatter token. Each player either shakes their head no or points to another character of the same type as their current character.  If a second player would end up with the same character as another player, shake your head no and gesture for them to choose again. Put them to sleep. Remove the TEA PARTY TONIGHT reminder. Change each player to the character they chose. \n\t\t\t\t \nOptional rule: if the Hatter dies, allow the Demon to become a Minion, and a Minion to become a Demon. This may cause some chaos among the evil team as they try to communicate silently at night about who wants to be the Demon.",
+  "examples": [
+    "The Hatter dies. The Ojo chooses to become the No Dashii and the Devil's Advocate chooses to become the Scarlet Woman.",
+    "The Vigormortis has killed their Pit-Hag, then later kills the Hatter. Both players choose to stay the same characters, so that they don't lose the effects of the Vigormortis.",
+    "The Assassin kills a player. The Hatter is executed. That night, the Assassin becomes the Mastermind and the Mastermind shakes their head no to stay the Mastermind. The Storyteller shakes their head no because the Mastermind character has been chosen already, and gestures for the Mastermind player to choose again, so they choose Assassin. The new Assassin then uses their new ability to kill a player."
+  ],
+  "jinxes": [
+    {
+      "with": "Legion",
+      "withKey": "legion",
+      "alignment": "Evil",
+      "text": "If Legion is created, all evil players become Legion. If Legion is in play, the Hatter has no ability."
+    },
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "The Leviathan cannot enter play after day 5."
+    },
+    {
+      "with": "Lil' Monsta",
+      "withKey": "lilmonsta",
+      "alignment": "Evil",
+      "text": "If the Hatter dies & the Demon chooses Lil' Monsta, they also choose a Minion to become."
+    },
+    {
+      "with": "Summoner",
+      "withKey": "summoner",
+      "alignment": "Evil",
+      "text": "If the Summoner creates a second living Demon, deaths tonight are arbitrary."
+    }
+  ],
+  "otherSections": {
+    "Bluffing as the Hatter": "-  You don’t want to die! Take advantage of the fact that the good team will be wary of killing a Hatter to stay alive longer than you would do otherwise. You can possibly even take this bluff to the final 3 and beyond if you can keep playing up the fear of what might happen if you die. \n-  If you do die, see if your fellow evils can bluff a change of Minion or Demon abilities affecting them to back up your bluff. It depends which evil characters are on the script, but this can have effects far beyond implying that you yourself are good. It can also send the good team off down a rabbit hole of theorising entirely around a Demon type that isn’t in play and never has been. \n-  Hatters are often mad! They like to claim to be other things to try to survive as long as possible and conceal themselves so the evil team can’t use them to switch around their characters when it’s most effective for them. This makes it a great fallback bluff for you if an initial bluff has gone awry or if your initial bluff doesn't give you a good reason not to be executed when the pressure comes on. \n-  Make a good faith effort after you die to try to solve what the changes were to sell your bona fides. You might be able to be the butter in the gears that makes the good team’s calculations fall apart by distracting them constantly with theories about different Minion and Demon types to expand the list of possible explanations for any given situation so much farther than it might be otherwise. \n-  If you are the Demon bluffing Hatter, try to make it look like weaker Minion/Demons in play. This increases the threat of your death as the evil team being able to pick the most powerful options possible is terrifying for any good team and will potentially allow you to survive through the whole game. You will, however, need to have good reasons prepared for why the evil team hasn’t just killed you at night at any point. So it might be worth claiming something else publicly and Hatter privately to dead good players and leaning on their support to keep you alive if the living come after you.",
+    "Tips & Tricks": "-   Don’t die! As soon as you die, the evil team gets to power up to become the exact combination they think will be most effective, regardless of the prior game balance. And that could be overpowering if the evil team can do it with impunity when they want to. \n-  Die as early as possible! The sooner you die, the less time the evil team have to work out which characters are going to be most effective against the characters arrayed on the good team. It also increases the odds that you are confirmed by later Minion/Demon activity contradicting the early indications, helping town work out the Outsider count. \n-  Mid-game is the worst time for you to die. Just as the good team are getting to grips with their information and tracking down evil players, your ability can completely switch that information around and make it incredibly hard to parse, just when you need it most to narrow down between the smaller group of candidates remaining. \n-  The day after you die, tell everyone that you were the Hatter! They need to adjust their choices accordingly to adjust to a potential change of characters on the evil team, whether that’s night choices or nominations and voting choices to hunt the Demon effectively. \n-  After you die, try to see if you can spot what the Minions/Demons have changed to based on game state changes from the early game. Maybe some people’s information has gone weird when it was previously reliable, maybe a suspected evil player is suddenly much happier to die, maybe there was an extra death you can’t explain. Any clues you can garner about your new evil team are even more crucial than they would ordinarily be, with the reduced time available to work out your new evil team."
+  },
+  "signals": {
+    "eachNight": false,
+    "eachDay": false,
+    "oncePerGame": true,
+    "youLearn": false,
+    "choose": true,
+    "dies": true
+  },
+  "sections": {
+    "summary": "The Hatter allows the evil players to change characters.  \n-  Each player with a Minion or Demon character may choose to become any character of the same type as their current character.  \n-  They may choose not to change characters.  \n-  If a player becomes a new character, they gain the new ability, even if it was a \"you start knowing\" ability or a once per game ability that had already been used.  \n-  Once a player has changed character, their previous character ability has no further effect on the game.  \n-  If a player dies then becomes the Hatter, the evil players do not change characters tonight.  \n-  Once a character has been chosen, a second player cannot choose the same character. If it is already in play, the player with that character must choose a new character.",
+    "how_to_run": "If the Hatter dies, mark them with the TEA PARTY TONIGHT reminder. \n\nDuring that night, wake the Minions and Demon. Show them the THIS CHARACTER SELECTED YOU info token, then the Hatter token. Each player either shakes their head no or points to another character of the same type as their current character.  If a second player would end up with the same character as another player, shake your head no and gesture for them to choose again. Put them to sleep. Remove the TEA PARTY TONIGHT reminder. Change each player to the character they chose. \n\t\t\t\t \nOptional rule: if the Hatter dies, allow the Demon to become a Minion, and a Minion to become a Demon. This may cause some chaos among the evil team as they try to communicate silently at night about who wants to be the Demon.",
+    "examples": [
+      "The Hatter dies. The Ojo chooses to become the No Dashii and the Devil's Advocate chooses to become the Scarlet Woman.",
+      "The Vigormortis has killed their Pit-Hag, then later kills the Hatter. Both players choose to stay the same characters, so that they don't lose the effects of the Vigormortis.",
+      "The Assassin kills a player. The Hatter is executed. That night, the Assassin becomes the Mastermind and the Mastermind shakes their head no to stay the Mastermind. The Storyteller shakes their head no because the Mastermind character has been chosen already, and gestures for the Mastermind player to choose again, so they choose Assassin. The new Assassin then uses their new ability to kill a player."
+    ],
+    "other": {
+      "Bluffing as the Hatter": "-  You don’t want to die! Take advantage of the fact that the good team will be wary of killing a Hatter to stay alive longer than you would do otherwise. You can possibly even take this bluff to the final 3 and beyond if you can keep playing up the fear of what might happen if you die. \n-  If you do die, see if your fellow evils can bluff a change of Minion or Demon abilities affecting them to back up your bluff. It depends which evil characters are on the script, but this can have effects far beyond implying that you yourself are good. It can also send the good team off down a rabbit hole of theorising entirely around a Demon type that isn’t in play and never has been. \n-  Hatters are often mad! They like to claim to be other things to try to survive as long as possible and conceal themselves so the evil team can’t use them to switch around their characters when it’s most effective for them. This makes it a great fallback bluff for you if an initial bluff has gone awry or if your initial bluff doesn't give you a good reason not to be executed when the pressure comes on. \n-  Make a good faith effort after you die to try to solve what the changes were to sell your bona fides. You might be able to be the butter in the gears that makes the good team’s calculations fall apart by distracting them constantly with theories about different Minion and Demon types to expand the list of possible explanations for any given situation so much farther than it might be otherwise. \n-  If you are the Demon bluffing Hatter, try to make it look like weaker Minion/Demons in play. This increases the threat of your death as the evil team being able to pick the most powerful options possible is terrifying for any good team and will potentially allow you to survive through the whole game. You will, however, need to have good reasons prepared for why the evil team hasn’t just killed you at night at any point. So it might be worth claiming something else publicly and Hatter privately to dead good players and leaning on their support to keep you alive if the living come after you.",
+      "Tips & Tricks": "-   Don’t die! As soon as you die, the evil team gets to power up to become the exact combination they think will be most effective, regardless of the prior game balance. And that could be overpowering if the evil team can do it with impunity when they want to. \n-  Die as early as possible! The sooner you die, the less time the evil team have to work out which characters are going to be most effective against the characters arrayed on the good team. It also increases the odds that you are confirmed by later Minion/Demon activity contradicting the early indications, helping town work out the Outsider count. \n-  Mid-game is the worst time for you to die. Just as the good team are getting to grips with their information and tracking down evil players, your ability can completely switch that information around and make it incredibly hard to parse, just when you need it most to narrow down between the smaller group of candidates remaining. \n-  The day after you die, tell everyone that you were the Hatter! They need to adjust their choices accordingly to adjust to a potential change of characters on the evil team, whether that’s night choices or nominations and voting choices to hunt the Demon effectively. \n-  After you die, try to see if you can spot what the Minions/Demons have changed to based on game state changes from the early game. Maybe some people’s information has gone weird when it was previously reliable, maybe a suspected evil player is suddenly much happier to die, maybe there was an extra death you can’t explain. Any clues you can garner about your new evil team are even more crucial than they would ordinarily be, with the reduced time available to work out your new evil team."
+    }
+  }
+}

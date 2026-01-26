@@ -1,0 +1,49 @@
+{
+  "roleKey": "assassin",
+  "title": "Assassin",
+  "url": "https://wiki.bloodontheclocktower.com/Assassin",
+  "categoryHint": "minion",
+  "categories": [
+    "Bad Moon Rising",
+    "Minions"
+  ],
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "Once per game, at night*, choose a player: they die, even if for some reason they could not.",
+  "summary": "The Assassin kills who the Demon cannot.\n-  Once per game at night, the Assassin can kill a player. This player dies, even if they are protected from death in any way, such as from an ability.\n-  The Assassin ability is affected by drunkenness and poisoning, as normal.\n-  If the Assassin attacks the Goon, the Goon dies and turns evil.",
+  "howToRun": "Each night except the first, wake the Assassin. They either shake their head no or point at any player. Put the Assassin to sleep. \n\nIf the Assassin chose a player, that player dies— mark them with the DEAD reminder. This cannot be prevented in any way (except if the Assassin doesn’t have their ability, such as if they’re drunk or poisoned). The Assassin loses their ability—mark them with the NO ABILITY reminder and remove their night token from the night sheet. (The Assassin won’t wake again.)",
+  "examples": [
+    "For the first three nights the Assassin wakes, but chooses not to act. During the fourth night, they choose to kill the Fool. Even though the Fool still has their ability, the Fool dies and stays dead.",
+    "The Tea Lady neighbours two good players. The Assassin chooses to kill one of the Tea Lady’s neighbours, who dies even though they were protected by the Tea Lady.",
+    "The Minstrel is in play. The Mastermind dies by execution. That night, the Assassin chooses to kill the Moonchild, but they do not die, because the Assassin is drunk due to the Minstrel.",
+    "The Assassin, who was drunk due to the Courtier, chooses to kill the Goon. The Assassin has no ability, so the Goon remains alive but turns evil."
+  ],
+  "jinxes": [],
+  "otherSections": {
+    "Fighting the Assassin": "-  You can't! The Assassin has the opportunity to kill any player of their choice, and that player can not do anything to prevent that death from occurring. The Innkeeper can't protect them, nor can the Tea Lady, and the Fool, Sailor, and even the Goon will die at the Assassin's hand. As a good player, the best that you can do to combat the Assassin is to notice when the Assassin made a kill and to pick up the pieces afterwards. The good news is that the Assassin can only kill one player per game, unlike the Godfather which can often kill multiple players.",
+    "Tips & Tricks": "-  Few minions hold the power you have. Absolute control over life and death. No protection will keep players safe from your machinations (unless you get drunk - don't do that). Enjoy the terror you wield over the good team, and strike into their heart at the worst possible moment!\n-  Kill players that your demon cannot get to. Is that Exorcist blocking your demon from acting? Not anymore. Is that Pacifist under the protection of a Innkeeper? Child's play. A smug Sailor causing you problems? Make this night their last. Nothing stops your blade, so you might as well take full advantage and go after the players that think they are untouchable.\n-  Kill to confuse death count and mask the type of demon that is in play. If the players suspect a Zombuul, you can kill on a night the demon cannot, which will confuse things (especially since your ability can mimic the kill of a venomous Pukka). Another useful example is to cover for a charging Po - the good team won't see the extra deaths coming, making it extra devastating when unleashed.\n-  Coordinate with your demon on who they would like you to kill. This is especially true of hungry demons like the Shabaloth and the Po who can kill multiple times per night, but it's nearly always worth discussing to avoid doubling up with them. Your extra kill is powerful, and it'll be a real bummer to 'lose' it because you and the demon both went after the same target.\n-  If you don't know who to kill, or if you feel like being particularly tricky, you can kill yourself (or kill a fellow evil player) at night to make that evil player look like a good player. Since it is rare for an evil player to die at night, the good team will usually assume that any player that dies at night is good, trusting that player's information and basing their future strategy on that assumption. This is particularly damaging if you can undercut a good player's ability in the process. For example, if you know that an Innkeeper is protecting you at night, and you kill yourself, not only will you look good in the morning, but the Innkeeper will look like they are lying about protecting you."
+  },
+  "signals": {
+    "eachNight": true,
+    "eachDay": false,
+    "oncePerGame": true,
+    "youLearn": false,
+    "choose": true,
+    "dies": true
+  },
+  "sections": {
+    "summary": "The Assassin kills who the Demon cannot.\n-  Once per game at night, the Assassin can kill a player. This player dies, even if they are protected from death in any way, such as from an ability.\n-  The Assassin ability is affected by drunkenness and poisoning, as normal.\n-  If the Assassin attacks the Goon, the Goon dies and turns evil.",
+    "how_to_run": "Each night except the first, wake the Assassin. They either shake their head no or point at any player. Put the Assassin to sleep. \n\nIf the Assassin chose a player, that player dies— mark them with the DEAD reminder. This cannot be prevented in any way (except if the Assassin doesn’t have their ability, such as if they’re drunk or poisoned). The Assassin loses their ability—mark them with the NO ABILITY reminder and remove their night token from the night sheet. (The Assassin won’t wake again.)",
+    "examples": [
+      "For the first three nights the Assassin wakes, but chooses not to act. During the fourth night, they choose to kill the Fool. Even though the Fool still has their ability, the Fool dies and stays dead.",
+      "The Tea Lady neighbours two good players. The Assassin chooses to kill one of the Tea Lady’s neighbours, who dies even though they were protected by the Tea Lady.",
+      "The Minstrel is in play. The Mastermind dies by execution. That night, the Assassin chooses to kill the Moonchild, but they do not die, because the Assassin is drunk due to the Minstrel.",
+      "The Assassin, who was drunk due to the Courtier, chooses to kill the Goon. The Assassin has no ability, so the Goon remains alive but turns evil."
+    ],
+    "other": {
+      "Fighting the Assassin": "-  You can't! The Assassin has the opportunity to kill any player of their choice, and that player can not do anything to prevent that death from occurring. The Innkeeper can't protect them, nor can the Tea Lady, and the Fool, Sailor, and even the Goon will die at the Assassin's hand. As a good player, the best that you can do to combat the Assassin is to notice when the Assassin made a kill and to pick up the pieces afterwards. The good news is that the Assassin can only kill one player per game, unlike the Godfather which can often kill multiple players.",
+      "Tips & Tricks": "-  Few minions hold the power you have. Absolute control over life and death. No protection will keep players safe from your machinations (unless you get drunk - don't do that). Enjoy the terror you wield over the good team, and strike into their heart at the worst possible moment!\n-  Kill players that your demon cannot get to. Is that Exorcist blocking your demon from acting? Not anymore. Is that Pacifist under the protection of a Innkeeper? Child's play. A smug Sailor causing you problems? Make this night their last. Nothing stops your blade, so you might as well take full advantage and go after the players that think they are untouchable.\n-  Kill to confuse death count and mask the type of demon that is in play. If the players suspect a Zombuul, you can kill on a night the demon cannot, which will confuse things (especially since your ability can mimic the kill of a venomous Pukka). Another useful example is to cover for a charging Po - the good team won't see the extra deaths coming, making it extra devastating when unleashed.\n-  Coordinate with your demon on who they would like you to kill. This is especially true of hungry demons like the Shabaloth and the Po who can kill multiple times per night, but it's nearly always worth discussing to avoid doubling up with them. Your extra kill is powerful, and it'll be a real bummer to 'lose' it because you and the demon both went after the same target.\n-  If you don't know who to kill, or if you feel like being particularly tricky, you can kill yourself (or kill a fellow evil player) at night to make that evil player look like a good player. Since it is rare for an evil player to die at night, the good team will usually assume that any player that dies at night is good, trusting that player's information and basing their future strategy on that assumption. This is particularly damaging if you can undercut a good player's ability in the process. For example, if you know that an Innkeeper is protecting you at night, and you kill yourself, not only will you look good in the morning, but the Innkeeper will look like they are lying about protecting you."
+    }
+  }
+}

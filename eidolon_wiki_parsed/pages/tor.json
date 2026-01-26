@@ -1,0 +1,37 @@
+{
+  "roleKey": "tor",
+  "title": "Tor",
+  "url": "https://wiki.bloodontheclocktower.com/Tor",
+  "categoryHint": "loric",
+  "categories": [
+    "Experimental Characters",
+    "Loric"
+  ],
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Players don't know their character or alignment. They learn them when they die.",
+  "summary": "Tor removes all knowledge of who is who.\n-  Players do not know which character they are.\n-  Players do not draw tokens from the bag. The Storyteller puts them directly in the Grimoire at the start of the game.\n-  Character abilities work as normal. Players are woken and prompted to use their ability if needed.\n-  When a player dies, they learn their character and alignment. Even if they are drunk or poisoned, this information is correct.\n-  The Demon and Minions do not know each other.",
+  "howToRun": "During setup, do not pass the bag to the players. Instead, draw the character tokens from the bag and place them in order in the Grimoire.\n\nIf a player dies during the day, privately tell them what character and alignment they are. If a player dies at night, wake them, show them the YOU ARE info token, their character token, the YOU ARE info token, and either a thumbs up or a thumbs down.",
+  "examples": [
+    "Julian, Alex, Evin, Lachlan, Sarah, Marianna and Amy do not know which character they are. Evin wakes each night and learns a thumbs up, but does not know why. Sarah wakes each night to choose a player, but does not know why. Amy wakes each night to choose a player, but does not know why. Sarah is executed and learns that she is the good Monk. Lachlan, guessing that he might be the Slayer, publicly says that he is the Slayer, and chooses Amy. Amy dies. Evin was the General, Lachlan was the Slayer and Amy was the Imp."
+  ],
+  "jinxes": [],
+  "otherSections": {},
+  "signals": {
+    "eachNight": false,
+    "eachDay": false,
+    "oncePerGame": false,
+    "youLearn": true,
+    "choose": false,
+    "dies": true
+  },
+  "sections": {
+    "summary": "Tor removes all knowledge of who is who.\n-  Players do not know which character they are.\n-  Players do not draw tokens from the bag. The Storyteller puts them directly in the Grimoire at the start of the game.\n-  Character abilities work as normal. Players are woken and prompted to use their ability if needed.\n-  When a player dies, they learn their character and alignment. Even if they are drunk or poisoned, this information is correct.\n-  The Demon and Minions do not know each other.",
+    "how_to_run": "During setup, do not pass the bag to the players. Instead, draw the character tokens from the bag and place them in order in the Grimoire.\n\nIf a player dies during the day, privately tell them what character and alignment they are. If a player dies at night, wake them, show them the YOU ARE info token, their character token, the YOU ARE info token, and either a thumbs up or a thumbs down.",
+    "examples": [
+      "Julian, Alex, Evin, Lachlan, Sarah, Marianna and Amy do not know which character they are. Evin wakes each night and learns a thumbs up, but does not know why. Sarah wakes each night to choose a player, but does not know why. Amy wakes each night to choose a player, but does not know why. Sarah is executed and learns that she is the good Monk. Lachlan, guessing that he might be the Slayer, publicly says that he is the Slayer, and chooses Amy. Amy dies. Evin was the General, Lachlan was the Slayer and Amy was the Imp."
+    ],
+    "other": {}
+  }
+}

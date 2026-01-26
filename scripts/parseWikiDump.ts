@@ -3,14 +3,9 @@ import path from 'path';
 import { NormalizedWikiPage, RoleRecord, JinxEntry, JinxIndexEntry } from '../src/spec/wikiTypes';
 
 const SECTION_HEADING_REGEX = /^==\s*(.+?)\s*==\s*$/gm;
-const JINX_REGEX = /\{\{Jinx\|([^|}]+)\|([^|}]+)\|([^|}]+)\|([\s\S]+?)\}\}/gi;
+const JINX_REGEX = /\{\{Jinx\|([^|}]+)\|([^|}]*)\|([^|}]+)\|([\s\S]+?)\}\}/gi;
 const SUMMARY_HEADING_REGEX = /==\s*Summary\s*==/i;
-const EDITION_TAG_CANDIDATES = [
-    'Trouble Brewing',
-    'Sects & Violets',
-    'Bad Moon Rising',
-    'Experimental Characters'
-];
+const EDITION_TAG_CANDIDATES = ['Trouble Brewing', 'Sects & Violets', 'Bad Moon Rising', 'Experimental Characters'];
 const EXAMPLE_DIV_REGEX = /<div\s+class=['"]example['"][^>]*>([\s\S]*?)<\/div>/gi;
 const STOPSET = new Set(['Summary', 'How to Run', 'Examples']);
 
@@ -47,7 +42,10 @@ function extractSections(text: string): Record<string, string> {
 
 function stripSurroundingQuotes(line: string): string {
     const trimmed = line.trim();
-    return trimmed.replace(/^["“”]+/, '').replace(/["“”]+$/, '').trim();
+    return trimmed
+        .replace(/^["“”]+/, '')
+        .replace(/["“”]+$/, '')
+        .trim();
 }
 
 function findAbilityLine(summaryBody: string): { abilityLine: string; summaryRest: string } {
@@ -66,7 +64,10 @@ function findAbilityLine(summaryBody: string): { abilityLine: string; summaryRes
     }
 
     const abilityLine = stripSurroundingQuotes(lines[firstLineIndex]);
-    const summaryRest = lines.slice(firstLineIndex + 1).join('\n').trim();
+    const summaryRest = lines
+        .slice(firstLineIndex + 1)
+        .join('\n')
+        .trim();
     return { abilityLine, summaryRest };
 }
 
@@ -252,8 +253,7 @@ async function main() {
         const cleanedHowToRun = cleanText(howToRunSection);
 
         const explicitExamples = sections['Examples'] ? extractExamplesFromText(sections['Examples']) : [];
-        const examples =
-            explicitExamples.length > 0 ? explicitExamples : extractExamplesFromText(summaryBody);
+        const examples = explicitExamples.length > 0 ? explicitExamples : extractExamplesFromText(summaryBody);
 
         const categories = parseCategories(wikitext);
         const editionTags = EDITION_TAG_CANDIDATES.filter((tag) => categories.includes(tag));
@@ -276,8 +276,10 @@ async function main() {
         const parsedJinxes = parseJinxes(wikitext);
 
         const roleKey = (data.roleKey as string | undefined) ?? slugify(data.title ?? filename.replace(/\.json$/i, ''));
-        const title = String(data.title ?? data.roleKey ?? '' );
-        const url = data.source?.url ?? `https://wiki.bloodontheclocktower.com/${encodeURIComponent(title.replace(/\s+/g, '_'))}`;
+        const title = String(data.title ?? data.roleKey ?? '');
+        const url =
+            data.source?.url ??
+            `https://wiki.bloodontheclocktower.com/${encodeURIComponent(title.replace(/\s+/g, '_'))}`;
         const signals = computeSignals(cleanedAbility, cleanedSummary, cleanedHowToRun);
 
         const normalizedPage: NormalizedWikiPage = {
@@ -320,6 +322,7 @@ async function main() {
         };
 
         roleRecords.push(roleRecord);
+        console.log(path.join(pagesDir, `${roleKey}.json`));
         await writeJson(path.join(pagesDir, `${roleKey}.json`), normalizedPage);
     }
 
@@ -363,19 +366,12 @@ async function main() {
     console.log(`jinxIndex.json contains ${Object.keys(jinxIndexSorted).length} entries.`);
 }
 
-if (import.meta.main) {
+const entryFile = path.basename(process.argv[1] ?? '');
+if (entryFile === 'parseWikiDump.js' || entryFile === 'parseWikiDump.ts') {
     main().catch((error) => {
         console.error(error);
         process.exit(1);
     });
 }
 
-export {
-    extractSections,
-    findAbilityLine,
-    parseCategories,
-    parseJinxes,
-    cleanText,
-    slugify,
-    extractExamplesFromText
-};
+export { extractSections, findAbilityLine, parseCategories, parseJinxes, cleanText, slugify, extractExamplesFromText };

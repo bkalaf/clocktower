@@ -1,0 +1,2212 @@
+{
+  "al_hadikhia|mastermind": {
+    "roles": [
+      "al_hadikhia",
+      "mastermind"
+    ],
+    "roleTitles": [
+      "Al-Hadikhia",
+      "Mastermind"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Al-Hadikhia dies by execution, and the Mastermind is alive, the Al-Hadikhia chooses 3 good players tonight: if all 3 choose to live, evil wins. Otherwise, good wins.",
+    "sourceRole": "al_hadikhia"
+  },
+  "al_hadikhia|princess": {
+    "roles": [
+      "al_hadikhia",
+      "princess"
+    ],
+    "roleTitles": [
+      "Al-Hadikhia",
+      "Princess"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Princess nominated & executed a player on their 1st day, no one dies to the Al-Hadikhia tonight.",
+    "sourceRole": "al_hadikhia"
+  },
+  "al_hadikhia|scarletwoman": {
+    "roles": [
+      "al_hadikhia",
+      "scarletwoman"
+    ],
+    "roleTitles": [
+      "Al-Hadikhia",
+      "Scarlet Woman"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If there would be two Demons, one of which was the Scarlet Woman, the Scarlet Woman becomes the Scarlet Woman again.",
+    "sourceRole": "al_hadikhia"
+  },
+  "alchemist|boffin": {
+    "roles": [
+      "alchemist",
+      "boffin"
+    ],
+    "roleTitles": [
+      "Alchemist",
+      "Boffin"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Alchemist has the Boffin ability, the Alchemist does not learn what ability the Demon has.",
+    "sourceRole": "alchemist"
+  },
+  "alchemist|marionette": {
+    "roles": [
+      "alchemist",
+      "marionette"
+    ],
+    "roleTitles": [
+      "Alchemist",
+      "Marionette"
+    ],
+    "alignmentTag": "Evil",
+    "text": "An Alchemist-Marionette has no Marionette ability & the Marionette is in play.",
+    "sourceRole": "alchemist"
+  },
+  "alchemist|mastermind": {
+    "roles": [
+      "alchemist",
+      "mastermind"
+    ],
+    "roleTitles": [
+      "Alchemist",
+      "Mastermind"
+    ],
+    "alignmentTag": "Evil",
+    "text": "An Alchemist-Mastermind has no Mastermind ability & the Mastermind is not-in-play.",
+    "sourceRole": "alchemist"
+  },
+  "alchemist|organ_grinder": {
+    "roles": [
+      "alchemist",
+      "organ_grinder"
+    ],
+    "roleTitles": [
+      "Alchemist",
+      "Organ Grinder"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Alchemist has the Organ Grinder ability, the Organ Grinder is in play. If both are sober, both are drunk.",
+    "sourceRole": "organ_grinder"
+  },
+  "alchemist|organgrinder": {
+    "roles": [
+      "alchemist",
+      "organgrinder"
+    ],
+    "roleTitles": [
+      "Alchemist",
+      "Organ Grinder"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Alchemist has the Organ Grinder ability, the Organ Grinder is in play. If both are sober, both are drunk.",
+    "sourceRole": "alchemist"
+  },
+  "alchemist|spy": {
+    "roles": [
+      "alchemist",
+      "spy"
+    ],
+    "roleTitles": [
+      "Alchemist",
+      "Spy"
+    ],
+    "alignmentTag": "Evil",
+    "text": "An Alchemist-Spy has no Spy ability & a Spy is in play. After each execution, a living Alchemist-Spy may publicly guess a living player as the Spy. If correct, the Demon must choose the Spy tonight.",
+    "sourceRole": "alchemist"
+  },
+  "alchemist|summoner": {
+    "roles": [
+      "alchemist",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Alchemist",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Alchemist-Summoner does not get bluffs, and chooses which Demon but not which player. If they die before this happens, evil wins. [No Demon]",
+    "sourceRole": "alchemist"
+  },
+  "alchemist|widow": {
+    "roles": [
+      "alchemist",
+      "widow"
+    ],
+    "roleTitles": [
+      "Alchemist",
+      "Widow"
+    ],
+    "alignmentTag": "Evil",
+    "text": "An Alchemist-Widow has no Widow ability & a Widow is in play. After each execution, a living Alchemist-Widow may publicly guess a living player as the Widow. If correct, the Demon must choose the Widow tonight.",
+    "sourceRole": "alchemist"
+  },
+  "alchemist|wraith": {
+    "roles": [
+      "alchemist",
+      "wraith"
+    ],
+    "roleTitles": [
+      "Alchemist",
+      "Wraith"
+    ],
+    "alignmentTag": "Evil",
+    "text": "An Alchemist-Wraith has no Wraith ability & a Wraith is in play. After each execution, a living Alchemist-Wraith may publicly guess a living player as the Wraith. If correct, the Demon must choose the Wraith tonight.",
+    "sourceRole": "alchemist"
+  },
+  "alhadikhia|mastermind": {
+    "roles": [
+      "alhadikhia",
+      "mastermind"
+    ],
+    "roleTitles": [
+      "Al-Hadikhia",
+      "Mastermind"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Al-Hadikhia dies by execution, and the Mastermind is alive, the Al-Hadikhia chooses 3 good players tonight: if all 3 choose to live, evil wins. Otherwise, good wins.",
+    "sourceRole": "mastermind"
+  },
+  "alhadikhia|princess": {
+    "roles": [
+      "alhadikhia",
+      "princess"
+    ],
+    "roleTitles": [
+      "Al-Hadikhia",
+      "Princess"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Princess nominated & executed a player on their 1st day, no one dies to the Al-Hadikhia tonight.",
+    "sourceRole": "princess"
+  },
+  "alhadikhia|scarlet_woman": {
+    "roles": [
+      "alhadikhia",
+      "scarlet_woman"
+    ],
+    "roleTitles": [
+      "Al-Hadikhia",
+      "Scarlet Woman"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If there would be two Demons, one of which was the Scarlet Woman, the Scarlet Woman becomes the Scarlet Woman again.",
+    "sourceRole": "scarlet_woman"
+  },
+  "alsaahir|vizier": {
+    "roles": [
+      "alsaahir",
+      "vizier"
+    ],
+    "roleTitles": [
+      "Alsaahir",
+      "Vizier"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Storyteller doesn't declare the Vizier is in play.",
+    "sourceRole": "alsaahir"
+  },
+  "atheist|riot": {
+    "roles": [
+      "atheist",
+      "riot"
+    ],
+    "roleTitles": [
+      "Atheist",
+      "Riot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "During a riot, if the Storyteller is nominated, players vote. If they are \"about to die\", the game ends. If not, they nominate again.",
+    "sourceRole": "atheist"
+  },
+  "balloonist|marionette": {
+    "roles": [
+      "balloonist",
+      "marionette"
+    ],
+    "roleTitles": [
+      "Balloonist",
+      "Marionette"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Marionette thinks that they are the Balloonist, an Outsider might have been added during setup.",
+    "sourceRole": "balloonist"
+  },
+  "banshee|leviathan": {
+    "roles": [
+      "banshee",
+      "leviathan"
+    ],
+    "roleTitles": [
+      "Banshee",
+      "Leviathan"
+    ],
+    "alignmentTag": "Evil",
+    "text": "Each night*, the Leviathan chooses an alive good player (different to previous nights): a chosen Banshee dies & gains their ability.",
+    "sourceRole": "banshee"
+  },
+  "banshee|riot": {
+    "roles": [
+      "banshee",
+      "riot"
+    ],
+    "roleTitles": [
+      "Banshee",
+      "Riot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Banshee dies & gains their ability.",
+    "sourceRole": "banshee"
+  },
+  "banshee|vortox": {
+    "roles": [
+      "banshee",
+      "vortox"
+    ],
+    "roleTitles": [
+      "Banshee",
+      "Vortox"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Vortox kills the Banshee, all players learn that the Banshee has died.",
+    "sourceRole": "banshee"
+  },
+  "baron|heretic": {
+    "roles": [
+      "baron",
+      "heretic"
+    ],
+    "roleTitles": [
+      "Baron",
+      "Heretic"
+    ],
+    "alignmentTag": "Good",
+    "text": "Only 1 jinxed character can be in play.",
+    "sourceRole": "baron"
+  },
+  "baron|plague_doctor": {
+    "roles": [
+      "baron",
+      "plague_doctor"
+    ],
+    "roleTitles": [
+      "Baron",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Storyteller would gain the Baron ability, up to two players become Outsiders.",
+    "sourceRole": "plague_doctor"
+  },
+  "baron|plaguedoctor": {
+    "roles": [
+      "baron",
+      "plaguedoctor"
+    ],
+    "roleTitles": [
+      "Baron",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Storyteller would gain the Baron ability, up to two players become Outsiders.",
+    "sourceRole": "baron"
+  },
+  "boffin|cult_leader": {
+    "roles": [
+      "boffin",
+      "cult_leader"
+    ],
+    "roleTitles": [
+      "Boffin",
+      "Cult Leader"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Demon has the Cult Leader ability, they can’t turn good due to this ability.",
+    "sourceRole": "cult_leader"
+  },
+  "boffin|cultleader": {
+    "roles": [
+      "boffin",
+      "cultleader"
+    ],
+    "roleTitles": [
+      "Boffin",
+      "Cult Leader"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Demon has the Cult Leader ability, they can’t turn good due to this ability.",
+    "sourceRole": "boffin"
+  },
+  "boffin|drunk": {
+    "roles": [
+      "boffin",
+      "drunk"
+    ],
+    "roleTitles": [
+      "Boffin",
+      "Drunk"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Demon cannot have the Drunk ability.",
+    "sourceRole": "boffin"
+  },
+  "boffin|goon": {
+    "roles": [
+      "boffin",
+      "goon"
+    ],
+    "roleTitles": [
+      "Boffin",
+      "Goon"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Demon has the Goon ability, they can’t turn good due to this ability.",
+    "sourceRole": "boffin"
+  },
+  "boffin|heretic": {
+    "roles": [
+      "boffin",
+      "heretic"
+    ],
+    "roleTitles": [
+      "Boffin",
+      "Heretic"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Demon cannot have the Heretic ability.",
+    "sourceRole": "boffin"
+  },
+  "boffin|ogre": {
+    "roles": [
+      "boffin",
+      "ogre"
+    ],
+    "roleTitles": [
+      "Boffin",
+      "Ogre"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Demon cannot have the Ogre ability.",
+    "sourceRole": "boffin"
+  },
+  "boffin|politician": {
+    "roles": [
+      "boffin",
+      "politician"
+    ],
+    "roleTitles": [
+      "Boffin",
+      "Politician"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Demon cannot have the Politician ability.",
+    "sourceRole": "boffin"
+  },
+  "boffin|village_idiot": {
+    "roles": [
+      "boffin",
+      "village_idiot"
+    ],
+    "roleTitles": [
+      "Boffin",
+      "Village Idiot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If there is a spare token, the Boffin can give the Demon the Village Idiot ability.",
+    "sourceRole": "village_idiot"
+  },
+  "boffin|villageidiot": {
+    "roles": [
+      "boffin",
+      "villageidiot"
+    ],
+    "roleTitles": [
+      "Boffin",
+      "Village Idiot"
+    ],
+    "alignmentTag": "Good",
+    "text": "If there is a spare token, the Boffin can give the Demon the Village Idiot ability.",
+    "sourceRole": "boffin"
+  },
+  "boomdandy|plague_doctor": {
+    "roles": [
+      "boomdandy",
+      "plague_doctor"
+    ],
+    "roleTitles": [
+      "Boomdandy",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Storyteller would gain the Boomdandy ability, a player becomes the Boomdandy.",
+    "sourceRole": "plague_doctor"
+  },
+  "boomdandy|plaguedoctor": {
+    "roles": [
+      "boomdandy",
+      "plaguedoctor"
+    ],
+    "roleTitles": [
+      "Boomdandy",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Storyteller would gain the Boomdandy ability, a player becomes the Boomdandy.",
+    "sourceRole": "boomdandy"
+  },
+  "bounty_hunter|kazali": {
+    "roles": [
+      "bounty_hunter",
+      "kazali"
+    ],
+    "roleTitles": [
+      "Bounty Hunter",
+      "Kazali"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Kazali turns the Bounty Hunter into a Minion, an evil Townsfolk is not created.",
+    "sourceRole": "bounty_hunter"
+  },
+  "bounty_hunter|philosopher": {
+    "roles": [
+      "bounty_hunter",
+      "philosopher"
+    ],
+    "roleTitles": [
+      "Bounty Hunter",
+      "Philosopher"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Philosopher gains the Bounty Hunter ability, a Townsfolk might turn evil.",
+    "sourceRole": "bounty_hunter"
+  },
+  "bountyhunter|kazali": {
+    "roles": [
+      "bountyhunter",
+      "kazali"
+    ],
+    "roleTitles": [
+      "Bounty Hunter",
+      "Kazali"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Kazali turns the Bounty Hunter into a Minion, an evil Townsfolk is not created.",
+    "sourceRole": "kazali"
+  },
+  "bountyhunter|philosopher": {
+    "roles": [
+      "bountyhunter",
+      "philosopher"
+    ],
+    "roleTitles": [
+      "Bounty Hunter",
+      "Philosopher"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Philosopher gains the Bounty Hunter ability, a Townsfolk might turn evil.",
+    "sourceRole": "philosopher"
+  },
+  "butler|cannibal": {
+    "roles": [
+      "butler",
+      "cannibal"
+    ],
+    "roleTitles": [
+      "Butler",
+      "Cannibal"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Cannibal gains the Butler ability, the Cannibal learns this.",
+    "sourceRole": "butler"
+  },
+  "butler|organ_grinder": {
+    "roles": [
+      "butler",
+      "organ_grinder"
+    ],
+    "roleTitles": [
+      "Butler",
+      "Organ Grinder"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Organ Grinder is causing eyes closed voting, the Butler may raise their hand to vote but their vote is only counted if their master voted too.",
+    "sourceRole": "organ_grinder"
+  },
+  "butler|organgrinder": {
+    "roles": [
+      "butler",
+      "organgrinder"
+    ],
+    "roleTitles": [
+      "Butler",
+      "Organ Grinder"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Organ Grinder is causing eyes closed voting, the Butler may raise their hand to vote but their vote is only counted if their master voted too.",
+    "sourceRole": "butler"
+  },
+  "cannibal|juggler": {
+    "roles": [
+      "cannibal",
+      "juggler"
+    ],
+    "roleTitles": [
+      "Cannibal",
+      "Juggler"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Juggler guesses on their first day and dies by execution, tonight the living Cannibal learns how many guesses the Juggler got correct.",
+    "sourceRole": "cannibal"
+  },
+  "cannibal|princess": {
+    "roles": [
+      "cannibal",
+      "princess"
+    ],
+    "roleTitles": [
+      "Cannibal",
+      "Princess"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Cannibal nominated, executed, & killed the Princess today, the Demon doesn’t kill tonight.",
+    "sourceRole": "cannibal"
+  },
+  "cannibal|zealot": {
+    "roles": [
+      "cannibal",
+      "zealot"
+    ],
+    "roleTitles": [
+      "Cannibal",
+      "Zealot"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Cannibal gains the Zealot ability, the Cannibal learns this.",
+    "sourceRole": "cannibal"
+  },
+  "cerenovus|goblin": {
+    "roles": [
+      "cerenovus",
+      "goblin"
+    ],
+    "roleTitles": [
+      "Cerenovus",
+      "Goblin"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Cerenovus may choose to make a player mad that they are the Goblin.",
+    "sourceRole": "cerenovus"
+  },
+  "chambermaid|mathematician": {
+    "roles": [
+      "chambermaid",
+      "mathematician"
+    ],
+    "roleTitles": [
+      "Chambermaid",
+      "Mathematician"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Chambermaid can detect if the Mathematician will wake tonight.",
+    "sourceRole": "chambermaid"
+  },
+  "clockmaker|summoner": {
+    "roles": [
+      "clockmaker",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Clockmaker",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Summoner registers as the Demon to the Clockmaker.",
+    "sourceRole": "clockmaker"
+  },
+  "courtier|summoner": {
+    "roles": [
+      "courtier",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Courtier",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the living Summoner has no ability, the Storyteller has the Summoner ability.",
+    "sourceRole": "courtier"
+  },
+  "courtier|vizier": {
+    "roles": [
+      "courtier",
+      "vizier"
+    ],
+    "roleTitles": [
+      "Courtier",
+      "Vizier"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Vizier loses their ability, they learn this, and cannot die during the day.",
+    "sourceRole": "courtier"
+  },
+  "cult_leader|pithag": {
+    "roles": [
+      "cult_leader",
+      "pithag"
+    ],
+    "roleTitles": [
+      "Cult Leader",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Pit-Hag turns an evil player into the Cult Leader, they can't turn good due to their own ability.",
+    "sourceRole": "cult_leader"
+  },
+  "cultleader|pit_hag": {
+    "roles": [
+      "cultleader",
+      "pit_hag"
+    ],
+    "roleTitles": [
+      "Cult Leader",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Pit-Hag turns an evil player into the Cult Leader, they can't turn good due to their own ability.",
+    "sourceRole": "pit_hag"
+  },
+  "damsel|pit_hag": {
+    "roles": [
+      "damsel",
+      "pit_hag"
+    ],
+    "roleTitles": [
+      "Damsel",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Good",
+    "text": "If a Pit-Hag creates a Damsel, the Storyteller chooses which player it is.",
+    "sourceRole": "pit_hag"
+  },
+  "damsel|pithag": {
+    "roles": [
+      "damsel",
+      "pithag"
+    ],
+    "roleTitles": [
+      "Damsel",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If a Pit-Hag creates a Damsel, the Storyteller chooses which player it is.",
+    "sourceRole": "damsel"
+  },
+  "damsel|spy": {
+    "roles": [
+      "damsel",
+      "spy"
+    ],
+    "roleTitles": [
+      "Damsel",
+      "Spy"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Spy is (or has been) in play, the Damsel is poisoned.",
+    "sourceRole": "damsel"
+  },
+  "damsel|widow": {
+    "roles": [
+      "damsel",
+      "widow"
+    ],
+    "roleTitles": [
+      "Damsel",
+      "Widow"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Widow is (or has been) in play, the Damsel is poisoned.",
+    "sourceRole": "damsel"
+  },
+  "drunk|mathematician": {
+    "roles": [
+      "drunk",
+      "mathematician"
+    ],
+    "roleTitles": [
+      "Drunk",
+      "Mathematician"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Mathematician might learn if the Drunk's ability yielded false info or failed to work properly.",
+    "sourceRole": "drunk"
+  },
+  "engineer|legion": {
+    "roles": [
+      "engineer",
+      "legion"
+    ],
+    "roleTitles": [
+      "Engineer",
+      "Legion"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Legion is created, all evil players become Legion. If Legion is in play, the Engineer starts knowing this but has no ability.",
+    "sourceRole": "engineer"
+  },
+  "engineer|summoner": {
+    "roles": [
+      "engineer",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Engineer",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the living Summoner is removed from play, the Storyteller has the Summoner ability.",
+    "sourceRole": "engineer"
+  },
+  "evil_twin|plaguedoctor": {
+    "roles": [
+      "evil_twin",
+      "plaguedoctor"
+    ],
+    "roleTitles": [
+      "Evil Twin",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Storyteller would gain the Evil Twin ability, a player becomes the Evil Twin.",
+    "sourceRole": "evil_twin"
+  },
+  "eviltwin|plague_doctor": {
+    "roles": [
+      "eviltwin",
+      "plague_doctor"
+    ],
+    "roleTitles": [
+      "Evil Twin",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Storyteller would gain the Evil Twin ability, a player becomes the Evil Twin.",
+    "sourceRole": "plague_doctor"
+  },
+  "exorcist|leviathan": {
+    "roles": [
+      "exorcist",
+      "leviathan"
+    ],
+    "roleTitles": [
+      "Exorcist",
+      "Leviathan"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Leviathan nominates and executes the Exorcist-chosen player, good wins.",
+    "sourceRole": "exorcist"
+  },
+  "exorcist|riot": {
+    "roles": [
+      "exorcist",
+      "riot"
+    ],
+    "roleTitles": [
+      "Exorcist",
+      "Riot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Riot nominates and executes the Exorcist-chosen player, good wins.",
+    "sourceRole": "exorcist"
+  },
+  "exorcist|yaggababble": {
+    "roles": [
+      "exorcist",
+      "yaggababble"
+    ],
+    "roleTitles": [
+      "Exorcist",
+      "Yaggababble"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Exorcist chooses the Yaggababble, the Yaggababble does not kill tonight.",
+    "sourceRole": "exorcist"
+  },
+  "fang_gu|scarletwoman": {
+    "roles": [
+      "fang_gu",
+      "scarletwoman"
+    ],
+    "roleTitles": [
+      "Fang Gu",
+      "Scarlet Woman"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If there would be two Demons, one of which was the Scarlet Woman, the Scarlet Woman remains the Scarlet Woman.",
+    "sourceRole": "fang_gu"
+  },
+  "fanggu|scarlet_woman": {
+    "roles": [
+      "fanggu",
+      "scarlet_woman"
+    ],
+    "roleTitles": [
+      "Fang Gu",
+      "Scarlet Woman"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If there would be two Demons, one of which was the Scarlet Woman, the Scarlet Woman remains the Scarlet Woman.",
+    "sourceRole": "scarlet_woman"
+  },
+  "farmer|leviathan": {
+    "roles": [
+      "farmer",
+      "leviathan"
+    ],
+    "roleTitles": [
+      "Farmer",
+      "Leviathan"
+    ],
+    "alignmentTag": "Evil",
+    "text": "Each night*, the Leviathan chooses an alive good player (different to previous nights): a chosen Farmer uses their ability but does not die.",
+    "sourceRole": "farmer"
+  },
+  "farmer|riot": {
+    "roles": [
+      "farmer",
+      "riot"
+    ],
+    "roleTitles": [
+      "Farmer",
+      "Riot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Farmer uses their ability but does not die.",
+    "sourceRole": "farmer"
+  },
+  "fearmonger|plague_doctor": {
+    "roles": [
+      "fearmonger",
+      "plague_doctor"
+    ],
+    "roleTitles": [
+      "Fearmonger",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Storyteller would gain the Fearmonger ability, a Minion gains it, and learns this.",
+    "sourceRole": "plague_doctor"
+  },
+  "fearmonger|plaguedoctor": {
+    "roles": [
+      "fearmonger",
+      "plaguedoctor"
+    ],
+    "roleTitles": [
+      "Fearmonger",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Storyteller would gain the Fearmonger ability, a Minion gains it, and learns this.",
+    "sourceRole": "fearmonger"
+  },
+  "fearmonger|vizier": {
+    "roles": [
+      "fearmonger",
+      "vizier"
+    ],
+    "roleTitles": [
+      "Fearmonger",
+      "Vizier"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Vizier wakes with the Fearmonger, learns who they choose and cannot choose to immediately execute that player.",
+    "sourceRole": "fearmonger"
+  },
+  "goblin|plague_doctor": {
+    "roles": [
+      "goblin",
+      "plague_doctor"
+    ],
+    "roleTitles": [
+      "Goblin",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Storyteller would gain the Goblin ability, a Minion gains it, and learns this.",
+    "sourceRole": "plague_doctor"
+  },
+  "goblin|plaguedoctor": {
+    "roles": [
+      "goblin",
+      "plaguedoctor"
+    ],
+    "roleTitles": [
+      "Goblin",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Storyteller would gain the Goblin ability, a Minion gains it, and learns this.",
+    "sourceRole": "goblin"
+  },
+  "godfather|heretic": {
+    "roles": [
+      "godfather",
+      "heretic"
+    ],
+    "roleTitles": [
+      "Godfather",
+      "Heretic"
+    ],
+    "alignmentTag": "Good",
+    "text": "Only 1 jinxed character can be in play.",
+    "sourceRole": "godfather"
+  },
+  "goon|pit_hag": {
+    "roles": [
+      "goon",
+      "pit_hag"
+    ],
+    "roleTitles": [
+      "Goon",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Pit-Hag turns an evil player into the Goon, they can't turn good due to their own ability.",
+    "sourceRole": "pit_hag"
+  },
+  "goon|pithag": {
+    "roles": [
+      "goon",
+      "pithag"
+    ],
+    "roleTitles": [
+      "Goon",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Pit-Hag turns an evil player into the Goon, they can't turn good due to their own ability.",
+    "sourceRole": "goon"
+  },
+  "grandmother|leviathan": {
+    "roles": [
+      "grandmother",
+      "leviathan"
+    ],
+    "roleTitles": [
+      "Grandmother",
+      "Leviathan"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Leviathan is in play and the Grandchild dies by execution, evil wins.",
+    "sourceRole": "grandmother"
+  },
+  "grandmother|riot": {
+    "roles": [
+      "grandmother",
+      "riot"
+    ],
+    "roleTitles": [
+      "Grandmother",
+      "Riot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Riot is in play and the Grandchild dies by execution, evil wins.",
+    "sourceRole": "grandmother"
+  },
+  "hatter|legion": {
+    "roles": [
+      "hatter",
+      "legion"
+    ],
+    "roleTitles": [
+      "Hatter",
+      "Legion"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Legion is created, all evil players become Legion. If Legion is in play, the Hatter has no ability.",
+    "sourceRole": "hatter"
+  },
+  "hatter|leviathan": {
+    "roles": [
+      "hatter",
+      "leviathan"
+    ],
+    "roleTitles": [
+      "Hatter",
+      "Leviathan"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Leviathan cannot enter play after day 5.",
+    "sourceRole": "hatter"
+  },
+  "hatter|lil_monsta": {
+    "roles": [
+      "hatter",
+      "lil_monsta"
+    ],
+    "roleTitles": [
+      "Hatter",
+      "Lil' Monsta"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Hatter dies & the Demon chooses Lil' Monsta, they also choose a Minion to become.",
+    "sourceRole": "lil_monsta"
+  },
+  "hatter|lilmonsta": {
+    "roles": [
+      "hatter",
+      "lilmonsta"
+    ],
+    "roleTitles": [
+      "Hatter",
+      "Lil' Monsta"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Hatter dies & the Demon chooses Lil' Monsta, they also choose a Minion to become.",
+    "sourceRole": "hatter"
+  },
+  "hatter|summoner": {
+    "roles": [
+      "hatter",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Hatter",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Summoner creates a second living Demon, deaths tonight are arbitrary.",
+    "sourceRole": "hatter"
+  },
+  "heretic|lleech": {
+    "roles": [
+      "heretic",
+      "lleech"
+    ],
+    "roleTitles": [
+      "Heretic",
+      "Lleech"
+    ],
+    "alignmentTag": "Evil",
+    "text": "Only 1 jinxed character can be in play.",
+    "sourceRole": "heretic"
+  },
+  "heretic|pit_hag": {
+    "roles": [
+      "heretic",
+      "pit_hag"
+    ],
+    "roleTitles": [
+      "Heretic",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Good",
+    "text": "Only 1 jinxed character can be in play.",
+    "sourceRole": "pit_hag"
+  },
+  "heretic|pithag": {
+    "roles": [
+      "heretic",
+      "pithag"
+    ],
+    "roleTitles": [
+      "Heretic",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Evil",
+    "text": "Only 1 jinxed character can be in play.",
+    "sourceRole": "heretic"
+  },
+  "heretic|spy": {
+    "roles": [
+      "heretic",
+      "spy"
+    ],
+    "roleTitles": [
+      "Heretic",
+      "Spy"
+    ],
+    "alignmentTag": "Evil",
+    "text": "Only 1 jinxed character can be in play.",
+    "sourceRole": "heretic"
+  },
+  "heretic|widow": {
+    "roles": [
+      "heretic",
+      "widow"
+    ],
+    "roleTitles": [
+      "Heretic",
+      "Widow"
+    ],
+    "alignmentTag": "Evil",
+    "text": "Only 1 jinxed character can be in play.",
+    "sourceRole": "heretic"
+  },
+  "huntsman|marionette": {
+    "roles": [
+      "huntsman",
+      "marionette"
+    ],
+    "roleTitles": [
+      "Huntsman",
+      "Marionette"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Marionette thinks that they are the Huntsman, the Damsel was added during setup.",
+    "sourceRole": "huntsman"
+  },
+  "innkeeper|leviathan": {
+    "roles": [
+      "innkeeper",
+      "leviathan"
+    ],
+    "roleTitles": [
+      "Innkeeper",
+      "Leviathan"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Leviathan nominates and executes an Innkeeper-protected player, good wins.",
+    "sourceRole": "innkeeper"
+  },
+  "innkeeper|riot": {
+    "roles": [
+      "innkeeper",
+      "riot"
+    ],
+    "roleTitles": [
+      "Innkeeper",
+      "Riot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Riot nominates and executes an Innkeeper-protected player, good wins.",
+    "sourceRole": "innkeeper"
+  },
+  "investigator|vizier": {
+    "roles": [
+      "investigator",
+      "vizier"
+    ],
+    "roleTitles": [
+      "Investigator",
+      "Vizier"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Storyteller doesn't declare the Vizier is in play.",
+    "sourceRole": "investigator"
+  },
+  "kazali|marionette": {
+    "roles": [
+      "kazali",
+      "marionette"
+    ],
+    "roleTitles": [
+      "Kazali",
+      "Marionette"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If there would be a Marionette in play, they enter play after the Demon & must start as their neighbor.",
+    "sourceRole": "kazali"
+  },
+  "kazali|summoner": {
+    "roles": [
+      "kazali",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Kazali",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Summoner creates a second living Demon, deaths tonight are arbitrary.",
+    "sourceRole": "kazali"
+  },
+  "king|leviathan": {
+    "roles": [
+      "king",
+      "leviathan"
+    ],
+    "roleTitles": [
+      "King",
+      "Leviathan"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Leviathan is in play, and at least 1 player is dead, the King learns an alive character each night.",
+    "sourceRole": "king"
+  },
+  "king|riot": {
+    "roles": [
+      "king",
+      "riot"
+    ],
+    "roleTitles": [
+      "King",
+      "Riot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Riot is in play, and at least 1 player is dead, the King learns an alive character each night.",
+    "sourceRole": "king"
+  },
+  "legion|magician": {
+    "roles": [
+      "legion",
+      "magician"
+    ],
+    "roleTitles": [
+      "Legion",
+      "Magician"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Magician wakes with Legion and might register as evil. Legion knows if a Magician is in play, but not which player it is.",
+    "sourceRole": "legion"
+  },
+  "legion|minstrel": {
+    "roles": [
+      "legion",
+      "minstrel"
+    ],
+    "roleTitles": [
+      "Legion",
+      "Minstrel"
+    ],
+    "alignmentTag": "Good",
+    "text": "If Legion died by execution today, Legion keeps their ability, but the Minstrel might learn they are Legion.",
+    "sourceRole": "legion"
+  },
+  "legion|politician": {
+    "roles": [
+      "legion",
+      "politician"
+    ],
+    "roleTitles": [
+      "Legion",
+      "Politician"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Politician might register as evil to Legion.",
+    "sourceRole": "legion"
+  },
+  "legion|preacher": {
+    "roles": [
+      "legion",
+      "preacher"
+    ],
+    "roleTitles": [
+      "Legion",
+      "Preacher"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Preacher chooses Legion, Legion keeps their ability, but the Preacher might learn they are Legion.",
+    "sourceRole": "legion"
+  },
+  "legion|summoner": {
+    "roles": [
+      "legion",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Legion",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Legion is summoned, all evil players become Legion.",
+    "sourceRole": "legion"
+  },
+  "legion|zealot": {
+    "roles": [
+      "legion",
+      "zealot"
+    ],
+    "roleTitles": [
+      "Legion",
+      "Zealot"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Zealot might register as evil to Legion.",
+    "sourceRole": "legion"
+  },
+  "leviathan|mayor": {
+    "roles": [
+      "leviathan",
+      "mayor"
+    ],
+    "roleTitles": [
+      "Leviathan",
+      "Mayor"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Leviathan and the Mayor are alive on day 5 & no execution occurs, good wins.",
+    "sourceRole": "leviathan"
+  },
+  "leviathan|monk": {
+    "roles": [
+      "leviathan",
+      "monk"
+    ],
+    "roleTitles": [
+      "Leviathan",
+      "Monk"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Leviathan nominates and executes the Monk-protected player, good wins.",
+    "sourceRole": "leviathan"
+  },
+  "leviathan|pit_hag": {
+    "roles": [
+      "leviathan",
+      "pit_hag"
+    ],
+    "roleTitles": [
+      "Leviathan",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Leviathan cannot enter play after day 5.",
+    "sourceRole": "pit_hag"
+  },
+  "leviathan|pithag": {
+    "roles": [
+      "leviathan",
+      "pithag"
+    ],
+    "roleTitles": [
+      "Leviathan",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Leviathan cannot enter play after day 5.",
+    "sourceRole": "leviathan"
+  },
+  "leviathan|ravenkeeper": {
+    "roles": [
+      "leviathan",
+      "ravenkeeper"
+    ],
+    "roleTitles": [
+      "Leviathan",
+      "Ravenkeeper"
+    ],
+    "alignmentTag": "Good",
+    "text": "Each night*, the Leviathan chooses an alive player (different to previous nights): a chosen Ravenkeeper uses their ability but does not die.",
+    "sourceRole": "leviathan"
+  },
+  "leviathan|sage": {
+    "roles": [
+      "leviathan",
+      "sage"
+    ],
+    "roleTitles": [
+      "Leviathan",
+      "Sage"
+    ],
+    "alignmentTag": "Good",
+    "text": "Each night*, the Leviathan chooses an alive good player (different to previous nights): a chosen Sage uses their ability but does not die.",
+    "sourceRole": "leviathan"
+  },
+  "leviathan|soldier": {
+    "roles": [
+      "leviathan",
+      "soldier"
+    ],
+    "roleTitles": [
+      "Leviathan",
+      "Soldier"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Leviathan nominates and executes the Soldier, good wins.",
+    "sourceRole": "leviathan"
+  },
+  "lil_monsta|magician": {
+    "roles": [
+      "lil_monsta",
+      "magician"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Magician"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Magician is alive, the Storyteller chooses which Minion babysits Lil' Monsta.",
+    "sourceRole": "lil_monsta"
+  },
+  "lil_monsta|marionette": {
+    "roles": [
+      "lil_monsta",
+      "marionette"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Marionette"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If there would be a Marionette in play, they enter play after the Demon & must start as their neighbor.",
+    "sourceRole": "lil_monsta"
+  },
+  "lil_monsta|poppygrower": {
+    "roles": [
+      "lil_monsta",
+      "poppygrower"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Poppy Grower"
+    ],
+    "alignmentTag": "Good",
+    "text": "If Lil' Monsta & the Poppy Grower are alive, Minions wake one by one, until one of them chooses to take the Lil' Monsta token.",
+    "sourceRole": "lil_monsta"
+  },
+  "lil_monsta|psychopath": {
+    "roles": [
+      "lil_monsta",
+      "psychopath"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Psychopath"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Psychopath is babysitting Lil' Monsta, they die when executed.",
+    "sourceRole": "lil_monsta"
+  },
+  "lil_monsta|scarletwoman": {
+    "roles": [
+      "lil_monsta",
+      "scarletwoman"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Scarlet Woman"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Lil' Monsta dies with 5 or more players alive, the Scarlet Woman babysits Lil' Monsta for the rest of the game.",
+    "sourceRole": "lil_monsta"
+  },
+  "lil_monsta|vizier": {
+    "roles": [
+      "lil_monsta",
+      "vizier"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Vizier"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Vizier is babysitting Lil' Monsta, they die when executed.",
+    "sourceRole": "lil_monsta"
+  },
+  "lilmonsta|magician": {
+    "roles": [
+      "lilmonsta",
+      "magician"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Magician"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Magician is alive, the Storyteller chooses which Minion babysits Lil' Monsta.",
+    "sourceRole": "magician"
+  },
+  "lilmonsta|marionette": {
+    "roles": [
+      "lilmonsta",
+      "marionette"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Marionette"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If there would be a Marionette in play, they enter play after the Demon & must start as their neighbor.",
+    "sourceRole": "marionette"
+  },
+  "lilmonsta|poppy_grower": {
+    "roles": [
+      "lilmonsta",
+      "poppy_grower"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Poppy Grower"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Lil' Monsta & the Poppy Grower are alive, Minions wake one by one, until one of them chooses to take the Lil' Monsta token.",
+    "sourceRole": "poppy_grower"
+  },
+  "lilmonsta|psychopath": {
+    "roles": [
+      "lilmonsta",
+      "psychopath"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Psychopath"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Psychopath is babysitting Lil' Monsta, they die when executed.",
+    "sourceRole": "psychopath"
+  },
+  "lilmonsta|scarlet_woman": {
+    "roles": [
+      "lilmonsta",
+      "scarlet_woman"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Scarlet Woman"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Lil' Monsta dies with 5 or more players alive, the Scarlet Woman babysits Lil' Monsta for the rest of the game.",
+    "sourceRole": "scarlet_woman"
+  },
+  "lilmonsta|vizier": {
+    "roles": [
+      "lilmonsta",
+      "vizier"
+    ],
+    "roleTitles": [
+      "Lil' Monsta",
+      "Vizier"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Vizier is babysitting Lil' Monsta, they die when executed.",
+    "sourceRole": "vizier"
+  },
+  "lleech|mastermind": {
+    "roles": [
+      "lleech",
+      "mastermind"
+    ],
+    "roleTitles": [
+      "Lleech",
+      "Mastermind"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Mastermind is alive and the Lleech host dies by execution, the Lleech lives but loses their ability.",
+    "sourceRole": "lleech"
+  },
+  "lleech|slayer": {
+    "roles": [
+      "lleech",
+      "slayer"
+    ],
+    "roleTitles": [
+      "Lleech",
+      "Slayer"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Slayer slays the Lleech host, the host dies.",
+    "sourceRole": "lleech"
+  },
+  "lord_of_typhon|summoner": {
+    "roles": [
+      "lord_of_typhon",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Lord of Typhon",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If a Lord of Typhon is summoned, they must neighbor a Minion & their other neighbor becomes an evil Minion.",
+    "sourceRole": "lord_of_typhon"
+  },
+  "lordoftyphon|summoner": {
+    "roles": [
+      "lordoftyphon",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Lord of Typhon",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If a Lord of Typhon is summoned, they must neighbor a Minion & their other neighbor becomes an evil Minion.",
+    "sourceRole": "summoner"
+  },
+  "lunatic|mathematician": {
+    "roles": [
+      "lunatic",
+      "mathematician"
+    ],
+    "roleTitles": [
+      "Lunatic",
+      "Mathematician"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Mathematician might learn if the Lunatic attacks a different player than the real Demon attacked.",
+    "sourceRole": "lunatic"
+  },
+  "magician|marionette": {
+    "roles": [
+      "magician",
+      "marionette"
+    ],
+    "roleTitles": [
+      "Magician",
+      "Marionette"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Magician is alive, the Demon doesn't know which neighbor is the Marionette.",
+    "sourceRole": "magician"
+  },
+  "magician|spy": {
+    "roles": [
+      "magician",
+      "spy"
+    ],
+    "roleTitles": [
+      "Magician",
+      "Spy"
+    ],
+    "alignmentTag": "Evil",
+    "text": "When the Spy sees the Grimoire, the Demon and Magician's character tokens are removed.",
+    "sourceRole": "magician"
+  },
+  "magician|vizier": {
+    "roles": [
+      "magician",
+      "vizier"
+    ],
+    "roleTitles": [
+      "Magician",
+      "Vizier"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Vizier is in play, the Magician has no ability but is immune to the Vizier's ability.",
+    "sourceRole": "magician"
+  },
+  "magician|widow": {
+    "roles": [
+      "magician",
+      "widow"
+    ],
+    "roleTitles": [
+      "Magician",
+      "Widow"
+    ],
+    "alignmentTag": "Evil",
+    "text": "When the Widow sees the Grimoire, the Demon and Magician's character tokens are removed.",
+    "sourceRole": "magician"
+  },
+  "magician|wraith": {
+    "roles": [
+      "magician",
+      "wraith"
+    ],
+    "roleTitles": [
+      "Magician",
+      "Wraith"
+    ],
+    "alignmentTag": "Evil",
+    "text": "After each execution, the living Magician may publicly guess a living player as the Wraith. If correct, the Demon must choose the Wraith tonight.",
+    "sourceRole": "magician"
+  },
+  "marionette|mathematician": {
+    "roles": [
+      "marionette",
+      "mathematician"
+    ],
+    "roleTitles": [
+      "Marionette",
+      "Mathematician"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Mathematician might learn if the Marionette's ability yielded false info or failed to work properly.",
+    "sourceRole": "marionette"
+  },
+  "marionette|plague_doctor": {
+    "roles": [
+      "marionette",
+      "plague_doctor"
+    ],
+    "roleTitles": [
+      "Marionette",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Storyteller would gain the Marionette ability, one of the Demon's good neighbors becomes the Marionette.",
+    "sourceRole": "plague_doctor"
+  },
+  "marionette|plaguedoctor": {
+    "roles": [
+      "marionette",
+      "plaguedoctor"
+    ],
+    "roleTitles": [
+      "Marionette",
+      "Plague Doctor"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Storyteller would gain the Marionette ability, one of the Demon's good neighbors becomes the Marionette.",
+    "sourceRole": "marionette"
+  },
+  "marionette|summoner": {
+    "roles": [
+      "marionette",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Marionette",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If there would be a Marionette in play, they enter play after the Demon & must start as their neighbor.",
+    "sourceRole": "marionette"
+  },
+  "mastermind|vigormortis": {
+    "roles": [
+      "mastermind",
+      "vigormortis"
+    ],
+    "roleTitles": [
+      "Mastermind",
+      "Vigormortis"
+    ],
+    "alignmentTag": "Evil",
+    "text": "A Mastermind that has their ability keeps it if the Vigormortis dies.",
+    "sourceRole": "mastermind"
+  },
+  "mayor|riot": {
+    "roles": [
+      "mayor",
+      "riot"
+    ],
+    "roleTitles": [
+      "Mayor",
+      "Riot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Mayor may choose to stop the riot. If they do so when only 1 Riot is alive, good wins. Otherwise, evil wins.",
+    "sourceRole": "mayor"
+  },
+  "monk|riot": {
+    "roles": [
+      "monk",
+      "riot"
+    ],
+    "roleTitles": [
+      "Monk",
+      "Riot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If Riot nominates and executes the Monk-protected player, good wins.",
+    "sourceRole": "monk"
+  },
+  "ogre|pit_hag": {
+    "roles": [
+      "ogre",
+      "pit_hag"
+    ],
+    "roleTitles": [
+      "Ogre",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Pit-Hag turns an evil player into the Ogre, they can't turn good due to their own ability.",
+    "sourceRole": "pit_hag"
+  },
+  "ogre|pithag": {
+    "roles": [
+      "ogre",
+      "pithag"
+    ],
+    "roleTitles": [
+      "Ogre",
+      "Pit-Hag"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Pit-Hag turns an evil player into the Ogre, they can't turn good due to their own ability.",
+    "sourceRole": "ogre"
+  },
+  "ogre|recluse": {
+    "roles": [
+      "ogre",
+      "recluse"
+    ],
+    "roleTitles": [
+      "Ogre",
+      "Recluse"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Recluse registers as evil to the Ogre, the Ogre learns that they are evil.",
+    "sourceRole": "ogre"
+  },
+  "ogre|spy": {
+    "roles": [
+      "ogre",
+      "spy"
+    ],
+    "roleTitles": [
+      "Ogre",
+      "Spy"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Spy registers as evil to the Ogre.",
+    "sourceRole": "ogre"
+  },
+  "pit_hag|politician": {
+    "roles": [
+      "pit_hag",
+      "politician"
+    ],
+    "roleTitles": [
+      "Pit-Hag",
+      "Politician"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Pit-Hag turns an evil player into the Politician, they can't turn good due to their own ability.",
+    "sourceRole": "pit_hag"
+  },
+  "pit_hag|summoner": {
+    "roles": [
+      "pit_hag",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Pit-Hag",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Summoner creates a second living Demon, deaths tonight are arbitrary.",
+    "sourceRole": "pit_hag"
+  },
+  "pit_hag|villageidiot": {
+    "roles": [
+      "pit_hag",
+      "villageidiot"
+    ],
+    "roleTitles": [
+      "Pit-Hag",
+      "Village Idiot"
+    ],
+    "alignmentTag": "Good",
+    "text": "If there is a spare token, the Pit-Hag can create an extra Village Idiot. If so, the drunk Village Idiot might change.",
+    "sourceRole": "pit_hag"
+  },
+  "pithag|politician": {
+    "roles": [
+      "pithag",
+      "politician"
+    ],
+    "roleTitles": [
+      "Pit-Hag",
+      "Politician"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Pit-Hag turns an evil player into the Politician, they can't turn good due to their own ability.",
+    "sourceRole": "politician"
+  },
+  "pithag|summoner": {
+    "roles": [
+      "pithag",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Pit-Hag",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Summoner creates a second living Demon, deaths tonight are arbitrary.",
+    "sourceRole": "summoner"
+  },
+  "pithag|village_idiot": {
+    "roles": [
+      "pithag",
+      "village_idiot"
+    ],
+    "roleTitles": [
+      "Pit-Hag",
+      "Village Idiot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If there is a spare token, the Pit-Hag can create an extra Village Idiot. If so, the drunk Village Idiot might change.",
+    "sourceRole": "village_idiot"
+  },
+  "plague_doctor|scarletwoman": {
+    "roles": [
+      "plague_doctor",
+      "scarletwoman"
+    ],
+    "roleTitles": [
+      "Plague Doctor",
+      "Scarlet Woman"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Storyteller would gain the Scarlet Woman ability, a Minion gains it, and learns this.",
+    "sourceRole": "plague_doctor"
+  },
+  "plague_doctor|spy": {
+    "roles": [
+      "plague_doctor",
+      "spy"
+    ],
+    "roleTitles": [
+      "Plague Doctor",
+      "Spy"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Storyteller would gain the Spy ability, a Minion gains it, and learns this.",
+    "sourceRole": "plague_doctor"
+  },
+  "plague_doctor|wraith": {
+    "roles": [
+      "plague_doctor",
+      "wraith"
+    ],
+    "roleTitles": [
+      "Plague Doctor",
+      "Wraith"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Storyteller would gain the Wraith ability, a Minion gains it, and learns this.",
+    "sourceRole": "plague_doctor"
+  },
+  "plaguedoctor|scarlet_woman": {
+    "roles": [
+      "plaguedoctor",
+      "scarlet_woman"
+    ],
+    "roleTitles": [
+      "Plague Doctor",
+      "Scarlet Woman"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Storyteller would gain the Scarlet Woman ability, a Minion gains it, and learns this.",
+    "sourceRole": "scarlet_woman"
+  },
+  "plaguedoctor|spy": {
+    "roles": [
+      "plaguedoctor",
+      "spy"
+    ],
+    "roleTitles": [
+      "Plague Doctor",
+      "Spy"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Storyteller would gain the Spy ability, a Minion gains it, and learns this.",
+    "sourceRole": "spy"
+  },
+  "plaguedoctor|wraith": {
+    "roles": [
+      "plaguedoctor",
+      "wraith"
+    ],
+    "roleTitles": [
+      "Plague Doctor",
+      "Wraith"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Storyteller would gain the Wraith ability, a Minion gains it, and learns this.",
+    "sourceRole": "wraith"
+  },
+  "politician|vizier": {
+    "roles": [
+      "politician",
+      "vizier"
+    ],
+    "roleTitles": [
+      "Politician",
+      "Vizier"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Politician might register as evil to the Vizier.",
+    "sourceRole": "politician"
+  },
+  "poppy_grower|spy": {
+    "roles": [
+      "poppy_grower",
+      "spy"
+    ],
+    "roleTitles": [
+      "Poppy Grower",
+      "Spy"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Poppy Grower has their ability, the Spy does not see the Grimoire.",
+    "sourceRole": "poppy_grower"
+  },
+  "poppy_grower|summoner": {
+    "roles": [
+      "poppy_grower",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Poppy Grower",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Poppy Grower is alive on the 3rd night, the Summoner chooses which Demon but not which player.",
+    "sourceRole": "poppy_grower"
+  },
+  "poppy_grower|widow": {
+    "roles": [
+      "poppy_grower",
+      "widow"
+    ],
+    "roleTitles": [
+      "Poppy Grower",
+      "Widow"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Poppy Grower has their ability, the Widow does not see the Grimoire.",
+    "sourceRole": "poppy_grower"
+  },
+  "poppygrower|spy": {
+    "roles": [
+      "poppygrower",
+      "spy"
+    ],
+    "roleTitles": [
+      "Poppy Grower",
+      "Spy"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Poppy Grower has their ability, the Spy does not see the Grimoire.",
+    "sourceRole": "spy"
+  },
+  "poppygrower|summoner": {
+    "roles": [
+      "poppygrower",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Poppy Grower",
+      "Summoner"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Poppy Grower is alive on the 3rd night, the Summoner chooses which Demon but not which player.",
+    "sourceRole": "summoner"
+  },
+  "poppygrower|widow": {
+    "roles": [
+      "poppygrower",
+      "widow"
+    ],
+    "roleTitles": [
+      "Poppy Grower",
+      "Widow"
+    ],
+    "alignmentTag": "Good",
+    "text": "If the Poppy Grower has their ability, the Widow does not see the Grimoire.",
+    "sourceRole": "widow"
+  },
+  "preacher|summoner": {
+    "roles": [
+      "preacher",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Preacher",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the living Summoner has no ability, the Storyteller has the Summoner ability.",
+    "sourceRole": "preacher"
+  },
+  "preacher|vizier": {
+    "roles": [
+      "preacher",
+      "vizier"
+    ],
+    "roleTitles": [
+      "Preacher",
+      "Vizier"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Vizier loses their ability, they learn this, and cannot die during the day.",
+    "sourceRole": "preacher"
+  },
+  "pukka|summoner": {
+    "roles": [
+      "pukka",
+      "summoner"
+    ],
+    "roleTitles": [
+      "Pukka",
+      "Summoner"
+    ],
+    "alignmentTag": "Evil",
+    "text": "The Summoner may summon a Pukka on the 2nd night instead of the 3rd.",
+    "sourceRole": "pukka"
+  },
+  "ravenkeeper|riot": {
+    "roles": [
+      "ravenkeeper",
+      "riot"
+    ],
+    "roleTitles": [
+      "Ravenkeeper",
+      "Riot"
+    ],
+    "alignmentTag": "Evil",
+    "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Ravenkeeper uses their ability but does not die.",
+    "sourceRole": "ravenkeeper"
+  },
+  "recluse|sage": {
+    "roles": [
+      "recluse",
+      "sage"
+    ],
+    "roleTitles": [
+      "Recluse",
+      "Sage"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Recluse might register as the Demon to the Sage.",
+    "sourceRole": "recluse"
+  },
+  "riot|sage": {
+    "roles": [
+      "riot",
+      "sage"
+    ],
+    "roleTitles": [
+      "Riot",
+      "Sage"
+    ],
+    "alignmentTag": "Good",
+    "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Sage uses their ability but does not die.",
+    "sourceRole": "riot"
+  },
+  "riot|soldier": {
+    "roles": [
+      "riot",
+      "soldier"
+    ],
+    "roleTitles": [
+      "Riot",
+      "Soldier"
+    ],
+    "alignmentTag": "Good",
+    "text": "If Riot nominates and executes the Soldier, good wins.",
+    "sourceRole": "riot"
+  },
+  "summoner|zombuul": {
+    "roles": [
+      "summoner",
+      "zombuul"
+    ],
+    "roleTitles": [
+      "Summoner",
+      "Zombuul"
+    ],
+    "alignmentTag": "Evil",
+    "text": "If the Summoner summons a dead player into the Zombuul, the Zombuul has already \"died once\".",
+    "sourceRole": "summoner"
+  },
+  "vizier|zealot": {
+    "roles": [
+      "vizier",
+      "zealot"
+    ],
+    "roleTitles": [
+      "Vizier",
+      "Zealot"
+    ],
+    "alignmentTag": "Good",
+    "text": "The Zealot might register as evil to the Vizier.",
+    "sourceRole": "vizier"
+  }
+}

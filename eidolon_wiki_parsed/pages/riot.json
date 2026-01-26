@@ -1,0 +1,110 @@
+{
+  "roleKey": "riot",
+  "title": "Riot",
+  "url": "https://wiki.bloodontheclocktower.com/Riot",
+  "categoryHint": "experimental",
+  "categories": [
+    "Demons",
+    "Experimental Characters"
+  ],
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "On day 3, Minions become Riot & nominees die but nominate an alive player immediately. This must happen.",
+  "summary": "Riot kills everybody in a panic.\n-  On the 3rd day, each player that is nominated dies immediately. Even though they are dead, they nominate again.\n-  The player that was nominated must nominate again immediately or lose their chance to do so. The Storyteller counts down “3... 2... 1...” to let the player know how long they have to nominate, should they wish to. If they don’t, the Storyteller nominates instead.\n-  The good team wins if all Riot players are dead. If the last Riot dies and only two players are alive, they do not nominate, and the good team wins.\n-  If nobody nominates on the 3rd day, the Storyteller makes the 1st nomination instead.\n-  Minions may change into Riot as the nomination phase begins on the 3rd day.",
+  "howToRun": "On the 1st day, add the DAY 1 reminder to the Grimoire. On the 2nd day, add the DAY 2 reminder to the Grimoire. On the 3rd day, add the DAY 3 reminder to the Grimoire.\n\nOn the 3rd night, wake each Minion. Show the YOU ARE info token, then the Riot token, then put each Minion to sleep. Either now, or later during the 3rd day, replace all Minion tokens with Riot tokens.\n\nDuring the 3rd day, each time a player is nominated, they die. Declare that they are dead, and add a shroud immediately. Tell them to nominate again and publicly count down “3... 2... 1...” After they nominate, repeat this process until all Riot are dead, or just 2 players are alive. Declare which team has won.\n\nIf the players do not nominate at all on the 3rd day, or if a nominated player does not nominate before their time runs out, nominate a player – they die and must then nominate again.",
+  "examples": [
+    "Alex nominates Lewis. Lewis dies and nominates Ben. Ben dies and nominates Marianna. Marianna dies and nominates Lachlan. Lachlan dies. All Riot players are dead. Good wins."
+  ],
+  "jinxes": [
+    {
+      "with": "Atheist",
+      "withKey": "atheist",
+      "alignment": "Good",
+      "text": "During a riot, if the Storyteller is nominated, players vote. If they are \"about to die\", the game ends. If not, they nominate again."
+    },
+    {
+      "with": "Banshee",
+      "withKey": "banshee",
+      "alignment": "Good",
+      "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Banshee dies & gains their ability."
+    },
+    {
+      "with": "Exorcist",
+      "withKey": "exorcist",
+      "alignment": "Good",
+      "text": "If Riot nominates and executes the Exorcist-chosen player, good wins."
+    },
+    {
+      "with": "Farmer",
+      "withKey": "farmer",
+      "alignment": "Good",
+      "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Farmer uses their ability but does not die."
+    },
+    {
+      "with": "Grandmother",
+      "withKey": "grandmother",
+      "alignment": "Good",
+      "text": "If Riot is in play and the Grandchild dies by execution, evil wins."
+    },
+    {
+      "with": "Innkeeper",
+      "withKey": "innkeeper",
+      "alignment": "Good",
+      "text": "If Riot nominates and executes an Innkeeper-protected player, good wins."
+    },
+    {
+      "with": "King",
+      "withKey": "king",
+      "alignment": "Good",
+      "text": "If Riot is in play, and at least 1 player is dead, the King learns an alive character each night."
+    },
+    {
+      "with": "Mayor",
+      "withKey": "mayor",
+      "alignment": "Good",
+      "text": "The Mayor may choose to stop the riot. If they do so when only 1 Riot is alive, good wins. Otherwise, evil wins."
+    },
+    {
+      "with": "Monk",
+      "withKey": "monk",
+      "alignment": "Good",
+      "text": "If Riot nominates and executes the Monk-protected player, good wins."
+    },
+    {
+      "with": "Ravenkeeper",
+      "withKey": "ravenkeeper",
+      "alignment": "Good",
+      "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Ravenkeeper uses their ability but does not die."
+    },
+    {
+      "with": "Sage",
+      "withKey": "sage",
+      "alignment": "Good",
+      "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Sage uses their ability but does not die."
+    },
+    {
+      "with": "Soldier",
+      "withKey": "soldier",
+      "alignment": "Good",
+      "text": "If Riot nominates and executes the Soldier, good wins."
+    }
+  ],
+  "otherSections": {},
+  "signals": {
+    "eachNight": false,
+    "eachDay": false,
+    "oncePerGame": false,
+    "youLearn": false,
+    "choose": false,
+    "dies": true
+  },
+  "sections": {
+    "summary": "Riot kills everybody in a panic.\n-  On the 3rd day, each player that is nominated dies immediately. Even though they are dead, they nominate again.\n-  The player that was nominated must nominate again immediately or lose their chance to do so. The Storyteller counts down “3... 2... 1...” to let the player know how long they have to nominate, should they wish to. If they don’t, the Storyteller nominates instead.\n-  The good team wins if all Riot players are dead. If the last Riot dies and only two players are alive, they do not nominate, and the good team wins.\n-  If nobody nominates on the 3rd day, the Storyteller makes the 1st nomination instead.\n-  Minions may change into Riot as the nomination phase begins on the 3rd day.",
+    "how_to_run": "On the 1st day, add the DAY 1 reminder to the Grimoire. On the 2nd day, add the DAY 2 reminder to the Grimoire. On the 3rd day, add the DAY 3 reminder to the Grimoire.\n\nOn the 3rd night, wake each Minion. Show the YOU ARE info token, then the Riot token, then put each Minion to sleep. Either now, or later during the 3rd day, replace all Minion tokens with Riot tokens.\n\nDuring the 3rd day, each time a player is nominated, they die. Declare that they are dead, and add a shroud immediately. Tell them to nominate again and publicly count down “3... 2... 1...” After they nominate, repeat this process until all Riot are dead, or just 2 players are alive. Declare which team has won.\n\nIf the players do not nominate at all on the 3rd day, or if a nominated player does not nominate before their time runs out, nominate a player – they die and must then nominate again.",
+    "examples": [
+      "Alex nominates Lewis. Lewis dies and nominates Ben. Ben dies and nominates Marianna. Marianna dies and nominates Lachlan. Lachlan dies. All Riot players are dead. Good wins."
+    ],
+    "other": {}
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "roleKey": "deviant",
+  "title": "Deviant",
+  "url": "https://wiki.bloodontheclocktower.com/Deviant",
+  "categoryHint": "traveller",
+  "categories": [
+    "Travellers"
+  ],
+  "editionTags": [],
+  "abilityText": "If you were funny today, you cannot die by exile.",
+  "summary": "The Deviant can avoid being Exiled - as long as the Deviant player has been amusing today.\n-  The Deviant can amuse the group in any way they choose. Generally, verbal means such as jokes, funny stories, or witty remarks will suffice.\n-  The Storyteller is the judge of whether the Deviant was funny or not.",
+  "howToRun": "If the Deviant would be exiled, you may declare that the Deviant\nremains alive.\n\nIt is best to be forgiving and treat even a slightly funny Deviant as funny. It can be tough to be funny when one is expected to be, after all.\n\nIf the player would prefer, you may determine different criteria for whether the Deviant is exiled. If being “funny” is difficult, you may reward the Deviant who “creates a positive mood” or “is helpful to others” instead. The Deviant is not a serious character, and it is meant to encourage laughter, lightheartedness, and fun, so adjust the Deviant rules to your players’ needs and talents.",
+  "examples": [
+    "The evil Deviant cracks a few jokes, and gets a few laughs, but the players nevertheless decide to exile them. Even though there are enough votes, the Storyteller decides to keep the Deviant alive.",
+    "On the third day, the Deviant was slightly funny, and cannot be exiled. On the fourth day, the Deviant was not very funny, and is successfully exiled."
+  ],
+  "jinxes": [],
+  "otherSections": {
+    "Tips & Tricks (if you are evil)": "-  Oh man. If you are hoping that this wiki entry will teach you how to be funny, you are in trouble. See if you can get a giggle. Do your best, and use your words to lighten the mood - even setting a good vibe might be enough to avoid dying. Above all, relax, be yourself, and be ok with not being funny, should it pan out that way. Sometimes we all fall flat. Good luck :)\n-  If you are the Deviant, but find it too much of a challenge to be funny on call, talk to the Storyteller. Together, you may determine different criteria for whether the Deviant is exiled. Instead of “being funny”, you could “create a positive mood” or “be helpful to others” instead. The Deviant is not a serious character, and its purpose is to provide an avenue for laughter, lightheartedness, and fun, so talk to the Storyteller about adjusting the Deviant criteria to your needs and talents. \n-  Some personal favorite comedy routines for people in need of inspiration: [https://www.youtube.com/results?search_query=billy+connolly Billy Connolly] and [https://www.youtube.com/watch?v=uw8dW9Hyno0 Rowan Atkinson].",
+    "Tips & Tricks (if you are good)": "-  Oh man. If you are hoping that this wiki entry will teach you how to be funny, you are in trouble. See if you can get a giggle. Do your best, and use your words to lighten the mood - even setting a good vibe might be enough to avoid dying. Above all, relax, be yourself, and be ok with not being funny, should it pan out that way. Sometimes we all fall flat. Good luck :)\n-  If you are the Deviant, but find it too much of a challenge to be funny on call, talk to the Storyteller. Together, you may determine different criteria for whether the Deviant is exiled. Instead of “being funny”, you could “create a positive mood” or “be helpful to others” instead. The Deviant is not a serious character, and its purpose is to provide an avenue for laughter, lightheartedness, and fun, so talk to the Storyteller about adjusting the Deviant criteria to your needs and talents. \n-  Some personal favorite comedy routines for people in need of inspiration:  [https://www.youtube.com/results?search_query=steven+wright Steve Wright] and [https://www.youtube.com/watch?v=FJdzoY-Wsc8 Larry Miller]."
+  },
+  "signals": {
+    "eachNight": false,
+    "eachDay": false,
+    "oncePerGame": false,
+    "youLearn": false,
+    "choose": true,
+    "dies": true
+  },
+  "sections": {
+    "summary": "The Deviant can avoid being Exiled - as long as the Deviant player has been amusing today.\n-  The Deviant can amuse the group in any way they choose. Generally, verbal means such as jokes, funny stories, or witty remarks will suffice.\n-  The Storyteller is the judge of whether the Deviant was funny or not.",
+    "how_to_run": "If the Deviant would be exiled, you may declare that the Deviant\nremains alive.\n\nIt is best to be forgiving and treat even a slightly funny Deviant as funny. It can be tough to be funny when one is expected to be, after all.\n\nIf the player would prefer, you may determine different criteria for whether the Deviant is exiled. If being “funny” is difficult, you may reward the Deviant who “creates a positive mood” or “is helpful to others” instead. The Deviant is not a serious character, and it is meant to encourage laughter, lightheartedness, and fun, so adjust the Deviant rules to your players’ needs and talents.",
+    "examples": [
+      "The evil Deviant cracks a few jokes, and gets a few laughs, but the players nevertheless decide to exile them. Even though there are enough votes, the Storyteller decides to keep the Deviant alive.",
+      "On the third day, the Deviant was slightly funny, and cannot be exiled. On the fourth day, the Deviant was not very funny, and is successfully exiled."
+    ],
+    "other": {
+      "Tips & Tricks (if you are evil)": "-  Oh man. If you are hoping that this wiki entry will teach you how to be funny, you are in trouble. See if you can get a giggle. Do your best, and use your words to lighten the mood - even setting a good vibe might be enough to avoid dying. Above all, relax, be yourself, and be ok with not being funny, should it pan out that way. Sometimes we all fall flat. Good luck :)\n-  If you are the Deviant, but find it too much of a challenge to be funny on call, talk to the Storyteller. Together, you may determine different criteria for whether the Deviant is exiled. Instead of “being funny”, you could “create a positive mood” or “be helpful to others” instead. The Deviant is not a serious character, and its purpose is to provide an avenue for laughter, lightheartedness, and fun, so talk to the Storyteller about adjusting the Deviant criteria to your needs and talents. \n-  Some personal favorite comedy routines for people in need of inspiration: [https://www.youtube.com/results?search_query=billy+connolly Billy Connolly] and [https://www.youtube.com/watch?v=uw8dW9Hyno0 Rowan Atkinson].",
+      "Tips & Tricks (if you are good)": "-  Oh man. If you are hoping that this wiki entry will teach you how to be funny, you are in trouble. See if you can get a giggle. Do your best, and use your words to lighten the mood - even setting a good vibe might be enough to avoid dying. Above all, relax, be yourself, and be ok with not being funny, should it pan out that way. Sometimes we all fall flat. Good luck :)\n-  If you are the Deviant, but find it too much of a challenge to be funny on call, talk to the Storyteller. Together, you may determine different criteria for whether the Deviant is exiled. Instead of “being funny”, you could “create a positive mood” or “be helpful to others” instead. The Deviant is not a serious character, and its purpose is to provide an avenue for laughter, lightheartedness, and fun, so talk to the Storyteller about adjusting the Deviant criteria to your needs and talents. \n-  Some personal favorite comedy routines for people in need of inspiration:  [https://www.youtube.com/results?search_query=steven+wright Steve Wright] and [https://www.youtube.com/watch?v=FJdzoY-Wsc8 Larry Miller]."
+    }
+  }
+}

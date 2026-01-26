@@ -1,0 +1,39 @@
+{
+  "roleKey": "gardener",
+  "title": "Gardener",
+  "url": "https://wiki.bloodontheclocktower.com/Gardener",
+  "categoryHint": "loric",
+  "categories": [
+    "Experimental Characters",
+    "Loric"
+  ],
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "The Storyteller assigns 1 or more players' characters.",
+  "summary": "Use the Gardener to assign characters to particular players.\n-  After the Storyteller has put the Gardener into play, they can manually assign and edit which characters are going to be given to which seated players before sending them out.\n-  If a player has an issue with a particular character, you may use the Gardener to affect setup so that player doesn’t draw the relevant token.\n-  The Gardener can also be useful if a particular player has drawn evil many times over a single session.\n-  The Gardener is designed for use in the official app only.",
+  "howToRun": "At the start of the game, declare that the Gardener is in play. \n\nBefore character tokens are sent out to players, decide what characters the players affected by Gardener will have. Assign, or swap, the relevant players to the characters you have decided.\n\nThen, send the characters to players in the game.",
+  "examples": [
+    "The Vizier is on the script and Ida doesn’t like playing as outed evil. To ensure that Ida doesn’t receive the Vizier token, the Storyteller puts the Gardener into play and assigns Ida directly as the Poisoner instead.",
+    "Robin has been evil every game today. The Storyteller puts the Gardener into play and assigns Robin directly as the Chef instead."
+  ],
+  "jinxes": [],
+  "otherSections": {},
+  "signals": {
+    "eachNight": false,
+    "eachDay": false,
+    "oncePerGame": false,
+    "youLearn": false,
+    "choose": false,
+    "dies": false
+  },
+  "sections": {
+    "summary": "Use the Gardener to assign characters to particular players.\n-  After the Storyteller has put the Gardener into play, they can manually assign and edit which characters are going to be given to which seated players before sending them out.\n-  If a player has an issue with a particular character, you may use the Gardener to affect setup so that player doesn’t draw the relevant token.\n-  The Gardener can also be useful if a particular player has drawn evil many times over a single session.\n-  The Gardener is designed for use in the official app only.",
+    "how_to_run": "At the start of the game, declare that the Gardener is in play. \n\nBefore character tokens are sent out to players, decide what characters the players affected by Gardener will have. Assign, or swap, the relevant players to the characters you have decided.\n\nThen, send the characters to players in the game.",
+    "examples": [
+      "The Vizier is on the script and Ida doesn’t like playing as outed evil. To ensure that Ida doesn’t receive the Vizier token, the Storyteller puts the Gardener into play and assigns Ida directly as the Poisoner instead.",
+      "Robin has been evil every game today. The Storyteller puts the Gardener into play and assigns Robin directly as the Chef instead."
+    ],
+    "other": {}
+  }
+}

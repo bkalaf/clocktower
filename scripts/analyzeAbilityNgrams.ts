@@ -32,7 +32,20 @@ const STOPWORDS = new Set([
     'no'
 ]);
 
-function parseCliArgs(argv: string[]): { inputDir: string; outputDir: string } {
+const DEFAULT_CONFIG_PATH = path.resolve('scripts', 'tokenNormalizationConfig.json');
+
+interface AliasSequence {
+    alias: string;
+    sequence: string[];
+}
+
+interface CliOptions {
+    inputDir: string;
+    outputDir: string;
+    configPath?: string;
+}
+
+function parseCliArgs(argv: string[]): CliOptions {
     const args = [...argv];
     const getValue = (flag: string) => {
         const index = args.indexOf(flag);
@@ -46,11 +59,37 @@ function parseCliArgs(argv: string[]): { inputDir: string; outputDir: string } {
 
     const inputDir = getValue('--in');
     const outputDir = getValue('--out');
+    const configPath = getValue('--config');
 
     if (!inputDir || !outputDir) {
         throw new Error('Usage: node ./dist/scripts/analyzeAbilityNgrams.js --in <normalizedPagesDir> --out <outputDir>');
     }
 
+    return {
+        inputDir: path.resolve(inputDir),
+        outputDir: path.resolve(outputDir),
+        configPath: configPath ? path.resolve(configPath) : undefined
+    };
+}
+
+function normalizeAliasToken(token: string): string {
+    const trimmed = token.trim();
+    if (!trimmed) {
+        return '';
+    }
+    if (trimmed.toUpperCase() === 'STAR') {
+        return 'STAR';
+    }
+    if (trimmed.toUpperCase() === 'ACCEPT_MODIFIER') {
+        return 'ACCEPT_MODIFIER';
+    }
+    return trimmed.toLowerCase();
+}
+
+function loadAliasSequences(filePath: string | undefined): AliasSequence[] {
+    const resolvedPath = filePath ?? DEFAULT_CONFIG_PATH;
+    try {
+        const raw = fs.readFileSync
     return {
         inputDir: path.resolve(inputDir),
         outputDir: path.resolve(outputDir)
@@ -163,7 +202,8 @@ async function main() {
     console.log(`Outputs written to ${outputDir}.`);
 }
 
-if (import.meta.main) {
+const analyzeEntry = path.basename(process.argv[1] ?? '');
+if (analyzeEntry === 'analyzeAbilityNgrams.js' || analyzeEntry === 'analyzeAbilityNgrams.ts') {
     main().catch((error) => {
         console.error(error);
         process.exit(1);

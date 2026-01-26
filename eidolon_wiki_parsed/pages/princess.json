@@ -1,0 +1,58 @@
+{
+  "roleKey": "princess",
+  "title": "Princess",
+  "url": "https://wiki.bloodontheclocktower.com/Princess",
+  "categoryHint": "experimental",
+  "categories": [
+    "Experimental Characters",
+    "Townsfolk"
+  ],
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "On your 1st day, if you nominated & executed a player, the Demon doesn’t kill tonight.",
+  "summary": "The Princess decides which player dies first.\n-  For the Princess ability to work, the player that the Princess nominated must be the one executed. Players executed but nominated by others don’t count.\n-  The executed player does not have to die for the Princess ability to work.\n-  Exiles don’t count for the Princess ability.\n-  If the Princess is drunk during the day, then sober at night, they prevent the Demon from killing. If the Princess is sober during the day, but drunk at night, they do not.\n-  At night, non-Demon kills happen as normal.\n-  At night, the Demon still chooses a player to kill, but they do not die. Other parts of the Demon’s ability, such as poisoning players, making false information, etc. happen as normal.\n-  The Princess does not have to nominate on their 1st day.\n-  If a Princess is created mid-game, and they nominate and execute a player on their 1st day as a Princess, the Demon doesn’t kill that night.",
+  "howToRun": "If the Princess nominates and executes a player, mark the Demon with the DOESN'T KILL reminder.\n\nTonight, if the Demon would wake to choose a player, wake them as normal. The Demon does not kill.",
+  "examples": [
+    "The Princess nominates the Preacher. The Preacher is executed, and dies. That night, the Vortox chooses the Pixie, who does not die. The Town Crier learns that a Minion nominated today, which is false information due to the Vortox.",
+    "On night 4, the Pit-Hag turns the Dreamer into the Princess. That day, the Princess nominates the Zealot, who is executed. That night, the Kazali chooses the Princess, who does not die."
+  ],
+  "jinxes": [
+    {
+      "with": "Al-Hadikhia",
+      "withKey": "alhadikhia",
+      "alignment": "Evil",
+      "text": "If the Princess nominated & executed a player on their 1st day, no one dies to the Al-Hadikhia tonight."
+    },
+    {
+      "with": "Cannibal",
+      "withKey": "cannibal",
+      "alignment": "Good",
+      "text": "If the Cannibal nominated, executed, & killed the Princess today, the Demon doesn’t kill tonight."
+    }
+  ],
+  "otherSections": {
+    "Bluffing as the Princess": "-  Play exactly as you would if you were a good Princess. The Princess wants to get someone executed straight away, so you have a built-in excuse to try and kill a good player immediately.\n-  If you successfully nominate & execute a player, kill the person you executed that night to “prove” yourself as the Princess.\n-  If you successfully nominate & execute a player, kill someone at night, and bluff that you must be poisoned or drunk. If your ability doesn’t appear to be working, good players might think their drunk or poisoned abilities are working perfectly normally.\n-  Encourage good players to nominate, under the guise that this will make it more difficult for the evil team to identify you as the Princess.\n-  If the Fearmonger is in play, let them claim to be the Princess so they can nominate the player they picked in the night. Or, if the Boomdandy is in play, nominate them on your 1st day to trigger their ability.\n-  Be kind! Pushing to get someone killed on the first day can be socially tricky, especially if it’s part of your evil bluff. Remember Rule 4: Kill with grace and die with dignity.",
+    "Tips & Tricks": "-  Demand attention from your loyal subj- I mean, fellow players! If you want to be the one who nominates and executes a player, let everyone know your plan in advance so they’ll vote with you & help you achieve your goal.\n-  On your 1st day, try to find a player who doesn’t mind being executed. Nominate them and keep it casual, bluffing as if you are not the Princess. Claim you’ve nominated because you think the player is good Cannibal food, or because they would like their role confirmed by an Undertaker.\n-  Don’t use your ability. Stay quiet, wait, and see if a different player tries to claim that they are the Princess.\n-  Can you use your ability without killing a player? Look for reasons someone might not die to execution, like a Tea Lady or a Sailor. \n-  Be kind! Pushing to get someone killed on the first day can be socially tricky. Remember Rule 4: Kill with grace and die with dignity. \n-  Be honest and forthcoming. The more socially good you seem, the more people will believe you and choose to go forward with your plan."
+  },
+  "signals": {
+    "eachNight": false,
+    "eachDay": false,
+    "oncePerGame": false,
+    "youLearn": false,
+    "choose": true,
+    "dies": true
+  },
+  "sections": {
+    "summary": "The Princess decides which player dies first.\n-  For the Princess ability to work, the player that the Princess nominated must be the one executed. Players executed but nominated by others don’t count.\n-  The executed player does not have to die for the Princess ability to work.\n-  Exiles don’t count for the Princess ability.\n-  If the Princess is drunk during the day, then sober at night, they prevent the Demon from killing. If the Princess is sober during the day, but drunk at night, they do not.\n-  At night, non-Demon kills happen as normal.\n-  At night, the Demon still chooses a player to kill, but they do not die. Other parts of the Demon’s ability, such as poisoning players, making false information, etc. happen as normal.\n-  The Princess does not have to nominate on their 1st day.\n-  If a Princess is created mid-game, and they nominate and execute a player on their 1st day as a Princess, the Demon doesn’t kill that night.",
+    "how_to_run": "If the Princess nominates and executes a player, mark the Demon with the DOESN'T KILL reminder.\n\nTonight, if the Demon would wake to choose a player, wake them as normal. The Demon does not kill.",
+    "examples": [
+      "The Princess nominates the Preacher. The Preacher is executed, and dies. That night, the Vortox chooses the Pixie, who does not die. The Town Crier learns that a Minion nominated today, which is false information due to the Vortox.",
+      "On night 4, the Pit-Hag turns the Dreamer into the Princess. That day, the Princess nominates the Zealot, who is executed. That night, the Kazali chooses the Princess, who does not die."
+    ],
+    "other": {
+      "Bluffing as the Princess": "-  Play exactly as you would if you were a good Princess. The Princess wants to get someone executed straight away, so you have a built-in excuse to try and kill a good player immediately.\n-  If you successfully nominate & execute a player, kill the person you executed that night to “prove” yourself as the Princess.\n-  If you successfully nominate & execute a player, kill someone at night, and bluff that you must be poisoned or drunk. If your ability doesn’t appear to be working, good players might think their drunk or poisoned abilities are working perfectly normally.\n-  Encourage good players to nominate, under the guise that this will make it more difficult for the evil team to identify you as the Princess.\n-  If the Fearmonger is in play, let them claim to be the Princess so they can nominate the player they picked in the night. Or, if the Boomdandy is in play, nominate them on your 1st day to trigger their ability.\n-  Be kind! Pushing to get someone killed on the first day can be socially tricky, especially if it’s part of your evil bluff. Remember Rule 4: Kill with grace and die with dignity.",
+      "Tips & Tricks": "-  Demand attention from your loyal subj- I mean, fellow players! If you want to be the one who nominates and executes a player, let everyone know your plan in advance so they’ll vote with you & help you achieve your goal.\n-  On your 1st day, try to find a player who doesn’t mind being executed. Nominate them and keep it casual, bluffing as if you are not the Princess. Claim you’ve nominated because you think the player is good Cannibal food, or because they would like their role confirmed by an Undertaker.\n-  Don’t use your ability. Stay quiet, wait, and see if a different player tries to claim that they are the Princess.\n-  Can you use your ability without killing a player? Look for reasons someone might not die to execution, like a Tea Lady or a Sailor. \n-  Be kind! Pushing to get someone killed on the first day can be socially tricky. Remember Rule 4: Kill with grace and die with dignity. \n-  Be honest and forthcoming. The more socially good you seem, the more people will believe you and choose to go forward with your plan."
+    }
+  }
+}

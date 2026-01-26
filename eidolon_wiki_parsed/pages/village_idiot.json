@@ -1,0 +1,58 @@
+{
+  "roleKey": "village_idiot",
+  "title": "Village Idiot",
+  "url": "https://wiki.bloodontheclocktower.com/Village%20Idiot",
+  "categoryHint": "experimental",
+  "categories": [
+    "Experimental Characters",
+    "Townsfolk"
+  ],
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night, choose a player: you learn their alignment. [+0 to +2 Village Idiots. 1 of the extras is drunk]",
+  "summary": "The Village Idiots are a group that learn players’ alignments. \n-  The Village Idiot that is drunk is chosen by the Storyteller during the game setup. \n-  There may be one, two, or three Village Idiots in play, irrespective of the number of players. \n-  If there is only one Village Idiot in play, they are sober. \n-  The drunk Village Idiot may get true information. \n-  When Village Idiots are added to the game during setup, they replace other Townsfolk. \n-  If a Village Idiot is created mid-game, only one is created. \n-  Village Idiots act one at a time, not all together. \n-  If all sober Village Idiots exit play, the remaining drunk Village Idiot remains drunk. \n-  If a sober Village Idiot becomes drunk or poisoned by other means, the drunk Village Idiot remains drunk.",
+  "howToRun": "While setting up the game, before putting the character tokens in the bag, replace zero, one or two Townsfolk tokens with Village Idiot tokens. While preparing the first night, mark one Village Idiot with the DRUNK reminder. \n\nDuring each night, wake any Village Idiot. They point to a player. Give a thumbs up or a thumbs down. Put that Village Idiot to sleep. Repeat until all Village Idiots have acted.",
+  "examples": [
+    "Doug, Lewis, and Amy are all Village Idiots. Doug is drunk. At night, they all choose Evin, the Kazali. Doug learns that Evin is good. Lewis and Amy learn that Evin is evil.",
+    "Ben and Marianna are Village Idiots. Marianna is drunk. Sarah is evil, and bluffing as the Village Idiot. Ben chooses Sarah and learns that she is evil. Marianna chooses the Heretic player and learns that they are good. Sarah claims to have chosen Ben and learnt that he is evil."
+  ],
+  "jinxes": [
+    {
+      "with": "Boffin",
+      "withKey": "boffin",
+      "alignment": "Evil",
+      "text": "If there is a spare token, the Boffin can give the Demon the Village Idiot ability."
+    },
+    {
+      "with": "Pit-Hag",
+      "withKey": "pithag",
+      "alignment": "Evil",
+      "text": "If there is a spare token, the Pit-Hag can create an extra Village Idiot. If so, the drunk Village Idiot might change."
+    }
+  ],
+  "otherSections": {
+    "Bluffing as the Village Idiot": "-  If you find a Village Idiot pair, bluff as the third Village Idiot and “confirm” the drunk Village Idiot’s info, to provide misinformation. \n-  If you find a Village Idiot pair, bluff as the third Village Idiot and “confirm” the sober Village Idiot’s info, to gain trust with the group by maybe throwing one of your more expendable evil players under the bus, then use that trust later in the game. \n-  If you get Village Idiot as a bluff, considering whether you want to get more than one evil player to bluff Village Idiot. One solo Village Idiot is often suspicious, but multiple evil players bluffing Village Idiot ties you together as a potential evil team. If the good team is not executing Village Idiots, get the Demon to bluff Village Idiot. \n-  As the demon, you can still safely bluff Village Idiot even if you don’t get it shown as one of the demon’s three bluffs, you may just need to back out quickly if there are three already that go on the warpath. \n-  Bluff as the Village Idiot temporarily, until you want to reveal your main bluff – it’s great cover to pass out your “actual” info without having to claim your real character. \n-  If you receive the Village Idiot as a demon bluff, stay mindful of good players pretending to be Village Idiots. They may actually be powerful Townsfolk, or detrimental Outsiders like the Damsel or Heretic.",
+    "Tips & Tricks": "-   Find your fellow idiots. The easiest way for you to find out which of you is drunk is to compare your information and spot where there are agreements and disagreements. And, if you’re the only Village Idiot out there, you know you’re sober! \n-  Collaborate with other Village Idiots to all choose the same player. This can help determine which of you is drunk (if one person’s information differs), or whether there are multiple people bluffing as Village Idiots (if all information is the same). \n-  If there are exactly two of you and you haven't been able to work out who’s drunk, make sure to choose different players so you still get information. Two Village Idiots always choosing the same player won’t get any useful information. \n-  Remember that there being three Village Idiot claims doesn’t prove any of you good. Be aware of evil players bluffing, as long as there aren’t too many Village Idiots as a result, one of your compatriots could be evil and trying to make you look drunk when you’re not! \n-  Ignore the other Village Idiots, and assume that your information is correct. If all Village Idiots do this, the net effect will most likely be positive. \n-  Execute the Village Idiot that you think is drunk (in case they are actually evil). \n-  If a player is confirmed or strongly believed to be good or evil, choose them to determine whether you are the drunk VI or not. \n-  Be aware that the Storyteller may still give correct information to the drunk Village Idiot in order to prevent you becoming too powerful.\n-  Wait a while before revealing you are a Village Idiot. If three or more other players claim to be a Village Idiot, you’ll know at least one of them is lying."
+  },
+  "signals": {
+    "eachNight": true,
+    "eachDay": false,
+    "oncePerGame": false,
+    "youLearn": true,
+    "choose": true,
+    "dies": false
+  },
+  "sections": {
+    "summary": "The Village Idiots are a group that learn players’ alignments. \n-  The Village Idiot that is drunk is chosen by the Storyteller during the game setup. \n-  There may be one, two, or three Village Idiots in play, irrespective of the number of players. \n-  If there is only one Village Idiot in play, they are sober. \n-  The drunk Village Idiot may get true information. \n-  When Village Idiots are added to the game during setup, they replace other Townsfolk. \n-  If a Village Idiot is created mid-game, only one is created. \n-  Village Idiots act one at a time, not all together. \n-  If all sober Village Idiots exit play, the remaining drunk Village Idiot remains drunk. \n-  If a sober Village Idiot becomes drunk or poisoned by other means, the drunk Village Idiot remains drunk.",
+    "how_to_run": "While setting up the game, before putting the character tokens in the bag, replace zero, one or two Townsfolk tokens with Village Idiot tokens. While preparing the first night, mark one Village Idiot with the DRUNK reminder. \n\nDuring each night, wake any Village Idiot. They point to a player. Give a thumbs up or a thumbs down. Put that Village Idiot to sleep. Repeat until all Village Idiots have acted.",
+    "examples": [
+      "Doug, Lewis, and Amy are all Village Idiots. Doug is drunk. At night, they all choose Evin, the Kazali. Doug learns that Evin is good. Lewis and Amy learn that Evin is evil.",
+      "Ben and Marianna are Village Idiots. Marianna is drunk. Sarah is evil, and bluffing as the Village Idiot. Ben chooses Sarah and learns that she is evil. Marianna chooses the Heretic player and learns that they are good. Sarah claims to have chosen Ben and learnt that he is evil."
+    ],
+    "other": {
+      "Bluffing as the Village Idiot": "-  If you find a Village Idiot pair, bluff as the third Village Idiot and “confirm” the drunk Village Idiot’s info, to provide misinformation. \n-  If you find a Village Idiot pair, bluff as the third Village Idiot and “confirm” the sober Village Idiot’s info, to gain trust with the group by maybe throwing one of your more expendable evil players under the bus, then use that trust later in the game. \n-  If you get Village Idiot as a bluff, considering whether you want to get more than one evil player to bluff Village Idiot. One solo Village Idiot is often suspicious, but multiple evil players bluffing Village Idiot ties you together as a potential evil team. If the good team is not executing Village Idiots, get the Demon to bluff Village Idiot. \n-  As the demon, you can still safely bluff Village Idiot even if you don’t get it shown as one of the demon’s three bluffs, you may just need to back out quickly if there are three already that go on the warpath. \n-  Bluff as the Village Idiot temporarily, until you want to reveal your main bluff – it’s great cover to pass out your “actual” info without having to claim your real character. \n-  If you receive the Village Idiot as a demon bluff, stay mindful of good players pretending to be Village Idiots. They may actually be powerful Townsfolk, or detrimental Outsiders like the Damsel or Heretic.",
+      "Tips & Tricks": "-   Find your fellow idiots. The easiest way for you to find out which of you is drunk is to compare your information and spot where there are agreements and disagreements. And, if you’re the only Village Idiot out there, you know you’re sober! \n-  Collaborate with other Village Idiots to all choose the same player. This can help determine which of you is drunk (if one person’s information differs), or whether there are multiple people bluffing as Village Idiots (if all information is the same). \n-  If there are exactly two of you and you haven't been able to work out who’s drunk, make sure to choose different players so you still get information. Two Village Idiots always choosing the same player won’t get any useful information. \n-  Remember that there being three Village Idiot claims doesn’t prove any of you good. Be aware of evil players bluffing, as long as there aren’t too many Village Idiots as a result, one of your compatriots could be evil and trying to make you look drunk when you’re not! \n-  Ignore the other Village Idiots, and assume that your information is correct. If all Village Idiots do this, the net effect will most likely be positive. \n-  Execute the Village Idiot that you think is drunk (in case they are actually evil). \n-  If a player is confirmed or strongly believed to be good or evil, choose them to determine whether you are the drunk VI or not. \n-  Be aware that the Storyteller may still give correct information to the drunk Village Idiot in order to prevent you becoming too powerful.\n-  Wait a while before revealing you are a Village Idiot. If three or more other players claim to be a Village Idiot, you’ll know at least one of them is lying."
+    }
+  }
+}

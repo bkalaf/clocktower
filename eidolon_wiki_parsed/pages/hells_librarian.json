@@ -1,0 +1,38 @@
+{
+  "roleKey": "hells_librarian",
+  "title": "Hell's Librarian",
+  "url": "https://wiki.bloodontheclocktower.com/Hell's%20Librarian",
+  "categoryHint": "fabled",
+  "categories": [
+    "Fabled"
+  ],
+  "editionTags": [],
+  "abilityText": "Something bad might happen to whoever talks when the Storyteller has asked for silence.",
+  "summary": "Use the Hell’s Librarian to allow a softly-spoken Storyteller to be heard when needed.\n-  As the Storyteller, you’ll find the Hell’s Librarian useful when it is difficult to get the group’s attention. Maybe you need to explain a game rule? Or get attention for a crucial final-day vote? It can also be used to prevent players from talking about their characters before the game begins or from narrating what they are doing at night. Players instinctively stay quieter during the pre-game period and at night, so you may never need it.\n-  It is best to give the players fair warning before you bring the hammer down. Like the Angel, the threat of a mysterious penalty is more important than the actual penalty. The purpose of this character is to make games run smoothly, not to punish minor infringements.",
+  "howToRun": "At any time, declare that the Hell’s Librarian is in play. Add the Hell’s Librarian token and their SOMETHING BAD reminder to the Grimoire.\n\nAt any time, you can ask the group for silence for a particular period of time. Remind them that the Hell’s Librarian is in play if needed. If a player talks or otherwise interrupts and makes your job difficult during that time, you can let them know that something bad happens to them. You may need to mark their character token with the SOMETHING BAD reminder, to remind you that they are now poisoned, or mad, or can’t vote today, or simply as a reminder to decide on what to do later.\n\nLike the Angel, the “something bad” that might happen is up to you. However, it is recommended to either make the penalty that the player dies, that the player loses their ability for a day, or that the player may not vote for a day. A light penalty works much better than a severe one.",
+  "examples": [
+    "The Storyteller is attempting to explain the voting rules to a few new players. The group is loud and is not listening to the Storyteller’s requests for silence, so the Storyteller declares that the Hell's Librarian is in play. Two players continue to loudly talk, even though they know the possible penalty. The Storyteller decides that one dies and the other loses their vote for today. All players are silent whilst the rules are explained."
+  ],
+  "jinxes": [],
+  "otherSections": {
+    "Explanation": "The Hell's Librarian is useful when you find it difficult to get the group’s attention. Maybe you need to explain a game rule? Or get attention for a crucial final day vote? It can also be used to prevent players talking about their characters before the game begins or narrating what they are doing at night. Players instinctively stay quieter during the pre-game period and at night, so you may never need it.\n\nIt is best to give the players fair warning before you bring the hammer down. Like the , the threat of a mysterious penalty is more important than the actual penalty. The purpose of this character is to make games that run smoothly, not to punish minor infringements.\n\nLike the , the \"something bad\" that might happen is up to you. However, it is recommended to either make the penalty that the player dies, that the player loses their ability for a day, or that the player may not vote for a day. A light penalty works much better than a severe one."
+  },
+  "signals": {
+    "eachNight": false,
+    "eachDay": false,
+    "oncePerGame": false,
+    "youLearn": false,
+    "choose": false,
+    "dies": true
+  },
+  "sections": {
+    "summary": "Use the Hell’s Librarian to allow a softly-spoken Storyteller to be heard when needed.\n-  As the Storyteller, you’ll find the Hell’s Librarian useful when it is difficult to get the group’s attention. Maybe you need to explain a game rule? Or get attention for a crucial final-day vote? It can also be used to prevent players from talking about their characters before the game begins or from narrating what they are doing at night. Players instinctively stay quieter during the pre-game period and at night, so you may never need it.\n-  It is best to give the players fair warning before you bring the hammer down. Like the Angel, the threat of a mysterious penalty is more important than the actual penalty. The purpose of this character is to make games run smoothly, not to punish minor infringements.",
+    "how_to_run": "At any time, declare that the Hell’s Librarian is in play. Add the Hell’s Librarian token and their SOMETHING BAD reminder to the Grimoire.\n\nAt any time, you can ask the group for silence for a particular period of time. Remind them that the Hell’s Librarian is in play if needed. If a player talks or otherwise interrupts and makes your job difficult during that time, you can let them know that something bad happens to them. You may need to mark their character token with the SOMETHING BAD reminder, to remind you that they are now poisoned, or mad, or can’t vote today, or simply as a reminder to decide on what to do later.\n\nLike the Angel, the “something bad” that might happen is up to you. However, it is recommended to either make the penalty that the player dies, that the player loses their ability for a day, or that the player may not vote for a day. A light penalty works much better than a severe one.",
+    "examples": [
+      "The Storyteller is attempting to explain the voting rules to a few new players. The group is loud and is not listening to the Storyteller’s requests for silence, so the Storyteller declares that the Hell's Librarian is in play. Two players continue to loudly talk, even though they know the possible penalty. The Storyteller decides that one dies and the other loses their vote for today. All players are silent whilst the rules are explained."
+    ],
+    "other": {
+      "Explanation": "The Hell's Librarian is useful when you find it difficult to get the group’s attention. Maybe you need to explain a game rule? Or get attention for a crucial final day vote? It can also be used to prevent players talking about their characters before the game begins or narrating what they are doing at night. Players instinctively stay quieter during the pre-game period and at night, so you may never need it.\n\nIt is best to give the players fair warning before you bring the hammer down. Like the , the threat of a mysterious penalty is more important than the actual penalty. The purpose of this character is to make games that run smoothly, not to punish minor infringements.\n\nLike the , the \"something bad\" that might happen is up to you. However, it is recommended to either make the penalty that the player dies, that the player loses their ability for a day, or that the player may not vote for a day. A light penalty works much better than a severe one."
+    }
+  }
+}
