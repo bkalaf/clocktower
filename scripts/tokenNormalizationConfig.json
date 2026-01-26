@@ -1,0 +1,53 @@
+{
+  "tokens": {
+      "NOMINATED": ["nominated"],
+      "EACH_NIGHT_STAR": ["each", "night", "STAR"],
+      "EACH_NIGHT_LEARN": ["each", "night", "learn"],
+      "EACH_NIGHT_CHOOSE": ["each", "night", "choose"],
+      "EACH_NIGHT": ["each", "night"],
+      "ONCE_PER_GAME": ["once", "per", "game"],
+      "PER_GAME_NIGHT": ["per", "game", "night"],
+      "CHOOSE_TWO_PLAYERS": ["choose", "2", "players"],
+      "UNTIL_DUSK": ["until", "dusk"],
+      "PLAYER_MIGHT_DIE": ["player", "might", "die"],
+      "EVEN_IF_DEAD": ["even", "if", "dead"],
+      "START_KNOWING": ["start", "knowing"],
+      "YOU_DIE_WITH": ["you", "die"],
+      "CHOOSE_PLAYER": ["choose", "player"]
+  },
+  "ignored": [
+    "a",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "been",
+    "being",
+    "by",
+    "did",
+    "do",
+    "does",
+    "for",
+    "from",
+    "in",
+    "is",
+    "of",
+    "on",
+    "or",
+    "the",
+    "to",
+    "with",
+    "you",
+    "your"
+  ],
+  "regex": {
+    "BRACKETED": [
+      "/\\[\\s*(?<direction1>[+-])(?<value1>\\d+)(?:\\s+or\\s+(?<direction2>[+-])(?<value2>\\+))?\\s+(?<characterType>Outsider|Minion)\\s*\\]/",
+      {
+        "0": "ACCEPT_MODIFIER"
+      }
+    ]
+  }
+}

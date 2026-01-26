@@ -580,3 +580,5 @@ Also, can you generate 100 such documents (don't insert them into mongoose yet) 
 So, let's make sure each personality is unique so nothing that deepEquals would be true on. If there are, make tweaks to make them unique in the set. Also, I do like the idea of `If you want these to feel more tied to the username (e.g., “backstabben” trends toward lower trust, “patch_notes” trends toward higher info-handling), I can skew the generated personality numbers harder in that direction across the full set.` that you suggested, so do that first, and then check equality and make tweaks that make sense based on the name to ensure uniqueness and the give me the new result. (no need to give me all the text just output me a new ai.json please)
 
 Finally, go ahead and give me the personality categorys sorted and ranked 1 to 5 for each of the properties of Personality and generate typescript enums that map to this as well and update the prompts above to use these enums going forward.
+
+/\[\s*(?<direction1>[+-])(?<value1>\d+)(?:\s+or\s+(?<direction2>[+-])(?<value2>\+))?\s+(?<characterType>Outsider|Minion)\s*\]/

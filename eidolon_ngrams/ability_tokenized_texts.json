@@ -1,0 +1,3497 @@
+[
+  {
+    "roleKey": "acrobat",
+    "title": "Acrobat",
+    "originalText": "Each night*, choose a player: if they are or become drunk or poisoned tonight, you die.",
+    "normalizedText": "Each night*, choose a player: if they are or become drunk or poisoned tonight, you die.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "if",
+      "they",
+      "become",
+      "drunk",
+      "poisoned",
+      "tonight",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "al_hadikhia",
+    "title": "Al-Hadikhia",
+    "originalText": "Each night*, you may choose 3 players (all players learn who): each silently chooses to live or die, but if all live, all die.",
+    "normalizedText": "Each night*, you may choose 3 players (all players learn who): each silently chooses to live or die, but if all live, all die.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "may",
+      "choose",
+      "3",
+      "players",
+      "all",
+      "players",
+      "learn",
+      "who",
+      "each",
+      "silently",
+      "chooses",
+      "live",
+      "die",
+      "but",
+      "if",
+      "all",
+      "live",
+      "all",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "alchemist",
+    "title": "Alchemist",
+    "originalText": "You have a Minion ability. When using this, the Storyteller may prompt you to choose differently.",
+    "normalizedText": "You have a Minion ability. When using this, the Storyteller may prompt you to choose differently.",
+    "tokens": [
+      "have",
+      "minion",
+      "ability",
+      "when",
+      "using",
+      "this",
+      "storyteller",
+      "may",
+      "prompt",
+      "choose",
+      "differently"
+    ]
+  },
+  {
+    "roleKey": "alsaahir",
+    "title": "Alsaahir",
+    "originalText": "Each day, if you publicly guess which players are Minion(s) and which are Demon(s), good wins.",
+    "normalizedText": "Each day, if you publicly guess which players are Minion(s) and which are Demon(s), good wins.",
+    "tokens": [
+      "each",
+      "day",
+      "if",
+      "publicly",
+      "guess",
+      "which",
+      "players",
+      "minion",
+      "s",
+      "which",
+      "demon",
+      "s",
+      "good",
+      "wins"
+    ]
+  },
+  {
+    "roleKey": "amnesiac",
+    "title": "Amnesiac",
+    "originalText": "You do not know what your ability is. Each day, privately guess what it is: you learn how accurate you are.",
+    "normalizedText": "You do not know what your ability is. Each day, privately guess what it is: you learn how accurate you are.",
+    "tokens": [
+      "not",
+      "know",
+      "what",
+      "ability",
+      "each",
+      "day",
+      "privately",
+      "guess",
+      "what",
+      "it",
+      "learn",
+      "how",
+      "accurate"
+    ]
+  },
+  {
+    "roleKey": "angel",
+    "title": "Angel",
+    "originalText": "Something bad might happen to whoever is most responsible for the death of a new player.",
+    "normalizedText": "Something bad might happen to whoever is most responsible for the death of a new player.",
+    "tokens": [
+      "something",
+      "bad",
+      "might",
+      "happen",
+      "whoever",
+      "most",
+      "responsible",
+      "death",
+      "new",
+      "player"
+    ]
+  },
+  {
+    "roleKey": "apprentice",
+    "title": "Apprentice",
+    "originalText": "On your 1st night, you gain a Townsfolk ability (if good) or a Minion ability (if evil).",
+    "normalizedText": "On your 1st night, you gain a Townsfolk ability (if good) or a Minion ability (if evil).",
+    "tokens": [
+      "1st",
+      "night",
+      "gain",
+      "townsfolk",
+      "ability",
+      "if",
+      "good",
+      "minion",
+      "ability",
+      "if",
+      "evil"
+    ]
+  },
+  {
+    "roleKey": "artist",
+    "title": "Artist",
+    "originalText": "Once per game, during the day, privately ask the Storyteller any yes/no question.",
+    "normalizedText": "Once per game, during the day, privately ask the Storyteller any yes/no question.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "during",
+      "day",
+      "privately",
+      "ask",
+      "storyteller",
+      "any",
+      "yes",
+      "no",
+      "question"
+    ]
+  },
+  {
+    "roleKey": "assassin",
+    "title": "Assassin",
+    "originalText": "Once per game, at night*, choose a player: they die, even if for some reason they could not.",
+    "normalizedText": "Once per game, at night*, choose a player: they die, even if for some reason they could not.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "night",
+      "STAR",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "even",
+      "if",
+      "some",
+      "reason",
+      "they",
+      "could",
+      "not"
+    ]
+  },
+  {
+    "roleKey": "atheist",
+    "title": "Atheist",
+    "originalText": "The Storyteller can break the game rules, and if executed, good wins, even if you are dead. [No evil characters]",
+    "normalizedText": "The Storyteller can break the game rules, and if executed, good wins, even if you are dead. [No evil characters]",
+    "tokens": [
+      "storyteller",
+      "can",
+      "break",
+      "game",
+      "rules",
+      "if",
+      "executed",
+      "good",
+      "wins",
+      "EVEN_IF_DEAD",
+      "ACCEPT_MODIFIER",
+      "no",
+      "evil",
+      "characters",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "balloonist",
+    "title": "Balloonist",
+    "originalText": "Each night, you learn a player of a different character type than last night. [+0 or +1 Outsider]",
+    "normalizedText": "Each night, you learn a player of a different character type than last night. [+0 or +1 Outsider]",
+    "tokens": [
+      "EACH_NIGHT_LEARN",
+      "player",
+      "different",
+      "character",
+      "type",
+      "than",
+      "last",
+      "night",
+      "ACCEPT_MODIFIER",
+      "0",
+      "1",
+      "outsider",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "banshee",
+    "title": "Banshee",
+    "originalText": "If the Demon kills you, all players learn this. From now on, you may nominate twice per day and vote twice per nomination.",
+    "normalizedText": "If the Demon kills you, all players learn this. From now on, you may nominate twice per day and vote twice per nomination.",
+    "tokens": [
+      "if",
+      "demon",
+      "kills",
+      "all",
+      "players",
+      "learn",
+      "this",
+      "now",
+      "may",
+      "nominate",
+      "twice",
+      "per",
+      "day",
+      "vote",
+      "twice",
+      "per",
+      "nomination"
+    ]
+  },
+  {
+    "roleKey": "barber",
+    "title": "Barber",
+    "originalText": "If you died today or tonight, the Demon may choose 2 players (not another Demon) to swap characters.",
+    "normalizedText": "If you died today or tonight, the Demon may choose 2 players (not another Demon) to swap characters.",
+    "tokens": [
+      "if",
+      "died",
+      "today",
+      "tonight",
+      "demon",
+      "may",
+      "CHOOSE_TWO_PLAYERS",
+      "not",
+      "another",
+      "demon",
+      "swap",
+      "characters"
+    ]
+  },
+  {
+    "roleKey": "barista",
+    "title": "Barista",
+    "originalText": "Each night, until dusk, 1) a player becomes sober, healthy & gets true info, or 2) their ability works twice. They learn which.",
+    "normalizedText": "Each night, until dusk, 1) a player becomes sober, healthy & gets true info, or 2) their ability works twice. They learn which.",
+    "tokens": [
+      "EACH_NIGHT",
+      "UNTIL_DUSK",
+      "1",
+      "player",
+      "becomes",
+      "sober",
+      "healthy",
+      "gets",
+      "true",
+      "info",
+      "2",
+      "their",
+      "ability",
+      "works",
+      "twice",
+      "they",
+      "learn",
+      "which"
+    ]
+  },
+  {
+    "roleKey": "baron",
+    "title": "Baron",
+    "originalText": "There are extra Outsiders in play. [+2 Outsiders]",
+    "normalizedText": "There are extra Outsiders in play. [+2 Outsiders]",
+    "tokens": [
+      "there",
+      "extra",
+      "outsiders",
+      "play",
+      "ACCEPT_MODIFIER",
+      "2",
+      "outsiders",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "beggar",
+    "title": "Beggar",
+    "originalText": "You must use a vote token to vote. If a dead player gives you theirs, you learn their alignment. You are sober and healthy.",
+    "normalizedText": "You must use a vote token to vote. If a dead player gives you theirs, you learn their alignment. You are sober and healthy.",
+    "tokens": [
+      "must",
+      "use",
+      "vote",
+      "token",
+      "vote",
+      "if",
+      "dead",
+      "player",
+      "gives",
+      "theirs",
+      "learn",
+      "their",
+      "alignment",
+      "sober",
+      "healthy"
+    ]
+  },
+  {
+    "roleKey": "big_wig",
+    "title": "Big Wig",
+    "originalText": "Each nominee chooses a player: until voting, only they may speak & they are mad the nominee is good or they might die.",
+    "normalizedText": "Each nominee chooses a player: until voting, only they may speak & they are mad the nominee is good or they might die.",
+    "tokens": [
+      "each",
+      "nominee",
+      "chooses",
+      "player",
+      "until",
+      "voting",
+      "only",
+      "they",
+      "may",
+      "speak",
+      "they",
+      "mad",
+      "nominee",
+      "good",
+      "they",
+      "might",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "bishop",
+    "title": "Bishop",
+    "originalText": "Only the Storyteller can nominate. At least 1 opposing player must be nominated each day.",
+    "normalizedText": "Only the Storyteller can nominate. At least 1 opposing player must be nominated each day.",
+    "tokens": [
+      "only",
+      "storyteller",
+      "can",
+      "nominate",
+      "least",
+      "1",
+      "opposing",
+      "player",
+      "must",
+      "NOMINATED",
+      "each",
+      "day"
+    ]
+  },
+  {
+    "roleKey": "boffin",
+    "title": "Boffin",
+    "originalText": "The Demon (even if drunk or poisoned) has a not-in-play good character's ability. You both know which.",
+    "normalizedText": "The Demon (even if drunk or poisoned) has a not-in-play good character's ability. You both know which.",
+    "tokens": [
+      "demon",
+      "even",
+      "if",
+      "drunk",
+      "poisoned",
+      "has",
+      "not",
+      "play",
+      "good",
+      "character",
+      "s",
+      "ability",
+      "both",
+      "know",
+      "which"
+    ]
+  },
+  {
+    "roleKey": "bone_collector",
+    "title": "Bone Collector",
+    "originalText": "Once per game, at night*, choose a dead player: they regain their ability until dusk.",
+    "normalizedText": "Once per game, at night*, choose a dead player: they regain their ability until dusk.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "night",
+      "STAR",
+      "choose",
+      "dead",
+      "player",
+      "they",
+      "regain",
+      "their",
+      "ability",
+      "UNTIL_DUSK"
+    ]
+  },
+  {
+    "roleKey": "boomdandy",
+    "title": "Boomdandy",
+    "originalText": "If you are executed, all but 3 players die. After a 10 to 1 countdown, the player with the most players pointing at them, dies.",
+    "normalizedText": "If you are executed, all but 3 players die. After a 10 to 1 countdown, the player with the most players pointing at them, dies.",
+    "tokens": [
+      "if",
+      "executed",
+      "all",
+      "but",
+      "3",
+      "players",
+      "die",
+      "after",
+      "10",
+      "1",
+      "countdown",
+      "player",
+      "most",
+      "players",
+      "pointing",
+      "them",
+      "dies"
+    ]
+  },
+  {
+    "roleKey": "bootlegger",
+    "title": "Bootlegger",
+    "originalText": "This script has homebrew characters or rules.",
+    "normalizedText": "This script has homebrew characters or rules.",
+    "tokens": [
+      "this",
+      "script",
+      "has",
+      "homebrew",
+      "characters",
+      "rules"
+    ]
+  },
+  {
+    "roleKey": "bounty_hunter",
+    "title": "Bounty Hunter",
+    "originalText": "You start knowing 1 evil player. If the player you know dies, you learn another evil player tonight. [1 Townsfolk is evil]",
+    "normalizedText": "You start knowing 1 evil player. If the player you know dies, you learn another evil player tonight. [1 Townsfolk is evil]",
+    "tokens": [
+      "START_KNOWING",
+      "1",
+      "evil",
+      "player",
+      "if",
+      "player",
+      "know",
+      "dies",
+      "learn",
+      "another",
+      "evil",
+      "player",
+      "tonight",
+      "ACCEPT_MODIFIER",
+      "1",
+      "townsfolk",
+      "evil",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "buddhist",
+    "title": "Buddhist",
+    "originalText": "For the first 2 minutes of each day, veteran players may not talk.",
+    "normalizedText": "For the first 2 minutes of each day, veteran players may not talk.",
+    "tokens": [
+      "first",
+      "2",
+      "minutes",
+      "each",
+      "day",
+      "veteran",
+      "players",
+      "may",
+      "not",
+      "talk"
+    ]
+  },
+  {
+    "roleKey": "bureaucrat",
+    "title": "Bureaucrat",
+    "originalText": "Each night, choose a player (not yourself): their vote counts as 3 votes tomorrow.",
+    "normalizedText": "Each night, choose a player (not yourself): their vote counts as 3 votes tomorrow.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "not",
+      "yourself",
+      "their",
+      "vote",
+      "counts",
+      "3",
+      "votes",
+      "tomorrow"
+    ]
+  },
+  {
+    "roleKey": "butcher",
+    "title": "Butcher",
+    "originalText": "Each day, after the 1st execution, you may nominate again.",
+    "normalizedText": "Each day, after the 1st execution, you may nominate again.",
+    "tokens": [
+      "each",
+      "day",
+      "after",
+      "1st",
+      "execution",
+      "may",
+      "nominate",
+      "again"
+    ]
+  },
+  {
+    "roleKey": "butler",
+    "title": "Butler",
+    "originalText": "Each night, choose a player (not yourself): tomorrow, you may only vote if they are voting too.",
+    "normalizedText": "Each night, choose a player (not yourself): tomorrow, you may only vote if they are voting too.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "not",
+      "yourself",
+      "tomorrow",
+      "may",
+      "only",
+      "vote",
+      "if",
+      "they",
+      "voting",
+      "too"
+    ]
+  },
+  {
+    "roleKey": "cacklejack",
+    "title": "Cacklejack",
+    "originalText": "Each day, choose a player: a different player changes character tonight.",
+    "normalizedText": "Each day, choose a player: a different player changes character tonight.",
+    "tokens": [
+      "each",
+      "day",
+      "CHOOSE_PLAYER",
+      "different",
+      "player",
+      "changes",
+      "character",
+      "tonight"
+    ]
+  },
+  {
+    "roleKey": "cannibal",
+    "title": "Cannibal",
+    "originalText": "You have the ability of the recently killed executee. If they are evil, you are poisoned until a good player dies by execution.",
+    "normalizedText": "You have the ability of the recently killed executee. If they are evil, you are poisoned until a good player dies by execution.",
+    "tokens": [
+      "have",
+      "ability",
+      "recently",
+      "killed",
+      "executee",
+      "if",
+      "they",
+      "evil",
+      "poisoned",
+      "until",
+      "good",
+      "player",
+      "dies",
+      "execution"
+    ]
+  },
+  {
+    "roleKey": "cerenovus",
+    "title": "Cerenovus",
+    "originalText": "Each night, choose a player & a good character: they are \"mad\" they are this character tomorrow, or might be executed.",
+    "normalizedText": "Each night, choose a player & a good character: they are \"mad\" they are this character tomorrow, or might be executed.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "good",
+      "character",
+      "they",
+      "mad",
+      "they",
+      "this",
+      "character",
+      "tomorrow",
+      "might",
+      "executed"
+    ]
+  },
+  {
+    "roleKey": "chambermaid",
+    "title": "Chambermaid",
+    "originalText": "Each night, choose 2 alive players (not yourself): you learn how many woke tonight due to their ability.",
+    "normalizedText": "Each night, choose 2 alive players (not yourself): you learn how many woke tonight due to their ability.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "2",
+      "alive",
+      "players",
+      "not",
+      "yourself",
+      "learn",
+      "how",
+      "many",
+      "woke",
+      "tonight",
+      "due",
+      "their",
+      "ability"
+    ]
+  },
+  {
+    "roleKey": "chef",
+    "title": "Chef",
+    "originalText": "You start knowing how many pairs of evil players there are.",
+    "normalizedText": "You start knowing how many pairs of evil players there are.",
+    "tokens": [
+      "START_KNOWING",
+      "how",
+      "many",
+      "pairs",
+      "evil",
+      "players",
+      "there"
+    ]
+  },
+  {
+    "roleKey": "choirboy",
+    "title": "Choirboy",
+    "originalText": "If the Demon kills the King, you learn which player is the Demon. [+the King]",
+    "normalizedText": "If the Demon kills the King, you learn which player is the Demon. [+the King]",
+    "tokens": [
+      "if",
+      "demon",
+      "kills",
+      "king",
+      "learn",
+      "which",
+      "player",
+      "demon",
+      "ACCEPT_MODIFIER",
+      "king",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "clockmaker",
+    "title": "Clockmaker",
+    "originalText": "You start knowing how many steps from the Demon to its nearest Minion.",
+    "normalizedText": "You start knowing how many steps from the Demon to its nearest Minion.",
+    "tokens": [
+      "START_KNOWING",
+      "how",
+      "many",
+      "steps",
+      "demon",
+      "its",
+      "nearest",
+      "minion"
+    ]
+  },
+  {
+    "roleKey": "courtier",
+    "title": "Courtier",
+    "originalText": "Once per game, at night, choose a character: they are drunk for 3 nights & 3 days.",
+    "normalizedText": "Once per game, at night, choose a character: they are drunk for 3 nights & 3 days.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "night",
+      "choose",
+      "character",
+      "they",
+      "drunk",
+      "3",
+      "nights",
+      "3",
+      "days"
+    ]
+  },
+  {
+    "roleKey": "cult_leader",
+    "title": "Cult Leader",
+    "originalText": "Each night, you become the alignment of an alive neighbor. If all good players choose to join your cult, your team wins.",
+    "normalizedText": "Each night, you become the alignment of an alive neighbor. If all good players choose to join your cult, your team wins.",
+    "tokens": [
+      "EACH_NIGHT",
+      "become",
+      "alignment",
+      "alive",
+      "neighbor",
+      "if",
+      "all",
+      "good",
+      "players",
+      "choose",
+      "join",
+      "cult",
+      "team",
+      "wins"
+    ]
+  },
+  {
+    "roleKey": "damsel",
+    "title": "Damsel",
+    "originalText": "All Minions know a Damsel is in play. If a Minion publicly guesses you (once), your team loses.",
+    "normalizedText": "All Minions know a Damsel is in play. If a Minion publicly guesses you (once), your team loses.",
+    "tokens": [
+      "all",
+      "minions",
+      "know",
+      "damsel",
+      "play",
+      "if",
+      "minion",
+      "publicly",
+      "guesses",
+      "once",
+      "team",
+      "loses"
+    ]
+  },
+  {
+    "roleKey": "deus_ex_fiasco",
+    "title": "Deus ex Fiasco",
+    "originalText": "At least once per game, the Storyteller will make a mistake, correct it, and publicly admit to it.",
+    "normalizedText": "At least once per game, the Storyteller will make a mistake, correct it, and publicly admit to it.",
+    "tokens": [
+      "least",
+      "ONCE_PER_GAME",
+      "storyteller",
+      "will",
+      "make",
+      "mistake",
+      "correct",
+      "it",
+      "publicly",
+      "admit",
+      "it"
+    ]
+  },
+  {
+    "roleKey": "deviant",
+    "title": "Deviant",
+    "originalText": "If you were funny today, you cannot die by exile.",
+    "normalizedText": "If you were funny today, you cannot die by exile.",
+    "tokens": [
+      "if",
+      "were",
+      "funny",
+      "today",
+      "cannot",
+      "die",
+      "exile"
+    ]
+  },
+  {
+    "roleKey": "devils_advocate",
+    "title": "Devil's Advocate",
+    "originalText": "Each night, choose a living player (different to last night): if executed tomorrow, they don't die.",
+    "normalizedText": "Each night, choose a living player (different to last night): if executed tomorrow, they don't die.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "living",
+      "player",
+      "different",
+      "last",
+      "night",
+      "if",
+      "executed",
+      "tomorrow",
+      "they",
+      "don",
+      "t",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "djinn",
+    "title": "Djinn",
+    "originalText": "Use the Djinn's special rule. All players know what it is.",
+    "normalizedText": "Use the Djinn's special rule. All players know what it is.",
+    "tokens": [
+      "use",
+      "djinn",
+      "s",
+      "special",
+      "rule",
+      "all",
+      "players",
+      "know",
+      "what",
+      "it"
+    ]
+  },
+  {
+    "roleKey": "doomsayer",
+    "title": "Doomsayer",
+    "originalText": "If 4 or more players live, each living player may publicly choose (once per game) that a player of their own alignment dies.",
+    "normalizedText": "If 4 or more players live, each living player may publicly choose (once per game) that a player of their own alignment dies.",
+    "tokens": [
+      "if",
+      "4",
+      "more",
+      "players",
+      "live",
+      "each",
+      "living",
+      "player",
+      "may",
+      "publicly",
+      "choose",
+      "ONCE_PER_GAME",
+      "that",
+      "player",
+      "their",
+      "own",
+      "alignment",
+      "dies"
+    ]
+  },
+  {
+    "roleKey": "dreamer",
+    "title": "Dreamer",
+    "originalText": "Each night, choose a player (not yourself or Travellers): you learn 1 good & 1 evil character, 1 of which is correct.",
+    "normalizedText": "Each night, choose a player (not yourself or Travellers): you learn 1 good & 1 evil character, 1 of which is correct.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "not",
+      "yourself",
+      "travellers",
+      "learn",
+      "1",
+      "good",
+      "1",
+      "evil",
+      "character",
+      "1",
+      "which",
+      "correct"
+    ]
+  },
+  {
+    "roleKey": "drunk",
+    "title": "Drunk",
+    "originalText": "You do not know you are the Drunk. You think you are a Townsfolk character, but you are not.",
+    "normalizedText": "You do not know you are the Drunk. You think you are a Townsfolk character, but you are not.",
+    "tokens": [
+      "not",
+      "know",
+      "drunk",
+      "think",
+      "townsfolk",
+      "character",
+      "but",
+      "not"
+    ]
+  },
+  {
+    "roleKey": "duchess",
+    "title": "Duchess",
+    "originalText": "Each day, 3 players may choose to visit you. At night*, each visitor learns how many visitors are evil, but 1 gets false info.",
+    "normalizedText": "Each day, 3 players may choose to visit you. At night*, each visitor learns how many visitors are evil, but 1 gets false info.",
+    "tokens": [
+      "each",
+      "day",
+      "3",
+      "players",
+      "may",
+      "choose",
+      "visit",
+      "night",
+      "STAR",
+      "each",
+      "visitor",
+      "learns",
+      "how",
+      "many",
+      "visitors",
+      "evil",
+      "but",
+      "1",
+      "gets",
+      "false",
+      "info"
+    ]
+  },
+  {
+    "roleKey": "empath",
+    "title": "Empath",
+    "originalText": "Each night, you learn how many of your 2 alive neighbors are evil.",
+    "normalizedText": "Each night, you learn how many of your 2 alive neighbors are evil.",
+    "tokens": [
+      "EACH_NIGHT_LEARN",
+      "how",
+      "many",
+      "2",
+      "alive",
+      "neighbors",
+      "evil"
+    ]
+  },
+  {
+    "roleKey": "engineer",
+    "title": "Engineer",
+    "originalText": "Once per game, at night, choose which Minions or which Demon is in play.",
+    "normalizedText": "Once per game, at night, choose which Minions or which Demon is in play.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "night",
+      "choose",
+      "which",
+      "minions",
+      "which",
+      "demon",
+      "play"
+    ]
+  },
+  {
+    "roleKey": "evil_twin",
+    "title": "Evil Twin",
+    "originalText": "You & an opposing player know each other. If the good player is executed, evil wins. Good can't win if you both live.",
+    "normalizedText": "You & an opposing player know each other. If the good player is executed, evil wins. Good can't win if you both live.",
+    "tokens": [
+      "opposing",
+      "player",
+      "know",
+      "each",
+      "other",
+      "if",
+      "good",
+      "player",
+      "executed",
+      "evil",
+      "wins",
+      "good",
+      "can",
+      "t",
+      "win",
+      "if",
+      "both",
+      "live"
+    ]
+  },
+  {
+    "roleKey": "exorcist",
+    "title": "Exorcist",
+    "originalText": "Each night*, choose a player (different to last night): the Demon, if chosen, learns who you are then doesn't wake tonight.",
+    "normalizedText": "Each night*, choose a player (different to last night): the Demon, if chosen, learns who you are then doesn't wake tonight.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "different",
+      "last",
+      "night",
+      "demon",
+      "if",
+      "chosen",
+      "learns",
+      "who",
+      "then",
+      "doesn",
+      "t",
+      "wake",
+      "tonight"
+    ]
+  },
+  {
+    "roleKey": "fang_gu",
+    "title": "Fang Gu",
+    "originalText": "Each night*, choose a player: they die. The 1st Outsider this kills becomes an evil Fang Gu & you die instead. [+1 Outsider]",
+    "normalizedText": "Each night*, choose a player: they die. The 1st Outsider this kills becomes an evil Fang Gu & you die instead. [+1 Outsider]",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "1st",
+      "outsider",
+      "this",
+      "kills",
+      "becomes",
+      "evil",
+      "fang",
+      "gu",
+      "die",
+      "instead",
+      "ACCEPT_MODIFIER",
+      "1",
+      "outsider",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "farmer",
+    "title": "Farmer",
+    "originalText": "When you die at night, an alive good player becomes a Farmer.",
+    "normalizedText": "When you die at night, an alive good player becomes a Farmer.",
+    "tokens": [
+      "when",
+      "die",
+      "night",
+      "alive",
+      "good",
+      "player",
+      "becomes",
+      "farmer"
+    ]
+  },
+  {
+    "roleKey": "fearmonger",
+    "title": "Fearmonger",
+    "originalText": "Each night, choose a player: if you nominate & execute them, their team loses. All players know if you choose a new player.",
+    "normalizedText": "Each night, choose a player: if you nominate & execute them, their team loses. All players know if you choose a new player.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "if",
+      "nominate",
+      "execute",
+      "them",
+      "their",
+      "team",
+      "loses",
+      "all",
+      "players",
+      "know",
+      "if",
+      "choose",
+      "new",
+      "player"
+    ]
+  },
+  {
+    "roleKey": "ferryman",
+    "title": "Ferryman",
+    "originalText": "On the final day, all dead players regain their vote token.",
+    "normalizedText": "On the final day, all dead players regain their vote token.",
+    "tokens": [
+      "final",
+      "day",
+      "all",
+      "dead",
+      "players",
+      "regain",
+      "their",
+      "vote",
+      "token"
+    ]
+  },
+  {
+    "roleKey": "fibbin",
+    "title": "Fibbin",
+    "originalText": "Once per game, 1 good player might get incorrect information.",
+    "normalizedText": "Once per game, 1 good player might get incorrect information.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "1",
+      "good",
+      "player",
+      "might",
+      "get",
+      "incorrect",
+      "information"
+    ]
+  },
+  {
+    "roleKey": "fiddler",
+    "title": "Fiddler",
+    "originalText": "Once per game, the Demon secretly chooses an opposing player: all players choose which of these 2 players win.",
+    "normalizedText": "Once per game, the Demon secretly chooses an opposing player: all players choose which of these 2 players win.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "demon",
+      "secretly",
+      "chooses",
+      "opposing",
+      "player",
+      "all",
+      "players",
+      "choose",
+      "which",
+      "these",
+      "2",
+      "players",
+      "win"
+    ]
+  },
+  {
+    "roleKey": "fisherman",
+    "title": "Fisherman",
+    "originalText": "Once per game, during the day, visit the Storyteller for some advice to help your team win.",
+    "normalizedText": "Once per game, during the day, visit the Storyteller for some advice to help your team win.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "during",
+      "day",
+      "visit",
+      "storyteller",
+      "some",
+      "advice",
+      "help",
+      "team",
+      "win"
+    ]
+  },
+  {
+    "roleKey": "flowergirl",
+    "title": "Flowergirl",
+    "originalText": "Each night*, you learn if a Demon voted today.",
+    "normalizedText": "Each night*, you learn if a Demon voted today.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "learn",
+      "if",
+      "demon",
+      "voted",
+      "today"
+    ]
+  },
+  {
+    "roleKey": "fool",
+    "title": "Fool",
+    "originalText": "The 1st time you die, you don't.",
+    "normalizedText": "The 1st time you die, you don't.",
+    "tokens": [
+      "1st",
+      "time",
+      "die",
+      "don",
+      "t"
+    ]
+  },
+  {
+    "roleKey": "fortune_teller",
+    "title": "Fortune Teller",
+    "originalText": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
+    "normalizedText": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "2",
+      "players",
+      "learn",
+      "if",
+      "either",
+      "demon",
+      "there",
+      "good",
+      "player",
+      "that",
+      "registers",
+      "demon"
+    ]
+  },
+  {
+    "roleKey": "gambler",
+    "title": "Gambler",
+    "originalText": "Each night*, choose a player & guess their character: if you guess wrong, you die.",
+    "normalizedText": "Each night*, choose a player & guess their character: if you guess wrong, you die.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "guess",
+      "their",
+      "character",
+      "if",
+      "guess",
+      "wrong",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "gangster",
+    "title": "Gangster",
+    "originalText": "Once per day, you may choose to kill an alive neighbor, if your other alive neighbor agrees.",
+    "normalizedText": "Once per day, you may choose to kill an alive neighbor, if your other alive neighbor agrees.",
+    "tokens": [
+      "once",
+      "per",
+      "day",
+      "may",
+      "choose",
+      "kill",
+      "alive",
+      "neighbor",
+      "if",
+      "other",
+      "alive",
+      "neighbor",
+      "agrees"
+    ]
+  },
+  {
+    "roleKey": "gardener",
+    "title": "Gardener",
+    "originalText": "The Storyteller assigns 1 or more players' characters.",
+    "normalizedText": "The Storyteller assigns 1 or more players' characters.",
+    "tokens": [
+      "storyteller",
+      "assigns",
+      "1",
+      "more",
+      "players",
+      "characters"
+    ]
+  },
+  {
+    "roleKey": "general",
+    "title": "General",
+    "originalText": "Each night, you learn which alignment the Storyteller believes is winning: good, evil, or neither.",
+    "normalizedText": "Each night, you learn which alignment the Storyteller believes is winning: good, evil, or neither.",
+    "tokens": [
+      "EACH_NIGHT_LEARN",
+      "which",
+      "alignment",
+      "storyteller",
+      "believes",
+      "winning",
+      "good",
+      "evil",
+      "neither"
+    ]
+  },
+  {
+    "roleKey": "gnome",
+    "title": "Gnome",
+    "originalText": "All players start knowing a player of your alignment. You may choose to kill anyone who nominates them.",
+    "normalizedText": "All players start knowing a player of your alignment. You may choose to kill anyone who nominates them.",
+    "tokens": [
+      "all",
+      "players",
+      "START_KNOWING",
+      "player",
+      "alignment",
+      "may",
+      "choose",
+      "kill",
+      "anyone",
+      "who",
+      "nominates",
+      "them"
+    ]
+  },
+  {
+    "roleKey": "goblin",
+    "title": "Goblin",
+    "originalText": "If you publicly claim to be the Goblin when nominated & are executed that day, your team wins.",
+    "normalizedText": "If you publicly claim to be the Goblin when nominated & are executed that day, your team wins.",
+    "tokens": [
+      "if",
+      "publicly",
+      "claim",
+      "goblin",
+      "when",
+      "NOMINATED",
+      "executed",
+      "that",
+      "day",
+      "team",
+      "wins"
+    ]
+  },
+  {
+    "roleKey": "godfather",
+    "title": "Godfather",
+    "originalText": "You start knowing which Outsiders are in play. If 1 died today, choose a player tonight: they die. [-1 or +1 Outsider]",
+    "normalizedText": "You start knowing which Outsiders are in play. If 1 died today, choose a player tonight: they die. [-1 or +1 Outsider]",
+    "tokens": [
+      "START_KNOWING",
+      "which",
+      "outsiders",
+      "play",
+      "if",
+      "1",
+      "died",
+      "today",
+      "CHOOSE_PLAYER",
+      "tonight",
+      "they",
+      "die",
+      "ACCEPT_MODIFIER",
+      "1",
+      "1",
+      "outsider",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "golem",
+    "title": "Golem",
+    "originalText": "You may only nominate once per game. When you do, if the nominee is not the Demon, they die.",
+    "normalizedText": "You may only nominate once per game. When you do, if the nominee is not the Demon, they die.",
+    "tokens": [
+      "may",
+      "only",
+      "nominate",
+      "ONCE_PER_GAME",
+      "when",
+      "if",
+      "nominee",
+      "not",
+      "demon",
+      "they",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "goon",
+    "title": "Goon",
+    "originalText": "Each night, the 1st player to choose you with their ability is drunk until dusk. You become their alignment.",
+    "normalizedText": "Each night, the 1st player to choose you with their ability is drunk until dusk. You become their alignment.",
+    "tokens": [
+      "EACH_NIGHT",
+      "1st",
+      "player",
+      "choose",
+      "their",
+      "ability",
+      "drunk",
+      "UNTIL_DUSK",
+      "become",
+      "their",
+      "alignment"
+    ]
+  },
+  {
+    "roleKey": "gossip",
+    "title": "Gossip",
+    "originalText": "Each day, you may make a public statement. Tonight, if it was true, a player dies.",
+    "normalizedText": "Each day, you may make a public statement. Tonight, if it was true, a player dies.",
+    "tokens": [
+      "each",
+      "day",
+      "may",
+      "make",
+      "public",
+      "statement",
+      "tonight",
+      "if",
+      "it",
+      "was",
+      "true",
+      "player",
+      "dies"
+    ]
+  },
+  {
+    "roleKey": "grandmother",
+    "title": "Grandmother",
+    "originalText": "You start knowing a good player & their character. If the Demon kills them, you die too.",
+    "normalizedText": "You start knowing a good player & their character. If the Demon kills them, you die too.",
+    "tokens": [
+      "START_KNOWING",
+      "good",
+      "player",
+      "their",
+      "character",
+      "if",
+      "demon",
+      "kills",
+      "them",
+      "die",
+      "too"
+    ]
+  },
+  {
+    "roleKey": "gunslinger",
+    "title": "Gunslinger",
+    "originalText": "Each day, after the 1st vote has been tallied, you may choose a player that voted: they die.",
+    "normalizedText": "Each day, after the 1st vote has been tallied, you may choose a player that voted: they die.",
+    "tokens": [
+      "each",
+      "day",
+      "after",
+      "1st",
+      "vote",
+      "has",
+      "tallied",
+      "may",
+      "CHOOSE_PLAYER",
+      "that",
+      "voted",
+      "they",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "harlot",
+    "title": "Harlot",
+    "originalText": "Each night*, choose a living player: if they agree, you learn their character, but you both might die.",
+    "normalizedText": "Each night*, choose a living player: if they agree, you learn their character, but you both might die.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "choose",
+      "living",
+      "player",
+      "if",
+      "they",
+      "agree",
+      "learn",
+      "their",
+      "character",
+      "but",
+      "both",
+      "might",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "harpy",
+    "title": "Harpy",
+    "originalText": "Each night, choose 2 players: tomorrow, the 1st player is mad that the 2nd is evil, or one or both might die.",
+    "normalizedText": "Each night, choose 2 players: tomorrow, the 1st player is mad that the 2nd is evil, or one or both might die.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "2",
+      "players",
+      "tomorrow",
+      "1st",
+      "player",
+      "mad",
+      "that",
+      "2nd",
+      "evil",
+      "one",
+      "both",
+      "might",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "hatter",
+    "title": "Hatter",
+    "originalText": "If you died today or tonight, the Minion & Demon players may choose new Minion & Demon characters to be.",
+    "normalizedText": "If you died today or tonight, the Minion & Demon players may choose new Minion & Demon characters to be.",
+    "tokens": [
+      "if",
+      "died",
+      "today",
+      "tonight",
+      "minion",
+      "demon",
+      "players",
+      "may",
+      "choose",
+      "new",
+      "minion",
+      "demon",
+      "characters"
+    ]
+  },
+  {
+    "roleKey": "hells_librarian",
+    "title": "Hell's Librarian",
+    "originalText": "Something bad might happen to whoever talks when the Storyteller has asked for silence.",
+    "normalizedText": "Something bad might happen to whoever talks when the Storyteller has asked for silence.",
+    "tokens": [
+      "something",
+      "bad",
+      "might",
+      "happen",
+      "whoever",
+      "talks",
+      "when",
+      "storyteller",
+      "has",
+      "asked",
+      "silence"
+    ]
+  },
+  {
+    "roleKey": "heretic",
+    "title": "Heretic",
+    "originalText": "Whoever wins, loses & whoever loses, wins, even if you are dead.",
+    "normalizedText": "Whoever wins, loses & whoever loses, wins, even if you are dead.",
+    "tokens": [
+      "whoever",
+      "wins",
+      "loses",
+      "whoever",
+      "loses",
+      "wins",
+      "EVEN_IF_DEAD"
+    ]
+  },
+  {
+    "roleKey": "hermit",
+    "title": "Hermit",
+    "originalText": "You have all Outsider abilities. [-0 or -1 Outsider]",
+    "normalizedText": "You have all Outsider abilities. [-0 or -1 Outsider]",
+    "tokens": [
+      "have",
+      "all",
+      "outsider",
+      "abilities",
+      "ACCEPT_MODIFIER",
+      "0",
+      "1",
+      "outsider",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "high_priestess",
+    "title": "High Priestess",
+    "originalText": "Each night, learn which player the Storyteller believes you should talk to most.",
+    "normalizedText": "Each night, learn which player the Storyteller believes you should talk to most.",
+    "tokens": [
+      "EACH_NIGHT_LEARN",
+      "which",
+      "player",
+      "storyteller",
+      "believes",
+      "should",
+      "talk",
+      "most"
+    ]
+  },
+  {
+    "roleKey": "hindu",
+    "title": "Hindu",
+    "originalText": "The first 4 players to die are immediately reincarnated as Travellers of the same alignment.",
+    "normalizedText": "The first 4 players to die are immediately reincarnated as Travellers of the same alignment.",
+    "tokens": [
+      "first",
+      "4",
+      "players",
+      "die",
+      "immediately",
+      "reincarnated",
+      "travellers",
+      "same",
+      "alignment"
+    ]
+  },
+  {
+    "roleKey": "huntsman",
+    "title": "Huntsman",
+    "originalText": "Once per game, at night, choose a living player: the Damsel, if chosen, becomes a not-in-play Townsfolk. [+the Damsel]",
+    "normalizedText": "Once per game, at night, choose a living player: the Damsel, if chosen, becomes a not-in-play Townsfolk. [+the Damsel]",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "night",
+      "choose",
+      "living",
+      "player",
+      "damsel",
+      "if",
+      "chosen",
+      "becomes",
+      "not",
+      "play",
+      "townsfolk",
+      "ACCEPT_MODIFIER",
+      "damsel",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "imp",
+    "title": "Imp",
+    "originalText": "Each night*, choose a player: they die. If you kill yourself this way, a Minion becomes the Imp.",
+    "normalizedText": "Each night*, choose a player: they die. If you kill yourself this way, a Minion becomes the Imp.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "if",
+      "kill",
+      "yourself",
+      "this",
+      "way",
+      "minion",
+      "becomes",
+      "imp"
+    ]
+  },
+  {
+    "roleKey": "innkeeper",
+    "title": "Innkeeper",
+    "originalText": "Each night*, choose 2 players: they can't die tonight, but 1 is drunk until dusk.",
+    "normalizedText": "Each night*, choose 2 players: they can't die tonight, but 1 is drunk until dusk.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_TWO_PLAYERS",
+      "they",
+      "can",
+      "t",
+      "die",
+      "tonight",
+      "but",
+      "1",
+      "drunk",
+      "UNTIL_DUSK"
+    ]
+  },
+  {
+    "roleKey": "investigator",
+    "title": "Investigator",
+    "originalText": "You start knowing that 1 of 2 players is a particular Minion.",
+    "normalizedText": "You start knowing that 1 of 2 players is a particular Minion.",
+    "tokens": [
+      "START_KNOWING",
+      "that",
+      "1",
+      "2",
+      "players",
+      "particular",
+      "minion"
+    ]
+  },
+  {
+    "roleKey": "judge",
+    "title": "Judge",
+    "originalText": "Once per game, if another player nominated, you may choose to force the current execution to pass or fail.",
+    "normalizedText": "Once per game, if another player nominated, you may choose to force the current execution to pass or fail.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "if",
+      "another",
+      "player",
+      "NOMINATED",
+      "may",
+      "choose",
+      "force",
+      "current",
+      "execution",
+      "pass",
+      "fail"
+    ]
+  },
+  {
+    "roleKey": "juggler",
+    "title": "Juggler",
+    "originalText": "On your 1st day, publicly guess up to 5 players' characters. That night, you learn how many you got correct.",
+    "normalizedText": "On your 1st day, publicly guess up to 5 players' characters. That night, you learn how many you got correct.",
+    "tokens": [
+      "1st",
+      "day",
+      "publicly",
+      "guess",
+      "up",
+      "5",
+      "players",
+      "characters",
+      "that",
+      "night",
+      "learn",
+      "how",
+      "many",
+      "got",
+      "correct"
+    ]
+  },
+  {
+    "roleKey": "kazali",
+    "title": "Kazali",
+    "originalText": "Each night*, choose a player: they die. [You choose which players are which Minions. -? to +? Outsiders]",
+    "normalizedText": "Each night*, choose a player: they die. [You choose which players are which Minions. -? to +? Outsiders]",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "ACCEPT_MODIFIER",
+      "choose",
+      "which",
+      "players",
+      "which",
+      "minions",
+      "outsiders",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "king",
+    "title": "King",
+    "originalText": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows you are the King.",
+    "normalizedText": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows you are the King.",
+    "tokens": [
+      "EACH_NIGHT",
+      "if",
+      "dead",
+      "equal",
+      "outnumber",
+      "living",
+      "learn",
+      "1",
+      "alive",
+      "character",
+      "demon",
+      "knows",
+      "king"
+    ]
+  },
+  {
+    "roleKey": "klutz",
+    "title": "Klutz",
+    "originalText": "When you learn that you died, publicly choose 1 alive player: if they are evil, your team loses.",
+    "normalizedText": "When you learn that you died, publicly choose 1 alive player: if they are evil, your team loses.",
+    "tokens": [
+      "when",
+      "learn",
+      "that",
+      "died",
+      "publicly",
+      "choose",
+      "1",
+      "alive",
+      "player",
+      "if",
+      "they",
+      "evil",
+      "team",
+      "loses"
+    ]
+  },
+  {
+    "roleKey": "knight",
+    "title": "Knight",
+    "originalText": "You start knowing 2 players that are not the Demon.",
+    "normalizedText": "You start knowing 2 players that are not the Demon.",
+    "tokens": [
+      "START_KNOWING",
+      "2",
+      "players",
+      "that",
+      "not",
+      "demon"
+    ]
+  },
+  {
+    "roleKey": "legion",
+    "title": "Legion",
+    "originalText": "Each night*, a player might die. Executions fail if only evil voted. You register as a Minion too. [Most players are Legion]",
+    "normalizedText": "Each night*, a player might die. Executions fail if only evil voted. You register as a Minion too. [Most players are Legion]",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "PLAYER_MIGHT_DIE",
+      "executions",
+      "fail",
+      "if",
+      "only",
+      "evil",
+      "voted",
+      "register",
+      "minion",
+      "too",
+      "ACCEPT_MODIFIER",
+      "most",
+      "players",
+      "legion",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "leviathan",
+    "title": "Leviathan",
+    "originalText": "If more than 1 good player is executed, evil wins. All players know you are in play. After day 5, evil wins.",
+    "normalizedText": "If more than 1 good player is executed, evil wins. All players know you are in play. After day 5, evil wins.",
+    "tokens": [
+      "if",
+      "more",
+      "than",
+      "1",
+      "good",
+      "player",
+      "executed",
+      "evil",
+      "wins",
+      "all",
+      "players",
+      "know",
+      "play",
+      "after",
+      "day",
+      "5",
+      "evil",
+      "wins"
+    ]
+  },
+  {
+    "roleKey": "librarian",
+    "title": "Librarian",
+    "originalText": "You start knowing that 1 of 2 players is a particular Outsider. (Or that zero are in play.)",
+    "normalizedText": "You start knowing that 1 of 2 players is a particular Outsider. (Or that zero are in play.)",
+    "tokens": [
+      "START_KNOWING",
+      "that",
+      "1",
+      "2",
+      "players",
+      "particular",
+      "outsider",
+      "that",
+      "zero",
+      "play"
+    ]
+  },
+  {
+    "roleKey": "lil_monsta",
+    "title": "Lil' Monsta",
+    "originalText": "Each night, Minions choose who babysits Lil' Monsta & \"is the Demon\". Each night*, a player might die. [+1 Minion]",
+    "normalizedText": "Each night, Minions choose who babysits Lil' Monsta & \"is the Demon\". Each night*, a player might die. [+1 Minion]",
+    "tokens": [
+      "EACH_NIGHT",
+      "minions",
+      "choose",
+      "who",
+      "babysits",
+      "lil",
+      "monsta",
+      "demon",
+      "EACH_NIGHT_STAR",
+      "PLAYER_MIGHT_DIE",
+      "ACCEPT_MODIFIER",
+      "1",
+      "minion",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "lleech",
+    "title": "Lleech",
+    "originalText": "Each night*, choose a player: they die. You start by choosing a player: they are poisoned. You die if & only if they are dead.",
+    "normalizedText": "Each night*, choose a player: they die. You start by choosing a player: they are poisoned. You die if & only if they are dead.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "start",
+      "choosing",
+      "player",
+      "they",
+      "poisoned",
+      "die",
+      "if",
+      "only",
+      "if",
+      "they",
+      "dead"
+    ]
+  },
+  {
+    "roleKey": "lord_of_typhon",
+    "title": "Lord of Typhon",
+    "originalText": "Each night*, choose a player: they die. [Evil characters are in a line. You are in the middle. +1 Minion. -? to +? Outsiders]",
+    "normalizedText": "Each night*, choose a player: they die. [Evil characters are in a line. You are in the middle. +1 Minion. -? to +? Outsiders]",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "ACCEPT_MODIFIER",
+      "evil",
+      "characters",
+      "line",
+      "middle",
+      "1",
+      "minion",
+      "outsiders",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "lunatic",
+    "title": "Lunatic",
+    "originalText": "You think you are a Demon, but you are not. The Demon knows who you are & who you choose at night.",
+    "normalizedText": "You think you are a Demon, but you are not. The Demon knows who you are & who you choose at night.",
+    "tokens": [
+      "think",
+      "demon",
+      "but",
+      "not",
+      "demon",
+      "knows",
+      "who",
+      "who",
+      "choose",
+      "night"
+    ]
+  },
+  {
+    "roleKey": "lycanthrope",
+    "title": "Lycanthrope",
+    "originalText": "Each night*, choose an alive player. If good, they die & the Demon doesn’t kill tonight. One good player registers as evil.",
+    "normalizedText": "Each night*, choose an alive player. If good, they die & the Demon doesn’t kill tonight. One good player registers as evil.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "choose",
+      "alive",
+      "player",
+      "if",
+      "good",
+      "they",
+      "die",
+      "demon",
+      "doesn",
+      "t",
+      "kill",
+      "tonight",
+      "one",
+      "good",
+      "player",
+      "registers",
+      "evil"
+    ]
+  },
+  {
+    "roleKey": "magician",
+    "title": "Magician",
+    "originalText": "The Demon thinks you are a Minion. Minions think you are a Demon.",
+    "normalizedText": "The Demon thinks you are a Minion. Minions think you are a Demon.",
+    "tokens": [
+      "demon",
+      "thinks",
+      "minion",
+      "minions",
+      "think",
+      "demon"
+    ]
+  },
+  {
+    "roleKey": "marionette",
+    "title": "Marionette",
+    "originalText": "You think you are a good character, but you are not. The Demon knows who you are. [You neighbor the Demon]",
+    "normalizedText": "You think you are a good character, but you are not. The Demon knows who you are. [You neighbor the Demon]",
+    "tokens": [
+      "think",
+      "good",
+      "character",
+      "but",
+      "not",
+      "demon",
+      "knows",
+      "who",
+      "ACCEPT_MODIFIER",
+      "neighbor",
+      "demon",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "mastermind",
+    "title": "Mastermind",
+    "originalText": "If the Demon dies by execution (ending the game), play for 1 more day. If a player is then executed, their team loses.",
+    "normalizedText": "If the Demon dies by execution (ending the game), play for 1 more day. If a player is then executed, their team loses.",
+    "tokens": [
+      "if",
+      "demon",
+      "dies",
+      "execution",
+      "ending",
+      "game",
+      "play",
+      "1",
+      "more",
+      "day",
+      "if",
+      "player",
+      "then",
+      "executed",
+      "their",
+      "team",
+      "loses"
+    ]
+  },
+  {
+    "roleKey": "mathematician",
+    "title": "Mathematician",
+    "originalText": "Each night, you learn how many players' abilities worked abnormally (since dawn) due to another character's ability.",
+    "normalizedText": "Each night, you learn how many players' abilities worked abnormally (since dawn) due to another character's ability.",
+    "tokens": [
+      "EACH_NIGHT_LEARN",
+      "how",
+      "many",
+      "players",
+      "abilities",
+      "worked",
+      "abnormally",
+      "since",
+      "dawn",
+      "due",
+      "another",
+      "character",
+      "s",
+      "ability"
+    ]
+  },
+  {
+    "roleKey": "matron",
+    "title": "Matron",
+    "originalText": "Each day, you may choose up to 3 sets of 2 players to swap seats. Players may not leave their seats to talk in private.",
+    "normalizedText": "Each day, you may choose up to 3 sets of 2 players to swap seats. Players may not leave their seats to talk in private.",
+    "tokens": [
+      "each",
+      "day",
+      "may",
+      "choose",
+      "up",
+      "3",
+      "sets",
+      "2",
+      "players",
+      "swap",
+      "seats",
+      "players",
+      "may",
+      "not",
+      "leave",
+      "their",
+      "seats",
+      "talk",
+      "private"
+    ]
+  },
+  {
+    "roleKey": "mayor",
+    "title": "Mayor",
+    "originalText": "If only 3 players live & no execution occurs, your team wins. If you die at night, another player might die instead.",
+    "normalizedText": "If only 3 players live & no execution occurs, your team wins. If you die at night, another player might die instead.",
+    "tokens": [
+      "if",
+      "only",
+      "3",
+      "players",
+      "live",
+      "no",
+      "execution",
+      "occurs",
+      "team",
+      "wins",
+      "if",
+      "die",
+      "night",
+      "another",
+      "PLAYER_MIGHT_DIE",
+      "instead"
+    ]
+  },
+  {
+    "roleKey": "mezepheles",
+    "title": "Mezepheles",
+    "originalText": "You start knowing a secret word. The 1st good player to say this word becomes evil that night.",
+    "normalizedText": "You start knowing a secret word. The 1st good player to say this word becomes evil that night.",
+    "tokens": [
+      "START_KNOWING",
+      "secret",
+      "word",
+      "1st",
+      "good",
+      "player",
+      "say",
+      "this",
+      "word",
+      "becomes",
+      "evil",
+      "that",
+      "night"
+    ]
+  },
+  {
+    "roleKey": "minstrel",
+    "title": "Minstrel",
+    "originalText": "When a Minion dies by execution, all other players (except Travellers) are drunk until dusk tomorrow.",
+    "normalizedText": "When a Minion dies by execution, all other players (except Travellers) are drunk until dusk tomorrow.",
+    "tokens": [
+      "when",
+      "minion",
+      "dies",
+      "execution",
+      "all",
+      "other",
+      "players",
+      "except",
+      "travellers",
+      "drunk",
+      "UNTIL_DUSK",
+      "tomorrow"
+    ]
+  },
+  {
+    "roleKey": "monk",
+    "title": "Monk",
+    "originalText": "Each night*, choose a player (not yourself): they are safe from the Demon tonight.",
+    "normalizedText": "Each night*, choose a player (not yourself): they are safe from the Demon tonight.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "not",
+      "yourself",
+      "they",
+      "safe",
+      "demon",
+      "tonight"
+    ]
+  },
+  {
+    "roleKey": "moonchild",
+    "title": "Moonchild",
+    "originalText": "When you learn that you died, publicly choose 1 alive player. Tonight, if it was a good player, they die.",
+    "normalizedText": "When you learn that you died, publicly choose 1 alive player. Tonight, if it was a good player, they die.",
+    "tokens": [
+      "when",
+      "learn",
+      "that",
+      "died",
+      "publicly",
+      "choose",
+      "1",
+      "alive",
+      "player",
+      "tonight",
+      "if",
+      "it",
+      "was",
+      "good",
+      "player",
+      "they",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "mutant",
+    "title": "Mutant",
+    "originalText": "If you are \"mad\" about being an Outsider, you might be executed.",
+    "normalizedText": "If you are \"mad\" about being an Outsider, you might be executed.",
+    "tokens": [
+      "if",
+      "mad",
+      "about",
+      "outsider",
+      "might",
+      "executed"
+    ]
+  },
+  {
+    "roleKey": "nightwatchman",
+    "title": "Nightwatchman",
+    "originalText": "Once per game, at night, choose a player: they learn you are the Nightwatchman.",
+    "normalizedText": "Once per game, at night, choose a player: they learn you are the Nightwatchman.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "night",
+      "CHOOSE_PLAYER",
+      "they",
+      "learn",
+      "nightwatchman"
+    ]
+  },
+  {
+    "roleKey": "no_dashii",
+    "title": "No Dashii",
+    "originalText": "Each night*, choose a player: they die. Your 2 Townsfolk neighbors are poisoned.",
+    "normalizedText": "Each night*, choose a player: they die. Your 2 Townsfolk neighbors are poisoned.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "2",
+      "townsfolk",
+      "neighbors",
+      "poisoned"
+    ]
+  },
+  {
+    "roleKey": "noble",
+    "title": "Noble",
+    "originalText": "You start knowing 3 players, 1 and only 1 of which is evil.",
+    "normalizedText": "You start knowing 3 players, 1 and only 1 of which is evil.",
+    "tokens": [
+      "START_KNOWING",
+      "3",
+      "players",
+      "1",
+      "only",
+      "1",
+      "which",
+      "evil"
+    ]
+  },
+  {
+    "roleKey": "ogre",
+    "title": "Ogre",
+    "originalText": "On your 1st night, choose a player (not yourself): you become their alignment (you don't know which) even if drunk or poisoned.",
+    "normalizedText": "On your 1st night, choose a player (not yourself): you become their alignment (you don't know which) even if drunk or poisoned.",
+    "tokens": [
+      "1st",
+      "night",
+      "CHOOSE_PLAYER",
+      "not",
+      "yourself",
+      "become",
+      "their",
+      "alignment",
+      "don",
+      "t",
+      "know",
+      "which",
+      "even",
+      "if",
+      "drunk",
+      "poisoned"
+    ]
+  },
+  {
+    "roleKey": "ojo",
+    "title": "Ojo",
+    "originalText": "Each night*, choose a character: they die. If they are not in play, the Storyteller chooses who dies.",
+    "normalizedText": "Each night*, choose a character: they die. If they are not in play, the Storyteller chooses who dies.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "choose",
+      "character",
+      "they",
+      "die",
+      "if",
+      "they",
+      "not",
+      "play",
+      "storyteller",
+      "chooses",
+      "who",
+      "dies"
+    ]
+  },
+  {
+    "roleKey": "oracle",
+    "title": "Oracle",
+    "originalText": "Each night*, you learn how many dead players are evil.",
+    "normalizedText": "Each night*, you learn how many dead players are evil.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "learn",
+      "how",
+      "many",
+      "dead",
+      "players",
+      "evil"
+    ]
+  },
+  {
+    "roleKey": "organ_grinder",
+    "title": "Organ Grinder",
+    "originalText": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk until dusk.",
+    "normalizedText": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk until dusk.",
+    "tokens": [
+      "all",
+      "players",
+      "keep",
+      "their",
+      "eyes",
+      "closed",
+      "when",
+      "voting",
+      "vote",
+      "tally",
+      "secret",
+      "EACH_NIGHT_CHOOSE",
+      "if",
+      "drunk",
+      "UNTIL_DUSK"
+    ]
+  },
+  {
+    "roleKey": "pacifist",
+    "title": "Pacifist",
+    "originalText": "Executed good players might not die.",
+    "normalizedText": "Executed good players might not die.",
+    "tokens": [
+      "executed",
+      "good",
+      "players",
+      "might",
+      "not",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "philosopher",
+    "title": "Philosopher",
+    "originalText": "Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk.",
+    "normalizedText": "Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "night",
+      "choose",
+      "good",
+      "character",
+      "gain",
+      "that",
+      "ability",
+      "if",
+      "this",
+      "character",
+      "play",
+      "they",
+      "drunk"
+    ]
+  },
+  {
+    "roleKey": "pit_hag",
+    "title": "Pit-Hag",
+    "originalText": "Each night*, choose a player & a character they become (if not in play). If a Demon is made, deaths tonight are arbitrary.",
+    "normalizedText": "Each night*, choose a player & a character they become (if not in play). If a Demon is made, deaths tonight are arbitrary.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "character",
+      "they",
+      "become",
+      "if",
+      "not",
+      "play",
+      "if",
+      "demon",
+      "made",
+      "deaths",
+      "tonight",
+      "arbitrary"
+    ]
+  },
+  {
+    "roleKey": "pixie",
+    "title": "Pixie",
+    "originalText": "You start knowing 1 in-play Townsfolk. If you were mad that you were this character, you gain their ability when they die.",
+    "normalizedText": "You start knowing 1 in-play Townsfolk. If you were mad that you were this character, you gain their ability when they die.",
+    "tokens": [
+      "START_KNOWING",
+      "1",
+      "play",
+      "townsfolk",
+      "if",
+      "were",
+      "mad",
+      "that",
+      "were",
+      "this",
+      "character",
+      "gain",
+      "their",
+      "ability",
+      "when",
+      "they",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "plague_doctor",
+    "title": "Plague Doctor",
+    "originalText": "When you die, the Storyteller gains a Minion ability.",
+    "normalizedText": "When you die, the Storyteller gains a Minion ability.",
+    "tokens": [
+      "when",
+      "die",
+      "storyteller",
+      "gains",
+      "minion",
+      "ability"
+    ]
+  },
+  {
+    "roleKey": "po",
+    "title": "Po",
+    "originalText": "Each night*, you may choose a player: they die. If your last choice was no-one, choose 3 players tonight.",
+    "normalizedText": "Each night*, you may choose a player: they die. If your last choice was no-one, choose 3 players tonight.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "may",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "if",
+      "last",
+      "choice",
+      "was",
+      "no",
+      "one",
+      "choose",
+      "3",
+      "players",
+      "tonight"
+    ]
+  },
+  {
+    "roleKey": "poisoner",
+    "title": "Poisoner",
+    "originalText": "Each night, choose a player: they are poisoned tonight and tomorrow day.",
+    "normalizedText": "Each night, choose a player: they are poisoned tonight and tomorrow day.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "they",
+      "poisoned",
+      "tonight",
+      "tomorrow",
+      "day"
+    ]
+  },
+  {
+    "roleKey": "politician",
+    "title": "Politician",
+    "originalText": "If you were the player most responsible for your team losing, you change alignment & win, even if dead.",
+    "normalizedText": "If you were the player most responsible for your team losing, you change alignment & win, even if dead.",
+    "tokens": [
+      "if",
+      "were",
+      "player",
+      "most",
+      "responsible",
+      "team",
+      "losing",
+      "change",
+      "alignment",
+      "win",
+      "EVEN_IF_DEAD"
+    ]
+  },
+  {
+    "roleKey": "pope",
+    "title": "Pope",
+    "originalText": "There are duplicate good characters in play. They might also be bluffs.",
+    "normalizedText": "There are duplicate good characters in play. They might also be bluffs.",
+    "tokens": [
+      "there",
+      "duplicate",
+      "good",
+      "characters",
+      "play",
+      "they",
+      "might",
+      "also",
+      "bluffs"
+    ]
+  },
+  {
+    "roleKey": "poppy_grower",
+    "title": "Poppy Grower",
+    "originalText": "Minions & Demons do not know each other. If you die, they learn who each other are that night.",
+    "normalizedText": "Minions & Demons do not know each other. If you die, they learn who each other are that night.",
+    "tokens": [
+      "minions",
+      "demons",
+      "not",
+      "know",
+      "each",
+      "other",
+      "if",
+      "die",
+      "they",
+      "learn",
+      "who",
+      "each",
+      "other",
+      "that",
+      "night"
+    ]
+  },
+  {
+    "roleKey": "preacher",
+    "title": "Preacher",
+    "originalText": "Each night, choose a player: a Minion, if chosen, learns this. All chosen Minions have no ability.",
+    "normalizedText": "Each night, choose a player: a Minion, if chosen, learns this. All chosen Minions have no ability.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "minion",
+      "if",
+      "chosen",
+      "learns",
+      "this",
+      "all",
+      "chosen",
+      "minions",
+      "have",
+      "no",
+      "ability"
+    ]
+  },
+  {
+    "roleKey": "princess",
+    "title": "Princess",
+    "originalText": "On your 1st day, if you nominated & executed a player, the Demon doesn’t kill tonight.",
+    "normalizedText": "On your 1st day, if you nominated & executed a player, the Demon doesn’t kill tonight.",
+    "tokens": [
+      "1st",
+      "day",
+      "if",
+      "NOMINATED",
+      "executed",
+      "player",
+      "demon",
+      "doesn",
+      "t",
+      "kill",
+      "tonight"
+    ]
+  },
+  {
+    "roleKey": "professor",
+    "title": "Professor",
+    "originalText": "Once per game, at night*, choose a dead player: if they are a Townsfolk, they are resurrected.",
+    "normalizedText": "Once per game, at night*, choose a dead player: if they are a Townsfolk, they are resurrected.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "night",
+      "STAR",
+      "choose",
+      "dead",
+      "player",
+      "if",
+      "they",
+      "townsfolk",
+      "they",
+      "resurrected"
+    ]
+  },
+  {
+    "roleKey": "psychopath",
+    "title": "Psychopath",
+    "originalText": "Each day, before nominations, you may publicly choose a player: they die. If executed, you only die if you lose roshambo.",
+    "normalizedText": "Each day, before nominations, you may publicly choose a player: they die. If executed, you only die if you lose roshambo.",
+    "tokens": [
+      "each",
+      "day",
+      "before",
+      "nominations",
+      "may",
+      "publicly",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "if",
+      "executed",
+      "only",
+      "die",
+      "if",
+      "lose",
+      "roshambo"
+    ]
+  },
+  {
+    "roleKey": "pukka",
+    "title": "Pukka",
+    "originalText": "Each night, choose a player: they are poisoned. The previously poisoned player dies then becomes healthy.",
+    "normalizedText": "Each night, choose a player: they are poisoned. The previously poisoned player dies then becomes healthy.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "they",
+      "poisoned",
+      "previously",
+      "poisoned",
+      "player",
+      "dies",
+      "then",
+      "becomes",
+      "healthy"
+    ]
+  },
+  {
+    "roleKey": "puzzlemaster",
+    "title": "Puzzlemaster",
+    "originalText": "1 player is drunk, even if you die. If you guess (once) who it is, learn the Demon player, but guess wrong & get false info.",
+    "normalizedText": "1 player is drunk, even if you die. If you guess (once) who it is, learn the Demon player, but guess wrong & get false info.",
+    "tokens": [
+      "1",
+      "player",
+      "drunk",
+      "even",
+      "if",
+      "die",
+      "if",
+      "guess",
+      "once",
+      "who",
+      "it",
+      "learn",
+      "demon",
+      "player",
+      "but",
+      "guess",
+      "wrong",
+      "get",
+      "false",
+      "info"
+    ]
+  },
+  {
+    "roleKey": "ravenkeeper",
+    "title": "Ravenkeeper",
+    "originalText": "If you die at night, you are woken to choose a player: you learn their character.",
+    "normalizedText": "If you die at night, you are woken to choose a player: you learn their character.",
+    "tokens": [
+      "if",
+      "die",
+      "night",
+      "woken",
+      "CHOOSE_PLAYER",
+      "learn",
+      "their",
+      "character"
+    ]
+  },
+  {
+    "roleKey": "recluse",
+    "title": "Recluse",
+    "originalText": "You might register as evil & as a Minion or Demon, even if dead.",
+    "normalizedText": "You might register as evil & as a Minion or Demon, even if dead.",
+    "tokens": [
+      "might",
+      "register",
+      "evil",
+      "minion",
+      "demon",
+      "EVEN_IF_DEAD"
+    ]
+  },
+  {
+    "roleKey": "revolutionary",
+    "title": "Revolutionary",
+    "originalText": "2 neighboring players are known to be the same alignment. Once per game, 1 of them registers falsely.",
+    "normalizedText": "2 neighboring players are known to be the same alignment. Once per game, 1 of them registers falsely.",
+    "tokens": [
+      "2",
+      "neighboring",
+      "players",
+      "known",
+      "same",
+      "alignment",
+      "ONCE_PER_GAME",
+      "1",
+      "them",
+      "registers",
+      "falsely"
+    ]
+  },
+  {
+    "roleKey": "riot",
+    "title": "Riot",
+    "originalText": "On day 3, Minions become Riot & nominees die but nominate an alive player immediately. This must happen.",
+    "normalizedText": "On day 3, Minions become Riot & nominees die but nominate an alive player immediately. This must happen.",
+    "tokens": [
+      "day",
+      "3",
+      "minions",
+      "become",
+      "riot",
+      "nominees",
+      "die",
+      "but",
+      "nominate",
+      "alive",
+      "player",
+      "immediately",
+      "this",
+      "must",
+      "happen"
+    ]
+  },
+  {
+    "roleKey": "sage",
+    "title": "Sage",
+    "originalText": "If the Demon kills you, you learn that it is 1 of 2 players.",
+    "normalizedText": "If the Demon kills you, you learn that it is 1 of 2 players.",
+    "tokens": [
+      "if",
+      "demon",
+      "kills",
+      "learn",
+      "that",
+      "it",
+      "1",
+      "2",
+      "players"
+    ]
+  },
+  {
+    "roleKey": "sailor",
+    "title": "Sailor",
+    "originalText": "Each night, choose an alive player: either you or they are drunk until dusk. You can't die.",
+    "normalizedText": "Each night, choose an alive player: either you or they are drunk until dusk. You can't die.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "alive",
+      "player",
+      "either",
+      "they",
+      "drunk",
+      "UNTIL_DUSK",
+      "can",
+      "t",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "saint",
+    "title": "Saint",
+    "originalText": "If you die by execution, your team loses.",
+    "normalizedText": "If you die by execution, your team loses.",
+    "tokens": [
+      "if",
+      "die",
+      "execution",
+      "team",
+      "loses"
+    ]
+  },
+  {
+    "roleKey": "savant",
+    "title": "Savant",
+    "originalText": "Each day, you may visit the Storyteller to learn 2 things in private: 1 is true & 1 is false.",
+    "normalizedText": "Each day, you may visit the Storyteller to learn 2 things in private: 1 is true & 1 is false.",
+    "tokens": [
+      "each",
+      "day",
+      "may",
+      "visit",
+      "storyteller",
+      "learn",
+      "2",
+      "things",
+      "private",
+      "1",
+      "true",
+      "1",
+      "false"
+    ]
+  },
+  {
+    "roleKey": "scapegoat",
+    "title": "Scapegoat",
+    "originalText": "If a player of your alignment is executed, you might be executed instead.",
+    "normalizedText": "If a player of your alignment is executed, you might be executed instead.",
+    "tokens": [
+      "if",
+      "player",
+      "alignment",
+      "executed",
+      "might",
+      "executed",
+      "instead"
+    ]
+  },
+  {
+    "roleKey": "scarlet_woman",
+    "title": "Scarlet Woman",
+    "originalText": "If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don't count.)",
+    "normalizedText": "If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don't count.)",
+    "tokens": [
+      "if",
+      "there",
+      "5",
+      "more",
+      "players",
+      "alive",
+      "demon",
+      "dies",
+      "become",
+      "demon",
+      "travellers",
+      "don",
+      "t",
+      "count"
+    ]
+  },
+  {
+    "roleKey": "seamstress",
+    "title": "Seamstress",
+    "originalText": "Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment.",
+    "normalizedText": "Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "night",
+      "CHOOSE_TWO_PLAYERS",
+      "not",
+      "yourself",
+      "learn",
+      "if",
+      "they",
+      "same",
+      "alignment"
+    ]
+  },
+  {
+    "roleKey": "sentinel",
+    "title": "Sentinel",
+    "originalText": "There might be 1 extra or 1 fewer Outsider in play.",
+    "normalizedText": "There might be 1 extra or 1 fewer Outsider in play.",
+    "tokens": [
+      "there",
+      "might",
+      "1",
+      "extra",
+      "1",
+      "fewer",
+      "outsider",
+      "play"
+    ]
+  },
+  {
+    "roleKey": "shabaloth",
+    "title": "Shabaloth",
+    "originalText": "Each night*, choose 2 players: they die. A dead player you chose last night might be regurgitated.",
+    "normalizedText": "Each night*, choose 2 players: they die. A dead player you chose last night might be regurgitated.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_TWO_PLAYERS",
+      "they",
+      "die",
+      "dead",
+      "player",
+      "chose",
+      "last",
+      "night",
+      "might",
+      "regurgitated"
+    ]
+  },
+  {
+    "roleKey": "shugenja",
+    "title": "Shugenja",
+    "originalText": "You start knowing if your closest evil player is clockwise or anti-clockwise. If equidistant, this info is arbitrary.",
+    "normalizedText": "You start knowing if your closest evil player is clockwise or anti-clockwise. If equidistant, this info is arbitrary.",
+    "tokens": [
+      "START_KNOWING",
+      "if",
+      "closest",
+      "evil",
+      "player",
+      "clockwise",
+      "anti",
+      "clockwise",
+      "if",
+      "equidistant",
+      "this",
+      "info",
+      "arbitrary"
+    ]
+  },
+  {
+    "roleKey": "slayer",
+    "title": "Slayer",
+    "originalText": "Once per game, during the day, publicly choose a player: if they are the Demon, they die.",
+    "normalizedText": "Once per game, during the day, publicly choose a player: if they are the Demon, they die.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "during",
+      "day",
+      "publicly",
+      "CHOOSE_PLAYER",
+      "if",
+      "they",
+      "demon",
+      "they",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "snake_charmer",
+    "title": "Snake Charmer",
+    "originalText": "Each night, choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned.",
+    "normalizedText": "Each night, choose an alive player: a chosen Demon swaps characters & alignments with you & is then poisoned.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "alive",
+      "player",
+      "chosen",
+      "demon",
+      "swaps",
+      "characters",
+      "alignments",
+      "then",
+      "poisoned"
+    ]
+  },
+  {
+    "roleKey": "snitch",
+    "title": "Snitch",
+    "originalText": "Each Minion gets 3 bluffs.",
+    "normalizedText": "Each Minion gets 3 bluffs.",
+    "tokens": [
+      "each",
+      "minion",
+      "gets",
+      "3",
+      "bluffs"
+    ]
+  },
+  {
+    "roleKey": "soldier",
+    "title": "Soldier",
+    "originalText": "You are safe from the Demon.",
+    "normalizedText": "You are safe from the Demon.",
+    "tokens": [
+      "safe",
+      "demon"
+    ]
+  },
+  {
+    "roleKey": "spirit_of_ivory",
+    "title": "Spirit of Ivory",
+    "originalText": "There can't be more than 1 extra evil player.",
+    "normalizedText": "There can't be more than 1 extra evil player.",
+    "tokens": [
+      "there",
+      "can",
+      "t",
+      "more",
+      "than",
+      "1",
+      "extra",
+      "evil",
+      "player"
+    ]
+  },
+  {
+    "roleKey": "spy",
+    "title": "Spy",
+    "originalText": "Each night, you see the Grimoire. You might register as good & as a Townsfolk or Outsider, even if dead.",
+    "normalizedText": "Each night, you see the Grimoire. You might register as good & as a Townsfolk or Outsider, even if dead.",
+    "tokens": [
+      "EACH_NIGHT",
+      "see",
+      "grimoire",
+      "might",
+      "register",
+      "good",
+      "townsfolk",
+      "outsider",
+      "EVEN_IF_DEAD"
+    ]
+  },
+  {
+    "roleKey": "steward",
+    "title": "Steward",
+    "originalText": "You start knowing 1 good player.",
+    "normalizedText": "You start knowing 1 good player.",
+    "tokens": [
+      "START_KNOWING",
+      "1",
+      "good",
+      "player"
+    ]
+  },
+  {
+    "roleKey": "storm_catcher",
+    "title": "Storm Catcher",
+    "originalText": "Name a good character. If in play, they can only die by execution, but evil players learn which player it is.",
+    "normalizedText": "Name a good character. If in play, they can only die by execution, but evil players learn which player it is.",
+    "tokens": [
+      "name",
+      "good",
+      "character",
+      "if",
+      "play",
+      "they",
+      "can",
+      "only",
+      "die",
+      "execution",
+      "but",
+      "evil",
+      "players",
+      "learn",
+      "which",
+      "player",
+      "it"
+    ]
+  },
+  {
+    "roleKey": "summoner",
+    "title": "Summoner",
+    "originalText": "You get 3 bluffs. On the 3rd night, choose a player: they become an evil Demon of your choice. [No Demon]",
+    "normalizedText": "You get 3 bluffs. On the 3rd night, choose a player: they become an evil Demon of your choice. [No Demon]",
+    "tokens": [
+      "get",
+      "3",
+      "bluffs",
+      "3rd",
+      "night",
+      "CHOOSE_PLAYER",
+      "they",
+      "become",
+      "evil",
+      "demon",
+      "choice",
+      "ACCEPT_MODIFIER",
+      "no",
+      "demon",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "sweetheart",
+    "title": "Sweetheart",
+    "originalText": "When you die, 1 player is drunk from now on.",
+    "normalizedText": "When you die, 1 player is drunk from now on.",
+    "tokens": [
+      "when",
+      "die",
+      "1",
+      "player",
+      "drunk",
+      "now"
+    ]
+  },
+  {
+    "roleKey": "tea_lady",
+    "title": "Tea Lady",
+    "originalText": "If both your alive neighbors are good, they can't die.",
+    "normalizedText": "If both your alive neighbors are good, they can't die.",
+    "tokens": [
+      "if",
+      "both",
+      "alive",
+      "neighbors",
+      "good",
+      "they",
+      "can",
+      "t",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "thief",
+    "title": "Thief",
+    "originalText": "Each night, choose a player (not yourself): their vote counts negatively tomorrow.",
+    "normalizedText": "Each night, choose a player (not yourself): their vote counts negatively tomorrow.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "not",
+      "yourself",
+      "their",
+      "vote",
+      "counts",
+      "negatively",
+      "tomorrow"
+    ]
+  },
+  {
+    "roleKey": "tinker",
+    "title": "Tinker",
+    "originalText": "You might die at any time.",
+    "normalizedText": "You might die at any time.",
+    "tokens": [
+      "might",
+      "die",
+      "any",
+      "time"
+    ]
+  },
+  {
+    "roleKey": "tor",
+    "title": "Tor",
+    "originalText": "Players don't know their character or alignment. They learn them when they die.",
+    "normalizedText": "Players don't know their character or alignment. They learn them when they die.",
+    "tokens": [
+      "players",
+      "don",
+      "t",
+      "know",
+      "their",
+      "character",
+      "alignment",
+      "they",
+      "learn",
+      "them",
+      "when",
+      "they",
+      "die"
+    ]
+  },
+  {
+    "roleKey": "town_crier",
+    "title": "Town Crier",
+    "originalText": "Each night*, you learn if a Minion nominated today.",
+    "normalizedText": "Each night*, you learn if a Minion nominated today.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "learn",
+      "if",
+      "minion",
+      "NOMINATED",
+      "today"
+    ]
+  },
+  {
+    "roleKey": "toymaker",
+    "title": "Toymaker",
+    "originalText": "The Demon may choose not to attack & must do this at least once per game. Evil players get normal starting info.",
+    "normalizedText": "The Demon may choose not to attack & must do this at least once per game. Evil players get normal starting info.",
+    "tokens": [
+      "demon",
+      "may",
+      "choose",
+      "not",
+      "attack",
+      "must",
+      "this",
+      "least",
+      "ONCE_PER_GAME",
+      "evil",
+      "players",
+      "get",
+      "normal",
+      "starting",
+      "info"
+    ]
+  },
+  {
+    "roleKey": "undertaker",
+    "title": "Undertaker",
+    "originalText": "Each night*, you learn which character died by execution today.",
+    "normalizedText": "Each night*, you learn which character died by execution today.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "learn",
+      "which",
+      "character",
+      "died",
+      "execution",
+      "today"
+    ]
+  },
+  {
+    "roleKey": "vigormortis",
+    "title": "Vigormortis",
+    "originalText": "Each night*, choose a player: they die. Minions you kill keep their ability & poison 1 Townsfolk neighbor. [-1 Outsider]",
+    "normalizedText": "Each night*, choose a player: they die. Minions you kill keep their ability & poison 1 Townsfolk neighbor. [-1 Outsider]",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "minions",
+      "kill",
+      "keep",
+      "their",
+      "ability",
+      "poison",
+      "1",
+      "townsfolk",
+      "neighbor",
+      "ACCEPT_MODIFIER",
+      "1",
+      "outsider",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "village_idiot",
+    "title": "Village Idiot",
+    "originalText": "Each night, choose a player: you learn their alignment. [+0 to +2 Village Idiots. 1 of the extras is drunk]",
+    "normalizedText": "Each night, choose a player: you learn their alignment. [+0 to +2 Village Idiots. 1 of the extras is drunk]",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "learn",
+      "their",
+      "alignment",
+      "ACCEPT_MODIFIER",
+      "0",
+      "2",
+      "village",
+      "idiots",
+      "1",
+      "extras",
+      "drunk",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "virgin",
+    "title": "Virgin",
+    "originalText": "The 1st time you are nominated, if the nominator is a Townsfolk, they are executed immediately.",
+    "normalizedText": "The 1st time you are nominated, if the nominator is a Townsfolk, they are executed immediately.",
+    "tokens": [
+      "1st",
+      "time",
+      "NOMINATED",
+      "if",
+      "nominator",
+      "townsfolk",
+      "they",
+      "executed",
+      "immediately"
+    ]
+  },
+  {
+    "roleKey": "vizier",
+    "title": "Vizier",
+    "originalText": "All players know you are the Vizier. You cannot die during the day. If good voted, you may choose to execute immediately.",
+    "normalizedText": "All players know you are the Vizier. You cannot die during the day. If good voted, you may choose to execute immediately.",
+    "tokens": [
+      "all",
+      "players",
+      "know",
+      "vizier",
+      "cannot",
+      "die",
+      "during",
+      "day",
+      "if",
+      "good",
+      "voted",
+      "may",
+      "choose",
+      "execute",
+      "immediately"
+    ]
+  },
+  {
+    "roleKey": "vortox",
+    "title": "Vortox",
+    "originalText": "Each night*, choose a player: they die. Townsfolk abilities yield false info. Each day, if no-one is executed, evil wins.",
+    "normalizedText": "Each night*, choose a player: they die. Townsfolk abilities yield false info. Each day, if no-one is executed, evil wins.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "townsfolk",
+      "abilities",
+      "yield",
+      "false",
+      "info",
+      "each",
+      "day",
+      "if",
+      "no",
+      "one",
+      "executed",
+      "evil",
+      "wins"
+    ]
+  },
+  {
+    "roleKey": "voudon",
+    "title": "Voudon",
+    "originalText": "Only you & the dead can vote. They don't need a vote token to do so. A 50% majority isn't required.",
+    "normalizedText": "Only you & the dead can vote. They don't need a vote token to do so. A 50% majority isn't required.",
+    "tokens": [
+      "only",
+      "dead",
+      "can",
+      "vote",
+      "they",
+      "don",
+      "t",
+      "need",
+      "vote",
+      "token",
+      "so",
+      "50",
+      "majority",
+      "isn",
+      "t",
+      "required"
+    ]
+  },
+  {
+    "roleKey": "washerwoman",
+    "title": "Washerwoman",
+    "originalText": "You start knowing that 1 of 2 players is a particular Townsfolk.",
+    "normalizedText": "You start knowing that 1 of 2 players is a particular Townsfolk.",
+    "tokens": [
+      "START_KNOWING",
+      "that",
+      "1",
+      "2",
+      "players",
+      "particular",
+      "townsfolk"
+    ]
+  },
+  {
+    "roleKey": "widow",
+    "title": "Widow",
+    "originalText": "On your 1st night, look at the Grimoire & choose a player: they are poisoned. 1 good player knows a Widow is in play.",
+    "normalizedText": "On your 1st night, look at the Grimoire & choose a player: they are poisoned. 1 good player knows a Widow is in play.",
+    "tokens": [
+      "1st",
+      "night",
+      "look",
+      "grimoire",
+      "CHOOSE_PLAYER",
+      "they",
+      "poisoned",
+      "1",
+      "good",
+      "player",
+      "knows",
+      "widow",
+      "play"
+    ]
+  },
+  {
+    "roleKey": "witch",
+    "title": "Witch",
+    "originalText": "Each night, choose a player: if they nominate tomorrow, they die. If just 3 players live, you lose this ability.",
+    "normalizedText": "Each night, choose a player: if they nominate tomorrow, they die. If just 3 players live, you lose this ability.",
+    "tokens": [
+      "EACH_NIGHT_CHOOSE",
+      "player",
+      "if",
+      "they",
+      "nominate",
+      "tomorrow",
+      "they",
+      "die",
+      "if",
+      "just",
+      "3",
+      "players",
+      "live",
+      "lose",
+      "this",
+      "ability"
+    ]
+  },
+  {
+    "roleKey": "wizard",
+    "title": "Wizard",
+    "originalText": "Once per game, choose to make a wish. If granted, it might have a price & leave a clue as to its nature.",
+    "normalizedText": "Once per game, choose to make a wish. If granted, it might have a price & leave a clue as to its nature.",
+    "tokens": [
+      "ONCE_PER_GAME",
+      "choose",
+      "make",
+      "wish",
+      "if",
+      "granted",
+      "it",
+      "might",
+      "have",
+      "price",
+      "leave",
+      "clue",
+      "its",
+      "nature"
+    ]
+  },
+  {
+    "roleKey": "wraith",
+    "title": "Wraith",
+    "originalText": "You may choose to open your eyes at night. You wake when other evil players do.",
+    "normalizedText": "You may choose to open your eyes at night. You wake when other evil players do.",
+    "tokens": [
+      "may",
+      "choose",
+      "open",
+      "eyes",
+      "night",
+      "wake",
+      "when",
+      "other",
+      "evil",
+      "players"
+    ]
+  },
+  {
+    "roleKey": "xaan",
+    "title": "Xaan",
+    "originalText": "On night X, all Townsfolk are poisoned until dusk. [X Outsiders]",
+    "normalizedText": "On night X, all Townsfolk are poisoned until dusk. [X Outsiders]",
+    "tokens": [
+      "night",
+      "x",
+      "all",
+      "townsfolk",
+      "poisoned",
+      "UNTIL_DUSK",
+      "ACCEPT_MODIFIER",
+      "x",
+      "outsiders",
+      "ACCEPT_MODIFIER"
+    ]
+  },
+  {
+    "roleKey": "yaggababble",
+    "title": "Yaggababble",
+    "originalText": "You start knowing a secret phrase. For each time you said it publicly today, a player might die.",
+    "normalizedText": "You start knowing a secret phrase. For each time you said it publicly today, a player might die.",
+    "tokens": [
+      "START_KNOWING",
+      "secret",
+      "phrase",
+      "each",
+      "time",
+      "said",
+      "it",
+      "publicly",
+      "today",
+      "PLAYER_MIGHT_DIE"
+    ]
+  },
+  {
+    "roleKey": "zealot",
+    "title": "Zealot",
+    "originalText": "If there are 5 or more players alive, you must vote for every nomination.",
+    "normalizedText": "If there are 5 or more players alive, you must vote for every nomination.",
+    "tokens": [
+      "if",
+      "there",
+      "5",
+      "more",
+      "players",
+      "alive",
+      "must",
+      "vote",
+      "every",
+      "nomination"
+    ]
+  },
+  {
+    "roleKey": "zenomancer",
+    "title": "Zenomancer",
+    "originalText": "One or more players each have a goal. When achieved, that player learns a piece of true info.",
+    "normalizedText": "One or more players each have a goal. When achieved, that player learns a piece of true info.",
+    "tokens": [
+      "one",
+      "more",
+      "players",
+      "each",
+      "have",
+      "goal",
+      "when",
+      "achieved",
+      "that",
+      "player",
+      "learns",
+      "piece",
+      "true",
+      "info"
+    ]
+  },
+  {
+    "roleKey": "zombuul",
+    "title": "Zombuul",
+    "originalText": "Each night*, if no-one died today, choose a player: they die. The 1st time you die, you live but register as dead.",
+    "normalizedText": "Each night*, if no-one died today, choose a player: they die. The 1st time you die, you live but register as dead.",
+    "tokens": [
+      "EACH_NIGHT_STAR",
+      "if",
+      "no",
+      "one",
+      "died",
+      "today",
+      "CHOOSE_PLAYER",
+      "they",
+      "die",
+      "1st",
+      "time",
+      "die",
+      "live",
+      "but",
+      "register",
+      "dead"
+    ]
+  }
+]

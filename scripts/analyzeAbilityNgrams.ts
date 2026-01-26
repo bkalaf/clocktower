@@ -1,8 +1,9 @@
 import fs from 'fs/promises';
 import path from 'path';
+import { pathToFileURL } from 'url';
 import type { NormalizedWikiPage } from '../src/spec/wikiTypes';
 
-const STOPWORDS = new Set([
+const DEFAULT_STOPWORD_LIST = [
     'a',
     'an',
     'the',
@@ -30,19 +31,34 @@ const STOPWORDS = new Set([
     'did',
     'not',
     'no'
-]);
+];
 
-const DEFAULT_CONFIG_PATH = path.resolve('scripts', 'tokenNormalizationConfig.json');
+const DEFAULT_STOPWORDS = new Set(DEFAULT_STOPWORD_LIST);
+const DEFAULT_CONFIG_PATH = path.resolve('scripts', 'tokenNormalizationConfig.ts');
+
+type CountMap = Record<string, number>;
 
 interface AliasSequence {
     alias: string;
     sequence: string[];
 }
 
+interface RegexAlias {
+    alias: string;
+    regex: RegExp;
+    handler?: (match: RegExpMatchArray) => string[];
+}
+
 interface CliOptions {
     inputDir: string;
     outputDir: string;
     configPath?: string;
+}
+
+interface NormalizationConfig {
+    tokens?: Record<string, string[]>;
+    ignored?: string[];
+    regex?: Record<string, [string, ((match: RegExpMatchArray) => string[]) | undefined]>;
 }
 
 function parseCliArgs(argv: string[]): CliOptions {
@@ -62,7 +78,9 @@ function parseCliArgs(argv: string[]): CliOptions {
     const configPath = getValue('--config');
 
     if (!inputDir || !outputDir) {
-        throw new Error('Usage: node ./dist/scripts/analyzeAbilityNgrams.js --in <normalizedPagesDir> --out <outputDir>');
+        throw new Error(
+            'Usage: node ./dist/scripts/analyzeAbilityNgrams.js --in <normalizedPagesDir> --out <outputDir>'
+        );
     }
 
     return {
@@ -86,21 +104,135 @@ function normalizeAliasToken(token: string): string {
     return trimmed.toLowerCase();
 }
 
-function loadAliasSequences(filePath: string | undefined): AliasSequence[] {
+function buildRegexAliases(config: NormalizationConfig['regex']): RegexAlias[] {
+    if (!config) {
+        return [];
+    }
+
+    return Object.entries(config)
+        .map(([alias, tuple]) => {
+            if (!Array.isArray(tuple) || typeof tuple[0] !== 'string') {
+                return null;
+            }
+            const pattern = tuple[0];
+            try {
+                const regex = new RegExp(pattern, 'gu');
+                const extras = tuple[1] ?? {};
+                return { alias: alias.trim(), regex, extras };
+            } catch {
+                return null;
+            }
+        })
+        .filter((entry): entry is RegexAlias => Boolean(entry));
+}
+
+function normalizeRegexExtras(extras: Record<string, string>): string[] {
+    return Object.entries(extras)
+        .sort((a, b) => {
+            const aNum = Number(a[0]);
+            const bNum = Number(b[0]);
+            if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) {
+                return aNum - bNum;
+            }
+            if (!Number.isNaN(aNum)) {
+                return -1;
+            }
+            if (!Number.isNaN(bNum)) {
+                return 1;
+            }
+            return a[0].localeCompare(b[0], 'en', { sensitivity: 'base' });
+        })
+        .map(([, token]) => token);
+}
+
+async function loadNormalizationConfig(filePath: string | undefined): Promise<{
+    sequences: AliasSequence[];
+    regexAliases: RegexAlias[];
+    stopwords: Set<string>;
+    source?: string;
+}> {
     const resolvedPath = filePath ?? DEFAULT_CONFIG_PATH;
     try {
-        const raw = fs.readFileSync
-    return {
-        inputDir: path.resolve(inputDir),
-        outputDir: path.resolve(outputDir)
-    };
+        const raw = await fs.readFile(resolvedPath, 'utf-8');
+        const parsed = (raw ? (JSON.parse(raw) as NormalizationConfig) : {}) ?? {};
+        const sequences: AliasSequence[] = [];
+
+        if (parsed.tokens) {
+            for (const [alias, sequence] of Object.entries(parsed.tokens)) {
+                if (!Array.isArray(sequence)) {
+                    continue;
+                }
+                const normalizedSequence = sequence.map(normalizeAliasToken).filter((token) => Boolean(token));
+                if (!normalizedSequence.length) {
+                    continue;
+                }
+                sequences.push({ alias: alias.trim(), sequence: normalizedSequence });
+            }
+        }
+
+        const stopwords = new Set<string>();
+        if (parsed.ignored && parsed.ignored.length > 0) {
+            parsed.ignored.forEach((item) => {
+                const normalized = item.trim().toLowerCase();
+                if (normalized) {
+                    stopwords.add(normalized);
+                }
+            });
+        } else {
+            DEFAULT_STOPWORD_LIST.forEach((item) => stopwords.add(item));
+        }
+
+        const regexAliases = buildRegexAliases(parsed.regex);
+
+        return {
+            sequences: sequences.sort((a, b) => {
+                if (b.sequence.length !== a.sequence.length) {
+                    return b.sequence.length - a.sequence.length;
+                }
+                return a.alias.localeCompare(b.alias, 'en', { sensitivity: 'base' });
+            }),
+            regexAliases,
+            stopwords,
+            source: resolvedPath
+        };
+    } catch (error) {
+        if (filePath) {
+            console.warn(`Unable to load normalization config at ${resolvedPath}: ${(error as Error).message}`);
+        }
+        return {
+            sequences: [],
+            regexAliases: [],
+            stopwords: new Set(DEFAULT_STOPWORD_LIST),
+            source: undefined
+        };
+    }
+}
+
+function applyRegexMappings(text: string, regexAliases: RegexAlias[]): string {
+    if (!regexAliases.length) {
+        return text;
+    }
+
+    let transformed = text;
+    for (const entry of regexAliases) {
+        entry.regex.lastIndex = 0;
+        transformed = transformed.replace(entry.regex, () => {
+            const extras = normalizeRegexExtras(entry.extras);
+            const tokens = [entry.alias, ...extras].filter(Boolean);
+            return tokens.length ? ` ${tokens.join(' ')} ` : ' ';
+        });
+    }
+    return transformed;
 }
 
 function writeJson(file: string, data: unknown): Promise<void> {
     return fs.writeFile(file, JSON.stringify(data, null, 2) + '\n', 'utf-8');
 }
 
-function tokenizeAbilityText(text: string): { tokens: string[]; stopwordCount: number } {
+function tokenizeAbilityText(
+    text: string,
+    stopwordSet: Set<string> = DEFAULT_STOPWORDS
+): { tokens: string[]; stopwordCount: number } {
     const normalized = text
         .replace(/\*/g, ' STAR ')
         .replace(/\[/g, ' ACCEPT_MODIFIER ')
@@ -116,7 +248,7 @@ function tokenizeAbilityText(text: string): { tokens: string[]; stopwordCount: n
     let stopwordCount = 0;
 
     for (const token of rawTokens) {
-        if (STOPWORDS.has(token)) {
+        if (stopwordSet.has(token)) {
             stopwordCount += 1;
             continue;
         }
@@ -128,9 +260,9 @@ function tokenizeAbilityText(text: string): { tokens: string[]; stopwordCount: n
 
 function accumulateNgramCounts(
     tokens: string[],
-    tokenCounts: Record<string, number>,
-    bigramCounts: Record<string, number>,
-    trigramCounts: Record<string, number>
+    tokenCounts: CountMap,
+    bigramCounts: CountMap,
+    trigramCounts: CountMap
 ): void {
     for (const token of tokens) {
         tokenCounts[token] = (tokenCounts[token] ?? 0) + 1;
@@ -147,22 +279,90 @@ function accumulateNgramCounts(
     }
 }
 
-function sortCountMap(counts: Record<string, number>): Record<string, number> {
+function sortCountMap(counts: CountMap): CountMap {
     return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
 }
 
+function applyAliasSequences(tokens: string[], sequences: AliasSequence[]): string[] {
+    if (!sequences.length) {
+        return tokens;
+    }
+    const mapped: string[] = [];
+    let index = 0;
+
+    while (index < tokens.length) {
+        let matched: AliasSequence | undefined;
+        for (const sequence of sequences) {
+            if (sequence.sequence.length > tokens.length - index) {
+                continue;
+            }
+            let matches = true;
+            for (let i = 0; i < sequence.sequence.length; i += 1) {
+                if (tokens[index + i] !== sequence.sequence[i]) {
+                    matches = false;
+                    break;
+                }
+            }
+            if (matches) {
+                matched = sequence;
+                break;
+            }
+        }
+
+        if (matched) {
+            mapped.push(matched.alias);
+            index += matched.sequence.length;
+            continue;
+        }
+
+        mapped.push(tokens[index]);
+        index += 1;
+    }
+
+    return mapped;
+}
+
+interface TokenizedTrace {
+    roleKey: string;
+    title: string;
+    originalText: string;
+    normalizedText: string;
+    tokens: string[];
+}
+
 async function main() {
-    const { inputDir, outputDir } = parseCliArgs(process.argv.slice(2));
+    const { inputDir, outputDir, configPath } = parseCliArgs(process.argv.slice(2));
+    const {
+        sequences: aliasSequences,
+        regexAliases,
+        stopwords: stopwordSet,
+        source: configSource
+    } = await loadNormalizationConfig(configPath);
+    if (aliasSequences.length) {
+        console.log(
+            `Loaded ${aliasSequences.length} alias sequences from ${configSource ?? configPath ?? DEFAULT_CONFIG_PATH}.`
+        );
+    }
+    if (regexAliases.length) {
+        console.log(
+            `Applied ${regexAliases.length} regex mappings from ${configSource ?? configPath ?? DEFAULT_CONFIG_PATH}.`
+        );
+    }
+    if (stopwordSet.size !== DEFAULT_STOPWORD_LIST.length) {
+        console.log(`Using ${stopwordSet.size} stopwords${configSource ? ` from ${configSource}` : ''}.`);
+    }
+
     const files = await fs.readdir(inputDir);
     await fs.mkdir(outputDir, { recursive: true });
 
-    const tokenCounts: Record<string, number> = {};
-    const bigramCounts: Record<string, number> = {};
-    const trigramCounts: Record<string, number> = {};
+    const tokenCounts: CountMap = {};
+    const bigramCounts: CountMap = {};
+    const trigramCounts: CountMap = {};
     let totalRolesProcessed = 0;
     let totalAbilityTextsProcessed = 0;
     let totalTokens = 0;
     let stopwordCount = 0;
+    const tokenizedTraces: TokenizedTrace[] = [];
 
     for (const filename of files) {
         if (!filename.endsWith('.json')) {
@@ -173,22 +373,33 @@ async function main() {
         const filepath = path.join(inputDir, filename);
         const raw = await fs.readFile(filepath, 'utf-8');
         const page: NormalizedWikiPage = JSON.parse(raw);
-        const abilityText = String(page.abilityText ?? '').trim();
-        if (!abilityText) {
+        const originalText = String(page.abilityText ?? '').trim();
+        if (!originalText) {
             continue;
         }
 
+        const normalizedText = applyRegexMappings(originalText, regexAliases);
         totalAbilityTextsProcessed += 1;
-        const { tokens, stopwordCount: removed } = tokenizeAbilityText(abilityText);
+        const { tokens, stopwordCount: removed } = tokenizeAbilityText(normalizedText, stopwordSet);
         stopwordCount += removed;
-        totalTokens += tokens.length;
+        const normalizedTokens = applyAliasSequences(tokens, aliasSequences);
+        totalTokens += normalizedTokens.length;
+        tokenizedTraces.push({
+            roleKey: page.roleKey,
+            title: page.title,
+            originalText,
+            normalizedText,
+            tokens: normalizedTokens
+        });
 
-        accumulateNgramCounts(tokens, tokenCounts, bigramCounts, trigramCounts);
+        accumulateNgramCounts(normalizedTokens, tokenCounts, bigramCounts, trigramCounts);
     }
 
     await writeJson(path.join(outputDir, 'ability_token_counts.json'), sortCountMap(tokenCounts));
     await writeJson(path.join(outputDir, 'ability_bigrams.json'), sortCountMap(bigramCounts));
     await writeJson(path.join(outputDir, 'ability_trigrams.json'), sortCountMap(trigramCounts));
+    const sortedTraces = tokenizedTraces.sort((a, b) => a.roleKey.localeCompare(b.roleKey));
+    await writeJson(path.join(outputDir, 'ability_tokenized_texts.json'), sortedTraces);
     await writeJson(path.join(outputDir, 'analysis_meta.json'), {
         totalRolesProcessed,
         totalAbilityTextsProcessed,
@@ -200,6 +411,7 @@ async function main() {
     console.log(`Processed ${totalRolesProcessed} roles (${totalAbilityTextsProcessed} abilities).`);
     console.log(`Collected ${totalTokens} tokens (removed ${stopwordCount} stopwords).`);
     console.log(`Outputs written to ${outputDir}.`);
+    console.log(`Tokenized ability texts saved to ability_tokenized_texts.json.`);
 }
 
 const analyzeEntry = path.basename(process.argv[1] ?? '');
@@ -210,4 +422,4 @@ if (analyzeEntry === 'analyzeAbilityNgrams.js' || analyzeEntry === 'analyzeAbili
     });
 }
 
-export { tokenizeAbilityText, accumulateNgramCounts, sortCountMap, STOPWORDS };
+export { tokenizeAbilityText, accumulateNgramCounts, sortCountMap, applyAliasSequences, loadNormalizationConfig };

@@ -1,4 +1,4 @@
-import { accumulateNgramCounts, tokenizeAbilityText } from '../analyzeAbilityNgrams';
+import { accumulateNgramCounts, tokenizeAbilityText, applyAliasSequences } from '../analyzeAbilityNgrams';
 
 describe('analyzeAbilityNgrams helpers', () => {
     it('tokenizes ability text, keeps STAR, and filters stopwords', () => {
@@ -10,6 +10,15 @@ describe('analyzeAbilityNgrams helpers', () => {
     it('inserts ACCEPT_MODIFIER tokens for brackets and removes punctuation', () => {
         const { tokens } = tokenizeAbilityText('You start knowing [something].');
         expect(tokens).toEqual(['start', 'knowing', 'ACCEPT_MODIFIER', 'something', 'ACCEPT_MODIFIER']);
+    });
+
+    it('applies alias sequences to collapse known bigrams', () => {
+        const { tokens } = tokenizeAbilityText('Each night*, choose a player: they die.');
+        const sequences = [
+            { alias: 'EACH_NIGHT', sequence: ['each', 'night'] }
+        ];
+        const aliased = applyAliasSequences(tokens, sequences);
+        expect(aliased).toEqual(['EACH_NIGHT', 'STAR', 'choose', 'player', 'they', 'die']);
     });
 
     it('counts bigrams and trigrams across several ability texts', () => {
