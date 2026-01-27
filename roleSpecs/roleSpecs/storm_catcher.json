@@ -1,0 +1,54 @@
+{
+  "roleKey": "storm_catcher",
+  "title": "Storm Catcher",
+  "category": "loric",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Name a good character. If in play, they can only die by execution, but evil players learn which player it is.",
+  "summary": "Use the Storm Catcher to focus the game on a particular good character.\n-  If you want to construct a script based around the actions or information of one particular good character, if you want to have this character in every game (or at least have an evil player bluffing as this character), you can use the Storm Catcher. Your chosen character will play a big part in the game, will be the focus of a lot of group discussion, and will probably live until the final day.\n-  The Storyteller declares that one character can’t die, unless by execution. This character may be in play, or not in play. If it is in play, this good player lives as long as the good players want them to, since evil players cannot kill them. If it is not in play, all evil players learn this, so any evil player can easily bluff as this character. (They don’t have to, but they can.)",
+  "howToRun": "At the start of the game, declare that the Storm Catcher is in play. Add the Storm Catcher token to the Grimoire. Declare which good character is favoured by the Storm Catcher. If the favoured character is in play, mark them with the Storm Catcher’s SAFE reminder.\n\nDuring the first night, wake each evil player in turn. If a good character is marked with the Storm Catcher’s SAFE reminder, show the evil player the THIS PLAYER IS info token, the good character token, point to the good player, then put the evil player to sleep. If no one is marked with the Storm Catcher’s SAFE reminder, show the evil player the THESE CHARACTERS ARE NOT IN PLAY info token and the good character token, then put the evil player to sleep.\n\nIf the character marked with the Storm Catcher’s SAFE reminder is executed, they die. If they would die by other means, they remain alive.",
+  "examples": [
+    "The Storyteller has built a script based on the General, so says that “the Storm Catcher favours the General”. The General is in play. At night, the Imp and the Godfather both attack the General, who does not die. After 5 days of information and discussion, the town decides to execute the General. They die.",
+    "The Storyteller wants a game based around the Empath’s information, so declares that “The Storm Catcher favours the Empath”. There is no Empath in play. Because the evil players learn this, the Poisoner chooses to bluff as the Empath."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": false,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "execution",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "does not die (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/storm_catcher"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "roleKey": "saint",
+  "title": "Saint",
+  "category": "outsider",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "If you die by execution, your team loses.",
+  "summary": "The Saint ends the game if they are executed.\n-  If the Saint dies by execution, the game ends. Good loses and evil wins.\n-  If the Saint dies in any way other than execution—such as the Demon killing them—then the game continues.",
+  "howToRun": "If the Saint dies by execution, declare that the game ends and evil wins.\n\nThe Saint's ability has the strange phrase \"your team loses.\" In Trouble Brewing, this will always mean \"evil wins\" because the Saint is always good. In other editions, it is possible for characters to change alignment. If the evil Saint is executed, good wins.",
+  "examples": [
+    "There are seven players alive and nominations are in progress. The Saint gets four votes and is about to die. Then, the Baron is nominated but only gets three votes. No more nominations occur today. The Saint is executed, and evil wins.",
+    "The Imp is nominated, and the players vote. The  kills the Saint. The Saint dies, and the game continues.",
+    "The Saint is executed. However, the  's ability is triggered, so the  dies instead. The game continues, because the Saint did not die."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_DEATH_RESOLVED",
+      "description": "Something happens when this character dies.",
+      "evidence": [
+        "if you die (text)"
+      ]
+    },
+    {
+      "moment": "MOMENT_ATTEMPTED_EXECUTION",
+      "description": "Special consequences when the character is executed.",
+      "evidence": [
+        "attempted execution list (fact)"
+      ]
+    }
+  ],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "SAINT",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)",
+        "evil wins (text)",
+        "good loses (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RULES/saint_global_rule",
+    "WINCHECK/saint",
+    "TRIGGER/saint/MOMENT_DEATH_RESOLVED",
+    "TRIGGER/saint/MOMENT_ATTEMPTED_EXECUTION"
+  ],
+  "factTags": [
+    "execution-trigger",
+    "win-condition"
+  ]
+}

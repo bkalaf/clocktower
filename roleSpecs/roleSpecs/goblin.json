@@ -1,0 +1,59 @@
+{
+  "roleKey": "goblin",
+  "title": "Goblin",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "If you publicly claim to be the Goblin when nominated & are executed that day, your team wins.",
+  "summary": "The Goblin takes revenge if the town knowingly executes them.\n-  If the Goblin is executed, evil wins.\n-  ...but for this to happen the Goblin needs to tell the group that they are the Goblin when they are nominated, but before votes happen, and to do so in a way that everyone hears. The good players need to know the risk.\n-  If the Goblin is executed without telling the group that they are the Goblin when nominated, the Goblin dies and the game continues as normal.\n-  The Goblin must have claimed to be the Goblin today for their ability to work. Telling the group yesterday, or even every previous day, doesn't count.\n-  Any player may claim to be the Goblin when nominated.",
+  "howToRun": "If the Goblin claims to be the Goblin when nominated (and before voting begins), declare that this player has claimed to be the Goblin, so that all the group hears. Put the CLAIMED reminder by the Goblin token.\n\nIf the Goblin is executed, and they are marked CLAIMED, then declare that evil wins.\n\nIf a non-Goblin player claims to be the Goblin when nominated, act as if they are the Goblin. Declare to the group that they have claimed to be the Goblin and pretend to move a reminder token in the Grimoire.",
+  "examples": [
+    "Abdallah is the Goblin. Alex nominates Abdallah, and Abdallah claims to be the Goblin. Votes are counted, and Abdallah is about to die. Other nominations occur later today, but Abdallah has the most votes and is executed. Evil wins.",
+    "Lewis is the Artist, and claims to be the Goblin when nominated. He is executed, and the game continues.",
+    "Doug is the Goblin. He claimed to be the Goblin yesterday and the day before, but not today. He is executed. The game continues."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "GOBLIN",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "evil wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Cerenovus",
+      "withKey": "cerenovus",
+      "alignment": "Evil",
+      "text": "The Cerenovus may choose to make a player mad that they are the Goblin."
+    },
+    {
+      "with": "Plague Doctor",
+      "withKey": "plaguedoctor",
+      "alignment": "Good",
+      "text": "If the Storyteller would gain the Goblin ability, a Minion gains it, and learns this."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RULES/goblin_global_rule",
+    "WINCHECK/goblin"
+  ]
+}

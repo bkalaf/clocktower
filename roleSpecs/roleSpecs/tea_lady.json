@@ -1,0 +1,42 @@
+{
+  "roleKey": "tea_lady",
+  "title": "Tea Lady",
+  "category": "townsfolk",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "If both your alive neighbors are good, they can't die.",
+  "summary": "The Tea Lady protects her neighbours from death... as long as they are good.\n-  If both alive neighbours  of the Tea Lady are currently good, those neighbours cannot die. The Demon cannot kill them, nor the Godfather, nor the Gossip. If they are executed, they do not die. The only exception is the Assassin, who can kill someone protected from death.\n-  The Tea Lady’s alive neighbours are the two alive players closest to the Tea Lady—one clockwise and one counterclockwise. Skip past any dead neighbours.\n-  However, if either alive neighbours is evil, or both are, then the Tea Lady does not protect her alive neighbours . If an evil player dies and the Tea Lady is now neighbouring two good players, then neither can die.",
+  "howToRun": "If both alive neighbours of the Tea Lady are good, mark those neighbours’ character tokens with the Tea Lady’s CANNOT DIE reminders. If either alive neighbour of the Tea Lady is evil, remove these reminders. Update these reminders immediately based on this condition throughout the entire game (such as if a player’s alignment changes).\n\nIf a player marked CANNOT DIE would die, they remain alive. If a player marked CANNOT DIE is executed, declare that the marked player is executed but remains alive. (Do not say why.)",
+  "examples": [
+    "The Tea Lady starts the game neighbouring the Mastermind and the good Goon. The Mastermind is executed and dies. Now, the Tea Lady's alive neighbours are the good Goon and the Courtier. The Demon attacks the Courtier, but the Courtier remains alive. Later, the Goon turns evil, and the Demon attacks the Courtier again. This time, the Courtier dies.",
+    "The Tea Lady's alive neighbours are a good  and a good . The  is exiled but remains alive."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "demon_kill",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "cannot die (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": []
+}

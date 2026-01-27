@@ -1,0 +1,145 @@
+{
+  "roleKey": "marionette",
+  "title": "Marionette",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "You think you are a good character, but you are not. The Demon knows who you are. [You neighbor the Demon]",
+  "summary": "The Marionette doesn't know that they are a Minion. \n-  The Marionette draws either a Townsfolk or an Outsider token from the bag, but is secretly the Marionette.\n-  The Marionette neighbors the Demon. There are no players sitting in between the Marionette and the Demon.\n-  The Demon knows which player is the Marionette.\n-  On the first night, the Marionette does not wake to learn the other evil players, and the other Minions do not learn the Marionette.\n-  The good ability that the Marionette thinks they have doesn’t work, but the Storyteller pretends it does. It is just as if this player is the Drunk.\n-  The Marionette registers as evil, and as a Minion.",
+  "howToRun": "While setting up the game, before putting tokens in the bag, remove the Marionette token and add any Townsfolk token.\n\nIf there are three Minions in play, remove another Minion token and add another Townsfolk token. During the first night, swap a good player’s character token with a not-in-play Minion character token. Wake this player, show them the YOU ARE info token then their Minion character token, then the YOU ARE info token then a thumbs down, then put them to sleep. This player is now an evil Minion. (This ensures that only one Minion token is in the bag, so at least one good player will neighbor the Demon.)\n\nDuring the first night, mark a good player neighboring the Demon with the IS THE MARIONETTE reminder. Wake the Demon. Point to the player marked IS THE MARIONETTE and show the Marionette character token. Put the Demon to sleep.\n\nTreat the Marionette as if they were drunk. They wake when their good character would wake, may get false information, do not wake during the Minion Info step etc.",
+  "examples": [
+    "Marianna is the Marionette, but thinks she is the Undertaker. She wakes each night to learn who was executed that day, but her information is often wrong. Halfway through the game, the Demon tells her that she is the Marionette.",
+    "Lachlan is the Demon. He tells Sarah that she is the Marionette. Lachlan is lying. There is no Marionette.",
+    "The Demon tells Ben that he is the Marionette. Ben thinks he is the Fortune Teller, but he isn’t. Ben doesn’t believe the Demon, and executes them. Good wins."
+  ],
+  "setupModifications": [
+    {
+      "kind": "ASSIGN_MASKED_ROLE",
+      "maskedSeat": "self",
+      "shownRoleKey": "townsfolk",
+      "trueRoleKey": "marionette",
+      "reason": "Masking phrases detected",
+      "evidence": [
+        "you think you are (text)",
+        "you think you are a (text)",
+        "secretly the (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": false,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "REGISTRATION_MODIFIER",
+      "registersAs": [
+        "evil"
+      ],
+      "scope": "always",
+      "evidence": [
+        "registers as (text)"
+      ]
+    },
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "MARIONETTE",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)"
+      ]
+    },
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Alchemist",
+      "withKey": "alchemist",
+      "alignment": "Good",
+      "text": "An Alchemist-Marionette has no Marionette ability & the Marionette is in play."
+    },
+    {
+      "with": "Balloonist",
+      "withKey": "balloonist",
+      "alignment": "Good",
+      "text": "If the Marionette thinks that they are the Balloonist, an Outsider might have been added during setup."
+    },
+    {
+      "with": "Huntsman",
+      "withKey": "huntsman",
+      "alignment": "Good",
+      "text": "If the Marionette thinks that they are the Huntsman, the Damsel was added during setup."
+    },
+    {
+      "with": "Kazali",
+      "withKey": "kazali",
+      "alignment": "Evil",
+      "text": "If there would be a Marionette in play, they enter play after the Demon & must start as their neighbor."
+    },
+    {
+      "with": "Lil' Monsta",
+      "withKey": "lilmonsta",
+      "alignment": "Evil",
+      "text": "If there would be a Marionette in play, they enter play after the Demon & must start as their neighbor."
+    },
+    {
+      "with": "Magician",
+      "withKey": "magician",
+      "alignment": "Good",
+      "text": "If the Magician is alive, the Demon doesn't know which neighbor is the Marionette."
+    },
+    {
+      "with": "Mathematician",
+      "withKey": "mathematician",
+      "alignment": "Good",
+      "text": "The Mathematician might learn if the Marionette's ability yielded false info or failed to work properly."
+    },
+    {
+      "with": "Plague Doctor",
+      "withKey": "plaguedoctor",
+      "alignment": "Good",
+      "text": "If the Storyteller would gain the Marionette ability, one of the Demon's good neighbors becomes the Marionette."
+    },
+    {
+      "with": "Summoner",
+      "withKey": "summoner",
+      "alignment": "Evil",
+      "text": "If there would be a Marionette in play, they enter play after the Demon & must start as their neighbor."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": true,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/marionette",
+    "RULES/marionette_global_rule",
+    "WINCHECK/marionette"
+  ]
+}

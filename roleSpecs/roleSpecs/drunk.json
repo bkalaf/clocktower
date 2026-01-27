@@ -1,0 +1,95 @@
+{
+  "roleKey": "drunk",
+  "title": "Drunk",
+  "category": "outsider",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "You do not know you are the Drunk. You think you are a Townsfolk character, but you are not.",
+  "summary": "The Drunk player thinks that they are a Townsfolk, and has no idea that they are actually the Drunk.\n-  During setup, the Drunk's token does not go in the bag. Instead, a Townsfolk character token goes in the bag, and the player who draws that token is secretly the Drunk for the whole game. The Storyteller knows. The player does not.\n-  The Drunk has no ability. Whenever their Townsfolk ability would affect the game in some way, it doesn't. However, the Storyteller pretends that the player is the Townsfolk they think they are. If that character would wake at night, the Drunk wakes to act as if they are that Townsfolk. If that Townsfolk would gain information, the Storyteller may give them false information instead—and the Storyteller is encouraged to do so.",
+  "howToRun": "While setting up the game, before putting character tokens in the bag, remove the Drunk token and add a Townsfolk character token. Add the Drunk's IS THE DRUNK reminder token to the Grimoire. Put the swapped Townsfolk character token in the bag, not the Drunk character token.\n\nWhile preparing the first night, put the Drunk's IS THE DRUNK reminder token by any Townsfolk character token, changing that player's character to the Drunk. They are now an Outsider, and do not have the ability of this Townsfolk character. (But they think they do.)\n\nDuring the game, act as if the Drunk is actually this Townsfolk character. (If that character would wake to act at night, the Drunk wakes to act. If their ability would give them information, you can give false information to them if you wish. See \"Drunkenness and Poisoning\" in the rulebook.)",
+  "examples": [
+    "The Drunk, who thinks they are the Soldier, is attacked by the Imp. The Drunk dies.",
+    "The Drunk, who thinks they are the Empath, wakes and learns a \"0,” even though they are sitting next to one evil player. The next night, they learn a \"1.\".",
+    "The Drunk, who thinks they are the Ravenkeeper, is killed at night. They choose the Saint, but learn that this player is the Poisoner.",
+    "The Fortune Teller is executed. That night, the Drunk, who thinks they are Undertaker, learns that the Drunk died today."
+  ],
+  "setupModifications": [
+    {
+      "kind": "ASSIGN_MASKED_ROLE",
+      "maskedSeat": "self",
+      "shownRoleKey": "townsfolk",
+      "trueRoleKey": "drunk",
+      "reason": "Masking phrases detected",
+      "evidence": [
+        "you think you are (text)",
+        "you think you are a (text)",
+        "you do not know you are (text)",
+        "secretly the (text)",
+        "is the drunk reminder (text)",
+        "token does not go in the bag (text)",
+        "add a townsfolk character token (text)",
+        "put the swapped townsfolk character token in the bag (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": false,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Boffin",
+      "withKey": "boffin",
+      "alignment": "Evil",
+      "text": "The Demon cannot have the Drunk ability."
+    },
+    {
+      "with": "Mathematician",
+      "withKey": "mathematician",
+      "alignment": "Good",
+      "text": "The Mathematician might learn if the Drunk's ability yielded false info or failed to work properly."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/drunk"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\"."
+  ],
+  "factTags": [
+    "masking",
+    "setup-modifier"
+  ]
+}

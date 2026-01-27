@@ -1,0 +1,93 @@
+{
+  "roleKey": "huntsman",
+  "title": "Huntsman",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Once per game, at night, choose a living player: the Damsel, if chosen, becomes a not-in-play Townsfolk. [+the Damsel]",
+  "summary": "The Huntsman saves the Damsel before the Minions find her... hopefully.\n-  The Damsel can be in play without the Huntsman. During the setup phase, if the Huntsman is in play and the Damsel isn’t, the Damsel is added. If a Damsel is already in play, the Huntsman doesn’t add a second Damsel.\n-  If the Huntsman correctly chooses the Damsel at night, the Damsel becomes a not-in-play Townsfolk immediately. The Storyteller chooses which Townsfolk character, and the Damsel learns which one.\n-  When the Damsel becomes a Townsfolk, they gain that Townsfolk ability and lose the Damsel ability.\n-  The Huntsman gets one guess, and makes it at night.\n-  The Minions get one guess in total, and make it publicly during the day. If a Minion guesses who the Damsel is, evil wins. If a Minion incorrectly guesses who the Damsel is, the guess is used, and other Minions cannot win by correctly guessing the Damsel.\n-  If the Damsel is drunk or poisoned but the Huntsman is sober and healthy, the Damsel can still become a Townsfolk.",
+  "howToRun": "While setting up the game, before putting character tokens in\nthe bag, if the Damsel is not already in play, remove a Townsfolk\ncharacter token and add the Damsel character token.\n\nEach night, wake the Huntsman.\n\nIf they shake their head no, put the Huntsman to sleep.\n\nIf they point to a player, put the Huntsman to sleep. The Huntsman loses their ability—mark them with the NO ABILITY reminder and remove their night token from the night sheet. If they chose the Damsel, wake the Damsel, show the YOU ARE info token, then a not-in-play Townsfolk token, then put the Damsel to sleep. The Damsel now has this Townsfolk ability, so replace the Damsel character token with this Townsfolk character token.",
+  "examples": [
+    "The Huntsman is woken on the 1st night, but does not use their ability. On the second night, the Huntsman chooses the Damsel player. The Damsel becomes the Undertaker and learns which player died today.",
+    "The Huntsman chooses Lachlan. Lachlan is the General, so nothing happens. The Huntsman is no longer woken at night."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "HUNTSMAN",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "evil wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "once_per_game",
+      "description": "Once per game, at night, choose a living player: the Damsel, if chosen, becomes a not-in-play Townsfolk. [+the Damsel]",
+      "resolution": {
+        "stKind": "RESOLVE/huntsman/action",
+        "description": "Resolve huntsman day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "during the day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Marionette",
+      "withKey": "marionette",
+      "alignment": "Evil",
+      "text": "If the Marionette thinks that they are the Huntsman, the Damsel was added during setup."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/huntsman",
+    "RESOLVE/huntsman/action",
+    "RULES/huntsman_global_rule",
+    "WINCHECK/huntsman"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

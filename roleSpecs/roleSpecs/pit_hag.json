@@ -1,0 +1,127 @@
+{
+  "roleKey": "pit_hag",
+  "title": "Pit-Hag",
+  "category": "minion",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "Each night*, choose a player & a character they become (if not in play). If a Demon is made, deaths tonight are arbitrary.",
+  "summary": "The Pit-Hag changes players into different characters.\n-  Each night, the Pit-Hag chooses a player and a character to turn that player into.\n-  They can’t create duplicate characters. If the character is already in play, nothing happens.",
+  "howToRun": "Each night except the first, wake the Pit-Hag. They point at any player and any character icon on their character sheet. Put the Pit-Hag to sleep.\n\nIf the chosen character is in play, nothing happens.\n\nIf the chosen character is not in play, wake the chosen player. Show them the YOU ARE info token, then their new character token, then put them to sleep. Replace their old character token with the new character token. (You may need to turn character tokens upside-down to remind you that a player’s alignment is opposite to the color of the token. You may need to remind the player that their alignment is unchanged, by giving a thumbs-up or thumbs-down.)\n\nIf a Demon is created, you may choose any players to kill or to protect throughout the night to balance the game. Additional deaths are considered attacks from the Pit-Hag.\n\nIf the Pit-Hag changes a Demon into a new Demon, it is best to make no death occur tonight, so the good team gets a clue that the Demon has changed. You can even wake the Demon, see who they choose to attack, and decide that no one dies. If the Pit-Hag creates a new evil Demon, it is best to kill the old Demon and some other player, to signal to the good team that the Demon has changed. If the Pit-Hag creates a good Demon, it is best to kill either Demon (if it is the final night), or to just let two Demons run amok (if it is not the final night)—but since all Demons must die for good to win, use caution.",
+  "examples": [
+    "The Pit-Hag turns the Clockmaker into the Mutant.",
+    "The Pit-Hag tries to turn the Savant into the Sage, but nothing happens because a Sage is already in play.",
+    "The Pit-Hag turns the Flowergirl into the Evil Twin. Now, there is a good Evil Twin, so the Evil Twin and an evil player are woken to learn each other's character.",
+    "During the final night, the Pit-Hag turns the Oracle into a good No Dashii. The Storyteller kills the evil Demon only, so that only one Demon is alive during the final day."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night*, choose a player & a character they become (if not in play). If a Demon is made, deaths tonight are arbitrary.",
+      "resolution": {
+        "stKind": "RESOLVE/pit_hag/action",
+        "description": "Resolve pit_hag night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Cult Leader",
+      "withKey": "cultleader",
+      "alignment": "Good",
+      "text": "If the Pit-Hag turns an evil player into the Cult Leader, they can't turn good due to their own ability."
+    },
+    {
+      "with": "Damsel",
+      "withKey": "damsel",
+      "alignment": "Good",
+      "text": "If a Pit-Hag creates a Damsel, the Storyteller chooses which player it is."
+    },
+    {
+      "with": "Goon",
+      "withKey": "goon",
+      "alignment": "Good",
+      "text": "If the Pit-Hag turns an evil player into the Goon, they can't turn good due to their own ability."
+    },
+    {
+      "with": "Heretic",
+      "withKey": "heretic",
+      "alignment": "Good",
+      "text": "Only 1 jinxed character can be in play."
+    },
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "The Leviathan cannot enter play after day 5."
+    },
+    {
+      "with": "Ogre",
+      "withKey": "ogre",
+      "alignment": "Good",
+      "text": "If the Pit-Hag turns an evil player into the Ogre, they can't turn good due to their own ability."
+    },
+    {
+      "with": "Politician",
+      "withKey": "politician",
+      "alignment": "Good",
+      "text": "If the Pit-Hag turns an evil player into the Politician, they can't turn good due to their own ability."
+    },
+    {
+      "with": "Summoner",
+      "withKey": "summoner",
+      "alignment": "Evil",
+      "text": "If the Summoner creates a second living Demon, deaths tonight are arbitrary."
+    },
+    {
+      "with": "Village Idiot",
+      "withKey": "villageidiot",
+      "alignment": "Good",
+      "text": "If there is a spare token, the Pit-Hag can create an extra Village Idiot. If so, the drunk Village Idiot might change."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/pit_hag",
+    "RESOLVE/pit_hag/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"you may need to\"."
+  ]
+}

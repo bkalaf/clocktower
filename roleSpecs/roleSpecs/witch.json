@@ -1,0 +1,81 @@
+{
+  "roleKey": "witch",
+  "title": "Witch",
+  "category": "minion",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "Each night, choose a player: if they nominate tomorrow, they die. If just 3 players live, you lose this ability.",
+  "summary": "The Witch curses players, so that they die if they nominate.\n-  Each night, the Witch chooses a player to curse. That player dies if they nominate any player on the next day, although their nomination still counts.\n-  The Witch’s curse lasts only for one day, but the Witch may curse the same player again and again each night.\n-  As soon as just three players are left alive, the Witch’s curse is immediately removed, and the Witch acts no more.",
+  "howToRun": "Each night, wake the Witch. They point at any player. Put the Witch to sleep. Mark the chosen player with the CURSED reminder.\n\nThe next day, if the player marked CURSED makes a nomination, immediately declare that they die. (Nominations continue as normal.)",
+  "examples": [
+    "At night, the Witch curses the Sage. During the next day, the Sage nominates the Dreamer. The Storyteller immediately declares that the player of the Sage dies. The players still vote to execute the Dreamer, who dies too.",
+    "The Witch curses themself. During the next day, the Witch nominates the Demon, and dies. The players do not vote to execute the Demon, and nominations continue.",
+    "The Witch curses the Klutz. The Fang Gu attacks the Klutz, so the Klutz becomes the Fang Gu. The new Fang Gu is now cursed by the Witch, and they nominate. The new Fang Gu dies, and good wins.",
+    "The Witch curses the Savant. Later that night, after the Demon kills a player, only three players are alive, so the curse is removed. The Savant may nominate safely.",
+    "The Witch curses the Juggler. During the next day, the Juggler calls for the exile of a Traveller. The Juggler lives, and may nominate again, because abilities do not affect exiles."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "WITCH",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night, choose a player: if they nominate tomorrow, they die. If just 3 players live, you lose this ability.",
+      "resolution": {
+        "stKind": "RESOLVE/witch/action",
+        "description": "Resolve witch night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RESOLVE/witch/action",
+    "RULES/witch_global_rule",
+    "WINCHECK/witch"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "roleKey": "cannibal",
+  "title": "Cannibal",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "You have the ability of the recently killed executee. If they are evil, you are poisoned until a good player dies by execution.",
+  "summary": "The Cannibal eats executed characters, gaining their ability.\n-  If a good player dies by execution, the Cannibal gains that player’s ability. If an evil player dies by execution, the Cannibal only thinks that they gain an ability, since the Cannibal is poisoned. The Storyteller may be lying to them.\n-  Each time a player dies by execution, the Cannibal loses the ability of the previous player.\n-  Executing a dead player won’t grant the Cannibal an ability. Executing a living player who doesn’t die won’t grant the Cannibal an ability. A player must be executed and die for the Cannibal to gain their ability.\n-  The Cannibal is not told which ability they have gained. They must figure that out for themselves.\n-  If the Cannibal has an “even if dead” ability, such as the Recluse, or an ability that implies it works while dead, such as the Ravenkeeper or Sweetheart, the Cannibal keeps that ability when they die, but loses their Cannibal ability.",
+  "howToRun": "If a good player dies by execution, mark them with the LUNCH reminder, and remove the Cannibal’s POISONED reminder if necessary. The Cannibal now has this good player’s ability (do not say which), and will wake at night when this good character would normally wake.\n\nIf an evil player dies by execution, mark them with the LUNCH reminder and mark the Cannibal with the POISONED reminder. The Cannibal is poisoned. You may wake them when this evil character would normally wake, and pretend that they have a new ability.\n\nPay attention to which character each evil player is bluffing as. If they are executed, then their bluffed ability is the best one to pretend that the Cannibal has gained.",
+  "examples": [
+    "The Clockmaker is executed and dies. That night, the Cannibal learns a “2” because the Demon and Minion are two steps apart.",
+    "It is the third night and the Widow was executed today. Because the Widow was bluffing as the Fortune Teller, the Cannibal is prompted to choose 2 players, but they learn a “no” after choosing the Demon because they don’t actually have the Fortune Teller's (or Widow’s) ability, because they are poisoned.",
+    "It is the fourth night and the Mutant was executed today. The Cannibal doesn’t learn anything tonight, because a real Mutant would not wake."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Butler",
+      "withKey": "butler",
+      "alignment": "Good",
+      "text": "If the Cannibal gains the Butler ability, the Cannibal learns this."
+    },
+    {
+      "with": "Juggler",
+      "withKey": "juggler",
+      "alignment": "Good",
+      "text": "If the Juggler guesses on their first day and dies by execution, tonight the living Cannibal learns how many guesses the Juggler got correct."
+    },
+    {
+      "with": "Princess",
+      "withKey": "princess",
+      "alignment": "Good",
+      "text": "If the Cannibal nominated, executed, & killed the Princess today, the Demon doesn’t kill tonight."
+    },
+    {
+      "with": "Zealot",
+      "withKey": "zealot",
+      "alignment": "Good",
+      "text": "If the Cannibal gains the Zealot ability, the Cannibal learns this."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/cannibal"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\"."
+  ]
+}

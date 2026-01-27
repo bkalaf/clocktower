@@ -1,0 +1,58 @@
+{
+  "roleKey": "scapegoat",
+  "title": "Scapegoat",
+  "category": "traveller",
+  "editionTags": [],
+  "abilityText": "If a player of your alignment is executed, you might be executed instead.",
+  "summary": "The Scapegoat is executed instead of an ally.\n-  If the Scapegoat is evil, they might die instead of an evil player dying. If the Scapegoat is good, they might die instead of a good player dying. When exactly this happens is up to the Storyteller. This can only happen due to an execution, not death by other means such as a Demon or Slayer.\n-  The Scapegoat being killed still counts as an execution, so no more nominations occur today.\n-  As always, players do not learn the alignment of the Scapegoat when they die.",
+  "howToRun": "If a player of the same alignment as the Scapegoat would be executed, you may choose that the Scapegoat is executed instead. The Scapegoat dies.\n\nIt is best to use the Scapegoat’s ability before the final day, because a Scapegoat that remains alive on the final day will almost certainly be exiled. You should always use an evil Scapegoat’s ability to prevent evil from losing the game.",
+  "examples": [
+    "The Fortune Teller is about to be executed, but the Storyteller chooses to execute the good Scapegoat instead. The Fortune Teller lives and the Scapegoat dies. That night, the Undertaker learns that a Scapegoat was executed today.",
+    "The Poisoner is about to be executed, but the Storyteller chooses to execute the evil Scapegoat instead. The Storyteller could have let the Poisoner die as normal, but chose not to.",
+    "The Spy is about to be executed. The good Scapegoat dies instead."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "other",
+      "usage": "variable",
+      "description": "If a player of your alignment is executed, you might be executed instead.",
+      "resolution": {
+        "stKind": "RESOLVE/scapegoat/action",
+        "description": "Resolve scapegoat other",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/scapegoat",
+    "RESOLVE/scapegoat/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

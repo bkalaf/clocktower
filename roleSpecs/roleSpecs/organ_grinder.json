@@ -1,0 +1,78 @@
+{
+  "roleKey": "organ_grinder",
+  "title": "Organ Grinder",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk until dusk.",
+  "summary": "The Organ Grinder makes voting secret.\n-  When a player is nominated, players vote with eyes closed.\n-  The Storyteller does not count the votes out loud, and does not reveal how many players voted once voting is complete.\n-  The Storyteller doesn’t reveal which player is “about to die”.\n-  After nominations have closed, the Storyteller reveals which player is executed, as normal.\n-  Dead players may vote once if they have a vote token. Their vote token is removed at the end of the day instead of after the vote.\n-  If the Organ Grinder is drunk, the vote happens with eyes open, as normal. The Storyteller makes no comment as to whether the Organ Grinder is dead or alive. That night, the Organ Grinder chooses to become sober or drunk again.",
+  "howToRun": "Each night, wake the Organ Grinder. The Organ Grinder either nods or shakes their head. If they nod their head, mark them with the DRUNK reminder. Put the Organ Grinder to sleep.\n\nWhen a player has been nominated and a vote is just about to begin, and the Organ Grinder is sober, ask all players to close their eyes. If they ask why, tell them that an Organ Grinder is in play. When counting votes, do so silently. Afterwards, do not reveal how many players voted, nor if the nominee is “about to die”. If there were enough votes to execute the nominee, mark them with the ABOUT TO DIE reminder. Ask players to open their eyes, and if there are any more nominations.\n\nWhen nominations are closed, declare that the player marked ABOUT TO DIE, is executed.\n\nEach dusk, remove the DRUNK reminder.\n\nPlayers are not allowed to use other methods to determine who is voting, such as touch or sound. It is a secret.",
+  "examples": [
+    "There are 8 players alive. The Noble is nominated. All players close eyes to vote and the Noble gets 5 votes. The Imp is nominated. All players close eyes to vote and the Imp gets 7 votes. The Pixie is nominated. All players close eyes to vote and the Pixie gets 4 votes. After nominations close, the Storyteller declares that Doug (the Imp) is executed and dies, and that good has won."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk until dusk.",
+      "resolution": {
+        "stKind": "RESOLVE/organ_grinder/action",
+        "description": "Resolve organ_grinder night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Alchemist",
+      "withKey": "alchemist",
+      "alignment": "Good",
+      "text": "If the Alchemist has the Organ Grinder ability, the Organ Grinder is in play. If both are sober, both are drunk."
+    },
+    {
+      "with": "Butler",
+      "withKey": "butler",
+      "alignment": "Good",
+      "text": "If the Organ Grinder is causing eyes closed voting, the Butler may raise their hand to vote but their vote is only counted if their master voted too."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/organ_grinder/action"
+  ]
+}

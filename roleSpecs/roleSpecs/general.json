@@ -1,0 +1,73 @@
+{
+  "roleKey": "general",
+  "title": "General",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night, you learn which alignment the Storyteller believes is winning: good, evil, or neither.",
+  "summary": "The General knows who is winning.\n-  If the good team is winning, the Storyteller gives a thumbs up. If the evil team is winning, the Storyteller gives a thumbs down. If neither team is winning, or the Storyteller isn’t sure, the Storyteller gives a thumbs to the side.\n-  The Storyteller is the judge on which team is winning. Many factors may be included, such as how many players of each team are still alive, how much information the good team has, how successful the evil team’s bluffs seem to be, which players the group wants to execute next, or how experienced the Demon player is. All of these, and more, will inform the Storyteller’s judgment.\n-  The Storyteller decides who is winning at the point that the General wakes. Previous events in the night may affect their decision.",
+  "howToRun": "Each night, wake the General. If you believe that the good team is winning, give a thumbs up. If you believe that the evil team is winning, give a thumbs down. If you don’t know which team is winning, give a thumbs to the side. Put the General to sleep.",
+  "examples": [
+    "There are 5 good players alive and 4 evil players alive. Even though the Demon is very suspicious and will probably be executed next, there is a Scarlet Woman in play, who is very trustworthy. The Storyteller gives a thumbs down.",
+    "The Good team has a lot of information, and believes that their false information is indeed false. The only Minion is dead. The Storyteller gives a thumbs up.",
+    "The Po is a very experienced player and is coordinating well with the Minions. The Monk is successfully protecting the Savant each night and the good team have correctly identified several good players. However, the Po will probably kill 3 times tomorrow night, so it is anyone’s game. The Storyteller gives a thumbs to the side."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night, you learn which alignment the Storyteller believes is winning: good, evil, or neither.",
+      "resolution": {
+        "stKind": "RESOLVE/general/action",
+        "description": "Resolve general night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)"
+      ]
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/general",
+    "RESOLVE/general/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"the storyteller decides\"."
+  ]
+}

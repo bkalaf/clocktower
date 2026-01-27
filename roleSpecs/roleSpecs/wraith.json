@@ -1,0 +1,94 @@
+{
+  "roleKey": "wraith",
+  "title": "Wraith",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "You may choose to open your eyes at night. You wake when other evil players do.",
+  "summary": "The Wraith knows and shares what happens at night.\n-  The Wraith may open their eyes at any point during the night, for as long or as short a time as they wish.\n-  They may open their eyes fully, or just peek.\n-  The Storyteller wakes the Wraith when other evil players also wake, such as when the Demon kills a player, an evil Traveller uses their ability, or a Cult Leader learns that they are evil.\n-  When several players have their eyes open at once, they may communicate if they wish.\n-  If a good player catches the Wraith with their eyes open, there is no mechanical effect. \n-  A dead Wraith may not open their eyes at night. A drunk or poisoned Wraith is told by the Storyteller that they may not open their eyes that night.",
+  "howToRun": "Each time you wake an evil player at night, first wake the Wraith. When you put that evil player to sleep, put the Wraith to sleep.\n\nIf the Wraith loses their ability while alive, privately tell the Wraith that they may not choose to open their eyes tonight, and do not wake them when other evil players wake.\n\n \nOptional rule: Once per game, a player that is mad that you are the Wraith, dies.",
+  "examples": [
+    "During the first night the Wraith peeks at other players, and notices which good players wake and which do not. During the second night, the Wraith opens their eyes more fully and notices that Doug was woken and pointed to two players tonight. During the 3rd night, when both the Wraith and the Demon wake together, the Wraith uses body language and points to the character sheet to communicate to the Demon to kill Doug, whom the Wraith believes is the Fortune Teller."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "during the night (text)",
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "once_per_game",
+      "description": "You may choose to open your eyes at night. You wake when other evil players do.",
+      "resolution": {
+        "stKind": "RESOLVE/wraith/action",
+        "description": "Resolve wraith night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "during the night (text)",
+        "first night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Alchemist",
+      "withKey": "alchemist",
+      "alignment": "Good",
+      "text": "An Alchemist-Wraith has no Wraith ability & a Wraith is in play. After each execution, a living Alchemist-Wraith may publicly guess a living player as the Wraith. If correct, the Demon must choose the Wraith tonight."
+    },
+    {
+      "with": "Magician",
+      "withKey": "magician",
+      "alignment": "Good",
+      "text": "After each execution, the living Magician may publicly guess a living player as the Wraith. If correct, the Demon must choose the Wraith tonight."
+    },
+    {
+      "with": "Plague Doctor",
+      "withKey": "plaguedoctor",
+      "alignment": "Good",
+      "text": "If the Storyteller would gain the Wraith ability, a Minion gains it, and learns this."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/wraith",
+    "RESOLVE/wraith/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"optional rule\".",
+    "Storyteller discretion noted near \"you may choose to\"."
+  ]
+}

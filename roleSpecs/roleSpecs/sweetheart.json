@@ -1,0 +1,79 @@
+{
+  "roleKey": "sweetheart",
+  "title": "Sweetheart",
+  "category": "outsider",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "When you die, 1 player is drunk from now on.",
+  "summary": "The Sweetheart, when they die, causes someone to be drunk for the rest of the game.\n-  The Storyteller chooses which player becomes drunk.\n-  This ability works while the Sweetheart is dead.",
+  "howToRun": "If the Sweetheart dies, you choose any one player to become drunk - mark this player with the DRUNK reminder. The Sweetheart does not lose this ability when dead.\n\nYou will almost always want to make a Townsfolk drunk, which will hurt the good team, but if evil is winning quite convincingly, you can make an Outsider, Minion, or even the Demon drunk.",
+  "examples": [
+    "The Sweetheart dies. The Mathematician is now drunk, and may get false information at night.",
+    "The Sweetheart dies. The Mutant is now drunk. The Mutant may safely come out as the Mutant, but they do not know this.",
+    "The Sweetheart dies. The Demon is now drunk, so their attack at night won’t kill anyone."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_DEATH_RESOLVED",
+      "description": "Something happens when this character dies.",
+      "evidence": [
+        "when you die (text)"
+      ]
+    }
+  ],
+  "passiveAbilities": [
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "other",
+      "usage": "variable",
+      "description": "When you die, 1 player is drunk from now on.",
+      "resolution": {
+        "stKind": "RESOLVE/sweetheart/action",
+        "description": "Resolve sweetheart other",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/sweetheart/action",
+    "TRIGGER/sweetheart/MOMENT_DEATH_RESOLVED"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

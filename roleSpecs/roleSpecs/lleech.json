@@ -1,0 +1,124 @@
+{
+  "roleKey": "lleech",
+  "title": "Lleech",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night*, choose a player: they die. You start by choosing a player: they are poisoned. You die if & only if they are dead.",
+  "summary": "The Lleech lives if their host lives, and dies if their host dies.\n-  On the first night, the Lleech chooses a player, who is poisoned for the rest of the game.\n-  If this player is alive, the Lleech cannot die. If the Lleech is executed, the Storyteller tells the group that the player lives, but not why.\n-  If the player that the Lleech chose dies, the Lleech dies as well. If this means that only one or two players are left alive, good still wins, because the Demon is dead.\n-  From the second night onwards, players that the Lleech attacks die but are not poisoned.\n-  If a Lleech is created mid-game, they poison a player that night. They must choose an alive player.",
+  "howToRun": "During the first night, wake the Lleech. They point at any player. That player is poisoned—mark them with the POISONED reminder. Put the Lleech to sleep.\n\nEach night except the first, wake the Lleech. They point at any player. That player dies—mark them with the DEAD reminder. Put the Lleech to sleep.\n\nIf the Lleech would die but the player marked with the Lleech’s POISONED reminder is alive, the Lleech does not die. If the player marked with the Lleech’s POISONED reminder is dead, the Lleech dies and the good team wins.\n\nWhen giving false information to a good player poisoned by the Lleech, make sure this information seems true. If the good player believes it to be false, they will quickly execute themselves and win the game.",
+  "examples": [
+    "The Lleech poisons the Noble. The Noble learns false information. The Lleech is executed, but does not die. The next day, the Noble is executed. The Noble and the Lleech die. Good wins.",
+    "The Lleech poisons the Farmer. The Lleech is made drunk by the Courtier. The poisoned Farmer dies, and the game continues because the Lleech is also drunk. The drunk Lleech is executed and dies, and good wins."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "demon_kill",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "cannot die (text)",
+        "does not die (text)"
+      ]
+    },
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "LLEECH",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)",
+        "good team wins (text)",
+        "the good team wins (text)"
+      ]
+    },
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "first_night",
+      "description": "Each night*, choose a player: they die. You start by choosing a player: they are poisoned. You die if & only if they are dead.",
+      "resolution": {
+        "stKind": "RESOLVE/lleech/action",
+        "description": "Resolve lleech night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Heretic",
+      "withKey": "heretic",
+      "alignment": "Good",
+      "text": "Only 1 jinxed character can be in play."
+    },
+    {
+      "with": "Mastermind",
+      "withKey": "mastermind",
+      "alignment": "Evil",
+      "text": "If the Mastermind is alive and the Lleech host dies by execution, the Lleech lives but loses their ability."
+    },
+    {
+      "with": "Slayer",
+      "withKey": "slayer",
+      "alignment": "Good",
+      "text": "If the Slayer slays the Lleech host, the host dies."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/lleech",
+    "RESOLVE/lleech/action",
+    "RULES/lleech_global_rule",
+    "WINCHECK/lleech"
+  ]
+}

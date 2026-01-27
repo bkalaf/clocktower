@@ -1,0 +1,95 @@
+{
+  "roleKey": "innkeeper",
+  "title": "Innkeeper",
+  "category": "townsfolk",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "Each night*, choose 2 players: they can't die tonight, but 1 is drunk until dusk.",
+  "summary": "The Innkeeper protects people from death at night, but somebody gets drunk in the process.\n-  The Innkeeper, like the Monk, makes players safe from being killed by the Demon. They are also safe from death caused by Outsiders, Minions, Townsfolk, and Travellers.\n-  The Innkeeper only protects players at night, not the day. \n-  One of the two players that the Innkeeper chooses becomes drunk for tonight and the next day. This player may be good or evil, but will almost always be good, depending how your game is going. An Innkeeper that chooses themself might become drunk, which means they have no ability and may die tonight—and the other player they chose to protect isn’t safe either.",
+  "howToRun": "Each night except the first, wake the Innkeeper. They point at any two players. Put the Innkeeper to sleep. Mark the two chosen players with SAFE reminders. One of the chosen players becomes drunk—mark them with the DRUNK reminder. The players marked SAFE cannot die tonight.\n\nAt dawn, remove the SAFE reminders.\n\nAt dusk, remove the DRUNK reminder.",
+  "examples": [
+    "The Innkeeper protects the Fool and the Chambermaid. The Storyteller chooses that the Fool becomes drunk. Tomorrow, when the Fool is executed, they die, even though they hadn’t used their ability yet.",
+    "The Innkeeper protects the Assassin and the Po. The Storyteller chooses that the Assassin becomes drunk. Later that night, the Assassin uses their ability, but nothing happens.",
+    "The Innkeeper protects themself and the Pacifist. The Storyteller chooses that the Innkeeper becomes drunk. The Pacifist is attacked by the Demon tonight and dies."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "demon_kill",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "cannot die (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night*, choose 2 players: they can't die tonight, but 1 is drunk until dusk.",
+      "resolution": {
+        "stKind": "RESOLVE/innkeeper/action",
+        "description": "Resolve innkeeper night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 2,
+          "description": "Choose 2 players"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "If the Leviathan nominates and executes an Innkeeper-protected player, good wins."
+    },
+    {
+      "with": "Riot",
+      "withKey": "riot",
+      "alignment": "Evil",
+      "text": "If Riot nominates and executes an Innkeeper-protected player, good wins."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/innkeeper/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

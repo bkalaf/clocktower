@@ -1,0 +1,72 @@
+{
+  "roleKey": "high_priestess",
+  "title": "High Priestess",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night, learn which player the Storyteller believes you should talk to most.",
+  "summary": "The High Priestess acts on intuition.\n-   The High Priestess can be shown the same player multiple times in a row, or a different player every night.\n-   The shown player can be alive or dead.\n-  The shown player can be good or evil.\n-  There are no official criteria that determine which player the Storyteller must show to the High Priestess. It is up to the Storyteller’s judgement as to what they think will most benefit the High Priestess and the good team in general. It could be because the player has important information that has not been revealed yet. Or because the player is evil and has a bluff that doesn’t make sense. Or because the player is trustworthy and needs to be trusted more. Or because the player is good but on the wrong track and needs to be corrected. Or something new.",
+  "howToRun": "Each night, wake the High Priestess. Point to a player. Put the High Priestess to sleep.",
+  "examples": [
+    "On the first night, the High Priestess learns Julian. Julian is the Chef and has useful information to share. On the second night, the High Priestess is shown Marianna. Marianna is the Goblin and the Storyteller thinks that the High Priestess would benefit most from talking to Marianna to find this out as early as possible. On the third night, the High Priestess is shown Doug. Doug is the Drunk whose information is wrong and harming the good team.",
+    "For three nights in a row, the High Priestess learns Sarah. Sarah is the Saint and the good team are trying to execute her. On the last night, the High Priestess learns Lewis. Lewis is the Imp, and his story is clashing with several good players."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "every night (text)",
+        "first night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "information is wrong (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "first_night",
+      "description": "Each night, learn which player the Storyteller believes you should talk to most.",
+      "resolution": {
+        "stKind": "RESOLVE/high_priestess/action",
+        "description": "Resolve high_priestess night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "every night (text)",
+        "first night (text)"
+      ]
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/high_priestess",
+    "RESOLVE/high_priestess/action"
+  ]
+}

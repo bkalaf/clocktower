@@ -1,0 +1,51 @@
+{
+  "roleKey": "virgin",
+  "title": "Virgin",
+  "category": "townsfolk",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "The 1st time you are nominated, if the nominator is a Townsfolk, they are executed immediately.",
+  "summary": "The Virgin may inadvertently execute their accuser, confirming which players are Townsfolk in the process.\n-  If a Townsfolk nominates the Virgin, then that Townsfolk is executed immediately. Because there can only be one execution per day, the nomination process immediately ends, even if a player was about to die.\n-  Only Townsfolk are executed due to the Virgin's ability. If an Outsider, Minion, or Demon nominates the Virgin, nothing happens, and voting continues.\n-  The Virgin's ability is powerful because if a Townsfolk nominates them and dies, then both characters are almost certainly Townsfolk.\n-  After being nominated for the first time, the Virgin loses their ability, even if the nominator did not die, and even if the Virgin was poisoned or drunk.",
+  "howToRun": "If the first player to ever nominate the Virgin is a Townsfolk, immediately declare that the nominating player is executed. That player dies—put a shroud on their character token in the Grimoire. The Virgin loses their ability—put the Virgin's NO ABILITY reminder token by the Virgin token. End the nomination process and proceed to the night phase. (No one else can be executed today.)\n\nIf the first player to ever nominate the Virgin is not a Townsfolk, continue the vote as normal. The Virgin loses their ability—put the Virgin's NO ABILITY reminder token by the Virgin token.",
+  "examples": [
+    "The Washerwoman nominates the Virgin. The Washerwoman is immediately executed and the day ends.",
+    "The Drunk, who thinks they are the Chef, nominates the Virgin. The Drunk remains alive, and the Virgin loses their ability. Players may now vote on whether or not to execute the Virgin. (This happens because the Drunk is not a Townsfolk.)",
+    "A dead player nominates the Virgin. The dead, however, cannot nominate. The Storyteller declares that the nomination does not count. The Virgin does not lose their ability."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_NOMINATION_STARTED",
+      "description": "Virgin ability must be applied when a nomination is made so the Storyteller can track whether anyone would die.",
+      "evidence": [
+        "Forced override to highlight nomination monitoring"
+      ]
+    }
+  ],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "TRIGGER/virgin/MOMENT_ATTEMPTED_EXECUTION",
+    "TRIGGER/virgin/MOMENT_REGISTRATION_CHECKED"
+  ],
+  "todos": [
+    "Confirm whether the Virgin needs a separate night order step when the Storyteller enforces the penalty."
+  ],
+  "factTags": [
+    "execution-trigger",
+    "registration-check"
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "roleKey": "plague_doctor",
+  "title": "Plague Doctor",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "When you die, the Storyteller gains a Minion ability.",
+  "summary": "The Plague Doctor brings an extra Minion ability into play.\n-  The Storyteller chooses which Minion ability is gained.\n-  This ability is in effect for the rest of the game.\n-  Nothing else changes for the Storyteller – they don’t become evil, they don’t become a player, they are not a legitimate player to be targeted by other abilities, and they cannot vote or nominate.\n-  If the Plague Doctor is drunk or poisoned when they die, the Storyteller doesn’t gain a Minion ability, even when the Plague Doctor becomes sober and healthy.",
+  "howToRun": "When the Plague Doctor dies, place a Minion character token in the centre of the left side of the Grimoire and mark this with the Plague Doctor’s STORYTELLER ABILITY reminder. Or, mark an in-play Minion with the STORYTELLER ABILITY reminder. If applicable, add a night token to the night sheet. \n\nWhen this Minion would normally act, the relevant choices are made by the Storyteller.",
+  "examples": [
+    "The Plague Doctor dies. The Storyteller gains the Poisoner ability and chooses a player to poison each night for the rest of the game.",
+    "The Plague Doctor is executed and the Storyteller gains the Cerenovus ability. That night, the Pit-Hag turns the Witch into the Cerenovus. There are now two Cerenovus abilities in play – the Storyteller’s and the new Cerenovus’.",
+    "The Plague Doctor has died and the Storyteller has had the Organ Grinder ability for two days. The Plague Doctor is made drunk by the Minstrel. The Storyteller still has the Organ Grinder ability as they gained it when the Plague Doctor died and the Plague Doctor now being drunk does not affect that."
+  ],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "ROLE_CHANGED",
+      "payload": {
+        "description": "Role or alignment swap is established during setup"
+      },
+      "reason": "Role swap phrases detected",
+      "evidence": [
+        "become evil (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [
+    {
+      "moment": "MOMENT_DEATH_RESOLVED",
+      "description": "Something happens when this character dies.",
+      "evidence": [
+        "when you die (text)"
+      ]
+    },
+    {
+      "moment": "ROLE_CHANGED",
+      "description": "Alignment or role status can change.",
+      "evidence": [
+        "become evil (text)"
+      ]
+    }
+  ],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "When you die, the Storyteller gains a Minion ability.",
+      "resolution": {
+        "stKind": "RESOLVE/plague_doctor/action",
+        "description": "Resolve plague_doctor night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Baron",
+      "withKey": "baron",
+      "alignment": "Evil",
+      "text": "If the Storyteller would gain the Baron ability, up to two players become Outsiders."
+    },
+    {
+      "with": "Boomdandy",
+      "withKey": "boomdandy",
+      "alignment": "Evil",
+      "text": "If the Storyteller would gain the Boomdandy ability, a player becomes the Boomdandy."
+    },
+    {
+      "with": "Evil Twin",
+      "withKey": "eviltwin",
+      "alignment": "Evil",
+      "text": "If the Storyteller would gain the Evil Twin ability, a player becomes the Evil Twin."
+    },
+    {
+      "with": "Fearmonger",
+      "withKey": "fearmonger",
+      "alignment": "Evil",
+      "text": "If the Storyteller would gain the Fearmonger ability, a Minion gains it, and learns this."
+    },
+    {
+      "with": "Goblin",
+      "withKey": "goblin",
+      "alignment": "Evil",
+      "text": "If the Storyteller would gain the Goblin ability, a Minion gains it, and learns this."
+    },
+    {
+      "with": "Marionette",
+      "withKey": "marionette",
+      "alignment": "Evil",
+      "text": "If the Storyteller would gain the Marionette ability, one of the Demon's good neighbors becomes the Marionette."
+    },
+    {
+      "with": "Scarlet Woman",
+      "withKey": "scarletwoman",
+      "alignment": "Evil",
+      "text": "If the Storyteller would gain the Scarlet Woman ability, a Minion gains it, and learns this."
+    },
+    {
+      "with": "Spy",
+      "withKey": "spy",
+      "alignment": "Evil",
+      "text": "If the Storyteller would gain the Spy ability, a Minion gains it, and learns this."
+    },
+    {
+      "with": "Wraith",
+      "withKey": "wraith",
+      "alignment": "Evil",
+      "text": "If the Storyteller would gain the Wraith ability, a Minion gains it, and learns this."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": true,
+    "hasAlignmentSwap": true,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/plague_doctor/action",
+    "TRIGGER/plague_doctor/MOMENT_DEATH_RESOLVED",
+    "TRIGGER/plague_doctor/ROLE_CHANGED"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

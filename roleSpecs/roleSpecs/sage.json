@@ -1,0 +1,57 @@
+{
+  "roleKey": "sage",
+  "title": "Sage",
+  "category": "townsfolk",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "If the Demon kills you, you learn that it is 1 of 2 players.",
+  "summary": "The Sage knows nothing while alive, but learns the most important information of all at the moment of their death - who killed them.\n-  The Sage only gets this information when killed by a Demon attack. Being executed does not count.",
+  "howToRun": "If the Sage was killed by the Demon, wake the Sage. Point at two players, one who is the Demon that killed the Sage. Put the Sage to sleep.\n\nIf the Sage dies early, you will probably want to show the Sage two alive players, which lets the evil team still have a slim chance of winning. If the Sage dies on the final night, feel free to show one alive and one dead player.",
+  "examples": [
+    "During the second night, the Demon kills the Sage. The Storyteller points at two players, one of whom is the Demon.",
+    "During the final night, the Demon kills the Sage, who is drunk because of the Sweetheart. The Storyteller points at a dead player and one of the remaining three alive players. This information is incorrect.",
+    "The Pit-Hag creates a Demon. Because the Pit-Hag ability says that \"all deaths tonight are arbitrary,” the Storyteller decides that the old Demon dies, and the Sage dies. Because the Sage died due to the Pit-Hag, not the Demon, the Sage does not wake to learn anything tonight"
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "Each night*, the Leviathan chooses an alive good player (different to previous nights): a chosen Sage uses their ability but does not die."
+    },
+    {
+      "with": "Recluse",
+      "withKey": "recluse",
+      "alignment": "Good",
+      "text": "The Recluse might register as the Demon to the Sage."
+    },
+    {
+      "with": "Riot",
+      "withKey": "riot",
+      "alignment": "Evil",
+      "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Sage uses their ability but does not die."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/sage"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"the storyteller decides\"."
+  ]
+}

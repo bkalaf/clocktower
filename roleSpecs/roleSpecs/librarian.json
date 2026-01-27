@@ -1,0 +1,57 @@
+{
+  "roleKey": "librarian",
+  "title": "Librarian",
+  "category": "townsfolk",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "You start knowing that 1 of 2 players is a particular Outsider. (Or that zero are in play.)",
+  "summary": "The Librarian learns that a particular Outsider character is in play, but not exactly which player it is.\n-  During the first night, the Librarian learns that one of two players is a specific Outsider.\n-  They learn this only once and then learn nothing more.\n-  The Drunk is an Outsider. If the Librarian learns that one of two players is the Drunk, they do not learn the Townsfolk that the Drunk's player thinks they are.",
+  "howToRun": "While preparing the first night, put the Librarian's OUTSIDER reminder token by any Outsider character token, and put the Librarian's WRONG reminder token by any other character token.\n\nDuring the first night, wake the Librarian and point to the players marked OUTSIDER and WRONG. Show the character token marked OUTSIDER to the Librarian. Put the Librarian to sleep. Remove the Librarian's reminder tokens when convenient.",
+  "examples": [
+    "Benjamin is the Saint, and Filip is the Baron. The Librarian learns that either Benjamin or Filip is the Saint.",
+    "There are no Outsiders in this game. The Librarian learns a '0'.",
+    "Abdallah is the Drunk, who thinks they are the Monk, and Douglas is the Undertaker. The Librarian learns that either Abdallah or Douglas is the Drunk. (This happens because the Librarian learns the true character. The Drunk is Abdallah’s true character, not the Monk.)"
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)",
+        "you start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Role flagged as acting at night via Trouble Brewing facts.",
+      "evidence": [
+        "librarian listed as night action (fact list)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/librarian"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "roleKey": "king",
+  "title": "King",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows you are the King.",
+  "summary": "The King learns which characters are still alive.\n-  The King gains this ability after a few nights have passed — once the dead players equal or outnumber the living.\n-  At the start of the game, the Demon learns who the King is. If a King is created mid-game, the Demon learns who the King is that night.\n-  The King may not survive long enough to use their ability. Once the number of dead players is equal to or greater than the number of alive players, the King learns one alive character each night.\n-  The King may learn good or evil characters, and may even learn the same character more than once.\n-  There may not be a Choirboy in play. But if there is, and they are still alive when the Demon kills the King, the Choirboy learns who the Demon is.",
+  "howToRun": "During the first night, wake the Demon. Show them the THIS PLAYER IS info token, then the King token, then point at the King player. Put the Demon to sleep.\n\nWhen the number of dead players equals or exceeds the number of alive players, add a night token to the King’s entry on the night sheet. \n\nEach night, if the King has a night token on the night sheet, wake the King. Show one alive character token. Put the King to sleep.\n\nThink carefully about what character tokens to show the King. Don’t be afraid to give great information. Most Kings will die before the final day. A King that lives to the final day will usually win, and that’s ok.",
+  "examples": [
+    "Amy is the King. There are 12 players alive, and one dead player. On the second night, she learns nothing. On the third night, she learns nothing. On the fourth day, there are 7 dead players and 6 alive players. On the fourth night, Amy learns that the Snitch is alive. On the fifth night, she learns that the Witch is alive.",
+    "The Demon knows that Abdallah is the King. Evin is claiming to be the Choirboy, but is the Butler. The Demon takes a risk and kills Abdallah. If Evin was actually the Choirboy, he would have learnt which player was the Demon."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows you are the King.",
+      "resolution": {
+        "stKind": "RESOLVE/king/action",
+        "description": "Resolve king night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "If the Leviathan is in play, and at least 1 player is dead, the King learns an alive character each night."
+    },
+    {
+      "with": "Riot",
+      "withKey": "riot",
+      "alignment": "Evil",
+      "text": "If Riot is in play, and at least 1 player is dead, the King learns an alive character each night."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/king",
+    "RESOLVE/king/action"
+  ]
+}

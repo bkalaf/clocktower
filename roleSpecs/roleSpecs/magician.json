@@ -1,0 +1,86 @@
+{
+  "roleKey": "magician",
+  "title": "Magician",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "The Demon thinks you are a Minion. Minions think you are a Demon.",
+  "summary": "The Magician confuses the evil players about who is evil and who isn’t.\n-  On the first night, instead of learning which player is the Demon, the Minions are told that both players—the Demon and the Magician—are the Demon.\n-  On the first night, the Demon learns that the Magician player is one of its Minions.\n-  The Magician does not wake to learn anything.\n-  The Storyteller can point to the Magician and the evil players in any order, so that the evil players won’t know which player is the Magician.\n-  If the Poppy Grower dies and the Demon and Minions learn who each other are mid-game, the Magician ability has an effect that night, just as if it was the first night.",
+  "howToRun": "During the first night, wake the Minions. Show them the THIS IS THE DEMON info token, then point to the Demon and the Magician. Put the Minions to sleep.\n\nDuring the first night, wake the Demon. Show the THESE ARE YOUR MINIONS info token, then point to all Minions and the Magician. Show the THESE CHARACTERS ARE NOT IN PLAY info token and three character tokens. Put the Demon to sleep. \n\nDo this instead of the normal Minion Info and Demon Info steps.",
+  "examples": [
+    "The Minions wake to learn that either the Leviathan player or the Magician player is the Demon. The Leviathan player learns that the Fearmonger player, the Assassin player, and the Magician player are the Minions."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": false,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Legion",
+      "withKey": "legion",
+      "alignment": "Evil",
+      "text": "The Magician wakes with Legion and might register as evil. Legion knows if a Magician is in play, but not which player it is."
+    },
+    {
+      "with": "Lil' Monsta",
+      "withKey": "lilmonsta",
+      "alignment": "Evil",
+      "text": "If the Magician is alive, the Storyteller chooses which Minion babysits Lil' Monsta."
+    },
+    {
+      "with": "Marionette",
+      "withKey": "marionette",
+      "alignment": "Evil",
+      "text": "If the Magician is alive, the Demon doesn't know which neighbor is the Marionette."
+    },
+    {
+      "with": "Spy",
+      "withKey": "spy",
+      "alignment": "Evil",
+      "text": "When the Spy sees the Grimoire, the Demon and Magician's character tokens are removed."
+    },
+    {
+      "with": "Vizier",
+      "withKey": "vizier",
+      "alignment": "Evil",
+      "text": "If the Vizier is in play, the Magician has no ability but is immune to the Vizier's ability."
+    },
+    {
+      "with": "Widow",
+      "withKey": "widow",
+      "alignment": "Evil",
+      "text": "When the Widow sees the Grimoire, the Demon and Magician's character tokens are removed."
+    },
+    {
+      "with": "Wraith",
+      "withKey": "wraith",
+      "alignment": "Evil",
+      "text": "After each execution, the living Magician may publicly guess a living player as the Wraith. If correct, the Demon must choose the Wraith tonight."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/magician"
+  ]
+}

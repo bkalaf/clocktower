@@ -1,0 +1,93 @@
+{
+  "roleKey": "al_hadikhia",
+  "title": "Al-Hadikhia",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night*, you may choose 3 players (all players learn who): each silently chooses to live or die, but if all live, all die.",
+  "summary": "The Al-Hadikhia puts three players in a dilemma — who will choose to die, so that others can live?\n-  The Al-Hadikhia may choose three players per night. Everyone learns which three were chosen. Each player makes their choice before the next player is revealed.\n-  All players must be silent when the Al-Hadikhia acts at night. This period lasts from when the Storyteller first declares that a player has been chosen, until the Storyteller says that it ends.\n-  If the Al-Hadikhia chooses no one, no announcement is made and nobody dies to the Al-Hadikhia tonight.\n-  At night, the Storyteller asks players out loud if they choose to live. If they nod their head, they live. If they shake their head, they die. Players may be brought back to life this way.\n-  If all players choose to live, then they all die instead. If a player chose to die but did not die, they count as alive for this calculation.",
+  "howToRun": "Each night except the first, wake the Al-Hadikhia. They may point at three players. If they do, mark these players with the 1, 2 and 3 reminders, in the order the Al-Hadikhia chose. Put the Al-Hadikhia to sleep. Wake the player marked 1 and say “The Al-Hadikhia has chosen” then the name of the player, then “Do you choose to live?” They either nod or shake their head. Put them to sleep. If they chose to live, remove their shroud (if any), and if they choose to die, add a shroud. Repeat for players marked 2 then 3. If all three players are alive (none of them have a shroud) then add a shroud to all three. They die. Declare that the time of silence has ended.\n\nEach dawn, declare which players marked 1, 2 and 3 are alive and which are dead. Do this even if a player’s alive or dead status did not change during the night.\n\nYou may need to remind all players to be silent as the Al-Hadikhia acts. This includes non-verbal noise. This prevents players signaling to others about whether they have chosen to live or die.",
+  "examples": [
+    "The Al-Hadikhia chooses Evin, Lachlan, and Sarah. Evin chooses to die. Lachlan chooses to die. Sarah chooses to live. In the morning, Evin and Lachlan are dead, and Sarah is alive.",
+    "The Al-Hadikhia chooses Alex, Lewis, and Doug, who is dead. Alex chooses life. Lewis chooses life. Doug chooses life, so is now alive. Since all players are now alive, all three players die."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "during the night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night*, you may choose 3 players (all players learn who): each silently chooses to live or die, but if all live, all die.",
+      "resolution": {
+        "stKind": "RESOLVE/al_hadikhia/action",
+        "description": "Resolve al_hadikhia night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "during the night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 3,
+          "description": "Choose 3 players"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Mastermind",
+      "withKey": "mastermind",
+      "alignment": "Evil",
+      "text": "If the Al-Hadikhia dies by execution, and the Mastermind is alive, the Al-Hadikhia chooses 3 good players tonight: if all 3 choose to live, evil wins. Otherwise, good wins."
+    },
+    {
+      "with": "Princess",
+      "withKey": "princess",
+      "alignment": "Good",
+      "text": "If the Princess nominated & executed a player on their 1st day, no one dies to the Al-Hadikhia tonight."
+    },
+    {
+      "with": "Scarlet Woman",
+      "withKey": "scarletwoman",
+      "alignment": "Evil",
+      "text": "If there would be two Demons, one of which was the Scarlet Woman, the Scarlet Woman becomes the Scarlet Woman again."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/al_hadikhia",
+    "RESOLVE/al_hadikhia/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"you may need to\"."
+  ]
+}

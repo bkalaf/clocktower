@@ -1,0 +1,116 @@
+{
+  "roleKey": "ogre",
+  "title": "Ogre",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "On your 1st night, choose a player (not yourself): you become their alignment (you don't know which) even if drunk or poisoned.",
+  "summary": "The Ogre is someone's best friend.\n-  The Ogre's chosen player does not change, even if the Ogre is drunk or poisoned when they chose.\n-  The Ogre becomes the same alignment as their chosen player immediately on the first night, even if the Ogre is drunk or poisoned.\n-  The Ogre is not told their alignment at the beginning of the game.\n-  If the Ogre changes alignment by other means, the Ogre learns their new alignment, as normal.\n-  If an Ogre is created mid-game, the Ogre chooses a player that night, and becomes their alignment.",
+  "howToRun": "During the first night, wake the Ogre. The Ogre points to a player. Put the Ogre to sleep. If the Ogre pointed to an evil player, flip the Ogre's character token upside down to represent that the Ogre is evil.\n\nOptional rule: Mark the Ogre’s chosen player with a FRIEND reminder. The Ogre is always the same alignment as their friend. If the Ogre’s friend changes alignment, the Ogre changes alignment too, but the Ogre does not learn this.\n\nThis is only recommended for games of 15 players or more, so that there are not too many evil players.",
+  "examples": [
+    "On the first night, the Ogre chooses the Summoner. The Ogre becomes evil, and stays evil for the rest of the game.",
+    "On the first night, the Ogre chooses the Banshee. The Ogre stays good. On the third night, the Mezepheles turns the Banshee evil. The Ogre remains good."
+  ],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "ROLE_CHANGED",
+      "payload": {
+        "description": "Role or alignment swap is established during setup"
+      },
+      "reason": "Role swap phrases detected",
+      "evidence": [
+        "becomes evil (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [
+    {
+      "moment": "ROLE_CHANGED",
+      "description": "Alignment or role status can change.",
+      "evidence": [
+        "becomes evil (text)"
+      ]
+    }
+  ],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "first_night",
+      "description": "On your 1st night, choose a player (not yourself): you become their alignment (you don't know which) even if drunk or poisoned.",
+      "resolution": {
+        "stKind": "RESOLVE/ogre/action",
+        "description": "Resolve ogre night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "first night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Boffin",
+      "withKey": "boffin",
+      "alignment": "Evil",
+      "text": "The Demon cannot have the Ogre ability."
+    },
+    {
+      "with": "Pit-Hag",
+      "withKey": "pithag",
+      "alignment": "Evil",
+      "text": "If the Pit-Hag turns an evil player into the Ogre, they can't turn good due to their own ability."
+    },
+    {
+      "with": "Recluse",
+      "withKey": "recluse",
+      "alignment": "Good",
+      "text": "If the Recluse registers as evil to the Ogre, the Ogre learns that they are evil."
+    },
+    {
+      "with": "Spy",
+      "withKey": "spy",
+      "alignment": "Evil",
+      "text": "The Spy registers as evil to the Ogre."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": true,
+    "hasAlignmentSwap": true,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/ogre",
+    "RESOLVE/ogre/action",
+    "TRIGGER/ogre/ROLE_CHANGED"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"optional rule\"."
+  ]
+}

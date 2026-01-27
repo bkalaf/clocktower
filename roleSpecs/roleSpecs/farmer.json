@@ -1,0 +1,56 @@
+{
+  "roleKey": "farmer",
+  "title": "Farmer",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "When you die at night, an alive good player becomes a Farmer.",
+  "summary": "The Farmer creates more farmers.\n-  If a Farmer dies at night, another player becomes a Farmer too.\n-  Only players that are good can become Farmers this way.\n-  If this new Farmer also dies at night, another Farmer is created.\n-  Farmers that die during the day, such as by execution, do not create more Farmers.\n-  Farmers that have turned evil, such as from the Mezepheles’ ability, can create more Farmers. But Townsfolk and Outsiders that have turned evil cannot become a Farmer.\n-  Farmers do not learn who each other are, but each player that becomes a Farmer learns that they are now a Farmer.\n-  When a player becomes a Farmer, they are no longer their old character, and do not have that ability. Any ongoing effects of their old ability immediately end.",
+  "howToRun": "If the Farmer died tonight, wake an alive good player. Show them the YOU ARE info token and a Farmer character token, then put them to sleep. Replace their previous character token with a Farmer character token.",
+  "examples": [
+    "Julian is the Farmer. The Demon kills him at night. Evin is the Fearmonger, and Sarah is the Alchemist. Sarah becomes the Farmer that night. Evin could not become the Farmer, because he is evil.",
+    "On the 2nd night, the Farmer dies. The Choirboy becomes the Farmer. On the 3rd night, the new Farmer dies, and the Heretic becomes a Farmer. There is now no Heretic and no Choirboy in play, and three Farmers in play, two of which are dead."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_DEATH_RESOLVED",
+      "description": "Something happens when this character dies.",
+      "evidence": [
+        "when you die (text)"
+      ]
+    }
+  ],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "Each night*, the Leviathan chooses an alive good player (different to previous nights): a chosen Farmer uses their ability but does not die."
+    },
+    {
+      "with": "Riot",
+      "withKey": "riot",
+      "alignment": "Evil",
+      "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Farmer uses their ability but does not die."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/farmer",
+    "TRIGGER/farmer/MOMENT_DEATH_RESOLVED"
+  ]
+}

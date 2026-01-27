@@ -1,0 +1,72 @@
+{
+  "roleKey": "gnome",
+  "title": "Gnome",
+  "category": "traveller",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "All players start knowing a player of your alignment. You may choose to kill anyone who nominates them.",
+  "summary": "The Gnome protects one player on their team.\n-  The Gnome starts as the same alignment as one other player - their \"amigo\". The Storyteller publicly announces which player this is.\n-  When their amigo is nominated, it is the Gnome's responsibility to speak up. The Storyteller may not prompt them to use their ability.\n-  If their amigo changes alignment, the Gnome's alignment does not change.\n-  The Gnome may use their ability any number of times over the course of the game, including zero. Their amigo may still only be nominated once per day.\n-  When the Gnome uses their ability, and the Storyteller confirms it, the nominator dies immediately. Voting for execution still occurs.\n-  Regardless of what the group wants, it is always the individual player's decision whether they wish to nominate or not, and always the Gnome player's decision on whether they wish to use their ability or not. If the Storyteller feels that a player is being pressured into nominating or using their ability when they don't want to, the Storyteller may not recognize that nomination or ability use.",
+  "howToRun": "During the day, as soon as the Gnome has entered play, mark a player of the same alignment with the AMIGO reminder. Declare that this player is the same alignment as the Gnome.\n\nIf this player is nominated, but before you have started the voting process, if the Gnome player declares that they wish to use their ability, the nominator dies.",
+  "examples": [
+    "The Gnome starts the game at the same time as the rest of the players, and is good. Amy is the Alsaahir. Before the first night, the Storyteller announces that the Gnome is the same alignment as Amy. The Engineer nominates Amy on day 3. The Gnome does not use their ability.",
+    "The Gnome enters the game on the 2nd day, and is evil. Lewis is the Demon. At this time, the Storyteller announces that the Gnome is the same alignment as Lewis. On the 2nd day, the Boffin nominates Lewis, and is killed by the Gnome. On the 3rd day, the Zealot nominates Lewis, and is killed by the Gnome. On the 4th day, the Village Idiot nominates Lewis, and the Gnome does not use their ability."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "All players start knowing a player of your alignment. You may choose to kill anyone who nominates them.",
+      "resolution": {
+        "stKind": "RESOLVE/gnome/action",
+        "description": "Resolve gnome day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "first night (text)",
+        "during the day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/gnome/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\".",
+    "Storyteller discretion noted near \"you may choose to\"."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "roleKey": "beggar",
+  "title": "Beggar",
+  "category": "traveller",
+  "editionTags": [],
+  "abilityText": "You must use a vote token to vote. If a dead player gives you theirs, you learn their alignment. You are sober and healthy.",
+  "summary": "The Beggar can not vote unless someone gives them a token to use, but they learn if the player that does so is good or evil.\n-  The Beggar cannot raise their hand to vote at all unless they have a vote token.\n-  When they do vote, they lose one vote token. If they have more than one, they may only use one at a time.\n-  Only a dead player may give their vote token to the Beggar, after which that dead player cannot vote. Each dead player decides for themself whether to give the Beggar their vote token. No one, including the Beggar, may move a player’s vote token on their behalf.\n-  When a player gives their vote token to the Beggar, the Beggar learns whether that player is good or evil.\n-  The Beggar can still nominate freely, and can still vote for an exile freely, because exiles are not affected by abilities.\n-  If the Beggar dies, they gain one vote token to use while dead, just like any other character would. However, the Beggar loses all their previously acquired vote tokens.\n-  If the Beggar would become drunk or poisoned, they do not.\n-  The ability to donate vote tokens is unique to the Beggar ability. Players may not give their vote token to a player that is not the Beggar, whether or not a Beggar is in play.",
+  "howToRun": "The Beggar cannot vote unless they have a vote token. They lose one vote token each time they vote.\n\nDuring the day, a dead player can declare that they give their vote token to the Beggar. Transfer the vote token to the Beggar and privately tell the Beggar the alignment of that player.",
+  "examples": [
+    "The Beggar cannot vote. On the fourth day, the Monk gives her vote token to the Beggar. The Beggar may now vote (once), and learns that the player is good. The Beggar is evil and tells the group that the Monk player is evil.",
+    "The good Beggar has three vote tokens. The Recluse gives the Beggar their vote token, and the Beggar learns that they are evil. That day, the Beggar dies, and loses all their vote tokens except for one."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/beggar"
+  ]
+}

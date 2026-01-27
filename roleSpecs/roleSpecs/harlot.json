@@ -1,0 +1,70 @@
+{
+  "roleKey": "harlot",
+  "title": "Harlot",
+  "category": "traveller",
+  "editionTags": [],
+  "abilityText": "Each night*, choose a living player: if they agree, you learn their character, but you both might die.",
+  "summary": "The Harlot learns the character of whoever agrees to reveal it, but at great risk for them both.\n-  Each night, the Harlot chooses a player. That player has a decision to make: do they reveal their character to the Harlot? If they do, the Storyteller may decide that both this player and the Harlot die tonight.\n-  The Harlot only learns the character of the chosen player, not that player’s alignment.\n-  The Harlot may discuss during the day which character they would like to pick at night, and other players may offer to be picked, but they may go back on their word and choose differently when night comes.",
+  "howToRun": "Each night, wake the Harlot. The Harlot points at any player. Put the Harlot to sleep. Wake the chosen player, show them the THIS CHARACTER SELECTED YOU' info token, then the Harlot token. That player either nods their head yes or shakes their head no. Put that player to sleep.\n\nIf they shook their head no, then nothing happens. Continue with the night phase.\n\nIf they nodded their head yes, wake the Harlot and show them the chosen player’s character token. Put the Harlot to sleep. You may decide that both players die—mark them with DEAD reminders.\n\nWhen choosing whether to kill players, do what you feel is the most interesting and balanced. If the Demon reveals to the Harlot, you should not end the game by killing them.",
+  "examples": [
+    "The good Harlot wakes and chooses the Philosopher, who chooses to reveal. The next night, the Harlot chooses the No Dashii, who chooses not to reveal. The next night, the Harlot chooses the Mutant, who chooses to reveal. The Storyteller decides that the Harlot and Mutant die tonight.",
+    "The evil Harlot chooses the Sage, who reveals. The next day, the Harlot says the Sage is actually the Witch."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "Each night*, choose a living player: if they agree, you learn their character, but you both might die.",
+      "resolution": {
+        "stKind": "RESOLVE/harlot/action",
+        "description": "Resolve harlot day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "during the day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/harlot",
+    "RESOLVE/harlot/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\".",
+    "Storyteller discretion noted near \"the storyteller decides\"."
+  ]
+}

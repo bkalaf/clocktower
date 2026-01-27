@@ -1,0 +1,91 @@
+{
+  "roleKey": "ravenkeeper",
+  "title": "Ravenkeeper",
+  "category": "townsfolk",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "If you die at night, you are woken to choose a player: you learn their character.",
+  "summary": "If the Ravenkeeper dies at night, they get to learn one player's character.\n-  The Ravenkeeper is woken on the night that they die, and chooses a player immediately.\n-  The Ravenkeeper may choose a dead player if they wish.",
+  "howToRun": "If the Ravenkeeper died tonight, wake them. They point at any player. Show the chosen player's character token to the Ravenkeeper. Put the Ravenkeeper to sleep.\n\nWe advise you to discourage or even ban players from talking about what they are doing at night as they are doing it.",
+  "examples": [
+    "The Ravenkeeper is killed by the Imp, and then wakes to choose a player. After some deliberation, they choose Benjamin. Benjamin is the Empath, and the Ravenkeeper learns this.",
+    "The Imp attacks the Mayor. The Mayor doesn't die, but the Ravenkeeper dies instead, due to the Mayor's ability. The Ravenkeeper is woken and chooses Douglas, who is a dead Recluse. The Ravenkeeper learns that Douglas is the Scarlet Woman, since the Recluse registered as a Minion."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Role flagged as acting at night via Trouble Brewing facts.",
+      "evidence": [
+        "ravenkeeper listed as night action (fact list)"
+      ]
+    }
+  ],
+  "onMoments": [
+    {
+      "moment": "MOMENT_DEATH_RESOLVED",
+      "description": "Something happens when this character dies.",
+      "evidence": [
+        "if you die (text)"
+      ]
+    }
+  ],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "other",
+      "usage": "variable",
+      "description": "If you die at night, you are woken to choose a player: you learn their character.",
+      "resolution": {
+        "stKind": "RESOLVE/ravenkeeper/action",
+        "description": "Resolve ravenkeeper other",
+        "effectType": "requestInfo"
+      },
+      "evidence": [
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "Each night*, the Leviathan chooses an alive player (different to previous nights): a chosen Ravenkeeper uses their ability but does not die."
+    },
+    {
+      "with": "Riot",
+      "withKey": "riot",
+      "alignment": "Evil",
+      "text": "Each night*, Riot chooses an alive good player (different to previous nights): a chosen Ravenkeeper uses their ability but does not die."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/ravenkeeper",
+    "RESOLVE/ravenkeeper/action",
+    "TRIGGER/ravenkeeper/MOMENT_DEATH_RESOLVED"
+  ],
+  "factTags": [
+    "makes-choice",
+    "one-time-info"
+  ]
+}

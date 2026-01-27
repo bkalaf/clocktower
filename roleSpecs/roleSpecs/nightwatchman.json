@@ -1,0 +1,71 @@
+{
+  "roleKey": "nightwatchman",
+  "title": "Nightwatchman",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Once per game, at night, choose a player: they learn you are the Nightwatchman.",
+  "summary": "The Nightwatchman is known by one player.\n-  At night, the Nightwatchman chooses a player. This player wakes, and learns which player the Nightwatchman is.\n-  The Nightwatchman and their chosen player do not make eye contact. They wake separately.\n-  The Nightwatchman player chooses which night to act.",
+  "howToRun": "Each night, wake the Nightwatchman. The Nightwatchman either shakes their head or points at any player. Put the Nightwatchman to sleep.\n\nIf the Nightwatchman pointed at a player, wake them and show them the Nightwatchman token, then point to the Nightwatchman player. Put the chosen player to sleep. The Nightwatchman loses their ability – mark them with a NO ABILITY reminder and remove their night token from the night sheet.",
+  "examples": [
+    "Lachlan is the Nightwatchman. He chooses Abdallah. Abdallah learns that Lachlan is the Nightwatchman.",
+    "Marianna is the drunk Nightwatchman. She chooses Amy. Amy does not wake, and does not learn that Marianna is the Nightwatchman, because the Nightwatchman has no ability.",
+    "Ben is the Nightwatchman and Vortox is in play. Ben chooses Sarah. Sarah learns that Lewis is the Nightwatchman. Even though the Nightwatchman has their ability, the information is false."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "once_per_game",
+      "description": "Once per game, at night, choose a player: they learn you are the Nightwatchman.",
+      "resolution": {
+        "stKind": "RESOLVE/nightwatchman/action",
+        "description": "Resolve nightwatchman night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/nightwatchman",
+    "RESOLVE/nightwatchman/action"
+  ]
+}

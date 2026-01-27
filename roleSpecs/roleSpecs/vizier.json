@@ -1,0 +1,139 @@
+{
+  "roleKey": "vizier",
+  "title": "Vizier",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "All players know you are the Vizier. You cannot die during the day. If good voted, you may choose to execute immediately.",
+  "summary": "The Vizier executes players without the town’s consent.\n-  On the first day, all players learn that the Vizier is in play, and which player it is.\n-  During the day, the Vizier can not die by any means.\n-  After a vote is tallied, if the Vizier chooses to execute the nominee (and at least one good player voted), they are executed immediately. This counts as the 1 execution allowed each day.\n-  After a vote is tallied, if the Vizier chooses to execute the nominee (and no good players voted), nothing happens.\n-  Even if the vote tally is less than 50% of the living players, the Vizier may still execute. Even if another player has more votes than the current player, the Vizier may still execute.\n-  The Vizier does not have to force an execution each day.",
+  "howToRun": "When the first night has ended, declare that the Vizier is in play, and which player it is.\nIf a vote has just been tallied, and one or more good players voted, and the Vizier declares that the nominee is executed, that player is executed and dies. No more nominations, votes, or executions occur today.",
+  "examples": [
+    "The King has been nominated. Five people vote, but the Vizier does not use their ability. The Boomdandy is nominated and eight people vote. The Vizier uses their ability and the Boomdandy is executed immediately.",
+    "The Demon has seven votes against them, and is “about to die”. The Vizier nominates Bill, the Barber. Two evil players and one good player vote. The Vizier declares that Bill is executed. The Demon survives today.",
+    "The town nominates and executes the Vizier. The Vizier does not die. That night, The Demon kills the Vizier."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "execution",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "cannot die (text)",
+        "does not die (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "All players know you are the Vizier. You cannot die during the day. If good voted, you may choose to execute immediately.",
+      "resolution": {
+        "stKind": "RESOLVE/vizier/action",
+        "description": "Resolve vizier day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "first night (text)",
+        "at night (text)",
+        "during the day (text)",
+        "each day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Alsaahir",
+      "withKey": "alsaahir",
+      "alignment": "Good",
+      "text": "The Storyteller doesn't declare the Vizier is in play."
+    },
+    {
+      "with": "Courtier",
+      "withKey": "courtier",
+      "alignment": "Good",
+      "text": "If the Vizier loses their ability, they learn this, and cannot die during the day."
+    },
+    {
+      "with": "Fearmonger",
+      "withKey": "fearmonger",
+      "alignment": "Evil",
+      "text": "The Vizier wakes with the Fearmonger, learns who they choose and cannot choose to immediately execute that player."
+    },
+    {
+      "with": "Investigator",
+      "withKey": "investigator",
+      "alignment": "Good",
+      "text": "The Storyteller doesn't declare the Vizier is in play."
+    },
+    {
+      "with": "Lil' Monsta",
+      "withKey": "lilmonsta",
+      "alignment": "Evil",
+      "text": "If the Vizier is babysitting Lil' Monsta, they die when executed."
+    },
+    {
+      "with": "Magician",
+      "withKey": "magician",
+      "alignment": "Good",
+      "text": "If the Vizier is in play, the Magician has no ability but is immune to the Vizier's ability."
+    },
+    {
+      "with": "Politician",
+      "withKey": "politician",
+      "alignment": "Good",
+      "text": "The Politician might register as evil to the Vizier."
+    },
+    {
+      "with": "Preacher",
+      "withKey": "preacher",
+      "alignment": "Good",
+      "text": "If the Vizier loses their ability, they learn this, and cannot die during the day."
+    },
+    {
+      "with": "Zealot",
+      "withKey": "zealot",
+      "alignment": "Good",
+      "text": "The Zealot might register as evil to the Vizier."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/vizier",
+    "RESOLVE/vizier/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"you may choose to\"."
+  ]
+}

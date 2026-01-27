@@ -1,0 +1,63 @@
+{
+  "roleKey": "town_crier",
+  "title": "Town Crier",
+  "category": "townsfolk",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "Each night*, you learn if a Minion nominated today.",
+  "summary": "The Town Crier knows when Minions nominate.\n-  Each night, the Town Crier learns either a “yes” or a “no”.\n-  They do not learn which players are Minions or how many Minions made nominations, just whether or not any Minions made nominations today.",
+  "howToRun": "Each dawn, mark the Town Crier with the MINIONS NOT NOMINATED reminder, and remove the MINION NOMINATED reminder, if any.\n\nEach day, if any Minion makes a nomination, replace the MINIONS NOT NOMINATED reminder with the MINION NOMINATED reminder.\n\nEach night except the first, wake the Town Crier. If the Town Crier is marked MINIONS NOT NOMINATED, shake your head no. If the Town Crier is marked MINION NOMINATED, nod your head yes. Then, put the Town Crier to sleep. Remove the MINION NOMINATED reminder, if any.\n\nIf you forget whether a Minion made a nomination or not, wake each Minion at night and ask by showing them the DID YOU NOMINATE TODAY? info token. They must answer honestly, then go to sleep.",
+  "examples": [
+    "Today, four players nominated. Two of them were Minions. Many players voted, but there was no execution. That night, the Town Crier learns a “yes.”",
+    "A Minion called for the exile of a Traveller, who was exiled. That night, the Town Crier learns a “no.” (Exiles are never affected by character abilities.)"
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "Each night*, you learn if a Minion nominated today.",
+      "resolution": {
+        "stKind": "RESOLVE/town_crier/action",
+        "description": "Resolve town_crier day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "each day (text)"
+      ]
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/town_crier",
+    "RESOLVE/town_crier/action"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "roleKey": "gambler",
+  "title": "Gambler",
+  "category": "townsfolk",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "Each night*, choose a player & guess their character: if you guess wrong, you die.",
+  "summary": "The Gambler can guess who is who... but pays the ultimate price if they guess wrong.\n-  Each night except the first, the Gambler chooses a player and guesses their character by pointing to its icon on the character sheet. If the guess is correct, nothing happens. If the guess is incorrect, the Gambler dies.\n-  The Gambler does not learn from the Storyteller whether their guess is correct or incorrect.\n-  The Gambler may choose any player, dead or alive, even themself.",
+  "howToRun": "Each night except the first, wake the Gambler. They point at any player, then point at any character icon on their character sheet. Put the Gambler to sleep. If the chosen player is a different character from the chosen character icon, the Gambler dies—mark them with the DEAD reminder.",
+  "examples": [
+    "The Gambler points to the Minstrel player, then to the Minstrel icon. This guess is correct, so the Gambler remains alive, but is killed by the Demon tonight anyway.",
+    "The Devil's Advocate is bluffing as the Pacifist. That night, the Gambler points to the Devil's Advocate player, then to the Pacifist icon. This guess is wrong, so the Gambler dies."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night*, choose a player & guess their character: if you guess wrong, you die.",
+      "resolution": {
+        "stKind": "RESOLVE/gambler/action",
+        "description": "Resolve gambler night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/gambler",
+    "RESOLVE/gambler/action"
+  ]
+}

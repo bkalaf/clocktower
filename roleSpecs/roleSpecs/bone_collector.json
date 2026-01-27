@@ -1,0 +1,86 @@
+{
+  "roleKey": "bone_collector",
+  "title": "Bone Collector",
+  "category": "traveller",
+  "editionTags": [],
+  "abilityText": "Once per game, at night*, choose a dead player: they regain their ability until dusk.",
+  "summary": "The Bone Collector temporarily gives dead players their ability back.\n-  The Bone Collector must choose a dead player. The chosen player remains dead, but they get their ability to use. If their ability was a “you start knowing” or a “once per game” ability—such as the Virgin, Slayer, Clockmaker, Seamstress, or Juggler—they may use it again, even if it was already used, until dusk falls.\n-  When the Bone Collector chooses a player, that player does not learn they were selected by the Bone Collector, although they find out soon enough when they are woken to use their ability.\n-  If the Bone Collector dies, that player no longer has the ability they regained due to the Bone Collector.",
+  "howToRun": "Each night except the first, wake the Bone Collector. They either shake their head no or point at any dead player. Put the Bone Collector to sleep.\n\nIf they pointed at a dead player, the chosen player regains their ability—mark their character token with the Bone Collector’s HAS ABILITY reminder. (They may need to be woken tonight to use their ability.) The Bone Collector loses their ability—mark them with their NO ABILITY reminder. The next dusk, the chosen player loses their ability—remove the HAS ABILITY reminder.",
+  "examples": [
+    "The Bone Collector gives the dead Flowergirl her ability back. That night, the Flowergirl learns that the Demon did indeed vote today. The following night, the Flowergirl once again has no ability.",
+    "The Bone Collector chooses the dead Witch. The Witch wakes and curses the Clockmaker. The Clockmaker nominates the following day, and dies.",
+    "At night, the Bone Collector chooses the dead . The following day, after an execution has occurred, the Storyteller prompts the  to nominate again.",
+    "During the day, the dead Juggler guesses five players’ characters. That night, the Bone Collector gives the Juggler their ability back. The Juggler learns a \"3\"."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)",
+        "you start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "once_per_game",
+      "description": "Once per game, at night*, choose a dead player: they regain their ability until dusk.",
+      "resolution": {
+        "stKind": "RESOLVE/bone_collector/action",
+        "description": "Resolve bone_collector day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "during the day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/bone_collector",
+    "RESOLVE/bone_collector/action"
+  ]
+}

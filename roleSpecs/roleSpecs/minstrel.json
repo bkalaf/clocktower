@@ -1,0 +1,63 @@
+{
+  "roleKey": "minstrel",
+  "title": "Minstrel",
+  "category": "townsfolk",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "When a Minion dies by execution, all other players (except Travellers) are drunk until dusk tomorrow.",
+  "summary": "The Minstrel makes everybody drunk if a Minion dies.\n-  If a Minion is executed and dies, all players (except the Minstrel) become drunk immediately and stay drunk all through the night and all the following day. Townsfolk, Outsiders, Minions, and even Demons become drunk, but not Travellers. This doesn’t happen if a Minion died at night.\n-  If a dead Minion is executed, the Minstrel ability does not trigger—a dead character cannot die again! If a Minion is executed but does not die, the Minstrel’s ability does not trigger. If the Minstrel is drunk or poisoned when a Minion dies by execution, the Minstrel ability does not trigger.",
+  "howToRun": "During the day, if a Minion dies by execution, all other players except Travellers become drunk—put the Minstrel’s EVERYONE IS DRUNK reminder in the center of the left side of the Grimoire. \n\nAt dusk tomorrow, all players made drunk by the Minstrel become sober—remove the EVERYONE IS DRUNK reminder.",
+  "examples": [
+    "During the first day, the Pacifist dies. That night, players act as normal, because the Pacifist is not a Minion. During the second day, the  executes the Godfather. That night, everyone is drunk, including the Demon, so nobody dies. During the third day, a Minion who is protected by the Devil's Advocate is executed and dies, because the Devil's Advocate is drunk. Again, since a Minion died during the day, the Minstrel makes everyone drunk.",
+    "The Assassin is executed, so the Minstrel makes everyone drunk. The next day, the Godfather is executed, so the Minstrel makes everyone drunk again. The Demon could not kill on either night. The next day, the evil  Mastermind is exiled, so that night everyone becomes sober again, because the Minstrel ability doesn't trigger from a Traveller being exiled.",
+    "During the day, the Assassin dies, so the Minstrel makes everyone drunk. The following day, the Zombuul is executed and dies for the first time. Good wins, because the Zombuul is drunk and so has no ability."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "execution",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "cannot die (text)",
+        "does not die (text)"
+      ]
+    },
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "MINSTREL",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Legion",
+      "withKey": "legion",
+      "alignment": "Evil",
+      "text": "If Legion died by execution today, Legion keeps their ability, but the Minstrel might learn they are Legion."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RULES/minstrel_global_rule",
+    "WINCHECK/minstrel"
+  ]
+}

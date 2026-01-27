@@ -1,0 +1,35 @@
+{
+  "roleKey": "fool",
+  "title": "Fool",
+  "category": "townsfolk",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "The 1st time you die, you don't.",
+  "summary": "The Fool escapes death... once.\n-  The first time the Fool dies for any reason, the Fool remains alive. They don’t learn that their ability saved their life.\n-  If another character’s ability protects the Fool from death, the Fool does not use their ability. Only the time that the Fool would actually for realsy bona fide be dead does the Fool’s ability trigger.",
+  "howToRun": "If the Fool would die, they remain alive. (But they die if they are drunk or poisoned.) If the Fool was executed, declare that the player was executed but remains alive. (Do not say why.) \n\nEither way, the Fool loses their ability—mark them with the NO ABILITY reminder.",
+  "examples": [
+    "On the first day, the Fool is executed but remains alive. On the fourth day, the Fool is executed again. This time, they die.",
+    "The Demon attacks the Fool, who remains alive. Nobody dies that night. The next day, the Fool is executed by the , and dies.",
+    "The Demon attacks the Fool, who is protected by the Tea Lady. The Fool remains alive and keeps their ability. Later, after the Tea Lady has died, the Demon attacks the Fool, who is now protected by the Innkeeper. The Fool remains alive and keeps their ability. Later, after the Innkeeper has died, the Demon attacks the Fool, who remains alive again but uses their ability, so next time they will die."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/fool"
+  ]
+}

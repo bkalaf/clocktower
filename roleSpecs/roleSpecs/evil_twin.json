@@ -1,0 +1,93 @@
+{
+  "roleKey": "evil_twin",
+  "title": "Evil Twin",
+  "category": "minion",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "You & an opposing player know each other. If the good player is executed, evil wins. Good can't win if you both live.",
+  "summary": "The Evil Twin mirrors a good character, so that the players don't know which twin is good and which twin is evil.\n-  The Evil Twin is paired with a good player, chosen by the Storyteller, called the Good Twin.\n-  On the first night, the Evil Twin and Good Twin both wake, make eye contact, and learn each other’s character.\n-  If the Good Twin is executed, evil wins. If the Evil Twin is executed, the game continues. A dead Evil Twin has no ability, so evil doesn’t win if the Good Twin is later executed. \n-  Good cannot win while both twins are alive. Even if the Demon is killed, the game continues. Good will need to kill the Evil Twin as well as the Demon to win.\n-  If a good player is turned into an Evil Twin, they are still a good player, with an evil player becoming their twin. It doesn’t matter which twin is which character, what matters is their alignment—the good team can execute the evil player safely, but if they execute the good player, evil wins.\n-  If both Twins are the same alignment, the Storyteller chooses a new Twin.",
+  "howToRun": "While setting up the game, choose a Good Twin by marking any good character with the TWIN reminder. During the first night, wake both Twins. Let them make eye contact. Point at the Evil Twin, then show the Evil Twin token to the Good Twin. Point at the Good Twin, then show the Good Twin’s character token to the Evil Twin. Put them both to sleep.\n\nWhile both Twins are alive, the good team cannot win. If a good- aligned Twin is executed, the evil team wins.\n\nIf a Pit-Hag creates an Evil Twin during the final night, either make the other Twin the Demon player or a dead player, so that the good team is still able to win.\n\nIt is rarely a good idea to choose a Traveller to be a Twin.",
+  "examples": [
+    "Both twins are claiming to be the Oracle. The Evil Twin is executed. The game continues.",
+    "The Pit-Hag turns the good Sage, who is also the Good Twin, into the Mutant. Both twins try to convince the group that they are the Mutant. The Storyteller immediately executes the Mutant, who is also the Good Twin. The game ends and evil wins.",
+    "The Good Twin and the Evil Twin are both loudly claiming to be the Artist. Both players approach the Storyteller to ask a question in private. The good players, confused, execute the Demon. The game continues, with no death during the night from now on.",
+    "The Pit-Hag turns a good player into the Evil Twin, who remains good. The group executes the good-aligned Evil Twin. Evil wins."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "during the night (text)",
+        "first night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "EVIL_TWIN",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "evil wins (text)",
+        "evil team wins (text)",
+        "the evil team wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "first_night",
+      "description": "You & an opposing player know each other. If the good player is executed, evil wins. Good can't win if you both live.",
+      "resolution": {
+        "stKind": "RESOLVE/evil_twin/action",
+        "description": "Resolve evil_twin night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "during the night (text)",
+        "first night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Plague Doctor",
+      "withKey": "plaguedoctor",
+      "alignment": "Good",
+      "text": "If the Storyteller would gain the Evil Twin ability, a player becomes the Evil Twin."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/evil_twin",
+    "RESOLVE/evil_twin/action",
+    "RULES/evil_twin_global_rule",
+    "WINCHECK/evil_twin"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

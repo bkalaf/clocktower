@@ -1,0 +1,65 @@
+{
+  "roleKey": "golem",
+  "title": "Golem",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "You may only nominate once per game. When you do, if the nominee is not the Demon, they die.",
+  "summary": "The Golem kills the player they nominate. \n-  When the Golem nominates a player, that player immediately dies. The nomination process continues.\n-  If the Golem nominates the Demon, nothing happens. The Storyteller doesn’t confirm or deny that the Golem nominated, and continues with the voting process as normal. The Storyteller may say “nothing happens” if clarity is asked for.\n-  After the Golem has nominated once, whether or not the nominee dies, the Golem may not nominate again this game. It is the player’s responsibility to refrain from nominating, not the Storyteller’s. Deliberately nominating when they shouldn’t is considered cheating.",
+  "howToRun": "If the Golem nominates a non-Demon, that player dies, then the vote continues as normal. Mark the Golem with the MAY NOT NOMINATE reminder.\n\nIf the Golem nominates the Demon, the vote continues as normal. (Do not say why.) Mark the Golem with the MAY NOT NOMINATE reminder.\n\nIf the Golem accidentally nominates when they shouldn’t, you can either accept or not accept the nomination. It is best to not accept the nomination—as long as you think that this won’t confirm that a Golem is in play. To keep things fair, also do this for players bluffing as the Golem, reminding them that the Golem cannot nominate more than once.",
+  "examples": [
+    "The Golem nominates the Poppy Grower. The Poppy Grower dies. The Golem may not nominate again this game.",
+    "The Golem nominates the Recluse. The Recluse registers as the Demon. Nothing happens, and the Storyteller begins counting votes for the Recluse to be executed. The Golem may not nominate again this game."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "REGISTRATION_MODIFIER",
+      "registersAs": [
+        {
+          "roleKey": "the"
+        }
+      ],
+      "scope": "always",
+      "evidence": [
+        "registers as (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "other",
+      "usage": "once_per_game",
+      "description": "You may only nominate once per game. When you do, if the nominee is not the Demon, they die.",
+      "resolution": {
+        "stKind": "RESOLVE/golem/action",
+        "description": "Resolve golem other",
+        "effectType": "applyEffect"
+      },
+      "evidence": [],
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": true,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/golem/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\"."
+  ]
+}

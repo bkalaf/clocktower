@@ -1,0 +1,53 @@
+{
+  "roleKey": "matron",
+  "title": "Matron",
+  "category": "traveller",
+  "editionTags": [],
+  "abilityText": "Each day, you may choose up to 3 sets of 2 players to swap seats. Players may not leave their seats to talk in private.",
+  "summary": "The Matron chooses which players sit where.\n-  The Matron may swap two players’ seating positions, up to three times per day. The new seating order is permanent, unless changed again by the Matron.\n-  The same player may be moved multiple times.\n-  Some players may find moving difficult due to a physical disability or impediment. In these cases, they are immune to the Matron’s ability and can stay put.\n-  With the Matron in play, players may not talk privately except with their immediate neighbors while sitting down. Players may not leave their seat to whisper something to any player, and may not even talk about the game to each other when going to the bathroom, and so on. Players should self-police this.\n-  If the Matron swaps just one or two sets of players, they may not swap another set of players later that day.",
+  "howToRun": "Players who leave their seats cannot talk about the game to other players until they return.\n\nEach day, the Matron may choose two players and declare that they swap seating positions. Ask them to do so. Swap their character tokens and any reminders they have in the Grimoire. The Matron may do this up to three times, but all swaps happen one after the other.",
+  "examples": [
+    "The evil Matron rearranges the seating order so that she is sitting next to the Tea Lady. This way, the two of them can whisper to each other, and the Tea Lady's ability does not work.",
+    "The good Matron swaps the seating position of the player they think is the Demon, so that player is far away from the player they think is the Minion. They may not whisper to each other now."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "Each day, you may choose up to 3 sets of 2 players to swap seats. Players may not leave their seats to talk in private.",
+      "resolution": {
+        "stKind": "RESOLVE/matron/action",
+        "description": "Resolve matron day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 3,
+          "description": "Choose 3 players"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/matron/action"
+  ]
+}

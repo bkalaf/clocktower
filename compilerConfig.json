@@ -1,0 +1,32 @@
+{
+  "phraseThresholds": {
+    "nightAction": 2,
+    "dayClaim": 1
+  },
+  "forcedOverrides": {
+    "virgin": {
+      "onMoments": [
+        {
+          "moment": "MOMENT_NOMINATION_STARTED",
+          "description": "Virgin ability must be applied when a nomination is made so the Storyteller can track whether anyone would die.",
+          "evidence": [
+            "Forced override to highlight nomination monitoring"
+          ]
+        }
+      ],
+      "tags": {
+        "actsByClaim": true,
+        "isInfoRole": false,
+        "isSetupModifier": true,
+        "actsAtNight": false,
+        "hasRoleSwap": false,
+        "hasAlignmentSwap": false,
+        "hasRegistrationWeirdness": false,
+        "isGlobalRule": false
+      },
+      "todos": [
+        "Confirm whether the Virgin needs a separate night order step when the Storyteller enforces the penalty."
+      ]
+    }
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "roleKey": "kazali",
+  "title": "Kazali",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night*, choose a player: they die. [You choose which players are which Minions. -? to +? Outsiders]",
+  "summary": "The Kazali chooses their own Minions. \n-  If a Kazali is created mid game, the Kazali does not choose new Minion players. \n-  The Storyteller can give the Minions’ original good characters as bluffs to the Demon, since they are not in play. \n-  The Kazali acts at a time that is technically both during setup and during the first night. \n-  The Storyteller may keep the Kazali awake, or put the Kazali to sleep, when waking the Minions to tell them which Minion that they are. \n-  Only Minions that are on the script may be chosen. Duplicate Minion characters are not allowed.",
+  "howToRun": "While setting up the game, remove all Minion tokens and add Townsfolk or Outsider tokens. \n\nDuring the first night, wake the Kazali. The Kazali points at a player and a Minion on the character sheet. Replace their old character token with the Minion token, show them the “You Are” info token then the Minion character token, and give a thumbs down. Repeat until the normal number of Minions exist. Put the Kazali to sleep. \n\nEach night except the first, wake the Kazali. They point at any player. That player dies.\n\n \n\nDepending on the script, adding more than one Outsider can put the good team at a significant disadvantage.",
+  "examples": [
+    "There are 15 players and no Minions in play yet. The Kazali wakes and chooses that Doug becomes the evil Organ Grinder, that Amy becomes the evil Vizier, and that Lewis becomes the evil Goblin."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night*, choose a player: they die. [You choose which players are which Minions. -? to +? Outsiders]",
+      "resolution": {
+        "stKind": "RESOLVE/kazali/action",
+        "description": "Resolve kazali night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Bounty Hunter",
+      "withKey": "bountyhunter",
+      "alignment": "Good",
+      "text": "If the Kazali turns the Bounty Hunter into a Minion, an evil Townsfolk is not created."
+    },
+    {
+      "with": "Marionette",
+      "withKey": "marionette",
+      "alignment": "Evil",
+      "text": "If there would be a Marionette in play, they enter play after the Demon & must start as their neighbor."
+    },
+    {
+      "with": "Summoner",
+      "withKey": "summoner",
+      "alignment": "Evil",
+      "text": "If the Summoner creates a second living Demon, deaths tonight are arbitrary."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/kazali/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\"."
+  ]
+}

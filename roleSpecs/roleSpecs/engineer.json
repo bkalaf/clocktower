@@ -1,0 +1,90 @@
+{
+  "roleKey": "engineer",
+  "title": "Engineer",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Once per game, at night, choose which Minions or which Demon is in play.",
+  "summary": "The Engineer manufactures the threat that the town faces.\n-  The Engineer can choose which Minion characters are in play, or which Demon is in play, but not both.\n-  When the Engineer creates new in-play characters, the Demon player remains the Demon, and the Minion players remain Minions. The number of evil players stays the same.\n-  If the Engineer tries to create an in-play character, that character stays as the same player. The Engineer doesn’t learn this, and may not use their ability again.\n-  If creating Minions, the Engineer chooses the same number of Minions that should be in play for the number of players (see the Traveller sheet or the setup sheet).\n-  If the Engineer accidentally chooses too many or too few characters, the Storyteller changes as many evil players’ characters as is fair and feasible.\n-  Only characters from the current script may be chosen.",
+  "howToRun": "Each night, wake the Engineer. They either shake their head no or point at evil characters on the character sheet.\n\nIf they shake their head no, nothing happens. Put the Engineer to sleep.\n\nIf they point to a Demon or Minions on their character sheet, put them to sleep. Swap all appropriate character tokens with new character tokens. Wake each evil player that changed character, show the YOU ARE info token, then their new character token, then put them to sleep. The Engineer loses their ability—mark them with the NO ABILITY reminder and remove their night token from the night sheet.",
+  "examples": [
+    "On the second night, the Engineer chooses that the Demon is a Lleech. Lewis, who was the Imp, is now the Lleech.",
+    "On the first night, the Engineer changes the Baron into the Boomdandy. There are still an extra two Outsiders in play.",
+    "The Fearmonger and the Psychopath are in play, and causing havoc. The Engineer chooses that the Mezepheles and the Spy are in play. The Storyteller chooses to change the Fearmonger into the Mezepheles and the Psychopath into the Spy.",
+    "The Spy, Assassin, and Witch are in play. The Engineer chooses that the Spy, Assassin and Mezepheles are in play. The Witch turns into the Mezepheles."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "once_per_game",
+      "description": "Once per game, at night, choose which Minions or which Demon is in play.",
+      "resolution": {
+        "stKind": "RESOLVE/engineer/action",
+        "description": "Resolve engineer night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Legion",
+      "withKey": "legion",
+      "alignment": "Evil",
+      "text": "If Legion is created, all evil players become Legion. If Legion is in play, the Engineer starts knowing this but has no ability."
+    },
+    {
+      "with": "Summoner",
+      "withKey": "summoner",
+      "alignment": "Evil",
+      "text": "If the living Summoner is removed from play, the Storyteller has the Summoner ability."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/engineer",
+    "RESOLVE/engineer/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "roleKey": "seamstress",
+  "title": "Seamstress",
+  "category": "townsfolk",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment.",
+  "summary": "The Seamstress learns whether 2 players are on the same team as each other.\n-  They only get this information once per game, so they had best choose wisely when and who.\n-  They may choose alive or dead players or even Travellers.",
+  "howToRun": "Each night, wake the Seamstress. They either shake their head no or point at any two players except themself.\n\nIf they shake their head no, nothing happens. Put the Seamstress to sleep.\n\nIf they point at two players, either nod your head yes (to indicate these players have the same alignment) or shake your head no (to indicate these players do not have the same alignment). Put the Seamstress to sleep. The Seamstress loses their ability - mark them with the NO ABILITY reminder and remove their night token from the night sheet.",
+  "examples": [
+    "During the first night, the Seamstress chooses two players, who are the Barber and the Clockmaker. Because they are both good, the Seamstress learns a \"yes.”",
+    "During the first three nights, the Seamstress chooses not to use their ability. During the fourth night, they choose two players, who are the Fang Gu and the Sweetheart. The Seamstress learns a \"no.”",
+    "The Pit-Hag turns the Mathematician into the Witch, who remains good. Later that night, the Seamstress chooses the two players, the Witch and the Town Crier. The Seamstress learns a \"yes\" because they are both good."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "once_per_game",
+      "description": "Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment.",
+      "resolution": {
+        "stKind": "RESOLVE/seamstress/action",
+        "description": "Resolve seamstress night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 2,
+          "description": "Choose 2 players"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/seamstress",
+    "RESOLVE/seamstress/action"
+  ]
+}

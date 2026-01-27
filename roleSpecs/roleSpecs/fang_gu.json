@@ -1,0 +1,137 @@
+{
+  "roleKey": "fang_gu",
+  "title": "Fang Gu",
+  "category": "demon",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "Each night*, choose a player: they die. The 1st Outsider this kills becomes an evil Fang Gu & you die instead. [+1 Outsider]",
+  "summary": "The Fang Gu possesses Outsiders.\n-  The first time a Fang Gu attacks and kills an Outsider, the Fang Gu dies, and the Outsider becomes a Fang Gu and turns evil.\n-  This can only happen once per game. If the new Fang Gu attacks an Outsider, the Outsider dies as normal.\n-  The new Fang Gu counts as the Demon, and good wins if they die. They do not learn which players are Minions.\n-  There is an extra Outsider in play.\n-  If the Fang Gu attacks an Outsider but that Outsider does not die, that Outsider does not become an evil Fang Gu and the Fang Gu does not die.",
+  "howToRun": "While setting up the game, before putting character tokens in the bag, add one extra Outsider character token and remove one Townsfolk character token.\n\nEach night except the first, wake the Fang Gu. They point at any player. Put the Fang Gu to sleep.\n\nIf the chosen player is not an Outsider, that player dies—mark them with the DEAD reminder.\n\nIf the chosen player is an Outsider and the ONCE reminder is in the center of the Grimoire, that player dies—mark them with the DEAD reminder.\n\nIf the chosen player is an Outsider and the ONCE reminder is not in the centre of the Grimoire, the Fang Gu dies—mark them with the DEAD reminder. Wake the chosen Outsider. Show them the YOU ARE info token, then the Fang Gu token, then the YOU ARE info token, then a thumbs-down. Change their character to a Fang Gu—swap their character token with the spare Fang Gu token. They become evil. Put the new Fang Gu to sleep. Put the ONCE reminder in the center of the Grimoire. (Unlike “Once per game” abilities, this reminder stays there for the rest of the game. Don’t remove it, even if the Fang Gu dies or changes character.)",
+  "examples": [
+    "The Fang Gu attacks the Artist, who dies. The next night, the Fang Gu attacks the Sweetheart, who becomes the Fang Gu while the old Fang Gu dies. The Sweetheart does not make a player drunk, because they did not die. The next night, the new Fang Gu attacks the Klutz, who dies."
+  ],
+  "setupModifications": [
+    {
+      "kind": "ASSIGN_MASKED_ROLE",
+      "maskedSeat": "self",
+      "shownRoleKey": "townsfolk",
+      "trueRoleKey": "fang_gu",
+      "reason": "Masking phrases detected",
+      "evidence": [
+        "hidden (text)"
+      ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "ROLE_CHANGED",
+      "payload": {
+        "description": "Role or alignment swap is established during setup"
+      },
+      "reason": "Role swap phrases detected",
+      "evidence": [
+        "become evil (text)"
+      ]
+    },
+    {
+      "kind": "ADD_ROLE_COUNT",
+      "target": "outsider",
+      "delta": 1,
+      "reason": "explicit bracket note",
+      "evidence": [
+        "[+1 outsider] (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [
+    {
+      "moment": "ROLE_CHANGED",
+      "description": "Alignment or role status can change.",
+      "evidence": [
+        "become evil (text)"
+      ]
+    }
+  ],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "demon_kill",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "does not die (text)"
+      ]
+    },
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "FANG_GU",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "once_per_game",
+      "description": "Each night*, choose a player: they die. The 1st Outsider this kills becomes an evil Fang Gu & you die instead. [+1 Outsider]",
+      "resolution": {
+        "stKind": "RESOLVE/fang_gu/action",
+        "description": "Resolve fang_gu night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Scarlet Woman",
+      "withKey": "scarletwoman",
+      "alignment": "Evil",
+      "text": "If there would be two Demons, one of which was the Scarlet Woman, the Scarlet Woman remains the Scarlet Woman."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": true,
+    "hasAlignmentSwap": true,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/fang_gu",
+    "RESOLVE/fang_gu/action",
+    "RULES/fang_gu_global_rule",
+    "WINCHECK/fang_gu",
+    "TRIGGER/fang_gu/ROLE_CHANGED"
+  ]
+}

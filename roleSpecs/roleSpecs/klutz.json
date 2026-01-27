@@ -1,0 +1,82 @@
+{
+  "roleKey": "klutz",
+  "title": "Klutz",
+  "category": "outsider",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "When you learn that you died, publicly choose 1 alive player: if they are evil, your team loses.",
+  "summary": "The Klutz might accidentally lose the game for their team, unless they are clever.\n-  When the Klutz dies, they must declare a player. They may take a few minutes to do so—after all, it’s a big decision, and other players may give advice on who to choose, but it is always the Klutz’s decision. If they choose an evil player, the game ends immediately and the good team loses. If they choose a good player, nothing happens and the game continues.\n-  It is not the Storyteller’s responsibility to prompt the Klutz to declare they are the Klutz and choose a player. The Klutz must do this shortly after they learn that they are dead. Deliberately not doing so is considered cheating.",
+  "howToRun": "When the Klutz player is declared dead, they must declare that they are the Klutz and then point at any player. (Give them time.) If they choose an evil player, the game ends and the evil team wins. If they choose a good player, the game continues.\n\nIn the strange situation where the Klutz is evil and chooses an evil player, then the game ends and the good team wins instead.\n\nIf the Klutz player doesn’t realize that they must choose a player when they die, privately remind them. New players may not understand how their character works.",
+  "examples": [
+    "The Klutz dies by execution. After much yelling and confusion, the Klutz chooses a player—who is secretly the Seamstress. Night falls, and the game continues.",
+    "The Demon kills Dave, the Klutz. In the morning, when the Storyteller informs the group that Dave is dead, Dave says \"Ok everybody, I was the Klutz\" and after discussion for a few minutes, Dave publicly chooses the player that is the Demon. The game ends immediately and evil rejoices."
+  ],
+  "setupModifications": [
+    {
+      "kind": "ASSIGN_MASKED_ROLE",
+      "maskedSeat": "self",
+      "shownRoleKey": "outsider",
+      "trueRoleKey": "klutz",
+      "reason": "Masking phrases detected",
+      "evidence": [
+        "secretly the (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "KLUTZ",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good team wins (text)",
+        "evil team wins (text)",
+        "the good team wins (text)",
+        "the evil team wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "When you learn that you died, publicly choose 1 alive player: if they are evil, your team loses.",
+      "resolution": {
+        "stKind": "RESOLVE/klutz/action",
+        "description": "Resolve klutz day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "publicly choose (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose 1 player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/klutz",
+    "RESOLVE/klutz/action",
+    "RULES/klutz_global_rule",
+    "WINCHECK/klutz"
+  ]
+}

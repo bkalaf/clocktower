@@ -1,0 +1,123 @@
+{
+  "roleKey": "monk",
+  "title": "Monk",
+  "category": "townsfolk",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "Each night*, choose a player (not yourself): they are safe from the Demon tonight.",
+  "summary": "The Monk protects other players from the Demon.\n-  Each night except the first, the Monk may choose to protect any player except themself.\n-  If the Demon attacks a player who has been protected by the Monk, then that player does not die. The Demon does not get to attack another player—there is simply no death tonight.\n-  The Monk does not protect against the Demon nominating and executing someone.",
+  "howToRun": "Each night except the first, wake the Monk. The Monk points at any player except themself. (If the Monk points at themself, shake your head no and prompt them to point at another player.) Put the Monk to sleep. Put the Monk's SAFE reminder token by the chosen player's character token.\n\nIf the Demon attacks the player marked SAFE, the player remains alive. (Do not mark them with the Demon's DEAD reminder token or add a shroud as you normally would.) At dawn, declare that no one died at night. (Do not say why.)\n\nAt dawn, remove the SAFE reminder token.\n\nIn other editions, Demons may have abilities other than killing. The Monk's protection also prevents all other harmful effects of the Demon's ability, such as poisoning or turning the protected player evil.",
+  "examples": [
+    "The Monk protects the Fortune Teller. The Imp attacks the Fortune Teller. No deaths occur tonight.",
+    "The Monk protects the Mayor, and the Imp attacks the Mayor. The Mayor's \"another player dies\" ability does not trigger, because the Mayor is safe from the Imp. Nobody dies tonight.",
+    "The Monk protects the Imp . The Imp chooses to kill themself tonight, but nothing happens. The Imp stays alive and a new Imp is not created."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    },
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Role flagged as acting at night via Trouble Brewing facts.",
+      "evidence": [
+        "monk listed as night action (fact list)"
+      ]
+    }
+  ],
+  "onMoments": [
+    {
+      "moment": "MOMENT_DEMON_DEATH_RESOLVED",
+      "description": "Triggers when the Demon dies or is revealed.",
+      "evidence": [
+        "demon death check list (fact)"
+      ]
+    },
+    {
+      "moment": "MOMENT_PLAYERS_ALIVE_CHANGED",
+      "description": "Rules change depending on how many players are alive.",
+      "evidence": [
+        "alive conditional list (fact)"
+      ]
+    }
+  ],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "demon_kill",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "does not die (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night*, choose a player (not yourself): they are safe from the Demon tonight.",
+      "resolution": {
+        "stKind": "RESOLVE/monk/action",
+        "description": "Resolve monk night action",
+        "effectType": "preventDeath"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "If the Leviathan nominates and executes the Monk-protected player, good wins."
+    },
+    {
+      "with": "Riot",
+      "withKey": "riot",
+      "alignment": "Evil",
+      "text": "If Riot nominates and executes the Monk-protected player, good wins."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/monk/action",
+    "TRIGGER/monk/MOMENT_DEMON_DEATH_RESOLVED",
+    "TRIGGER/monk/MOMENT_PLAYERS_ALIVE_CHANGED"
+  ],
+  "factTags": [
+    "alive-cond",
+    "demon-death-check",
+    "makes-choice",
+    "protection"
+  ]
+}

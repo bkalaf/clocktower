@@ -1,0 +1,81 @@
+{
+  "roleKey": "fortune_teller",
+  "title": "Fortune Teller",
+  "category": "townsfolk",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
+  "summary": "The Fortune Teller detects who the Demon is, but sometimes thinks good players are Demons.\n-  Each night, the Fortune Teller chooses two players and learns if at least one of them is a Demon. They do not learn which of them is a Demon, just that one of them is. If neither is the Demon, they learn this instead.\n-  Unfortunately, one player, called the Red Herring, will register as a Demon to the Fortune Teller if chosen. The Red Herring is the same player throughout the entire game. This player may be any good player, even the Fortune Teller themself, and the Fortune Teller does not know which player it is.\n-  The Fortune Teller may choose any two players—alive or dead, or even themself. If they choose a dead Demon, then the Fortune Teller still receives a nod.",
+  "howToRun": "While preparing the first night, put the Fortune Teller's RED HERRING reminder token by any good character token, marking that player as the Red Herring.\n\nEach night, wake the Fortune Teller. The Fortune Teller points at any two players. If either chosen player is a Demon or the Red Herring, nod your head yes. Otherwise, shake your head no. Put the Fortune Teller to sleep.\n\nIn smaller games, making the Fortune Teller their own Red Herring is sometimes advised, as the Fortune Teller gets more information that way.",
+  "examples": [
+    "The Fortune Teller chooses the Monk and the Undertaker and learns a 'no'.",
+    "The Fortune Teller chooses the Imp and the Empath, and learns a 'yes'.",
+    "The Fortune Teller chooses an alive Butler and a dead Imp, and learns a 'yes'.",
+    "The Fortune Teller chooses themselves and a Saint. The Saint is the Red Herring. The Fortune Teller learns a 'yes'."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "REGISTRATION_MODIFIER",
+      "registersAs": [
+        "demon"
+      ],
+      "scope": "always",
+      "evidence": [
+        "register as (text)",
+        "registers as (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
+      "resolution": {
+        "stKind": "RESOLVE/fortune_teller/action",
+        "description": "Resolve fortune_teller night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 2,
+          "description": "Choose 2 players"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": true,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/fortune_teller",
+    "RESOLVE/fortune_teller/action"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "roleKey": "alsaahir",
+  "title": "Alsaahir",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each day, if you publicly guess which players are Minion(s) and which are Demon(s), good wins.",
+  "summary": "The Alsaahir guesses the entire evil team.\n-  The Alsaahir’s guesses need to be public, and they need to be during the day. They don’t have to guess every day.\n-  Other players may pretend to be the Alsaahir and make a guess. Like the Juggler or the Gossip, the Storyteller will briefly pretend that player is the Alsaahir. \n-  If the Alsaahir guesses the Demon player as the Demon, and the Minion players as Minions, the game ends immediately. The Alsaahir must guess all Demon and Minion players.\n-  The Alsaahir doesn’t need to guess specific minion characters, nor specific Demon characters. \n-  If there is more than one Demon in play, all Demons must be guessed, including dead Demons.\n-  If a player is a Minion and Demon, such as Legion, the Alsaahir must guess this player as a Demon.\n-  Once a guess is made, the Alsaahir cannot change their mind later that day and guess again.\n-  The Alsaahir needs to guess Minions and Demons, even if they are good, but need not guess which Travellers are evil.\n-  If the evil team has changed during the game, the Alsaahir must guess the current evil team, not the starting evil team.",
+  "howToRun": "Each day, once only, if the Alsaahir declares that they wish to use their ability, prompt them to guess which player is the Demon, and which player(s) are Minions. If incorrect, nothing happens and the game continues. If correct, declare that good wins.\n\nOptional rule: like the Juggler and the Gossip, the Storyteller may limit the number of players that make an Alsaahir guess to three players per day. Only use this optional rule if so many players are bluffing as the Alsaahir that the game slows down and ceases to be fun.",
+  "examples": [
+    "The Alsaahir guesses four good players. Nothing happens.",
+    "The Alsaahir guesses that Doug is the Demon, and Ben and Sarah are Minions. Doug is the Demon, and Ben and Sarah are Minions. Good wins immediately.",
+    "The drunk Alsaahir guesses that Doug is the Demon, and Ben and Sarah are Minions. Doug is the Demon, and Ben and Sarah are Minions. Nothing happens and the game continues. The next day, the sober Alsaahir guesses that Ben is the Demon and Doug and Sarah are Minions. Nothing happens and the game continues."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "ALSAAHIR",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)",
+        "good wins immediately (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "Each day, if you publicly guess which players are Minion(s) and which are Demon(s), good wins.",
+      "resolution": {
+        "stKind": "RESOLVE/alsaahir/action",
+        "description": "Resolve alsaahir day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "during the day (text)",
+        "each day (text)",
+        "publicly guess (text)"
+      ]
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Vizier",
+      "withKey": "vizier",
+      "alignment": "Evil",
+      "text": "The Storyteller doesn't declare the Vizier is in play."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RESOLVE/alsaahir/action",
+    "RULES/alsaahir_global_rule",
+    "WINCHECK/alsaahir"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\".",
+    "Storyteller discretion noted near \"optional rule\"."
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "roleKey": "princess",
+  "title": "Princess",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "On your 1st day, if you nominated & executed a player, the Demon doesn’t kill tonight.",
+  "summary": "The Princess decides which player dies first.\n-  For the Princess ability to work, the player that the Princess nominated must be the one executed. Players executed but nominated by others don’t count.\n-  The executed player does not have to die for the Princess ability to work.\n-  Exiles don’t count for the Princess ability.\n-  If the Princess is drunk during the day, then sober at night, they prevent the Demon from killing. If the Princess is sober during the day, but drunk at night, they do not.\n-  At night, non-Demon kills happen as normal.\n-  At night, the Demon still chooses a player to kill, but they do not die. Other parts of the Demon’s ability, such as poisoning players, making false information, etc. happen as normal.\n-  The Princess does not have to nominate on their 1st day.\n-  If a Princess is created mid-game, and they nominate and execute a player on their 1st day as a Princess, the Demon doesn’t kill that night.",
+  "howToRun": "If the Princess nominates and executes a player, mark the Demon with the DOESN'T KILL reminder.\n\nTonight, if the Demon would wake to choose a player, wake them as normal. The Demon does not kill.",
+  "examples": [
+    "The Princess nominates the Preacher. The Preacher is executed, and dies. That night, the Vortox chooses the Pixie, who does not die. The Town Crier learns that a Minion nominated today, which is false information due to the Vortox.",
+    "On night 4, the Pit-Hag turns the Dreamer into the Princess. That day, the Princess nominates the Zealot, who is executed. That night, the Kazali chooses the Princess, who does not die."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "demon_kill",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "does not die (text)"
+      ]
+    },
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "On your 1st day, if you nominated & executed a player, the Demon doesn’t kill tonight.",
+      "resolution": {
+        "stKind": "RESOLVE/princess/action",
+        "description": "Resolve princess day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "at night (text)",
+        "during the day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Al-Hadikhia",
+      "withKey": "alhadikhia",
+      "alignment": "Evil",
+      "text": "If the Princess nominated & executed a player on their 1st day, no one dies to the Al-Hadikhia tonight."
+    },
+    {
+      "with": "Cannibal",
+      "withKey": "cannibal",
+      "alignment": "Good",
+      "text": "If the Cannibal nominated, executed, & killed the Princess today, the Demon doesn’t kill tonight."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/princess",
+    "RESOLVE/princess/action"
+  ]
+}

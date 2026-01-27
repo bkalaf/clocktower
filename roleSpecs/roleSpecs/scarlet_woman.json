@@ -1,0 +1,133 @@
+{
+  "roleKey": "scarlet_woman",
+  "title": "Scarlet Woman",
+  "category": "minion",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don't count.)",
+  "summary": "The Scarlet Woman becomes the Demon when the Demon dies.\n-  If there are five or more players just before the Demon dies—that is, four or more players left alive after the Demon dies—then the Scarlet Woman immediately becomes the Demon, and the game continues as if nothing happened.\n-  Travellers do not count as players when seeing if the Scarlet Woman's ability triggers.\n-  If less than five players are alive when the Demon is executed, then the game ends and good wins.\n-  If five or more players are alive when the Imp kills themself at night, the Scarlet Woman must become the new Imp.\n-  If the Scarlet Woman becomes the Demon, they are that Demon in every way. Good wins if they are executed. They attack each night. They register as the Demon.",
+  "howToRun": "If the Demon dies and there were five or more alive players immediately before the Demon died, replace the Scarlet Woman token with a spare Imp token, changing that player's character from the Scarlet Woman into the Imp. (They are now the Demon and have the Imp's ability. If they die, good wins.)\n\nThat night, wake the new Imp, show them the YOU ARE info token, then show them the Imp token.\n\nIn Trouble Brewing, there is only one Demon—the Imp. In other editions, there are multiple possible Demons. If the Scarlet Woman becomes the Demon, they become the same type of Demon that died, and they gain this Demon's ability. When this happens, mark the Scarlet Woman with the IS THE DEMON reminder and refer to that Demon's \"How to Run\" instructions.",
+  "examples": [
+    "There are seven players alive: the Imp, the Scarlet Woman, two Townsfolk, and three Travellers. The Imp is executed, so the game ends and good wins because Travellers do not add to the player count for the Scarlet Woman's ability.",
+    "There are five players alive: the Imp, the Scarlet Woman, the Baron, and two Townsfolk. The Imp is executed. The Scarlet Woman becomes the Imp, and the game continues.",
+    "Brianna is the Scarlet Woman. The Fortune Teller chooses Brianna and Alex, and learns a \"no.” Later, the Imp dies, so Brianna becomes the Imp. The Fortune Teller chooses Brianna and Alex again, and learns a \"yes.\""
+  ],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "ROLE_CHANGED",
+      "payload": {
+        "description": "Role or alignment swap is established during setup"
+      },
+      "reason": "Role swap phrases detected",
+      "evidence": [
+        "becomes the demon (text)",
+        "become the demon (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [
+    {
+      "moment": "ROLE_CHANGED",
+      "description": "Alignment or role status can change.",
+      "evidence": [
+        "becomes the demon (text)",
+        "become the demon (text)"
+      ]
+    }
+  ],
+  "passiveAbilities": [
+    {
+      "kind": "REGISTRATION_MODIFIER",
+      "registersAs": [
+        {
+          "roleKey": "the"
+        }
+      ],
+      "scope": "always",
+      "evidence": [
+        "register as (text)"
+      ]
+    },
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "SCARLET_WOMAN",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "If there are 5 or more players alive & the Demon dies, you become the Demon. (Travellers don't count.)",
+      "resolution": {
+        "stKind": "RESOLVE/scarlet_woman/action",
+        "description": "Resolve scarlet_woman night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Al-Hadikhia",
+      "withKey": "alhadikhia",
+      "alignment": "Evil",
+      "text": "If there would be two Demons, one of which was the Scarlet Woman, the Scarlet Woman becomes the Scarlet Woman again."
+    },
+    {
+      "with": "Fang Gu",
+      "withKey": "fanggu",
+      "alignment": "Evil",
+      "text": "If there would be two Demons, one of which was the Scarlet Woman, the Scarlet Woman remains the Scarlet Woman."
+    },
+    {
+      "with": "Lil' Monsta",
+      "withKey": "lilmonsta",
+      "alignment": "Evil",
+      "text": "If Lil' Monsta dies with 5 or more players alive, the Scarlet Woman babysits Lil' Monsta for the rest of the game."
+    },
+    {
+      "with": "Plague Doctor",
+      "withKey": "plaguedoctor",
+      "alignment": "Good",
+      "text": "If the Storyteller would gain the Scarlet Woman ability, a Minion gains it, and learns this."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": true,
+    "hasAlignmentSwap": true,
+    "hasRegistrationWeirdness": true,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/scarlet_woman",
+    "RESOLVE/scarlet_woman/action",
+    "RULES/scarlet_woman_global_rule",
+    "WINCHECK/scarlet_woman",
+    "TRIGGER/scarlet_woman/ROLE_CHANGED"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "roleKey": "fibbin",
+  "title": "Fibbin",
+  "category": "fabled",
+  "editionTags": [],
+  "abilityText": "Once per game, 1 good player might get incorrect information.",
+  "summary": "Add the Fibbin if your script has too much information or no possibility of misinformation.\n-  If you create a character list and it has no characters that cause drunkenness, poisoning, or other ways for information to be false, then you may want to add the Fibbin. Whilst it is not necessary, even a minor chance of a good player’s information being incorrect can drastically help the evil players bluff.\n-  The Fibbin does not make an ability fail in the way that drunkenness and poisoning do. It only affects abilities that provide information from the Storyteller signaling to a player during the night or telling them something.\n-  If the game ends before you have given a good player incorrect information, that’s okay.\n-  Some characters get false information due to their ability. The Fibbin can make this information true.",
+  "howToRun": "At the start of the game, declare that the Fibbin is in play. Add the Fibbin token to the Grimoire.\n\nOnce per game, when a good player gains information from an ability, you can give them incorrect information. The Fibbin loses their ability—put their NO ABILITY reminder token by their token.",
+  "examples": [
+    "On the first night, all players get correct information. On the second night, the Empath learns they are neighbouring one evil player, but both their neighbours are actually good. For the rest of the game, all good players get correct information.",
+    "The Virgin is nominated by a Townsfolk. This Townsfolk is executed immediately because the Fibbin cannot make an ability malfunction. Later, the Monk protects a player. Again, the Monk's ability cannot fail due to the Fibbin ability. Later, the Ravenkeeper dies at night and gets false information, because information from an ability can be affected by the Fibbin ability."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "during the night (text)",
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "once_per_game",
+      "description": "Once per game, 1 good player might get incorrect information.",
+      "resolution": {
+        "stKind": "RESOLVE/fibbin/action",
+        "description": "Resolve fibbin night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "during the night (text)",
+        "first night (text)",
+        "at night (text)"
+      ],
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/fibbin",
+    "RESOLVE/fibbin/action"
+  ]
+}

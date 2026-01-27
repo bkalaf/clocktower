@@ -1,0 +1,110 @@
+{
+  "roleKey": "hatter",
+  "title": "Hatter",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "If you died today or tonight, the Minion & Demon players may choose new Minion & Demon characters to be.",
+  "summary": "The Hatter allows the evil players to change characters.  \n-  Each player with a Minion or Demon character may choose to become any character of the same type as their current character.  \n-  They may choose not to change characters.  \n-  If a player becomes a new character, they gain the new ability, even if it was a \"you start knowing\" ability or a once per game ability that had already been used.  \n-  Once a player has changed character, their previous character ability has no further effect on the game.  \n-  If a player dies then becomes the Hatter, the evil players do not change characters tonight.  \n-  Once a character has been chosen, a second player cannot choose the same character. If it is already in play, the player with that character must choose a new character.",
+  "howToRun": "If the Hatter dies, mark them with the TEA PARTY TONIGHT reminder. \n\nDuring that night, wake the Minions and Demon. Show them the THIS CHARACTER SELECTED YOU info token, then the Hatter token. Each player either shakes their head no or points to another character of the same type as their current character.  If a second player would end up with the same character as another player, shake your head no and gesture for them to choose again. Put them to sleep. Remove the TEA PARTY TONIGHT reminder. Change each player to the character they chose. \n\t\t\t\t \nOptional rule: if the Hatter dies, allow the Demon to become a Minion, and a Minion to become a Demon. This may cause some chaos among the evil team as they try to communicate silently at night about who wants to be the Demon.",
+  "examples": [
+    "The Hatter dies. The Ojo chooses to become the No Dashii and the Devil's Advocate chooses to become the Scarlet Woman.",
+    "The Vigormortis has killed their Pit-Hag, then later kills the Hatter. Both players choose to stay the same characters, so that they don't lose the effects of the Vigormortis.",
+    "The Assassin kills a player. The Hatter is executed. That night, the Assassin becomes the Mastermind and the Mastermind shakes their head no to stay the Mastermind. The Storyteller shakes their head no because the Mastermind character has been chosen already, and gestures for the Mastermind player to choose again, so they choose Assassin. The new Assassin then uses their new ability to kill a player."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)",
+        "you start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_DEATH_RESOLVED",
+      "description": "Something happens when this character dies.",
+      "evidence": [
+        "if you die (text)",
+        "if you died (text)"
+      ]
+    }
+  ],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "other",
+      "usage": "once_per_game",
+      "description": "If you died today or tonight, the Minion & Demon players may choose new Minion & Demon characters to be.",
+      "resolution": {
+        "stKind": "RESOLVE/hatter/action",
+        "description": "Resolve hatter other",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Legion",
+      "withKey": "legion",
+      "alignment": "Evil",
+      "text": "If Legion is created, all evil players become Legion. If Legion is in play, the Hatter has no ability."
+    },
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "The Leviathan cannot enter play after day 5."
+    },
+    {
+      "with": "Lil' Monsta",
+      "withKey": "lilmonsta",
+      "alignment": "Evil",
+      "text": "If the Hatter dies & the Demon chooses Lil' Monsta, they also choose a Minion to become."
+    },
+    {
+      "with": "Summoner",
+      "withKey": "summoner",
+      "alignment": "Evil",
+      "text": "If the Summoner creates a second living Demon, deaths tonight are arbitrary."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/hatter/action",
+    "TRIGGER/hatter/MOMENT_DEATH_RESOLVED"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"optional rule\"."
+  ]
+}

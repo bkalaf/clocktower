@@ -1,0 +1,78 @@
+{
+  "roleKey": "undertaker",
+  "title": "Undertaker",
+  "category": "townsfolk",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "Each night*, you learn which character died by execution today.",
+  "summary": "The Undertaker learns which character was executed today.\n-  The player must have died from execution for the Undertaker to learn who they are. Deaths during the day for other reasons, such as the Gunslinger choosing a player to kill, or the exile of a Traveller, do not count.\n-  The Undertaker wakes each night except the first, as there have been no executions yet.\n-  If nobody died today, the Undertaker learns nothing. The Storyteller either does not wake the Undertaker at night, or wakes them but does not show a token.\n-  If the Drunk is executed, the Undertaker is shown the Drunk character token, not the token for the Townsfolk that the Drunk player thought they were.",
+  "howToRun": "If a player dies by execution, put the Undertaker's DIED TODAY reminder token by the dead player's character token.\n\nEach night except the first, if any player died by execution today, wake the Undertaker. Show the character token marked DIED TODAY to the Undertaker. Put the Undertaker to sleep. Remove the Undertaker's reminder token when convenient.\n\nIn Trouble Brewing, there can only be one execution per day, and every execution causes a player to die. In other editions, there may be more than one execution per day (in which case the Storyteller chooses which character to show the Undertaker) or the execution does not cause a death (in which case the Undertaker learns nothing).",
+  "examples": [
+    "The Mayor is executed today. That night, the Undertaker is shown the Mayor token.",
+    "The Drunk, who thinks they are the Virgin, is executed today. At night, the Undertaker is shown the Drunk token, because the Undertaker learns a player's true character, as opposed to the one they believe they are.",
+    "The Spy is executed. Two Travellers are exiled. That night, the Undertaker is shown the Butler token, because the Spy is registering as the Butler, and because the exiles are not executions.",
+    "Nobody was executed today. That night, the Undertaker does not wake."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "Each night*, you learn which character died by execution today.",
+      "resolution": {
+        "stKind": "RESOLVE/undertaker/action",
+        "description": "Resolve undertaker day claim",
+        "effectType": "requestInfo"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "during the day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/undertaker",
+    "RESOLVE/undertaker/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ],
+  "factTags": [
+    "ongoing-info"
+  ]
+}

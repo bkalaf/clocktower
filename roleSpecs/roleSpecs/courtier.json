@@ -1,0 +1,96 @@
+{
+  "roleKey": "courtier",
+  "title": "Courtier",
+  "category": "townsfolk",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "Once per game, at night, choose a character: they are drunk for 3 nights & 3 days.",
+  "summary": "The Courtier gets a character drunk, without knowing which player it is.\n-  Once per game, the Courtier chooses a character to be drunk for three nights and three days, starting immediately.\n-  The Courtier does not learn if they were successful or not, so they might choose a character that is not in play.\n-  The Courtier chooses a character, not a player. The Courtier player may need to be reminded of this. Evil players bluffing as the Courtier may also need to be reminded.\n-  If the drunk or poisoned Courtier chooses a character, that character is not drunk, even if the Courtier later becomes sober and healthy. If the Courtier made a character drunk, but the Courtier becomes drunk or poisoned, the player they made drunk becomes sober again. If the Courtier becomes sober and healthy again before the three nights and three days have ended, that player becomes drunk yet again.",
+  "howToRun": "Each night, wake the Courtier. They either shake their head no or point at any character icon on their character sheet. Put the Courtier to sleep.\n\nIf the Courtier chose a character icon and that character is in play, the player of the chosen character becomes drunk for three nights and three days. Tonight, mark them with the Courtier’s DRUNK 1 reminder. The next night, replace the DRUNK 1 reminder with the DRUNK 2 reminder. The next night, replace the DRUNK 2 reminder with the DRUNK 3 reminder. At dusk on the next night, remove the DRUNK 3 reminder, and the Courtier loses their ability—mark them with the NO ABILITY reminder and remove their night token from the night sheet.\n\nAfter the Courtier chooses a character to make drunk, do not wake the Courtier for the rest of the game.\n\nIn other editions, there can be multiple copies of the same character in play. The Courtier only makes one of them drunk.",
+  "examples": [
+    "For four nights, the Courtier wakes but does not use their ability. During the fifth night, they make the Shabaloth drunk. For the next three nights, the Shabaloth acts but cannot kill anybody.",
+    "The Courtier uses their ability while drunk. Nothing happens, but they are not woken again.",
+    "The Courtier makes the Mastermind drunk. The Po is executed while the Mastermind still lives. The game ends and good wins."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "COURTIER",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "once_per_game",
+      "description": "Once per game, at night, choose a character: they are drunk for 3 nights & 3 days.",
+      "resolution": {
+        "stKind": "RESOLVE/courtier/action",
+        "description": "Resolve courtier night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Summoner",
+      "withKey": "summoner",
+      "alignment": "Evil",
+      "text": "If the living Summoner has no ability, the Storyteller has the Summoner ability."
+    },
+    {
+      "with": "Vizier",
+      "withKey": "vizier",
+      "alignment": "Evil",
+      "text": "If the Vizier loses their ability, they learn this, and cannot die during the day."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/courtier",
+    "RESOLVE/courtier/action",
+    "RULES/courtier_global_rule",
+    "WINCHECK/courtier"
+  ]
+}

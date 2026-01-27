@@ -1,0 +1,78 @@
+{
+  "roleKey": "balloonist",
+  "title": "Balloonist",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night, you learn a player of a different character type than last night. [+0 or +1 Outsider]",
+  "summary": "The Balloonist learns players of different character types.\n-  Each time the Balloonist learns a player, the player must have a different character type to the previously shown player.\n-  The Balloonist does not learn the character type of the player they learn.\n-  The shown player can be alive or dead.\n-  The shown player can be good or evil.\n-  If the Balloonist is drunk or poisoned, they may learn a character of the same type as the previously shown player. When the Balloonist becomes sober and healthy, they must learn a player of a different character type to the previously shown player.\n-  During setup, the Storyteller may choose to add an Outsider due to the Balloonist’s ability.",
+  "howToRun": "During setup, you may add an Outsider.\n\nWhen preparing the first night, mark any player with the KNOW reminder. When preparing each night afterwards, mark a character of a different type than the current with the KNOW reminder.\n\nEach night, wake the Balloonist. Point to the player marked KNOW. Put the Balloonist to sleep.",
+  "examples": [
+    "Abdallah is the Vizier, Lewis is the High Priestess, and Sarah is the Politician. On the first night, the Balloonist learns Abdallah. On the second night, the Balloonist learns Lewis. On the third night, the Balloonist learns Sarah.",
+    "Julian is the Nightwatchman, Alex is the Sailor, and Lachlan is the Puzzlemaster. On the first night, the Balloonist learns Julian. On the second night, the Poisoner chooses the Balloonist. Because the Balloonist is poisoned, the Storyteller chooses to show the Balloonist another Townsfolk, and the Balloonist learns Alex. On the third night, the Balloonist is sober and healthy, and learns Lachlan, who is a different character type to Alex."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "first_night",
+      "description": "Each night, you learn a player of a different character type than last night. [+0 or +1 Outsider]",
+      "resolution": {
+        "stKind": "RESOLVE/balloonist/action",
+        "description": "Resolve balloonist night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Marionette",
+      "withKey": "marionette",
+      "alignment": "Evil",
+      "text": "If the Marionette thinks that they are the Balloonist, an Outsider might have been added during setup."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/balloonist",
+    "RESOLVE/balloonist/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\".",
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "roleKey": "poppy_grower",
+  "title": "Poppy Grower",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Minions & Demons do not know each other. If you die, they learn who each other are that night.",
+  "summary": "The Poppy Grower prevents the evil players from learning who each other are.\n-  The Demon still learns three not-in-play characters that are safe to bluff as.\n-  If the Poppy Grower dies, the Demon and Minions learn who each other are, as though it were the first night again.\n-  If the Poppy Grower becomes drunk or poisoned, Demons and Minions do not suddenly learn who each other are. If the Poppy Grower is drunk or poisoned when they die, Demons and Minions do not learn who each other are, since the Poppy Grower has no ability that night.\n-  An evil Traveller still learns which player is the Demon when that Traveller enters play.",
+  "howToRun": "During the first night, wake the Demon. Show the THESE CHARACTERS ARE NOT IN PLAY info token, then any three good character tokens that are not in play. Then, put the Demon to sleep. Do not do the Minion Info and Demon Info steps.\n\nIf the Poppy Grower dies, mark them with the EVIL WAKES reminder. That night, wake the Minions and let them make eye contact. Show the THIS IS THE DEMON info token, then point to the Demon. Put the Minions to sleep. Wake the Demon. Show the THESE ARE YOUR MINIONS info token, then point to the Minions. Put the Demon to sleep.",
+  "examples": [
+    "The Imp, the Poisoner and the Witch are in play. On the first night, the Imp wakes to learn 3 not-in-play characters, but does not learn which players are the Minions. The Poisoner and the Witch do not wake to learn who each other are, and do not learn who the Demon is.",
+    "The Poppy Grower is executed, and dies. That night, the Shabaloth learns which players are the Minions. The Godfather and the Baron wake, make eye contact, and learn which player is the Shabaloth.",
+    "The Poppy Grower is the Drunk. On the 1st night, the evil players learn who each other are, as normal. On the fourth night, the Demon kills the Poppy Grower. The Demons and Minions do not wake to learn who each other are again because the Poppy Grower is the Drunk."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": false,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [
+    {
+      "moment": "MOMENT_DEATH_RESOLVED",
+      "description": "Something happens when this character dies.",
+      "evidence": [
+        "if you die (text)"
+      ]
+    }
+  ],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Lil' Monsta",
+      "withKey": "lilmonsta",
+      "alignment": "Evil",
+      "text": "If Lil' Monsta & the Poppy Grower are alive, Minions wake one by one, until one of them chooses to take the Lil' Monsta token."
+    },
+    {
+      "with": "Spy",
+      "withKey": "spy",
+      "alignment": "Evil",
+      "text": "If the Poppy Grower has their ability, the Spy does not see the Grimoire."
+    },
+    {
+      "with": "Summoner",
+      "withKey": "summoner",
+      "alignment": "Evil",
+      "text": "If the Poppy Grower is alive on the 3rd night, the Summoner chooses which Demon but not which player."
+    },
+    {
+      "with": "Widow",
+      "withKey": "widow",
+      "alignment": "Evil",
+      "text": "If the Poppy Grower has their ability, the Widow does not see the Grimoire."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/poppy_grower",
+    "TRIGGER/poppy_grower/MOMENT_DEATH_RESOLVED"
+  ]
+}

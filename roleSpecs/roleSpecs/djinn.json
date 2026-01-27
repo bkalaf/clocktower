@@ -1,0 +1,44 @@
+{
+  "roleKey": "djinn",
+  "title": "Djinn",
+  "category": "fabled",
+  "editionTags": [],
+  "abilityText": "Use the Djinn's special rule. All players know what it is.",
+  "summary": "Add the Djinn to all games with a jinx icon on the script. The Djinn resolves jinxes by creating a unique rule.\n-  When creating a character list using the Script Tool, some character combinations will be marked as unusual. These two characters are jinxed—they have abilities that clash or contradict each other in some way. The Djinn creates a special rule that allows these characters to work well together. Some jinxed characters even work better with the Djinn in play!\n-  The Djinn’s special rule is described by the Script Tool online, and is printed out automatically when you create a script with a character combination that is jinxed.\n-  There are many different Djinn special rules. Each is tailored to a specific pair of jinxed characters.\n-  If there are jinxed characters on the character sheet, even if there are no jinxed characters in play, the Storyteller tells all players what the Djinn’s special rule is at the start of the game.\n-  The Djinn may have several special rules at once. If there are multiple pairs of jinxed characters on the character sheet, the players learn all the Djinn’s special rules.",
+  "howToRun": "At the start of the game, if there are jinxed characters on the character sheet, declare that the Djinn is in play and inform the group of all Djinn special rules for this game. (Do this even if there are no jinxed characters in play.)\n\nFollow the Djinn instructions as listed on the Script Tool printout.",
+  "examples": [
+    "The Pit-Hag and the Heretic are Jinxed. At the start of the game, the Storyteller reads out the Djinn's special rule: “A Pit-Hag cannot create a Heretic.” Later in the game, the Pit-Hag tries to create a Heretic. The Storyteller shakes their head, and the Pit-Hag must choose another character to create.",
+    "The Spy and the Magician are Jinxed. At the start of the game, the Storyteller reads out the Djinn's special rule: \"When the Spy sees the grimoire, the Demon and the Magician's character tokens are removed.\" There is no Spy and no Magician in play, but the Storyteller reads this aloud anyway so that the good team doesn't know which Minion is in play."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "starts knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/djinn"
+  ]
+}

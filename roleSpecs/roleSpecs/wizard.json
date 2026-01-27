@@ -1,0 +1,79 @@
+{
+  "roleKey": "wizard",
+  "title": "Wizard",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Once per game, choose to make a wish. If granted, it might have a price & leave a clue as to its nature.",
+  "summary": "The Wizard makes a wish.\n-  This wish is limited only by the player’s imagination. It can be anything at all. The Wizard can write their wish on their phone and wake at night to show the Storyteller, or talk with the Storyteller in private during the day. The Wizard could even make a wish publicly if they are feeling foolish.\n-  If the Storyteller tells the group that the Wizard has made a wish, they need not do so immediately, and can do so at any point later on.\n-  Many wishes have a price. The price changes the game in some way, or changes the wish in some way. It can be anything at all, and is decided by the Storyteller. The Storyteller may or may not tell the Wizard what the price is. The purpose of the price is to rebalance a wish that is unfair for the good team on a mechanical level.\n-  Many wishes leave a clue. The clue can be anything at all, is decided by the Storyteller, and is declared publicly. The purpose of a clue is to rebalance a wish that is unfair to the good team on an informational level.\n-  When the Wizard dies, the wish may or may not still be in effect, depending on the nature of the wish and the nature of the price.\n-  If the Wizard makes a wish that the Storyteller doesn’t understand, or feels like it would be impossible to implement, the Storyteller may ask the Wizard to wish again, or cancel the wish.",
+  "howToRun": "When the Wizard makes a wish, either verbally or via text, decide whether to accept or decline the wish. If the wish is declined, prompt the Wizard to wish again, or tell them that they have no more wishes.\n\nIf the wish is granted, say “Your wish is granted.” or “Your wish is my command”, or nod, or otherwise signal that their wish is accepted. Now or later, you may make a price: make whatever mechanical adjustments to the game you feel are necessary for the wish to be balanced. Now or later, you may declare publicly that the Wizard has made a wish, then give the good team a clue about what was wished. \n\nStorytelling the Wizard can be tricky. The Wizard is the most fun for everybody when all wishes are granted, all wishes leave a clue, and all wishes have a price. However...\n\nIf you feel that by granting a wish, the evil team has benefitted a small amount but the good team still has all they need to figure out who the Demon is and to win the game, you may apply no clue and no price. You may even skip telling the good team that the Wizard has made a wish, or tell them but give no clue.\n\nIf you feel that by granting the wish, the good team is at a severe disadvantage in terms of balance - the game rules have changed so that it is impossible for the good team to win even if they learn who the Demon is - then change the game rules or change the wish so that it is still fair for the good team.\n\nIf you feel that by granting the wish, the good team is at a severe disadvantage in terms of knowledge - they lack the needed information to reasonably win the game - then give them a helpful clue to find out what the wish was.\n\nIf you feel that the wish is so extreme and convoluted that you can think of no clue or price to balance it, or that it would just make the game unfun, then decline the wish completely.\n\nOverall, the wish should tip the scales in favour of the Wizard, but still allow the good team a reasonable chance of winning. Take your time in deciding how to do this.",
+  "examples": [
+    "The Wizard wishes to see the Grimoire. The Storyteller grants this wish, and there is no price and no clue.",
+    "The Wizard wishes that all good players are drunk. The Storyteller grants the wish. Later, they declare that the Wizard has made a wish and that “Things are wrong” but provide no further context. For the rest of the game, the Storyteller makes all information false.",
+    "The Wizard wishes that they become a Demon. The Storyteller grants the wish. Later, they declare that the Wizard has made a wish, and that “The student has become the master.” The Storyteller kills the Lord of Typhon and turns the Wizard into the Ojo.",
+    "The Wizard wishes to win the game. The Storyteller grants the wish, and tells the Wizard that the evil team will win the game at the end of the day. The Storyteller declares that the Wizard has made a wish, and that either Ben, Amy, or Lewis is the Demon. The group executes Ben, who is the Demon, and good wins.",
+    "The Wizard wishes that all players have 5 lives, and all reminder tokens for the script are added to characters. The Storyteller judges that this wish is too awkward, confusing and boring, declines the wish, and asks the Wizard to wish again."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "WIZARD",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "once_per_game",
+      "description": "Once per game, choose to make a wish. If granted, it might have a price & leave a clue as to its nature.",
+      "resolution": {
+        "stKind": "RESOLVE/wizard/action",
+        "description": "Resolve wizard day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "at night (text)",
+        "during the day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/wizard",
+    "RESOLVE/wizard/action",
+    "RULES/wizard_global_rule",
+    "WINCHECK/wizard"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\".",
+    "Storyteller discretion noted near \"if you feel\"."
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "roleKey": "imp",
+  "title": "Imp",
+  "category": "demon",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "Each night*, choose a player: they die. If you kill yourself this way, a Minion becomes the Imp.",
+  "summary": "The Imp kills a player each night, and can make copies of itself... for a terrible price.\n-  On each night except the first, the Imp chooses a player to kill. Because most characters act after the Demon, that player will probably not get to use their ability tonight.\n-  The Imp, because they're a Demon, knows which players are their Minions, and knows three not-in-play good characters that they can safely bluff as.\n-  If the Imp dies, the game ends and good wins. However, if the Imp kills themself at night, they die and an alive Minion becomes an Imp. This new Imp does not act that same night, but is now the Imp in every other way—they kill each night, and lose if they die.",
+  "howToRun": "Each night except the first, wake the Imp. The Imp points at any player. Put the Imp to sleep. The chosen player dies—put the Imp's DEAD reminder by the chosen player's character token in the Grimoire and put a shroud on it.\n\nIf the Imp killed themself at night, choose an alive Minion and replace their character token with a spare Imp token, changing their character to the Imp. Wake the new Imp, show them the YOU ARE info token, then show them the Imp token. Put the new Imp to sleep.\n\nAt dawn, declare which player died at night. (Do not say how they died.)\n\nIf the Imp attacks a dead player at night, let them do so. Whenever a character's ability says \"choose a player,\" that means that any player—alive or dead—can be chosen. The Imp may be planning on bluffing as the Soldier, and this kind of thing helps their bluff look stronger.",
+  "examples": [
+    "It is the first night. The Imp learns that Evin and Sarah are the Minions. The Imp also learns that the Monk, Chef, and Librarian are not in play. The Imp bluffs as the Chef, then bluffs as Mayor halfway through the game. Eventually, the Imp is executed and good wins.",
+    "During the night, the Imp wakes and chooses a player, who dies. The next night, the Imp chooses themselves to die. The Imp dies, and the Poisoner becomes the Imp."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "during the night (text)",
+        "first night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [
+    {
+      "moment": "MOMENT_DEMON_DEATH_RESOLVED",
+      "description": "Triggers when the Demon dies or is revealed.",
+      "evidence": [
+        "demon death check list (fact)"
+      ]
+    }
+  ],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "IMP",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night*, choose a player: they die. If you kill yourself this way, a Minion becomes the Imp.",
+      "resolution": {
+        "stKind": "RESOLVE/imp/action",
+        "description": "Resolve imp night action",
+        "effectType": "killAttempt",
+        "emitEvent": "ATTEMPTED_DEATH"
+      },
+      "evidence": [
+        "each night (text)",
+        "during the night (text)",
+        "first night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/imp",
+    "RESOLVE/imp/action",
+    "RULES/imp_global_rule",
+    "WINCHECK/imp",
+    "TRIGGER/imp/MOMENT_DEMON_DEATH_RESOLVED"
+  ],
+  "factTags": [
+    "demon-death-check",
+    "win-condition"
+  ]
+}

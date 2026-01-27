@@ -1,0 +1,60 @@
+{
+  "roleKey": "choirboy",
+  "title": "Choirboy",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "If the Demon kills the King, you learn which player is the Demon. [+the King]",
+  "summary": "The Choirboy learns who the Demon is when the King is slain.\n-  The King can be in play without the Choirboy. During the setup phase, if the Choirboy is in play and the King isn’t, the King is added. If a King is already in play, the Choirboy doesn’t add a second King.\n-  If the Demon kills the King using their ability, the Choirboy learns which player is the Demon. The Demon nominating and executing the King doesn’t count. Minions that kill the King, such as the Assassin, don’t count either.\n-  If the Demon attacks the King but doesn’t kill the King, the Choirboy doesn’t learn who the Demon is.\n-  The Choirboy learns which player the Demon is, but does not learn which character.",
+  "howToRun": "While setting up the game, before putting character tokens in the bag, if the King is not already in play, remove a Townsfolk character token and add the King character token.\n\nEach night except the first, if the Demon kills the King, put the Demon to sleep then wake the Choirboy. Point to the Demon player then put the Choirboy to sleep.",
+  "examples": [
+    "The Imp attacks the Empath. The Empath dies. The next night, the Imp attacks the King, who is protected by the Monk. The King lives. The next night, the Imp attacks the King, who is no longer protected by the Monk. The King dies. The Choirboy is woken by the Storyteller and learns which player is the Imp.",
+    "The Shabaloth kills the King. The drunk Choirboy wakes and wrongly learns that the General is the Demon."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "If the Demon kills the King, you learn which player is the Demon. [+the King]",
+      "resolution": {
+        "stKind": "RESOLVE/choirboy/action",
+        "description": "Resolve choirboy night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/choirboy",
+    "RESOLVE/choirboy/action"
+  ]
+}

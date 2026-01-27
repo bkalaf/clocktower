@@ -1,0 +1,48 @@
+{
+  "roleKey": "noble",
+  "title": "Noble",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "You start knowing 3 players, 1 and only 1 of which is evil.",
+  "summary": "The Noble learns that one of three players is evil.\n-  The Noble learns their information on the first night only.\n-  If a Noble is created mid-game, the Noble learns their information on their first night.\n-  The Noble learns two good players and one evil player. They may not learn one good player and two evil players. They may not learn three evil players.",
+  "howToRun": "While preparing the first night, mark two good players' character tokens with Noble KNOW reminders. Mark any evil player's character token with the third KNOW reminder.\n\nDuring the first night, wake the Noble. Point to all three players marked KNOW. Put the Noble to sleep.",
+  "examples": [
+    "The Noble is shown Marianna, Alex, and Abdallah. Marianna and Abdallah are good, and Alex is evil.",
+    "The Noble learns Doug, Lachlan and Ben. Doug is the Chambermaid. Lachlan is the Barber. Ben is the Recluse, who has registered as evil to the Noble.",
+    "On the third night, the Pit-Hag turns Amy into the Noble. Amy learns that 1 of Evin, Sarah, or Julian is evil. However, Sarah is the evil Spy and has registered as good, and Julian is the Po, who is also evil."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)",
+        "you start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/noble"
+  ]
+}

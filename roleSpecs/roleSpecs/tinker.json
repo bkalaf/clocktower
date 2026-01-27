@@ -1,0 +1,83 @@
+{
+  "roleKey": "tinker",
+  "title": "Tinker",
+  "category": "outsider",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "You might die at any time.",
+  "summary": "The Tinker can die at any time, for no reason.\n-  The Storyteller may kill the Tinker at any time.\n-  The Tinker cannot die from their ability while protected from death, as normal.",
+  "howToRun": "At any time, you may decide that the Tinker dies. If this is during the day, immediately declare that the Tinker has died. If this is during the night, mark the Tinker with the DEAD reminder and wait until dawn to declare which players died during the night. (Do not say how.)\n\nWhile you may kill the Tinker out of the blue during the day, it is most interesting if the Tinker dies at night, because the players will be wondering whether the Tinker died due to their ability or for some other reason.\n\nYou can choose to never kill the Tinker. This makes the Tinker look really suspicious.\n\nWe recommend that you never kill the Tinker when it would end the game. Players should win or lose by their own efforts, not Storyteller fiat.",
+  "examples": [
+    "During the night, the Tinker dies, even though the Demon attacked a different player.",
+    "The Tea Lady sits next to the Tinker and another good player, protecting the Tinker from death. The Tinker cannot die from their ability.",
+    "The Tinker is attacked by the Demon. The Tinker does not die because they are protected by the Innkeeper. Later that night, the Innkeeper dies, so the Storyteller chooses to kill the Tinker too."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "during the night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "demon_kill",
+      "scope": "self",
+      "resolution": "st_request",
+      "evidence": [
+        "cannot die (text)",
+        "does not die (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "You might die at any time.",
+      "resolution": {
+        "stKind": "RESOLVE/tinker/action",
+        "description": "Resolve tinker day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "during the night (text)",
+        "at night (text)",
+        "during the day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/tinker/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\".",
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

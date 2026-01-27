@@ -1,0 +1,86 @@
+{
+  "roleKey": "cacklejack",
+  "title": "Cacklejack",
+  "category": "traveller",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each day, choose a player: a different player changes character tonight.",
+  "summary": "The Cacklejack causes character-changing chaos.\n-  The Storyteller chooses one player to change character each night. This player can be evil or good, dead or alive.\n-  The Storyteller also chooses which character they become. This may be an in-play or a not-in-play character.\n-  Each day, the Cacklejack chooses a player that is immune - the Storyteller must choose a different player to change character that night.\n-  The Cacklejack may choose publicly or privately, but must choose during the day.\n-  Each time a player’s character changes, this is treated as a new instance of that character ability. For example, if a player becomes the Chef on Night 3, they immediately learn how many pairs of evil players there are.",
+  "howToRun": "Each day, the Cacklejack chooses a player. Mark them with the NOT ME reminder.\n\nEach night, except the first, replace any player’s character token with a different character token. Wake that player. Show the YOU ARE info token, and their new character token, then put them to sleep.\n\n \nRemember that the night order is just a guide. The Cacklejack may act at any point in the night if you need it to.",
+  "examples": [
+    "During the day, the Cacklejack chooses Evin. That night, Amy changes from the Acrobat into the Clockmaker. Amy learns a 2.",
+    "During the day, the Cacklejack chooses Abdallah. That night, Julian changes from the Drunk into the Flowergirl. Julian does not learn that he is now sober.",
+    "During the day, the Cacklejack chooses Alex. That night, Lachlan changes from the Leviathan into the Shabaloth. Lachlan has fun."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)",
+        "you start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "Each day, choose a player: a different player changes character tonight.",
+      "resolution": {
+        "stKind": "RESOLVE/cacklejack/action",
+        "description": "Resolve cacklejack day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "during the day (text)",
+        "each day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/cacklejack",
+    "RESOLVE/cacklejack/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

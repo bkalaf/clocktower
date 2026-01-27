@@ -1,0 +1,88 @@
+{
+  "roleKey": "professor",
+  "title": "Professor",
+  "category": "townsfolk",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "Once per game, at night*, choose a dead player: if they are a Townsfolk, they are resurrected.",
+  "summary": "The Professor can bring someone back from the dead.\n-  Once per game, the Professor can choose a dead player. If that player is a Townsfolk, they are resurrected, becoming alive again.\n-  If the Professor chooses an Outsider, Minion, or Demon, then nothing happens, and the Professor’s ability is gone.\n-  The resurrected player regains their ability, even a “once per game” ability they used already.\n-  Resurrected Townsfolk may or may not get to act on the night of their resurrection, depending on whether they would act before or after the Professor. If they had a “first night only” or “you start knowing” ability, they immediately wake to use it again, as soon as the Professor goes to sleep.",
+  "howToRun": "Each night except the first, wake the Professor. The Professor either shakes their head no or points to a dead player. Put the Professor to sleep.\n\nIf the Professor chose a dead Townsfolk, the chosen player becomes alive again—mark them with the Professor’s ALIVE reminder and remove their shroud. (They wake later tonight if they normally would. If they wake on the first night only, they wake now to use their ability.) At dawn, after declaring which players died, declare which player is alive again. (Do not say why.) The Professor loses their ability—mark them with the NO ABILITY reminder and remove their night token from the night sheet.",
+  "examples": [
+    "The Professor chooses a dead player who is claiming to be the Tea Lady. The player is actually the Lunatic. Nobody is resurrected.",
+    "The Professor resurrects the Grandmother, who learns a good player’s character. At dawn, all players learn the Grandmother player is alive, but not that the player is the Grandmother.",
+    "The drunk Professor chooses to resurrect the Minstrel. Unbeknownst to the Professor, the Minstrel was regurgitated by the Shabaloth and is now alive. The Storyteller shakes their head no, because the Professor must choose a dead player. The Professor chooses the dead Fool instead. Nothing happens because the Professor is drunk, and the Professor cannot use their ability again."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)",
+        "you start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "once_per_game",
+      "description": "Once per game, at night*, choose a dead player: if they are a Townsfolk, they are resurrected.",
+      "resolution": {
+        "stKind": "RESOLVE/professor/action",
+        "description": "Resolve professor night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/professor",
+    "RESOLVE/professor/action"
+  ]
+}

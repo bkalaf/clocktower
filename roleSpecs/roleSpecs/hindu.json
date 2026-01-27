@@ -1,0 +1,92 @@
+{
+  "roleKey": "hindu",
+  "title": "Hindu",
+  "category": "loric",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "The first 4 players to die are immediately reincarnated as Travellers of the same alignment.",
+  "summary": "The Hindu gives players that die early a new life.\n-  The first four players to die become Travellers.\n-  It doesn’t matter how the players died.\n-  The Storyteller chooses which Traveller the player becomes. This is different to the normal rule that players choose their Traveller. The players’ alignment stays the same as it was before death.\n-  If the script has five recommended Travellers, the Storyteller chooses from those.\n-  Death is never simultaneous. For example, if the Shabaloth kills two players at night, it kills one, then the other.\n-  If the Demon is one of the first four players to die, the game ends and good wins.",
+  "howToRun": "If a player dies, they become a Traveller character of your choice. Declare which Traveller they are.\n\nWhen four players have died and become Travellers, players die as normal.\n\n \n\nOptional rule: If the Demon becomes a Traveller, a Minion becomes the Demon.",
+  "examples": [
+    "Julian is a Princess. He is executed and becomes the .",
+    "Lachlan is the Sweetheart. He dies and becomes the . Nobody is drunk because the Sweetheart is no longer in play. Evin is the Engineer. He dies and becomes the . That night, the Po kills Marianna, Abdallah, and Lewis. Marianna becomes the  and Abdallah becomes the ."
+  ],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "ROLE_CHANGED",
+      "payload": {
+        "description": "Role or alignment swap is established during setup"
+      },
+      "reason": "Role swap phrases detected",
+      "evidence": [
+        "becomes the demon (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [],
+  "onMoments": [
+    {
+      "moment": "ROLE_CHANGED",
+      "description": "Alignment or role status can change.",
+      "evidence": [
+        "becomes the demon (text)"
+      ]
+    }
+  ],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "HINDU",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "other",
+      "usage": "variable",
+      "description": "The first 4 players to die are immediately reincarnated as Travellers of the same alignment.",
+      "resolution": {
+        "stKind": "RESOLVE/hindu/action",
+        "description": "Resolve hindu other",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": true,
+    "hasAlignmentSwap": true,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RESOLVE/hindu/action",
+    "RULES/hindu_global_rule",
+    "WINCHECK/hindu",
+    "TRIGGER/hindu/ROLE_CHANGED"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"optional rule\".",
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

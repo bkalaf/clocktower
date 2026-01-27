@@ -1,0 +1,76 @@
+{
+  "roleKey": "bounty_hunter",
+  "title": "Bounty Hunter",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "You start knowing 1 evil player. If the player you know dies, you learn another evil player tonight. [1 Townsfolk is evil]",
+  "summary": "The Bounty Hunter tracks down evil players, one at a time.\n-  The Bounty Hunter starts knowing one evil player. When that player dies, they learn another evil player.\n-  The Bounty Hunter only learns the evil player, not their character.\n-  If the Bounty Hunter is drunk or poisoned when they should learn a new player, the Storyteller may show them a good player. When the recently shown player dies, the Bounty Hunter learns a new player that night.\n-  The Bounty Hunter cannot learn the same evil player twice.\n-  If the Bounty Hunter is in the game at setup, one Townsfolk is evil. The Bounty Hunter may learn the evil Townsfolk.",
+  "howToRun": "During setup, turn one Townsfolk character token upside down, to represent that they are evil. Mark one evil player with the KNOW reminder.\n\nDuring the first night, wake the Bounty Hunter. Point to the player marked KNOW. Put the Bounty Hunter to sleep.\n\nEach time the player marked KNOW dies, mark a new evil player with the KNOW reminder. That night, wake the Bounty Hunter, point to the player marked KNOW, then put the Bounty Hunter to sleep.",
+  "examples": [
+    "Alex is the Bounty Hunter, Ben is the Harpy, and Abdallah is the Tea Lady. During setup, the Storyteller decides that Abdallah will be the Evil Tea Lady. On the first night, Alex learns Ben. On day 3, Ben is executed. That night, Alex learns Abdallah.",
+    "On the first night, the Bounty Hunter learns Julian, who is the evil Baron. When Julian dies, the Poisoner targets the Bounty Hunter. That night, the Bounty Hunter learns Evin, who is the good Magician.",
+    "Lachlan is the Drunk who thinks he is the Bounty Hunter. No evil Townsfolk was added at setup, because the Bounty Hunter is not in play. On the first night, Lachlan learns Marianna, who is the good  Empath. When Marianna dies, Lachlan learns Doug, who is the good Flowergirl."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)",
+        "you start knowing (text)",
+        "starts knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": false,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Kazali",
+      "withKey": "kazali",
+      "alignment": "Evil",
+      "text": "If the Kazali turns the Bounty Hunter into a Minion, an evil Townsfolk is not created."
+    },
+    {
+      "with": "Philosopher",
+      "withKey": "philosopher",
+      "alignment": "Good",
+      "text": "If the Philosopher gains the Bounty Hunter ability, a Townsfolk might turn evil."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/bounty_hunter"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\".",
+    "Storyteller discretion noted near \"the storyteller decides\"."
+  ]
+}

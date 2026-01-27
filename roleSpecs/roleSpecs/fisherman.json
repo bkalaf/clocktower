@@ -1,0 +1,86 @@
+{
+  "roleKey": "fisherman",
+  "title": "Fisherman",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Once per game, during the day, visit the Storyteller for some advice to help your team win.",
+  "summary": "The Fisherman knows something that nobody else can know: what should be done.\n-  The Fisherman player chooses when to use their ability.\n-  When they visit the Storyteller, the Storyteller chooses what piece of advice to give the Fisherman.\n-  The Storyteller’s pieces of advice are not necessarily “facts”. They are strategy tips that the Storyteller believes will help the Fisherman win, if they are followed.\n-  If the Fisherman is drunk or poisoned, the Storyteller may give the Fisherman bad advice.",
+  "howToRun": "Once per game, the Fisherman will ask to use their ability. In private, give them once piece of advice to help them win. Then, put the No ability reminder by the Fisherman token.\n\nIt is best to give the Fisherman advice on what to DO, not just information about what IS. This makes the Fisherman more fun and unique.\n\nEg. Saying “You should execute that player” or “Keep this player alive” or “find out who is drunk” or “change your thinking entirely” or “ignore the Minions” or “trust this player” are much more interesting than saying “this player is evil” or “the Demon is a No Dashii”.",
+  "examples": [
+    "The Fisherman visits the Storyteller and learns that “You shouldn’t trust Ben”. Ben is the poisoned Empath, and is unknowingly spreading false information.",
+    "The Fisherman learns “Keep the players claiming to be Outsiders alive”. These players are secretly the Klutz and the Fearmonger. The Storyteller believes that keeping these players alive is more likely to end up with good executing the Demon.",
+    "On the final day, the Fisherman learns to “kill Lewis”. The Fisherman is drunk, and Lewis is a Townsfolk. The Storyteller gave bad (“false”) advice to the Fisherman."
+  ],
+  "setupModifications": [
+    {
+      "kind": "ASSIGN_MASKED_ROLE",
+      "maskedSeat": "self",
+      "shownRoleKey": "townsfolk",
+      "trueRoleKey": "fisherman",
+      "reason": "Masking phrases detected",
+      "evidence": [
+        "secretly the (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "once_per_game",
+      "description": "Once per game, during the day, visit the Storyteller for some advice to help your team win.",
+      "resolution": {
+        "stKind": "RESOLVE/fisherman/action",
+        "description": "Resolve fisherman day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "during the day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/fisherman",
+    "RESOLVE/fisherman/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\".",
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

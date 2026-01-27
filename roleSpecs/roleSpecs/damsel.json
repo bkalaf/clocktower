@@ -1,0 +1,101 @@
+{
+  "roleKey": "damsel",
+  "title": "Damsel",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "All Minions know a Damsel is in play. If a Minion publicly guesses you (once), your team loses.",
+  "summary": "The Damsel needs to avoid being found by the Minions.\n-  If a Minion guesses that you are the Damsel, and does so publicly (so that all players know that they are a Minion), evil wins.\n-  No matter how many Minions are in play, they only get one guess, total. If a Minion makes a guess and is wrong, future guesses by this Minion or by other Minions don’t count.\n-  If the Demon pretends to be a Minion making a guess, that doesn’t count as a guess. Minions may still make a guess and win.\n-  Minions may make a guess at any time.\n-  If the Damsel dies, they are no longer at risk of being guessed by a Minion, since the Damsel loses their ability when dead.\n-  There may not be a Huntsman in play. But if there is, and the Huntsman chooses the Damsel at night, the Damsel becomes a not-in-play Townsfolk, and is no longer the Damsel. The Damsel learns which Townsfolk and has that Townsfolk ability from then on.",
+  "howToRun": "During the first night, wake each Minion. Show the Damsel token. Put each Minion to sleep.\n\nAt any time during the game, if a Minion publicly guesses which player is the Damsel and is incorrect, mark the Damsel with the GUESS USED reminder. Future guesses by Minion players have no effect.\n\nAt any time during the game, if a Minion publicly guesses which player is the Damsel and is correct, the game ends. Declare that the evil team wins.",
+  "examples": [
+    "Marianna is the Damsel. She is bluffing as the Lycanthrope. The Witch guesses that Marianna is the Damsel. Evil wins.",
+    "Doug is the Damsel. The Boomdandy guesses that Julian is the Damsel. Nothing happens, and the game continues. The Goblin guesses that Doug is the Damsel. Nothing happens, and the game continues."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "DAMSEL",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "evil wins (text)",
+        "evil team wins (text)",
+        "the evil team wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "All Minions know a Damsel is in play. If a Minion publicly guesses you (once), your team loses.",
+      "resolution": {
+        "stKind": "RESOLVE/damsel/action",
+        "description": "Resolve damsel day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "first night (text)",
+        "at night (text)",
+        "publicly guess (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Pit-Hag",
+      "withKey": "pithag",
+      "alignment": "Evil",
+      "text": "If a Pit-Hag creates a Damsel, the Storyteller chooses which player it is."
+    },
+    {
+      "with": "Spy",
+      "withKey": "spy",
+      "alignment": "Evil",
+      "text": "If the Spy is (or has been) in play, the Damsel is poisoned."
+    },
+    {
+      "with": "Widow",
+      "withKey": "widow",
+      "alignment": "Evil",
+      "text": "If the Widow is (or has been) in play, the Damsel is poisoned."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/damsel",
+    "RESOLVE/damsel/action",
+    "RULES/damsel_global_rule",
+    "WINCHECK/damsel"
+  ]
+}

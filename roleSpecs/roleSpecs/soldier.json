@@ -1,0 +1,104 @@
+{
+  "roleKey": "soldier",
+  "title": "Soldier",
+  "category": "townsfolk",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "You are safe from the Demon.",
+  "summary": "The Soldier can not be killed by the Demon.\n-  The Soldier cannot die from the Demon's ability. So, if the Imp attacks the Soldier at night, nothing happens. Nobody dies. The Imp does not get to choose another player to attack instead.\n-  The Soldier can still die by execution, even if the nominator was the Demon. The Soldier is protected from the Demon's ability to kill, not the actions of the Demon player.",
+  "howToRun": "During the night, if the Demon attacks the Soldier, the Soldier remains alive. (At dawn, declare that no one died at night.)\n\nIn other editions, Demons may have abilities other than killing. The Soldier is also protected from all other harmful effects of the Demon's ability, such as poisoning or turning the Soldier evil.",
+  "examples": [
+    "The Imp attacks the Soldier. The Soldier does not die, so nobody dies that night.",
+    "The Poisoner poisons the Soldier, then the Imp attacks the Soldier. The Soldier dies, since they have no ability.",
+    "The Imp attacks the Soldier. The Soldier dies, because they are actually the Drunk."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "during the night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [
+    {
+      "moment": "MOMENT_DEMON_DEATH_RESOLVED",
+      "description": "Triggers when the Demon dies or is revealed.",
+      "evidence": [
+        "demon death check list (fact)"
+      ]
+    }
+  ],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "execution",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "cannot die (text)",
+        "does not die (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "You are safe from the Demon.",
+      "resolution": {
+        "stKind": "RESOLVE/soldier/action",
+        "description": "Resolve soldier night action",
+        "effectType": "killAttempt"
+      },
+      "evidence": [
+        "during the night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "If the Leviathan nominates and executes the Soldier, good wins."
+    },
+    {
+      "with": "Riot",
+      "withKey": "riot",
+      "alignment": "Evil",
+      "text": "If Riot nominates and executes the Soldier, good wins."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/soldier/action",
+    "TRIGGER/soldier/MOMENT_DEMON_DEATH_RESOLVED"
+  ],
+  "factTags": [
+    "demon-death-check",
+    "protection"
+  ]
+}

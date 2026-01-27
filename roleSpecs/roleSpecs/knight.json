@@ -1,0 +1,47 @@
+{
+  "roleKey": "knight",
+  "title": "Knight",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "You start knowing 2 players that are not the Demon.",
+  "summary": "The Knight knows players that are not the Demon.\n-  On the first night, the Knight learns two players who are not the Demon.\n-  On subsequent nights, they learn nothing more.\n-  The Knight can learn Townsfolk, Outsiders or even Minions but does not learn which character type they are.",
+  "howToRun": "During setup, mark two non-Demon players with the Knight’s KNOW reminders.\nDuring the first night, wake the Knight. Point to the two players marked KNOW.",
+  "examples": [
+    "Lewis is the Undertaker, Doug is the Imp and Ben is the Fortune Teller. The Knight learns Lewis and Ben.",
+    "Marianna is the Vortox and Abdallah is the Alchemist. The Knight learns Marianna and Abdallah. The Knight must learn Marianna and Abdallah because the Knight's information must be false due to the Vortox ability and therefore include the Demon."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)",
+        "you start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/knight"
+  ]
+}

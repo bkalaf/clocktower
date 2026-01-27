@@ -1,0 +1,63 @@
+{
+  "roleKey": "bureaucrat",
+  "title": "Bureaucrat",
+  "category": "traveller",
+  "editionTags": [],
+  "abilityText": "Each night, choose a player (not yourself): their vote counts as 3 votes tomorrow.",
+  "summary": "The Bureaucrat gives extra votes to a player of their choice.\n-  When a player chosen by the Bureaucrat votes, that vote counts as three votes. This happens every time that player votes that day.\n-  The player with the triple vote loses it immediately if the Bureaucrat dies, including if the Bureaucrat is exiled, because the Bureaucrat loses their ability.\n-  Exiles are never affected by abilities, so the player with the triple vote can only support exiles once, not three times.\n-  Since the Storyteller counts the number of votes out loud as they move their hand around the circle, all players will know which player the Bureaucrat chose.",
+  "howToRun": "Each night, wake the Bureaucrat. They point at any player. Mark the chosen player with the Bureaucrat’s 3 VOTES reminder. Put the Bureaucrat to sleep.\n\nEach time you tally the vote of a player marked 3 VOTES, count it as three votes instead of one. (Count this out loud, as normal.)",
+  "examples": [
+    "The Bureaucrat chooses Evin. The next day, when the first vote is being tallied, the Storyteller counts \"1... 2... 3... 4-5-6... 7.” The nominated player now has seven votes for their execution, and the nomination process continues.",
+    "The Bureaucrat chooses Filip. The next day, Filip has a triple vote, which he uses during four nominations.",
+    "The Bureaucrat chooses Douglas, who is dead. The next day, Douglas uses his vote token to vote, and his vote counts as triple."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night, choose a player (not yourself): their vote counts as 3 votes tomorrow.",
+      "resolution": {
+        "stKind": "RESOLVE/bureaucrat/action",
+        "description": "Resolve bureaucrat night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/bureaucrat/action"
+  ]
+}

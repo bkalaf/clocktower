@@ -1,0 +1,146 @@
+{
+  "roleKey": "legion",
+  "title": "Legion",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night*, a player might die. Executions fail if only evil voted. You register as a Minion too. [Most players are Legion]",
+  "summary": "Legion is many Demons. \n-  The recommended number of good and evil players is the reverse of the normal. For example, for a ten player game, there are roughly seven Legion and three good players.\n-  The players that are not Legion may be Townsfolk or Outsiders, in any combination.\n-  If at least one good player voted for the nomination, and that player is “about to die”, then the execution happens as normal. If only evil players vote for a nomination, the vote tally for that nominee is zero.\n-  Each Legion registers as a Minion as well as a Demon.\n-  The Storyteller chooses which player dies at night.\n-  If only one good player remains alive, the Storyteller may declare that evil wins, since good cannot win.\n-  The Storyteller can decide not to give Legion players bluffs.",
+  "howToRun": "During the first night, during the Demon Info step, let all Legion players make eye contact. (You may want to point to the non-Legion players so that Legion knows who they are.)\n\nEach night except the first, you may decide that a player dies. \n\nWhen counting votes, count out loud, as normal. If the vote tally is enough to make a player about to die but only evil players voted, declare that the vote tally is zero.\n\nMost nights, kill a Legion. Killing a good player is usually unfair. Your aim is to get to three players alive—two good players and one Legion player. On the final day, if the players don’t execute, kill a good player that night so that evil wins.\n\nIf the players try to force others to vote to “test whether the vote tally is zero”, you may instead declare that a zero-tally vote is successful but secretly keep a record of which player is really about to die by marking them with Legion’s ABOUT TO DIE reminder, then execute them when nominations are over. This keeps Legion games mysterious and challenging.",
+  "examples": [
+    "The only good players are the Fortune Teller and the Slayer. 6 Legion and the Slayer vote to execute the Fortune Teller. They are executed, and evil wins.",
+    "4 players are alive. 3 Legion and no good players vote to execute Julian. Julian is not executed. Alex, who has 2 votes, 1 of which is a good player, is executed instead. Evil wins."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "REGISTRATION_MODIFIER",
+      "registersAs": [
+        "minion"
+      ],
+      "scope": "always",
+      "evidence": [
+        "register as (text)",
+        "registers as (text)"
+      ]
+    },
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "LEGION",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "evil wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night*, a player might die. Executions fail if only evil voted. You register as a Minion too. [Most players are Legion]",
+      "resolution": {
+        "stKind": "RESOLVE/legion/action",
+        "description": "Resolve legion night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Engineer",
+      "withKey": "engineer",
+      "alignment": "Good",
+      "text": "If Legion is created, all evil players become Legion. If Legion is in play, the Engineer starts knowing this but has no ability."
+    },
+    {
+      "with": "Hatter",
+      "withKey": "hatter",
+      "alignment": "Good",
+      "text": "If Legion is created, all evil players become Legion. If Legion is in play, the Hatter has no ability."
+    },
+    {
+      "with": "Magician",
+      "withKey": "magician",
+      "alignment": "Good",
+      "text": "The Magician wakes with Legion and might register as evil. Legion knows if a Magician is in play, but not which player it is."
+    },
+    {
+      "with": "Minstrel",
+      "withKey": "minstrel",
+      "alignment": "Good",
+      "text": "If Legion died by execution today, Legion keeps their ability, but the Minstrel might learn they are Legion."
+    },
+    {
+      "with": "Politician",
+      "withKey": "politician",
+      "alignment": "Good",
+      "text": "The Politician might register as evil to Legion."
+    },
+    {
+      "with": "Preacher",
+      "withKey": "preacher",
+      "alignment": "Good",
+      "text": "If the Preacher chooses Legion, Legion keeps their ability, but the Preacher might learn they are Legion."
+    },
+    {
+      "with": "Summoner",
+      "withKey": "summoner",
+      "alignment": "Evil",
+      "text": "If Legion is summoned, all evil players become Legion."
+    },
+    {
+      "with": "Zealot",
+      "withKey": "zealot",
+      "alignment": "Good",
+      "text": "The Zealot might register as evil to Legion."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": true,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RESOLVE/legion/action",
+    "RULES/legion_global_rule",
+    "WINCHECK/legion"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\".",
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

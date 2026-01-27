@@ -1,0 +1,65 @@
+{
+  "roleKey": "deviant",
+  "title": "Deviant",
+  "category": "traveller",
+  "editionTags": [],
+  "abilityText": "If you were funny today, you cannot die by exile.",
+  "summary": "The Deviant can avoid being Exiled - as long as the Deviant player has been amusing today.\n-  The Deviant can amuse the group in any way they choose. Generally, verbal means such as jokes, funny stories, or witty remarks will suffice.\n-  The Storyteller is the judge of whether the Deviant was funny or not.",
+  "howToRun": "If the Deviant would be exiled, you may declare that the Deviant\nremains alive.\n\nIt is best to be forgiving and treat even a slightly funny Deviant as funny. It can be tough to be funny when one is expected to be, after all.\n\nIf the player would prefer, you may determine different criteria for whether the Deviant is exiled. If being “funny” is difficult, you may reward the Deviant who “creates a positive mood” or “is helpful to others” instead. The Deviant is not a serious character, and it is meant to encourage laughter, lightheartedness, and fun, so adjust the Deviant rules to your players’ needs and talents.",
+  "examples": [
+    "The evil Deviant cracks a few jokes, and gets a few laughs, but the players nevertheless decide to exile them. Even though there are enough votes, the Storyteller decides to keep the Deviant alive.",
+    "On the third day, the Deviant was slightly funny, and cannot be exiled. On the fourth day, the Deviant was not very funny, and is successfully exiled."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "DEATH_PREVENTION",
+      "cause": "any",
+      "scope": "self",
+      "resolution": "automatic",
+      "evidence": [
+        "cannot die (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "other",
+      "usage": "variable",
+      "description": "If you were funny today, you cannot die by exile.",
+      "resolution": {
+        "stKind": "RESOLVE/deviant/action",
+        "description": "Resolve deviant other",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/deviant/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"the storyteller decides\"."
+  ]
+}

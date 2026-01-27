@@ -1,0 +1,88 @@
+{
+  "roleKey": "godfather",
+  "title": "Godfather",
+  "category": "minion",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "You start knowing which Outsiders are in play. If 1 died today, choose a player tonight: they die. [-1 or +1 Outsider]",
+  "summary": "The Godfather takes revenge when the town kills Outsiders.\n-  Whenever an Outsider is executed and dies, the Godfather chooses one player to die that night.\n-  The Godfather only kills if an Outsider dies during the day. Outsiders that die at night don’t count.\n-  If the Godfather is in play, this adds or removes one Outsider from play.\n-  At the start of the game, the Godfather learns which Outsiders are in play.\n-  If two Outsiders died today, the Godfather still only kills one player tonight.",
+  "howToRun": "While setting up the game, before putting the character tokens in the bag, either remove one Townsfolk and add one Outsider or remove one Outsider and add one Townsfolk.\n\nDuring the first night, wake the Godfather. Show them the character tokens of all Outsiders in play. Put the Godfather to sleep.\n\nIf an Outsider dies during the day, mark them with the DIED TODAY reminder. That night, wake the Godfather. They point at any player. Put the Godfather to sleep. The chosen player dies—mark them with the DEAD reminder.",
+  "examples": [
+    "The Godfather learns that the Lunatic and the Moonchild are in play, so the Godfather bluffs as the Tinker. During the third day, the Lunatic dies by execution. That night, the Demon kills the Minstrel, and the Godfather kills the Pacifist.",
+    "The Tinker is executed but remains alive, because they were protected by the Devil's Advocate. The Godfather does not act that night. The next day, the Tinker dies due to their own ability. That night, the Demon kills a player, and the Godfather kills themself to appear like a good player."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)",
+        "you start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "You start knowing which Outsiders are in play. If 1 died today, choose a player tonight: they die. [-1 or +1 Outsider]",
+      "resolution": {
+        "stKind": "RESOLVE/godfather/action",
+        "description": "Resolve godfather day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "first night (text)",
+        "at night (text)",
+        "during the day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Heretic",
+      "withKey": "heretic",
+      "alignment": "Good",
+      "text": "Only 1 jinxed character can be in play."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/godfather",
+    "RESOLVE/godfather/action"
+  ]
+}

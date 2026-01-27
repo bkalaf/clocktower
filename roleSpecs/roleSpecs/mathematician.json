@@ -1,0 +1,97 @@
+{
+  "roleKey": "mathematician",
+  "title": "Mathematician",
+  "category": "townsfolk",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "Each night, you learn how many players' abilities worked abnormally (since dawn) due to another character's ability.",
+  "summary": "The Mathematician knows how many things have gone wrong since dawn today.\n-  When an ability does not work in the intended way due to another character's interference, the Mathematician will learn that it happened. They'll learn that something went wrong if a piece of information was false but was supposed to be true, or if an ability should have worked but didn't, due to another character.\n-  The Mathematician does not learn which players this happened to, only how many times it happened.\n-  The Mathematician does not detect their own ability failing. \n-  The Mathematician does not detect drunkenness or poisoning itself, but does detect when drunk or poisoned players' abilities did not work as intended. The Recluse registering as evil to the Chef, and the poisoned Soldier dying from the Imp's attack, would each be detected. The poisoned Empath getting true information would not.",
+  "howToRun": "Each time a character's ability works abnormally due to another character's ability, mark them with an ABNORMAL reminder. \n\nEach night, wake the Mathematician. Show fingers (0, 1, 2, etc.) equaling the number of characters with ABNORMAL reminders. Put the Mathematician to sleep. Remove all ABNORMAL reminders.",
+  "examples": [
+    "The poisoned Oracle learns that two dead players are evil, when three dead players are actually evil. All other character abilities work normally. Later that night, the Mathematician learns a \"1\".",
+    "The poisoned Snake Charmer chooses a Townsfolk player, and nothing happens. The drunk Juggler gets correct information. The Savant learns two pieces of true information. Later that night, the Mathematician learns a \"1\" because the Snake Charmer and Juggler's abilities worked as normal, whilst one of the Savant's facts was true when it should have been false.",
+    "A Vortox is in play. Five good players got false information. The Witch is drunk, and when their cursed player nominated, nothing happened. Even though six abilities worked abnormally, the Mathematician learns a \"4\" due to the Vortox's ability."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night, you learn how many players' abilities worked abnormally (since dawn) due to another character's ability.",
+      "resolution": {
+        "stKind": "RESOLVE/mathematician/action",
+        "description": "Resolve mathematician night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Chambermaid",
+      "withKey": "chambermaid",
+      "alignment": "Good",
+      "text": "The Chambermaid can detect if the Mathematician will wake tonight."
+    },
+    {
+      "with": "Drunk",
+      "withKey": "drunk",
+      "alignment": "Good",
+      "text": "The Mathematician might learn if the Drunk's ability yielded false info or failed to work properly."
+    },
+    {
+      "with": "Lunatic",
+      "withKey": "lunatic",
+      "alignment": "Good",
+      "text": "The Mathematician might learn if the Lunatic attacks a different player than the real Demon attacked."
+    },
+    {
+      "with": "Marionette",
+      "withKey": "marionette",
+      "alignment": "Evil",
+      "text": "The Mathematician might learn if the Marionette's ability yielded false info or failed to work properly."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/mathematician",
+    "RESOLVE/mathematician/action"
+  ]
+}

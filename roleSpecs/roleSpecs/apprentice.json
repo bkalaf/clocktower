@@ -1,0 +1,77 @@
+{
+  "roleKey": "apprentice",
+  "title": "Apprentice",
+  "category": "traveller",
+  "editionTags": [],
+  "abilityText": "On your 1st night, you gain a Townsfolk ability (if good) or a Minion ability (if evil).",
+  "summary": "The Apprentice has either a Townsfolk or a Minion ability.\n-  A good Apprentice gains a Townsfolk ability. An evil Apprentice gains a Minion ability. They have this ability until they die.\n-  The Apprentice learns their ability on their first night, and they may act that night if the character whose ability they gain would do so.\n-  Only abilities listed on the character sheet may be gained.\n-  If the Apprentice gains an ability that normally only functions on the first night of the game, such as the Grandmother’s, it functions on the Apprentice’s first night instead.\n-  The Apprentice does not literally become the character whose ability they gain. They are the Apprentice, a Traveller, so they may be exiled but not executed, and they do not count toward the number of alive players to see if evil wins due to just two players being alive. Also, other characters’ abilities that detect characters would detect the Apprentice as the Apprentice.",
+  "howToRun": "During the first night after the Apprentice enters play, wake the Apprentice. Show them the YOU ARE info token, then a Townsfolk or Minion token. In the Grimoire, replace the Apprentice token with that character token, and mark them with the IS THE APPRENTICE reminder. That player remains the Apprentice but gains the ability of their character token.\n\nYou will almost certainly want to choose a not-in-play character ability, because there is only one of each character token and the Apprentice needs to use that token.",
+  "examples": [
+    "The evil Apprentice gains the Assassin ability. That night, they kill the Fool.",
+    "The good Apprentice gains the Chambermaid ability. From now on, they learn who wakes at night. Later, the Gambler guesses that the Apprentice is the Tea Lady. The Gambler dies, because the Apprentice is not the Tea Lady, but the Apprentice."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "APPRENTICE",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "evil wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "first_night",
+      "description": "On your 1st night, you gain a Townsfolk ability (if good) or a Minion ability (if evil).",
+      "resolution": {
+        "stKind": "RESOLVE/apprentice/action",
+        "description": "Resolve apprentice night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "first night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/apprentice",
+    "RESOLVE/apprentice/action",
+    "RULES/apprentice_global_rule",
+    "WINCHECK/apprentice"
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "roleKey": "oracle",
+  "title": "Oracle",
+  "category": "townsfolk",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "Each night*, you learn how many dead players are evil.",
+  "summary": "The Oracle knows how many dead players are evil.\n-  Because the Oracle acts after the Demon attacks each night, the Oracle’s info refers to the players that are dead when dawn breaks and all players open their eyes. \n-  The Oracle detects dead Minions and Demons, but also any other players that are evil, such as evil Travellers, or Townsfolk and Outsiders that have been turned evil.\n-  When counting the number of dead players, remember to count Townsfolk and Outsider tokens that are upside-down, which means their alignment is the opposite of what is printed.",
+  "howToRun": "Each night except the first, wake the Oracle. Show fingers (0, 1, 2, etc.) equaling the number of dead evil players. Then, put the Oracle to sleep.",
+  "examples": [
+    "During the first day, the Flowergirl is executed. That night, the Demon kills the Juggler. The Oracle wakes and learns a \"0,” because all dead players are good.",
+    "Halfway through the game, seven players are dead. Five of them are good and two of them are evil. During the day, an evil Traveller is Exiled. That night, the Demon kills one of it's Minions. The Oracle wakes and learns a \"4,” because four dead players are evil."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "Each night*, you learn how many dead players are evil.",
+      "resolution": {
+        "stKind": "RESOLVE/oracle/action",
+        "description": "Resolve oracle day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "during the day (text)"
+      ]
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/oracle",
+    "RESOLVE/oracle/action"
+  ]
+}

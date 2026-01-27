@@ -1,0 +1,57 @@
+{
+  "roleKey": "steward",
+  "title": "Steward",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "You start knowing 1 good player.",
+  "summary": "The Steward knows 1 good player.\n-  The Steward learns a player, but not their character.\n-  The Steward learns their information on the first night of the game.\n-  If created mid-game, then the Steward learns their information that night instead.",
+  "howToRun": "While preparing the first night, put the KNOW reminder by any good character token.\nDuring the first night, wake the Steward. Point to the player marked KNOW. Put the Steward to sleep.",
+  "examples": [
+    "The Steward learns that Alex is good. Alex is the Undertaker.",
+    "The Pit-Hag turns the Poppy Grower into the Steward.\nThat night, the Steward learns that Abdallah is good. Abdallah is the Spy, and is registering as good."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)",
+        "you start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": false,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/steward"
+  ]
+}

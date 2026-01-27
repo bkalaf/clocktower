@@ -1,0 +1,85 @@
+{
+  "roleKey": "preacher",
+  "title": "Preacher",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night, choose a player: a Minion, if chosen, learns this. All chosen Minions have no ability.",
+  "summary": "The Preacher removes Minion abilities.\n-  If the Preacher chooses a Minion, that Minion is woken to learn that they have been preached, and can no longer act while the Preacher is alive, sober, and healthy.\n-  If the Preacher chooses a player who is not a Minion, nothing happens.\n-  The Preacher may choose dead players.\n-  If the Preacher is drunk or poisoned at the time they choose a player, that player is not affected by the Preacher’s ability.\n-  If the Preacher becomes drunk or poisoned, preached Minions regain their abilities until the Preacher is sober and healthy.",
+  "howToRun": "Each night, wake the Preacher. They point to a player. Put the Preacher to sleep. If the Preacher choose a Minion, mark that Minion with a NO ABILITY reminder, wake the Minion and show them the THIS CHARACTER SELECTED YOU info token then the Preacher token, then put them to sleep.\n\nAll Minions marked NO ABILITY have no ability while the Preacher is alive.",
+  "examples": [
+    "The Preacher points to Alex, who is the Engineer. Nothing happens.",
+    "The Preacher points to Lachlan, who is the Cerenovus. Lachlan wakes to learn that he has been preached, and is not woken to use his ability.",
+    "Doug is the Preacher. He points to Marianna, who is the Pit-Hag. Marianna wakes to learn that she has been preached, and is not woken to use her ability. The following night, the Poisoner points to Doug. Because Doug is now poisoned, Marianna wakes to use her ability."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night, choose a player: a Minion, if chosen, learns this. All chosen Minions have no ability.",
+      "resolution": {
+        "stKind": "RESOLVE/preacher/action",
+        "description": "Resolve preacher night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Legion",
+      "withKey": "legion",
+      "alignment": "Evil",
+      "text": "If the Preacher chooses Legion, Legion keeps their ability, but the Preacher might learn they are Legion."
+    },
+    {
+      "with": "Summoner",
+      "withKey": "summoner",
+      "alignment": "Evil",
+      "text": "If the living Summoner has no ability, the Storyteller has the Summoner ability."
+    },
+    {
+      "with": "Vizier",
+      "withKey": "vizier",
+      "alignment": "Evil",
+      "text": "If the Vizier loses their ability, they learn this, and cannot die during the day."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/preacher",
+    "RESOLVE/preacher/action"
+  ]
+}

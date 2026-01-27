@@ -1,0 +1,58 @@
+{
+  "roleKey": "baron",
+  "title": "Baron",
+  "category": "minion",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "There are extra Outsiders in play. [+2 Outsiders]",
+  "summary": "The Baron changes the number of Outsiders present in the game.\n-  This change happens during setup, and it does not revert if the Baron dies. A change in characters during setup, regardless of what happens during the game, is shown on character sheets and tokens in square brackets at the end of a character's description—like [this].\n-  The added Outsiders always replace Townsfolk, not other character types.",
+  "howToRun": "While setting up the game, remove any two Townsfolk character tokens and add any two Outsider character tokens. (If you add the Drunk, remember to follow its setup instructions as well.) These Outsider tokens go into the bag instead of the Townsfolk tokens.",
+  "examples": [
+    "The game is being set up for seven players, with five Townsfolk, one Minion, and one Demon. Because the Minion is the Baron, the Storyteller removes two Townsfolk tokens and adds a Saint and a Butler token. In total, three Townsfolk, two Outsider, one Minion, and one Demon tokens go in the bag for the players to draw from.",
+    "The game is being set up for fifteen players, with nine Townsfolk, two Outsiders, three Minions, and one Demon. Because the Baron is in play, the Storyteller must add a Drunk and a Recluse. So, they remove the Monk token and add a Recluse token. Then, instead of adding the Drunk character token, they add the Drunk's “Is the Drunk” reminder token to the Grimoire... because this game, one player isn’t a Townsfolk—they are an Outsider: the Drunk. All these character tokens go into the bag for the players to draw from."
+  ],
+  "setupModifications": [
+    {
+      "kind": "ADD_ROLE_COUNT",
+      "target": "outsider",
+      "delta": 2,
+      "reason": "explicit bracket note",
+      "evidence": [
+        "[+2 outsiders] (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Heretic",
+      "withKey": "heretic",
+      "alignment": "Good",
+      "text": "Only 1 jinxed character can be in play."
+    },
+    {
+      "with": "Plague Doctor",
+      "withKey": "plaguedoctor",
+      "alignment": "Good",
+      "text": "If the Storyteller would gain the Baron ability, up to two players become Outsiders."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [],
+  "factTags": [
+    "setup-modifier"
+  ]
+}

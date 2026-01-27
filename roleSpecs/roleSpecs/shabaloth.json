@@ -1,0 +1,88 @@
+{
+  "roleKey": "shabaloth",
+  "title": "Shabaloth",
+  "category": "demon",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "Each night*, choose 2 players: they die. A dead player you chose last night might be regurgitated.",
+  "summary": "The Shabaloth eats two players per night, but may vomit one of them back up the following night.\n-  Unlike most Demons, the Shabaloth attacks twice per night. The night after the attack, the Storyteller may decide that one of the players attacked by the Shabaloth comes back to life.\n-  This can be an alive player that was killed, or a dead player that was attacked.\n-  The regurgitated player regains their ability, even a “once per game” ability already used. If they had a “first night only” or “start knowing” ability, they may use it again.",
+  "howToRun": "Each night except the first, wake the Shabaloth. They point at any two players, one at a time. Put the Shabaloth to sleep. In the order chosen, each chosen player dies—mark them with DEAD reminders.\n\nEach later night, just before waking the Shabaloth, you can choose one character marked with the Shabaloth’s DEAD reminder, and the chosen player becomes alive again—replace the DEAD reminder with the Shabaloth’s ALIVE reminder, and remove their shroud. They wake later tonight if they normally would. If they wake on the first night only, they wake now to use their ability. At dawn, after declaring which players died, declare which player is alive again. (Do not say why.)\n\nSince the Shabaloth cannot regurgitate themself—they have no ability when dead—it is best to only rarely make the Shabaloth regurgitate. Once per game, maybe twice, is usually sufficient.",
+  "examples": [
+    "The Shabaloth attacks the Gossip, then the Gambler. The Gossip dies, but the Gambler, who was protected by the Innkeeper, remains alive.",
+    "The Shabaloth attacks the alive Courtier and the dead Exorcist. The Courtier dies. The next night, the Storyteller decides that the Exorcist becomes alive again. The Exorcist doesn't act tonight--they normally act before the Shabaloth.",
+    "The Shabaloth attacks the Tea Lady’s neighbour, then the Tea Lady. The Tea Lady’s neighbour, who is protected by the Tea Lady, doesn’t die, but then the Tea Lady dies."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "once_per_game",
+      "description": "Each night*, choose 2 players: they die. A dead player you chose last night might be regurgitated.",
+      "resolution": {
+        "stKind": "RESOLVE/shabaloth/action",
+        "description": "Resolve shabaloth night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 2,
+          "description": "Choose 2 players"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/shabaloth/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller may\".",
+    "Storyteller discretion noted near \"the storyteller decides\"."
+  ]
+}

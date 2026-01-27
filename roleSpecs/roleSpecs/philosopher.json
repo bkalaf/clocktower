@@ -1,0 +1,80 @@
+{
+  "roleKey": "philosopher",
+  "title": "Philosopher",
+  "category": "townsfolk",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk.",
+  "summary": "The Philosopher has no ability until they decide which character they want to emulate.\n-  They can do this once per game. When they do so, they gain that character’s ability. They do not become that character. \n-  They may want to wait a while to choose. If the Philosopher chooses a character that is already in play, the player of that character becomes drunk. If the Philosopher then dies or becomes drunk or poisoned, the player they are making drunk becomes sober again.\n-  If the Philosopher chose a character that was not in play at the time but is in play now, that character is drunk.\n-  If the Philosopher gains an ability that works at night, they wake when that character would wake. If this ability is used on the first night only, they use it tonight.\n-  If the Philosopher regains their ability via the Bone Collector, or uses their ability twice via the Barista, the Philosopher may choose a new ability, or the same ability as before.\n-  If the Philosopher’s ability works while dead, such as the Klutz’s, it works if the Philosopher is dead.",
+  "howToRun": "Each night, wake the Philosopher. They either shake their head no or point at any Townsfolk icon or any Outsider icon on their character sheet. Put the Philosopher to sleep.\n\nIf they pointed to an icon of a character not in play, swap the Philosopher token with the chosen character token and mark them with the IS THE PHILOSOPHER reminder.\n\nIf they pointed to an icon of a character in play, the player of the chosen character becomes drunk - mark them with the DRUNK reminder. (You can now use the duplicated character’s reminders for the Philosopher). If the Philosopher dies, the player made drunk by the Philosopher becomes sober - remove the DRUNK reminder.",
+  "examples": [
+    "During the first night, the Philosopher chooses to gain the Dreamer's ability. They gain the Dreamer's ability from now on and act when the Dreamer normally acts.",
+    "During the third night, the Philosopher chooses to gain the Clockmaker's ability. That night, they learn the distance from the Demon to their nearest Minion.",
+    "An Artist is in play. The Philosopher chooses to gain the Artist's ability. The original Artist becomes drunk. Later, the Philosopher dies, so the original Artist becomes sober again. (The original Artist would also become sober if the Philosopher became drunk.)"
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "once_per_game",
+      "description": "Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk.",
+      "resolution": {
+        "stKind": "RESOLVE/philosopher/action",
+        "description": "Resolve philosopher night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      },
+      "spend": {
+        "marksNoAbilityEffect": true
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Bounty Hunter",
+      "withKey": "bountyhunter",
+      "alignment": "Good",
+      "text": "If the Philosopher gains the Bounty Hunter ability, a Townsfolk might turn evil."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/philosopher",
+    "RESOLVE/philosopher/action"
+  ]
+}

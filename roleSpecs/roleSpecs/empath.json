@@ -1,0 +1,72 @@
+{
+  "roleKey": "empath",
+  "title": "Empath",
+  "category": "townsfolk",
+  "editionTags": [
+    "Trouble Brewing"
+  ],
+  "abilityText": "Each night, you learn how many of your 2 alive neighbors are evil.",
+  "summary": "The Empath keeps learning if their living neighbours are good or evil.\n-  The Empath only learns how many of their neighbours are evil, not which one is evil.\n-  The Empath does not detect dead players. So, if the Empath is sitting next to a dead player, they do not get info about that dead player. Instead, they get info about the closest alive player in that direction.\n-  The Empath acts after the Demon, so if the Demon kills one of the Empath's alive neighbours, the Empath does not learn about the now-dead player. The Empath's information is accurate at dawn, not at dusk.",
+  "howToRun": "Each night, wake the Empath. Show them fingers (0, 1, or 2) equaling the number of evil players neighbouring the Empath. Put the Empath to sleep.",
+  "examples": [
+    "The Empath neighbours two good players—a Soldier and a Monk . The Empath learns a '0'. \n\n\t\t\t\tThe next day, the Soldier is executed. That night, the Monk is killed by the Imp. The Empath now detects the players sitting next to the Soldier and the Monk, which are a Librarian and an evil . The Empath now learns a '1'.\n\n\t\t\t\tThere are only three players left alive: the Empath, the Imp, and the Baron. No matter who is seated where, the Empath learns a '2'."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [
+    {
+      "moment": "MOMENT_REGISTRATION_CHECKED",
+      "description": "Storyteller validates this character during registration.",
+      "evidence": [
+        "registration check list (fact)"
+      ]
+    }
+  ],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night, you learn how many of your 2 alive neighbors are evil.",
+      "resolution": {
+        "stKind": "RESOLVE/empath/action",
+        "description": "Resolve empath night action",
+        "effectType": "requestInfo"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/empath",
+    "RESOLVE/empath/action",
+    "TRIGGER/empath/MOMENT_REGISTRATION_CHECKED"
+  ],
+  "factTags": [
+    "ongoing-info",
+    "registration-check"
+  ]
+}

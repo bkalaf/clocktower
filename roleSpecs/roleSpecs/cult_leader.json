@@ -1,0 +1,93 @@
+{
+  "roleKey": "cult_leader",
+  "title": "Cult Leader",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night, you become the alignment of an alive neighbor. If all good players choose to join your cult, your team wins.",
+  "summary": "The Cult Leader wins if everyone joins their cult.\n-  At the end of each night, the Cult Leader becomes the alignment of a living neighbor.\n-  Once per day, the Cult Leader may publicly choose to form a cult. If all good players vote to join the cult, the game ends immediately and the Cult Leader’s team wins.\n-  The Cult Leader may form a cult at any point in the day.\n-  Voting to join a cult does not require a vote token.\n-  Players may say whatever they want at any time, so a player bluffing as the Cult Leader may pretend to form a cult.",
+  "howToRun": "Each night, turn the Cult Leader character token right side up (if both alive neighbors are good) or upside down (if both alive neighbors are evil) or either (if one alive neighbor is good and the other alive neighbor is evil). If the Cult Leader's alignment changes, wake the Cult Leader and give a thumbs up or a thumbs down, then put the Cult Leader to sleep. If the Cult Leader’s alignment doesn’t change, do not wake them.\n\nDuring the day, the Cult Leader may declare that they wish to use their ability. If so, enter the circle and run a vote in the same way that you would for an Exile. If all good players raise their hand, declare which team has won. If not all good players raise their hand, nothing happens.",
+  "examples": [
+    "On day 3, the good Cult Leader’s living neighbors are the good Town Crier and the evil Goblin. The Cult Leader requests to form a cult, and all good players vote to join the cult. The game ends and the good team wins!",
+    "The Cult Leader neighbors the No Dashii. On day 2, the Cult Leader attempts to form a cult. All players vote to join the cult, but a cult is not formed, because the Cult Leader is poisoned.",
+    "The Cult Leader’s living neighbors are the evil Poisoner and the good Fortune Teller. The Poisoner chooses the Cult Leader, and the Kazali kills the Fortune Teller. The Cult Leader’s living neighbors are now the evil Poisoner and the evil Wizard. While the Cult Leader’s living neighbors are both evil, the Cult Leader doesn’t turn evil, because they cannot change alignment while poisoned."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "CULT_LEADER",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good team wins (text)",
+        "the good team wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "Each night, you become the alignment of an alive neighbor. If all good players choose to join your cult, your team wins.",
+      "resolution": {
+        "stKind": "RESOLVE/cult_leader/action",
+        "description": "Resolve cult_leader day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "during the day (text)",
+        "publicly choose (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Boffin",
+      "withKey": "boffin",
+      "alignment": "Evil",
+      "text": "If the Demon has the Cult Leader ability, they can’t turn good due to this ability."
+    },
+    {
+      "with": "Pit-Hag",
+      "withKey": "pithag",
+      "alignment": "Evil",
+      "text": "If the Pit-Hag turns an evil player into the Cult Leader, they can't turn good due to their own ability."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RESOLVE/cult_leader/action",
+    "RULES/cult_leader_global_rule",
+    "WINCHECK/cult_leader"
+  ]
+}

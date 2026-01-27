@@ -1,0 +1,96 @@
+{
+  "roleKey": "heretic",
+  "title": "Heretic",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Whoever wins, loses & whoever loses, wins, even if you are dead.",
+  "summary": "The Heretic turns a win into a loss, and a loss into a win.\n-  If the game ends due to the good team winning, then all good players lose, and all evil players win.\n-  If the game ends due to the evil team winning, then all evil players lose, and all good players win.\n-  The Heretic’s ability applies to all victory conditions, including the game ending due to just two players being alive, the Demon dying, or an ability ending the game.\n-  The Heretic’s ability functions even when the Heretic is dead, but not when the Heretic is drunk or poisoned.",
+  "howToRun": "If the game ends and the evil team would have won, declare that the good team wins and the evil team loses.\n\nIf the game ends and the good team would have won, declare that the evil team wins and the good team loses.",
+  "examples": [
+    "On the first day, the Heretic publicly claims to be the Heretic. That night, the Demon kills themself. Evil wins.",
+    "The Heretic does not reveal their character until the final day, when 3 players are alive. They convince the good team to execute a good player, leaving 2 players alive, one of which is the Demon. Good wins.",
+    "The Heretic is dead. The Saint is executed. Good wins.",
+    "The Heretic is poisoned. The Assassin kills the Demon. Good wins.",
+    "There are 3 players alive. The Demon is executed. Because there is a Heretic in play, evil wins."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "HERETIC",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)",
+        "evil wins (text)",
+        "good team wins (text)",
+        "evil team wins (text)",
+        "the good team wins (text)",
+        "the evil team wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Baron",
+      "withKey": "baron",
+      "alignment": "Evil",
+      "text": "Only 1 jinxed character can be in play."
+    },
+    {
+      "with": "Boffin",
+      "withKey": "boffin",
+      "alignment": "Evil",
+      "text": "The Demon cannot have the Heretic ability."
+    },
+    {
+      "with": "Godfather",
+      "withKey": "godfather",
+      "alignment": "Evil",
+      "text": "Only 1 jinxed character can be in play."
+    },
+    {
+      "with": "Lleech",
+      "withKey": "lleech",
+      "alignment": "Evil",
+      "text": "Only 1 jinxed character can be in play."
+    },
+    {
+      "with": "Pit-Hag",
+      "withKey": "pithag",
+      "alignment": "Evil",
+      "text": "Only 1 jinxed character can be in play."
+    },
+    {
+      "with": "Spy",
+      "withKey": "spy",
+      "alignment": "Evil",
+      "text": "Only 1 jinxed character can be in play."
+    },
+    {
+      "with": "Widow",
+      "withKey": "widow",
+      "alignment": "Evil",
+      "text": "Only 1 jinxed character can be in play."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RULES/heretic_global_rule",
+    "WINCHECK/heretic"
+  ]
+}

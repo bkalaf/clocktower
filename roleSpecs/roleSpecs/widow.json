@@ -1,0 +1,111 @@
+{
+  "roleKey": "widow",
+  "title": "Widow",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "On your 1st night, look at the Grimoire & choose a player: they are poisoned. 1 good player knows a Widow is in play.",
+  "summary": "The Widow sees the Grimoire and poisons a character of their choice.\n-  The Widow acts on their first night only, poisoning one player.\n-  The player that the Widow poisons is poisoned until the Widow dies.\n-  On the same night that the Widow acts, one good player learns that the Widow is in play, but not which player is the Widow, and not which player is poisoned.",
+  "howToRun": "While preparing the first night, mark a good player with the KNOW reminder.\n\nOn the first night, wake the Widow and show them the Grimoire for as long as they need. The Widow points to a character token in the Grimoire. Mark them with a POISONED reminder. They are poisoned. Put the Widow to sleep.\n\nWake the player marked KNOW. Show them the Widow character token. Put that good player to sleep.",
+  "examples": [
+    "The Widow sees the Grimoire and points to the Sailor. The Sailor is poisoned this game. The Sailor is sober, but dies when executed.",
+    "On the third night, the Pit-Hag turns themselves into the Widow. That night, the good  learns that a Widow is in play.",
+    "The Empath is poisoned due to the Widow. The Widow becomes drunk due to the Innkeeper. The Empath is no longer poisoned. The Innkeeper dies. The Widow is now sober and the Empath is poisoned again."
+  ],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "start the game knowing (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "first_night",
+      "description": "On your 1st night, look at the Grimoire & choose a player: they are poisoned. 1 good player knows a Widow is in play.",
+      "resolution": {
+        "stKind": "RESOLVE/widow/action",
+        "description": "Resolve widow night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "first night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Alchemist",
+      "withKey": "alchemist",
+      "alignment": "Good",
+      "text": "An Alchemist-Widow has no Widow ability & a Widow is in play. After each execution, a living Alchemist-Widow may publicly guess a living player as the Widow. If correct, the Demon must choose the Widow tonight."
+    },
+    {
+      "with": "Damsel",
+      "withKey": "damsel",
+      "alignment": "Good",
+      "text": "If the Widow is (or has been) in play, the Damsel is poisoned."
+    },
+    {
+      "with": "Heretic",
+      "withKey": "heretic",
+      "alignment": "Good",
+      "text": "Only 1 jinxed character can be in play."
+    },
+    {
+      "with": "Magician",
+      "withKey": "magician",
+      "alignment": "Good",
+      "text": "When the Widow sees the Grimoire, the Demon and Magician's character tokens are removed."
+    },
+    {
+      "with": "Poppy Grower",
+      "withKey": "poppygrower",
+      "alignment": "Good",
+      "text": "If the Poppy Grower has their ability, the Widow does not see the Grimoire."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/widow",
+    "RESOLVE/widow/action"
+  ]
+}

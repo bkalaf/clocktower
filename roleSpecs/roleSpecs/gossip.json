@@ -1,0 +1,71 @@
+{
+  "roleKey": "gossip",
+  "title": "Gossip",
+  "category": "townsfolk",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "Each day, you may make a public statement. Tonight, if it was true, a player dies.",
+  "summary": "The Gossip deliberately speaks lies, in the hope of uncovering the truth.\n-  Each day, the Gossip may make a public statement. If this statement is true, the Storyteller kills a player that night. If it is false, then no players die due to the Gossip.\n-  Mumbled words, whispers, statements the Storyteller doesn’t know are true or false, or statements that someone cannot hear don’t count. Like the Slayer’s ability, the Storyteller and every player must be able to hear and understand the Gossip and be aware that the Gossip is using their ability in order for the Storyteller to judge what happens next.\n-  If the Gossip made a true statement during the day while drunk or poisoned, but is sober and healthy when their ability triggers that night, the Storyteller still kills a player.",
+  "howToRun": "Each day, if the Gossip makes a definite, true public statement, put the Gossip’s DEAD reminder in the center of the left side of the Grimoire as a reminder to yourself to place it tonight.\n\nEach night except the first, if the Gossip made a definite, true public statement today, you choose any player. The chosen player dies—mark them with the DEAD reminder.\n\nWhen choosing a player to die due to the Gossip ability, we recommend that you choose a character that will actually die, not one protected from death by an ability (like the Fool or Tea Lady). The Gossip gains knowledge when their statement caused a death. This is more helpful to the good team, and more fun for everyone.",
+  "examples": [
+    "During the day, the Gossip says, \"I am the Gossip. My public statement is: The Demon is wearing a hat.\" The Demon is not wearing a hat. That night, nobody dies due to the Gossip’s ability.",
+    "The Gossip neighbours a good Traveller and the Pacifist. During the day, the drunk Gossip says, \"Both my neighbours are good.\" At dusk, the drunk Gossip becomes sober. That night, the Chambermaid dies.",
+    "During the day, the Gossip makes a true statement. That night, the Gossip is killed by the Demon. They lose their ability, so their statement does not kill anyone tonight."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "Each day, you may make a public statement. Tonight, if it was true, a player dies.",
+      "resolution": {
+        "stKind": "RESOLVE/gossip/action",
+        "description": "Resolve gossip day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "during the day (text)",
+        "each day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/gossip/action"
+  ]
+}

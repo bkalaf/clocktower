@@ -1,0 +1,139 @@
+{
+  "roleKey": "leviathan",
+  "title": "Leviathan",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "If more than 1 good player is executed, evil wins. All players know you are in play. After day 5, evil wins.",
+  "summary": "The Leviathan doesn't kill.\n-  All players know the Leviathan is in play, even if the Leviathan is created mid-game.\n-  Any number of evil players may be executed, but if more than one good player is executed, evil wins. It doesn’t matter which characters were executed, only the alignment of the player at the time they were executed.\n-  When the fifth day ends and night begins, if the Leviathan is still alive, evil wins.\n-  All types of execution count, even if the player doesn’t die. A player executed due to the Virgin, or due to revealing that they are the Mutant, is still executed. An executed player who lives due to the Pacifist is still executed.",
+  "howToRun": "Immediately after dawn on the first day, declare that the Leviathan is in play. Mark the Leviathan with the DAY 1 reminder. At the beginning of each following day, mark the Leviathan with DAY 2, then DAY 3, then DAY 4, then DAY 5 reminders. If a day ends and the Leviathan is marked with the DAY 5 reminder, declare that evil wins.\n\nIf a good player is executed, mark them with the GOOD PLAYER EXECUTED reminder.\n\nIf a good player is executed and a player is already marked with the GOOD PLAYER EXECUTED reminder, declare that evil wins.\n\nFor new players, it is helpful to declare that the Leviathan is in play each day, and to say what day it is. On the first day, say “The Leviathan is in play. It is day one.” On the second day, say “The Leviathan is in play. It is day two.” etc. This helps your players remember what Demon they are facing and avoid accidentally losing by forgetting to count the days.",
+  "examples": [
+    "On the first day, the Monk nominates the Virgin, and is executed. On the second day, the Courtier is executed. Evil wins.",
+    "On the second day, the Scarlet Woman is executed. On the third day, the Poisoner is executed. On the fifth day, the Soldier is executed. Evil wins."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "LEVIATHAN",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "evil wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "If more than 1 good player is executed, evil wins. All players know you are in play. After day 5, evil wins.",
+      "resolution": {
+        "stKind": "RESOLVE/leviathan/action",
+        "description": "Resolve leviathan day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each day (text)"
+      ]
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Banshee",
+      "withKey": "banshee",
+      "alignment": "Good",
+      "text": "Each night*, the Leviathan chooses an alive good player (different to previous nights): a chosen Banshee dies & gains their ability."
+    },
+    {
+      "with": "Exorcist",
+      "withKey": "exorcist",
+      "alignment": "Good",
+      "text": "If the Leviathan nominates and executes the Exorcist-chosen player, good wins."
+    },
+    {
+      "with": "Farmer",
+      "withKey": "farmer",
+      "alignment": "Good",
+      "text": "Each night*, the Leviathan chooses an alive good player (different to previous nights): a chosen Farmer uses their ability but does not die."
+    },
+    {
+      "with": "Grandmother",
+      "withKey": "grandmother",
+      "alignment": "Good",
+      "text": "If the Leviathan is in play and the Grandchild dies by execution, evil wins."
+    },
+    {
+      "with": "Hatter",
+      "withKey": "hatter",
+      "alignment": "Good",
+      "text": "The Leviathan cannot enter play after day 5."
+    },
+    {
+      "with": "Innkeeper",
+      "withKey": "innkeeper",
+      "alignment": "Good",
+      "text": "If the Leviathan nominates and executes an Innkeeper-protected player, good wins."
+    },
+    {
+      "with": "King",
+      "withKey": "king",
+      "alignment": "Good",
+      "text": "If the Leviathan is in play, and at least 1 player is dead, the King learns an alive character each night."
+    },
+    {
+      "with": "Mayor",
+      "withKey": "mayor",
+      "alignment": "Good",
+      "text": "If the Leviathan and the Mayor are alive on day 5 & no execution occurs, good wins."
+    },
+    {
+      "with": "Monk",
+      "withKey": "monk",
+      "alignment": "Good",
+      "text": "If the Leviathan nominates and executes the Monk-protected player, good wins."
+    },
+    {
+      "with": "Pit-Hag",
+      "withKey": "pithag",
+      "alignment": "Evil",
+      "text": "The Leviathan cannot enter play after day 5."
+    },
+    {
+      "with": "Ravenkeeper",
+      "withKey": "ravenkeeper",
+      "alignment": "Good",
+      "text": "Each night*, the Leviathan chooses an alive player (different to previous nights): a chosen Ravenkeeper uses their ability but does not die."
+    },
+    {
+      "with": "Sage",
+      "withKey": "sage",
+      "alignment": "Good",
+      "text": "Each night*, the Leviathan chooses an alive good player (different to previous nights): a chosen Sage uses their ability but does not die."
+    },
+    {
+      "with": "Soldier",
+      "withKey": "soldier",
+      "alignment": "Good",
+      "text": "If the Leviathan nominates and executes the Soldier, good wins."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": false,
+    "actsAtNight": false,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RESOLVE/leviathan/action",
+    "RULES/leviathan_global_rule",
+    "WINCHECK/leviathan"
+  ]
+}

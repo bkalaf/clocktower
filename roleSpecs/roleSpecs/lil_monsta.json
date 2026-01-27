@@ -1,0 +1,150 @@
+{
+  "roleKey": "lil_monsta",
+  "title": "Lil' Monsta",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "Each night, Minions choose who babysits Lil' Monsta & \"is the Demon\". Each night*, a player might die. [+1 Minion]",
+  "summary": "Lil’ Monsta isn’t a player, and is instead babysat by a Minion.\n-  Each night, all Minions wake together and decide amongst themselves who babysits the Lil’ Monsta. The Minions decide by pointing to a player, or otherwise make it obvious they have reached a decision. If they can not reach a unanimous decision, the Storyteller decides.\n-  If the Storyteller thinks it is funny, they may give this player the Lil’ Monsta token, which they will need to hide in a pocket, under their hat, or somewhere appropriate. Players may not request that others empty their pockets.\n-  The player with the Lil’ Monsta token “is the Demon”. Good wins if they die. They register as a Demon for characters like the Fortune Teller etc.\n-  If a good player babysits Lil’ Monsta, they “are the Demon” but they remain good. A dead player babysitting Lil’ Monsta ends the game because the Demon “is dead”.\n-  Minions babysitting Lil’ Monsta keep their Minion ability.\n-  Lil’ Monsta isn’t a player, so can’t be drunk or poisoned.",
+  "howToRun": "During setup, remove Lil’ Monsta and add a Minion token. On the first night, skip the MINION INFO and DEMON INFO steps.\n\nEach night, wake all Minions. The majority will (eventually) point to one player. If they can’t decide, choose a player. (Give this player the Lil’ Monsta token and wait for them to hide it, if you want!) Mark them with the IS THE DEMON reminder token. Put all Minions to sleep. Then, if it is not the first night, a player might die – mark them with a DEAD reminder and a shroud.\n\nThe player marked IS THE DEMON registers as the Demon. If they die, declare that the game is over and good has won.\n\n \nYou may need to kill a Minion or two at night using the Lil’\nMonsta’s ability. On the final day, it would be unfair for the good team to have 2 or more Minions alive, since either Minions could have been chosen to babysit Lil’ Monsta without any way for the good team to know which. Avoid this, and make the game fairer for the good team by killing Minions so that only 1 remains on the final day.",
+  "examples": [
+    "The Poisoner and the Widow wake. They point at each other, then point at themselves, then eventually both point at the Widow, who receives Lil’ Monsta’s token. The next night, they both choose that the Poisoner babysits Lil’ Monsta instead."
+  ],
+  "setupModifications": [
+    {
+      "kind": "ADD_ROLE_COUNT",
+      "target": "minion",
+      "delta": 1,
+      "reason": "explicit bracket note",
+      "evidence": [
+        "[+1 minion] (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "firstNight",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "REGISTRATION_MODIFIER",
+      "registersAs": [
+        "demon",
+        {
+          "roleKey": "the"
+        }
+      ],
+      "scope": "always",
+      "evidence": [
+        "register as (text)",
+        "registers as (text)"
+      ]
+    },
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "LIL_MONSTA",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "good wins (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "first_night",
+      "description": "Each night, Minions choose who babysits Lil' Monsta & \"is the Demon\". Each night*, a player might die. [+1 Minion]",
+      "resolution": {
+        "stKind": "RESOLVE/lil_monsta/action",
+        "description": "Resolve lil_monsta night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "first night (text)",
+        "at night (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Hatter",
+      "withKey": "hatter",
+      "alignment": "Good",
+      "text": "If the Hatter dies & the Demon chooses Lil' Monsta, they also choose a Minion to become."
+    },
+    {
+      "with": "Magician",
+      "withKey": "magician",
+      "alignment": "Good",
+      "text": "If the Magician is alive, the Storyteller chooses which Minion babysits Lil' Monsta."
+    },
+    {
+      "with": "Marionette",
+      "withKey": "marionette",
+      "alignment": "Evil",
+      "text": "If there would be a Marionette in play, they enter play after the Demon & must start as their neighbor."
+    },
+    {
+      "with": "Poppy Grower",
+      "withKey": "poppygrower",
+      "alignment": "Good",
+      "text": "If Lil' Monsta & the Poppy Grower are alive, Minions wake one by one, until one of them chooses to take the Lil' Monsta token."
+    },
+    {
+      "with": "Psychopath",
+      "withKey": "psychopath",
+      "alignment": "Evil",
+      "text": "If the Psychopath is babysitting Lil' Monsta, they die when executed."
+    },
+    {
+      "with": "Scarlet Woman",
+      "withKey": "scarletwoman",
+      "alignment": "Evil",
+      "text": "If Lil' Monsta dies with 5 or more players alive, the Scarlet Woman babysits Lil' Monsta for the rest of the game."
+    },
+    {
+      "with": "Vizier",
+      "withKey": "vizier",
+      "alignment": "Evil",
+      "text": "If the Vizier is babysitting Lil' Monsta, they die when executed."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": true,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RESOLVE/lil_monsta/action",
+    "RULES/lil_monsta_global_rule",
+    "WINCHECK/lil_monsta"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"you may need to\".",
+    "Storyteller discretion noted near \"the storyteller decides\"."
+  ]
+}

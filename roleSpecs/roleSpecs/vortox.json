@@ -1,0 +1,104 @@
+{
+  "roleKey": "vortox",
+  "title": "Vortox",
+  "category": "demon",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "Each night*, choose a player: they die. Townsfolk abilities yield false info. Each day, if no-one is executed, evil wins.",
+  "summary": "The Vortox makes all information false.\n-  Anytime a Townsfolk player gets information from their ability, they get false information. Even if they are drunk or poisoned, it must be false.\n-  The Vortox does not affect information gained by other means, such as when the Storyteller explains the rules, or when a player’s character or alignment changes.\n-  When night falls, if nobody was executed today, evil wins. Exiling a Traveller does not count.",
+  "howToRun": "While the Vortox is alive, you must give false information whenever a Townsfolk ability prompts you to give information.\n\nEach night except the first, wake the Vortox. They point at any player. That player dies - mark them with the DEAD reminder. Put the Vortox to sleep.\n\nEach dusk, if no player was executed today, the game ends and the evil team wins.",
+  "examples": [
+    "The Vortox kills the Sage. The Sage learns two players, both of which are not Demons.",
+    "Nobody voted or nominated today, but the Mutant is executed. That night, both the Flowergirl and the Town Crier learn a \"yes.”",
+    "The Savant is in play, and learns two pieces of information each day. Both are false. That night, the Dreamer chooses a player who is the Savant, and learns that player is either the Philosopher or the No Dashii.",
+    "The Pit-Hag turns the Juggler into the Witch. The Juggler learns that they are now the good Witch, because this information comes from the Pit-Hag's ability, not a Townsfolk's ability.",
+    "Today, a player died from the Witch, two Travellers were exiled, 5 nominations happened, but nobody was executed. Evil wins."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "VORTOX",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "evil wins (text)",
+        "evil team wins (text)",
+        "the evil team wins (text)"
+      ]
+    },
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [
+    {
+      "kind": "day_claim",
+      "usage": "each_day",
+      "description": "Each night*, choose a player: they die. Townsfolk abilities yield false info. Each day, if no-one is executed, evil wins.",
+      "resolution": {
+        "stKind": "RESOLVE/vortox/action",
+        "description": "Resolve vortox day claim",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "each day (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Banshee",
+      "withKey": "banshee",
+      "alignment": "Good",
+      "text": "If the Vortox kills the Banshee, all players learn that the Banshee has died."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": true,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "INFO/vortox",
+    "RESOLVE/vortox/action",
+    "RULES/vortox_global_rule",
+    "WINCHECK/vortox"
+  ]
+}

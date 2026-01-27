@@ -1,0 +1,89 @@
+{
+  "roleKey": "exorcist",
+  "title": "Exorcist",
+  "category": "townsfolk",
+  "editionTags": [
+    "Bad Moon Rising"
+  ],
+  "abilityText": "Each night*, choose a player (different to last night): the Demon, if chosen, learns who you are then doesn't wake tonight.",
+  "summary": "The Exorcist prevents the Demon from waking to attack.\n-  Each night, the Exorcist chooses a player. If they choose a player who is not the Demon, the Demon may still attack. If they choose the Demon, the Demon does not wake tonight, so does not choose players to attack tonight. The Demon learns that they cannot attack and who the Exorcist is.\n-  Any other Demon abilities still function—such as the Zombuul staying alive if killed, the Pukka killing a player they attacked on a previous night, or the Shabaloth regurgitating a player.\n-  The Exorcist may not choose the same player two nights in a row.",
+  "howToRun": "Each night except the first, wake the Exorcist. They point at any player. Mark the chosen player’s character token with the CHOSEN reminder. Put the Exorcist to sleep.\n\nIf the Exorcist chose the Demon, wake the Demon. Show them the THIS CHARACTER SELECTED YOU info token and the Exorcist token, then point at the Exorcist player. Put the Demon to sleep. Later tonight, do not wake the Demon.\n\nA Demon chosen by the Exorcist will not wake to use their Demon ability, but will still wake if they need to due to other characters’ abilities. This may be relevant if using the Exorcist with characters from other editions.",
+  "examples": [
+    "The Exorcist chooses the Shabaloth. The Shabaloth does not kill tonight. At dawn, the Storyteller declares that nobody died that night.",
+    "The Exorcist chooses the Pukka. The Pukka does not wake to attack tonight, but a player still dies because of the Pukka’s attack during the previous night.",
+    "The Po chooses to attack no one. The next night, the Exorcist chooses the Po. The Po does not wake to act tonight. The next night, the Exorcist chooses the Assassin. The Assassin can still attack tonight, and the Po chooses three players to attack, because the Po's last choice was no one."
+  ],
+  "setupModifications": [],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night*, choose a player (different to last night): the Demon, if chosen, learns who you are then doesn't wake tonight.",
+      "resolution": {
+        "stKind": "RESOLVE/exorcist/action",
+        "description": "Resolve exorcist night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "at night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Leviathan",
+      "withKey": "leviathan",
+      "alignment": "Evil",
+      "text": "If the Leviathan nominates and executes the Exorcist-chosen player, good wins."
+    },
+    {
+      "with": "Riot",
+      "withKey": "riot",
+      "alignment": "Evil",
+      "text": "If Riot nominates and executes the Exorcist-chosen player, good wins."
+    },
+    {
+      "with": "Yaggababble",
+      "withKey": "yaggababble",
+      "alignment": "Evil",
+      "text": "If the Exorcist chooses the Yaggababble, the Yaggababble does not kill tonight."
+    }
+  ],
+  "tags": {
+    "isInfoRole": true,
+    "isSetupModifier": false,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "INFO/exorcist",
+    "RESOLVE/exorcist/action"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "roleKey": "vigormortis",
+  "title": "Vigormortis",
+  "category": "demon",
+  "editionTags": [
+    "Sects & Violets"
+  ],
+  "abilityText": "Each night*, choose a player: they die. Minions you kill keep their ability & poison 1 Townsfolk neighbor. [-1 Outsider]",
+  "summary": "The Vigormortis kills their own Minions, but those Minions keep their ability.\n-  Every time the Vigormortis kills a Minion, they die but keep their ability for as long as the Vigormortis remains alive. The Witch, Cerenovus, and Pit-Hag still act each night.\n-  Somewhat like the No Dashii, the dead Minion’s closest clockwise or closest counterclockwise Townsfolk becomes poisoned, even if they are dead. If the Vigormortis dies or otherwise loses their ability, then those players become healthy again. One Townsfolk per Minion will always be poisoned this way, as neighboring Outsiders, Minions, or Travellers are skipped. The Storyteller chooses which of the two Townsfolk is poisoned.\n-  All Minions killed by the Vigormortis keep their ability and poison a Townsfolk, not just the most recent.\n-  If a dead Minion becomes a non-Minion character, they no longer poison a Townsfolk and have no ability. If a dead Minion becomes drunk or poisoned, they lose their ability until they become sober and healthy again.",
+  "howToRun": "While setting up the game, before putting the character tokens in the bag, remove one Outsider character token and add one Townsfolk character token. (If there are no Outsider tokens to remove, do not add a Townsfolk token.)\n\nEach night except the first, wake the Vigormortis. They point at any player. Put the Vigormortis to sleep. If the chosen player isn’t a Minion, that player dies - mark them with a DEAD reminder.\n\nIf the chosen player is a Minion, that player dies - mark them with a DEAD reminder and a HAS ABILITY reminder. The closest clockwise or closest counterclockwise Townsfolk to the Minion becomes poisoned - mark them with a POISONED reminder.",
+  "examples": [
+    "The Vigormortis kills the Witch. The player that the Witch cursed tonight remains cursed. The next day, when the cursed player nominates, they die.",
+    "The Vigormortis kills the Evil Twin. The Evil Twin neighbours a Klutz and a Flowergirl. The Sage is the next neighbour to the Klutz. The Storyteller chooses that the Sage is poisoned.",
+    "The Vigormortis kills the Pit-Hag. The Pit-Hag changes a Savant into a Witch. The Vigormortis kills the Witch, who curses and kills a player. The Pit-Hag turns the dead Witch into the Oracle, who now has no ability. The Pit-Hag turns the Vigormortis into a Vortox. The Pit-Hag now has no ability."
+  ],
+  "setupModifications": [
+    {
+      "kind": "ADD_ROLE_COUNT",
+      "target": "outsider",
+      "delta": -1,
+      "reason": "explicit bracket note",
+      "evidence": [
+        "[-1 outsider] (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [
+    {
+      "when": "otherNights",
+      "blocksNight": true,
+      "description": "Wakes to use ability at night.",
+      "evidence": [
+        "each night (text)",
+        "night except the first (text)"
+      ]
+    }
+  ],
+  "onMoments": [],
+  "passiveAbilities": [],
+  "activeAbilities": [
+    {
+      "kind": "night_action",
+      "usage": "each_night",
+      "description": "Each night*, choose a player: they die. Minions you kill keep their ability & poison 1 Townsfolk neighbor. [-1 Outsider]",
+      "resolution": {
+        "stKind": "RESOLVE/vigormortis/action",
+        "description": "Resolve vigormortis night action",
+        "effectType": "applyEffect"
+      },
+      "evidence": [
+        "each night (text)",
+        "night except the first (text)",
+        "choose (inferred)"
+      ],
+      "intent": {
+        "requestChoice": {
+          "targetCount": 1,
+          "description": "Choose a player"
+        }
+      }
+    }
+  ],
+  "jinxes": [
+    {
+      "with": "Mastermind",
+      "withKey": "mastermind",
+      "alignment": "Evil",
+      "text": "A Mastermind that has their ability keeps it if the Vigormortis dies."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": true,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": false
+  },
+  "stKinds": [
+    "RESOLVE/vigormortis/action"
+  ],
+  "todos": [
+    "Storyteller discretion noted near \"storyteller chooses\"."
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "roleKey": "politician",
+  "title": "Politician",
+  "category": "experimental",
+  "editionTags": [
+    "Experimental Characters"
+  ],
+  "abilityText": "If you were the player most responsible for your team losing, you change alignment & win, even if dead.",
+  "summary": "The Politician changes teams if they are losing.\n-  When the game ends, if the Politician was responsible for good losing, then the Politician turns evil and wins too.\n-  The player needs to be very influential when determining who wins. Simply spreading false information or voting for good players is usually not enough – they need to be the player that was more responsible for the good team losing than any other good player, and preferably more responsible than any one evil player too. The Storyteller is the judge of whether the Politician’s actions qualify.\n-  The Politician may still win with the good team, as normal.\n-  A drunk or poisoned Politician can not change teams.",
+  "howToRun": "When the game ends, if good lost and you feel that this was significantly due to the words and actions of the Politician player, declare that the Politician turns evil and wins too.\n\nIn the rare instance that the Politician is evil, and plays a big part in losing the game for evil, declare that the Politician turns good and wins with the good team.",
+  "examples": [
+    "The Politician has been trying to execute the Demon all game, without success. With just three players alive, the Politician convinces the group to not execute, since someone is claiming to be the Mayor. There is no execution, and evil wins because a Minion was bluffing as the Mayor. The Politician wins too.",
+    "On the final day, the Politician votes for the Empath, and tells the group that the Empath is evil. The Saint is executed instead. The Storyteller judges that the good team lost due to their own actions as a group, not just the bad advice of the Politician. Good loses, and the Politician loses.",
+    "The Politician, believing that evil is winning, bluffs as the Atheist. The Storyteller is executed. Evil wins, and the Politician wins too."
+  ],
+  "setupModifications": [
+    {
+      "kind": "ASSIGN_MASKED_ROLE",
+      "maskedSeat": "self",
+      "shownRoleKey": "outsider",
+      "trueRoleKey": "politician",
+      "reason": "Masking phrases detected",
+      "evidence": [
+        "hidden (text)"
+      ]
+    }
+  ],
+  "nightOrderSteps": [],
+  "onMoments": [],
+  "passiveAbilities": [
+    {
+      "kind": "GLOBAL_RULE",
+      "ruleKey": "POLITICIAN",
+      "activeWhile": "alive",
+      "resolution": "automatic",
+      "evidence": [
+        "evil wins (text)",
+        "good loses (text)"
+      ]
+    },
+    {
+      "kind": "INFO_DISTORTION",
+      "affects": "self",
+      "policy": "false",
+      "resolution": "st_request",
+      "evidence": [
+        "false information (text)",
+        "false info (text)"
+      ]
+    }
+  ],
+  "activeAbilities": [],
+  "jinxes": [
+    {
+      "with": "Boffin",
+      "withKey": "boffin",
+      "alignment": "Evil",
+      "text": "The Demon cannot have the Politician ability."
+    },
+    {
+      "with": "Legion",
+      "withKey": "legion",
+      "alignment": "Evil",
+      "text": "The Politician might register as evil to Legion."
+    },
+    {
+      "with": "Pit-Hag",
+      "withKey": "pithag",
+      "alignment": "Evil",
+      "text": "If the Pit-Hag turns an evil player into the Politician, they can't turn good due to their own ability."
+    },
+    {
+      "with": "Vizier",
+      "withKey": "vizier",
+      "alignment": "Evil",
+      "text": "The Politician might register as evil to the Vizier."
+    }
+  ],
+  "tags": {
+    "isInfoRole": false,
+    "isSetupModifier": true,
+    "actsAtNight": false,
+    "actsByClaim": false,
+    "hasRoleSwap": false,
+    "hasAlignmentSwap": false,
+    "hasRegistrationWeirdness": false,
+    "isGlobalRule": true
+  },
+  "stKinds": [
+    "RULES/politician_global_rule",
+    "WINCHECK/politician"
+  ]
+}
