@@ -1,7 +1,7 @@
 {
   "totalRolesProcessed": 178,
-  "totalAbilityTextsProcessed": 178,
-  "totalTokens": 2130,
-  "stopwordCount": 716,
-  "generatedAt": "2026-01-27T17:11:07.649Z"
+  "totalAbilityTextsProcessed": 22,
+  "totalTokens": 205,
+  "stopwordCount": 102,
+  "generatedAt": "2026-01-27T19:15:45.585Z"
 }

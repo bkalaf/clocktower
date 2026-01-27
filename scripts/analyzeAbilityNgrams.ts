@@ -257,7 +257,10 @@ const handlerResultToTokens = (value: RegexHandlerResult | undefined, alias: str
     return [];
 };
 
-function applyRegexMappings(text: string, regexAliases: RegexAlias[]): { text: string; placeholderMap: Record<string, Token> } {
+function applyRegexMappings(
+    text: string,
+    regexAliases: RegexAlias[]
+): { text: string; placeholderMap: Record<string, Token> } {
     const placeholderMap: Record<string, Token> = {};
 
     if (!regexAliases.length) {
@@ -331,6 +334,7 @@ interface TokenizedTrace {
     originalText: string;
     normalizedText: string;
     tokens: string[];
+    howToRun: string;
 }
 
 async function main() {
@@ -374,6 +378,7 @@ async function main() {
         const filepath = path.join(inputDir, filename);
         const raw = await fs.readFile(filepath, 'utf-8');
         const page: NormalizedWikiPage = JSON.parse(raw);
+        if (!page.categories.includes('Trouble Brewing')) continue;
         const _originalText = String(page.abilityText ?? '').trim();
         const originalText = Object.entries(pluralList)
             .map(
@@ -385,6 +390,16 @@ async function main() {
                 (pv, cv) => (s: string) => cv(pv(s)),
                 (s: string) => s
             )(_originalText);
+        const howToRun = Object.entries(pluralList)
+            .map(
+                ([k, v]) =>
+                    (s: string) =>
+                        s.toLowerCase().replaceAll(k, v)
+            )
+            .reduce(
+                (pv, cv) => (s: string) => cv(pv(s)),
+                (s: string) => s
+            )(String(page.howToRun ?? '').trim());
         if (!originalText) {
             continue;
         }
@@ -411,7 +426,8 @@ async function main() {
             title: page.title,
             originalText,
             normalizedText,
-            tokens: normalizedTokens
+            tokens: normalizedTokens,
+            howToRun
         });
 
         accumulateNgramCounts(normalizedTokens, tokenCounts, bigramCounts, trigramCounts);

@@ -1,0 +1,288 @@
+[
+    {
+        "roleKey": "baron",
+        "title": "Baron",
+        "originalText": "there are extra outsider in play. [+2 outsider]",
+        "normalizedText": "there are extra outsider in play. [+2 outsider]",
+        "tokens": [
+            "there",
+            "extra",
+            "CHARACTER_TYPE_OUTSIDER",
+            "IN_PLAY",
+            "ACCEPT_MODIFIER",
+            "NUMBER_VALUE",
+            "CHARACTER_TYPE_OUTSIDER",
+            "ACCEPT_MODIFIER"
+        ],
+        "howToRun": "while setting up the game, remove any two townsfolk character tokens and add any two outsider character tokens. (if you add the drunk, remember to follow it setup instructions as well.) these outsider tokens go into the bag instead of the townsfolk tokens."
+    },
+    {
+        "roleKey": "butler",
+        "title": "Butler",
+        "originalText": "each night, choose a player (not yourself): tomorrow, you may only vote if they are voting too.",
+        "normalizedText": "each night, choose a player (not yourself): tomorrow, you may only vote if they are voting too.",
+        "tokens": [
+            "EACH_NIGHT",
+            "choose",
+            "player",
+            "yourself",
+            "tomorrow",
+            "may",
+            "only",
+            "vote",
+            "if",
+            "they",
+            "voting",
+            "too"
+        ],
+        "howToRun": "each night, wake the butler. they point at any player. mark this player with the master reminder token. put the butler to sleep.\n\nduring a nomination, the butler may only have their hand raised to vote if the master has their hand raised to vote or if the master's vote has already been counted.\n\nif the butler accidentally vote illegally, tally the butler's vote anyway. if you don't, the total will be less than it should be, and all players will know which player is the butler, which is unfair for the evil team. mistakes happen. just play on and have a private chat later."
+    },
+    {
+        "roleKey": "chef",
+        "title": "Chef",
+        "originalText": "you start knowing how many pair of evil players there are.",
+        "normalizedText": "you start knowing how many pair of evil players there are.",
+        "tokens": ["START_KNOWING", "how", "many", "pair", "evil", "player", "there"],
+        "howToRun": "during the first night, wake the chef. show the chef fingers (0, 1, 2, etc.) equaling the number of pair of neighboring evil players. put the chef to sleep."
+    },
+    {
+        "roleKey": "drunk",
+        "title": "Drunk",
+        "originalText": "you do not know you are the drunk. you think you are a townsfolk character, but you are not.",
+        "normalizedText": "you do not know you are the drunk. you think you are a townsfolk character, but you are not.",
+        "tokens": ["know", "drunk", "think", "townsfolk", "character", "but"],
+        "howToRun": "while setting up the game, before putting character tokens in the bag, remove the drunk token and add a townsfolk character token. add the drunk's is the drunk reminder token to the grimoire. put the swapped townsfolk character token in the bag, not the drunk character token.\n\nwhile preparing the first night, put the drunk's is the drunk reminder token by any townsfolk character token, changing that player's character to the drunk. they are now an outsider, and do not have the ability of this townsfolk character. (but they think they do.)\n\nduring the game, act as if the drunk is actually this townsfolk character. (if that character would wake to act at night, the drunk wakes to act. if their ability would give them information, you can give false information to them if you wish. see \"drunkenness and poisoning\" in the rulebook.)"
+    },
+    {
+        "roleKey": "empath",
+        "title": "Empath",
+        "originalText": "each night, you learn how many of your 2 alive neighbor are evil.",
+        "normalizedText": "each night, you learn how many of your 2 alive neighbor are evil.",
+        "tokens": ["EACH_NIGHT", "learn", "how", "many", "2", "alive", "neighbor", "evil"],
+        "howToRun": "each night, wake the empath. show them fingers (0, 1, or 2) equaling the number of evil players neighbouring the empath. put the empath to sleep."
+    },
+    {
+        "roleKey": "fortune_teller",
+        "title": "Fortune Teller",
+        "originalText": "each night, choose 2 players: you learn if either is a demon. there is a good player that register as a demon to you.",
+        "normalizedText": "each night, choose 2 players: you learn if either is a demon. there is a good player that register as a demon to you.",
+        "tokens": [
+            "EACH_NIGHT",
+            "choose",
+            "2",
+            "player",
+            "learn",
+            "if",
+            "either",
+            "demon",
+            "there",
+            "GOOD_PLAYER",
+            "that",
+            "register",
+            "demon"
+        ],
+        "howToRun": "while preparing the first night, put the fortune teller's red herring reminder token by any good character token, marking that player as the red herring.\n\neach night, wake the fortune teller. the fortune teller points at any two players. if either chosen player is a demon or the red herring, nod your head yes. otherwise, shake your head no. put the fortune teller to sleep.\n\nin smaller games, making the fortune teller their own red herring is sometimes advised, as the fortune teller get more information that way."
+    },
+    {
+        "roleKey": "imp",
+        "title": "Imp",
+        "originalText": "each night*, choose a player: they die. if you kill yourself this way, a minion become the imp.",
+        "normalizedText": "each night*, choose a player: they die. if you kill yourself this way, a minion become the imp.",
+        "tokens": [
+            "EACH_NIGHT_STAR",
+            "choose",
+            "player",
+            "THEY_DIE",
+            "if",
+            "kill",
+            "yourself",
+            "this",
+            "way",
+            "CHARACTER_TYPE_MINION",
+            "become",
+            "imp"
+        ],
+        "howToRun": "each night except the first, wake the imp. the imp points at any player. put the imp to sleep. the chosen player die—put the imp's dead reminder by the chosen player's character token in the grimoire and put a shroud on it.\n\nif the imp killed themself at night, choose an alive minion and replace their character token with a spare imp token, changing their character to the imp. wake the new imp, show them the you are info token, then show them the imp token. put the new imp to sleep.\n\nat dawn, declare which player died at night. (do not say how they died.)\n\nif the imp attacks a dead player at night, let them do so. whenever a character ability says \"choose a player,\" that means that any player—alive or dead—can be chosen. the imp may be planning on bluffing as the soldier, and this kind of thing helps their bluff look stronger."
+    },
+    {
+        "roleKey": "investigator",
+        "title": "Investigator",
+        "originalText": "you start knowing that 1 of 2 players is a particular minion.",
+        "normalizedText": "you start knowing that 1 of 2 players is a particular minion.",
+        "tokens": ["START_KNOWING", "that", "1", "2", "player", "particular", "CHARACTER_TYPE_MINION"],
+        "howToRun": "while preparing the first night, put the investigator's minion reminder token by any minion character token, and put the investigator's wrong reminder token by any other character token.\n\nduring the first night, wake the investigator and point to the players marked minion and wrong. show the character token marked minion to the investigator. put the investigator to sleep. remove the investigator's reminder tokens when convenient."
+    },
+    {
+        "roleKey": "librarian",
+        "title": "Librarian",
+        "originalText": "you start knowing that 1 of 2 players is a particular outsider. (or that zero are in play.)",
+        "normalizedText": "you start knowing that 1 of 2 players is a particular outsider. (or that zero are in play.)",
+        "tokens": [
+            "START_KNOWING",
+            "that",
+            "1",
+            "2",
+            "player",
+            "particular",
+            "CHARACTER_TYPE_OUTSIDER",
+            "OR",
+            "that",
+            "zero",
+            "IN_PLAY"
+        ],
+        "howToRun": "while preparing the first night, put the librarian's outsider reminder token by any outsider character token, and put the librarian's wrong reminder token by any other character token.\n\nduring the first night, wake the librarian and point to the players marked outsider and wrong. show the character token marked outsider to the librarian. put the librarian to sleep. remove the librarian's reminder tokens when convenient."
+    },
+    {
+        "roleKey": "mayor",
+        "title": "Mayor",
+        "originalText": "if only 3 players live & no execution occur, your team win. if you die at night, another player might die instead.",
+        "normalizedText": "if only 3 players live & no execution occur, your team win. if you die at night, another player might die instead.",
+        "tokens": [
+            "if",
+            "only",
+            "3",
+            "player",
+            "live",
+            "&",
+            "execution",
+            "occur",
+            "team",
+            "win",
+            "if",
+            "die",
+            "AT_NIGHT",
+            "another",
+            "player",
+            "might",
+            "die",
+            "instead"
+        ],
+        "howToRun": "during the night, if the mayor would die, you choose if the mayor actually die, or if the mayor remains alive and another character die instead—put the demon's dead reminder token by that character token instead of the mayor, and put a shroud on that character token instead of the mayor.\n\nat dawn, declare that the player marked dead died at night. (do not say how they died.)\n\nat dusk, if exactly three players are alive and no player was executed today, declare that the game ends and good win.\n\n \n\nwe recommend you keep the mayor alive until the final day, since it is most fun for the players that way. on rare occasions, if the group is overwhelmingly convinced early in the game that the mayor is the mayor, let the mayor die so that evil has a chance to win. \n\nin trouble brewing, the mayor’s phrase “your team win” will always mean “good win” because the mayor is always good. in other editions, an evil mayor means “evil win” instead."
+    },
+    {
+        "roleKey": "monk",
+        "title": "Monk",
+        "originalText": "each night*, choose a player (not yourself): they are safe from the demon tonight.",
+        "normalizedText": "each night*, choose a player (not yourself): they are safe from the demon tonight.",
+        "tokens": ["EACH_NIGHT_STAR", "choose", "player", "yourself", "they", "safe", "demon", "tonight"],
+        "howToRun": "each night except the first, wake the monk. the monk points at any player except themself. (if the monk points at themself, shake your head no and prompt them to point at another player.) put the monk to sleep. put the monk's safe reminder token by the chosen player's character token.\n\nif the demon attacks the player marked safe, the player remains alive. (do not mark them with the demon's dead reminder token or add a shroud as you normally would.) at dawn, declare that no one died at night. (do not say why.)\n\nat dawn, remove the safe reminder token.\n\nin other editions, demon may have ability other than killing. the monk's protection also prevents all other harmful effects of the demon's ability, such as poisoning or turning the protected player evil."
+    },
+    {
+        "roleKey": "poisoner",
+        "title": "Poisoner",
+        "originalText": "each night, choose a player: they are poisoned tonight and tomorrow day.",
+        "normalizedText": "each night, choose a player: they are poisoned tonight and tomorrow day.",
+        "tokens": ["EACH_NIGHT", "choose", "player", "they", "poisoned", "tonight", "tomorrow", "day"],
+        "howToRun": "each night, wake the poisoner. they point at any player. the chosen player become poisoned—put the poisoned reminder token by the chosen player's character token. put the poisoner to sleep. (this poisoned player wakes and acts normally. they have no ability, but they think they do. if their ability would give them information, you can give false information to them if you wish. see “drunkenness and poisoning” in the rulebook.)\n\neach dusk, the poisoned player become healthy—remove their poisoned reminder."
+    },
+    {
+        "roleKey": "ravenkeeper",
+        "title": "Ravenkeeper",
+        "originalText": "if you die at night, you are woken to choose a player: you learn their character.",
+        "normalizedText": "if you die at night, you are woken to choose a player: you learn their character.",
+        "tokens": ["if", "die", "AT_NIGHT", "woken", "choose", "player", "learn", "their", "character"],
+        "howToRun": "if the ravenkeeper died tonight, wake them. they point at any player. show the chosen player's character token to the ravenkeeper. put the ravenkeeper to sleep.\n\nwe advise you to discourage or even ban players from talking about what they are doing at night as they are doing it."
+    },
+    {
+        "roleKey": "recluse",
+        "title": "Recluse",
+        "originalText": "you might register as evil & as a minion or demon, even if dead.",
+        "normalizedText": "you might register as evil & as a minion or demon, even if dead.",
+        "tokens": ["might", "register", "evil", "&", "CHARACTER_TYPE_MINION", "OR", "demon", "even", "if", "dead"],
+        "howToRun": "each time the recluse is targeted by an ability that detects or affects evil character, choose which character and alignment the recluse register as. (do whatever is appropriate, such as showing an evil character token, nodding, giving finger signals, or allowing an ability to work that would normally only affect evil, minion, or demon players.)"
+    },
+    {
+        "roleKey": "saint",
+        "title": "Saint",
+        "originalText": "if you die by execution, your team lose.",
+        "normalizedText": "if you die by execution, your team lose.",
+        "tokens": ["if", "die", "execution", "team", "lose"],
+        "howToRun": "if the saint die by execution, declare that the game ends and evil win.\n\nthe saint's ability has the strange phrase \"your team lose.\" in trouble brewing, this will always mean \"evil win\" because the saint is always good. in other editions, it is possible for character to change alignment. if the evil saint is executed, good win."
+    },
+    {
+        "roleKey": "scarlet_woman",
+        "title": "Scarlet Woman",
+        "originalText": "if there are 5 or more players alive & the demon die, you become the demon. (traveller don't count.)",
+        "normalizedText": "if there are 5 or more players alive & the demon die, you become the demon. (traveller don't count.)",
+        "tokens": [
+            "if",
+            "there",
+            "5",
+            "OR",
+            "more",
+            "player",
+            "alive",
+            "&",
+            "demon",
+            "die",
+            "become",
+            "demon",
+            "traveller",
+            "don't",
+            "count"
+        ],
+        "howToRun": "if the demon die and there were five or more alive players immediately before the demon died, replace the scarlet woman token with a spare imp token, changing that player's character from the scarlet woman into the imp. (they are now the demon and have the imp's ability. if they die, good win.)\n\nthat night, wake the new imp, show them the you are info token, then show them the imp token.\n\nin trouble brewing, there is only one demon—the imp. in other editions, there are multiple possible demon. if the scarlet woman become the demon, they become the same type of demon that died, and they gain this demon's ability. when this happens, mark the scarlet woman with the is the demon reminder and refer to that demon's \"how to run\" instructions."
+    },
+    {
+        "roleKey": "slayer",
+        "title": "Slayer",
+        "originalText": "once per game, during the day, publicly choose a player: if they are the demon, they die.",
+        "normalizedText": "once per game, during the day, publicly choose a player: if they are the demon, they die.",
+        "tokens": ["ONCE_PER_GAME", "during", "day", "publicly", "choose", "player", "if", "they", "demon", "THEY_DIE"],
+        "howToRun": "during the day, the slayer can declare that they wish to use their ability. if so, the slayer points at any player. if the chosen player is an alive demon, declare that the chosen player die—put a shroud on their character token in the grimoire. if the chosen player is not an alive demon, say \"nothing happens.\" either way, the slayer lose their ability—put the slayer's no ability reminder token by the slayer token.\n\nif a player is bluffing as the slayer and declares they wish to use their ability, act as if they were indeed the slayer—allow time for discussion, let them make the decision, and act like you're fiddling with tokens in your grimoire, then say \"nothing happens.\"\n\nwhen the slayer declares that they wish to use their ability, give the group a minute or two to discuss who the slayer should choose. this allows the group to feel responsible for the win (or the loss!), but the slayer always makes the final choice."
+    },
+    {
+        "roleKey": "soldier",
+        "title": "Soldier",
+        "originalText": "you are safe from the demon.",
+        "normalizedText": "you are safe from the demon.",
+        "tokens": ["safe", "demon"],
+        "howToRun": "during the night, if the demon attacks the soldier, the soldier remains alive. (at dawn, declare that no one died at night.)\n\nin other editions, demon may have ability other than killing. the soldier is also protected from all other harmful effects of the demon's ability, such as poisoning or turning the soldier evil."
+    },
+    {
+        "roleKey": "spy",
+        "title": "Spy",
+        "originalText": "each night, you see the grimoire. you might register as good & as a townsfolk or outsider, even if dead.",
+        "normalizedText": "each night, you see the grimoire. you might register as good & as a townsfolk or outsider, even if dead.",
+        "tokens": [
+            "EACH_NIGHT",
+            "see",
+            "grimoire",
+            "might",
+            "register",
+            "good",
+            "&",
+            "townsfolk",
+            "OR",
+            "CHARACTER_TYPE_OUTSIDER",
+            "even",
+            "if",
+            "dead"
+        ],
+        "howToRun": "each night, wake the spy and show them the grimoire for as long as they need. put the spy to sleep.\n\neach time the spy is targeted by an ability that detects or affects good character, choose what character and alignment the spy register as. (do whatever is appropriate, such as showing a good character token, nodding, giving finger signals, or allowing an ability to work that would normally only affect good, townsfolk, or outsider players.)\n\nremember to keep your grimoire tidy and show it to the spy in the correct orientation, so the spy can easily see who is who."
+    },
+    {
+        "roleKey": "undertaker",
+        "title": "Undertaker",
+        "originalText": "each night*, you learn which character died by execution today.",
+        "normalizedText": "each night*, you learn which character died by execution today.",
+        "tokens": ["EACH_NIGHT_STAR", "learn", "which", "character", "died", "execution", "today"],
+        "howToRun": "if a player die by execution, put the undertaker's died today reminder token by the dead player's character token.\n\neach night except the first, if any player died by execution today, wake the undertaker. show the character token marked died today to the undertaker. put the undertaker to sleep. remove the undertaker's reminder token when convenient.\n\nin trouble brewing, there can only be one execution per day, and every execution causes a player to die. in other editions, there may be more than one execution per day (in which case the storyteller choose which character to show the undertaker) or the execution does not cause a death (in which case the undertaker learn nothing)."
+    },
+    {
+        "roleKey": "virgin",
+        "title": "Virgin",
+        "originalText": "the 1st time you are nominated, if the nominator is a townsfolk, they are executed immediately.",
+        "normalizedText": "the 1st time you are nominated, if the nominator is a townsfolk, they are executed immediately.",
+        "tokens": ["1st", "time", "nominated", "if", "nominator", "townsfolk", "they", "executed", "immediately"],
+        "howToRun": "if the first player to ever nominate the virgin is a townsfolk, immediately declare that the nominating player is executed. that player die—put a shroud on their character token in the grimoire. the virgin lose their ability—put the virgin's no ability reminder token by the virgin token. end the nomination process and proceed to the night phase. (no one else can be executed today.)\n\nif the first player to ever nominate the virgin is not a townsfolk, continue the vote as normal. the virgin lose their ability—put the virgin's no ability reminder token by the virgin token."
+    },
+    {
+        "roleKey": "washerwoman",
+        "title": "Washerwoman",
+        "originalText": "you start knowing that 1 of 2 players is a particular townsfolk.",
+        "normalizedText": "you start knowing that 1 of 2 players is a particular townsfolk.",
+        "tokens": ["START_KNOWING", "that", "1", "2", "player", "particular", "townsfolk"],
+        "howToRun": "while preparing the first night, put the washerwoman's townsfolk reminder token by any townsfolk character token, and put the washerwoman's wrong reminder token by any other character token.\n\nduring the first night, wake the washerwoman and point to the players marked townsfolk and wrong. show the character token marked townsfolk to the washerwoman. put the washerwoman to sleep. remove the washerwoman's reminder tokens when convenient."
+    }
+]
