@@ -260,6 +260,21 @@ const defaultPatternRules: PatternRule[] = [
     }
 ];
 
+const replacePayloadPlaceholders = (tokens: Token[], placeholderMap?: Record<string, Token>): Token[] => {
+    if (!placeholderMap || Object.keys(placeholderMap).length === 0) {
+        return tokens;
+    }
+
+    return tokens.map((tok) => {
+        if (typeof tok !== 'string') {
+            return tok;
+        }
+
+        const normalized = tok.toLowerCase();
+        return placeholderMap[normalized] ?? tok;
+    });
+};
+
 const matchesPattern = (pattern: PatternStep[], tokens: Token[], start: number): boolean =>
     pattern.every((step, offset) => {
         const candidate = tokens[start + offset];
@@ -311,6 +326,7 @@ export const applyPatternRules = (tokens: Token[], rules: PatternRule[]): Token[
 export interface TokenizeOptions {
     lexRules?: LexRule[];
     patternRules?: PatternRule[];
+    payloadPlaceholders?: Record<string, Token>;
 }
 
 export const tokenize = (input: string, options?: TokenizeOptions): Token[] => {
@@ -318,7 +334,8 @@ export const tokenize = (input: string, options?: TokenizeOptions): Token[] => {
     const words = tokenizeWords(normalizedText);
     const lexed = applyLexRules(words, options?.lexRules ?? defaultLexRules);
     const numerics = applyNumericRules(lexed);
-    return applyPatternRules(numerics, options?.patternRules ?? defaultPatternRules);
+    const withPayloads = replacePayloadPlaceholders(numerics, options?.payloadPlaceholders);
+    return applyPatternRules(withPayloads, options?.patternRules ?? defaultPatternRules);
 };
 
 const formatToken = (tok: Token): string =>

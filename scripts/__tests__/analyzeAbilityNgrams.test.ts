@@ -49,6 +49,18 @@ describe('tokenPipeline', () => {
             'ACCEPT_MODIFIER'
         ]);
     });
+
+    it('honors payload placeholders when tokenizing', () => {
+        const placeholderMap = {
+            '__regex_payload_token_1__': ['NUMBER_VALUE', { op: 'add', value: 2 }]
+        };
+
+        const tokens = tokenize('__REGEX_PAYLOAD_TOKEN_1__', { payloadPlaceholders: placeholderMap });
+        expect(tokens).toHaveLength(1);
+        expect(isTupleToken(tokens[0])).toBe(true);
+        expect(tokenName(tokens[0])).toBe('NUMBER_VALUE');
+        expect(tokenPayload(tokens[0])).toEqual({ op: 'add', value: 2 });
+    });
 });
 
 describe('analyzeAbilityNgrams accumulate helpers', () => {

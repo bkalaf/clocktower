@@ -1,4 +1,4 @@
-import type { LexRule } from './tokenPipeline';
+import type { LexRule, Payload } from './tokenPipeline';
 
 const lexRules: LexRule[] = [
     { name: 'NOT_IN_PLAY', phrase: ['not', 'in', 'play'] },
@@ -54,7 +54,12 @@ const ignored = [
     'in'
 ];
 
-const regex: Record<string, [string, ((match: RegExpMatchArray) => string[]) | undefined]> = {};
+type HandlerToken = string | [string, Payload];
+type HandlerResult = HandlerToken | HandlerToken[] | Payload;
+
+const regex: Record<string, [string, ((match: RegExpMatchArray) => HandlerResult | undefined) | undefined]> = {
+    '/(.d*) extra': ['NUMBER', (match) => ({ value: match[0], op: '+' })]
+};
 
 const config = {
     lexRules,

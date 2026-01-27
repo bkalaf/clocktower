@@ -5,6 +5,66 @@ import { tokenize, tokenName } from './tokenPipeline.ts';
 import type { LexRule, Token } from './tokenPipeline.ts';
 import type { NormalizedWikiPage } from '../src/spec/wikiTypes';
 
+const pluralList = {
+    travellers: 'traveller',
+    executions: 'execution',
+    idiots: 'idiot',
+    "djinn's": 'djinn',
+    '"is': 'is',
+    its: 'it',
+    abilities: 'ability',
+    agrees: 'agree',
+    alignments: 'alignment',
+    assigns: 'assign',
+    babysits: 'babysit',
+    becomes: 'become',
+    believes: 'believe',
+    bluffs: 'bluff',
+    changes: 'change',
+    "character's": 'character',
+    characters: 'character',
+    chooses: 'choose',
+    counts: 'count',
+    days: 'day',
+    deaths: 'death',
+    demons: 'demon',
+    dies: 'die',
+    extras: 'extra',
+    eyes: 'eye',
+    gains: 'gain',
+    gets: 'get',
+    gives: 'give',
+    guesses: 'guess',
+    has: 'has',
+    kills: 'kill',
+    knows: 'know',
+    learns: 'learn',
+    loses: 'lose',
+    minutes: 'minute',
+    neighbors: 'neighbor',
+    nights: 'night',
+    nominates: 'nominate',
+    nominations: 'nomination',
+    nominees: 'nominee',
+    occurs: 'occur',
+    outsiders: 'outsider',
+    pairs: 'pair',
+    registers: 'register',
+    rules: 'rule',
+    seats: 'seat',
+    sets: 'set',
+    steps: 'step',
+    swaps: 'swap',
+    talks: 'talk',
+    theirs: 'their',
+    things: 'thing',
+    thinks: 'think',
+    visitors: 'visitor',
+    votes: 'vote',
+    wins: 'win',
+    works: 'work'
+};
+
 const DEFAULT_STOPWORD_LIST = [
     'a',
     'an',
@@ -39,10 +99,13 @@ const DEFAULT_CONFIG_PATH = path.resolve('scripts', 'tokenNormalizationConfig.ts
 
 type CountMap = Record<string, number>;
 
+type RegexHandlerResult = Token | Token[] | Record<string, unknown>;
+type RegexHandler = (match: RegExpMatchArray) => RegexHandlerResult | undefined;
+
 interface RegexAlias {
     alias: string;
     regex: RegExp;
-    handler?: (match: RegExpMatchArray) => string[];
+    handler?: RegexHandler;
 }
 
 interface CliOptions {
@@ -54,7 +117,7 @@ interface CliOptions {
 interface NormalizationConfig {
     lexRules?: LexRule[];
     ignored?: string[];
-    regex?: Record<string, [string, ((match: RegExpMatchArray) => string[]) | undefined]>;
+    regex?: Record<string, [string, RegexHandler | undefined]>;
 }
 
 function parseCliArgs(argv: string[]): CliOptions {
@@ -99,8 +162,7 @@ function buildRegexAliases(config: NormalizationConfig['regex']): RegexAlias[] {
         const pattern = tuple[0];
         try {
             const regex = new RegExp(pattern, 'gu');
-            const handler =
-                typeof tuple[1] === 'function' ? (tuple[1] as (match: RegExpMatchArray) => string[]) : undefined;
+            const handler = typeof tuple[1] === 'function' ? (tuple[1] as RegexHandler) : undefined;
             entries.push({ alias: alias.trim(), regex, handler });
         } catch {
             continue;
@@ -120,9 +182,9 @@ async function loadNormalizationConfig(filePath: string | undefined): Promise<{
     try {
         const parsed = await loadConfigValue(resolvedPath);
         const lexRules =
-            Array.isArray(parsed.lexRules) && parsed.lexRules.length
-                ? parsed.lexRules.filter((rule) => Array.isArray(rule.phrase) && rule.phrase.length > 0)
-                : undefined;
+            Array.isArray(parsed.lexRules) && parsed.lexRules.length ?
+                parsed.lexRules.filter((rule) => Array.isArray(rule.phrase) && rule.phrase.length > 0)
+            :   undefined;
 
         const stopwords = new Set<string>();
         if (parsed.ignored && parsed.ignored.length > 0) {
@@ -165,24 +227,73 @@ async function loadConfigValue(resolvedPath: string): Promise<NormalizationConfi
     return (raw ? (JSON.parse(raw) as NormalizationConfig) : {}) ?? {};
 }
 
-function applyRegexMappings(text: string, regexAliases: RegexAlias[]): string {
+const handlerResultToTokens = (value: RegexHandlerResult | undefined, alias: string): Token[] => {
+    if (!value) {
+        return [];
+    }
+
+    if (Array.isArray(value)) {
+        if (
+            value.length === 2 &&
+            typeof value[0] === 'string' &&
+            typeof value[1] === 'object' &&
+            value[1] !== null &&
+            !Array.isArray(value[1])
+        ) {
+            return [value as [string, Record<string, unknown>]];
+        }
+
+        return value as Token[];
+    }
+
+    if (typeof value === 'string') {
+        return [value];
+    }
+
+    if (typeof value === 'object') {
+        return [[alias, value]];
+    }
+
+    return [];
+};
+
+function applyRegexMappings(text: string, regexAliases: RegexAlias[]): { text: string; placeholderMap: Record<string, Token> } {
+    const placeholderMap: Record<string, Token> = {};
+
     if (!regexAliases.length) {
-        return text;
+        return { text, placeholderMap };
     }
 
     let transformed = text;
+    let placeholderCounter = 0;
+
     for (const entry of regexAliases) {
         entry.regex.lastIndex = 0;
         transformed = transformed.replace(entry.regex, (...args) => {
             const match = args.slice(0, -2) as RegExpMatchArray;
             match.index = args[args.length - 2];
             match.input = args[args.length - 1];
-            const handlerTokens = entry.handler ? (entry.handler(match) ?? []) : [];
+
+            const handlerTokens = handlerResultToTokens(entry.handler ? entry.handler(match) : undefined, entry.alias);
             const tokens = handlerTokens.length ? handlerTokens : [entry.alias];
-            return tokens.length ? ` ${tokens.join(' ')} ` : ' ';
+            const replacements: string[] = [];
+
+            for (const token of tokens) {
+                if (typeof token === 'string') {
+                    replacements.push(token);
+                    continue;
+                }
+
+                const placeholder = `__REGEX_PAYLOAD_TOKEN_${++placeholderCounter}__`;
+                placeholderMap[placeholder.toLowerCase()] = token;
+                replacements.push(placeholder);
+            }
+
+            return replacements.length ? ` ${replacements.join(' ')} ` : ' ';
         });
     }
-    return transformed;
+
+    return { text: transformed, placeholderMap };
 }
 
 function writeJson(file: string, data: unknown): Promise<void> {
@@ -224,12 +335,14 @@ interface TokenizedTrace {
 
 async function main() {
     const { inputDir, outputDir, configPath } = parseCliArgs(process.argv.slice(2));
-    const { lexRules, regexAliases, stopwords: stopwordSet, source: configSource } =
-        await loadNormalizationConfig(configPath);
+    const {
+        lexRules,
+        regexAliases,
+        stopwords: stopwordSet,
+        source: configSource
+    } = await loadNormalizationConfig(configPath);
     if (lexRules && lexRules.length) {
-        console.log(
-            `Loaded ${lexRules.length} lex rules from ${configSource ?? configPath ?? DEFAULT_CONFIG_PATH}.`
-        );
+        console.log(`Loaded ${lexRules.length} lex rules from ${configSource ?? configPath ?? DEFAULT_CONFIG_PATH}.`);
     }
     if (regexAliases.length) {
         console.log(
@@ -261,14 +374,24 @@ async function main() {
         const filepath = path.join(inputDir, filename);
         const raw = await fs.readFile(filepath, 'utf-8');
         const page: NormalizedWikiPage = JSON.parse(raw);
-        const originalText = String(page.abilityText ?? '').trim();
+        const _originalText = String(page.abilityText ?? '').trim();
+        const originalText = Object.entries(pluralList)
+            .map(
+                ([k, v]) =>
+                    (s: string) =>
+                        s.toLowerCase().replaceAll(k, v)
+            )
+            .reduce(
+                (pv, cv) => (s: string) => cv(pv(s)),
+                (s: string) => s
+            )(_originalText);
         if (!originalText) {
             continue;
         }
 
-        const normalizedText = applyRegexMappings(originalText, regexAliases);
+        const { text: normalizedText, placeholderMap } = applyRegexMappings(originalText, regexAliases);
         totalAbilityTextsProcessed += 1;
-        const rawTokens = tokenize(normalizedText, { lexRules });
+        const rawTokens = tokenize(normalizedText, { lexRules, payloadPlaceholders: placeholderMap });
         let removedInThisPass = 0;
         const filteredTokens: Token[] = [];
 
