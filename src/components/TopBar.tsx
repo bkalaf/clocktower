@@ -1,7 +1,7 @@
 // src/components/TopBar.tsx
 import { useCallback } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
-import { ChevronDown, LogIn, LogOut, Settings, User, UserPlus } from 'lucide-react';
+import { BookOpen, ChevronDown, LogIn, LogOut, Settings, User, UserPlus, AdjustmentsHorizontal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -22,12 +22,14 @@ import { TopBarSidebarTrigger } from './TopBarSidebarTrigger';
 import { UserNameSpan } from './UserNameSpan';
 import { CreateRoomButton } from './CreateRoomButton';
 import { useIsAuth, useUsername } from '../client/state/useIsAuth';
+import { useRoomUi } from '@/components/room/RoomUiContext';
 
 export function TopBar() {
     const navigate = useNavigate();
     const { open } = useModal();
     const isAuth = useIsAuth();
     const username = useUsername();
+    const { roomId, toggleSettings, toggleNotes } = useRoomUi();
     console.log(`isAuth`, isAuth);
     const handleLogin = useCallback(() => {
         navigate({
@@ -92,6 +94,27 @@ export function TopBar() {
                     <div className='hidden items-center gap-3 md:flex'>
                         <TopBarScriptsMenu />
                         <InvitesButton />
+                    </div>
+                )}
+
+                {roomId && (
+                    <div className='hidden items-center gap-2 md:flex'>
+                        <Button
+                            variant='ghost'
+                            size='icon'
+                            onClick={toggleSettings}
+                            aria-label='Room settings'
+                        >
+                            <AdjustmentsHorizontal className='h-4 w-4' />
+                        </Button>
+                        <Button
+                            variant='ghost'
+                            size='icon'
+                            onClick={toggleNotes}
+                            aria-label='Room notes'
+                        >
+                            <BookOpen className='h-4 w-4' />
+                        </Button>
                     </div>
                 )}
 

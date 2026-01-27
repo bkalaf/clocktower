@@ -10,7 +10,14 @@ export const env = createEnv({
         MONGODB_DB: z.string().min(1),
         REALTIME_PORT: z.coerce.number().int().min(0),
         SESSION_COOKIE_NAME: z.string().min(1),
-        ALLOW_DEV_GRIMOIRE: z.string().optional()
+        ALLOW_DEV_GRIMOIRE: z.string().optional(),
+        RENDER_TOKEN_SECRET: z.string().min(16),
+        GRIMOIRE_RENDER_PORT: z.coerce.number().int().min(1024).max(65535).default(4321),
+        GRIMOIRE_RENDER_TIMEOUT: z.coerce.number().int().min(1000).default(35000),
+        GRIMOIRE_RENDER_VIEWPORT: z.object({
+            width: z.coerce.number().int().min(320).default(1400),
+            height: z.coerce.number().int().min(240).default(900)
+        })
     },
 
     /**

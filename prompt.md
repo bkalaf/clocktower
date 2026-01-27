@@ -581,4 +581,4 @@ So, let's make sure each personality is unique so nothing that deepEquals would 
 
 Finally, go ahead and give me the personality categorys sorted and ranked 1 to 5 for each of the properties of Personality and generate typescript enums that map to this as well and update the prompts above to use these enums going forward.
 
-/\[\s*(?<direction1>[+-])(?<value1>\d+)(?:\s+or\s+(?<direction2>[+-])(?<value2>\+))?\s+(?<characterType>Outsider|Minion)\s*\]/
+

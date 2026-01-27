@@ -54,7 +54,8 @@ export const zGame = z.object({
         )
         .default([])
         .optional()
-        .nullable()
+        .nullable(),
+    phaseArtifacts: z.record(z.string(), z.string()).default({})
 });
 
 export type Game = z.infer<typeof zGame>;
@@ -143,7 +144,12 @@ const gameSchema = new Schema<Game>(
             default: {}
         },
         onTheBlock: { type: onTheBlockSchema, default: null },
-        voteHistory: { type: [voteHistoryEntrySchema], default: [] }
+        voteHistory: { type: [voteHistoryEntrySchema], default: [] },
+        phaseArtifacts: {
+            type: Map,
+            of: String,
+            default: {}
+        }
     },
     {
         timestamps: true,

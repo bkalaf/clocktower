@@ -1,7 +1,11 @@
 import fs from 'graceful-fs';
-import { arch } from 'os';
 import path from 'path';
 
+export enum ArchTypeCategory {
+    civilian = 0,
+    spellcaster = 1,
+    brute = 2
+}
 export enum ArchTypePart1 {
     lower = 0,
     middle = 1,
@@ -16,10 +20,11 @@ export enum ArchTypePart2 {
 export interface AvatarDescriptor {
     gender: Gender;
     ageGroup: AgeGroup;
-    archetype: SocialArchetypeIndex;
+    archetype: string;
     geography: GeographicOrigin;
     group1: ArchTypePart1;
     group2: ArchTypePart2;
+    archTypeCategory: ArchTypeCategory;
     filename?: string;
     prompt?: string;
 }
@@ -77,23 +82,126 @@ export enum GeographicOrigin {
     'Celtic / Druidic (British Isles)' = 17,
     'Caribbean (Haitian / Jamaican / Dominican)' = 18
 }
-
-export const SocialArchType = {
-    [ArchTypePart2.wanderer]: [['vagrant/beggar', 'nomad', 'peddler/entertainer']],
-    [ArchTypePart2.worker]: ['laborer/serf', 'artisan/apprentice', 'merchant/guildmaster'],
-    [ArchTypePart2.clergy]: ['local priest', 'monk/deacon', 'bishop/priest'],
-    [ArchTypePart2.nobility]: ['page/squire', 'knight/baron', 'monarch/high nobility']
+export const RoleCategoryNames = {
+    civilian: 'civilian',
+    spellcaster: 'spellcaster',
+    brute: 'brute'
 };
 
-export const AVATAR_PROMPT_TEMPLATE = ({
+export type ArchTypeBucket = Record<keyof typeof RoleCategoryNames, string[]>;
+
+const toBucket = (
+    ...[value0, value1, value2]: [civilians: string[], spellcasters: string[], brutes: string[]]
+): ArchTypeBucket => ({
+    civilian: value0,
+    spellcaster: value1,
+    brute: value2
+});
+
+export const SocialArchType = {
+    [ArchTypePart2.wanderer]: {
+        [ArchTypePart1.lower]: toBucket(
+            ['Mendicant', 'Pilgrim', 'Street Vendor'],
+            ['Charaltan', 'Warlock', 'Medium'],
+            ['Scrapper', 'Knifer', 'Pickpocket']
+        ),
+        [ArchTypePart1.middle]: toBucket(
+            ['Swashbuckler', 'Freebooter', 'Shipwright'],
+            ['Wayfarer', 'Arcanist', 'Mystic'],
+            ['Reaver', 'Marauder', 'Highwayman'] // Brigand, Raider, Pirate
+        ),
+        [ArchTypePart1.upper]: toBucket(
+            ['Merchant Prince', 'Trade Magnate', 'Caravan Lord'],
+            ['Savant', 'Spellblade Envoy', 'Augur'], // Spell Slinger
+            ['Assassin', 'Champion', 'Night Reaver'] // Champion, Veiled Operative, Duelist
+        )
+    },
+    [ArchTypePart2.worker]: {
+        [ArchTypePart1.lower]: toBucket(
+            ['Tinker', 'Cart Puller', 'Street Peddler'],
+            ['Witch', 'Tailor', 'Hexer'], // Glyph Scribe
+            ['Vanguard', 'Mud Runner', 'Shield Ranker'] // Battle-Raised
+        ),
+        [ArchTypePart1.middle]: toBucket(
+            ['Patternwright', 'Loomhand', 'Trader'],
+            ['Transmutation Adept', 'Alchemist', 'Brewer'],
+            ['Hammer Guard', 'Forge-Bound', 'Workshop Stalker'] // Brigand, Raider, Pirate
+        ),
+        [ArchTypePart1.upper]: toBucket(
+            ['Grand Architect', 'Stone Overseer', 'Commissioner'],
+            ['Chronicler', 'Engineer', 'Professor'], // Sage Runic Sigil
+            ['Forge Champion', 'Iron Votary', 'Guild Master'] // Champion, Veiled Operative, Duelist
+        )
+    },
+    [ArchTypePart2.clergy]: {
+        [ArchTypePart1.lower]: toBucket(
+            ['Glyph Scribe', '', 'Acolyte'],
+            ['Shaman', 'Ritual Apprentice', 'Mystic'],
+            ['Faithful Militant', 'Doctrine Hunter', 'Inquisitor']
+        ),
+        [ArchTypePart1.middle]: toBucket(
+            ['Wizard', 'Scriptorium Adept', 'Ritual Steward'],
+            ['Enchanter', 'Mystic', 'Illusionist'],
+            ['Druid', 'Verdant Avenger', 'Grove Stalker'] // Brigand, Raider, Pirate
+        ),
+        [ArchTypePart1.upper]: toBucket(
+            ['Monastic Mystic', 'Oracle', 'Arbiter'],
+            ['Archmage', 'Hierophant', 'Magus'],
+            ['Templar', 'Crusader', 'Silent Confessor'] // Champion, Veiled Operative, Duelist
+        )
+    },
+    [ArchTypePart2.nobility]: {
+        [ArchTypePart1.lower]: toBucket(
+            ['Knight Exemplar', 'Veiled Attendant', 'Valet'],
+            ['Shadow Knight', 'Channeler', 'Black Codex Adept'],
+            ['Hex Blade', 'Cursed Armsman', 'Nightstalker']
+        ),
+        [ArchTypePart1.middle]: toBucket(
+            ['Troubador', 'Estate Marshal', 'Courtier'],
+            ['Spell Scribe', 'Sigil Curator', 'Glyph Duelist'],
+            ['Warden', 'Rune-Warden', 'Sentinel'] // Brigand, Raider, Pirate
+        ),
+        [ArchTypePart1.upper]: toBucket(
+            ['Ranger', 'Crown Stategist', 'Court Liason'],
+            ['Paladin', 'Hierarch', 'Justicar'],
+            ['Anointed Knight', 'Banner Champion', 'Royal Shadow'] // Champion, Veiled Operative, Duelist
+        )
+    }
+    // [ArchTypePart2.worker]: [
+    //     toBucket('Peddler', 'Witch-Light', 'Foot Soldier'),
+    //     toBucket('Tailor', 'Alchemist', 'Blacksmith'),
+    //     toBucket('Master Mason', 'Sage', 'Guildmaster')
+    // ],
+    // [ArchTypePart2.clergy]: [toBucket('Acolyte', 'Shaman', 'Inquisitor')],
+    // [ArchTypePart2.nobility]: ['page/squire', 'knight/baron', 'monarch/high nobility']
+};
+
+const generateFn = ({
+    geography,
+    ageGroup,
     gender,
     group1,
     group2,
-    archetype,
-    ageGroup,
-    geography
-}: AvatarDescriptor) => {
-    return `FILENAME *****  ${[geography.toFixed(0), ageGroup.toFixed(0), gender.toFixed(0), group1.toFixed(0), group2.toFixed(0)].join('_').concat('.png')} *****    Portrait-style character illustration, waist-up. Gender presentation: ${Gender[gender]} Age group: ${AgeGroup[ageGroup]} Social Groups: ${ArchTypePart1[group1]} ${ArchTypePart2[group2]} Social archetype: ${SocialArchetype[archetype]} Geographic origin: ${GeographicOrigin[geography]} Portrait-style character illustration, waist-up (waist-up, chest-up or shoulders-up is acceptable), designed as a square 1:1 game-token icon (125x125 px), centered, high-contrast, readable at very small sizes, with a transparent background. Digitally illustrated fantasy art optimized for game UI, featuring cinematic lighting, idealized realism, and high symbolic clarity with a medieval-fantasy-adjacent tone.Subject is a ${AgeGroup[ageGroup]} ${ArchTypePart1[group1]}-class ${ArchTypePart2[group2]} of ${SocialArchType[group2][group1]} background, with gender presentation leaning ${Gender[gender]}. Facial features, hair texture, and styling should reflect a ${GeographicOrigin[geography]} geographic origin respectfully and accurately. Age should be visible in youthful facial structure, slightly uncertain posture, lightly worn clothing, and a restrained, neutral-to-subtle expression suitable for a social deduction game.Clothing should be simple, practical, and historically grounded: rough natural materials, modest cuts, minimal ornamentation, visibly worn but functional, with no modern elements. No exaggerated features or caricature.Background should be minimal and atmospheric, subtly evoking the subject's geographic region without distracting detail.No text. No watermark.`.trim();
+    archTypeCategory
+}: {
+    geography: number;
+    ageGroup: number;
+    gender: number;
+    group1: number;
+    group2: number;
+    archTypeCategory: number;
+}) =>
+    `${[geography.toFixed(0), ageGroup.toFixed(0), gender.toFixed(0), group1.toFixed(0), group2.toFixed(0), archTypeCategory.toFixed(0)].join('_').concat('.png')}`;
+
+export const AVATAR_PROMPT_TEMPLATE = (descriptor: AvatarDescriptor) => {
+    const filename = generateFn(descriptor);
+    const $geography = GeographicOrigin[descriptor.geography];
+    const $ageGroup = AgeGroup[descriptor.ageGroup];
+    const $gender = Gender[descriptor.gender];
+    const $group1 = ArchTypePart1[descriptor.group1];
+    const $group2 = ArchTypePart2[descriptor.group2];
+    const $archetype = descriptor.archetype;
+    return `FILENAME *****  ${filename} *****\nPortrait-style character illustration, waist-up. Gender presentation: ${$gender} Age group: ${$ageGroup} Social Groups: ${$group1} ${$group2} Social archetype: ${$archetype} Geographic origin: $geography} Portrait-style character illustration, waist-up (waist-up, chest-up or shoulders-up is acceptable), designed as a square 1:1 game-token icon (125x125 px), centered, high-contrast, readable at very small sizes, with a transparent background. Digitally illustrated fantasy art optimized for game UI, featuring cinematic lighting, idealized realism, and high symbolic clarity with a medieval-fantasy-adjacent tone.Subject is a ${$ageGroup} ${$group1}-class ${$group2} of ${$archetype} background, with gender presentation leaning ${$gender}. Facial features, hair texture, and styling should reflect a ${$geography} geographic origin respectfully and accurately. Age should be visible in youthful facial structure, slightly uncertain posture, lightly worn clothing, and a restrained, neutral-to-subtle expression suitable for a social deduction game.Clothing should be simple, practical, and historically grounded: rough natural materials, modest cuts, minimal ornamentation, visibly worn but functional, with no modern elements. No exaggerated features or caricature.Background should be minimal and atmospheric, subtly evoking the subject's geographic region without distracting detail.No text. No watermark.`.trim();
 };
 
 // export function generateAvatarPrompt(avatar: AvatarDescriptor): string {
@@ -109,7 +217,7 @@ export const AVATAR_PROMPT_TEMPLATE = ({
 
 /**
  * Shuffles array in place using the Fisher-Yates shuffle algorithm.
- * @param {Array} array The array containing the items to shuffle.
+ * @param {Array} array The array containing the items to shuffle
  * @returns {Array} The shuffled array (modifies the original array).
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -130,26 +238,40 @@ function shuffleArray(array: any[]) {
     return array;
 }
 
-const calculateArchetype = ({ group1, group2 }: { group1: number; group2: number }): SocialArchetypeIndex =>
-    ((group2 + 1) * 3 + (group1 + 1)) as SocialArchetypeIndex;
+const calculateArchetype = ({
+    group1,
+    group2,
+    archTypeCategory
+}: {
+    group1: number;
+    group2: number;
+    archTypeCategory: ArchTypeCategory;
+}): string =>
+    shuffleArray(
+        SocialArchType[group2 as ArchTypePart2][group1 as ArchTypePart1][
+            ArchTypeCategory[archTypeCategory] as keyof typeof RoleCategoryNames
+        ]
+    )[0];
+
 export function generateAvatarFromSeed(): AvatarDescriptor {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const group1 = shuffleArray([0, 1, 2])[0];
     const group2 = shuffleArray([0, 1, 2, 3])[0];
     const geography = shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17])[0];
-    const archetype = calculateArchetype({ group1, group2 });
+    const archTypeCategory = shuffleArray([0, 1, 2])[0] as ArchTypeCategory;
+    const archetype = calculateArchetype({ group1, group2, archTypeCategory });
     const ageGroup = shuffleArray([0, 1, 2, 3, 4, 5, 6])[0];
     const gender = shuffleArray([0, 1, 2, 3, 4])[0];
+    const filename = generateFn({ geography, ageGroup, gender, group1, group2, archTypeCategory });
     return {
         gender,
         ageGroup,
         geography,
         group1,
         group2,
+        archTypeCategory,
         archetype,
-        filename: [geography.toFixed(0), ageGroup.toFixed(0), gender.toFixed(0), group1.toFixed(0), group2.toFixed(0)]
-            .join('_')
-            .concat('.png')
+        filename
     };
 }
 
@@ -159,8 +281,12 @@ const generateAvatar = ({
     geography,
     group1,
     group2,
-    filename
-}: Pick<AvatarDescriptor, 'gender' | 'group1' | 'group2' | 'geography' | 'ageGroup' | 'archetype' | 'filename'> & {
+    filename,
+    archTypeCategory
+}: Pick<
+    AvatarDescriptor,
+    'gender' | 'group1' | 'group2' | 'geography' | 'ageGroup' | 'archetype' | 'filename' | 'archTypeCategory'
+> & {
     filename?: string;
 }) =>
     ({
@@ -169,7 +295,7 @@ const generateAvatar = ({
         group1,
         group2,
         gender,
-        archetype: calculateArchetype({ group1, group2 }),
+        archetype: calculateArchetype({ group1, group2, archTypeCategory }),
         filename:
             filename ??
             [geography, ageGroup, gender, group1, group2]
@@ -180,19 +306,29 @@ const generateAvatar = ({
             gender,
             group1,
             group2,
-            archetype: calculateArchetype({ group1, group2 }),
+            archetype: calculateArchetype({ group1, group2, archTypeCategory }),
             ageGroup,
-            geography
+            geography,
+            archTypeCategory
         })
     }) as AvatarDescriptor;
 
 const parseFilename = (fn: string) => {
-    const [geography, ageGroup, gender, group1, group2] = fn
+    const [geography, ageGroup, gender, group1, group2, archTypeCategory] = fn
         .split('.')[0]
         .split('_')
         .map((x) => parseInt(x, 10));
-    const archetype = calculateArchetype({ group1, group2 });
-    return generateAvatar({ geography, gender, group1, group2, ageGroup, archetype });
+    const archetype = calculateArchetype({ group1, group2, archTypeCategory });
+    return generateAvatar({
+        geography,
+        gender,
+        group1,
+        group2,
+        ageGroup,
+        archetype,
+        archTypeCategory: archTypeCategory ?? shuffleArray([0, 1, 2])[0],
+        filename: generateFn({ geography, ageGroup, gender, group1, group2, archTypeCategory })
+    });
 };
 
 // const avatar = generateAvatarFromSeed('ai_shadow_warden_042');
@@ -208,24 +344,26 @@ for (let index = 0; index < 25; index++) {
 
 const dir = `/home/bobby/Downloads/avatars`;
 
-const files = fs.readdirSync(dir);
+// const files = fs.readdirSync(dir);
 
-const filenames = files.map((x) => path.basename(x, path.extname(x))).map(parseFilename);
+// const filenames = files.map((x) => path.basename(x, path.extname(x))).map(parseFilename);
 // src/crossProductGenerator.ts
 
-type FiveTuple = [number, number, number, number, number];
+type FiveTuple = [number, number, number, number, number, number];
 
 /**
  * Generates the Cartesian product of five specific ranges:
  * [0-7], [0-4], [0-3], [0-2], [0-6]
  */
 export function* getNumberTuples(): Generator<FiveTuple> {
-    for (let i = 10; i <= 18; i++) {
+    for (let i = 0; i <= 9; i++) {
         for (let j = 0; j <= 6; j++) {
             for (let k = 0; k <= 4; k++) {
                 for (let l = 0; l <= 2; l++) {
                     for (let m = 0; m <= 3; m++) {
-                        yield [i, j, k, l, m];
+                        for (let n = 0; n < 3; n++) {
+                            yield [i, j, k, l, m, n];
+                        }
                     }
                 }
             }
@@ -246,40 +384,40 @@ const tuples = Array.from(getNumberTuples()).filter((x) => {
         .map((x) => x.toFixed(0))
         .join('_')
         .concat('.png');
-    console.log(`filenames`, filenames);
-    return !filenames.some((fn) => fn.filename === fn2);
+    // console.log(`filenames`, filenames);
+    return fn2;
+    // return !filenames.some((fn) => fn.filename === fn2);
 });
 
-const currentList = JSON.parse(
-    fs.readFileSync(`./chats/outstanding-avatars-keyart.json`, 'utf-8')
-) as AvatarDescriptor[];
+// const currentList = JSON.parse(
+//     fs.readFileSync(`./chats/outstanding-avatars-keyart.json`, 'utf-8')
+// ) as AvatarDescriptor[];
 
 const totalList = [
-    ...currentList.map((x) => [x.geography, x.ageGroup, x.gender, x.group1, x.group2] as FiveTuple),
+    // ...currentList.map((x) => [x.geography, x.ageGroup, x.gender, x.group1, x.group2, x.archTypeCategory] as FiveTuple),
     ...tuples
 ];
 console.log(totalList.length);
-// console.log(tuples);
-// fs.writeFileSync(
-//     `./chats/outstanding-avatars-prereview.json`,
-//     JSON.stringify(
-//         shuffleArray(totalList).map((x) => {
-//             return generateAvatar({
-//                 geography: x[0],
-//                 ageGroup: x[1],
-//                 gender: x[2],
-//                 group1: x[3],
-//                 group2: x[4],
-//                 archetype: 0
-//             });
-//         }),
-//         null,
-//         '\t'
-//     )
-// );
+console.log(tuples);
+fs.writeFileSync(
+    `./chats/avatars-preview.json`,
+    JSON.stringify(
+        shuffleArray(totalList).map((x) => {
+            return generateAvatar({
+                geography: x[0],
+                ageGroup: x[1],
+                gender: x[2],
+                group1: x[3],
+                group2: x[4],
+                archTypeCategory: x[5],
+                archetype: 0 as unknown as string
+            });
+        }),
+        null,
+        '\t'
+    )
+);
 
 // console.log(filenames);
 
-const data = JSON.parse(fs.readFileSync('./chats/outstanding-avatars-standardized.json').toString());
-
-function replacer()
+// const data = JSON.parse(fs.readFileSync('./chats/avatars-standardized.json').toString());

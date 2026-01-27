@@ -1,6 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { pathToFileURL } from 'url';
+import { tokenize, tokenName } from './tokenPipeline.ts';
+import type { LexRule, Token } from './tokenPipeline.ts';
 import type { NormalizedWikiPage } from '../src/spec/wikiTypes';
 
 const DEFAULT_STOPWORD_LIST = [
@@ -33,15 +35,9 @@ const DEFAULT_STOPWORD_LIST = [
     'no'
 ];
 
-const DEFAULT_STOPWORDS = new Set(DEFAULT_STOPWORD_LIST);
 const DEFAULT_CONFIG_PATH = path.resolve('scripts', 'tokenNormalizationConfig.ts');
 
 type CountMap = Record<string, number>;
-
-interface AliasSequence {
-    alias: string;
-    sequence: string[];
-}
 
 interface RegexAlias {
     alias: string;
@@ -56,7 +52,7 @@ interface CliOptions {
 }
 
 interface NormalizationConfig {
-    tokens?: Record<string, string[]>;
+    lexRules?: LexRule[];
     ignored?: string[];
     regex?: Record<string, [string, ((match: RegExpMatchArray) => string[]) | undefined]>;
 }
@@ -90,85 +86,43 @@ function parseCliArgs(argv: string[]): CliOptions {
     };
 }
 
-function normalizeAliasToken(token: string): string {
-    const trimmed = token.trim();
-    if (!trimmed) {
-        return '';
-    }
-    if (trimmed.toUpperCase() === 'STAR') {
-        return 'STAR';
-    }
-    if (trimmed.toUpperCase() === 'ACCEPT_MODIFIER') {
-        return 'ACCEPT_MODIFIER';
-    }
-    return trimmed.toLowerCase();
-}
-
 function buildRegexAliases(config: NormalizationConfig['regex']): RegexAlias[] {
     if (!config) {
         return [];
     }
 
-    return Object.entries(config)
-        .map(([alias, tuple]) => {
-            if (!Array.isArray(tuple) || typeof tuple[0] !== 'string') {
-                return null;
-            }
-            const pattern = tuple[0];
-            try {
-                const regex = new RegExp(pattern, 'gu');
-                const extras = tuple[1] ?? {};
-                return { alias: alias.trim(), regex, extras };
-            } catch {
-                return null;
-            }
-        })
-        .filter((entry): entry is RegexAlias => Boolean(entry));
-}
+    const entries: RegexAlias[] = [];
+    for (const [alias, tuple] of Object.entries(config)) {
+        if (!Array.isArray(tuple) || typeof tuple[0] !== 'string') {
+            continue;
+        }
+        const pattern = tuple[0];
+        try {
+            const regex = new RegExp(pattern, 'gu');
+            const handler =
+                typeof tuple[1] === 'function' ? (tuple[1] as (match: RegExpMatchArray) => string[]) : undefined;
+            entries.push({ alias: alias.trim(), regex, handler });
+        } catch {
+            continue;
+        }
+    }
 
-function normalizeRegexExtras(extras: Record<string, string>): string[] {
-    return Object.entries(extras)
-        .sort((a, b) => {
-            const aNum = Number(a[0]);
-            const bNum = Number(b[0]);
-            if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) {
-                return aNum - bNum;
-            }
-            if (!Number.isNaN(aNum)) {
-                return -1;
-            }
-            if (!Number.isNaN(bNum)) {
-                return 1;
-            }
-            return a[0].localeCompare(b[0], 'en', { sensitivity: 'base' });
-        })
-        .map(([, token]) => token);
+    return entries;
 }
 
 async function loadNormalizationConfig(filePath: string | undefined): Promise<{
-    sequences: AliasSequence[];
+    lexRules?: LexRule[];
     regexAliases: RegexAlias[];
     stopwords: Set<string>;
     source?: string;
 }> {
     const resolvedPath = filePath ?? DEFAULT_CONFIG_PATH;
     try {
-        const raw = await fs.readFile(resolvedPath, 'utf-8');
-        const parsed = (raw ? (JSON.parse(raw) as NormalizationConfig) : {}) ?? {};
-        const sequences: AliasSequence[] = [];
-
-        if (parsed.tokens) {
-            for (const [alias, sequence] of Object.entries(parsed.tokens)) {
-                if (!Array.isArray(sequence)) {
-                    continue;
-                }
-                const normalizedSequence = sequence.map(normalizeAliasToken).filter((token) => Boolean(token));
-                if (!normalizedSequence.length) {
-                    continue;
-                }
-                sequences.push({ alias: alias.trim(), sequence: normalizedSequence });
-            }
-        }
+        const parsed = await loadConfigValue(resolvedPath);
+        const lexRules =
+            Array.isArray(parsed.lexRules) && parsed.lexRules.length
+                ? parsed.lexRules.filter((rule) => Array.isArray(rule.phrase) && rule.phrase.length > 0)
+                : undefined;
 
         const stopwords = new Set<string>();
         if (parsed.ignored && parsed.ignored.length > 0) {
@@ -185,12 +139,7 @@ async function loadNormalizationConfig(filePath: string | undefined): Promise<{
         const regexAliases = buildRegexAliases(parsed.regex);
 
         return {
-            sequences: sequences.sort((a, b) => {
-                if (b.sequence.length !== a.sequence.length) {
-                    return b.sequence.length - a.sequence.length;
-                }
-                return a.alias.localeCompare(b.alias, 'en', { sensitivity: 'base' });
-            }),
+            lexRules,
             regexAliases,
             stopwords,
             source: resolvedPath
@@ -200,12 +149,20 @@ async function loadNormalizationConfig(filePath: string | undefined): Promise<{
             console.warn(`Unable to load normalization config at ${resolvedPath}: ${(error as Error).message}`);
         }
         return {
-            sequences: [],
             regexAliases: [],
             stopwords: new Set(DEFAULT_STOPWORD_LIST),
             source: undefined
         };
     }
+}
+
+async function loadConfigValue(resolvedPath: string): Promise<NormalizationConfig> {
+    if (/\.(js|ts|mjs)$/i.test(resolvedPath)) {
+        const module = await import(pathToFileURL(resolvedPath).href);
+        return (module.default ?? module) as NormalizationConfig;
+    }
+    const raw = await fs.readFile(resolvedPath, 'utf-8');
+    return (raw ? (JSON.parse(raw) as NormalizationConfig) : {}) ?? {};
 }
 
 function applyRegexMappings(text: string, regexAliases: RegexAlias[]): string {
@@ -216,9 +173,12 @@ function applyRegexMappings(text: string, regexAliases: RegexAlias[]): string {
     let transformed = text;
     for (const entry of regexAliases) {
         entry.regex.lastIndex = 0;
-        transformed = transformed.replace(entry.regex, () => {
-            const extras = normalizeRegexExtras(entry.extras);
-            const tokens = [entry.alias, ...extras].filter(Boolean);
+        transformed = transformed.replace(entry.regex, (...args) => {
+            const match = args.slice(0, -2) as RegExpMatchArray;
+            match.index = args[args.length - 2];
+            match.input = args[args.length - 1];
+            const handlerTokens = entry.handler ? (entry.handler(match) ?? []) : [];
+            const tokens = handlerTokens.length ? handlerTokens : [entry.alias];
             return tokens.length ? ` ${tokens.join(' ')} ` : ' ';
         });
     }
@@ -227,35 +187,6 @@ function applyRegexMappings(text: string, regexAliases: RegexAlias[]): string {
 
 function writeJson(file: string, data: unknown): Promise<void> {
     return fs.writeFile(file, JSON.stringify(data, null, 2) + '\n', 'utf-8');
-}
-
-function tokenizeAbilityText(
-    text: string,
-    stopwordSet: Set<string> = DEFAULT_STOPWORDS
-): { tokens: string[]; stopwordCount: number } {
-    const normalized = text
-        .replace(/\*/g, ' STAR ')
-        .replace(/\[/g, ' ACCEPT_MODIFIER ')
-        .replace(/\]/g, ' ACCEPT_MODIFIER ')
-        .replace(/[^\w\s]/g, ' ');
-
-    const rawTokens = normalized
-        .split(/\s+/)
-        .filter(Boolean)
-        .map((token) => (token === 'STAR' || token === 'ACCEPT_MODIFIER' ? token : token.toLowerCase()));
-
-    const tokens: string[] = [];
-    let stopwordCount = 0;
-
-    for (const token of rawTokens) {
-        if (stopwordSet.has(token)) {
-            stopwordCount += 1;
-            continue;
-        }
-        tokens.push(token);
-    }
-
-    return { tokens, stopwordCount };
 }
 
 function accumulateNgramCounts(
@@ -283,45 +214,6 @@ function sortCountMap(counts: CountMap): CountMap {
     return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
 }
 
-function applyAliasSequences(tokens: string[], sequences: AliasSequence[]): string[] {
-    if (!sequences.length) {
-        return tokens;
-    }
-    const mapped: string[] = [];
-    let index = 0;
-
-    while (index < tokens.length) {
-        let matched: AliasSequence | undefined;
-        for (const sequence of sequences) {
-            if (sequence.sequence.length > tokens.length - index) {
-                continue;
-            }
-            let matches = true;
-            for (let i = 0; i < sequence.sequence.length; i += 1) {
-                if (tokens[index + i] !== sequence.sequence[i]) {
-                    matches = false;
-                    break;
-                }
-            }
-            if (matches) {
-                matched = sequence;
-                break;
-            }
-        }
-
-        if (matched) {
-            mapped.push(matched.alias);
-            index += matched.sequence.length;
-            continue;
-        }
-
-        mapped.push(tokens[index]);
-        index += 1;
-    }
-
-    return mapped;
-}
-
 interface TokenizedTrace {
     roleKey: string;
     title: string;
@@ -332,15 +224,11 @@ interface TokenizedTrace {
 
 async function main() {
     const { inputDir, outputDir, configPath } = parseCliArgs(process.argv.slice(2));
-    const {
-        sequences: aliasSequences,
-        regexAliases,
-        stopwords: stopwordSet,
-        source: configSource
-    } = await loadNormalizationConfig(configPath);
-    if (aliasSequences.length) {
+    const { lexRules, regexAliases, stopwords: stopwordSet, source: configSource } =
+        await loadNormalizationConfig(configPath);
+    if (lexRules && lexRules.length) {
         console.log(
-            `Loaded ${aliasSequences.length} alias sequences from ${configSource ?? configPath ?? DEFAULT_CONFIG_PATH}.`
+            `Loaded ${lexRules.length} lex rules from ${configSource ?? configPath ?? DEFAULT_CONFIG_PATH}.`
         );
     }
     if (regexAliases.length) {
@@ -380,9 +268,20 @@ async function main() {
 
         const normalizedText = applyRegexMappings(originalText, regexAliases);
         totalAbilityTextsProcessed += 1;
-        const { tokens, stopwordCount: removed } = tokenizeAbilityText(normalizedText, stopwordSet);
-        stopwordCount += removed;
-        const normalizedTokens = applyAliasSequences(tokens, aliasSequences);
+        const rawTokens = tokenize(normalizedText, { lexRules });
+        let removedInThisPass = 0;
+        const filteredTokens: Token[] = [];
+
+        for (const token of rawTokens) {
+            if (typeof token === 'string' && stopwordSet.has(token)) {
+                removedInThisPass += 1;
+                continue;
+            }
+            filteredTokens.push(token);
+        }
+
+        stopwordCount += removedInThisPass;
+        const normalizedTokens = filteredTokens.map(tokenName);
         totalTokens += normalizedTokens.length;
         tokenizedTraces.push({
             roleKey: page.roleKey,
@@ -422,4 +321,4 @@ if (analyzeEntry === 'analyzeAbilityNgrams.js' || analyzeEntry === 'analyzeAbili
     });
 }
 
-export { tokenizeAbilityText, accumulateNgramCounts, sortCountMap, applyAliasSequences, loadNormalizationConfig };
+export { accumulateNgramCounts, sortCountMap, loadNormalizationConfig };

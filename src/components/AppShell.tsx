@@ -4,6 +4,7 @@ import { SidebarProvider, SidebarInset } from './ui/sidebar';
 import { TopBar } from './TopBar';
 import { BottomBar } from './header/BottomBar';
 import tokensDeskWindow from '@/assets/images/tokens-desk-window.png?url';
+import { RoomUiProvider, useRoomUi } from '@/components/room/RoomUiContext';
 
 const rootBackgroundStyle: React.CSSProperties = {
     backgroundImage: `url(${tokensDeskWindow})`,
@@ -14,6 +15,22 @@ const rootBackgroundStyle: React.CSSProperties = {
 };
 
 export function AppShell({ children }: { children: React.ReactNode }) {
+    return (
+        <RoomUiProvider>
+            <AppShellContent>{children}</AppShellContent>
+        </RoomUiProvider>
+    );
+}
+
+function AppShellContent({ children }: { children: React.ReactNode }) {
+    const { roomId } = useRoomUi();
+    const mainStyle: React.CSSProperties =
+        roomId ?
+            {
+                backgroundColor: '#3A4A6B'
+            }
+        :   rootBackgroundStyle;
+
     return (
         <SidebarProvider defaultOpen={false}>
             <AppSidebar />
@@ -26,7 +43,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 {/* This is the remaining usable space */}
                 <main
                     className='min-h-0 bg-cover bg-center flex-1 overflow-hidden object-contain items-center justify-center'
-                    style={rootBackgroundStyle}
+                    style={mainStyle}
                 >
                     {/* <div className='absolute inset-0'>
                                 <img

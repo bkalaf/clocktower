@@ -1,341 +1,306 @@
 
 Top ability tokens
-1. player — 101
-2. if — 95
-3. night — 83
-4. choose — 80
-5. each — 79
-6. they — 63
-7. die — 60
-8. players — 56
-9. 1 — 45
-10. demon — 43
-11. ACCEPT_MODIFIER — 36
-12. learn — 34
-13. evil — 31
-14. good — 31
-15. STAR — 31
-16. day — 27
-17. may — 25
-18. once — 24
-19. per — 24
-20. character — 23
-21. game — 23
-22. their — 23
-23. 2 — 22
-24. might — 21
-25. all — 19
-26. minion — 19
-27. that — 19
-28. which — 18
-29. ability — 17
-30. play — 17
-31. start — 17
-32. tonight — 17
-33. alive — 16
-34. executed — 16
-35. knowing — 16
-36. dead — 15
-37. t — 15
-38. when — 15
-39. 1st — 14
-40. 3 — 14
-41. alignment — 14
-42. drunk — 14
-43. this — 14
-44. know — 13
-45. storyteller — 13
-46. townsfolk — 13
-47. but — 12
-48. poisoned — 12
-49. vote — 12
-50. it — 11
-51. only — 11
-52. outsider — 11
-53. publicly — 11
-54. wins — 11
-55. dies — 10
-56. team — 10
-57. until — 10
-58. who — 10
-59. can — 9
-60. characters — 9
-61. even — 9
-62. execution — 9
-63. how — 9
-64. minions — 9
+1. if — 95
+2. EACH_NIGHT — 56
+3. player — 50
+4. demon — 41
+5. players — 41
+6. they — 40
+7. choose — 38
+8. CHOOSE_PLAYER — 37
+9. die — 37
+10. learn — 34
+11. 1 — 33
+12. STAR — 31
+13. evil — 28
+14. day — 27
+15. may — 25
+16. each — 23
+17. their — 23
+18. THEY_DIE — 23
+19. not — 22
+20. character — 21
+21. might — 21
+22. ONCE_PER_GAME — 21
+23. all — 19
+24. good — 19
+25. that — 19
+26. ACCEPT_MODIFIER — 18
+27. tonight — 17
+28. ability — 16
+29. alive — 16
+30. executed — 16
+31. minion — 16
+32. START_KNOWING — 16
+33. which — 16
+34. AT_NIGHT — 15
+35. t — 15
+36. when — 15
+37. 1st — 14
+38. 3 — 14
+39. alignment — 14
+40. this — 14
+41. dead — 13
+42. drunk — 13
+43. know — 13
+44. storyteller — 13
+45. TWO_PLAYERS — 13
+46. but — 12
+47. GOOD_PLAYER — 12
+48. night — 12
+49. poisoned — 12
+50. townsfolk — 12
+51. vote — 12
+52. IN_PLAY — 11
+53. it — 11
+54. only — 11
+55. publicly — 11
+56. wins — 11
+57. dies — 10
+58. team — 10
+59. until — 10
+60. who — 10
+61. can — 9
+62. even — 9
+63. execution — 9
+64. how — 9
 65. today — 9
 66. tomorrow — 9
 67. yourself — 9
 68. become — 8
-69. dusk — 8
-70. many — 8
-71. more — 8
-72. there — 8
-73. becomes — 7
-74. died — 7
-75. guess — 7
-76. info — 7
-77. live — 7
-78. loses — 7
-79. nominate — 7
-80. don — 6
-81. have — 6
-82. kill — 6
-83. nominated — 6
-84. one — 6
-85. other — 6
-86. outsiders — 6
-87. them — 6
-88. another — 5
-89. both — 5
-90. chosen — 5
-91. kills — 5
-92. last — 5
-93. living — 5
-94. mad — 5
-95. most — 5
-96. must — 5
-97. neighbor — 5
+69. CHARACTER_TYPE_OUTSIDER — 8
+70. dusk — 8
+71. many — 8
+72. more — 8
+73. there — 8
+74. 2 — 7
+75. becomes — 7
+76. characters — 7
+77. died — 7
+78. guess — 7
+79. info — 7
+80. live — 7
+81. loses — 7
+82. minions — 7
+83. nominate — 7
+84. don — 6
+85. have — 6
+86. kill — 6
+87. nominated — 6
+88. other — 6
+89. them — 6
+90. another — 5
+91. both — 5
+92. chosen — 5
+93. kills — 5
+94. last — 5
+95. living — 5
+96. mad — 5
+97. must — 5
 98. s — 5
 99. time — 5
 100. 5 — 4
 
 Top ability bigrams
-1. each night — 56
-2. choose player — 37
-3. night STAR — 31
-4. night choose — 26
-5. they die — 23
-6. once per — 22
-7. per game — 21
-8. STAR choose — 21
-9. player they — 20
-10. start knowing — 16
-11. 2 players — 13
-12. each day — 13
-13. may choose — 13
-14. good player — 12
-15. if they — 11
-16. all players — 9
-17. even if — 9
-18. game night — 9
-19. might die — 9
-20. player if — 9
-21. die if — 8
-22. how many — 8
-23. until dusk — 8
-24. 3 players — 7
-25. choose 2 — 7
-26. if dead — 7
-27. if demon — 7
-28. alive player — 6
-29. don t — 6
-30. learn how — 6
-31. learn which — 6
-32. night learn — 6
-33. player yourself — 6
-34. their ability — 6
-35. 1 good — 5
-36. 1 outsider — 5
-37. ACCEPT_MODIFIER 1 — 5
-38. can t — 5
-39. day if — 5
-40. drunk until — 5
-41. good character — 5
-42. if die — 5
-43. more players — 5
-44. outsider ACCEPT_MODIFIER — 5
-45. player might — 5
-46. publicly choose — 5
-47. team loses — 5
-48. their character — 5
-49. 1 2 — 4
-50. character they — 4
-51. day may — 4
-52. dead player — 4
-53. demon kills — 4
-54. die ACCEPT_MODIFIER — 4
-55. died today — 4
-56. during day — 4
-57. evil player — 4
-58. evil players — 4
-59. evil wins — 4
-60. if executed — 4
-61. if good — 4
-62. last night — 4
-63. learn if — 4
-64. learn their — 4
-65. living player — 4
-66. outsiders ACCEPT_MODIFIER — 4
-67. player different — 4
-68. players know — 4
-69. players learn — 4
-70. players may — 4
-71. STAR learn — 4
-72. t die — 4
-73. their alignment — 4
-74. they learn — 4
-75. they poisoned — 4
-76. 1 alive — 3
-77. 1 player — 3
-78. 1st night — 3
-79. 1st time — 3
-80. ability if — 3
-81. ACCEPT_MODIFIER 0 — 3
-82. alive neighbor — 3
-83. character but — 3
-84. character if — 3
-85. choose alive — 3
-86. choose living — 3
-87. choose which — 3
-88. demon ACCEPT_MODIFIER — 3
-89. demon knows — 3
-90. die night — 3
-91. dies execution — 3
-92. doesn t — 3
-93. drunk poisoned — 3
-94. each other — 3
-95. executed evil — 3
-96. false info — 3
-97. game during — 3
-98. good they — 3
-99. if chosen — 3
-100. if drunk — 3
+1. EACH_NIGHT STAR — 27
+2. STAR CHOOSE_PLAYER — 14
+3. each day — 13
+4. CHOOSE_PLAYER THEY_DIE — 12
+5. EACH_NIGHT CHOOSE_PLAYER — 11
+6. if they — 11
+7. may choose — 11
+8. all players — 9
+9. even if — 9
+10. ONCE_PER_GAME AT_NIGHT — 9
+11. how many — 8
+12. might die — 8
+13. not yourself — 8
+14. until dusk — 8
+15. 3 players — 7
+16. EACH_NIGHT choose — 7
+17. if dead — 7
+18. if demon — 7
+19. alive player — 6
+20. choose TWO_PLAYERS — 6
+21. CHOOSE_PLAYER not — 6
+22. don t — 6
+23. learn how — 6
+24. learn which — 6
+25. their ability — 6
+26. can t — 5
+27. CHOOSE_PLAYER they — 5
+28. day if — 5
+29. drunk until — 5
+30. EACH_NIGHT learn — 5
+31. good character — 5
+32. if die — 5
+33. more players — 5
+34. team loses — 5
+35. their character — 5
+36. THEY_DIE if — 5
+37. 1 GOOD_PLAYER — 4
+38. 1 TWO_PLAYERS — 4
+39. AT_NIGHT choose — 4
+40. AT_NIGHT STAR — 4
+41. CHOOSE_PLAYER if — 4
+42. day may — 4
+43. demon kills — 4
+44. died today — 4
+45. during day — 4
+46. evil player — 4
+47. evil players — 4
+48. evil wins — 4
+49. if executed — 4
+50. last night — 4
+51. learn if — 4
+52. learn their — 4
+53. living player — 4
+54. not demon — 4
+55. player if — 4
+56. player might — 4
+57. players know — 4
+58. players may — 4
+59. STAR choose — 4
+60. STAR learn — 4
+61. t die — 4
+62. their alignment — 4
+63. they learn — 4
+64. they poisoned — 4
+65. 1 alive — 3
+66. 1 player — 3
+67. 1st night — 3
+68. 1st time — 3
+69. ability if — 3
+70. alive neighbor — 3
+71. but not — 3
+72. character but — 3
+73. character if — 3
+74. CHARACTER_TYPE_OUTSIDER IN_PLAY — 3
+75. choose alive — 3
+76. choose living — 3
+77. demon knows — 3
+78. die AT_NIGHT — 3
+79. die if — 3
+80. dies execution — 3
+81. doesn t — 3
+82. drunk poisoned — 3
+83. each other — 3
+84. executed evil — 3
+85. false info — 3
+86. if chosen — 3
+87. if drunk — 3
+88. if good — 3
+89. if only — 3
+90. if player — 3
+91. if were — 3
+92. IN_PLAY they — 3
+93. learn that — 3
+94. might executed — 3
+95. minion ability — 3
+96. minion demon — 3
+97. not know — 3
+98. ONCE_PER_GAME during — 3
+99. opposing player — 3
+100. players learn — 3
 
 Top ability trigrams
-1. each night STAR — 27
-2. night STAR choose — 21
-3. once per game — 21
-4. each night choose — 18
-5. choose player they — 17
-6. night choose player — 14
-7. STAR choose player — 14
-8. player they die — 13
-9. per game night — 9
-10. choose 2 players — 6
-11. choose player yourself — 6
-12. game night choose — 6
-13. player if they — 6
-14. 1 outsider ACCEPT_MODIFIER — 5
-15. drunk until dusk — 5
-16. each night learn — 5
-17. even if dead — 5
-18. learn how many — 5
-19. they die if — 5
-20. 1 2 players — 4
-21. 1 good player — 4
-22. all players know — 4
-23. choose player if — 4
-24. if demon kills — 4
-25. night choose 2 — 4
-26. night STAR learn — 4
-27. player might die — 4
-28. player they poisoned — 4
-29. 2 players particular — 3
-30. can t die — 3
-31. choose alive player — 3
-32. choose living player — 3
-33. each day may — 3
-34. executed evil wins — 3
-35. game during day — 3
-36. game night STAR — 3
-37. knowing that 1 — 3
-38. learn which player — 3
-39. night learn how — 3
-40. per game during — 3
-41. start knowing 1 — 3
-42. start knowing that — 3
-43. that 1 2 — 3
-44. they die ACCEPT_MODIFIER — 3
-45. 0 1 outsider — 2
-46. 1 alive player — 2
-47. 1 player drunk — 2
-48. 1st time die — 2
-49. 2 players they — 2
-50. 3 players live — 2
-51. 5 more players — 2
-52. ACCEPT_MODIFIER 0 1 — 2
-53. ACCEPT_MODIFIER 1 outsider — 2
-54. ACCEPT_MODIFIER evil characters — 2
-55. alive neighbor if — 2
-56. alive player if — 2
-57. all players learn — 2
-58. bad might happen — 2
-59. become their alignment — 2
-60. both might die — 2
-61. but demon knows — 2
-62. character s ability — 2
-63. choose 1 alive — 2
-64. choose 3 players — 2
-65. choose character they — 2
-66. choose dead player — 2
-67. choose player different — 2
-68. choose player learn — 2
-69. day after 1st — 2
-70. day may choose — 2
-71. demon doesn t — 2
-72. demon even if — 2
-73. demon knows who — 2
-74. demon may choose — 2
-75. demon they die — 2
-76. die ACCEPT_MODIFIER 1 — 2
-77. died publicly choose — 2
-78. died today choose — 2
-79. died today tonight — 2
-80. different last night — 2
-81. doesn t kill — 2
-82. don t know — 2
-83. each day after — 2
-84. each day if — 2
-85. each other if — 2
-86. even if drunk — 2
-87. good player executed — 2
-88. if chosen learns — 2
-89. if die night — 2
-90. if died today — 2
-91. if drunk poisoned — 2
-92. if it was — 2
-93. if there 5 — 2
-94. if they evil — 2
-95. know each other — 2
-96. knowing how many — 2
-97. learn that died — 2
-98. learn their alignment — 2
-99. learn their character — 2
-100. learn who each — 2
-
-
-    "tokens": {
-        "NOMINATED": ["nominated"],
-        "EACH_NIGHT_STAR": ["each", "night", "STAR"],
-        "EACH_NIGHT_LEARN": ["each", "night", "learn"],
-        "EACH_NIGHT_CHOOSE": ["each", "night", "choose"],
-        "EACH_NIGHT": ["each", "night"],
-        "ONCE_PER_GAME": ["once", "per", "game"],
-        "PER_GAME_NIGHT": ["per", "game", "night"],
-        "CHOOSE_TWO_PLAYERS": ["choose", "2", "players"],
-        "UNTIL_DUSK": ["until", "dusk"],
-        "PLAYER_MIGHT_DIE": ["player", "might", "die"],
-        "EVEN_IF_DEAD": ["even", "if", "dead"],
-        "START_KNOWING": ["start", "knowing"],
-        "YOU_DIE_WITH": ["you", "die"],
-        "CHOOSE_PLAYER": ["choose", "player"]
-
-[+2 outsider] 
-[-1 Outsider] 
-[Most players are Legion] 
-[+1 Outsider] 
-[No evil characters] 
-[+0 or +1 Outsider] 
-here might be 1 extra or 1 fewer Outsider in play. 
-[You neighbor the Demon] 
-[-1 or +1 Outsider] 
-[+1 Minion] 
-[+the King] 
-[+the Damsel]
-
-
-
-YOU_THINK_YOU: []
-TOWNSFOLK: ["Townsfolk", "character"],
+1. EACH_NIGHT STAR CHOOSE_PLAYER — 13
+2. STAR CHOOSE_PLAYER THEY_DIE — 9
+3. CHOOSE_PLAYER not yourself — 6
+4. drunk until dusk — 5
+5. even if dead — 5
+6. learn how many — 5
+7. all players know — 4
+8. EACH_NIGHT CHOOSE_PLAYER not — 4
+9. EACH_NIGHT STAR choose — 4
+10. EACH_NIGHT STAR learn — 4
+11. if demon kills — 4
+12. ONCE_PER_GAME AT_NIGHT choose — 4
+13. player might die — 4
+14. 1 TWO_PLAYERS particular — 3
+15. can t die — 3
+16. choose alive player — 3
+17. choose living player — 3
+18. CHOOSE_PLAYER if they — 3
+19. CHOOSE_PLAYER they poisoned — 3
+20. CHOOSE_PLAYER THEY_DIE if — 3
+21. each day may — 3
+22. executed evil wins — 3
+23. learn which player — 3
+24. ONCE_PER_GAME AT_NIGHT STAR — 3
+25. ONCE_PER_GAME during day — 3
+26. START_KNOWING that 1 — 3
+27. that 1 TWO_PLAYERS — 3
+28. 1 alive player — 2
+29. 1 player drunk — 2
+30. 1st time die — 2
+31. 3 players live — 2
+32. 5 more players — 2
+33. alive neighbor if — 2
+34. alive player if — 2
+35. all players learn — 2
+36. AT_NIGHT STAR CHOOSE_DEAD_PLAYER — 2
+37. bad might happen — 2
+38. become their alignment — 2
+39. both might die — 2
+40. but not demon — 2
+41. character but not — 2
+42. character s ability — 2
+43. choose 1 alive — 2
+44. choose 3 players — 2
+45. choose TWO_PLAYERS not — 2
+46. CHOOSE_PLAYER learn their — 2
+47. CHOOSE_PLAYER THEY_DIE 1st — 2
+48. CHOOSE_PLAYER THEY_DIE ACCEPT_MODIFIER — 2
+49. day after 1st — 2
+50. day may choose — 2
+51. demon doesn t — 2
+52. demon even if — 2
+53. demon knows who — 2
+54. demon may choose — 2
+55. died publicly choose — 2
+56. died today CHOOSE_PLAYER — 2
+57. died today tonight — 2
+58. different last night — 2
+59. doesn t kill — 2
+60. don t know — 2
+61. each day after — 2
+62. each day if — 2
+63. each other if — 2
+64. EACH_NIGHT choose alive — 2
+65. EACH_NIGHT choose TWO_PLAYERS — 2
+66. EACH_NIGHT CHOOSE_PLAYER if — 2
+67. EACH_NIGHT CHOOSE_PLAYER they — 2
+68. EACH_NIGHT learn how — 2
+69. EACH_NIGHT learn which — 2
+70. EACH_NIGHT STAR may — 2
+71. EACH_NIGHT STAR player — 2
+72. even if drunk — 2
+73. GOOD_PLAYER executed evil — 2
+74. if chosen learns — 2
+75. if die AT_NIGHT — 2
+76. if died today — 2
+77. if drunk poisoned — 2
+78. if it was — 2
+79. if there 5 — 2
+80. if they evil — 2
+81. know each other — 2
+82. learn that died — 2
+83. learn their alignment — 2
+84. learn their character — 2
+85. learn who each — 2
+86. may choose kill — 2
+87. might happen whoever — 2
+88. more players alive — 2
+89. not demon knows — 2
+90. not yourself learn — 2
+91. not yourself their — 2
+92. player if they — 2
+93. players may choose — 2
+94. players may not — 2
+95. publicly choose 1 — 2
+96. something bad might — 2
+97. STAR choose TWO_PLAYERS — 2
+98. STAR learn if — 2
+99. STAR player might — 2
+100. START_KNOWING how many — 2
