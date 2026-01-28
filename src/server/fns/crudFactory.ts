@@ -3,7 +3,7 @@ import { createServerFn } from '@tanstack/react-start';
 import { connectMongoose } from '@/db/connectMongoose';
 import type { Model } from 'mongoose';
 import { bindCommandZod, bindQueryZod } from '@/shared/api/bindingsZod';
-import type { EndpointSpec } from '@/shared/api/endpoint';
+import type { EndpointSpec, InferOutput } from '@/shared/api/endpoint';
 import z from 'zod/v4';
 
 type AnyObj = Record<string, unknown>;
@@ -100,7 +100,7 @@ export function makeMongooseCrud<TDoc extends AnyObj, TDto, TIdKey extends strin
 }) {
     const { getEndpoint, updateEndpoint, deleteEndpoint, idKey, Model, mapDto, scopeFilter } = opts;
 
-    const getOneFn = createServerFn({ method: 'GET' })
+    const getOneFn = createServerFn<'GET', InferOutput<typeof getEndpoint>>({ method: 'GET' })
         .inputValidator(getEndpoint.input)
         .handler(async ({ data, context }) => {
             const id = (input as Record<TIdKey, string>)[idKey];
@@ -111,7 +111,7 @@ export function makeMongooseCrud<TDoc extends AnyObj, TDto, TIdKey extends strin
             return getEndpoint.output.parse({ item: mapDto(doc as TDoc) });
         });
 
-    const updateOneFn = createServerFn({ method: 'POST' })
+    const updateOneFn = createServerFn<'POST', InferOutput<typeof updateEndpoint>>({ method: 'POST' })
         .inputValidator(updateEndpoint.input)
         .handler(async ({ input, context }) => {
             const id = (input as Record<TIdKey, string>)[idKey];
@@ -131,7 +131,7 @@ export function makeMongooseCrud<TDoc extends AnyObj, TDto, TIdKey extends strin
             return updateEndpoint.output.parse({ item: mapDto(updated as TDoc) });
         });
 
-    const deleteOneFn = createServerFn({ method: 'POST' })
+    const deleteOneFn = createServerFn<'POST', InferOutput<typeof deleteEndpoint>>({ method: 'POST' })
         .inputValidator(deleteEndpoint.input)
         .handler(async ({ input, context }) => {
             const id = (input as Record<TIdKey, string>)[idKey];

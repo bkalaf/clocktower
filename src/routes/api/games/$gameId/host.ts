@@ -11,7 +11,7 @@ import { getUserFromCookie } from '../../../../serverFns/getId/getUserFromCookie
 import { $is } from '../../../../types/game';
 import { createServerFn } from '@tanstack/react-start';
 
-export const hostPost = createServerFn({
+export const hostPost = createServerFn<'POST', void>({
     method: 'POST'
 })
     .inputValidator(zAssignHostInput)

@@ -1,8 +1,9 @@
 // src/server/chatItem/createChatItem.ts
 import { createServerFn } from '@tanstack/react-start';
 import z from 'zod/v4';
-import { ChatItemModel } from '@/db/models/ChatItem';
+import { ChatItemModel, type ChatItemDocument } from '@/db/models/ChatItem';
 import { created } from '../../utils/http';
+import type { Result } from '../../types/game';
 
 const chatItemInputSchema = z.object({
     _id: z.string().min(1),
@@ -14,7 +15,7 @@ const chatItemInputSchema = z.object({
     from: z.string().min(1),
     name: z.string().min(1)
 });
-export const createChatItem = createServerFn({
+export const createChatItem = createServerFn<'POST', Result<ChatItemDocument>>({
     method: 'POST'
 })
     .inputValidator((data) => chatItemInputSchema.parse(data))

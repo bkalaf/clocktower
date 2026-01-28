@@ -44,7 +44,7 @@ export async function apiFetch<T = unknown>(path: string, options: RequestInit =
     return data as T;
 }
 
-export const whoamiFn = createServerFn({
+export const whoamiFn = createServerFn<'GET', { user: AuthedUser | null }>({
     method: 'GET'
 }).handler(async () => {
     const user: AuthedUser | null = await getUserFromCookie();
@@ -64,7 +64,9 @@ export const whoamiFn = createServerFn({
     return { user };
 });
 
-export const whoamiPrivilegedFn = createServerFn({
+type AvailabilityCheckResponse = { ok: boolean; msg?: string };
+
+export const whoamiPrivilegedFn = createServerFn<'GET', { user: AuthedUser }>({
     method: 'GET'
 }).handler(async () => {
     const user = await requirePrivilegedUser();
@@ -105,7 +107,7 @@ const checkEmailInput = z.object({
     email: z.email()
 });
 
-export const checkUserName = createServerFn({
+export const checkUserName = createServerFn<'GET', AvailabilityCheckResponse>({
     method: 'GET'
 })
     .inputValidator(checkUserNameInput)
@@ -114,7 +116,7 @@ export const checkUserName = createServerFn({
         if (result > 0) return { ok: false, msg: 'Username already in use.' };
         return { ok: true };
     });
-export const checkEmail = createServerFn({
+export const checkEmail = createServerFn<'GET', AvailabilityCheckResponse>({
     method: 'GET'
 })
     .inputValidator(checkEmailInput)

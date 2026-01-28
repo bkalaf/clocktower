@@ -7,6 +7,7 @@ import { createSession } from '../../../server/session/createSession';
 import { setSessionCookie } from '../../../server/auth/cookies';
 import { createServerFn } from '@tanstack/react-start';
 import { createSessionActor } from '../../../server/sessionService';
+import type { AuthedUser } from '../../../types/game';
 
 const loginBodySchema = z.object({
     email: z.email().min(1),
@@ -20,7 +21,10 @@ export function unauthorized(msg: string, payload: any) {
     });
 }
 
-export const loginServerFn = createServerFn({
+type LoginSuccessResponse = { ok: true; user: AuthedUser };
+type LoginResponse = Response | LoginSuccessResponse;
+
+export const loginServerFn = createServerFn<'POST', LoginResponse>({
     method: 'POST'
 })
     .inputValidator(loginBodySchema)

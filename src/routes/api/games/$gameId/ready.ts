@@ -18,7 +18,7 @@ const zReadyParams = z.object({
     gameId: zGameId
 });
 
-export const makeReady = createServerFn({
+export const makeReady = createServerFn<'POST', void>({
     method: 'POST'
 })
     .inputValidator($z.makeReadyInput)

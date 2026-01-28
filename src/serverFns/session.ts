@@ -29,7 +29,7 @@ const findOne = async (_id: SessionId, expiresAt: number = Date.now()) => {
     throw new Error(`could not populate userId`);
 };
 
-const deleteById = createServerFn({
+const deleteById = createServerFn<'GET', void>({
     method: 'GET'
 }).handler(async () => {
     const sessionId = getSessionCookie();

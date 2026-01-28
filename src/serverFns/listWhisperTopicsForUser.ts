@@ -9,11 +9,17 @@ import $whisper from './whisper';
 
 const toRoomTopic = (topic: string) => (topic.startsWith('game:') ? topic.replace(/^game:/, 'room:') : topic);
 
-export const listWhisperTopicsForUser = createServerFn({
+type ListWhisperTopicsRequest = {
+    gameId: GameId;
+    userId: UserId;
+    role: GameRoles;
+};
+
+export const listWhisperTopicsForUser = createServerFn<'POST', string[]>({
     method: 'POST'
 })
     .inputValidator(listWhisperTopicsInput)
-    .handler(async ({ data }: { data: { gameId: GameId; userId: UserId; role: GameRoles } }) => {
+    .handler(async ({ data }: { data: ListWhisperTopicsRequest }) => {
         const r = await getRedis();
         const key = $keys.userWhisperKey(data.gameId, data.userId);
         const topics = await r.sMembers(key);

@@ -4,6 +4,7 @@ import z from 'zod/v4';
 import { HttpError } from '../../errors';
 import { WhisperDocument, WhisperModel } from '@/db/models/Whisper';
 import { success } from '../../utils/http';
+import type { Result } from '../../types/game';
 
 const findWhisperInputSchema = z.object({
     gameId: z.string().min(1),
@@ -11,7 +12,7 @@ const findWhisperInputSchema = z.object({
     isActive: z.boolean().default(false)
 });
 
-export const findWhisper = createServerFn({
+export const findWhisper = createServerFn<'POST', Result<WhisperDocument>>({
     method: 'POST'
 })
     .inputValidator((data) => findWhisperInputSchema.parse(data))

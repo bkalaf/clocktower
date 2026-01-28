@@ -9,7 +9,7 @@ const getCurrentRoomInput = z.object({
     userId: z.string().min(1).nullable().optional()
 });
 
-export const getCurrentRoom = createServerFn({
+export const getCurrentRoom = createServerFn<'GET', string | null>({
     method: 'GET'
 })
     .inputValidator(getCurrentRoomInput)

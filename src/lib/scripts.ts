@@ -10,6 +10,25 @@ import { zScriptId } from '@/schemas/aliases/zScriptId';
 const editionOptions = ['tb', 'bmr', 'snv', 'custom'] as const;
 const skillLevelOptions = ['beginner', 'intermediate', 'advanced', 'expert', 'veteran'] as const;
 
+type Edition = (typeof editionOptions)[number];
+type SkillLevel = (typeof skillLevelOptions)[number];
+
+type ScriptSummary = {
+    _id: string;
+    name: string;
+    edition: Edition | null;
+    skillLevel: SkillLevel;
+    isOfficial: boolean;
+};
+
+type ListScriptsResponse = {
+    scripts: ScriptSummary[];
+};
+
+type CreateScriptResponse = {
+    script: ScriptSummary;
+};
+
 const createScriptInput = z.object({
     scriptId: zScriptId,
     name: z.string().min(1, 'Name is required').max(60, 'Name must be 60 characters or less'),
@@ -18,7 +37,7 @@ const createScriptInput = z.object({
     isOfficial: z.boolean().optional()
 });
 
-export const listScripts = createServerFn({
+export const listScripts = createServerFn<'GET', ListScriptsResponse>({
     method: 'GET'
 }).handler(async () => {
     await connectMongoose();
@@ -34,7 +53,7 @@ export const listScripts = createServerFn({
     };
 });
 
-export const createScript = createServerFn({
+export const createScript = createServerFn<'POST', CreateScriptResponse>({
     method: 'POST'
 })
     .inputValidator(createScriptInput)
