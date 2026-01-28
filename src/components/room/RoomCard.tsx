@@ -3,7 +3,6 @@ import { MessageCircle, Mail, DoorOpen, UserPlus } from 'lucide-react';
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import type React from 'react';
 
 type RoomCardProps = {
     room: RoomSummary;
