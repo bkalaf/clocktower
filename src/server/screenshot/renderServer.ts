@@ -1,6 +1,7 @@
 // src/server/screenshot/renderServer.ts
 import http from 'node:http';
 import { env } from '@/env';
+import { appendLog } from '../logging/diskLogger';
 import { getScreenshotJob } from './jobStore';
 import type { ScreenshotJob, GrimoireViewModel } from './types';
 import crypto from 'node:crypto';
@@ -11,6 +12,12 @@ const secret = env.RENDER_TOKEN_SECRET;
 
 let server: http.Server | null = null;
 let serverInitialized = false;
+
+const screenshotLogDir = env.SCREENSHOT_LOG_DIR;
+
+function logRenderServer(entry: Record<string, unknown>) {
+    void appendLog(screenshotLogDir, { service: 'screenshot', ...entry });
+}
 
 export function createRenderToken(jobId: string, expiresAt: number) {
     const payload = `${jobId}:${expiresAt}`;
@@ -55,8 +62,20 @@ export async function ensureRenderServer() {
             res.end('Not found');
             return;
         }
+        logRenderServer({
+            event: 'render_request_received',
+            method: req.method,
+            path: url.pathname,
+            query: url.searchParams.toString(),
+            remoteAddress: req.socket.remoteAddress
+        });
         const token = url.searchParams.get('token');
         if (!token) {
+            logRenderServer({
+                event: 'render_request_missing_token',
+                path: url.pathname,
+                remoteAddress: req.socket.remoteAddress
+            });
             res.writeHead(400);
             res.end('missing token');
             return;
@@ -65,13 +84,29 @@ export async function ensureRenderServer() {
         try {
             job = verifyRenderToken(token);
         } catch (error) {
+            logRenderServer({
+                event: 'render_request_forbidden',
+                remoteAddress: req.socket.remoteAddress,
+                errorMessage: (error as Error).message
+            });
             res.writeHead(403);
             res.end(`forbidden: ${(error as Error).message}`);
             return;
         }
 
+        logRenderServer({
+            event: 'render_job_verified',
+            jobId: job.id,
+            matchId: job.matchId
+        });
+
         if (!job.viewModel) {
             res.writeHead(500);
+            logRenderServer({
+                event: 'render_request_missing_view',
+                jobId: job.id,
+                matchId: job.matchId
+            });
             res.end('job missing view');
             return;
         }
@@ -79,14 +114,32 @@ export async function ensureRenderServer() {
         const html = renderHtml(job.viewModel);
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         res.end(html);
+        logRenderServer({
+            event: 'render_response_served',
+            jobId: job.id,
+            matchId: job.matchId
+        });
     });
 
     await new Promise<void>((resolve, reject) => {
         server?.listen(env.GRIMOIRE_RENDER_PORT, () => {
             serverInitialized = true;
+            logRenderServer({
+                event: 'server_started',
+                port: env.GRIMOIRE_RENDER_PORT
+            });
             resolve();
         });
-        server?.on('error', (error) => reject(error));
+        server?.once('close', () => {
+            logRenderServer({ event: 'server_shutdown' });
+        });
+        server?.on('error', (error) => {
+            logRenderServer({
+                event: 'server_error',
+                errorMessage: (error as Error).message
+            });
+            reject(error);
+        });
     });
 }
 

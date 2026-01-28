@@ -5,6 +5,10 @@ import mongoose from 'mongoose';
 import { createActor } from 'xstate';
 import { Server, type ServerOptions, type Socket } from 'socket.io';
 
+import { env } from '@/env';
+import { appendLog } from '../logging/diskLogger';
+import { instrumentXStateActor } from '../logging/xstateLogger';
+import { summarizePayload } from '../logging/logUtils';
 import { roomActors } from '../roomService';
 import { rehydrateAllRooms } from '../rehydrateRooms';
 import { getRoomSummaries } from './roomList';
@@ -61,6 +65,12 @@ function broadcast(msg: unknown) {
     if (candidate?.type === 'ROOM_SNAPSHOT' && typeof candidate.roomId === 'string') {
         broadcastToRoom(candidate.roomId, candidate);
     }
+}
+
+const socketLogDir = env.SOCKET_LOG_DIR;
+
+function logSocketIoActivity(entry: Record<string, unknown>) {
+    void appendLog(socketLogDir, { service: 'socket.io', ...entry });
 }
 
 async function sendRoomsList(socket: Socket, requestId?: string) {
@@ -171,6 +181,13 @@ function handleIncomingMessage(socket: Socket, sessionService: ReturnType<typeof
 function setupConnection(socket: Socket) {
     connectedClients.add(socket);
 
+    logSocketIoActivity({
+        event: 'client_connected',
+        socketId: socket.id,
+        namespace: socket.nsp?.name,
+        remoteAddress: socket.handshake.address
+    });
+
     const sessionService = createActor(SessionMachine, {
         input: {
             ws: socket,
@@ -183,6 +200,14 @@ function setupConnection(socket: Socket) {
             send: (msg: OutgoingMessage) => socket.emit('message', msg)
         }
     });
+
+    instrumentXStateActor(sessionService, {
+        logDir: env.XSTATE_LOG_DIR,
+        machineName: 'SessionMachine',
+        machineId: socket.id,
+        serviceName: 'xstate-session'
+    });
+
     sessionService.start();
 
     const sessionSubscription = sessionService.subscribe((state) => {
@@ -197,6 +222,36 @@ function setupConnection(socket: Socket) {
 
     const handleMessage = handleIncomingMessage(socket, sessionService);
 
+    const emitProxy = socket.emit.bind(socket);
+    const socketWithEmit = socket as Socket & { emit: typeof socket.emit };
+    socketWithEmit.emit = function (event, ...args) {
+        if (event !== 'disconnect' && event !== 'error') {
+            const payload =
+                args.length === 1 ? args[0] : args.length > 1 ? args : undefined;
+            logSocketIoActivity({
+                event: 'message_sent',
+                socketId: socket.id,
+                namespace: socket.nsp?.name,
+                eventName: event,
+                payloadSummary: summarizePayload(payload, 512)
+            });
+        }
+        return emitProxy(event, ...args);
+    };
+
+    socket.onAny((eventName, ...args) => {
+        if (eventName === 'disconnect' || eventName === 'error') return;
+        const payload =
+            args.length === 1 ? args[0] : args.length > 1 ? args : undefined;
+        logSocketIoActivity({
+            event: 'message_received',
+            socketId: socket.id,
+            namespace: socket.nsp?.name,
+            eventName,
+            payloadSummary: summarizePayload(payload, 512)
+        });
+    });
+
     let cleanedUp = false;
     const teardown = () => {
         if (cleanedUp) return;
@@ -206,13 +261,35 @@ function setupConnection(socket: Socket) {
         unsubscribeAll(socket);
         connectedClients.delete(socket);
         socket.off('message', handleMessage);
-        socket.off('disconnect', teardown);
-        socket.off('error', teardown);
+        socket.off('disconnect', handleDisconnect);
+        socket.off('error', handleError);
     };
 
+    function handleDisconnect(reason?: string) {
+        logSocketIoActivity({
+            event: 'client_disconnected',
+            socketId: socket.id,
+            namespace: socket.nsp?.name,
+            remoteAddress: socket.handshake.address,
+            reason
+        });
+        teardown();
+    }
+
+    function handleError(error?: Error) {
+        logSocketIoActivity({
+            event: 'client_error',
+            socketId: socket.id,
+            namespace: socket.nsp?.name,
+            remoteAddress: socket.handshake.address,
+            errorMessage: error?.message
+        });
+        teardown();
+    }
+
     socket.on('message', handleMessage);
-    socket.on('disconnect', teardown);
-    socket.on('error', teardown);
+    socket.on('disconnect', handleDisconnect);
+    socket.on('error', handleError);
 }
 
 export type AttachSocketIoOptions = {

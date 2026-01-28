@@ -1,6 +1,7 @@
 // src/schemas/aliases/index.ts
 
 import { zPassword } from './zPassword';
+import { zPasswordHash } from './zPasswordHash';
 import { zVersion } from './zVersion';
 import { zTimestamp } from './zTimestamp';
 import { zEmail } from './zEmail';
@@ -48,6 +49,7 @@ const aliases = {
     gameMemberId: z.string('Must be a UUID'),
     name: zName,
     password: zPassword,
+    passwordHash: zPasswordHash,
     pcPlayerCount: zPCPlayerCount,
     pcTraverCount: zPCTravelerCount,
     sessionId: z.string('Must be a UUID'),

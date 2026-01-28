@@ -7,7 +7,7 @@ import { zAuthedUser } from './AuthedUser';
 
 export const zUser = z.object({
     ...zAuthedUser.shape,
-    passwordHash: aliases.password
+    passwordHash: aliases.passwordHash
 });
 
 export type User = z.infer<typeof zUser>;
@@ -26,7 +26,7 @@ const userSchema = new Schema<User>(
             default: ['user']
         },
         penaltyUntil: { type: Date, default: null },
-        passwordHash: { type: String, required: true, minlength: 8, maxlength: 64 }
+        passwordHash: { type: String, required: true, minlength: 8, maxlength: 512 }
     },
     {
         timestamps: true,

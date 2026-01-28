@@ -31,7 +31,11 @@ export const loginServerFn = createServerFn({
         if (!user) {
             return unauthorized('Could not find user', { email });
         }
-        const ok = await verifyPassword(password, user.passwordHash);
+        const ok = await verifyPassword(password, user.passwordHash, {
+            onUpgrade(newHash) {
+                return UserModel.updateOne({ _id: user._id }, { passwordHash: newHash }).exec();
+            }
+        });
         if (!ok) {
             return unauthorized('invalid credentials', { email });
         }

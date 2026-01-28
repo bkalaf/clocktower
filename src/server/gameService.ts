@@ -1,9 +1,11 @@
 // src/server/gameService.ts
 import { randomUUID } from 'crypto';
 import { createActor, type ActorRefFrom } from 'xstate';
+import { env } from '@/env';
 import { publish } from '@/server/_authed.rooms.index.tsx/publish';
 import { $keys } from '@/keys';
 import { GameMachine, type GameEvents, type GameMachineWsEvent } from '@/server/machines/GameMachine';
+import { instrumentXStateActor } from '@/server/logging/xstateLogger';
 import { AppEvents } from '@/types/game';
 
 const actors = new Map<string, ActorRefFrom<typeof GameMachine>>();
@@ -69,6 +71,13 @@ export function startGameMachine(args: StartGameMachineArgs) {
                 }
             }
         }
+    });
+
+    instrumentXStateActor(actor, {
+        logDir: env.XSTATE_LOG_DIR,
+        machineName: 'GameMachine',
+        machineId: args.matchId,
+        serviceName: 'xstate'
     });
 
     actor.subscribe((state) => {

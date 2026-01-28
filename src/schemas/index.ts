@@ -51,7 +51,7 @@ export const zCreateUserInput = z.object({
     _id: aliases.userId,
     name: aliases.name,
     email: aliases.email,
-    passwordHash: aliases.password,
+    passwordHash: aliases.passwordHash,
     roles: z.array(enums.globalRoles)
 });
 
