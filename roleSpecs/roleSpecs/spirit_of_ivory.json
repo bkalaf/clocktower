@@ -20,6 +20,18 @@
       "evidence": [
         "become evil (text)"
       ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_ADD_THE_SPIRIT_OF_IVORY_TOKEN_AND_THEIR",
+      "payload": {
+        "token": "Add the Spirit of Ivory token and their",
+        "description": "Add the Spirit of Ivory token and their reminder token is marked during setup."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "Add the Spirit of Ivory token and their reminder token"
+      ]
     }
   ],
   "nightOrderSteps": [],

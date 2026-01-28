@@ -32,7 +32,7 @@
   "activeAbilities": [
     {
       "kind": "day_claim",
-      "usage": "once_per_game",
+      "usage": "each_day",
       "description": "Once per game, during the day, privately ask the Storyteller any yes/no question.",
       "resolution": {
         "stKind": "RESOLVE/artist/action",
@@ -41,10 +41,7 @@
       },
       "evidence": [
         "during the day (text)"
-      ],
-      "spend": {
-        "marksNoAbilityEffect": true
-      }
+      ]
     }
   ],
   "jinxes": [],

@@ -24,7 +24,16 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "put the Huntsman to sleep (text)",
+        "put the Damsel to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [
     {
       "kind": "GLOBAL_RULE",
@@ -39,7 +48,7 @@
   "activeAbilities": [
     {
       "kind": "day_claim",
-      "usage": "once_per_game",
+      "usage": "each_day",
       "description": "Once per game, at night, choose a living player: the Damsel, if chosen, becomes a not-in-play Townsfolk. [+the Damsel]",
       "resolution": {
         "stKind": "RESOLVE/huntsman/action",
@@ -57,9 +66,6 @@
           "targetCount": 1,
           "description": "Choose a player"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],
@@ -85,9 +91,20 @@
     "INFO/huntsman",
     "RESOLVE/huntsman/action",
     "RULES/huntsman_global_rule",
-    "WINCHECK/huntsman"
+    "WINCHECK/huntsman",
+    "TRIGGER/huntsman/MOMENT_PUT_TO_SLEEP"
   ],
   "todos": [
     "Storyteller discretion noted near \"storyteller chooses\"."
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "put the Huntsman to sleep (text)",
+        "put the Damsel to sleep (text)"
+      ]
+    }
   ]
 }

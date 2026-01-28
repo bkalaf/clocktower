@@ -1,5 +1,5 @@
 {
-  "roleKey": "fortune_teller",
+  "roleKey": "fortuneteller",
   "title": "Fortune Teller",
   "category": "townsfolk",
   "editionTags": [
@@ -14,7 +14,44 @@
     "The Fortune Teller chooses an alive Butler and a dead Imp, and learns a 'yes'.",
     "The Fortune Teller chooses themselves and a Saint. The Saint is the Red Herring. The Fortune Teller learns a 'yes'."
   ],
-  "setupModifications": [],
+  "setupModifications": [
+    {
+      "kind": "START_KNOWING",
+      "recipients": "self",
+      "payload": {
+        "detail": "Start knowledge inferred from description"
+      },
+      "reason": "Start knowledge phrases detected",
+      "evidence": [
+        "fortuneteller start knowledge inferred (forced detail)"
+      ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_RED_HERRING",
+      "payload": {
+        "token": "RED HERRING",
+        "placement": "any good character",
+        "description": "Place the RED HERRING reminder token by any good character."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "'s RED HERRING reminder token by any good character token"
+      ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "MARKER_PERSISTENCE",
+      "payload": {
+        "description": "The marker stays on the same player for the entire game, even if the storyteller source dies.",
+        "duration": "permanent"
+      },
+      "reason": "Permanent marker phrase detected",
+      "evidence": [
+        "same player throughout the entire game (text)"
+      ]
+    }
+  ],
   "nightOrderSteps": [
     {
       "when": "firstNight",
@@ -24,9 +61,25 @@
         "each night (text)",
         "first night (text)"
       ]
+    },
+    {
+      "when": "everyNight",
+      "blocksNight": true,
+      "description": "Role flagged as acting at night via Trouble Brewing facts.",
+      "evidence": [
+        "fortuneteller listed as night action (fact list)"
+      ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Fortune Teller to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [
     {
       "kind": "REGISTRATION_MODIFIER",
@@ -46,9 +99,9 @@
       "usage": "each_night",
       "description": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
       "resolution": {
-        "stKind": "RESOLVE/fortune_teller/action",
-        "description": "Resolve fortune_teller night action",
-        "effectType": "applyEffect"
+        "stKind": "RESOLVE/fortuneteller/action",
+        "description": "Resolve fortuneteller night action",
+        "effectType": "requestInfo"
       },
       "evidence": [
         "each night (text)",
@@ -66,7 +119,7 @@
   "jinxes": [],
   "tags": {
     "isInfoRole": true,
-    "isSetupModifier": false,
+    "isSetupModifier": true,
     "actsAtNight": true,
     "actsByClaim": false,
     "hasRoleSwap": false,
@@ -75,7 +128,21 @@
     "isGlobalRule": false
   },
   "stKinds": [
-    "INFO/fortune_teller",
-    "RESOLVE/fortune_teller/action"
+    "INFO/fortuneteller",
+    "RESOLVE/fortuneteller/action",
+    "TRIGGER/fortuneteller/MOMENT_PUT_TO_SLEEP"
+  ],
+  "factTags": [
+    "makes-choice",
+    "ongoing-info"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Fortune Teller to sleep (text)"
+      ]
+    }
   ]
 }

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UnauthedRouteImport } from './routes/_unauthed'
 import { Route as AuthedRouteImport } from './routes/_authed'
+import { Route as AuthedIndexRouteImport } from './routes/_authed.index'
 import { Route as GamesGameIdRouteImport } from './routes/games/$gameId'
 import { Route as ApiWhoamiRouteImport } from './routes/api/whoami'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
@@ -57,6 +58,11 @@ const UnauthedRoute = UnauthedRouteImport.update({
 const AuthedRoute = AuthedRouteImport.update({
   id: '/_authed',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthedIndexRoute = AuthedIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthedRoute,
 } as any)
 const GamesGameIdRoute = GamesGameIdRouteImport.update({
   id: '/games/$gameId',
@@ -262,7 +268,6 @@ const AuthedRoomsRoomRoomIdIndexRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof UnauthedRouteWithChildren
   '/scripts': typeof AuthedScriptsRouteWithChildren
   '/about': typeof UnauthedAboutRoute
   '/login': typeof UnauthedLoginRoute
@@ -270,6 +275,7 @@ export interface FileRoutesByFullPath {
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/games/$gameId': typeof GamesGameIdRoute
+  '/': typeof AuthedIndexRoute
   '/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
   '/rooms/n': typeof AuthedRoomsNRoute
   '/scripts/n': typeof AuthedScriptsNRoute
@@ -277,9 +283,9 @@ export interface FileRoutesByFullPath {
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
   '/api/dev/grimoire': typeof ApiDevGrimoireRoute
-  '/api/invites/': typeof ApiInvitesIndexRoute
-  '/api/rooms/': typeof ApiRoomsIndexRoute
-  '/api/scripts/': typeof ApiScriptsIndexRoute
+  '/api/invites': typeof ApiInvitesIndexRoute
+  '/api/rooms': typeof ApiRoomsIndexRoute
+  '/api/scripts': typeof ApiScriptsIndexRoute
   '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
   '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
   '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
@@ -298,12 +304,11 @@ export interface FileRoutesByFullPath {
   '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
   '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
   '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
-  '/api/matches/$matchId/': typeof ApiMatchesMatchIdIndexRoute
-  '/api/rooms/$roomId/': typeof ApiRoomsRoomIdIndexRoute
-  '/rooms/$roomId/': typeof AuthedRoomsRoomRoomIdIndexRoute
+  '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute
+  '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute
+  '/rooms/$roomId': typeof AuthedRoomsRoomRoomIdIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof UnauthedRouteWithChildren
   '/scripts': typeof AuthedScriptsRouteWithChildren
   '/about': typeof UnauthedAboutRoute
   '/login': typeof UnauthedLoginRoute
@@ -311,6 +316,7 @@ export interface FileRoutesByTo {
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/games/$gameId': typeof GamesGameIdRoute
+  '/': typeof AuthedIndexRoute
   '/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
   '/rooms/n': typeof AuthedRoomsNRoute
   '/scripts/n': typeof AuthedScriptsNRoute
@@ -354,6 +360,7 @@ export interface FileRoutesById {
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
   '/games/$gameId': typeof GamesGameIdRoute
+  '/_authed/': typeof AuthedIndexRoute
   '/_authed/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
   '/_authed/rooms/n': typeof AuthedRoomsNRoute
   '/_authed/scripts/n': typeof AuthedScriptsNRoute
@@ -389,7 +396,6 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
     | '/scripts'
     | '/about'
     | '/login'
@@ -397,6 +403,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/whoami'
     | '/games/$gameId'
+    | '/'
     | '/auth/forgot-password'
     | '/rooms/n'
     | '/scripts/n'
@@ -404,9 +411,9 @@ export interface FileRouteTypes {
     | '/api/auth/logout'
     | '/api/auth/register'
     | '/api/dev/grimoire'
-    | '/api/invites/'
-    | '/api/rooms/'
-    | '/api/scripts/'
+    | '/api/invites'
+    | '/api/rooms'
+    | '/api/scripts'
     | '/api/games/$gameId/host'
     | '/api/games/$gameId/ready'
     | '/api/games/$gameId/start-setup'
@@ -425,12 +432,11 @@ export interface FileRouteTypes {
     | '/api/rooms/$roomId/remove-player'
     | '/api/rooms/$roomId/script'
     | '/api/rooms/$roomId/start-match'
-    | '/api/matches/$matchId/'
-    | '/api/rooms/$roomId/'
-    | '/rooms/$roomId/'
+    | '/api/matches/$matchId'
+    | '/api/rooms/$roomId'
+    | '/rooms/$roomId'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/scripts'
     | '/about'
     | '/login'
@@ -438,6 +444,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/whoami'
     | '/games/$gameId'
+    | '/'
     | '/auth/forgot-password'
     | '/rooms/n'
     | '/scripts/n'
@@ -480,6 +487,7 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/whoami'
     | '/games/$gameId'
+    | '/_authed/'
     | '/_authed/auth/forgot-password'
     | '/_authed/rooms/n'
     | '/_authed/scripts/n'
@@ -553,16 +561,23 @@ declare module '@tanstack/react-router' {
     '/_unauthed': {
       id: '/_unauthed'
       path: ''
-      fullPath: '/'
+      fullPath: ''
       preLoaderRoute: typeof UnauthedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authed': {
       id: '/_authed'
       path: ''
-      fullPath: '/'
+      fullPath: ''
       preLoaderRoute: typeof AuthedRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authed/': {
+      id: '/_authed/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthedIndexRouteImport
+      parentRoute: typeof AuthedRoute
     }
     '/games/$gameId': {
       id: '/games/$gameId'
@@ -616,21 +631,21 @@ declare module '@tanstack/react-router' {
     '/api/scripts/': {
       id: '/api/scripts/'
       path: '/api/scripts'
-      fullPath: '/api/scripts/'
+      fullPath: '/api/scripts'
       preLoaderRoute: typeof ApiScriptsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/rooms/': {
       id: '/api/rooms/'
       path: '/api/rooms'
-      fullPath: '/api/rooms/'
+      fullPath: '/api/rooms'
       preLoaderRoute: typeof ApiRoomsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/invites/': {
       id: '/api/invites/'
       path: '/api/invites'
-      fullPath: '/api/invites/'
+      fullPath: '/api/invites'
       preLoaderRoute: typeof ApiInvitesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -686,14 +701,14 @@ declare module '@tanstack/react-router' {
     '/api/rooms/$roomId/': {
       id: '/api/rooms/$roomId/'
       path: '/api/rooms/$roomId'
-      fullPath: '/api/rooms/$roomId/'
+      fullPath: '/api/rooms/$roomId'
       preLoaderRoute: typeof ApiRoomsRoomIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/matches/$matchId/': {
       id: '/api/matches/$matchId/'
       path: '/api/matches/$matchId'
-      fullPath: '/api/matches/$matchId/'
+      fullPath: '/api/matches/$matchId'
       preLoaderRoute: typeof ApiMatchesMatchIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -826,7 +841,7 @@ declare module '@tanstack/react-router' {
     '/_authed/rooms/_room/$roomId/': {
       id: '/_authed/rooms/_room/$roomId/'
       path: '/rooms/$roomId'
-      fullPath: '/rooms/$roomId/'
+      fullPath: '/rooms/$roomId'
       preLoaderRoute: typeof AuthedRoomsRoomRoomIdIndexRouteImport
       parentRoute: typeof AuthedRoute
     }
@@ -847,6 +862,7 @@ const AuthedScriptsRouteWithChildren = AuthedScriptsRoute._addFileChildren(
 
 interface AuthedRouteChildren {
   AuthedScriptsRoute: typeof AuthedScriptsRouteWithChildren
+  AuthedIndexRoute: typeof AuthedIndexRoute
   AuthedAuthForgotPasswordRoute: typeof AuthedAuthForgotPasswordRoute
   AuthedRoomsNRoute: typeof AuthedRoomsNRoute
   AuthedRoomsRoomRoomIdIndexRoute: typeof AuthedRoomsRoomRoomIdIndexRoute
@@ -854,6 +870,7 @@ interface AuthedRouteChildren {
 
 const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedScriptsRoute: AuthedScriptsRouteWithChildren,
+  AuthedIndexRoute: AuthedIndexRoute,
   AuthedAuthForgotPasswordRoute: AuthedAuthForgotPasswordRoute,
   AuthedRoomsNRoute: AuthedRoomsNRoute,
   AuthedRoomsRoomRoomIdIndexRoute: AuthedRoomsRoomRoomIdIndexRoute,
@@ -915,3 +932,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

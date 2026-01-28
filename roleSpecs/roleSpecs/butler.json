@@ -13,7 +13,20 @@
     "A nomination is in progress. The Butler and their Master both have their hands raised to vote. As the Storyteller is counting votes, the Master lowers their hand at the last second. The Butler must lower their hand immediately.",
     "The Butler is dead. Because dead players have no ability, the Butler may vote with their vote token at any time."
   ],
-  "setupModifications": [],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_MARK_THIS_PLAYER_WITH_THE_MASTER",
+      "payload": {
+        "token": "Mark this player with the MASTER",
+        "description": "Mark this player with the MASTER reminder token is marked during setup."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "Mark this player with the MASTER reminder token"
+      ]
+    }
+  ],
   "nightOrderSteps": [
     {
       "when": "everyNight",
@@ -24,7 +37,15 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Butler to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
@@ -64,7 +85,7 @@
   ],
   "tags": {
     "isInfoRole": false,
-    "isSetupModifier": false,
+    "isSetupModifier": true,
     "actsAtNight": true,
     "actsByClaim": false,
     "hasRoleSwap": false,
@@ -73,10 +94,20 @@
     "isGlobalRule": false
   },
   "stKinds": [
-    "RESOLVE/butler/action"
+    "RESOLVE/butler/action",
+    "TRIGGER/butler/MOMENT_PUT_TO_SLEEP"
   ],
   "factTags": [
     "makes-choice",
     "voting-restriction"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Butler to sleep (text)"
+      ]
+    }
   ]
 }

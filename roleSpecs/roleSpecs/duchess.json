@@ -13,7 +13,15 @@
   ],
   "setupModifications": [],
   "nightOrderSteps": [],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the woken player to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [
     {
       "kind": "INFO_DISTORTION",
@@ -62,6 +70,40 @@
   },
   "stKinds": [
     "INFO/duchess",
-    "RESOLVE/duchess/action"
+    "RESOLVE/duchess/action",
+    "TRIGGER/duchess/MOMENT_PUT_TO_SLEEP"
+  ],
+  "nightCardConstraints": [
+    {
+      "cards": [
+        {
+          "type": "ZERO",
+          "equals": "0"
+        },
+        {
+          "type": "ONE",
+          "equals": "1"
+        },
+        {
+          "type": "TWO",
+          "equals": "2"
+        }
+      ],
+      "method": "fingers",
+      "scope": "equaling the number of evil players who are marked either VISITOR or FALSE INFO",
+      "evidence": [
+        "Show the woken player the Duchess token. If the woken player is marked VISITOR, show them fingers (0, 1, 2, or 3) equaling the number of evil players who are marked either VISITOR or FALSE INFO. (text)"
+      ],
+      "alignment": "evil"
+    }
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the woken player to sleep (text)"
+      ]
+    }
   ]
 }

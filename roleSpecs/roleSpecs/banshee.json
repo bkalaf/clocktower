@@ -13,7 +13,20 @@
     "The Banshee is poisoned. The Ojo kills the Banshee. Nobody learns that the Banshee has died, and for the rest of the game, the Banshee may not nominate, and has just one vote.",
     "The Lycanthrope kills the Banshee. The Banshee does not gain their additional powers and is not announced."
   ],
-  "setupModifications": [],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_PLACE_THE_HAS_ABILITY",
+      "payload": {
+        "token": "place the HAS ABILITY",
+        "description": "place the HAS ABILITY reminder token is marked during setup."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "place the HAS ABILITY reminder token"
+      ]
+    }
+  ],
   "nightOrderSteps": [],
   "onMoments": [],
   "passiveAbilities": [],
@@ -40,7 +53,7 @@
   ],
   "tags": {
     "isInfoRole": true,
-    "isSetupModifier": false,
+    "isSetupModifier": true,
     "actsAtNight": false,
     "actsByClaim": false,
     "hasRoleSwap": false,

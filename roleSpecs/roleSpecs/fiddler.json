@@ -30,7 +30,7 @@
   "activeAbilities": [
     {
       "kind": "day_claim",
-      "usage": "once_per_game",
+      "usage": "each_day",
       "description": "Once per game, the Demon secretly chooses an opposing player: all players choose which of these 2 players win.",
       "resolution": {
         "stKind": "RESOLVE/fiddler/action",
@@ -47,9 +47,6 @@
           "targetCount": 1,
           "description": "Choose a player"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],

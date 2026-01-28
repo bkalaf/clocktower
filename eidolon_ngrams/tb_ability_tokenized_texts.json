@@ -62,7 +62,7 @@
         "howToRun": "each night, wake the empath. show them fingers (0, 1, or 2) equaling the number of evil players neighbouring the empath. put the empath to sleep."
     },
     {
-        "roleKey": "fortune_teller",
+        "roleKey": "fortuneteller",
         "title": "Fortune Teller",
         "originalText": "each night, choose 2 players: you learn if either is a demon. there is a good player that register as a demon to you.",
         "normalizedText": "each night, choose 2 players: you learn if either is a demon. there is a good player that register as a demon to you.",

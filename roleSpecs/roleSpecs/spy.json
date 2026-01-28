@@ -37,7 +37,22 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_REGISTRATION_CHECKED",
+      "description": "Storyteller decides how this character registers during setup.",
+      "evidence": [
+        "misregistration fact list (fact)"
+      ]
+    },
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Spy to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [
     {
       "kind": "REGISTRATION_MODIFIER",
@@ -140,12 +155,31 @@
   },
   "stKinds": [
     "INFO/spy",
-    "RESOLVE/spy/action"
+    "RESOLVE/spy/action",
+    "TRIGGER/spy/MOMENT_REGISTRATION_CHECKED",
+    "TRIGGER/spy/MOMENT_PUT_TO_SLEEP"
   ],
   "todos": [
     "Storyteller discretion noted near \"storyteller chooses\"."
   ],
   "factTags": [
-    "misregistration"
+    "misregistration",
+    "persists-through-death"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Spy to sleep (text)"
+      ]
+    },
+    {
+      "key": "GRIMOIRE_VIEW",
+      "description": "The character is shown the Grimoire during their wake.",
+      "evidence": [
+        "show them the Grimoire (text)"
+      ]
+    }
   ]
 }

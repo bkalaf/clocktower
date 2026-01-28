@@ -13,7 +13,21 @@
     "The Drunk, who thinks they are the Chef, nominates the Virgin. The Drunk remains alive, and the Virgin loses their ability. Players may now vote on whether or not to execute the Virgin. (This happens because the Drunk is not a Townsfolk.)",
     "A dead player nominates the Virgin. The dead, however, cannot nominate. The Storyteller declares that the nomination does not count. The Virgin does not lose their ability."
   ],
-  "setupModifications": [],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_NO_ABILITY",
+      "payload": {
+        "token": "NO ABILITY",
+        "placement": "the Virgin",
+        "description": "Place the NO ABILITY reminder token by the Virgin."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "'s NO ABILITY reminder token by the Virgin token"
+      ]
+    }
+  ],
   "nightOrderSteps": [],
   "onMoments": [
     {
@@ -38,8 +52,7 @@
     "isGlobalRule": false
   },
   "stKinds": [
-    "TRIGGER/virgin/MOMENT_ATTEMPTED_EXECUTION",
-    "TRIGGER/virgin/MOMENT_REGISTRATION_CHECKED"
+    "TRIGGER/virgin/MOMENT_ATTEMPTED_EXECUTION"
   ],
   "todos": [
     "Confirm whether the Virgin needs a separate night order step when the Storyteller enforces the penalty."

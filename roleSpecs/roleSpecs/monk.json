@@ -13,7 +13,45 @@
     "The Monk protects the Mayor, and the Imp attacks the Mayor. The Mayor's \"another player dies\" ability does not trigger, because the Mayor is safe from the Imp. Nobody dies tonight.",
     "The Monk protects the Imp . The Imp chooses to kill themself tonight, but nothing happens. The Imp stays alive and a new Imp is not created."
   ],
-  "setupModifications": [],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_SAFE",
+      "payload": {
+        "token": "SAFE",
+        "placement": "the chosen player's character",
+        "description": "Place the SAFE reminder token by the chosen player's character."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "'s SAFE reminder token by the chosen player's character token"
+      ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_DEAD",
+      "payload": {
+        "token": "DEAD",
+        "description": "DEAD reminder token is marked during setup."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "'s DEAD reminder token"
+      ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_REMOVE_THE_SAFE",
+      "payload": {
+        "token": "remove the SAFE",
+        "description": "remove the SAFE reminder token is marked during setup."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "remove the SAFE reminder token"
+      ]
+    }
+  ],
   "nightOrderSteps": [
     {
       "when": "otherNights",
@@ -47,6 +85,13 @@
       "description": "Rules change depending on how many players are alive.",
       "evidence": [
         "alive conditional list (fact)"
+      ]
+    },
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Monk to sleep (text)"
       ]
     }
   ],
@@ -101,7 +146,7 @@
   ],
   "tags": {
     "isInfoRole": false,
-    "isSetupModifier": false,
+    "isSetupModifier": true,
     "actsAtNight": true,
     "actsByClaim": false,
     "hasRoleSwap": false,
@@ -112,12 +157,22 @@
   "stKinds": [
     "RESOLVE/monk/action",
     "TRIGGER/monk/MOMENT_DEMON_DEATH_RESOLVED",
-    "TRIGGER/monk/MOMENT_PLAYERS_ALIVE_CHANGED"
+    "TRIGGER/monk/MOMENT_PLAYERS_ALIVE_CHANGED",
+    "TRIGGER/monk/MOMENT_PUT_TO_SLEEP"
   ],
   "factTags": [
     "alive-cond",
     "demon-death-check",
     "makes-choice",
     "protection"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Monk to sleep (text)"
+      ]
+    }
   ]
 }

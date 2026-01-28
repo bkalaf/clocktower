@@ -47,7 +47,7 @@
   "activeAbilities": [
     {
       "kind": "night_action",
-      "usage": "once_per_game",
+      "usage": "each_night",
       "description": "Each night, until dusk, 1) a player becomes sober, healthy & gets true info, or 2) their ability works twice. They learn which.",
       "resolution": {
         "stKind": "RESOLVE/barista/action",
@@ -64,9 +64,6 @@
           "targetCount": 1,
           "description": "Choose a player"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],

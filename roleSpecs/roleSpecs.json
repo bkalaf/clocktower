@@ -27,7 +27,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Acrobat to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "REGISTRATION_MODIFIER",
@@ -89,7 +97,17 @@
     },
     "stKinds": [
       "INFO/acrobat",
-      "RESOLVE/acrobat/action"
+      "RESOLVE/acrobat/action",
+      "TRIGGER/acrobat/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Acrobat to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -120,7 +138,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Al-Hadikhia to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -179,10 +205,20 @@
     },
     "stKinds": [
       "INFO/al_hadikhia",
-      "RESOLVE/al_hadikhia/action"
+      "RESOLVE/al_hadikhia/action",
+      "TRIGGER/al_hadikhia/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"you may need to\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Al-Hadikhia to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -212,7 +248,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Alchemist to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "REGISTRATION_MODIFIER",
@@ -238,7 +282,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "first_night",
+        "usage": "each_day",
         "description": "You have a Minion ability. When using this, the Storyteller may prompt you to choose differently.",
         "resolution": {
           "stKind": "RESOLVE/alchemist/action",
@@ -324,10 +368,20 @@
       "INFO/alchemist",
       "RESOLVE/alchemist/action",
       "RULES/alchemist_global_rule",
-      "WINCHECK/alchemist"
+      "WINCHECK/alchemist",
+      "TRIGGER/alchemist/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller may\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Alchemist to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -437,7 +491,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "first_night",
+        "usage": "each_day",
         "description": "You do not know what your ability is. Each day, privately guess what it is: you learn how accurate you are.",
         "resolution": {
           "stKind": "RESOLVE/amnesiac/action",
@@ -622,7 +676,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "once_per_game",
+        "usage": "each_day",
         "description": "Once per game, during the day, privately ask the Storyteller any yes/no question.",
         "resolution": {
           "stKind": "RESOLVE/artist/action",
@@ -631,10 +685,7 @@
         },
         "evidence": [
           "during the day (text)"
-        ],
-        "spend": {
-          "marksNoAbilityEffect": true
-        }
+        ]
       }
     ],
     "jinxes": [],
@@ -681,12 +732,20 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Assassin to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "each_night",
         "description": "Once per game, at night*, choose a player: they die, even if for some reason they could not.",
         "resolution": {
           "stKind": "RESOLVE/assassin/action",
@@ -704,9 +763,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -722,7 +778,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/assassin/action"
+      "RESOLVE/assassin/action",
+      "TRIGGER/assassin/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Assassin to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -748,6 +814,18 @@
         "reason": "Masking phrases detected",
         "evidence": [
           "hidden (text)"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_USE_EVIL",
+        "payload": {
+          "token": "Use evil",
+          "description": "Use evil reminder token is marked during setup."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "Use evil reminder token"
         ]
       }
     ],
@@ -830,7 +908,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Balloonist to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -875,11 +961,21 @@
     },
     "stKinds": [
       "INFO/balloonist",
-      "RESOLVE/balloonist/action"
+      "RESOLVE/balloonist/action",
+      "TRIGGER/balloonist/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller may\".",
       "Storyteller discretion noted near \"storyteller chooses\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Balloonist to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -897,7 +993,20 @@
       "The Banshee is poisoned. The Ojo kills the Banshee. Nobody learns that the Banshee has died, and for the rest of the game, the Banshee may not nominate, and has just one vote.",
       "The Lycanthrope kills the Banshee. The Banshee does not gain their additional powers and is not announced."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_PLACE_THE_HAS_ABILITY",
+        "payload": {
+          "token": "place the HAS ABILITY",
+          "description": "place the HAS ABILITY reminder token is marked during setup."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "place the HAS ABILITY reminder token"
+        ]
+      }
+    ],
     "nightOrderSteps": [],
     "onMoments": [],
     "passiveAbilities": [],
@@ -924,7 +1033,7 @@
     ],
     "tags": {
       "isInfoRole": true,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": false,
       "actsByClaim": false,
       "hasRoleSwap": false,
@@ -975,6 +1084,13 @@
           "if you die (text)",
           "if you died (text)"
         ]
+      },
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Demon to sleep (text)"
+        ]
       }
     ],
     "passiveAbilities": [],
@@ -1017,10 +1133,20 @@
     "stKinds": [
       "INFO/barber",
       "RESOLVE/barber/action",
-      "TRIGGER/barber/MOMENT_DEATH_RESOLVED"
+      "TRIGGER/barber/MOMENT_DEATH_RESOLVED",
+      "TRIGGER/barber/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Demon to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -1072,7 +1198,7 @@
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "each_night",
         "description": "Each night, until dusk, 1) a player becomes sober, healthy & gets true info, or 2) their ability works twice. They learn which.",
         "resolution": {
           "stKind": "RESOLVE/barista/action",
@@ -1089,9 +1215,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -1461,12 +1584,20 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Bone Collector to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "once_per_game",
+        "usage": "each_day",
         "description": "Once per game, at night*, choose a dead player: they regain their ability until dusk.",
         "resolution": {
           "stKind": "RESOLVE/bone_collector/action",
@@ -1485,9 +1616,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -1504,7 +1632,17 @@
     },
     "stKinds": [
       "INFO/bone_collector",
-      "RESOLVE/bone_collector/action"
+      "RESOLVE/bone_collector/action",
+      "TRIGGER/bone_collector/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Bone Collector to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -1634,7 +1772,16 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Bounty Hunter to sleep (text)",
+          "put the Bounty Hunter to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [
@@ -1662,11 +1809,22 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/bounty_hunter"
+      "INFO/bounty_hunter",
+      "TRIGGER/bounty_hunter/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller may\".",
       "Storyteller discretion noted near \"the storyteller decides\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Bounty Hunter to sleep (text)",
+          "put the Bounty Hunter to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -1739,7 +1897,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Bureaucrat to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -1775,7 +1941,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/bureaucrat/action"
+      "RESOLVE/bureaucrat/action",
+      "TRIGGER/bureaucrat/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Bureaucrat to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -1847,7 +2023,20 @@
       "A nomination is in progress. The Butler and their Master both have their hands raised to vote. As the Storyteller is counting votes, the Master lowers their hand at the last second. The Butler must lower their hand immediately.",
       "The Butler is dead. Because dead players have no ability, the Butler may vote with their vote token at any time."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_MARK_THIS_PLAYER_WITH_THE_MASTER",
+        "payload": {
+          "token": "Mark this player with the MASTER",
+          "description": "Mark this player with the MASTER reminder token is marked during setup."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "Mark this player with the MASTER reminder token"
+        ]
+      }
+    ],
     "nightOrderSteps": [
       {
         "when": "everyNight",
@@ -1858,7 +2047,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Butler to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -1898,7 +2095,7 @@
     ],
     "tags": {
       "isInfoRole": false,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": true,
       "actsByClaim": false,
       "hasRoleSwap": false,
@@ -1907,11 +2104,21 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/butler/action"
+      "RESOLVE/butler/action",
+      "TRIGGER/butler/MOMENT_PUT_TO_SLEEP"
     ],
     "factTags": [
       "makes-choice",
       "voting-restriction"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Butler to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -2061,6 +2268,9 @@
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller may\"."
+    ],
+    "factTags": [
+      "persists-through-death"
     ]
   },
   {
@@ -2089,7 +2299,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Cerenovus to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -2134,10 +2352,20 @@
     },
     "stKinds": [
       "INFO/cerenovus",
-      "RESOLVE/cerenovus/action"
+      "RESOLVE/cerenovus/action",
+      "TRIGGER/cerenovus/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"if you feel\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Cerenovus to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -2168,7 +2396,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Chambermaid to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -2214,7 +2450,40 @@
     },
     "stKinds": [
       "INFO/chambermaid",
-      "RESOLVE/chambermaid/action"
+      "RESOLVE/chambermaid/action",
+      "TRIGGER/chambermaid/MOMENT_PUT_TO_SLEEP"
+    ],
+    "nightCardConstraints": [
+      {
+        "cards": [
+          {
+            "type": "ZERO",
+            "equals": "0"
+          },
+          {
+            "type": "ONE",
+            "equals": "1"
+          },
+          {
+            "type": "TWO",
+            "equals": "2"
+          }
+        ],
+        "method": "fingers",
+        "scope": "equaling the number of chosen characters who woke tonight",
+        "evidence": [
+          "Show the Chambermaid fingers (0, 1, or 2) equaling the number of chosen characters who woke tonight. (text)"
+        ]
+      }
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Chambermaid to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -2238,7 +2507,10 @@
         "kind": "START_KNOWING",
         "recipients": "self",
         "payload": {
-          "detail": "Start knowledge inferred from description"
+          "detail": "Counts how many adjacent evil pairs are touching, counting overlaps separately.",
+          "focus": "evil pairs",
+          "targetType": "evil",
+          "pairCount": 2
         },
         "reason": "Start knowledge phrases detected",
         "evidence": [
@@ -2259,10 +2531,10 @@
     ],
     "onMoments": [
       {
-        "moment": "MOMENT_REGISTRATION_CHECKED",
-        "description": "Storyteller validates this character during registration.",
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
         "evidence": [
-          "registration check list (fact)"
+          "Put the Chef to sleep (text)"
         ]
       }
     ],
@@ -2281,10 +2553,43 @@
     },
     "stKinds": [
       "INFO/chef",
-      "TRIGGER/chef/MOMENT_REGISTRATION_CHECKED"
+      "TRIGGER/chef/MOMENT_PUT_TO_SLEEP"
     ],
     "factTags": [
       "registration-check"
+    ],
+    "nightCardConstraints": [
+      {
+        "cards": [
+          {
+            "type": "ZERO",
+            "equals": "0"
+          },
+          {
+            "type": "ONE",
+            "equals": "1"
+          },
+          {
+            "type": "TWO",
+            "equals": "2"
+          }
+        ],
+        "method": "fingers",
+        "scope": "equaling the number of pairs of neighboring evil players",
+        "evidence": [
+          "Show the Chef fingers (0, 1, 2, etc.) equaling the number of pairs of neighboring evil players. (text)"
+        ],
+        "alignment": "evil"
+      }
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Chef to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -2313,7 +2618,16 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Demon to sleep (text)",
+          "put the Choirboy to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -2344,7 +2658,18 @@
     },
     "stKinds": [
       "INFO/choirboy",
-      "RESOLVE/choirboy/action"
+      "RESOLVE/choirboy/action",
+      "TRIGGER/choirboy/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Demon to sleep (text)",
+          "put the Choirboy to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -2377,7 +2702,15 @@
       }
     ],
     "nightOrderSteps": [],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Clockmaker to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [
@@ -2399,7 +2732,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/clockmaker"
+      "INFO/clockmaker",
+      "TRIGGER/clockmaker/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Clockmaker to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -2429,7 +2772,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Courtier to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "GLOBAL_RULE",
@@ -2444,7 +2795,7 @@
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "each_night",
         "description": "Once per game, at night, choose a character: they are drunk for 3 nights & 3 days.",
         "resolution": {
           "stKind": "RESOLVE/courtier/action",
@@ -2461,9 +2812,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -2495,7 +2843,17 @@
       "INFO/courtier",
       "RESOLVE/courtier/action",
       "RULES/courtier_global_rule",
-      "WINCHECK/courtier"
+      "WINCHECK/courtier",
+      "TRIGGER/courtier/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Courtier to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -2524,7 +2882,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Cult Leader to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "GLOBAL_RULE",
@@ -2588,7 +2954,17 @@
     "stKinds": [
       "RESOLVE/cult_leader/action",
       "RULES/cult_leader_global_rule",
-      "WINCHECK/cult_leader"
+      "WINCHECK/cult_leader",
+      "TRIGGER/cult_leader/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Cult Leader to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -2741,7 +3117,7 @@
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "each_night",
         "description": "At least once per game, the Storyteller will make a mistake, correct it, and publicly admit to it.",
         "resolution": {
           "stKind": "RESOLVE/deus_ex_fiasco/action",
@@ -2752,10 +3128,7 @@
           "every night (text)",
           "during the night (text)",
           "at night (text)"
-        ],
-        "spend": {
-          "marksNoAbilityEffect": true
-        }
+        ]
       }
     ],
     "jinxes": [],
@@ -2868,7 +3241,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Devil’s Advocate to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "REGISTRATION_MODIFIER",
@@ -2918,7 +3299,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/devils_advocate/action"
+      "RESOLVE/devils_advocate/action",
+      "TRIGGER/devils_advocate/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Devil’s Advocate to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -2984,7 +3375,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "once_per_game",
+        "usage": "each_day",
         "description": "If 4 or more players live, each living player may publicly choose (once per game) that a player of their own alignment dies.",
         "resolution": {
           "stKind": "RESOLVE/doomsayer/action",
@@ -3001,9 +3392,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -3053,7 +3441,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Dreamer to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -3091,10 +3487,20 @@
     },
     "stKinds": [
       "INFO/dreamer",
-      "RESOLVE/dreamer/action"
+      "RESOLVE/dreamer/action",
+      "TRIGGER/dreamer/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"the storyteller decides\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Dreamer to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -3129,6 +3535,31 @@
           "token does not go in the bag (text)",
           "add a townsfolk character token (text)",
           "put the swapped townsfolk character token in the bag (text)"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_IS_THE_DRUNK",
+        "payload": {
+          "token": "IS THE DRUNK",
+          "description": "IS THE DRUNK reminder token is marked during setup."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s IS THE DRUNK reminder token"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_IS_THE_DRUNK",
+        "payload": {
+          "token": "IS THE DRUNK",
+          "placement": "any Townsfolk character",
+          "description": "Place the IS THE DRUNK reminder token by any Townsfolk character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s IS THE DRUNK reminder token by any Townsfolk character token"
         ]
       }
     ],
@@ -3207,7 +3638,15 @@
     ],
     "setupModifications": [],
     "nightOrderSteps": [],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the woken player to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "INFO_DISTORTION",
@@ -3256,7 +3695,41 @@
     },
     "stKinds": [
       "INFO/duchess",
-      "RESOLVE/duchess/action"
+      "RESOLVE/duchess/action",
+      "TRIGGER/duchess/MOMENT_PUT_TO_SLEEP"
+    ],
+    "nightCardConstraints": [
+      {
+        "cards": [
+          {
+            "type": "ZERO",
+            "equals": "0"
+          },
+          {
+            "type": "ONE",
+            "equals": "1"
+          },
+          {
+            "type": "TWO",
+            "equals": "2"
+          }
+        ],
+        "method": "fingers",
+        "scope": "equaling the number of evil players who are marked either VISITOR or FALSE INFO",
+        "evidence": [
+          "Show the woken player the Duchess token. If the woken player is marked VISITOR, show them fingers (0, 1, 2, or 3) equaling the number of evil players who are marked either VISITOR or FALSE INFO. (text)"
+        ],
+        "alignment": "evil"
+      }
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the woken player to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -3272,7 +3745,22 @@
     "examples": [
       "The Empath neighbours two good players—a Soldier and a Monk . The Empath learns a '0'. \n\n\t\t\t\tThe next day, the Soldier is executed. That night, the Monk is killed by the Imp. The Empath now detects the players sitting next to the Soldier and the Monk, which are a Librarian and an evil . The Empath now learns a '1'.\n\n\t\t\t\tThere are only three players left alive: the Empath, the Imp, and the Baron. No matter who is seated where, the Empath learns a '2'."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "START_KNOWING",
+        "recipients": "self",
+        "payload": {
+          "detail": "Each night you learn how many of your two alive neighbors are evil.",
+          "focus": "neighboring evil",
+          "targetType": "evil",
+          "neighbors": 2
+        },
+        "reason": "Start knowledge phrases detected",
+        "evidence": [
+          "empath start knowledge inferred (forced detail)"
+        ]
+      }
+    ],
     "nightOrderSteps": [
       {
         "when": "everyNight",
@@ -3286,10 +3774,10 @@
     ],
     "onMoments": [
       {
-        "moment": "MOMENT_REGISTRATION_CHECKED",
-        "description": "Storyteller validates this character during registration.",
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
         "evidence": [
-          "registration check list (fact)"
+          "Put the Empath to sleep (text)"
         ]
       }
     ],
@@ -3313,7 +3801,7 @@
     "jinxes": [],
     "tags": {
       "isInfoRole": true,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": true,
       "actsByClaim": false,
       "hasRoleSwap": false,
@@ -3324,11 +3812,44 @@
     "stKinds": [
       "INFO/empath",
       "RESOLVE/empath/action",
-      "TRIGGER/empath/MOMENT_REGISTRATION_CHECKED"
+      "TRIGGER/empath/MOMENT_PUT_TO_SLEEP"
     ],
     "factTags": [
       "ongoing-info",
       "registration-check"
+    ],
+    "nightCardConstraints": [
+      {
+        "cards": [
+          {
+            "type": "ZERO",
+            "equals": "0"
+          },
+          {
+            "type": "ONE",
+            "equals": "1"
+          },
+          {
+            "type": "TWO",
+            "equals": "2"
+          }
+        ],
+        "method": "fingers",
+        "scope": "equaling the number of evil players neighbouring the Empath",
+        "evidence": [
+          "Show them fingers (0, 1, or 2) equaling the number of evil players neighbouring the Empath. (text)"
+        ],
+        "alignment": "evil"
+      }
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Empath to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -3360,12 +3881,20 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Engineer to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "first_night",
         "description": "Once per game, at night, choose which Minions or which Demon is in play.",
         "resolution": {
           "stKind": "RESOLVE/engineer/action",
@@ -3383,9 +3912,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -3415,10 +3941,20 @@
     },
     "stKinds": [
       "INFO/engineer",
-      "RESOLVE/engineer/action"
+      "RESOLVE/engineer/action",
+      "TRIGGER/engineer/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Engineer to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -3542,7 +4078,16 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Exorcist to sleep (text)",
+          "Put the Demon to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -3600,7 +4145,18 @@
     },
     "stKinds": [
       "INFO/exorcist",
-      "RESOLVE/exorcist/action"
+      "RESOLVE/exorcist/action",
+      "TRIGGER/exorcist/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Exorcist to sleep (text)",
+          "Put the Demon to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -3666,6 +4222,14 @@
         "evidence": [
           "become evil (text)"
         ]
+      },
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Fang Gu to sleep (text)",
+          "Put the new Fang Gu to sleep (text)"
+        ]
       }
     ],
     "passiveAbilities": [
@@ -3691,7 +4255,7 @@
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "each_night",
         "description": "Each night*, choose a player: they die. The 1st Outsider this kills becomes an evil Fang Gu & you die instead. [+1 Outsider]",
         "resolution": {
           "stKind": "RESOLVE/fang_gu/action",
@@ -3708,9 +4272,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -3737,7 +4298,18 @@
       "RESOLVE/fang_gu/action",
       "RULES/fang_gu_global_rule",
       "WINCHECK/fang_gu",
-      "TRIGGER/fang_gu/ROLE_CHANGED"
+      "TRIGGER/fang_gu/ROLE_CHANGED",
+      "TRIGGER/fang_gu/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Fang Gu to sleep (text)",
+          "Put the new Fang Gu to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -3837,7 +4409,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Fearmonger to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "DEATH_PREVENTION",
@@ -3862,7 +4442,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "first_night",
+        "usage": "each_day",
         "description": "Each night, choose a player: if you nominate & execute them, their team loses. All players know if you choose a new player.",
         "resolution": {
           "stKind": "RESOLVE/fearmonger/action",
@@ -3912,7 +4492,17 @@
       "INFO/fearmonger",
       "RESOLVE/fearmonger/action",
       "RULES/fearmonger_global_rule",
-      "WINCHECK/fearmonger"
+      "WINCHECK/fearmonger",
+      "TRIGGER/fearmonger/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Fearmonger to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -3959,7 +4549,21 @@
       "On the first night, all players get correct information. On the second night, the Empath learns they are neighbouring one evil player, but both their neighbours are actually good. For the rest of the game, all good players get correct information.",
       "The Virgin is nominated by a Townsfolk. This Townsfolk is executed immediately because the Fibbin cannot make an ability malfunction. Later, the Monk protects a player. Again, the Monk's ability cannot fail due to the Fibbin ability. Later, the Ravenkeeper dies at night and gets false information, because information from an ability can be affected by the Fibbin ability."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_PUT_THEIR_NO_ABILITY",
+        "payload": {
+          "token": "put their NO ABILITY",
+          "placement": "their",
+          "description": "Place the put their NO ABILITY reminder token by their."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "put their NO ABILITY reminder token by their token"
+        ]
+      }
+    ],
     "nightOrderSteps": [
       {
         "when": "firstNight",
@@ -3988,7 +4592,7 @@
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "first_night",
         "description": "Once per game, 1 good player might get incorrect information.",
         "resolution": {
           "stKind": "RESOLVE/fibbin/action",
@@ -3999,16 +4603,13 @@
           "during the night (text)",
           "first night (text)",
           "at night (text)"
-        ],
-        "spend": {
-          "marksNoAbilityEffect": true
-        }
+        ]
       }
     ],
     "jinxes": [],
     "tags": {
       "isInfoRole": true,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": true,
       "actsByClaim": false,
       "hasRoleSwap": false,
@@ -4053,7 +4654,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "once_per_game",
+        "usage": "each_day",
         "description": "Once per game, the Demon secretly chooses an opposing player: all players choose which of these 2 players win.",
         "resolution": {
           "stKind": "RESOLVE/fiddler/action",
@@ -4070,9 +4671,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -4137,7 +4735,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "once_per_game",
+        "usage": "each_day",
         "description": "Once per game, during the day, visit the Storyteller for some advice to help your team win.",
         "resolution": {
           "stKind": "RESOLVE/fisherman/action",
@@ -4153,9 +4751,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -4207,7 +4802,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Flowergirl to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -4240,7 +4843,17 @@
     },
     "stKinds": [
       "INFO/flowergirl",
-      "RESOLVE/flowergirl/action"
+      "RESOLVE/flowergirl/action",
+      "TRIGGER/flowergirl/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Flowergirl to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -4279,7 +4892,7 @@
     ]
   },
   {
-    "roleKey": "fortune_teller",
+    "roleKey": "fortuneteller",
     "title": "Fortune Teller",
     "category": "townsfolk",
     "editionTags": [
@@ -4294,7 +4907,44 @@
       "The Fortune Teller chooses an alive Butler and a dead Imp, and learns a 'yes'.",
       "The Fortune Teller chooses themselves and a Saint. The Saint is the Red Herring. The Fortune Teller learns a 'yes'."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "START_KNOWING",
+        "recipients": "self",
+        "payload": {
+          "detail": "Start knowledge inferred from description"
+        },
+        "reason": "Start knowledge phrases detected",
+        "evidence": [
+          "fortuneteller start knowledge inferred (forced detail)"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_RED_HERRING",
+        "payload": {
+          "token": "RED HERRING",
+          "placement": "any good character",
+          "description": "Place the RED HERRING reminder token by any good character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s RED HERRING reminder token by any good character token"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "MARKER_PERSISTENCE",
+        "payload": {
+          "description": "The marker stays on the same player for the entire game, even if the storyteller source dies.",
+          "duration": "permanent"
+        },
+        "reason": "Permanent marker phrase detected",
+        "evidence": [
+          "same player throughout the entire game (text)"
+        ]
+      }
+    ],
     "nightOrderSteps": [
       {
         "when": "firstNight",
@@ -4304,9 +4954,25 @@
           "each night (text)",
           "first night (text)"
         ]
+      },
+      {
+        "when": "everyNight",
+        "blocksNight": true,
+        "description": "Role flagged as acting at night via Trouble Brewing facts.",
+        "evidence": [
+          "fortuneteller listed as night action (fact list)"
+        ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Fortune Teller to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "REGISTRATION_MODIFIER",
@@ -4326,9 +4992,9 @@
         "usage": "each_night",
         "description": "Each night, choose 2 players: you learn if either is a Demon. There is a good player that registers as a Demon to you.",
         "resolution": {
-          "stKind": "RESOLVE/fortune_teller/action",
-          "description": "Resolve fortune_teller night action",
-          "effectType": "applyEffect"
+          "stKind": "RESOLVE/fortuneteller/action",
+          "description": "Resolve fortuneteller night action",
+          "effectType": "requestInfo"
         },
         "evidence": [
           "each night (text)",
@@ -4346,7 +5012,7 @@
     "jinxes": [],
     "tags": {
       "isInfoRole": true,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": true,
       "actsByClaim": false,
       "hasRoleSwap": false,
@@ -4355,8 +5021,22 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/fortune_teller",
-      "RESOLVE/fortune_teller/action"
+      "INFO/fortuneteller",
+      "RESOLVE/fortuneteller/action",
+      "TRIGGER/fortuneteller/MOMENT_PUT_TO_SLEEP"
+    ],
+    "factTags": [
+      "makes-choice",
+      "ongoing-info"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Fortune Teller to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -4386,7 +5066,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Gambler to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -4425,7 +5113,17 @@
     },
     "stKinds": [
       "INFO/gambler",
-      "RESOLVE/gambler/action"
+      "RESOLVE/gambler/action",
+      "TRIGGER/gambler/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Gambler to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -4557,7 +5255,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the General to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "INFO_DISTORTION",
@@ -4598,10 +5304,20 @@
     },
     "stKinds": [
       "INFO/general",
-      "RESOLVE/general/action"
+      "RESOLVE/general/action",
+      "TRIGGER/general/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"the storyteller decides\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the General to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -4691,7 +5407,20 @@
       "Lewis is the Artist, and claims to be the Goblin when nominated. He is executed, and the game continues.",
       "Doug is the Goblin. He claimed to be the Goblin yesterday and the day before, but not today. He is executed. The game continues."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_DECLARE_TO_THE_GROUP_THAT_THEY_HAVE_CLAIMED_TO_BE_THE_GOBLIN_AND_PRETEND_TO_MOVE_A",
+        "payload": {
+          "token": "Declare to the group that they have claimed to be the Goblin and pretend to move a",
+          "description": "Declare to the group that they have claimed to be the Goblin and pretend to move a reminder token is marked during setup."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "Declare to the group that they have claimed to be the Goblin and pretend to move a reminder token"
+        ]
+      }
+    ],
     "nightOrderSteps": [],
     "onMoments": [],
     "passiveAbilities": [
@@ -4722,7 +5451,7 @@
     ],
     "tags": {
       "isInfoRole": false,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": false,
       "actsByClaim": false,
       "hasRoleSwap": false,
@@ -4774,7 +5503,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Godfather to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -4820,7 +5557,17 @@
     },
     "stKinds": [
       "INFO/godfather",
-      "RESOLVE/godfather/action"
+      "RESOLVE/godfather/action",
+      "TRIGGER/godfather/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Godfather to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -4916,7 +5663,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Goon to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "DEATH_PREVENTION",
@@ -4977,7 +5732,17 @@
     },
     "stKinds": [
       "INFO/goon",
-      "RESOLVE/goon/action"
+      "RESOLVE/goon/action",
+      "TRIGGER/goon/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Goon to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -5091,7 +5856,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Grandmother to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -5142,7 +5915,17 @@
     },
     "stKinds": [
       "INFO/grandmother",
-      "RESOLVE/grandmother/action"
+      "RESOLVE/grandmother/action",
+      "TRIGGER/grandmother/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Grandmother to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -5226,7 +6009,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Harlot to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -5265,11 +6056,21 @@
     },
     "stKinds": [
       "INFO/harlot",
-      "RESOLVE/harlot/action"
+      "RESOLVE/harlot/action",
+      "TRIGGER/harlot/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller may\".",
       "Storyteller discretion noted near \"the storyteller decides\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Harlot to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -5299,7 +6100,16 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Harpy to sleep (text)",
+          "Put the player marked “Mad” to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -5336,10 +6146,21 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/harpy/action"
+      "RESOLVE/harpy/action",
+      "TRIGGER/harpy/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"the storyteller decides\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Harpy to sleep (text)",
+          "Put the player marked “Mad” to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -5676,7 +6497,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the High Priestess to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "INFO_DISTORTION",
@@ -5718,7 +6547,17 @@
     },
     "stKinds": [
       "INFO/high_priestess",
-      "RESOLVE/high_priestess/action"
+      "RESOLVE/high_priestess/action",
+      "TRIGGER/high_priestess/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the High Priestess to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -5839,7 +6678,16 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Huntsman to sleep (text)",
+          "put the Damsel to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "GLOBAL_RULE",
@@ -5854,7 +6702,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "once_per_game",
+        "usage": "each_day",
         "description": "Once per game, at night, choose a living player: the Damsel, if chosen, becomes a not-in-play Townsfolk. [+the Damsel]",
         "resolution": {
           "stKind": "RESOLVE/huntsman/action",
@@ -5872,9 +6720,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -5900,10 +6745,21 @@
       "INFO/huntsman",
       "RESOLVE/huntsman/action",
       "RULES/huntsman_global_rule",
-      "WINCHECK/huntsman"
+      "WINCHECK/huntsman",
+      "TRIGGER/huntsman/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Huntsman to sleep (text)",
+          "put the Damsel to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -5941,6 +6797,14 @@
         "description": "Triggers when the Demon dies or is revealed.",
         "evidence": [
           "demon death check list (fact)"
+        ]
+      },
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Imp to sleep (text)",
+          "Put the new Imp to sleep (text)"
         ]
       }
     ],
@@ -5998,11 +6862,22 @@
       "RESOLVE/imp/action",
       "RULES/imp_global_rule",
       "WINCHECK/imp",
-      "TRIGGER/imp/MOMENT_DEMON_DEATH_RESOLVED"
+      "TRIGGER/imp/MOMENT_DEMON_DEATH_RESOLVED",
+      "TRIGGER/imp/MOMENT_PUT_TO_SLEEP"
     ],
     "factTags": [
       "demon-death-check",
       "win-condition"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Imp to sleep (text)",
+          "Put the new Imp to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -6033,7 +6908,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Innkeeper to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "DEATH_PREVENTION",
@@ -6094,10 +6977,20 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/innkeeper/action"
+      "RESOLVE/innkeeper/action",
+      "TRIGGER/innkeeper/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Innkeeper to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -6120,12 +7013,40 @@
         "kind": "START_KNOWING",
         "recipients": "self",
         "payload": {
-          "detail": "Start knowledge inferred from description"
+          "detail": "One of two players is a specific Minion.",
+          "targetType": "minion",
+          "pairCount": 2
         },
         "reason": "Start knowledge phrases detected",
         "evidence": [
           "start knowing (text)",
           "you start knowing (text)"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_MINION",
+        "payload": {
+          "token": "MINION",
+          "placement": "any Minion character",
+          "description": "Place the MINION reminder token by any Minion character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s MINION reminder token by any Minion character token"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_WRONG",
+        "payload": {
+          "token": "WRONG",
+          "placement": "any other character",
+          "description": "Place the WRONG reminder token by any other character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s WRONG reminder token by any other character token"
         ]
       }
     ],
@@ -6139,7 +7060,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Investigator to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [
@@ -6161,7 +7090,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/investigator"
+      "INFO/investigator",
+      "TRIGGER/investigator/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Investigator to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -6176,7 +7115,21 @@
       "The Slayer was about to die, but the Po is nominated and every alive player votes, so now the Po is about to die. The evil Judge decides that the Po’s execution fails. So, as before, the Slayer is about to die, and the nomination process continues.",
       "The good Judge nominates the Professor. Nobody votes, but the Judge may not use their ability. A Traveller's exile is voted on. Once again, the Judge may not use their ability. The Grandmother nominates the Goon. Even though the Goon got only one vote, the Judge decides that the Goon is executed immediately."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_NO_ABILITY",
+        "payload": {
+          "token": "NO ABILITY",
+          "placement": "the Judge",
+          "description": "Place the NO ABILITY reminder token by the Judge."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "’s NO ABILITY reminder token by the Judge token"
+        ]
+      }
+    ],
     "nightOrderSteps": [],
     "onMoments": [],
     "passiveAbilities": [],
@@ -6207,7 +7160,7 @@
     "jinxes": [],
     "tags": {
       "isInfoRole": false,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": false,
       "actsByClaim": false,
       "hasRoleSwap": false,
@@ -6238,7 +7191,15 @@
     ],
     "setupModifications": [],
     "nightOrderSteps": [],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Juggler to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [
@@ -6260,7 +7221,40 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/juggler"
+      "INFO/juggler",
+      "TRIGGER/juggler/MOMENT_PUT_TO_SLEEP"
+    ],
+    "nightCardConstraints": [
+      {
+        "cards": [
+          {
+            "type": "ZERO",
+            "equals": "0"
+          },
+          {
+            "type": "ONE",
+            "equals": "1"
+          },
+          {
+            "type": "TWO",
+            "equals": "2"
+          }
+        ],
+        "method": "fingers",
+        "scope": "equaling the number of CORRECT reminders",
+        "evidence": [
+          "Show them fingers (0, 1, 2, etc.) equaling the number of CORRECT reminders. (text)"
+        ]
+      }
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Juggler to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -6301,7 +7295,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Kazali to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -6358,10 +7360,20 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/kazali/action"
+      "RESOLVE/kazali/action",
+      "TRIGGER/kazali/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller may\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Kazali to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -6391,7 +7403,16 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Demon to sleep (text)",
+          "Put the King to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -6436,7 +7457,18 @@
     },
     "stKinds": [
       "INFO/king",
-      "RESOLVE/king/action"
+      "RESOLVE/king/action",
+      "TRIGGER/king/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Demon to sleep (text)",
+          "Put the King to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -6873,12 +7905,41 @@
         "kind": "START_KNOWING",
         "recipients": "self",
         "payload": {
-          "detail": "Start knowledge inferred from description"
+          "detail": "One of two players is a specific Outsider or there are zero Outsiders in play.",
+          "targetType": "outsider",
+          "pairCount": 2,
+          "zeroPossible": true
         },
         "reason": "Start knowledge phrases detected",
         "evidence": [
           "start knowing (text)",
           "you start knowing (text)"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_OUTSIDER",
+        "payload": {
+          "token": "OUTSIDER",
+          "placement": "any Outsider character",
+          "description": "Place the OUTSIDER reminder token by any Outsider character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s OUTSIDER reminder token by any Outsider character token"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_WRONG",
+        "payload": {
+          "token": "WRONG",
+          "placement": "any other character",
+          "description": "Place the WRONG reminder token by any other character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s WRONG reminder token by any other character token"
         ]
       }
     ],
@@ -6892,7 +7953,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Librarian to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [],
@@ -6907,7 +7976,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/librarian"
+      "INFO/librarian",
+      "TRIGGER/librarian/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Librarian to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -6931,6 +8010,18 @@
         "reason": "explicit bracket note",
         "evidence": [
           "[+1 minion] (text)"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_MARK_THEM_WITH_THE_IS_THE_DEMON",
+        "payload": {
+          "token": "Mark them with the IS THE DEMON",
+          "description": "Mark them with the IS THE DEMON reminder token is marked during setup."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "Mark them with the IS THE DEMON reminder token"
         ]
       }
     ],
@@ -7088,7 +8179,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Lleech to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "DEATH_PREVENTION",
@@ -7181,7 +8280,17 @@
       "INFO/lleech",
       "RESOLVE/lleech/action",
       "RULES/lleech_global_rule",
-      "WINCHECK/lleech"
+      "WINCHECK/lleech",
+      "TRIGGER/lleech/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Lleech to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -7212,7 +8321,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Lord of Typhon to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -7257,10 +8374,20 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/lord_of_typhon/action"
+      "RESOLVE/lord_of_typhon/action",
+      "TRIGGER/lord_of_typhon/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"the storyteller decides\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Lord of Typhon to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -7379,7 +8506,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Lycanthrope to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "REGISTRATION_MODIFIER",
@@ -7437,7 +8572,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/lycanthrope/action"
+      "RESOLVE/lycanthrope/action",
+      "TRIGGER/lycanthrope/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Lycanthrope to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -7465,7 +8610,16 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Minions to sleep (text)",
+          "Put the Demon to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [
@@ -7523,7 +8677,18 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/magician"
+      "INFO/magician",
+      "TRIGGER/magician/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Minions to sleep (text)",
+          "Put the Demon to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -7566,7 +8731,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Demon to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "REGISTRATION_MODIFIER",
@@ -7668,7 +8841,17 @@
     "stKinds": [
       "INFO/marionette",
       "RULES/marionette_global_rule",
-      "WINCHECK/marionette"
+      "WINCHECK/marionette",
+      "TRIGGER/marionette/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Demon to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -7774,7 +8957,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Mathematician to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "INFO_DISTORTION",
@@ -7841,7 +9032,17 @@
     },
     "stKinds": [
       "INFO/mathematician",
-      "RESOLVE/mathematician/action"
+      "RESOLVE/mathematician/action",
+      "TRIGGER/mathematician/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Mathematician to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -7912,7 +9113,21 @@
       "There are three players alive. There are no nominations for execution today. Good wins.",
       "There are five players alive, including two Travellers. Both Travellers are exiled, and the vote is tied between the remaining players. Because a tied vote means neither player is executed, good wins."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_DEAD",
+        "payload": {
+          "token": "DEAD",
+          "placement": "that character",
+          "description": "Place the DEAD reminder token by that character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s DEAD reminder token by that character token"
+        ]
+      }
+    ],
     "nightOrderSteps": [
       {
         "when": "everyNight",
@@ -7993,7 +9208,7 @@
     ],
     "tags": {
       "isInfoRole": true,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": true,
       "actsByClaim": false,
       "hasRoleSwap": false,
@@ -8195,7 +9410,45 @@
       "The Monk protects the Mayor, and the Imp attacks the Mayor. The Mayor's \"another player dies\" ability does not trigger, because the Mayor is safe from the Imp. Nobody dies tonight.",
       "The Monk protects the Imp . The Imp chooses to kill themself tonight, but nothing happens. The Imp stays alive and a new Imp is not created."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_SAFE",
+        "payload": {
+          "token": "SAFE",
+          "placement": "the chosen player's character",
+          "description": "Place the SAFE reminder token by the chosen player's character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s SAFE reminder token by the chosen player's character token"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_DEAD",
+        "payload": {
+          "token": "DEAD",
+          "description": "DEAD reminder token is marked during setup."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s DEAD reminder token"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_REMOVE_THE_SAFE",
+        "payload": {
+          "token": "remove the SAFE",
+          "description": "remove the SAFE reminder token is marked during setup."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "remove the SAFE reminder token"
+        ]
+      }
+    ],
     "nightOrderSteps": [
       {
         "when": "otherNights",
@@ -8229,6 +9482,13 @@
         "description": "Rules change depending on how many players are alive.",
         "evidence": [
           "alive conditional list (fact)"
+        ]
+      },
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Monk to sleep (text)"
         ]
       }
     ],
@@ -8283,7 +9543,7 @@
     ],
     "tags": {
       "isInfoRole": false,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": true,
       "actsByClaim": false,
       "hasRoleSwap": false,
@@ -8294,13 +9554,23 @@
     "stKinds": [
       "RESOLVE/monk/action",
       "TRIGGER/monk/MOMENT_DEMON_DEATH_RESOLVED",
-      "TRIGGER/monk/MOMENT_PLAYERS_ALIVE_CHANGED"
+      "TRIGGER/monk/MOMENT_PLAYERS_ALIVE_CHANGED",
+      "TRIGGER/monk/MOMENT_PUT_TO_SLEEP"
     ],
     "factTags": [
       "alive-cond",
       "demon-death-check",
       "makes-choice",
       "protection"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Monk to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -8434,12 +9704,21 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Nightwatchman to sleep (text)",
+          "Put the chosen player to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "each_night",
         "description": "Once per game, at night, choose a player: they learn you are the Nightwatchman.",
         "resolution": {
           "stKind": "RESOLVE/nightwatchman/action",
@@ -8456,9 +9735,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -8475,7 +9751,18 @@
     },
     "stKinds": [
       "INFO/nightwatchman",
-      "RESOLVE/nightwatchman/action"
+      "RESOLVE/nightwatchman/action",
+      "TRIGGER/nightwatchman/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Nightwatchman to sleep (text)",
+          "Put the chosen player to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -8505,7 +9792,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the No Dashii to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -8543,7 +9838,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/no_dashii/action"
+      "RESOLVE/no_dashii/action",
+      "TRIGGER/no_dashii/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the No Dashii to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -8576,7 +9881,15 @@
       }
     ],
     "nightOrderSteps": [],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Noble to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [],
@@ -8591,7 +9904,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/noble"
+      "INFO/noble",
+      "TRIGGER/noble/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Noble to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -8638,6 +9961,13 @@
         "description": "Alignment or role status can change.",
         "evidence": [
           "becomes evil (text)"
+        ]
+      },
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Ogre to sleep (text)"
         ]
       }
     ],
@@ -8704,10 +10034,20 @@
     "stKinds": [
       "INFO/ogre",
       "RESOLVE/ogre/action",
-      "TRIGGER/ogre/ROLE_CHANGED"
+      "TRIGGER/ogre/ROLE_CHANGED",
+      "TRIGGER/ogre/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"optional rule\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Ogre to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -8737,7 +10077,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Ojo to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -8776,11 +10124,21 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/ojo/action"
+      "RESOLVE/ojo/action",
+      "TRIGGER/ojo/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller may\".",
       "Storyteller discretion noted near \"storyteller chooses\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Ojo to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -8810,7 +10168,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Oracle to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -8843,7 +10209,17 @@
     },
     "stKinds": [
       "INFO/oracle",
-      "RESOLVE/oracle/action"
+      "RESOLVE/oracle/action",
+      "TRIGGER/oracle/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Oracle to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -8871,7 +10247,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Organ Grinder to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -8921,7 +10305,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/organ_grinder/action"
+      "RESOLVE/organ_grinder/action",
+      "TRIGGER/organ_grinder/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Organ Grinder to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -9015,12 +10409,20 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Philosopher to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "first_night",
         "description": "Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk.",
         "resolution": {
           "stKind": "RESOLVE/philosopher/action",
@@ -9038,9 +10440,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -9064,7 +10463,17 @@
     },
     "stKinds": [
       "INFO/philosopher",
-      "RESOLVE/philosopher/action"
+      "RESOLVE/philosopher/action",
+      "TRIGGER/philosopher/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Philosopher to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -9095,7 +10504,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Pit-Hag to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -9188,10 +10605,20 @@
     },
     "stKinds": [
       "INFO/pit_hag",
-      "RESOLVE/pit_hag/action"
+      "RESOLVE/pit_hag/action",
+      "TRIGGER/pit_hag/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"you may need to\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Pit-Hag to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -9236,12 +10663,20 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Pixie to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "first_night",
+        "usage": "each_day",
         "description": "You start knowing 1 in-play Townsfolk. If you were mad that you were this character, you gain their ability when they die.",
         "resolution": {
           "stKind": "RESOLVE/pixie/action",
@@ -9276,10 +10711,20 @@
     },
     "stKinds": [
       "INFO/pixie",
-      "RESOLVE/pixie/action"
+      "RESOLVE/pixie/action",
+      "TRIGGER/pixie/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Pixie to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -9465,7 +10910,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Po to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -9504,7 +10957,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/po/action"
+      "RESOLVE/po/action",
+      "TRIGGER/po/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Po to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -9524,7 +10987,21 @@
       "The Undertaker is poisoned. Even though the Imp died today, they learn that the Virgin died. A few days later, a poisoned Saint dies, and the game continues.",
       "The Poisoner poisons the Mayor, then becomes the Imp. The Mayor is no longer poisoned because there is no Poisoner in play."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_PUT_THE_POISONED",
+        "payload": {
+          "token": "put the POISONED",
+          "placement": "the chosen player's character",
+          "description": "Place the put the POISONED reminder token by the chosen player's character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "put the POISONED reminder token by the chosen player's character token"
+        ]
+      }
+    ],
     "nightOrderSteps": [
       {
         "when": "everyNight",
@@ -9537,7 +11014,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Poisoner to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "INFO_DISTORTION",
@@ -9553,12 +11038,12 @@
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "each_night",
         "description": "Each night, choose a player: they are poisoned tonight and tomorrow day.",
         "resolution": {
           "stKind": "RESOLVE/poisoner/action",
           "description": "Resolve poisoner night action",
-          "effectType": "killAttempt"
+          "effectType": "applyEffect"
         },
         "evidence": [
           "each night (text)",
@@ -9571,16 +11056,13 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
     "jinxes": [],
     "tags": {
       "isInfoRole": true,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": true,
       "actsByClaim": false,
       "hasRoleSwap": false,
@@ -9590,13 +11072,43 @@
     },
     "stKinds": [
       "INFO/poisoner",
-      "RESOLVE/poisoner/action"
+      "RESOLVE/poisoner/action",
+      "TRIGGER/poisoner/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller may\"."
     ],
     "factTags": [
       "makes-choice"
+    ],
+    "effectNotes": [
+      {
+        "effectType": "POISONED",
+        "duration": "nextDusk",
+        "source": "poisoner",
+        "description": "Poisoner marks a player with POISONED; the reminder is removed at dusk.",
+        "evidence": [
+          "POISONED reminder token (text)",
+          "poisoned player becomes healthy (text)"
+        ]
+      },
+      {
+        "effectType": "NO_ABILITY",
+        "source": "poisoner",
+        "description": "Poisoned players appear to have an ability but the Storyteller blocks it.",
+        "evidence": [
+          "have no ability (text)"
+        ]
+      }
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Poisoner to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -9690,6 +11202,9 @@
     "stKinds": [
       "RULES/politician_global_rule",
       "WINCHECK/politician"
+    ],
+    "factTags": [
+      "persists-through-death"
     ]
   },
   {
@@ -9760,6 +11275,15 @@
         "evidence": [
           "if you die (text)"
         ]
+      },
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Demon to sleep (text)",
+          "Put the Minions to sleep (text)",
+          "Put the Demon to sleep (text)"
+        ]
       }
     ],
     "passiveAbilities": [],
@@ -9802,7 +11326,19 @@
     },
     "stKinds": [
       "INFO/poppy_grower",
-      "TRIGGER/poppy_grower/MOMENT_DEATH_RESOLVED"
+      "TRIGGER/poppy_grower/MOMENT_DEATH_RESOLVED",
+      "TRIGGER/poppy_grower/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Demon to sleep (text)",
+          "Put the Minions to sleep (text)",
+          "Put the Demon to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -9831,7 +11367,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Preacher to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -9887,7 +11431,27 @@
     },
     "stKinds": [
       "INFO/preacher",
-      "RESOLVE/preacher/action"
+      "RESOLVE/preacher/action",
+      "TRIGGER/preacher/MOMENT_PUT_TO_SLEEP"
+    ],
+    "effectNotes": [
+      {
+        "effectType": "NO_ABILITY",
+        "source": "preacher",
+        "description": "Poisoned players appear to have an ability but the Storyteller blocks it.",
+        "evidence": [
+          "have no ability (text)"
+        ]
+      }
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Preacher to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -10022,12 +11586,20 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Professor to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "first_night",
         "description": "Once per game, at night*, choose a dead player: if they are a Townsfolk, they are resurrected.",
         "resolution": {
           "stKind": "RESOLVE/professor/action",
@@ -10046,9 +11618,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -10065,7 +11634,17 @@
     },
     "stKinds": [
       "INFO/professor",
-      "RESOLVE/professor/action"
+      "RESOLVE/professor/action",
+      "TRIGGER/professor/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Professor to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -10172,7 +11751,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Pukka to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "DEATH_PREVENTION",
@@ -10238,10 +11825,20 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/pukka/action"
+      "RESOLVE/pukka/action",
+      "TRIGGER/pukka/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"you may need to\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Pukka to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -10295,7 +11892,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "once_per_game",
+        "usage": "each_day",
         "description": "1 player is drunk, even if you die. If you guess (once) who it is, learn the Demon player, but guess wrong & get false info.",
         "resolution": {
           "stKind": "RESOLVE/puzzlemaster/action",
@@ -10305,10 +11902,7 @@
         "evidence": [
           "first night (text)",
           "publicly guess (text)"
-        ],
-        "spend": {
-          "marksNoAbilityEffect": true
-        }
+        ]
       }
     ],
     "jinxes": [],
@@ -10359,6 +11953,13 @@
         "description": "Something happens when this character dies.",
         "evidence": [
           "if you die (text)"
+        ]
+      },
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Ravenkeeper to sleep (text)"
         ]
       }
     ],
@@ -10412,11 +12013,21 @@
     "stKinds": [
       "INFO/ravenkeeper",
       "RESOLVE/ravenkeeper/action",
-      "TRIGGER/ravenkeeper/MOMENT_DEATH_RESOLVED"
+      "TRIGGER/ravenkeeper/MOMENT_DEATH_RESOLVED",
+      "TRIGGER/ravenkeeper/MOMENT_PUT_TO_SLEEP"
     ],
     "factTags": [
       "makes-choice",
       "one-time-info"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Ravenkeeper to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -10438,7 +12049,15 @@
     ],
     "setupModifications": [],
     "nightOrderSteps": [],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_REGISTRATION_CHECKED",
+        "description": "Storyteller decides how this character registers during setup.",
+        "evidence": [
+          "misregistration fact list (fact)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "REGISTRATION_MODIFIER",
@@ -10516,14 +12135,16 @@
     },
     "stKinds": [
       "INFO/recluse",
-      "RESOLVE/recluse/action"
+      "RESOLVE/recluse/action",
+      "TRIGGER/recluse/MOMENT_REGISTRATION_CHECKED"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\".",
       "Storyteller discretion noted near \"the storyteller decides\"."
     ],
     "factTags": [
-      "misregistration"
+      "misregistration",
+      "persists-through-death"
     ]
   },
   {
@@ -10734,7 +12355,15 @@
     ],
     "setupModifications": [],
     "nightOrderSteps": [],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Sage to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [
@@ -10768,10 +12397,20 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/sage"
+      "INFO/sage",
+      "TRIGGER/sage/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"the storyteller decides\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Sage to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -10801,7 +12440,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Sailor to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "DEATH_PREVENTION",
@@ -10849,11 +12496,21 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/sailor/action"
+      "RESOLVE/sailor/action",
+      "TRIGGER/sailor/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\".",
       "Storyteller discretion noted near \"the storyteller decides\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Sailor to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -11216,12 +12873,20 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Seamstress to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "each_night",
         "description": "Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment.",
         "resolution": {
           "stKind": "RESOLVE/seamstress/action",
@@ -11239,9 +12904,6 @@
             "targetCount": 2,
             "description": "Choose 2 players"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -11258,7 +12920,17 @@
     },
     "stKinds": [
       "INFO/seamstress",
-      "RESOLVE/seamstress/action"
+      "RESOLVE/seamstress/action",
+      "TRIGGER/seamstress/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Seamstress to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -11331,12 +13003,20 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Shabaloth to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "first_night",
         "description": "Each night*, choose 2 players: they die. A dead player you chose last night might be regurgitated.",
         "resolution": {
           "stKind": "RESOLVE/shabaloth/action",
@@ -11354,9 +13034,6 @@
             "targetCount": 2,
             "description": "Choose 2 players"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -11372,11 +13049,31 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/shabaloth/action"
+      "RESOLVE/shabaloth/action",
+      "TRIGGER/shabaloth/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller may\".",
       "Storyteller discretion noted near \"the storyteller decides\"."
+    ],
+    "effectNotes": [
+      {
+        "effectType": "NO_ABILITY",
+        "source": "shabaloth",
+        "description": "Poisoned players appear to have an ability but the Storyteller blocks it.",
+        "evidence": [
+          "have no ability (text)"
+        ]
+      }
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Shabaloth to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -11418,7 +13115,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Shugenja to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -11456,10 +13161,20 @@
     },
     "stKinds": [
       "INFO/shugenja",
-      "RESOLVE/shugenja/action"
+      "RESOLVE/shugenja/action",
+      "TRIGGER/shugenja/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Shugenja to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -11477,7 +13192,21 @@
       "The Slayer chooses the Recluse. The Storyteller decides that the Recluse registers as the Imp, so the Recluse dies, but the game continues.",
       "The Imp is bluffing as the Slayer. They declare that they use their Slayer ability on the Scarlet Woman. Nothing happens."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_NO_ABILITY",
+        "payload": {
+          "token": "NO ABILITY",
+          "placement": "the Slayer",
+          "description": "Place the NO ABILITY reminder token by the Slayer."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s NO ABILITY reminder token by the Slayer token"
+        ]
+      }
+    ],
     "nightOrderSteps": [],
     "onMoments": [],
     "passiveAbilities": [
@@ -11506,7 +13235,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "once_per_game",
+        "usage": "each_day",
         "description": "Once per game, during the day, publicly choose a player: if they are the Demon, they die.",
         "resolution": {
           "stKind": "RESOLVE/slayer/action",
@@ -11523,9 +13252,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -11539,7 +13265,7 @@
     ],
     "tags": {
       "isInfoRole": true,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": false,
       "actsByClaim": true,
       "hasRoleSwap": false,
@@ -11606,6 +13332,15 @@
         "evidence": [
           "becomes the demon (text)"
         ]
+      },
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Snake Charmer to sleep (text)",
+          "Put the new Demon to sleep (text)",
+          "Put the new Snake Charmer to sleep (text)"
+        ]
       }
     ],
     "passiveAbilities": [],
@@ -11645,7 +13380,19 @@
     "stKinds": [
       "INFO/snake_charmer",
       "RESOLVE/snake_charmer/action",
-      "TRIGGER/snake_charmer/ROLE_CHANGED"
+      "TRIGGER/snake_charmer/ROLE_CHANGED",
+      "TRIGGER/snake_charmer/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Snake Charmer to sleep (text)",
+          "Put the new Demon to sleep (text)",
+          "Put the new Snake Charmer to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -11665,7 +13412,15 @@
     ],
     "setupModifications": [],
     "nightOrderSteps": [],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Minion to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [],
@@ -11680,7 +13435,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/snitch"
+      "INFO/snitch",
+      "TRIGGER/snitch/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Minion to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -11809,6 +13574,18 @@
         "evidence": [
           "become evil (text)"
         ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_ADD_THE_SPIRIT_OF_IVORY_TOKEN_AND_THEIR",
+        "payload": {
+          "token": "Add the Spirit of Ivory token and their",
+          "description": "Add the Spirit of Ivory token and their reminder token is marked during setup."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "Add the Spirit of Ivory token and their reminder token"
+        ]
       }
     ],
     "nightOrderSteps": [],
@@ -11877,7 +13654,22 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_REGISTRATION_CHECKED",
+        "description": "Storyteller decides how this character registers during setup.",
+        "evidence": [
+          "misregistration fact list (fact)"
+        ]
+      },
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Spy to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "REGISTRATION_MODIFIER",
@@ -11980,13 +13772,32 @@
     },
     "stKinds": [
       "INFO/spy",
-      "RESOLVE/spy/action"
+      "RESOLVE/spy/action",
+      "TRIGGER/spy/MOMENT_REGISTRATION_CHECKED",
+      "TRIGGER/spy/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\"."
     ],
     "factTags": [
-      "misregistration"
+      "misregistration",
+      "persists-through-death"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Spy to sleep (text)"
+        ]
+      },
+      {
+        "key": "GRIMOIRE_VIEW",
+        "description": "The character is shown the Grimoire during their wake.",
+        "evidence": [
+          "show them the Grimoire (text)"
+        ]
+      }
     ]
   },
   {
@@ -12028,7 +13839,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Steward to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [],
@@ -12043,7 +13862,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/steward"
+      "INFO/steward",
+      "TRIGGER/steward/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Steward to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -12072,7 +13901,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the evil player to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "DEATH_PREVENTION",
@@ -12097,7 +13934,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/storm_catcher"
+      "INFO/storm_catcher",
+      "TRIGGER/storm_catcher/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the evil player to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -12145,6 +13992,14 @@
         "description": "Alignment or role status can change.",
         "evidence": [
           "become the demon (text)"
+        ]
+      },
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Summoner to sleep (text)",
+          "put the new Demon to sleep (text)"
         ]
       }
     ],
@@ -12283,7 +14138,18 @@
       "RESOLVE/summoner/action",
       "RULES/summoner_global_rule",
       "WINCHECK/summoner",
-      "TRIGGER/summoner/ROLE_CHANGED"
+      "TRIGGER/summoner/ROLE_CHANGED",
+      "TRIGGER/summoner/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Summoner to sleep (text)",
+          "put the new Demon to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -12430,7 +14296,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Thief to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -12466,7 +14340,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/thief/action"
+      "RESOLVE/thief/action",
+      "TRIGGER/thief/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Thief to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -12622,7 +14506,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Town Crier to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -12655,7 +14547,17 @@
     },
     "stKinds": [
       "INFO/town_crier",
-      "RESOLVE/town_crier/action"
+      "RESOLVE/town_crier/action",
+      "TRIGGER/town_crier/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Town Crier to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -12687,7 +14589,7 @@
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "first_night",
         "description": "The Demon may choose not to attack & must do this at least once per game. Evil players get normal starting info.",
         "resolution": {
           "stKind": "RESOLVE/toymaker/action",
@@ -12704,9 +14606,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -12742,7 +14641,21 @@
       "The Spy is executed. Two Travellers are exiled. That night, the Undertaker is shown the Butler token, because the Spy is registering as the Butler, and because the exiles are not executions.",
       "Nobody was executed today. That night, the Undertaker does not wake."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_DIED_TODAY",
+        "payload": {
+          "token": "DIED TODAY",
+          "placement": "the dead player's character",
+          "description": "Place the DIED TODAY reminder token by the dead player's character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s DIED TODAY reminder token by the dead player's character token"
+        ]
+      }
+    ],
     "nightOrderSteps": [
       {
         "when": "otherNights",
@@ -12755,7 +14668,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Undertaker to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -12785,7 +14706,7 @@
     "jinxes": [],
     "tags": {
       "isInfoRole": true,
-      "isSetupModifier": false,
+      "isSetupModifier": true,
       "actsAtNight": true,
       "actsByClaim": true,
       "hasRoleSwap": false,
@@ -12795,13 +14716,23 @@
     },
     "stKinds": [
       "INFO/undertaker",
-      "RESOLVE/undertaker/action"
+      "RESOLVE/undertaker/action",
+      "TRIGGER/undertaker/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\"."
     ],
     "factTags": [
       "ongoing-info"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Undertaker to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -12841,7 +14772,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Vigormortis to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -12885,10 +14824,20 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "RESOLVE/vigormortis/action"
+      "RESOLVE/vigormortis/action",
+      "TRIGGER/vigormortis/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"storyteller chooses\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Vigormortis to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -12988,7 +14937,21 @@
       "The Drunk, who thinks they are the Chef, nominates the Virgin. The Drunk remains alive, and the Virgin loses their ability. Players may now vote on whether or not to execute the Virgin. (This happens because the Drunk is not a Townsfolk.)",
       "A dead player nominates the Virgin. The dead, however, cannot nominate. The Storyteller declares that the nomination does not count. The Virgin does not lose their ability."
     ],
-    "setupModifications": [],
+    "setupModifications": [
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_NO_ABILITY",
+        "payload": {
+          "token": "NO ABILITY",
+          "placement": "the Virgin",
+          "description": "Place the NO ABILITY reminder token by the Virgin."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s NO ABILITY reminder token by the Virgin token"
+        ]
+      }
+    ],
     "nightOrderSteps": [],
     "onMoments": [
       {
@@ -13013,8 +14976,7 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "TRIGGER/virgin/MOMENT_ATTEMPTED_EXECUTION",
-      "TRIGGER/virgin/MOMENT_REGISTRATION_CHECKED"
+      "TRIGGER/virgin/MOMENT_ATTEMPTED_EXECUTION"
     ],
     "todos": [
       "Confirm whether the Virgin needs a separate night order step when the Storyteller enforces the penalty."
@@ -13193,7 +15155,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Vortox to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "GLOBAL_RULE",
@@ -13264,7 +15234,17 @@
       "INFO/vortox",
       "RESOLVE/vortox/action",
       "RULES/vortox_global_rule",
-      "WINCHECK/vortox"
+      "WINCHECK/vortox",
+      "TRIGGER/vortox/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Vortox to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -13334,12 +15314,40 @@
         "kind": "START_KNOWING",
         "recipients": "self",
         "payload": {
-          "detail": "Start knowledge inferred from description"
+          "detail": "One of two players is a specific Townsfolk.",
+          "targetType": "townsfolk",
+          "pairCount": 2
         },
         "reason": "Start knowledge phrases detected",
         "evidence": [
           "start knowing (text)",
           "you start knowing (text)"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_TOWNSFOLK",
+        "payload": {
+          "token": "TOWNSFOLK",
+          "placement": "any Townsfolk character",
+          "description": "Place the TOWNSFOLK reminder token by any Townsfolk character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s TOWNSFOLK reminder token by any Townsfolk character token"
+        ]
+      },
+      {
+        "kind": "SETUP_CONSTRAINT",
+        "constraintKey": "REMINDER_TOKEN_WRONG",
+        "payload": {
+          "token": "WRONG",
+          "placement": "any other character",
+          "description": "Place the WRONG reminder token by any other character."
+        },
+        "reason": "Reminder token instructions detected",
+        "evidence": [
+          "'s WRONG reminder token by any other character token"
         ]
       }
     ],
@@ -13353,7 +15361,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Washerwoman to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [],
     "jinxes": [],
@@ -13368,7 +15384,17 @@
       "isGlobalRule": false
     },
     "stKinds": [
-      "INFO/washerwoman"
+      "INFO/washerwoman",
+      "TRIGGER/washerwoman/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Washerwoman to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -13410,7 +15436,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Widow to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
@@ -13479,7 +15513,24 @@
     },
     "stKinds": [
       "INFO/widow",
-      "RESOLVE/widow/action"
+      "RESOLVE/widow/action",
+      "TRIGGER/widow/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Widow to sleep (text)"
+        ]
+      },
+      {
+        "key": "GRIMOIRE_VIEW",
+        "description": "The character is shown the Grimoire during their wake.",
+        "evidence": [
+          "show them the Grimoire (text)"
+        ]
+      }
     ]
   },
   {
@@ -13511,7 +15562,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Witch to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "GLOBAL_RULE",
@@ -13560,7 +15619,17 @@
     "stKinds": [
       "RESOLVE/witch/action",
       "RULES/witch_global_rule",
-      "WINCHECK/witch"
+      "WINCHECK/witch",
+      "TRIGGER/witch/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Witch to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -13597,7 +15666,7 @@
     "activeAbilities": [
       {
         "kind": "day_claim",
-        "usage": "once_per_game",
+        "usage": "each_day",
         "description": "Once per game, choose to make a wish. If granted, it might have a price & leave a clue as to its nature.",
         "resolution": {
           "stKind": "RESOLVE/wizard/action",
@@ -13614,9 +15683,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -13668,12 +15734,20 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "put the Wraith to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [],
     "activeAbilities": [
       {
         "kind": "night_action",
-        "usage": "once_per_game",
+        "usage": "each_night",
         "description": "You may choose to open your eyes at night. You wake when other evil players do.",
         "resolution": {
           "stKind": "RESOLVE/wraith/action",
@@ -13691,9 +15765,6 @@
             "targetCount": 1,
             "description": "Choose a player"
           }
-        },
-        "spend": {
-          "marksNoAbilityEffect": true
         }
       }
     ],
@@ -13729,11 +15800,21 @@
     },
     "stKinds": [
       "INFO/wraith",
-      "RESOLVE/wraith/action"
+      "RESOLVE/wraith/action",
+      "TRIGGER/wraith/MOMENT_PUT_TO_SLEEP"
     ],
     "todos": [
       "Storyteller discretion noted near \"optional rule\".",
       "Storyteller discretion noted near \"you may choose to\"."
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "put the Wraith to sleep (text)"
+        ]
+      }
     ]
   },
   {
@@ -14019,7 +16100,15 @@
         ]
       }
     ],
-    "onMoments": [],
+    "onMoments": [
+      {
+        "moment": "MOMENT_PUT_TO_SLEEP",
+        "description": "Character is put to sleep after using this ability.",
+        "evidence": [
+          "Put the Zombuul to sleep (text)"
+        ]
+      }
+    ],
     "passiveAbilities": [
       {
         "kind": "REGISTRATION_MODIFIER",
@@ -14090,7 +16179,17 @@
     "stKinds": [
       "RESOLVE/zombuul/action",
       "RULES/zombuul_global_rule",
-      "WINCHECK/zombuul"
+      "WINCHECK/zombuul",
+      "TRIGGER/zombuul/MOMENT_PUT_TO_SLEEP"
+    ],
+    "specialActions": [
+      {
+        "key": "PUT_TO_SLEEP",
+        "description": "The storyteller puts the character to sleep once their action finishes.",
+        "evidence": [
+          "Put the Zombuul to sleep (text)"
+        ]
+      }
     ]
   }
 ]

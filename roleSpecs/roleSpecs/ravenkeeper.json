@@ -30,6 +30,13 @@
       "evidence": [
         "if you die (text)"
       ]
+    },
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Ravenkeeper to sleep (text)"
+      ]
     }
   ],
   "passiveAbilities": [],
@@ -82,10 +89,20 @@
   "stKinds": [
     "INFO/ravenkeeper",
     "RESOLVE/ravenkeeper/action",
-    "TRIGGER/ravenkeeper/MOMENT_DEATH_RESOLVED"
+    "TRIGGER/ravenkeeper/MOMENT_DEATH_RESOLVED",
+    "TRIGGER/ravenkeeper/MOMENT_PUT_TO_SLEEP"
   ],
   "factTags": [
     "makes-choice",
     "one-time-info"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Ravenkeeper to sleep (text)"
+      ]
+    }
   ]
 }

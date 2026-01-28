@@ -38,12 +38,20 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Shabaloth to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
       "kind": "night_action",
-      "usage": "once_per_game",
+      "usage": "first_night",
       "description": "Each night*, choose 2 players: they die. A dead player you chose last night might be regurgitated.",
       "resolution": {
         "stKind": "RESOLVE/shabaloth/action",
@@ -61,9 +69,6 @@
           "targetCount": 2,
           "description": "Choose 2 players"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],
@@ -79,10 +84,30 @@
     "isGlobalRule": false
   },
   "stKinds": [
-    "RESOLVE/shabaloth/action"
+    "RESOLVE/shabaloth/action",
+    "TRIGGER/shabaloth/MOMENT_PUT_TO_SLEEP"
   ],
   "todos": [
     "Storyteller discretion noted near \"storyteller may\".",
     "Storyteller discretion noted near \"the storyteller decides\"."
+  ],
+  "effectNotes": [
+    {
+      "effectType": "NO_ABILITY",
+      "source": "shabaloth",
+      "description": "Poisoned players appear to have an ability but the Storyteller blocks it.",
+      "evidence": [
+        "have no ability (text)"
+      ]
+    }
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Shabaloth to sleep (text)"
+      ]
+    }
   ]
 }

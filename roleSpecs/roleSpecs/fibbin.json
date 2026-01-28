@@ -10,7 +10,21 @@
     "On the first night, all players get correct information. On the second night, the Empath learns they are neighbouring one evil player, but both their neighbours are actually good. For the rest of the game, all good players get correct information.",
     "The Virgin is nominated by a Townsfolk. This Townsfolk is executed immediately because the Fibbin cannot make an ability malfunction. Later, the Monk protects a player. Again, the Monk's ability cannot fail due to the Fibbin ability. Later, the Ravenkeeper dies at night and gets false information, because information from an ability can be affected by the Fibbin ability."
   ],
-  "setupModifications": [],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_PUT_THEIR_NO_ABILITY",
+      "payload": {
+        "token": "put their NO ABILITY",
+        "placement": "their",
+        "description": "Place the put their NO ABILITY reminder token by their."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "put their NO ABILITY reminder token by their token"
+      ]
+    }
+  ],
   "nightOrderSteps": [
     {
       "when": "firstNight",
@@ -39,7 +53,7 @@
   "activeAbilities": [
     {
       "kind": "night_action",
-      "usage": "once_per_game",
+      "usage": "first_night",
       "description": "Once per game, 1 good player might get incorrect information.",
       "resolution": {
         "stKind": "RESOLVE/fibbin/action",
@@ -50,16 +64,13 @@
         "during the night (text)",
         "first night (text)",
         "at night (text)"
-      ],
-      "spend": {
-        "marksNoAbilityEffect": true
-      }
+      ]
     }
   ],
   "jinxes": [],
   "tags": {
     "isInfoRole": true,
-    "isSetupModifier": false,
+    "isSetupModifier": true,
     "actsAtNight": true,
     "actsByClaim": false,
     "hasRoleSwap": false,

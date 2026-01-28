@@ -27,12 +27,20 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Engineer to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
       "kind": "night_action",
-      "usage": "once_per_game",
+      "usage": "first_night",
       "description": "Once per game, at night, choose which Minions or which Demon is in play.",
       "resolution": {
         "stKind": "RESOLVE/engineer/action",
@@ -50,9 +58,6 @@
           "targetCount": 1,
           "description": "Choose a player"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],
@@ -82,9 +87,19 @@
   },
   "stKinds": [
     "INFO/engineer",
-    "RESOLVE/engineer/action"
+    "RESOLVE/engineer/action",
+    "TRIGGER/engineer/MOMENT_PUT_TO_SLEEP"
   ],
   "todos": [
     "Storyteller discretion noted near \"storyteller chooses\"."
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Engineer to sleep (text)"
+      ]
+    }
   ]
 }

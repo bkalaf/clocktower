@@ -38,12 +38,20 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Bone Collector to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
       "kind": "day_claim",
-      "usage": "once_per_game",
+      "usage": "each_day",
       "description": "Once per game, at night*, choose a dead player: they regain their ability until dusk.",
       "resolution": {
         "stKind": "RESOLVE/bone_collector/action",
@@ -62,9 +70,6 @@
           "targetCount": 1,
           "description": "Choose a player"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],
@@ -81,6 +86,16 @@
   },
   "stKinds": [
     "INFO/bone_collector",
-    "RESOLVE/bone_collector/action"
+    "RESOLVE/bone_collector/action",
+    "TRIGGER/bone_collector/MOMENT_PUT_TO_SLEEP"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Bone Collector to sleep (text)"
+      ]
+    }
   ]
 }

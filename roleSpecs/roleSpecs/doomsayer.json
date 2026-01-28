@@ -17,7 +17,7 @@
   "activeAbilities": [
     {
       "kind": "day_claim",
-      "usage": "once_per_game",
+      "usage": "each_day",
       "description": "If 4 or more players live, each living player may publicly choose (once per game) that a player of their own alignment dies.",
       "resolution": {
         "stKind": "RESOLVE/doomsayer/action",
@@ -34,9 +34,6 @@
           "targetCount": 1,
           "description": "Choose a player"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],

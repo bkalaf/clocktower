@@ -13,7 +13,21 @@
     "There are three players alive. There are no nominations for execution today. Good wins.",
     "There are five players alive, including two Travellers. Both Travellers are exiled, and the vote is tied between the remaining players. Because a tied vote means neither player is executed, good wins."
   ],
-  "setupModifications": [],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_DEAD",
+      "payload": {
+        "token": "DEAD",
+        "placement": "that character",
+        "description": "Place the DEAD reminder token by that character."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "'s DEAD reminder token by that character token"
+      ]
+    }
+  ],
   "nightOrderSteps": [
     {
       "when": "everyNight",
@@ -94,7 +108,7 @@
   ],
   "tags": {
     "isInfoRole": true,
-    "isSetupModifier": false,
+    "isSetupModifier": true,
     "actsAtNight": true,
     "actsByClaim": false,
     "hasRoleSwap": false,

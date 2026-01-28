@@ -13,7 +13,20 @@
     "Lewis is the Artist, and claims to be the Goblin when nominated. He is executed, and the game continues.",
     "Doug is the Goblin. He claimed to be the Goblin yesterday and the day before, but not today. He is executed. The game continues."
   ],
-  "setupModifications": [],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_DECLARE_TO_THE_GROUP_THAT_THEY_HAVE_CLAIMED_TO_BE_THE_GOBLIN_AND_PRETEND_TO_MOVE_A",
+      "payload": {
+        "token": "Declare to the group that they have claimed to be the Goblin and pretend to move a",
+        "description": "Declare to the group that they have claimed to be the Goblin and pretend to move a reminder token is marked during setup."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "Declare to the group that they have claimed to be the Goblin and pretend to move a reminder token"
+      ]
+    }
+  ],
   "nightOrderSteps": [],
   "onMoments": [],
   "passiveAbilities": [
@@ -44,7 +57,7 @@
   ],
   "tags": {
     "isInfoRole": false,
-    "isSetupModifier": false,
+    "isSetupModifier": true,
     "actsAtNight": false,
     "actsByClaim": false,
     "hasRoleSwap": false,

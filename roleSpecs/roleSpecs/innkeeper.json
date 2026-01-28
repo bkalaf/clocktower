@@ -26,7 +26,15 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Innkeeper to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [
     {
       "kind": "DEATH_PREVENTION",
@@ -87,9 +95,19 @@
     "isGlobalRule": false
   },
   "stKinds": [
-    "RESOLVE/innkeeper/action"
+    "RESOLVE/innkeeper/action",
+    "TRIGGER/innkeeper/MOMENT_PUT_TO_SLEEP"
   ],
   "todos": [
     "Storyteller discretion noted near \"storyteller chooses\"."
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Innkeeper to sleep (text)"
+      ]
+    }
   ]
 }

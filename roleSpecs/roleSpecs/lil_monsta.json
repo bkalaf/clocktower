@@ -20,6 +20,18 @@
       "evidence": [
         "[+1 minion] (text)"
       ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_MARK_THEM_WITH_THE_IS_THE_DEMON",
+      "payload": {
+        "token": "Mark them with the IS THE DEMON",
+        "description": "Mark them with the IS THE DEMON reminder token is marked during setup."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "Mark them with the IS THE DEMON reminder token"
+      ]
     }
   ],
   "nightOrderSteps": [

@@ -14,7 +14,15 @@
   ],
   "setupModifications": [],
   "nightOrderSteps": [],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Juggler to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [],
   "jinxes": [
@@ -36,6 +44,39 @@
     "isGlobalRule": false
   },
   "stKinds": [
-    "INFO/juggler"
+    "INFO/juggler",
+    "TRIGGER/juggler/MOMENT_PUT_TO_SLEEP"
+  ],
+  "nightCardConstraints": [
+    {
+      "cards": [
+        {
+          "type": "ZERO",
+          "equals": "0"
+        },
+        {
+          "type": "ONE",
+          "equals": "1"
+        },
+        {
+          "type": "TWO",
+          "equals": "2"
+        }
+      ],
+      "method": "fingers",
+      "scope": "equaling the number of CORRECT reminders",
+      "evidence": [
+        "Show them fingers (0, 1, 2, etc.) equaling the number of CORRECT reminders. (text)"
+      ]
+    }
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Juggler to sleep (text)"
+      ]
+    }
   ]
 }

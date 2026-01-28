@@ -31,6 +31,31 @@
         "add a townsfolk character token (text)",
         "put the swapped townsfolk character token in the bag (text)"
       ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_IS_THE_DRUNK",
+      "payload": {
+        "token": "IS THE DRUNK",
+        "description": "IS THE DRUNK reminder token is marked during setup."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "'s IS THE DRUNK reminder token"
+      ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_IS_THE_DRUNK",
+      "payload": {
+        "token": "IS THE DRUNK",
+        "placement": "any Townsfolk character",
+        "description": "Place the IS THE DRUNK reminder token by any Townsfolk character."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "'s IS THE DRUNK reminder token by any Townsfolk character token"
+      ]
     }
   ],
   "nightOrderSteps": [

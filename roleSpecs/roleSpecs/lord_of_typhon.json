@@ -26,7 +26,15 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Lord of Typhon to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
@@ -71,9 +79,19 @@
     "isGlobalRule": false
   },
   "stKinds": [
-    "RESOLVE/lord_of_typhon/action"
+    "RESOLVE/lord_of_typhon/action",
+    "TRIGGER/lord_of_typhon/MOMENT_PUT_TO_SLEEP"
   ],
   "todos": [
     "Storyteller discretion noted near \"the storyteller decides\"."
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Lord of Typhon to sleep (text)"
+      ]
+    }
   ]
 }

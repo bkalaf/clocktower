@@ -47,7 +47,7 @@
   "activeAbilities": [
     {
       "kind": "night_action",
-      "usage": "once_per_game",
+      "usage": "each_night",
       "description": "At least once per game, the Storyteller will make a mistake, correct it, and publicly admit to it.",
       "resolution": {
         "stKind": "RESOLVE/deus_ex_fiasco/action",
@@ -58,10 +58,7 @@
         "every night (text)",
         "during the night (text)",
         "at night (text)"
-      ],
-      "spend": {
-        "marksNoAbilityEffect": true
-      }
+      ]
     }
   ],
   "jinxes": [],

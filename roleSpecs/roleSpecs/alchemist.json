@@ -25,7 +25,15 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Alchemist to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [
     {
       "kind": "REGISTRATION_MODIFIER",
@@ -51,7 +59,7 @@
   "activeAbilities": [
     {
       "kind": "day_claim",
-      "usage": "first_night",
+      "usage": "each_day",
       "description": "You have a Minion ability. When using this, the Storyteller may prompt you to choose differently.",
       "resolution": {
         "stKind": "RESOLVE/alchemist/action",
@@ -137,9 +145,19 @@
     "INFO/alchemist",
     "RESOLVE/alchemist/action",
     "RULES/alchemist_global_rule",
-    "WINCHECK/alchemist"
+    "WINCHECK/alchemist",
+    "TRIGGER/alchemist/MOMENT_PUT_TO_SLEEP"
   ],
   "todos": [
     "Storyteller discretion noted near \"storyteller may\"."
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Alchemist to sleep (text)"
+      ]
+    }
   ]
 }

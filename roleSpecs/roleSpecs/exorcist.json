@@ -26,7 +26,16 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Exorcist to sleep (text)",
+        "Put the Demon to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
@@ -84,6 +93,17 @@
   },
   "stKinds": [
     "INFO/exorcist",
-    "RESOLVE/exorcist/action"
+    "RESOLVE/exorcist/action",
+    "TRIGGER/exorcist/MOMENT_PUT_TO_SLEEP"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Exorcist to sleep (text)",
+        "Put the Demon to sleep (text)"
+      ]
+    }
   ]
 }

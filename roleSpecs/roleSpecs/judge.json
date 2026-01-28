@@ -10,7 +10,21 @@
     "The Slayer was about to die, but the Po is nominated and every alive player votes, so now the Po is about to die. The evil Judge decides that the Po’s execution fails. So, as before, the Slayer is about to die, and the nomination process continues.",
     "The good Judge nominates the Professor. Nobody votes, but the Judge may not use their ability. A Traveller's exile is voted on. Once again, the Judge may not use their ability. The Grandmother nominates the Goon. Even though the Goon got only one vote, the Judge decides that the Goon is executed immediately."
   ],
-  "setupModifications": [],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_NO_ABILITY",
+      "payload": {
+        "token": "NO ABILITY",
+        "placement": "the Judge",
+        "description": "Place the NO ABILITY reminder token by the Judge."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "’s NO ABILITY reminder token by the Judge token"
+      ]
+    }
+  ],
   "nightOrderSteps": [],
   "onMoments": [],
   "passiveAbilities": [],
@@ -41,7 +55,7 @@
   "jinxes": [],
   "tags": {
     "isInfoRole": false,
-    "isSetupModifier": false,
+    "isSetupModifier": true,
     "actsAtNight": false,
     "actsByClaim": false,
     "hasRoleSwap": false,

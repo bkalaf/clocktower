@@ -17,7 +17,15 @@
   ],
   "setupModifications": [],
   "nightOrderSteps": [],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_REGISTRATION_CHECKED",
+      "description": "Storyteller decides how this character registers during setup.",
+      "evidence": [
+        "misregistration fact list (fact)"
+      ]
+    }
+  ],
   "passiveAbilities": [
     {
       "kind": "REGISTRATION_MODIFIER",
@@ -95,13 +103,15 @@
   },
   "stKinds": [
     "INFO/recluse",
-    "RESOLVE/recluse/action"
+    "RESOLVE/recluse/action",
+    "TRIGGER/recluse/MOMENT_REGISTRATION_CHECKED"
   ],
   "todos": [
     "Storyteller discretion noted near \"storyteller chooses\".",
     "Storyteller discretion noted near \"the storyteller decides\"."
   ],
   "factTags": [
-    "misregistration"
+    "misregistration",
+    "persists-through-death"
   ]
 }

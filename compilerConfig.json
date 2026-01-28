@@ -3,6 +3,7 @@
     "nightAction": 2,
     "dayClaim": 1
   },
+  "troubleBrewingOnlyRestrictions": false,
   "forcedOverrides": {
     "virgin": {
       "onMoments": [

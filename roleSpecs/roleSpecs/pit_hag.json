@@ -26,7 +26,15 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Pit-Hag to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
@@ -119,9 +127,19 @@
   },
   "stKinds": [
     "INFO/pit_hag",
-    "RESOLVE/pit_hag/action"
+    "RESOLVE/pit_hag/action",
+    "TRIGGER/pit_hag/MOMENT_PUT_TO_SLEEP"
   ],
   "todos": [
     "Storyteller discretion noted near \"you may need to\"."
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Pit-Hag to sleep (text)"
+      ]
+    }
   ]
 }

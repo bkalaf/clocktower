@@ -27,7 +27,7 @@
   "activeAbilities": [
     {
       "kind": "night_action",
-      "usage": "once_per_game",
+      "usage": "first_night",
       "description": "The Demon may choose not to attack & must do this at least once per game. Evil players get normal starting info.",
       "resolution": {
         "stKind": "RESOLVE/toymaker/action",
@@ -44,9 +44,6 @@
           "targetCount": 1,
           "description": "Choose a player"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],

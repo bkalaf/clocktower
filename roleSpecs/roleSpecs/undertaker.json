@@ -14,7 +14,21 @@
     "The Spy is executed. Two Travellers are exiled. That night, the Undertaker is shown the Butler token, because the Spy is registering as the Butler, and because the exiles are not executions.",
     "Nobody was executed today. That night, the Undertaker does not wake."
   ],
-  "setupModifications": [],
+  "setupModifications": [
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_DIED_TODAY",
+      "payload": {
+        "token": "DIED TODAY",
+        "placement": "the dead player's character",
+        "description": "Place the DIED TODAY reminder token by the dead player's character."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "'s DIED TODAY reminder token by the dead player's character token"
+      ]
+    }
+  ],
   "nightOrderSteps": [
     {
       "when": "otherNights",
@@ -27,7 +41,15 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Undertaker to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
@@ -57,7 +79,7 @@
   "jinxes": [],
   "tags": {
     "isInfoRole": true,
-    "isSetupModifier": false,
+    "isSetupModifier": true,
     "actsAtNight": true,
     "actsByClaim": true,
     "hasRoleSwap": false,
@@ -67,12 +89,22 @@
   },
   "stKinds": [
     "INFO/undertaker",
-    "RESOLVE/undertaker/action"
+    "RESOLVE/undertaker/action",
+    "TRIGGER/undertaker/MOMENT_PUT_TO_SLEEP"
   ],
   "todos": [
     "Storyteller discretion noted near \"storyteller chooses\"."
   ],
   "factTags": [
     "ongoing-info"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Undertaker to sleep (text)"
+      ]
+    }
   ]
 }

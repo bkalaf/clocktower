@@ -22,6 +22,18 @@
       "evidence": [
         "hidden (text)"
       ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_USE_EVIL",
+      "payload": {
+        "token": "Use evil",
+        "description": "Use evil reminder token is marked during setup."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "Use evil reminder token"
+      ]
     }
   ],
   "nightOrderSteps": [],

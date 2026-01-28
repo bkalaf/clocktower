@@ -13,7 +13,7 @@ import {
 describe('catalogBuilder heuristics', () => {
   const sampleRecords: NormalizedWikiRecord[] = [
     {
-      roleKey: 'fortune_teller',
+      roleKey: 'fortuneteller',
       title: 'Fortune Teller',
       url: 'https://wiki/example/Fortune_Teller',
       categoryHint: 'townsfolk',
@@ -44,20 +44,20 @@ describe('catalogBuilder heuristics', () => {
 
   it('infers patterns, stKinds, claims, and editions', () => {
     const { roleSpecCatalog, promptRoleContextCatalog } = buildCatalogsFromRecords(sampleRecords)
-    const fortune = roleSpecCatalog.find((spec) => spec.roleKey === 'fortune_teller')
+    const fortune = roleSpecCatalog.find((spec) => spec.roleKey === 'fortuneteller')
     expect(fortune).toBeDefined()
     if (!fortune) return
     expect(fortune.patterns).toEqual(expect.arrayContaining([Pattern.P2_SCHEDULED_ACTION, Pattern.P3_INFO_PROVIDER]))
-    expect(fortune.claimKinds).toEqual(expect.arrayContaining(['CLAIM/FORTUNE_TELLER']))
+    expect(fortune.claimKinds).toEqual(expect.arrayContaining(['CLAIM/FORTUNETELLER']))
     expect(fortune.edition).toBe('TB')
-    expect(fortune.stKinds).toEqual(expect.arrayContaining(['INFO/fortune_teller', 'RESOLVE/fortune_teller/action']))
+    expect(fortune.stKinds).toEqual(expect.arrayContaining(['INFO/fortuneteller', 'RESOLVE/fortuneteller/action']))
     const puzzleRole = roleSpecCatalog.find((spec) => spec.roleKey === 'puzzle_master')
     expect(puzzleRole).toBeDefined()
     if (!puzzleRole) return
     expect(puzzleRole.claimKinds).toEqual(
       expect.arrayContaining([expect.stringContaining('/GUESS'), expect.stringContaining('/QUESTION')])
     )
-    const promptContext = promptRoleContextCatalog.find((ctx) => ctx.roleKey === 'fortune_teller')
+    const promptContext = promptRoleContextCatalog.find((ctx) => ctx.roleKey === 'fortuneteller')
     expect(promptContext).toBeDefined()
     if (!promptContext) return
     expect(promptContext.howToRunHighlights[0].length).toBeLessThanOrEqual(200)

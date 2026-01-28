@@ -42,7 +42,7 @@
   "activeAbilities": [
     {
       "kind": "day_claim",
-      "usage": "once_per_game",
+      "usage": "each_day",
       "description": "Once per game, during the day, visit the Storyteller for some advice to help your team win.",
       "resolution": {
         "stKind": "RESOLVE/fisherman/action",
@@ -58,9 +58,6 @@
           "targetCount": 1,
           "description": "Choose a player"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],

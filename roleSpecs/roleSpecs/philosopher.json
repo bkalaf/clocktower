@@ -26,12 +26,20 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Philosopher to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
       "kind": "night_action",
-      "usage": "once_per_game",
+      "usage": "first_night",
       "description": "Once per game, at night, choose a good character: gain that ability. If this character is in play, they are drunk.",
       "resolution": {
         "stKind": "RESOLVE/philosopher/action",
@@ -49,9 +57,6 @@
           "targetCount": 1,
           "description": "Choose a player"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],
@@ -75,6 +80,16 @@
   },
   "stKinds": [
     "INFO/philosopher",
-    "RESOLVE/philosopher/action"
+    "RESOLVE/philosopher/action",
+    "TRIGGER/philosopher/MOMENT_PUT_TO_SLEEP"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Philosopher to sleep (text)"
+      ]
+    }
   ]
 }

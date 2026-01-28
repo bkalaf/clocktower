@@ -49,7 +49,7 @@
   "activeAbilities": [
     {
       "kind": "day_claim",
-      "usage": "once_per_game",
+      "usage": "each_day",
       "description": "1 player is drunk, even if you die. If you guess (once) who it is, learn the Demon player, but guess wrong & get false info.",
       "resolution": {
         "stKind": "RESOLVE/puzzlemaster/action",
@@ -59,10 +59,7 @@
       "evidence": [
         "first night (text)",
         "publicly guess (text)"
-      ],
-      "spend": {
-        "marksNoAbilityEffect": true
-      }
+      ]
     }
   ],
   "jinxes": [],

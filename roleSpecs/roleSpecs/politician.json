@@ -89,5 +89,8 @@
   "stKinds": [
     "RULES/politician_global_rule",
     "WINCHECK/politician"
+  ],
+  "factTags": [
+    "persists-through-death"
   ]
 }

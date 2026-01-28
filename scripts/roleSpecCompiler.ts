@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { infoKind, resolveKind, rulesKind, triggerKind, winCheckKind } from '../src/spec/stKinds.ts';
+import { EffectType as EngineEffectType } from '../src/spec/enginePrimitives.ts';
 import type { JinxEntry, NormalizedWikiPage, RoleRecord } from '../src/spec/wikiTypes.ts';
 
 type RoleCategory = 'townsfolk' | 'outsider' | 'minion' | 'demon' | 'traveller' | 'fabled' | 'loric' | 'experimental';
@@ -44,6 +45,22 @@ type SetupModificationSpec =
           payload: unknown;
           reason?: string;
       });
+
+interface StartKnowingDetail {
+    detail: string;
+    targetType?: string;
+    pairCount?: number;
+    neighbors?: number;
+    zeroPossible?: boolean;
+    focus?: string;
+}
+
+interface ReminderTokenMention {
+    token: string;
+    placement?: string;
+    snippet: string;
+    alignment?: string;
+}
 
 interface PassiveAbilityBase {
     evidence: string[];
@@ -116,6 +133,29 @@ interface ActiveAbilityResolution {
     emitEvent?: string;
 }
 
+type NightCardType = { type: 'ZERO'; equals: '0' } | { type: 'ONE'; equals: '1' } | { type: 'TWO'; equals: '2' };
+
+interface NightCardConstraint {
+    cards: NightCardType[];
+    method?: string;
+    scope?: string;
+    evidence: string[];
+}
+
+interface EngineEffectNote {
+    effectType: EngineEffectType;
+    duration?: string;
+    source?: string;
+    description: string;
+    evidence: string[];
+}
+
+interface SpecialActionNote {
+    key: string;
+    description: string;
+    evidence: string[];
+}
+
 interface ActiveAbilitySpend {
     marksNoAbilityEffect?: boolean;
 }
@@ -129,7 +169,7 @@ interface ActiveAbilitySpec {
     spend?: ActiveAbilitySpend;
     evidence: string[];
 }
-   
+
 interface RoleTagSpec {
     isInfoRole: boolean;
     isSetupModifier: boolean;
@@ -160,11 +200,15 @@ interface RoleSpec {
     stKinds: string[];
     todos?: string[];
     factTags?: string[];
+    nightCardConstraints?: NightCardConstraint[];
+    effectNotes?: EngineEffectNote[];
+    specialActions?: SpecialActionNote[];
 }
 
 interface CompilerConfig {
     phraseThresholds?: Partial<Record<'nightAction' | 'dayClaim', number>>;
     forcedOverrides?: Record<string, Partial<RoleSpec>>;
+    troubleBrewingOnlyRestrictions?: boolean;
 }
 
 interface CompilerReport {
@@ -333,6 +377,14 @@ const ONE_TIME_INFO_ROLES = new Set(['ravenkeeper']);
 const ACTIVE_ABILITY_ROLES = new Set(['slayer']);
 const PROTECTION_TAGGED_ROLES = new Set(['monk', 'soldier', 'mayor']);
 const MISREGISTRATION_ROLES = new Set(['spy', 'recluse']);
+const FORCE_START_KNOWING_ROLES = new Set([
+    'chef',
+    'empath',
+    'librarian',
+    'investigator',
+    'washerwoman',
+    'fortuneteller'
+]);
 const NIGHT_ROLE_GROUP_FACTS: Array<[Set<string>, string]> = [
     [MASKING_ROLES, 'masking'],
     [SETUP_MODIFIER_ROLES, 'setup-modifier'],
@@ -349,6 +401,16 @@ const NIGHT_ROLE_GROUP_FACTS: Array<[Set<string>, string]> = [
     [ALIVE_CONDITIONAL_ROLES, 'alive-cond']
 ];
 
+const TROUBLE_BREWING_TAG = 'Trouble Brewing';
+
+function hasTroubleBrewingTag(record: RoleRecord, page?: NormalizedWikiPage): boolean {
+    const recordTags = record.editionTags ?? [];
+    const pageTags = page?.editionTags ?? [];
+    const allTags = [...recordTags, ...pageTags];
+    console.log(`allTags`, allTags);
+    return allTags.some((tag) => tag.toLowerCase() === TROUBLE_BREWING_TAG.toLowerCase());
+}
+
 const ROLE_EFFECT_OVERRIDES: Record<string, EffectType> = {
     fortuneteller: 'requestInfo',
     undertaker: 'requestInfo',
@@ -356,7 +418,7 @@ const ROLE_EFFECT_OVERRIDES: Record<string, EffectType> = {
     ravenkeeper: 'requestInfo',
     monk: 'preventDeath',
     butler: 'modifyVote',
-    poisoner: 'killAttempt',
+    poisoner: 'applyEffect',
     slayer: 'killAttempt',
     imp: 'killAttempt',
     soldier: 'killAttempt',
@@ -413,6 +475,40 @@ const MASKED_ROLE_PHRASES = [
     'add a townsfolk character token',
     'put the swapped townsfolk character token in the bag'
 ];
+
+const REMINDER_TOKEN_REGEX = /(?:’s |'s )?([A-Z][A-Z0-9_ ]+?) reminder token(?: by ([^.,;]+?) token)?/gi;
+const PERMANENT_MARKER_PHRASES = ['same player throughout the entire game'];
+const ALIGNMENT_KEYWORDS = ['good', 'evil', 'townsfolk', 'outsider', 'minion', 'demon'];
+const START_KNOWING_DETAILS: Record<string, StartKnowingDetail> = {
+    chef: {
+        detail: 'Counts how many adjacent evil pairs are touching, counting overlaps separately.',
+        focus: 'evil pairs',
+        targetType: 'evil',
+        pairCount: 2
+    },
+    empath: {
+        detail: 'Each night you learn how many of your two alive neighbors are evil.',
+        focus: 'neighboring evil',
+        targetType: 'evil',
+        neighbors: 2
+    },
+    librarian: {
+        detail: 'One of two players is a specific Outsider or there are zero Outsiders in play.',
+        targetType: 'outsider',
+        pairCount: 2,
+        zeroPossible: true
+    },
+    investigator: {
+        detail: 'One of two players is a specific Minion.',
+        targetType: 'minion',
+        pairCount: 2
+    },
+    washerwoman: {
+        detail: 'One of two players is a specific Townsfolk.',
+        targetType: 'townsfolk',
+        pairCount: 2
+    }
+};
 
 function parseCliArgs(argv: string[]): CompilerOptions {
     const args = [...argv];
@@ -558,7 +654,10 @@ function determineCategory(record: RoleRecord, page?: NormalizedWikiPage): RoleC
     return 'experimental';
 }
 
-function buildPhraseChecker(normalizedText: string, tokens: string[]): (phrase: string) => { hit: boolean; evidence: string } {
+function buildPhraseChecker(
+    normalizedText: string,
+    tokens: string[]
+): (phrase: string) => { hit: boolean; evidence: string } {
     const normalizedTokens = tokens.map((token) => token.toLowerCase());
 
     const containsTokens = (phraseWords: string[]): boolean => {
@@ -607,8 +706,15 @@ function collectMatches(phrases: string[], checker: (phrase: string) => { hit: b
     return matches;
 }
 
-function detectRoleCountChanges(text: string): Array<{ target: 'outsider' | 'minion' | 'townsfolk'; delta: number; evidence: string; reason?: string }> {
-    const changes: Array<{ target: 'outsider' | 'minion' | 'townsfolk'; delta: number; evidence: string; reason?: string }> = [];
+function detectRoleCountChanges(
+    text: string
+): Array<{ target: 'outsider' | 'minion' | 'townsfolk'; delta: number; evidence: string; reason?: string }> {
+    const changes: Array<{
+        target: 'outsider' | 'minion' | 'townsfolk';
+        delta: number;
+        evidence: string;
+        reason?: string;
+    }> = [];
     const pushChange = (targetRaw: string, delta: number, evidence: string, reason?: string) => {
         const normalized = ROLE_COUNT_MAP[targetRaw.toLowerCase()];
         if (!normalized || delta === 0) {
@@ -636,7 +742,9 @@ function detectRoleCountChanges(text: string): Array<{ target: 'outsider' | 'min
     return changes;
 }
 
-function detectRegistrationTargets(text: string): Array<'evil' | 'good' | 'demon' | 'minion' | 'townsfolk' | 'outsider' | { roleKey: string }> {
+function detectRegistrationTargets(
+    text: string
+): Array<'evil' | 'good' | 'demon' | 'minion' | 'townsfolk' | 'outsider' | { roleKey: string }> {
     const targets: Array<'evil' | 'good' | 'demon' | 'minion' | 'townsfolk' | 'outsider' | { roleKey: string }> = [];
     const seen = new Set<string>();
     let match: RegExpExecArray | null;
@@ -685,43 +793,218 @@ function describeSnip(text: string, limit = 160): string {
     return `${excerpt.slice(0, limit).trim()}…`;
 }
 
+function collectReminderTokens(text?: string): ReminderTokenMention[] {
+    if (!text) {
+        return [];
+    }
+    const mentions: ReminderTokenMention[] = [];
+    const seen = new Set<string>();
+    REMINDER_TOKEN_REGEX.lastIndex = 0;
+    let match: RegExpExecArray | null;
+    while ((match = REMINDER_TOKEN_REGEX.exec(text))) {
+        const token = match[1].trim();
+        const placement = match[2]?.trim().replace(/\s+/g, ' ');
+        const key = `${token}|${placement ?? ''}`;
+        if (seen.has(key)) {
+            continue;
+        }
+        seen.add(key);
+        const snippet = match[0].trim();
+        mentions.push({
+            token,
+            placement,
+            snippet,
+            alignment: extractAlignmentFromSnippet(snippet, placement)
+        });
+    }
+    return mentions;
+}
+
+function normalizeReminderConstraintKey(token: string): string {
+    return token
+        .toUpperCase()
+        .replace(/[^A-Z0-9]+/g, '_')
+        .replace(/_+/g, '_')
+        .replace(/^_+|_+$/g, '');
+}
+
+function inferAlignmentFromText(text?: string): string | undefined {
+    if (!text) {
+        return undefined;
+    }
+    const normalized = text.toLowerCase();
+    for (const keyword of ALIGNMENT_KEYWORDS) {
+        if (normalized.includes(keyword)) {
+            return keyword;
+        }
+    }
+    return undefined;
+}
+
+function extractAlignmentFromSnippet(snippet: string, placement?: string): string | undefined {
+    return inferAlignmentFromText(`${snippet} ${placement ?? ''}`);
+}
+
+const NIGHT_CARD_REGEX =
+    /Show (?:them|the [^()]*)? (fingers|cards|signals|signals?)(?:[^()]*?)\(([^)]+)\)([^.]*)(?:\.|$)/gi;
+const PUT_TO_SLEEP_REGEX = /Put the [^.]+? to sleep/gi;
+const GRIMOIRE_VIEW_REGEX = /\b(?:see|show)(?: [^,]*?)? Grimoire/gi;
+
+const NIGHT_CARD_MAP: Record<number, NightCardType> = {
+    0: { type: 'ZERO', equals: '0' },
+    1: { type: 'ONE', equals: '1' },
+    2: { type: 'TWO', equals: '2' }
+};
+
+function mapNumberToNightCard(num: number): NightCardType | undefined {
+    return NIGHT_CARD_MAP[num];
+}
+
+function extractNightCardConstraints(text?: string): NightCardConstraint[] {
+    if (!text) {
+        return [];
+    }
+    const constraints: NightCardConstraint[] = [];
+    const seen = new Set<string>();
+    let match: RegExpExecArray | null;
+    NIGHT_CARD_REGEX.lastIndex = 0;
+    while ((match = NIGHT_CARD_REGEX.exec(text))) {
+        const method = match[1]?.trim();
+        const scopedComment = match[3]?.trim();
+        const numbers = Array.from(match[2].matchAll(/\d+/g)).map((entry) => Number(entry[0]));
+        const cards = numbers.map(mapNumberToNightCard).filter(Boolean) as NightCardType[];
+        if (!cards.length) {
+            continue;
+        }
+        const snippet = `${match[0].trim()} (text)`;
+        if (seen.has(snippet)) {
+            continue;
+        }
+        seen.add(snippet);
+        const alignment = extractAlignmentFromSnippet(match[0].trim(), scopedComment);
+        constraints.push({
+            cards,
+            method,
+            scope: scopedComment?.replace(/\s+/g, ' ').trim(),
+            evidence: [snippet],
+            ...(alignment ? { alignment } : {})
+        });
+    }
+    return constraints;
+}
+
+function extractPutToSleepEvidence(text?: string): string[] {
+    if (!text) {
+        return [];
+    }
+    const evidence: string[] = [];
+    const seen = new Set<string>();
+    let match: RegExpExecArray | null;
+    PUT_TO_SLEEP_REGEX.lastIndex = 0;
+    while ((match = PUT_TO_SLEEP_REGEX.exec(text))) {
+        const snippet = `${match[0].trim()} (text)`;
+        if (seen.has(snippet)) {
+            continue;
+        }
+        seen.add(snippet);
+        evidence.push(snippet);
+    }
+    return evidence;
+}
+
+function extractGrimoireEvidence(text?: string): string[] {
+    if (!text) {
+        return [];
+    }
+    const evidence: string[] = [];
+    const seen = new Set<string>();
+    let match: RegExpExecArray | null;
+    GRIMOIRE_VIEW_REGEX.lastIndex = 0;
+    while ((match = GRIMOIRE_VIEW_REGEX.exec(text))) {
+        const snippet = `${match[0].trim()} (text)`;
+        if (seen.has(snippet)) {
+            continue;
+        }
+        seen.add(snippet);
+        evidence.push(snippet);
+    }
+    return evidence;
+}
+
+function extractEffectNotes(roleKey: string, text?: string): EngineEffectNote[] {
+    if (!text) {
+        return [];
+    }
+    const notes: EngineEffectNote[] = [];
+    const lower = text.toLowerCase();
+    const poisonTokenMatch = /poisoned(?: player)? becomes healthy/.test(lower);
+    const poisonReminder = /poisoned reminder token/.test(lower);
+    if (poisonTokenMatch || poisonReminder) {
+        const evidence: string[] = [];
+        if (poisonReminder) {
+            evidence.push('POISONED reminder token (text)');
+        }
+        if (poisonTokenMatch) {
+            evidence.push('poisoned player becomes healthy (text)');
+        }
+        notes.push({
+            effectType: 'POISONED',
+            duration: 'nextDusk',
+            source: roleKey,
+            description: 'Poisoner marks a player with POISONED; the reminder is removed at dusk.',
+            evidence
+        });
+    }
+    if (lower.includes('have no ability')) {
+        notes.push({
+            effectType: 'NO_ABILITY',
+            source: roleKey,
+            description: 'Poisoned players appear to have an ability but the Storyteller blocks it.',
+            evidence: ['have no ability (text)']
+        });
+    }
+    return notes;
+}
+
 function buildRoleSpec(
     record: RoleRecord,
     page: NormalizedWikiPage | undefined,
     ngramIndex: NgramIndex,
-    thresholds: Record<'nightAction' | 'dayClaim', number>
+    thresholds: Record<'nightAction' | 'dayClaim', number>,
+    config: CompilerConfig
 ): RoleSpec {
     const abilityText = page?.abilityText ?? record.abilityText ?? '';
 
-    const sectionText = [
-        page?.sections?.summary,
-        page?.sections?.how_to_run,
-        ...(page?.sections?.examples ?? [])
-    ]
+    const sectionText = [page?.sections?.summary, page?.sections?.how_to_run, ...(page?.sections?.examples ?? [])]
         .filter(Boolean)
         .join(' ');
 
-    const combinedTextBase = [
-        abilityText,
-        record.summary,
-        record.howToRun,
-        sectionText
-    ]
+    const combinedTextBase = [abilityText, record.summary, record.howToRun, sectionText]
         .filter(Boolean)
         .join(' ')
         .replace(/\s+/g, ' ')
         .toLowerCase();
 
     const otherSectionsText =
-        page && page.otherSections
-            ? Object.values(page.otherSections)
-                .filter(Boolean)
-                .join(' ')
-                .replace(/\s+/g, ' ')
-                .toLowerCase()
-            : '';
+        page && page.otherSections ?
+            Object.values(page.otherSections).filter(Boolean).join(' ').replace(/\s+/g, ' ').toLowerCase()
+        :   '';
 
     const combinedText = combinedTextBase;
+    const howToRunText = [record.howToRun, page?.sections?.how_to_run, page?.howToRun]
+        .filter(Boolean)
+        .join(' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    const roleIsTroubleBrewing = hasTroubleBrewingTag(record, page);
+    const restrictionsOnlyForTb = config.troubleBrewingOnlyRestrictions ?? true;
+    const shouldApplyRestrictedFeatures = !restrictionsOnlyForTb || roleIsTroubleBrewing;
+    const nightCardConstraints = shouldApplyRestrictedFeatures ? extractNightCardConstraints(howToRunText) : [];
+    const putToSleepEvidence = shouldApplyRestrictedFeatures ? extractPutToSleepEvidence(howToRunText) : [];
+    const grimoireEvidence = shouldApplyRestrictedFeatures ? extractGrimoireEvidence(howToRunText) : [];
+    const effectNotes = shouldApplyRestrictedFeatures ? extractEffectNotes(record.roleKey, howToRunText) : [];
+    const specialActions: SpecialActionNote[] = [];
+    const persistsThroughDeath = shouldApplyRestrictedFeatures && /even if dead/.test(combinedText);
     const startText = [combinedTextBase, otherSectionsText].filter(Boolean).join(' ').trim();
     const roleTokens = ngramIndex.tokensByRole.get(record.roleKey) ?? [];
 
@@ -763,11 +1046,13 @@ function buildRoleSpec(
 
     const isNightAction = record.signals?.eachNight || hasNightPhrases;
     const actsDuringDay = record.signals?.eachDay || hasDayPhrases;
+    const oncePerGameHit = checker('once per game').hit || checker('one per game').hit;
+    const firstNightHit = checker('first night only').hit || checker('on the first night').hit;
     const usage =
-        checker('once per game').hit || checker('one per game').hit ? 'once_per_game'
-        : checker('first night only').hit || checker('on the first night').hit ? 'first_night'
-        : actsDuringDay ? 'each_day'
+        actsDuringDay ? 'each_day'
+        : firstNightHit ? 'first_night'
         : isNightAction ? 'each_night'
+        : oncePerGameHit ? 'once_per_game'
         : 'variable';
 
     const targetCount = parseTargetCount(abilityText);
@@ -844,17 +1129,19 @@ function buildRoleSpec(
             registersAs,
             scope: registerScope,
             notes: registerMatches.length ? undefined : 'Registration target inferred from context.',
-            evidence: registerMatches.length
-                ? registerMatches
-                : MISREGISTRATION_ROLES.has(record.roleKey)
-                    ? ['misregistration fact list']
-                    : ['registration pattern detected (text)']
+            evidence:
+                registerMatches.length ? registerMatches
+                : MISREGISTRATION_ROLES.has(record.roleKey) ? ['misregistration fact list']
+                : ['registration pattern detected (text)']
         });
     }
     if (deathPreventionMatches.length) {
         const hasExecution = /execution/i.test(combinedText);
         const hasDemonKill = /\bdemon\b/.test(combinedText);
-        const cause = hasExecution ? 'execution' : hasDemonKill ? 'demon_kill' : 'any';
+        const cause =
+            hasExecution ? 'execution'
+            : hasDemonKill ? 'demon_kill'
+            : 'any';
         const resolution = /storyteller may/i.test(combinedText) ? 'st_request' : 'automatic';
         passiveAbilities.push({
             kind: 'DEATH_PREVENTION',
@@ -914,11 +1201,11 @@ function buildRoleSpec(
             evidence: ['attempted execution list (fact)']
         });
     }
-    if (CHECK_REGISTRATION_ROLES.has(record.roleKey)) {
+    if (MISREGISTRATION_ROLES.has(record.roleKey)) {
         onMoments.push({
             moment: 'MOMENT_REGISTRATION_CHECKED',
-            description: 'Storyteller validates this character during registration.',
-            evidence: ['registration check list (fact)']
+            description: 'Storyteller decides how this character registers during setup.',
+            evidence: ['misregistration fact list (fact)']
         });
     }
     if (DEMON_DEATH_CHECKS.has(record.roleKey)) {
@@ -935,15 +1222,34 @@ function buildRoleSpec(
             evidence: ['alive conditional list (fact)']
         });
     }
+    if (putToSleepEvidence.length) {
+        onMoments.push({
+            moment: 'MOMENT_PUT_TO_SLEEP',
+            description: 'Character is put to sleep after using this ability.',
+            evidence: putToSleepEvidence
+        });
+        specialActions.push({
+            key: 'PUT_TO_SLEEP',
+            description: 'The storyteller puts the character to sleep once their action finishes.',
+            evidence: putToSleepEvidence
+        });
+    }
+    if (grimoireEvidence.length) {
+        specialActions.push({
+            key: 'GRIMOIRE_VIEW',
+            description: 'The character is shown the Grimoire during their wake.',
+            evidence: grimoireEvidence
+        });
+    }
 
     const setupModifications: SetupModificationSpec[] = [];
     if (maskDetected) {
         const combinedLower = startText.toLowerCase();
         const shownRoleKey =
-            combinedLower.includes('townsfolk') || combinedLower.includes('townsfolk character') ? 'townsfolk' :
-            combinedLower.includes('outsider') ? 'outsider' :
-            combinedLower.includes('minion') ? 'minion' :
-            'townsfolk';
+            combinedLower.includes('townsfolk') || combinedLower.includes('townsfolk character') ? 'townsfolk'
+            : combinedLower.includes('outsider') ? 'outsider'
+            : combinedLower.includes('minion') ? 'minion'
+            : 'townsfolk';
         setupModifications.push({
             kind: 'ASSIGN_MASKED_ROLE',
             maskedSeat: 'self',
@@ -953,13 +1259,22 @@ function buildRoleSpec(
             evidence: maskMatches
         });
     }
-    if (!maskDetected && startKnowingMatches.length) {
+    const shouldRecordStartKnowledge =
+        !maskDetected && (startKnowingMatches.length > 0 || FORCE_START_KNOWING_ROLES.has(record.roleKey));
+    if (shouldRecordStartKnowledge) {
+        const detailOverride = START_KNOWING_DETAILS[record.roleKey];
+        const payload =
+            detailOverride ? { ...detailOverride } : { detail: 'Start knowledge inferred from description' };
+        const evidence =
+            startKnowingMatches.length > 0 ?
+                startKnowingMatches
+            :   [`${record.roleKey} start knowledge inferred (forced detail)`];
         setupModifications.push({
             kind: 'START_KNOWING',
             recipients: 'self',
-            payload: { detail: 'Start knowledge inferred from description' },
+            payload,
             reason: 'Start knowledge phrases detected',
-            evidence: startKnowingMatches
+            evidence
         });
     }
     if (roleChangeMatches.length) {
@@ -981,12 +1296,45 @@ function buildRoleSpec(
         });
     }
 
+    const reminderTokens = collectReminderTokens(howToRunText);
+    for (const tokenMention of reminderTokens) {
+        const normalizedKey = normalizeReminderConstraintKey(tokenMention.token);
+        const constraintKey = normalizedKey ? `REMINDER_TOKEN_${normalizedKey}` : 'REMINDER_TOKEN';
+        setupModifications.push({
+            kind: 'SETUP_CONSTRAINT',
+            constraintKey,
+            payload: {
+                token: tokenMention.token,
+                placement: tokenMention.placement,
+                description:
+                    tokenMention.placement ?
+                        `Place the ${tokenMention.token} reminder token by ${tokenMention.placement}.`
+                    :   `${tokenMention.token} reminder token is marked during setup.`
+            },
+            reason: 'Reminder token instructions detected',
+            evidence: [tokenMention.snippet]
+        });
+    }
+
+    const permanentMatches = PERMANENT_MARKER_PHRASES.filter((phrase) => combinedText.includes(phrase));
+    if (permanentMatches.length) {
+        setupModifications.push({
+            kind: 'SETUP_CONSTRAINT',
+            constraintKey: 'MARKER_PERSISTENCE',
+            payload: {
+                description:
+                    'The marker stays on the same player for the entire game, even if the storyteller source dies.',
+                duration: 'permanent'
+            },
+            reason: 'Permanent marker phrase detected',
+            evidence: permanentMatches.map((phrase) => `${phrase} (text)`)
+        });
+    }
+
     const nightEvidence =
-        nightMatches.length > 0
-            ? nightMatches
-            : record.signals?.eachNight
-                ? ['each night (signal)']
-                : [];
+        nightMatches.length > 0 ? nightMatches
+        : record.signals?.eachNight ? ['each night (signal)']
+        : [];
 
     const nightOrderSteps: NightOrderStepSpec[] = [];
     if (isNightAction) {
@@ -1002,15 +1350,13 @@ function buildRoleSpec(
         });
     }
 
-    const forcedNightWhen = NIGHT_ACTION_ROLES.has(record.roleKey)
-        ? FIRST_NIGHT_ONLY_ROLES.has(record.roleKey)
-            ? 'firstNight'
-            : EVERY_NIGHT_EXCEPT_FIRST_ROLES.has(record.roleKey)
-                ? 'otherNights'
-                : EVERY_NIGHT_ROLES.has(record.roleKey)
-                    ? 'everyNight'
-                    : 'everyNight'
-        : undefined;
+    const forcedNightWhen =
+        NIGHT_ACTION_ROLES.has(record.roleKey) ?
+            FIRST_NIGHT_ONLY_ROLES.has(record.roleKey) ? 'firstNight'
+            : EVERY_NIGHT_EXCEPT_FIRST_ROLES.has(record.roleKey) ? 'otherNights'
+            : EVERY_NIGHT_ROLES.has(record.roleKey) ? 'everyNight'
+            : 'everyNight'
+        :   undefined;
     if (forcedNightWhen && !nightOrderSteps.some((step) => step.when === forcedNightWhen)) {
         nightOrderSteps.push({
             when: forcedNightWhen,
@@ -1067,6 +1413,9 @@ function buildRoleSpec(
     if (SETUP_MODIFIER_ROLES.has(record.roleKey)) {
         factTags.add('setup-modifier');
     }
+    if (persistsThroughDeath) {
+        factTags.add('persists-through-death');
+    }
     const roleSpec: RoleSpec = {
         roleKey: record.roleKey,
         title: record.title,
@@ -1085,7 +1434,10 @@ function buildRoleSpec(
         tags,
         stKinds: Array.from(stKinds),
         todos: todos.size ? Array.from(todos) : undefined,
-        factTags: factTags.size ? Array.from(factTags).sort() : undefined
+        factTags: factTags.size ? Array.from(factTags).sort() : undefined,
+        nightCardConstraints: nightCardConstraints.length ? nightCardConstraints : undefined,
+        effectNotes: effectNotes.length ? effectNotes : undefined,
+        specialActions: specialActions.length ? specialActions : undefined
     };
 
     return roleSpec;
@@ -1159,7 +1511,7 @@ async function main(): Promise<void> {
 
     const specs: RoleSpec[] = records.map((record) => {
         const page = pages.get(record.roleKey);
-        const built = buildRoleSpec(record, page, ngramIndex, thresholds);
+        const built = buildRoleSpec(record, page, ngramIndex, thresholds, config);
         const override = forcedOverrides[record.roleKey];
         if (override) {
             return mergeSpec(built, override);

@@ -25,7 +25,15 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Devil’s Advocate to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [
     {
       "kind": "REGISTRATION_MODIFIER",
@@ -75,6 +83,16 @@
     "isGlobalRule": false
   },
   "stKinds": [
-    "RESOLVE/devils_advocate/action"
+    "RESOLVE/devils_advocate/action",
+    "TRIGGER/devils_advocate/MOMENT_PUT_TO_SLEEP"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Devil’s Advocate to sleep (text)"
+      ]
+    }
   ]
 }

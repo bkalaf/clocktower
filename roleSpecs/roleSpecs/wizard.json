@@ -32,7 +32,7 @@
   "activeAbilities": [
     {
       "kind": "day_claim",
-      "usage": "once_per_game",
+      "usage": "each_day",
       "description": "Once per game, choose to make a wish. If granted, it might have a price & leave a clue as to its nature.",
       "resolution": {
         "stKind": "RESOLVE/wizard/action",
@@ -49,9 +49,6 @@
           "targetCount": 1,
           "description": "Choose a player"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],

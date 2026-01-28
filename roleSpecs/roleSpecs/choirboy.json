@@ -24,7 +24,16 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "put the Demon to sleep (text)",
+        "put the Choirboy to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
@@ -55,6 +64,17 @@
   },
   "stKinds": [
     "INFO/choirboy",
-    "RESOLVE/choirboy/action"
+    "RESOLVE/choirboy/action",
+    "TRIGGER/choirboy/MOMENT_PUT_TO_SLEEP"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "put the Demon to sleep (text)",
+        "put the Choirboy to sleep (text)"
+      ]
+    }
   ]
 }

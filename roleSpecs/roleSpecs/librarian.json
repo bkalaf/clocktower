@@ -18,12 +18,41 @@
       "kind": "START_KNOWING",
       "recipients": "self",
       "payload": {
-        "detail": "Start knowledge inferred from description"
+        "detail": "One of two players is a specific Outsider or there are zero Outsiders in play.",
+        "targetType": "outsider",
+        "pairCount": 2,
+        "zeroPossible": true
       },
       "reason": "Start knowledge phrases detected",
       "evidence": [
         "start knowing (text)",
         "you start knowing (text)"
+      ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_OUTSIDER",
+      "payload": {
+        "token": "OUTSIDER",
+        "placement": "any Outsider character",
+        "description": "Place the OUTSIDER reminder token by any Outsider character."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "'s OUTSIDER reminder token by any Outsider character token"
+      ]
+    },
+    {
+      "kind": "SETUP_CONSTRAINT",
+      "constraintKey": "REMINDER_TOKEN_WRONG",
+      "payload": {
+        "token": "WRONG",
+        "placement": "any other character",
+        "description": "Place the WRONG reminder token by any other character."
+      },
+      "reason": "Reminder token instructions detected",
+      "evidence": [
+        "'s WRONG reminder token by any other character token"
       ]
     }
   ],
@@ -37,7 +66,15 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Librarian to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [],
   "jinxes": [],
@@ -52,6 +89,16 @@
     "isGlobalRule": false
   },
   "stKinds": [
-    "INFO/librarian"
+    "INFO/librarian",
+    "TRIGGER/librarian/MOMENT_PUT_TO_SLEEP"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Librarian to sleep (text)"
+      ]
+    }
   ]
 }

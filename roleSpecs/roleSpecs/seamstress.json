@@ -26,12 +26,20 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Seamstress to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
       "kind": "night_action",
-      "usage": "once_per_game",
+      "usage": "each_night",
       "description": "Once per game, at night, choose 2 players (not yourself): you learn if they are the same alignment.",
       "resolution": {
         "stKind": "RESOLVE/seamstress/action",
@@ -49,9 +57,6 @@
           "targetCount": 2,
           "description": "Choose 2 players"
         }
-      },
-      "spend": {
-        "marksNoAbilityEffect": true
       }
     }
   ],
@@ -68,6 +73,16 @@
   },
   "stKinds": [
     "INFO/seamstress",
-    "RESOLVE/seamstress/action"
+    "RESOLVE/seamstress/action",
+    "TRIGGER/seamstress/MOMENT_PUT_TO_SLEEP"
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Seamstress to sleep (text)"
+      ]
+    }
   ]
 }

@@ -37,7 +37,15 @@
       ]
     }
   ],
-  "onMoments": [],
+  "onMoments": [
+    {
+      "moment": "MOMENT_PUT_TO_SLEEP",
+      "description": "Character is put to sleep after using this ability.",
+      "evidence": [
+        "Put the Shugenja to sleep (text)"
+      ]
+    }
+  ],
   "passiveAbilities": [],
   "activeAbilities": [
     {
@@ -75,9 +83,19 @@
   },
   "stKinds": [
     "INFO/shugenja",
-    "RESOLVE/shugenja/action"
+    "RESOLVE/shugenja/action",
+    "TRIGGER/shugenja/MOMENT_PUT_TO_SLEEP"
   ],
   "todos": [
     "Storyteller discretion noted near \"storyteller chooses\"."
+  ],
+  "specialActions": [
+    {
+      "key": "PUT_TO_SLEEP",
+      "description": "The storyteller puts the character to sleep once their action finishes.",
+      "evidence": [
+        "Put the Shugenja to sleep (text)"
+      ]
+    }
   ]
 }

@@ -30,7 +30,7 @@
   "activeAbilities": [
     {
       "kind": "day_claim",
-      "usage": "first_night",
+      "usage": "each_day",
       "description": "You do not know what your ability is. Each day, privately guess what it is: you learn how accurate you are.",
       "resolution": {
         "stKind": "RESOLVE/amnesiac/action",
