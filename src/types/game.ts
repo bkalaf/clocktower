@@ -68,6 +68,9 @@ export interface User {
     userRoles: GlobalRoles[];
     settings: UserSettings;
     avatarPath?: string;
+    level?: number;
+    currentXP?: number;
+    requiredXP?: number;
 }
 
 export type AuthedUser = Omit<User, 'passwordHash'>;

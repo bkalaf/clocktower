@@ -21,3 +21,15 @@ export function useAvatarUrl() {
 export function useDisplayName() {
     return useAppSelector(authSelectors.selectDisplayName);
 }
+
+export function useUserLevel() {
+    return useAppSelector(authSelectors.selectLevel);
+}
+
+export function useUserCurrentXP() {
+    return useAppSelector(authSelectors.selectCurrentXP);
+}
+
+export function useUserRequiredXP() {
+    return useAppSelector(authSelectors.selectRequiredXP);
+}

@@ -6,10 +6,16 @@ export type AuthUserPayload = {
     displayName?: string;
     avatarUrl?: string;
     scopes?: string[];
+    level?: number;
+    currentXP?: number;
+    requiredXP?: number;
 };
 
 export type AuthState = AuthUserPayload & {
     scopes: string[];
+    level: number;
+    currentXP: number;
+    requiredXP: number;
 };
 
 const initialState: AuthState = {
@@ -17,7 +23,10 @@ const initialState: AuthState = {
     username: undefined,
     displayName: undefined,
     avatarUrl: undefined,
-    scopes: []
+    scopes: [],
+    level: 0,
+    currentXP: 0,
+    requiredXP: 0
 };
 
 const authSlice = createSlice({
@@ -25,12 +34,16 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setUser(state, action: PayloadAction<AuthUserPayload>) {
-            const { userId, username, displayName, avatarUrl, scopes } = action.payload;
+            const { userId, username, displayName, avatarUrl, scopes, level, currentXP, requiredXP } =
+                action.payload;
             state.userId = userId;
             state.username = username;
             state.displayName = displayName;
             state.avatarUrl = avatarUrl;
             state.scopes = scopes ?? [];
+            state.level = level ?? 0;
+            state.currentXP = currentXP ?? 0;
+            state.requiredXP = requiredXP ?? 0;
         },
         clearUser(state) {
             state.userId = undefined;
@@ -38,6 +51,9 @@ const authSlice = createSlice({
             state.displayName = undefined;
             state.avatarUrl = undefined;
             state.scopes = [];
+            state.level = 0;
+            state.currentXP = 0;
+            state.requiredXP = 0;
         }
     }
 });
@@ -48,7 +64,10 @@ export const authSelectors = {
     selectUsername: (state: AuthState) => state.username,
     selectDisplayName: (state: AuthState) => state.displayName,
     selectAvatarUrl: (state: AuthState) => state.avatarUrl,
-    selectScopes: (state: AuthState) => state.scopes
+    selectScopes: (state: AuthState) => state.scopes,
+    selectLevel: (state: AuthState) => state.level,
+    selectCurrentXP: (state: AuthState) => state.currentXP,
+    selectRequiredXP: (state: AuthState) => state.requiredXP
 };
 
 export const authActions = authSlice.actions;

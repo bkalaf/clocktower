@@ -140,13 +140,19 @@ function RootLayout() {
                 if (user) {
                     const displayName = user.displayName ?? user.username;
                     const avatarUrl = buildAvatarUrl(user.avatarPath);
+                    const level = typeof user.level === 'number' ? user.level : 0;
+                    const currentXP = typeof user.currentXP === 'number' ? user.currentXP : 0;
+                    const requiredXP = typeof user.requiredXP === 'number' ? user.requiredXP : 0;
                     dispatch(
                         authActions.setUser({
                             userId: user._id,
                             username: user.username,
                             displayName,
                             avatarUrl,
-                            scopes: user.userRoles ?? []
+                            scopes: user.userRoles ?? [],
+                            level,
+                            currentXP,
+                            requiredXP
                         })
                     );
                     dispatch(themeActions.setSettings(user.settings ?? DEFAULT_THEME_STATE));
