@@ -23,6 +23,11 @@ const RegisterBodySchema = z
         path: ['verificationPassword']
     });
 
+const DEFAULT_USER_SETTINGS = {
+    backgroundColor: 'slate',
+    density: 'comfy'
+};
+
 export const Route = createFileRoute('/api/auth/register')({
     server: {
         handlers: {
@@ -47,7 +52,8 @@ export const Route = createFileRoute('/api/auth/register')({
                     email: body.email.toLowerCase(),
                     username: body.username,
                     passwordHash,
-                    userRoles: ['user']
+                    userRoles: ['user'],
+                    settings: DEFAULT_USER_SETTINGS
                 });
 
                 const { sessionId, expiresAt } = await createSession(userId);

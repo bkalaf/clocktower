@@ -1,11 +1,11 @@
 // src/client/state/checkAuth.ts
 import { redirect } from '@tanstack/react-router';
 import { store } from './store';
-import { realtimeSelectors } from './realtimeSlice';
+import { authSelectors } from './authSlice';
 
 // src/client/state/checkAuth.ts
 export function checkAuth() {
-    if (!realtimeSelectors.selectIsAuth(store.getState())) {
+    if (!authSelectors.selectIsAuth(store.getState().auth)) {
         redirect({ to: '/login' });
     }
 }

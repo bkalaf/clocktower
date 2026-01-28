@@ -4,6 +4,7 @@ import enums from './enums';
 import aliases from './aliases';
 import refs from './refs';
 import inputs from './inputs';
+import { zUserSettings } from './settings';
 
 export const zCreateLobbySettings = z.object({
     minPlayers: aliases.pcPlayerCount.default(5),
@@ -78,10 +79,14 @@ const schemas = {
     enums,
     aliases,
     refs,
-    inputs
+    inputs,
+    settings: {
+        user: zUserSettings
+    }
 };
 
 export { zGameId } from './aliases/zGameId';
 export { zUserId } from './aliases/zUserId';
 
+export { zUserSettings };
 export default schemas;

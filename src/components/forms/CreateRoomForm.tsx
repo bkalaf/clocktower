@@ -11,8 +11,7 @@ import { FormControl } from './FormControl';
 import { Modal } from '../Modal';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useAppSelector, useCreateRoom } from '@/client/state/hooks';
-import { realtimeSelectors } from '../../client/state/realtimeSlice';
+import { useCreateRoom } from '@/client/state/hooks';
 import { useUserId } from '../../client/state/useIsAuth';
 
 const parseIntegerField = (label: string, min: number, max: number) =>

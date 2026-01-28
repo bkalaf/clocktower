@@ -12,6 +12,8 @@ import { zRoomVisibility } from './zRoomVisibility';
 import { zGameSpeed } from './zGameSpeed';
 import { zSkillLevel } from './zSkillLevel';
 import { zEditions } from './zEditions';
+import { zThemeBackgroundColor } from './zThemeBackgroundColor';
+import { zThemeDensity } from './zThemeDensity';
 import z from 'zod/v4';
 
 const enums = {
@@ -61,6 +63,8 @@ const enums = {
     skillLevel: zSkillLevel,
     editions: zEditions,
     globalRoles: zGlobalRoles,
-    sessionRoles: zSessionRoles
+    sessionRoles: zSessionRoles,
+    themeBackgroundColor: zThemeBackgroundColor,
+    themeDensity: zThemeDensity
 };
 export default enums;

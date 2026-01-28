@@ -12,6 +12,10 @@ import { AppShell } from '../components/AppShell';
 import { ModalHost } from '../ui/modals/ModalHost';
 import { store } from '../client/state/store';
 import { Provider } from 'react-redux';
+import { useAppDispatch } from '@/client/state/hooks';
+import { authActions } from '@/client/state/authSlice';
+import { themeActions, DEFAULT_THEME_STATE } from '@/client/state/themeSlice';
+import { whoamiFn } from '@/lib/api';
 
 interface MyRouterContext {
     queryClient: QueryClient;
@@ -109,6 +113,40 @@ function RootShellComponent({ children }: { children: React.ReactNode }) {
 
 function RootLayout() {
     const search = Route.useSearch();
+    const dispatch = useAppDispatch();
+
+    React.useEffect(() => {
+        let isMounted = true;
+        const loadUser = async () => {
+            try {
+                const { user } = await whoamiFn();
+                if (!isMounted) return;
+                if (user) {
+                    dispatch(
+                        authActions.setUser({
+                            userId: user._id,
+                            username: user.username,
+                            scopes: user.userRoles ?? []
+                        })
+                    );
+                    dispatch(themeActions.setSettings(user.settings ?? DEFAULT_THEME_STATE));
+                } else {
+                    dispatch(authActions.clearUser());
+                    dispatch(themeActions.setSettings(DEFAULT_THEME_STATE));
+                }
+            } catch (error) {
+                if (!isMounted) return;
+                dispatch(authActions.clearUser());
+                dispatch(themeActions.setSettings(DEFAULT_THEME_STATE));
+                console.error(error);
+            }
+        };
+        void loadUser();
+        return () => {
+            isMounted = false;
+        };
+    }, [dispatch]);
+
     return (
         <div className='relative flex min-h-screen w-full overflow-hidden bg-slate-950 text-white'>
             <AppShell>

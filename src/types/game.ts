@@ -2,6 +2,7 @@
 import z from 'zod/v4';
 import { $STATUS_CODES } from '../errors';
 import { RoomStatus } from './room';
+import type { UserSettings } from '../schemas/settings';
 
 export type Success<T> = {
     kind: 'success';
@@ -64,6 +65,7 @@ export interface User {
     email: string;
     passwordHash: string;
     userRoles: GlobalRoles[];
+    settings: UserSettings;
 }
 
 export type AuthedUser = Omit<User, 'passwordHash'>;

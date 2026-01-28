@@ -7,6 +7,7 @@ import { getUserFromCookie } from '../serverFns/getId/getUserFromCookie';
 import z from 'zod/v4';
 import { UserModel } from '../db/models/User';
 import { loginServerFn } from '../routes/api/auth/-login';
+import type { UserSettings } from '../schemas/settings';
 
 const defaultHeaders = {
     'Content-Type': 'application/json'
@@ -65,6 +66,13 @@ export const whoamiFn = createServerFn({
 export async function whoami() {
     return apiFetch<{ user: AuthedUser | null }>('/api/whoami', {
         method: 'GET'
+    });
+}
+
+export async function updateThemeSettings(settings: UserSettings) {
+    return apiFetch<{ ok: boolean; settings: UserSettings }>('/api/auth/settings', {
+        method: 'PATCH',
+        body: JSON.stringify(settings)
     });
 }
 

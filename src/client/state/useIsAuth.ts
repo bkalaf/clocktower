@@ -1,15 +1,15 @@
 // src/client/state/useIsAuth.ts
 import { useAppSelector } from './hooks';
-import { realtimeSelectors } from './realtimeSlice';
+import { authSelectors } from './authSlice';
 
 export function useIsAuth() {
-    return useAppSelector(realtimeSelectors.selectIsAuth);
+    return useAppSelector(authSelectors.selectIsAuth);
 }
 
 export function useUserId() {
-    return useAppSelector(realtimeSelectors.selectUserId);
+    return useAppSelector(authSelectors.selectUserId);
 }
 
 export function useUsername() {
-    return useAppSelector(realtimeSelectors.selectUsername);
+    return useAppSelector(authSelectors.selectUsername);
 }

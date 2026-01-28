@@ -4,6 +4,8 @@ import z from 'zod/v4';
 import aliases from '../../schemas/aliases';
 import enums from '../../schemas/enums';
 import { zAuthedUser } from './AuthedUser';
+import { zThemeBackgroundColor } from '../../schemas/enums/zThemeBackgroundColor';
+import { zThemeDensity } from '../../schemas/enums/zThemeDensity';
 
 export const zUser = z.object({
     ...zAuthedUser.shape,
@@ -13,6 +15,13 @@ export const zUser = z.object({
 export type User = z.infer<typeof zUser>;
 
 const globalRoleValues = enums.globalRoles.options;
+
+const backgroundColorOptions = zThemeBackgroundColor.options;
+const densityOptions = zThemeDensity.options;
+const defaultSettings = {
+    backgroundColor: 'slate',
+    density: 'comfy'
+};
 
 const userSchema = new Schema<User>(
     {
@@ -26,6 +35,24 @@ const userSchema = new Schema<User>(
             default: ['user']
         },
         penaltyUntil: { type: Date, default: null },
+        settings: {
+            type: {
+                backgroundColor: {
+                    type: String,
+                    enum: backgroundColorOptions,
+                    required: true,
+                    default: defaultSettings.backgroundColor
+                },
+                density: {
+                    type: String,
+                    enum: densityOptions,
+                    required: true,
+                    default: defaultSettings.density
+                }
+            },
+            required: true,
+            default: defaultSettings
+        },
         passwordHash: { type: String, required: true, minlength: 8, maxlength: 512 }
     },
     {

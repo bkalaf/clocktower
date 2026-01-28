@@ -17,7 +17,7 @@ export function PersonalityTooltip({ personality, compact = true, children }: Pc
     return (
         <Tooltip>
             <TooltipTrigger asChild>{children}</TooltipTrigger>
-            <TooltipContent className='max-w-[260px] rounded-2xl border border-white/10 bg-black/80 p-3 shadow-[0_20px_60px_rgba(0,0,0,0.8)]'>
+            <TooltipContent className='max-w-[260px] rounded-2xl border border-slate-200/70 bg-white p-3 shadow-lg text-sm text-slate-900'>
                 <PersonalityMeter
                     personality={personality}
                     compact={compact}
