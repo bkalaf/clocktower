@@ -1,12 +1,6 @@
-// src/components/grimoire/Seat.tsx
-import * as React from 'react';
-import { cn } from '@/lib/utils';
-import type { SeatTokenPositions } from './computeLayout';
-
-export type ReminderDot = {
-    label: string;
-    color?: string;
-};
+import { ReminderTokenRack } from './ReminderTokenRack';
+import { type SeatTokenPositions } from './computeLayout';
+import type { ReminderDot } from './types';
 
 export type SeatProps = {
     seatId: string;
@@ -23,8 +17,8 @@ export type SeatProps = {
 export function Seat({
     playerName,
     avatarUrl,
-    roleImage,
     roleName,
+    roleImage,
     avatarSize,
     tokenSize,
     positions,
@@ -57,41 +51,24 @@ export function Seat({
                     left: positions.role.x - tokenSize / 2,
                     top: positions.role.y - tokenSize / 2,
                     backgroundImage:
-                        roleImage ?
-                            `linear-gradient(180deg, rgba(255,255,255,0.15), rgba(15,23,42,0.8)), url(${roleImage})`
-                        :   undefined,
+                        roleImage
+                            ? `linear-gradient(180deg, rgba(255,255,255,0.15), rgba(15,23,42,0.8)), url(${roleImage})`
+                            : undefined,
                     backgroundSize: '75%',
                     backgroundPosition: 'center'
                 }}
             >
-                <span
-                    className={cn(
-                        'absolute inset-0 flex items-center justify-center text-[0.6rem] uppercase tracking-[0.4em] text-white'
-                    )}
-                >
+                <span className='absolute inset-0 flex items-center justify-center text-[0.6rem] uppercase tracking-[0.4em] text-white'>
                     {roleName}
                 </span>
             </div>
 
-            {reminderTokens.map((reminder, index) => {
-                const reminderPosition = positions.reminders[index];
-                if (!reminderPosition) return null;
-                return (
-                    <div
-                        key={`${playerName}-${reminder.label}-${index}`}
-                        className='absolute flex items-center justify-center rounded-full border border-white/30 text-[0.55rem] font-semibold uppercase tracking-[0.2em] text-white shadow-[0_10px_25px_rgba(0,0,0,0.4)]'
-                        style={{
-                            width: reminderDiameter,
-                            height: reminderDiameter,
-                            left: reminderPosition.x - reminderDiameter / 2,
-                            top: reminderPosition.y - reminderDiameter / 2,
-                            backgroundColor: reminder.color ?? 'rgba(59,130,246,0.8)'
-                        }}
-                    >
-                        {reminder.label.charAt(0)}
-                    </div>
-                );
-            })}
+            <ReminderTokenRack
+                tokens={reminderTokens}
+                slots={positions.reminderSlots}
+                direction={positions.reminderDirection}
+                size={reminderDiameter}
+            />
 
             <div
                 className='absolute text-center text-[0.65rem] uppercase tracking-[0.35em] text-white/70'

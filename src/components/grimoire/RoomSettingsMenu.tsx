@@ -10,6 +10,7 @@ type RoomSettingsMenuProps = {
     open: boolean;
     tokenSize: number;
     layout: LayoutMode;
+    maxTokenSize: number;
     onTokenSizeChange: (value: number) => void;
     onLayoutChange: (layout: LayoutMode) => void;
     onClose: () => void;
@@ -49,7 +50,7 @@ export function RoomSettingsMenu({
                 <Slider
                     value={[tokenSize]}
                     min={75}
-                    max={200}
+                    max={Math.max(75, Math.round(maxTokenSize))}
                     step={1}
                     onValueChange={(values) => onTokenSizeChange(values[0])}
                     className='mt-3'

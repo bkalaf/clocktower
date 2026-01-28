@@ -23,10 +23,11 @@ export function NotesDrawer({ open, roomId, markdown, onChange, onOpenChange }: 
             onOpenChange={onOpenChange}
             direction='right'
         >
-            <DrawerContent
-                className='bg-slate-900 text-white'
-                side='right'
-            >
+                <DrawerContent
+                    className='bg-slate-900 text-white'
+                    side='right'
+                    style={{ top: '72px', bottom: '72px' }}
+                >
                 <DrawerHeader className='px-6 pt-6'>
                     <div className='flex items-center justify-between gap-2'>
                         <DrawerTitle className='text-lg uppercase tracking-[0.5em]'>Room Notes</DrawerTitle>

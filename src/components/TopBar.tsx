@@ -1,7 +1,7 @@
 // src/components/TopBar.tsx
 import { useCallback, useMemo } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
-import { BookOpen, ChevronDown, LogIn, LogOut, PanelRightClose, PanelRightOpen, Settings, User, UserPlus, MoveHorizontal } from 'lucide-react';
+import { BookOpen, ChevronDown, LogIn, LogOut, PanelRightClose, PanelRightOpen, Settings, User, UserPlus } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -152,7 +152,7 @@ export function TopBar() {
                             onClick={toggleSettings}
                             aria-label='Room settings'
                         >
-                            <MoveHorizontal className='h-4 w-4' />
+                            <Settings className='h-4 w-4' />
                         </Button>
                         <Button
                             variant='ghost'

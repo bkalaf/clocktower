@@ -1,23 +1,14 @@
 // src/components/grimoire/computeLayout.ts
 export type LayoutMode = 'circle' | 'square';
 
-type Point = {
+export type Point = {
     x: number;
     y: number;
 };
 
-type Viewport = {
+export type CanvasSize = {
     width: number;
     height: number;
-};
-
-type LayoutBaseOptions = {
-    viewport: Viewport;
-    count: number;
-    avatarSize: number;
-    tokenSize: number;
-    seatIds?: string[];
-    margin?: number;
 };
 
 export type SeatCenter = {
@@ -29,16 +20,13 @@ export type SeatCenter = {
 export type SeatTokenPositions = {
     avatar: Point;
     role: Point;
-    reminders: Point[];
+    reminderSlots: Point[];
+    reminderDirection: Point;
 };
 
-const safeMargin = (value?: number) => Math.max(0, value ?? 32);
-
-const computeAngleFromCenter = (center: Point, tableCenter: Point) => {
-    const dx = center.x - tableCenter.x;
-    const dy = tableCenter.y - center.y;
-    return Math.atan2(dx, dy);
-};
+const DEFAULT_MARGIN = 32;
+export const DEFAULT_GRIMOIRE_MARGIN = DEFAULT_MARGIN;
+const REMINDER_SLOT_COUNT = 3;
 
 const normalize = (vector: Point): Point => {
     const length = Math.hypot(vector.x, vector.y);
@@ -48,69 +36,145 @@ const normalize = (vector: Point): Point => {
     return { x: vector.x / length, y: vector.y / length };
 };
 
-const seatOuterExtent = (avatarSize: number) => avatarSize / 2 + 12;
+const computeAngleFromCenter = (center: Point, tableCenter: Point) => {
+    const dx = center.x - tableCenter.x;
+    const dy = tableCenter.y - center.y;
+    return Math.atan2(dx, dy);
+};
 
-export function computeCircleSeatCenters(options: LayoutBaseOptions): SeatCenter[] {
-    const { viewport, count, avatarSize, seatIds = [], margin, tokenSize } = options;
-    if (count <= 0 || viewport.width === 0 || viewport.height === 0) {
+const clampMargin = (value?: number) => Math.max(0, value ?? DEFAULT_MARGIN);
+
+const buildSeatIds = (count: number, seatIds?: string[]) =>
+    Array.from({ length: count }, (_, index) => seatIds?.[index] ?? `seat-${index}`);
+
+export function computeCircleMaxTokenSize(canvas: CanvasSize, count: number, margin = DEFAULT_MARGIN) {
+    const safeWidth = Math.max(0, canvas.width);
+    const safeHeight = Math.max(0, canvas.height);
+    const safeMargin = clampMargin(margin);
+    if (safeWidth === 0 || safeHeight === 0 || count <= 0) {
+        return 0;
+    }
+    const safeHalf = Math.min(safeWidth, safeHeight) / 2;
+    const availableRadius = Math.max(0, safeHalf - safeMargin);
+    if (availableRadius <= 0) {
+        return 0;
+    }
+    if (count === 1) {
+        const maxDiameter = Math.max(0, Math.min(safeWidth, safeHeight) - safeMargin * 2);
+        return maxDiameter * 0.8;
+    }
+    const sinTerm = Math.sin(Math.PI / count);
+    if (sinTerm <= 0) {
+        return 0;
+    }
+    const maxAvatar = (2 * availableRadius * sinTerm) / (1 + sinTerm);
+    return Math.max(0, maxAvatar * 0.8);
+}
+
+export function computeSquareMaxTokenSize(canvas: CanvasSize, count: number, margin = DEFAULT_MARGIN) {
+    const safeWidth = Math.max(0, canvas.width);
+    const safeHeight = Math.max(0, canvas.height);
+    const safeMargin = clampMargin(margin);
+    if (safeWidth === 0 || safeHeight === 0 || count <= 0) {
+        return 0;
+    }
+    const availableSpan = safeWidth + safeHeight - safeMargin * 4;
+    if (availableSpan <= 0) {
+        return 0;
+    }
+    const maxAvatar = (2 * availableSpan) / (count + 4);
+    return Math.max(0, maxAvatar * 0.8);
+}
+
+export function computeCircleSeatCenters(options: {
+    canvas: CanvasSize;
+    count: number;
+    avatarSize: number;
+    seatIds?: string[];
+    margin?: number;
+}): SeatCenter[] {
+    const { canvas, count, avatarSize, seatIds, margin } = options;
+    if (count <= 0) {
         return [];
     }
-
-    const safeViewportWidth = Math.max(0, viewport.width);
-    const safeViewportHeight = Math.max(0, viewport.height);
-    const centerPoint: Point = { x: safeViewportWidth / 2, y: safeViewportHeight / 2 };
+    const safeWidth = Math.max(0, canvas.width);
+    const safeHeight = Math.max(0, canvas.height);
+    if (safeWidth === 0 || safeHeight === 0) {
+        return [];
+    }
+    const safeMargin = clampMargin(margin);
+    const centerPoint: Point = { x: safeWidth / 2, y: safeHeight / 2 };
     const radius = Math.max(
         0,
-        Math.min(safeViewportWidth, safeViewportHeight) * 0.5 - safeMargin(margin) - seatOuterExtent(avatarSize)
+        Math.min(safeWidth, safeHeight) / 2 - safeMargin - avatarSize / 2
     );
+    const ids = buildSeatIds(count, seatIds);
 
-    return Array.from({ length: count }, (_, index) => {
+    if (count === 1) {
+        return [
+            {
+                seatId: ids[0],
+                angleRad: computeAngleFromCenter(centerPoint, centerPoint),
+                center: centerPoint
+            }
+        ];
+    }
+
+    return ids.map((seatId, index) => {
         const angle = (Math.PI * 2 * index) / count;
         const x = centerPoint.x + radius * Math.sin(angle);
         const y = centerPoint.y - radius * Math.cos(angle);
         const seatCenter = { x, y };
-        const tableCenter = centerPoint;
         return {
-            seatId: seatIds[index] ?? `seat-${index}`,
-            angleRad: computeAngleFromCenter(seatCenter, tableCenter),
+            seatId,
+            angleRad: computeAngleFromCenter(seatCenter, centerPoint),
             center: seatCenter
         };
     });
 }
 
-export function computeSquareSeatCenters(options: LayoutBaseOptions): SeatCenter[] {
-    const { viewport, count, avatarSize, seatIds = [], margin } = options;
-    if (count <= 0 || viewport.width === 0 || viewport.height === 0) {
+export function computeSquareSeatCenters(options: {
+    canvas: CanvasSize;
+    count: number;
+    avatarSize: number;
+    seatIds?: string[];
+    margin?: number;
+}): SeatCenter[] {
+    const { canvas, count, avatarSize, seatIds, margin } = options;
+    if (count <= 0) {
         return [];
     }
+    const safeWidth = Math.max(0, canvas.width);
+    const safeHeight = Math.max(0, canvas.height);
+    if (safeWidth === 0 || safeHeight === 0) {
+        return [];
+    }
+    const safeMargin = clampMargin(margin);
+    const inset = safeMargin + avatarSize / 2;
+    const left = inset;
+    const right = Math.max(left, safeWidth - inset);
+    const top = inset;
+    const bottom = Math.max(top, safeHeight - inset);
+    const horizontalLength = Math.max(0, right - left);
+    const verticalLength = Math.max(0, bottom - top);
+    const perimeter = 2 * (horizontalLength + verticalLength);
+    const centerPoint: Point = { x: safeWidth / 2, y: safeHeight / 2 };
+    const ids = buildSeatIds(count, seatIds);
 
-    const safeMarginValue = safeMargin(margin);
-    const seatPadding = seatOuterExtent(avatarSize);
-    const left = safeMarginValue + seatPadding;
-    const right = Math.max(left, viewport.width - (safeMarginValue + seatPadding));
-    const top = safeMarginValue + seatPadding;
-    const bottom = Math.max(top, viewport.height - (safeMarginValue + seatPadding));
-
-    const horizontalRange = Math.max(0, right - left);
-    const verticalRange = Math.max(0, bottom - top);
-    const perimeter = (horizontalRange + verticalRange) * 2;
     if (perimeter === 0) {
-        const fallbackCenter: Point = { x: viewport.width / 2, y: viewport.height / 2 };
-        return Array.from({ length: count }, (_, index) => ({
-            seatId: seatIds[index] ?? `seat-${index}`,
-            angleRad: computeAngleFromCenter(fallbackCenter, fallbackCenter),
-            center: fallbackCenter
+        return ids.map((seatId) => ({
+            seatId,
+            angleRad: computeAngleFromCenter(centerPoint, centerPoint),
+            center: centerPoint
         }));
     }
 
-    const tableCenter: Point = { x: viewport.width / 2, y: viewport.height / 2 };
-
-    return Array.from({ length: count }, (_, index) => {
+    return ids.map((seatId, index) => {
         const progress = (perimeter * index) / count;
+        const lengths = [horizontalLength, verticalLength, horizontalLength, verticalLength];
+        let remaining = progress;
         let x = left;
         let y = top;
-        const lengths = [horizontalRange, verticalRange, horizontalRange, verticalRange];
-        let remaining = progress;
 
         if (remaining <= lengths[0]) {
             x = left + remaining;
@@ -131,8 +195,8 @@ export function computeSquareSeatCenters(options: LayoutBaseOptions): SeatCenter
 
         const seatCenter: Point = { x, y };
         return {
-            seatId: seatIds[index] ?? `seat-${index}`,
-            angleRad: computeAngleFromCenter(seatCenter, tableCenter),
+            seatId,
+            angleRad: computeAngleFromCenter(seatCenter, centerPoint),
             center: seatCenter
         };
     });
@@ -143,40 +207,37 @@ export function computeSeatTokenPositions(args: {
     tableCenter: Point;
     avatarSize: number;
     tokenSize: number;
-    reminderCount: number;
     reminderGap?: number;
 }): SeatTokenPositions {
-    const { seatCenter, tableCenter, avatarSize, tokenSize, reminderCount, reminderGap } = args;
-    const toCenter = normalize({
+    const { seatCenter, tableCenter, avatarSize, tokenSize, reminderGap } = args;
+    const direction = normalize({
         x: tableCenter.x - seatCenter.x,
         y: tableCenter.y - seatCenter.y
     });
 
-    const roleRadius = avatarSize / 2 + tokenSize * 0.1;
+    const roleDistance = avatarSize / 2 + tokenSize * 0.1;
     const roleCenter: Point = {
-        x: seatCenter.x + toCenter.x * roleRadius,
-        y: seatCenter.y + toCenter.y * roleRadius
+        x: seatCenter.x + direction.x * roleDistance,
+        y: seatCenter.y + direction.y * roleDistance
     };
 
     const reminderDiameter = tokenSize / 2;
     const gap = reminderGap ?? Math.max(6, reminderDiameter * 0.2);
     const baseDistance = avatarSize / 2 + reminderDiameter / 2 + gap;
-    const basePoint: Point = {
-        x: seatCenter.x + toCenter.x * baseDistance,
-        y: seatCenter.y + toCenter.y * baseDistance
-    };
+    const slotSpacing = reminderDiameter + gap;
 
-    const reminders: Point[] = Array.from({ length: reminderCount }, (_, index) => {
-        const distance = index * (reminderDiameter + gap);
+    const reminderSlots = Array.from({ length: REMINDER_SLOT_COUNT }, (_, index) => {
+        const distance = baseDistance + index * slotSpacing;
         return {
-            x: basePoint.x + toCenter.x * distance,
-            y: basePoint.y + toCenter.y * distance
+            x: seatCenter.x + direction.x * distance,
+            y: seatCenter.y + direction.y * distance
         };
     });
 
     return {
         avatar: seatCenter,
         role: roleCenter,
-        reminders
+        reminderSlots,
+        reminderDirection: direction
     };
 }

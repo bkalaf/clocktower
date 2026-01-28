@@ -1,9 +1,15 @@
 // src/components/grimoire/GrimoirePage.tsx
 import * as React from 'react';
-import { Grimoire, type GrimoireSeat } from './Grimoire';
+
+import { GrimoireSeat } from './Grimoire';
+import { GrimoireCanvas } from './GrimoireCanvas';
 import { RoomSettingsMenu } from './RoomSettingsMenu';
 import { NotesDrawer } from './NotesDrawer';
-import { LayoutMode } from './computeLayout';
+import {
+    computeCircleMaxTokenSize,
+    computeSquareMaxTokenSize,
+    type LayoutMode
+} from './computeLayout';
 import { TownSquareProvider, useTownSquare } from '@/state/TownSquareContext';
 import { useRoomUi } from '@/components/room/RoomUiContext';
 import tokenBase from '@/assets/images/token.png?url';
@@ -62,14 +68,21 @@ export function GrimoirePage({ roomId }: GrimoirePageProps) {
 
 function GrimoirePageShell({ roomId }: GrimoirePageProps) {
     const { players } = useTownSquare();
-    const { enterRoom, exitRoom, settingsOpen, notesOpen, closeSettings, openNotes, closeNotes } = useRoomUi();
+    const {
+        enterRoom,
+        exitRoom,
+        settingsOpen,
+        notesOpen,
+        closeSettings,
+        openNotes,
+        closeNotes
+    } = useRoomUi();
     const { markdown, setMarkdown } = useRoomNotes(roomId);
 
-    const boardRef = React.useRef<HTMLDivElement>(null);
-    const [viewport, setViewport] = React.useState({ width: 0, height: 0 });
     const [layout, setLayout] = React.useState<LayoutMode>(() => (players.length <= 15 ? 'circle' : 'square'));
     const [manualLayout, setManualLayout] = React.useState(false);
     const [tokenSize, setTokenSize] = React.useState(120);
+    const [canvasSize, setCanvasSize] = React.useState({ width: 0, height: 0 });
 
     React.useEffect(() => {
         enterRoom(roomId);
@@ -78,22 +91,28 @@ function GrimoirePageShell({ roomId }: GrimoirePageProps) {
 
     React.useEffect(() => {
         if (manualLayout) return;
-        const nextLayout = players.length <= 15 ? 'circle' : 'square';
-        setLayout(nextLayout);
+        setLayout(players.length <= 15 ? 'circle' : 'square');
     }, [players.length, manualLayout]);
 
-    React.useLayoutEffect(() => {
-        const node = boardRef.current;
-        if (!node || typeof ResizeObserver === 'undefined') return;
-        const update = () => {
-            const rect = node.getBoundingClientRect();
-            setViewport({ width: rect.width, height: rect.height });
-        };
-        update();
-        const observer = new ResizeObserver(update);
-        observer.observe(node);
-        return () => observer.disconnect();
-    }, []);
+    const computedMaxTokenSize = React.useMemo(() => {
+        const { width, height } = canvasSize;
+        if (width === 0 || height === 0) {
+            return 200;
+        }
+        const canvas = { width, height };
+        const limit =
+            layout === 'square'
+                ? computeSquareMaxTokenSize(canvas, players.length)
+                : computeCircleMaxTokenSize(canvas, players.length);
+        const fallback = Number.isFinite(limit) && limit > 0 ? limit : 200;
+        return Math.max(75, Math.min(200, fallback));
+    }, [canvasSize.width, canvasSize.height, layout, players.length]);
+
+    React.useEffect(() => {
+        if (tokenSize > computedMaxTokenSize) {
+            setTokenSize(computedMaxTokenSize);
+        }
+    }, [computedMaxTokenSize, tokenSize]);
 
     const handleLayoutChange = (next: LayoutMode) => {
         setLayout(next);
@@ -101,8 +120,17 @@ function GrimoirePageShell({ roomId }: GrimoirePageProps) {
     };
 
     const handleTokenSizeChange = (value: number) => {
-        setTokenSize(clampValue(value, 75, 200));
+        setTokenSize(clampValue(value, 75, computedMaxTokenSize));
     };
+
+    const handleCanvasMeasure = React.useCallback((rect: { width: number; height: number }) => {
+        setCanvasSize((prev) => {
+            if (prev.width === rect.width && prev.height === rect.height) {
+                return prev;
+            }
+            return rect;
+        });
+    }, []);
 
     const avatarPool = React.useMemo(() => (avatarUrls.length > 0 ? avatarUrls : [tokenBase]), []);
 
@@ -119,14 +147,6 @@ function GrimoirePageShell({ roomId }: GrimoirePageProps) {
         [players, avatarPool]
     );
 
-    const tableCenter = React.useMemo(
-        () => ({
-            x: viewport.width / 2,
-            y: viewport.height / 2
-        }),
-        [viewport]
-    );
-
     const handleNotesOpenChange = (value: boolean) => {
         if (value) {
             openNotes();
@@ -136,23 +156,23 @@ function GrimoirePageShell({ roomId }: GrimoirePageProps) {
     };
 
     return (
-        <div className='flex h-full min-h-screen w-full flex-col text-white'>
+        <div
+            className='flex h-full min-h-screen w-full flex-col text-white'
+            style={{ backgroundColor: '#1f3656' }}
+        >
             <div className='relative flex flex-1 flex-col overflow-hidden'>
-                <div
-                    ref={boardRef}
-                    className='relative flex-1'
-                >
-                    <Grimoire
+                <div className='relative flex-1 overflow-hidden'>
+                    <GrimoireCanvas
                         seats={seats}
                         layout={layout}
                         tokenSize={tokenSize}
-                        viewport={viewport}
-                        tableCenter={tableCenter}
+                        onMeasure={handleCanvasMeasure}
                     />
                     <RoomSettingsMenu
                         open={settingsOpen}
                         layout={layout}
                         tokenSize={tokenSize}
+                        maxTokenSize={computedMaxTokenSize}
                         onLayoutChange={handleLayoutChange}
                         onTokenSizeChange={handleTokenSizeChange}
                         onClose={closeSettings}
