@@ -4,15 +4,17 @@ import z from 'zod/v4';
 import aliases from '../../schemas/aliases';
 import enums from '../../schemas/enums';
 import { zAuthedUser } from './AuthedUser';
+import type { AuthedUser } from './AuthedUser';
 import { zThemeBackgroundColor } from '../../schemas/enums/zThemeBackgroundColor';
 import { zThemeDensity } from '../../schemas/enums/zThemeDensity';
 
-export const zUser = z.object({
-    ...zAuthedUser.shape,
-    passwordHash: aliases.passwordHash
-});
+export interface User extends AuthedUser {
+    passwordHash: string;
+}
 
-export type User = z.infer<typeof zUser>;
+export const zUser = zAuthedUser.extend({
+    passwordHash: aliases.passwordHash
+}) satisfies z.ZodType<User>;
 
 const globalRoleValues = enums.globalRoles.options;
 

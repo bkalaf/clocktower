@@ -5,17 +5,32 @@ import schemas from '../../schemas/index';
 
 const { aliases, refs } = schemas;
 
-export const zTravellerRequest = z.object({
-    _id: aliases.travelerRequestId,
-    matchId: refs.match,
-    roomId: refs.game,
-    userId: refs.user,
-    status: z.enum(['pending', 'approved', 'rejected', 'expired']).default('pending'),
-    expiresAt: aliases.timestamp,
-    message: z.string().optional().nullable()
-});
+const statusOptions = ['pending', 'approved', 'rejected', 'expired'] as const;
 
-export type TravellerRequest = z.infer<typeof zTravellerRequest>;
+export type TravellerRequestStatus = (typeof statusOptions)[number];
+
+export interface TravellerRequest {
+    _id: string;
+    matchId: string;
+    roomId: string;
+    userId: string;
+    status: TravellerRequestStatus;
+    expiresAt: Date;
+    message?: string | null;
+}
+
+export const zTravellerRequest = z
+    .object({
+        _id: aliases.travelerRequestId,
+        matchId: refs.match,
+        roomId: refs.game,
+        userId: refs.user,
+        status: z.enum(statusOptions).default('pending'),
+        expiresAt: aliases.timestamp,
+        message: z.string().optional().nullable()
+    })
+    .satisfies<z.ZodType<TravellerRequest>>();
+
 export type TravellerRequestType = mongoose.InferRawDocType<TravellerRequest>;
 export type TravellerRequestDocument = mongoose.HydratedDocument<TravellerRequestType>;
 

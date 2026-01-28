@@ -2,36 +2,8 @@
 import mongoose from 'mongoose';
 import z from 'zod/v4';
 import schemas from '../../schemas/index';
+
 const { refs, aliases, enums } = schemas;
-
-export const zLobbySettings = z.object({
-    minPlayers: aliases.pcPlayerCount.default(5),
-    maxPlayers: aliases.pcPlayerCount.default(15),
-    maxTravelers: aliases.pcTraverCount.default(0),
-    edition: enums.editions.default('tb'),
-    skillLevel: enums.skillLevel.default('beginner'),
-    plannedStartTime: aliases.timestamp.optional().nullable(),
-    gameSpeed: enums.gameSpeed.default('moderate'),
-    isPrivate: z.boolean().default(false),
-    banner: z.string().optional().nullable()
-});
-
-export const zGame = z.object({
-    _id: aliases.gameId,
-    version: aliases.version,
-    snapshot: aliases.snapshot,
-    hostUserId: refs.user,
-    status: enums.roomStatus.default('closed'),
-    scriptId: aliases.scriptId,
-    allowTravelers: z.boolean().default(false),
-    visibility: enums.roomVisibility.default('public'),
-    endedAt: aliases.timestamp,
-    lobbySettings: zLobbySettings.optional().nullable()
-});
-
-export type Game = z.infer<typeof zGame>;
-export type GameType = mongoose.InferRawDocType<Game>;
-export type GameDocument = mongoose.HydratedDocument<GameType>;
 
 const playerCountOptions = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15] as const;
 const travelerCountOptions = [0, 1, 2, 3, 4, 5] as const;
@@ -40,6 +12,69 @@ const skillLevelOptions = enums.skillLevel.options;
 const gameSpeedOptions = enums.gameSpeed.options;
 const roomStatusOptions = enums.roomStatus.options;
 const visibilityOptions = enums.roomVisibility.options;
+
+type Edition = (typeof editionOptions)[number];
+type SkillLevel = (typeof skillLevelOptions)[number];
+type GameSpeed = (typeof gameSpeedOptions)[number];
+type RoomStatus = (typeof roomStatusOptions)[number];
+type RoomVisibility = (typeof visibilityOptions)[number];
+
+export interface LobbySettings {
+    minPlayers: (typeof playerCountOptions)[number];
+    maxPlayers: (typeof playerCountOptions)[number];
+    maxTravelers: (typeof travelerCountOptions)[number];
+    edition: Edition;
+    skillLevel: SkillLevel;
+    plannedStartTime?: Date | null;
+    gameSpeed: GameSpeed;
+    isPrivate: boolean;
+    banner?: string | null;
+}
+
+export const zLobbySettings = z
+    .object({
+        minPlayers: aliases.pcPlayerCount.default(5),
+        maxPlayers: aliases.pcPlayerCount.default(15),
+        maxTravelers: aliases.pcTraverCount.default(0),
+        edition: enums.editions.default('tb'),
+        skillLevel: enums.skillLevel.default('beginner'),
+        plannedStartTime: aliases.timestamp.optional().nullable(),
+        gameSpeed: enums.gameSpeed.default('moderate'),
+        isPrivate: z.boolean().default(false),
+        banner: z.string().optional().nullable()
+    })
+    .satisfies<z.ZodType<LobbySettings>>();
+
+export interface Game {
+    _id: string;
+    version: number;
+    snapshot: unknown;
+    hostUserId: string;
+    status: RoomStatus;
+    scriptId: string;
+    allowTravelers: boolean;
+    visibility: RoomVisibility;
+    endedAt?: Date | null;
+    lobbySettings?: LobbySettings | null;
+}
+
+export const zGame = z
+    .object({
+        _id: aliases.gameId,
+        version: aliases.version,
+        snapshot: aliases.snapshot,
+        hostUserId: refs.user,
+        status: enums.roomStatus.default('closed'),
+        scriptId: aliases.scriptId,
+        allowTravelers: z.boolean().default(false),
+        visibility: enums.roomVisibility.default('public'),
+        endedAt: aliases.timestamp,
+        lobbySettings: zLobbySettings.optional().nullable()
+    })
+    .satisfies<z.ZodType<Game>>();
+
+export type GameType = mongoose.InferRawDocType<Game>;
+export type GameDocument = mongoose.HydratedDocument<GameType>;
 
 const lobbySettingsSchema = new mongoose.Schema(
     {

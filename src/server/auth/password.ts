@@ -23,11 +23,7 @@ export async function hashPassword(password: string) {
     return argon2.hash(password, ARGON2_OPTIONS);
 }
 
-export async function verifyPassword(
-    password: string,
-    passwordHash: string,
-    options?: VerifyPasswordOptions
-) {
+export async function verifyPassword(password: string, passwordHash: string, options?: VerifyPasswordOptions) {
     const { onUpgrade } = options ?? {};
 
     if (passwordHash.startsWith('$argon2')) {

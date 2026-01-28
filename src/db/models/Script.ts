@@ -4,13 +4,26 @@ import z from 'zod/v4';
 import enums from '../../schemas/enums';
 import { zScript } from '../../schemas/api/scripts';
 
-export type Script = z.infer<typeof zScript>;
-export type ScriptType = mongoose.InferRawDocType<Script>;
-export type ScriptDocument = mongoose.HydratedDocument<ScriptType>;
-
 const characterRoleOptions = enums.characterRoles.options;
 const skillLevelOptions = enums.skillLevel.options;
 const editionOptions = enums.editions.options;
+
+type CharacterRole = (typeof characterRoleOptions)[number];
+type SkillLevel = (typeof skillLevelOptions)[number];
+type Edition = (typeof editionOptions)[number];
+
+export interface Script {
+    _id: string;
+    edition?: Edition | null;
+    skillLevel: SkillLevel;
+    roles: CharacterRole[];
+    name: string;
+    isOfficial: boolean;
+    isPlayable: boolean;
+}
+
+export type ScriptType = mongoose.InferRawDocType<Script>;
+export type ScriptDocument = mongoose.HydratedDocument<ScriptType>;
 
 const scriptSchema = new mongoose.Schema<Script>(
     {
@@ -37,7 +50,8 @@ const scriptSchema = new mongoose.Schema<Script>(
             }
         },
         name: { type: String, required: true, minlength: 1, maxlength: 60 },
-        isOfficial: { type: Boolean, required: true, default: false }
+        isOfficial: { type: Boolean, required: true, default: false },
+        isPlayable: { type: Boolean, required: true, default: true }
     },
     {
         timestamps: true,

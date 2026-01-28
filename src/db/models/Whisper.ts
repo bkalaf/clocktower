@@ -2,26 +2,43 @@
 import mongoose, { Schema } from 'mongoose';
 import z from 'zod/v4';
 import schemas from '../../schemas';
+import type { GameId, TopicId, UserId } from '../../types/game';
 
 const { refs, aliases } = schemas;
 
-export const zWhisper = z.object({
-    _id: aliases.whisperId,
-    gameId: refs.game,
-    topicId: refs.topic,
-    creatorId: refs.user,
-    members: z.array(refs.user),
-    isActive: z.boolean().default(true),
-    meta: z
-        .object({
-            name: aliases.name.meta({ description: 'The displayed name of the channel.' }),
-            includeStoryteller: z.boolean().default(true)
-        })
-        .optional()
-        .nullable()
-});
+export interface WhisperMeta {
+    name: string;
+    includeStoryteller: boolean;
+}
 
-export type Whisper = z.infer<typeof zWhisper>;
+export interface Whisper {
+    _id: string;
+    gameId: GameId;
+    topicId: TopicId;
+    creatorId: UserId;
+    members: UserId[];
+    isActive: boolean;
+    meta?: WhisperMeta | null;
+}
+
+export const zWhisper = z
+    .object({
+        _id: aliases.whisperId,
+        gameId: refs.game,
+        topicId: refs.topic,
+        creatorId: refs.user,
+        members: z.array(refs.user),
+        isActive: z.boolean().default(true),
+        meta: z
+            .object({
+                name: aliases.name.meta({ description: 'The displayed name of the channel.' }),
+                includeStoryteller: z.boolean().default(true)
+            })
+            .optional()
+            .nullable()
+    })
+    .satisfies<z.ZodType<Whisper>>();
+
 export type WhisperType = mongoose.InferRawDocType<Whisper>;
 export type WhisperDocument = mongoose.HydratedDocument<WhisperType>;
 

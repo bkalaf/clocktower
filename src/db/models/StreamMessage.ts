@@ -5,17 +5,28 @@ import schemas from '../../schemas/index';
 
 const { aliases, refs } = schemas;
 
-export const zStreamMessage = z.object({
-    _id: aliases.chatItemId,
-    gameId: refs.game,
-    topicId: z.string().min(1),
-    streamId: refs.stream,
-    ts: aliases.timestamp,
-    kind: z.enum(['event', 'snapshot']),
-    message: z.unknown()
-});
+export interface StreamMessage {
+    _id: string;
+    gameId: string;
+    topicId: string;
+    streamId: string;
+    ts: Date;
+    kind: 'event' | 'snapshot';
+    message: unknown;
+}
 
-export type StreamMessage = z.infer<typeof zStreamMessage>;
+export const zStreamMessage = z
+    .object({
+        _id: aliases.chatItemId,
+        gameId: refs.game,
+        topicId: z.string().min(1),
+        streamId: refs.stream,
+        ts: aliases.timestamp,
+        kind: z.enum(['event', 'snapshot']),
+        message: z.unknown()
+    })
+    .satisfies<z.ZodType<StreamMessage>>();
+
 export type StreamMessageType = mongoose.InferRawDocType<StreamMessage>;
 export type StreamMessageDocument = mongoose.HydratedDocument<StreamMessageType>;
 

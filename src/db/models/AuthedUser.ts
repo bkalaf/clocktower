@@ -1,8 +1,20 @@
 // src/db/models/AuthedUser.ts
 import z from 'zod/v4';
 import schemas from '../../schemas/index';
-import { zUserSettings } from '../../schemas/settings';
+import { zUserSettings, type UserSettings } from '../../schemas/settings';
+import type { GlobalRoles } from '../../types/game';
 const { aliases, enums } = schemas;
+
+export interface AuthedUser {
+    _id: string;
+    username: string;
+    displayName?: string;
+    email: string;
+    avatarPath?: string;
+    userRoles: GlobalRoles[];
+    penaltyUntil?: Date | null;
+    settings: UserSettings;
+}
 
 export const zAuthedUser = z.object({
     _id: z.string('Must be a UUID'),
@@ -17,6 +29,4 @@ export const zAuthedUser = z.object({
         .meta({ description: 'Roles granted to this user.' }),
     penaltyUntil: aliases.timestamp.optional().nullable(),
     settings: zUserSettings
-});
-
-export type AuthedUser = z.infer<typeof zAuthedUser>;
+}) satisfies z.ZodType<AuthedUser>;

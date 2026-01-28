@@ -4,22 +4,36 @@ import z from 'zod/v4';
 import schemas from '../../schemas/index';
 const { aliases, refs } = schemas;
 
-export const zModerationLog = z.object({
-    _id: aliases.moderationLogId,
-    roomId: refs.game,
-    actorUserId: refs.user,
-    targetUserId: refs.user,
-    action: z.enum(['removePlayer', 'emptySeat']),
-    reasonCode: z.string().min(1),
-    message: z.string().optional().nullable(),
-    ts: aliases.timestamp.default(() => new Date())
-});
+const actionOptions = ['removePlayer', 'emptySeat'] as const;
 
-export type ModerationLog = z.infer<typeof zModerationLog>;
+export type ModerationAction = (typeof actionOptions)[number];
+
+export interface ModerationLog {
+    _id: string;
+    roomId: string;
+    actorUserId: string;
+    targetUserId: string;
+    action: ModerationAction;
+    reasonCode: string;
+    message?: string | null;
+    ts: Date;
+}
+
+export const zModerationLog = z
+    .object({
+        _id: aliases.moderationLogId,
+        roomId: refs.game,
+        actorUserId: refs.user,
+        targetUserId: refs.user,
+        action: z.enum(actionOptions),
+        reasonCode: z.string().min(1),
+        message: z.string().optional().nullable(),
+        ts: aliases.timestamp.default(() => new Date())
+    })
+    .satisfies<z.ZodType<ModerationLog>>();
+
 export type ModerationLogType = mongoose.InferRawDocType<ModerationLog>;
 export type ModerationLogDocument = mongoose.HydratedDocument<ModerationLogType>;
-
-const actionOptions = ['removePlayer', 'emptySeat'] as const;
 
 const moderationLogSchema = new mongoose.Schema<ModerationLog>(
     {

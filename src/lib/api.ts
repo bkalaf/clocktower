@@ -7,7 +7,7 @@ import { getUserFromCookie } from '../serverFns/getId/getUserFromCookie';
 import { requirePrivilegedUser } from '../server/auth/privileged';
 import z from 'zod/v4';
 import { UserModel } from '../db/models/User';
-import { loginServerFn } from '../routes/api/auth/-login';
+import { loginServerFn } from '../routes/api/auth/-loginServerFn';
 import type { UserSettings } from '../schemas/settings';
 
 const defaultHeaders = {

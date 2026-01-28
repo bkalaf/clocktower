@@ -2,27 +2,47 @@
 import mongoose from 'mongoose';
 import z from 'zod/v4';
 import schemas from '../../schemas/index';
+import type { GameId, UserId } from '../../types/game';
 
 const { refs, aliases, enums } = schemas;
 
-export const zUpdateGameMember = z.object({
-    role: enums.sessionRoles.default('spectator'),
-    isSeated: z.boolean().default(false)
-});
+const sessionRoleOptions = enums.sessionRoles.options;
 
-export const zGameMember = z.object({
-    _id: aliases.gameMemberId,
-    gameId: refs.game,
-    userId: refs.user,
-    joinedAt: z.date(),
-    ...zUpdateGameMember.shape
-});
+export type SessionRole = (typeof sessionRoleOptions)[number];
 
-export type GameMember = z.infer<typeof zGameMember>;
+export interface GameMemberUpdate {
+    role: SessionRole;
+    isSeated: boolean;
+}
+
+export const zUpdateGameMember = z
+    .object({
+        role: enums.sessionRoles.default('spectator'),
+        isSeated: z.boolean().default(false)
+    })
+    .satisfies<z.ZodType<GameMemberUpdate>>();
+
+export interface GameMember {
+    _id: string;
+    gameId: GameId;
+    userId: UserId;
+    joinedAt: Date;
+    role: SessionRole;
+    isSeated: boolean;
+}
+
+export const zGameMember = z
+    .object({
+        _id: aliases.gameMemberId,
+        gameId: refs.game,
+        userId: refs.user,
+        joinedAt: z.date(),
+        ...zUpdateGameMember.shape
+    })
+    .satisfies<z.ZodType<GameMember>>();
+
 export type GameMemberType = mongoose.InferRawDocType<GameMember>;
 export type GameMemberDocument = mongoose.HydratedDocument<GameMemberType>;
-
-const sessionRoleOptions = enums.sessionRoles.options;
 
 const gameMemberSchema = new mongoose.Schema<GameMember>(
     {

@@ -1,10 +1,10 @@
 // src/server/_authed.rooms.index.tsx/roomList.ts
 import { getScriptById } from '../../db/crud/Script';
-import { getUserById } from '../../db/crud/User';
+import { getUserByIdServerFn } from '../../db/crud/User';
 import { roomActors } from '../roomService';
 
 export async function getRoomSummary(room: Room): Promise<RoomSummary> {
-    const hostUser = await getUserById({ data: room.hostUserId });
+    const hostUser = await getUserByIdServerFn({ data: room.hostUserId });
     const script = await getScriptById({ data: room.scriptId });
 
     return {

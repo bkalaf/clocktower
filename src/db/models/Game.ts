@@ -2,71 +2,132 @@
 import mongoose, { Schema } from 'mongoose';
 import z from 'zod/v4';
 import schemas from '../../schemas/index';
+import { daySubphase as daySubphaseValues } from '../../schemas/enums/_enums';
+import type { GameId, UserId } from '../../types/game';
 
 const { aliases, refs, enums } = schemas;
-
-export const zGame = z.object({
-    _id: aliases.matchId,
-    roomId: refs.game,
-    status: enums.matchStatus.default('setup'),
-    phase: enums.matchPhase.default('day'),
-    subphase: enums.matchSubphase.default('day.dawn_announcements'),
-    dayNumber: z.number().int().min(1).default(1),
-    allowTravelers: z.boolean().default(false),
-    travelerUserIds: z.array(aliases.userId).default([]),
-    travelerCountUsed: z.number().int().min(0).default(0),
-    travelerLimit: z.number().int().min(0).default(5),
-    playerSeatMap: z.record(aliases.userId, z.unknown()).default({}),
-    nominationsOpen: z.boolean().default(false),
-    breakoutWhispersEnabled: z.boolean().default(true),
-    dayNominated: z.array(aliases.userId).default([]),
-    dayNominators: z.array(aliases.userId).default([]),
-    aliveById: z.record(aliases.userId, z.boolean()).default({}),
-    isTravelerById: z.record(aliases.userId, z.boolean()).default({}),
-    ghostVoteAvailableById: z.record(aliases.userId, z.boolean()).default({}),
-    onTheBlock: z
-        .object({
-            nomineeId: aliases.userId,
-            votesFor: z.number().int().min(0),
-            nominatorId: aliases.userId
-        })
-        .optional()
-        .nullable(),
-    voteHistory: z
-        .array(
-            z.object({
-                day: z.number().int().min(1),
-                nominationType: z.enum(['execution', 'exile']),
-                nominatorId: aliases.userId,
-                nomineeId: aliases.userId,
-                votesFor: z.number().int().min(0),
-                threshold: z.number().int().min(0),
-                passed: z.boolean(),
-                votes: z.array(
-                    z.object({
-                        voterId: aliases.userId,
-                        choice: z.enum(['yes', 'no', 'abstain']),
-                        usedGhost: z.boolean().optional()
-                    })
-                ),
-                ts: z.number().int()
-            })
-        )
-        .default([])
-        .optional()
-        .nullable(),
-    phaseArtifacts: z.record(z.string(), z.string()).default({})
-});
-
-export type Game = z.infer<typeof zGame>;
-export type GameType = mongoose.InferRawDocType<Game>;
-export type GameDocument = mongoose.HydratedDocument<GameType>;
 
 const matchStatusOptions = enums.matchStatus.options;
 const matchPhaseOptions = enums.matchPhase.options;
 
 const voteChoiceOptions = ['yes', 'no', 'abstain'] as const;
 const nominationTypeOptions = ['execution', 'exile'] as const;
+
+type MatchStatus = (typeof matchStatusOptions)[number];
+type MatchPhase = (typeof matchPhaseOptions)[number];
+type VoteChoice = (typeof voteChoiceOptions)[number];
+type NominationType = (typeof nominationTypeOptions)[number];
+type DaySubphase = (typeof daySubphaseValues)[number];
+type MatchSubphase = `day.${DaySubphase}` | 'night.resolve_night_order';
+
+type PlayerSeatMap = Record<UserId, unknown>;
+type BooleanByUser = Record<UserId, boolean>;
+
+interface VoteHistoryVote {
+    voterId: UserId;
+    choice: VoteChoice;
+    usedGhost?: boolean;
+}
+
+interface VoteHistoryEntry {
+    day: number;
+    nominationType: NominationType;
+    nominatorId: UserId;
+    nomineeId: UserId;
+    votesFor: number;
+    threshold: number;
+    passed: boolean;
+    votes: VoteHistoryVote[];
+    ts: number;
+}
+
+interface OnTheBlock {
+    nomineeId: UserId;
+    votesFor: number;
+    nominatorId: UserId;
+}
+
+export interface Game {
+    _id: string;
+    roomId: GameId;
+    status: MatchStatus;
+    phase: MatchPhase;
+    subphase: MatchSubphase;
+    dayNumber: number;
+    allowTravelers: boolean;
+    travelerUserIds: UserId[];
+    travelerCountUsed: number;
+    travelerLimit: number;
+    playerSeatMap: PlayerSeatMap;
+    nominationsOpen: boolean;
+    breakoutWhispersEnabled: boolean;
+    dayNominated: UserId[];
+    dayNominators: UserId[];
+    aliveById: BooleanByUser;
+    isTravelerById: BooleanByUser;
+    ghostVoteAvailableById: BooleanByUser;
+    onTheBlock?: OnTheBlock | null;
+    voteHistory?: VoteHistoryEntry[] | null;
+    phaseArtifacts: Record<string, string>;
+}
+
+export const zGame = z
+    .object({
+        _id: aliases.matchId,
+        roomId: refs.game,
+        status: enums.matchStatus.default('setup'),
+        phase: enums.matchPhase.default('day'),
+        subphase: enums.matchSubphase.default('day.dawn_announcements'),
+        dayNumber: z.number().int().min(1).default(1),
+        allowTravelers: z.boolean().default(false),
+        travelerUserIds: z.array(aliases.userId).default([]),
+        travelerCountUsed: z.number().int().min(0).default(0),
+        travelerLimit: z.number().int().min(0).default(5),
+        playerSeatMap: z.record(aliases.userId, z.unknown()).default({}),
+        nominationsOpen: z.boolean().default(false),
+        breakoutWhispersEnabled: z.boolean().default(true),
+        dayNominated: z.array(aliases.userId).default([]),
+        dayNominators: z.array(aliases.userId).default([]),
+        aliveById: z.record(aliases.userId, z.boolean()).default({}),
+        isTravelerById: z.record(aliases.userId, z.boolean()).default({}),
+        ghostVoteAvailableById: z.record(aliases.userId, z.boolean()).default({}),
+        onTheBlock: z
+            .object({
+                nomineeId: aliases.userId,
+                votesFor: z.number().int().min(0),
+                nominatorId: aliases.userId
+            })
+            .optional()
+            .nullable(),
+        voteHistory: z
+            .array(
+                z.object({
+                    day: z.number().int().min(1),
+                    nominationType: z.enum(['execution', 'exile']),
+                    nominatorId: aliases.userId,
+                    nomineeId: aliases.userId,
+                    votesFor: z.number().int().min(0),
+                    threshold: z.number().int().min(0),
+                    passed: z.boolean(),
+                    votes: z.array(
+                        z.object({
+                            voterId: aliases.userId,
+                            choice: z.enum(['yes', 'no', 'abstain']),
+                            usedGhost: z.boolean().optional()
+                        })
+                    ),
+                    ts: z.number().int()
+                })
+            )
+            .default([])
+            .optional()
+            .nullable(),
+        phaseArtifacts: z.record(z.string(), z.string()).default({})
+    })
+    .satisfies<z.ZodType<Game>>();
+
+export type GameType = mongoose.InferRawDocType<Game>;
+export type GameDocument = mongoose.HydratedDocument<GameType>;
 
 const onTheBlockSchema = new Schema(
     {

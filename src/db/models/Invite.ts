@@ -5,18 +5,36 @@ import schemas from '../../schemas/index';
 
 const { aliases, refs } = schemas;
 
-export const zInvite = z.object({
-    _id: aliases.inviteId,
-    roomId: refs.game,
-    invitedUserId: refs.user,
-    kind: z.enum(['seat', 'spectator']).default('seat'),
-    status: z.enum(['pending', 'accepted', 'canceled', 'expired', 'rejected']).default('pending'),
-    createdByUserId: refs.user,
-    expiresAt: aliases.timestamp,
-    message: z.string().optional().nullable()
-});
+const kindOptions = ['seat', 'spectator'] as const;
+const statusOptions = ['pending', 'accepted', 'canceled', 'expired', 'rejected'] as const;
 
-export type Invite = z.infer<typeof zInvite>;
+export type InviteKind = (typeof kindOptions)[number];
+export type InviteStatus = (typeof statusOptions)[number];
+
+export interface Invite {
+    _id: string;
+    roomId: string;
+    invitedUserId: string;
+    kind: InviteKind;
+    status: InviteStatus;
+    createdByUserId: string;
+    expiresAt: Date;
+    message?: string | null;
+}
+
+export const zInvite = z
+    .object({
+        _id: aliases.inviteId,
+        roomId: refs.game,
+        invitedUserId: refs.user,
+        kind: z.enum(kindOptions).default('seat'),
+        status: z.enum(statusOptions).default('pending'),
+        createdByUserId: refs.user,
+        expiresAt: aliases.timestamp,
+        message: z.string().optional().nullable()
+    })
+    .satisfies<z.ZodType<Invite>>();
+
 export type InviteType = mongoose.InferRawDocType<Invite>;
 export type InviteDocument = mongoose.HydratedDocument<InviteType>;
 

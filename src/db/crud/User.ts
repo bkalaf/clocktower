@@ -1,22 +1,11 @@
 // src/db/crud/User.ts
-import z from 'zod/v4';
-import aliases from '../../schemas/aliases';
-import enums from '../../schemas/enums';
 import { createServerFn } from '@tanstack/react-start';
+import { zAuthedUser } from '../models/AuthedUser';
 import { UserModel } from '../models/User';
 
-const zUserOutput = z.object({
-    _id: z.string('Must be a UUID'),
-    username: aliases.name.meta({ description: 'Your displayed username.' }),
-    email: aliases.email.meta({ description: 'Your e-mail (this is private and not shown to others).' }),
-    userRoles: z
-        .array(enums.globalRoles)
-        .min(1, 'Must have at least 1 role.')
-        .default(['user'])
-        .meta({ description: 'Roles granted to this user.' })
-});
+const zUserOutput = zAuthedUser;
 
-export const getUserById = createServerFn({
+export const getUserByIdServerFn = createServerFn({
     method: 'GET'
 })
     .inputValidator(z.string().min(1))

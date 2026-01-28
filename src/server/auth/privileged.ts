@@ -1,7 +1,7 @@
 // src/server/auth/privileged.ts
 import { HttpError } from '../../errors';
 import type { AuthedUser, GlobalRoles } from '../../types/game';
-import { getUserFromCookie } from '../serverFns/getId/getUserFromCookie';
+import { getSessionCookie } from './cookies';
 
 const PRIVILEGED_ROLES: Set<GlobalRoles> = new Set(['admin', 'moderator']);
 
@@ -11,7 +11,7 @@ export function hasPrivilegedRole(user: AuthedUser | null | undefined): user is 
 }
 
 export async function requirePrivilegedUser(): Promise<AuthedUser> {
-    const user = await getUserFromCookie();
+    const user = await getSessionCookie();
     if (!user) {
         throw HttpError.UNAUTHORIZED('missing_session');
     }

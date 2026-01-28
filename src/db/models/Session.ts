@@ -4,13 +4,20 @@ import z from 'zod/v4';
 import refs from '../../schemas/refs';
 import aliases from '../../schemas/aliases';
 
-export const zSession = z.object({
-    _id: aliases.sessionId,
-    userId: refs.user,
-    expiresAt: z.date()
-});
+export interface Session {
+    _id: string;
+    userId: string;
+    expiresAt: Date;
+}
 
-export type Session = z.infer<typeof zSession>;
+export const zSession = z
+    .object({
+        _id: aliases.sessionId,
+        userId: refs.user,
+        expiresAt: z.date()
+    })
+    .satisfies<z.ZodType<Session>>();
+
 export type SessionType = mongoose.InferRawDocType<Session>;
 export type SessionDocument = mongoose.HydratedDocument<SessionType>;
 

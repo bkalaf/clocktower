@@ -1,4 +1,4 @@
-// src/routes/api/auth/-login.ts
+// src/routes/api/auth/-loginServerFn.ts
 import z from 'zod/v4';
 import { connectMongoose } from '../../../db/connectMongoose';
 import { UserModel } from '../../../db/models/User';
@@ -32,8 +32,8 @@ export const loginServerFn = createServerFn({
             return unauthorized('Could not find user', { email });
         }
         const ok = await verifyPassword(password, user.passwordHash, {
-            onUpgrade(newHash) {
-                return UserModel.updateOne({ _id: user._id }, { passwordHash: newHash }).exec();
+            onUpgrade: async (newHash) => {
+                await UserModel.updateOne({ _id: user._id }, { passwordHash: newHash }).exec();
             }
         });
         if (!ok) {
