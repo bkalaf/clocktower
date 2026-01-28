@@ -33,3 +33,12 @@ export function useUserCurrentXP() {
 export function useUserRequiredXP() {
     return useAppSelector(authSelectors.selectRequiredXP);
 }
+
+export function useUserScopes() {
+    return useAppSelector(authSelectors.selectScopes);
+}
+
+export function useHasPrivilegedAccess() {
+    const scopes = useUserScopes();
+    return scopes.includes('admin') || scopes.includes('moderator');
+}

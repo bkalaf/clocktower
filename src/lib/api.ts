@@ -4,6 +4,7 @@ import type { AuthedUser } from '../types/game';
 import { getSessionCookie } from '../server/auth/cookies';
 import { ensureSessionActor, stopSessionActor } from '../server/sessionService';
 import { getUserFromCookie } from '../serverFns/getId/getUserFromCookie';
+import { requirePrivilegedUser } from '../server/auth/privileged';
 import z from 'zod/v4';
 import { UserModel } from '../db/models/User';
 import { loginServerFn } from '../routes/api/auth/-login';
@@ -63,8 +64,21 @@ export const whoamiFn = createServerFn({
     return { user };
 });
 
+export const whoamiPrivilegedFn = createServerFn({
+    method: 'GET'
+}).handler(async () => {
+    const user = await requirePrivilegedUser();
+    return { user };
+});
+
 export async function whoami() {
     return apiFetch<{ user: AuthedUser | null }>('/api/whoami', {
+        method: 'GET'
+    });
+}
+
+export async function whoamiPrivileged() {
+    return apiFetch<{ user: AuthedUser | null }>('/api/auth/me/mod', {
         method: 'GET'
     });
 }

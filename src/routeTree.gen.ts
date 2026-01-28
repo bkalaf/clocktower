@@ -9,10 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as GameRouteImport } from './routes/game'
 import { Route as UnauthedRouteImport } from './routes/_unauthed'
 import { Route as AuthedRouteImport } from './routes/_authed'
 import { Route as AuthedIndexRouteImport } from './routes/_authed.index'
 import { Route as GamesGameIdRouteImport } from './routes/games/$gameId'
+import { Route as GameGrimRouteImport } from './routes/game/grim'
 import { Route as ApiWhoamiRouteImport } from './routes/api/whoami'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as UnauthedLogoutRouteImport } from './routes/_unauthed.logout'
@@ -22,7 +24,10 @@ import { Route as AuthedScriptsRouteImport } from './routes/_authed.scripts'
 import { Route as ApiScriptsIndexRouteImport } from './routes/api/scripts/index'
 import { Route as ApiRoomsIndexRouteImport } from './routes/api/rooms/index'
 import { Route as ApiInvitesIndexRouteImport } from './routes/api/invites/index'
+import { Route as AuthedRoomsIndexRouteImport } from './routes/_authed.rooms.index'
+import { Route as GameGrimWindowRouteImport } from './routes/game/grim/window'
 import { Route as ApiDevGrimoireRouteImport } from './routes/api/dev/grimoire'
+import { Route as ApiAuthSettingsRouteImport } from './routes/api/auth/settings'
 import { Route as ApiAuthRegisterRouteImport } from './routes/api/auth/register'
 import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
 import { Route as ApiAuthForgotPasswordRouteImport } from './routes/api/auth/forgot-password'
@@ -49,8 +54,16 @@ import { Route as ApiGamesGameIdStorytellersRouteImport } from './routes/api/gam
 import { Route as ApiGamesGameIdStartSetupRouteImport } from './routes/api/games/$gameId/start-setup'
 import { Route as ApiGamesGameIdReadyRouteImport } from './routes/api/games/$gameId/ready'
 import { Route as ApiGamesGameIdHostRouteImport } from './routes/api/games/$gameId/host'
+import { Route as ApiAuthMeModRouteImport } from './routes/api/auth/me/mod'
 import { Route as AuthedRoomsRoomRoomIdIndexRouteImport } from './routes/_authed.rooms._room.$roomId.index'
+import { Route as AuthedRoomsRoomRoomIdStRouteImport } from './routes/_authed.rooms._room.$roomId._st'
+import { Route as AuthedRoomsRoomRoomIdStWindowRouteImport } from './routes/_authed.rooms._room.$roomId._st.window'
 
+const GameRoute = GameRouteImport.update({
+  id: '/game',
+  path: '/game',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UnauthedRoute = UnauthedRouteImport.update({
   id: '/_unauthed',
   getParentRoute: () => rootRouteImport,
@@ -68,6 +81,11 @@ const GamesGameIdRoute = GamesGameIdRouteImport.update({
   id: '/games/$gameId',
   path: '/games/$gameId',
   getParentRoute: () => rootRouteImport,
+} as any)
+const GameGrimRoute = GameGrimRouteImport.update({
+  id: '/grim',
+  path: '/grim',
+  getParentRoute: () => GameRoute,
 } as any)
 const ApiWhoamiRoute = ApiWhoamiRouteImport.update({
   id: '/api/whoami',
@@ -114,9 +132,24 @@ const ApiInvitesIndexRoute = ApiInvitesIndexRouteImport.update({
   path: '/api/invites/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthedRoomsIndexRoute = AuthedRoomsIndexRouteImport.update({
+  id: '/rooms/',
+  path: '/rooms/',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const GameGrimWindowRoute = GameGrimWindowRouteImport.update({
+  id: '/window',
+  path: '/window',
+  getParentRoute: () => GameGrimRoute,
+} as any)
 const ApiDevGrimoireRoute = ApiDevGrimoireRouteImport.update({
   id: '/api/dev/grimoire',
   path: '/api/dev/grimoire',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthSettingsRoute = ApiAuthSettingsRouteImport.update({
+  id: '/api/auth/settings',
+  path: '/api/auth/settings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAuthRegisterRoute = ApiAuthRegisterRouteImport.update({
@@ -260,117 +293,54 @@ const ApiGamesGameIdHostRoute = ApiGamesGameIdHostRouteImport.update({
   path: '/api/games/$gameId/host',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAuthMeModRoute = ApiAuthMeModRouteImport.update({
+  id: '/api/auth/me/mod',
+  path: '/api/auth/me/mod',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthedRoomsRoomRoomIdIndexRoute =
   AuthedRoomsRoomRoomIdIndexRouteImport.update({
     id: '/rooms/_room/$roomId/',
     path: '/rooms/$roomId/',
     getParentRoute: () => AuthedRoute,
   } as any)
+const AuthedRoomsRoomRoomIdStRoute = AuthedRoomsRoomRoomIdStRouteImport.update({
+  id: '/rooms/_room/$roomId/_st',
+  path: '/rooms/$roomId',
+  getParentRoute: () => AuthedRoute,
+} as any)
+const AuthedRoomsRoomRoomIdStWindowRoute =
+  AuthedRoomsRoomRoomIdStWindowRouteImport.update({
+    id: '/window',
+    path: '/window',
+    getParentRoute: () => AuthedRoomsRoomRoomIdStRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof AuthedIndexRoute
+  '/game': typeof GameRouteWithChildren
   '/scripts': typeof AuthedScriptsRouteWithChildren
   '/about': typeof UnauthedAboutRoute
   '/login': typeof UnauthedLoginRoute
   '/logout': typeof UnauthedLogoutRoute
   '/api/health': typeof ApiHealthRoute
   '/api/whoami': typeof ApiWhoamiRoute
+  '/game/grim': typeof GameGrimRouteWithChildren
   '/games/$gameId': typeof GamesGameIdRoute
-  '/': typeof AuthedIndexRoute
   '/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
   '/rooms/n': typeof AuthedRoomsNRoute
   '/scripts/n': typeof AuthedScriptsNRoute
   '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/auth/settings': typeof ApiAuthSettingsRoute
   '/api/dev/grimoire': typeof ApiDevGrimoireRoute
-  '/api/invites': typeof ApiInvitesIndexRoute
-  '/api/rooms': typeof ApiRoomsIndexRoute
-  '/api/scripts': typeof ApiScriptsIndexRoute
-  '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
-  '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
-  '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
-  '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute
-  '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute
-  '/api/invites/$inviteId/accept': typeof ApiInvitesInviteIdAcceptRoute
-  '/api/invites/$inviteId/cancel': typeof ApiInvitesInviteIdCancelRoute
-  '/api/invites/$inviteId/reject': typeof ApiInvitesInviteIdRejectRoute
-  '/api/matches/$matchId/phase': typeof ApiMatchesMatchIdPhaseRoute
-  '/api/matches/$matchId/travel-approve': typeof ApiMatchesMatchIdTravelApproveRoute
-  '/api/matches/$matchId/travel-deny': typeof ApiMatchesMatchIdTravelDenyRoute
-  '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute
-  '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute
-  '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute
-  '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute
-  '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
-  '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
-  '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
-  '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute
-  '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute
-  '/rooms/$roomId': typeof AuthedRoomsRoomRoomIdIndexRoute
-}
-export interface FileRoutesByTo {
-  '/scripts': typeof AuthedScriptsRouteWithChildren
-  '/about': typeof UnauthedAboutRoute
-  '/login': typeof UnauthedLoginRoute
-  '/logout': typeof UnauthedLogoutRoute
-  '/api/health': typeof ApiHealthRoute
-  '/api/whoami': typeof ApiWhoamiRoute
-  '/games/$gameId': typeof GamesGameIdRoute
-  '/': typeof AuthedIndexRoute
-  '/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
-  '/rooms/n': typeof AuthedRoomsNRoute
-  '/scripts/n': typeof AuthedScriptsNRoute
-  '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
-  '/api/auth/logout': typeof ApiAuthLogoutRoute
-  '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/dev/grimoire': typeof ApiDevGrimoireRoute
-  '/api/invites': typeof ApiInvitesIndexRoute
-  '/api/rooms': typeof ApiRoomsIndexRoute
-  '/api/scripts': typeof ApiScriptsIndexRoute
-  '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
-  '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
-  '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
-  '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute
-  '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute
-  '/api/invites/$inviteId/accept': typeof ApiInvitesInviteIdAcceptRoute
-  '/api/invites/$inviteId/cancel': typeof ApiInvitesInviteIdCancelRoute
-  '/api/invites/$inviteId/reject': typeof ApiInvitesInviteIdRejectRoute
-  '/api/matches/$matchId/phase': typeof ApiMatchesMatchIdPhaseRoute
-  '/api/matches/$matchId/travel-approve': typeof ApiMatchesMatchIdTravelApproveRoute
-  '/api/matches/$matchId/travel-deny': typeof ApiMatchesMatchIdTravelDenyRoute
-  '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute
-  '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute
-  '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute
-  '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute
-  '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
-  '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
-  '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
-  '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute
-  '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute
-  '/rooms/$roomId': typeof AuthedRoomsRoomRoomIdIndexRoute
-}
-export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/_authed': typeof AuthedRouteWithChildren
-  '/_unauthed': typeof UnauthedRouteWithChildren
-  '/_authed/scripts': typeof AuthedScriptsRouteWithChildren
-  '/_unauthed/about': typeof UnauthedAboutRoute
-  '/_unauthed/login': typeof UnauthedLoginRoute
-  '/_unauthed/logout': typeof UnauthedLogoutRoute
-  '/api/health': typeof ApiHealthRoute
-  '/api/whoami': typeof ApiWhoamiRoute
-  '/games/$gameId': typeof GamesGameIdRoute
-  '/_authed/': typeof AuthedIndexRoute
-  '/_authed/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
-  '/_authed/rooms/n': typeof AuthedRoomsNRoute
-  '/_authed/scripts/n': typeof AuthedScriptsNRoute
-  '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
-  '/api/auth/logout': typeof ApiAuthLogoutRoute
-  '/api/auth/register': typeof ApiAuthRegisterRoute
-  '/api/dev/grimoire': typeof ApiDevGrimoireRoute
+  '/game/grim/window': typeof GameGrimWindowRoute
+  '/rooms/': typeof AuthedRoomsIndexRoute
   '/api/invites/': typeof ApiInvitesIndexRoute
   '/api/rooms/': typeof ApiRoomsIndexRoute
   '/api/scripts/': typeof ApiScriptsIndexRoute
+  '/api/auth/me/mod': typeof ApiAuthMeModRoute
   '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
   '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
   '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
@@ -391,113 +361,137 @@ export interface FileRoutesById {
   '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
   '/api/matches/$matchId/': typeof ApiMatchesMatchIdIndexRoute
   '/api/rooms/$roomId/': typeof ApiRoomsRoomIdIndexRoute
+  '/rooms/$roomId': typeof AuthedRoomsRoomRoomIdStRouteWithChildren
+  '/rooms/$roomId/': typeof AuthedRoomsRoomRoomIdIndexRoute
+  '/rooms/$roomId/window': typeof AuthedRoomsRoomRoomIdStWindowRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof AuthedIndexRoute
+  '/game': typeof GameRouteWithChildren
+  '/scripts': typeof AuthedScriptsRouteWithChildren
+  '/about': typeof UnauthedAboutRoute
+  '/login': typeof UnauthedLoginRoute
+  '/logout': typeof UnauthedLogoutRoute
+  '/api/health': typeof ApiHealthRoute
+  '/api/whoami': typeof ApiWhoamiRoute
+  '/game/grim': typeof GameGrimRouteWithChildren
+  '/games/$gameId': typeof GamesGameIdRoute
+  '/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
+  '/rooms/n': typeof AuthedRoomsNRoute
+  '/scripts/n': typeof AuthedScriptsNRoute
+  '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/auth/settings': typeof ApiAuthSettingsRoute
+  '/api/dev/grimoire': typeof ApiDevGrimoireRoute
+  '/game/grim/window': typeof GameGrimWindowRoute
+  '/rooms': typeof AuthedRoomsIndexRoute
+  '/api/invites': typeof ApiInvitesIndexRoute
+  '/api/rooms': typeof ApiRoomsIndexRoute
+  '/api/scripts': typeof ApiScriptsIndexRoute
+  '/api/auth/me/mod': typeof ApiAuthMeModRoute
+  '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
+  '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
+  '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
+  '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute
+  '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute
+  '/api/invites/$inviteId/accept': typeof ApiInvitesInviteIdAcceptRoute
+  '/api/invites/$inviteId/cancel': typeof ApiInvitesInviteIdCancelRoute
+  '/api/invites/$inviteId/reject': typeof ApiInvitesInviteIdRejectRoute
+  '/api/matches/$matchId/phase': typeof ApiMatchesMatchIdPhaseRoute
+  '/api/matches/$matchId/travel-approve': typeof ApiMatchesMatchIdTravelApproveRoute
+  '/api/matches/$matchId/travel-deny': typeof ApiMatchesMatchIdTravelDenyRoute
+  '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute
+  '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute
+  '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute
+  '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute
+  '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
+  '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
+  '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
+  '/api/matches/$matchId': typeof ApiMatchesMatchIdIndexRoute
+  '/api/rooms/$roomId': typeof ApiRoomsRoomIdIndexRoute
+  '/rooms/$roomId': typeof AuthedRoomsRoomRoomIdIndexRoute
+  '/rooms/$roomId/window': typeof AuthedRoomsRoomRoomIdStWindowRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/_authed': typeof AuthedRouteWithChildren
+  '/_unauthed': typeof UnauthedRouteWithChildren
+  '/game': typeof GameRouteWithChildren
+  '/_authed/scripts': typeof AuthedScriptsRouteWithChildren
+  '/_unauthed/about': typeof UnauthedAboutRoute
+  '/_unauthed/login': typeof UnauthedLoginRoute
+  '/_unauthed/logout': typeof UnauthedLogoutRoute
+  '/api/health': typeof ApiHealthRoute
+  '/api/whoami': typeof ApiWhoamiRoute
+  '/game/grim': typeof GameGrimRouteWithChildren
+  '/games/$gameId': typeof GamesGameIdRoute
+  '/_authed/': typeof AuthedIndexRoute
+  '/_authed/auth/forgot-password': typeof AuthedAuthForgotPasswordRoute
+  '/_authed/rooms/n': typeof AuthedRoomsNRoute
+  '/_authed/scripts/n': typeof AuthedScriptsNRoute
+  '/api/auth/forgot-password': typeof ApiAuthForgotPasswordRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/register': typeof ApiAuthRegisterRoute
+  '/api/auth/settings': typeof ApiAuthSettingsRoute
+  '/api/dev/grimoire': typeof ApiDevGrimoireRoute
+  '/game/grim/window': typeof GameGrimWindowRoute
+  '/_authed/rooms/': typeof AuthedRoomsIndexRoute
+  '/api/invites/': typeof ApiInvitesIndexRoute
+  '/api/rooms/': typeof ApiRoomsIndexRoute
+  '/api/scripts/': typeof ApiScriptsIndexRoute
+  '/api/auth/me/mod': typeof ApiAuthMeModRoute
+  '/api/games/$gameId/host': typeof ApiGamesGameIdHostRoute
+  '/api/games/$gameId/ready': typeof ApiGamesGameIdReadyRoute
+  '/api/games/$gameId/start-setup': typeof ApiGamesGameIdStartSetupRoute
+  '/api/games/$gameId/storytellers': typeof ApiGamesGameIdStorytellersRoute
+  '/api/games/$gameId/whispers': typeof ApiGamesGameIdWhispersRoute
+  '/api/invites/$inviteId/accept': typeof ApiInvitesInviteIdAcceptRoute
+  '/api/invites/$inviteId/cancel': typeof ApiInvitesInviteIdCancelRoute
+  '/api/invites/$inviteId/reject': typeof ApiInvitesInviteIdRejectRoute
+  '/api/matches/$matchId/phase': typeof ApiMatchesMatchIdPhaseRoute
+  '/api/matches/$matchId/travel-approve': typeof ApiMatchesMatchIdTravelApproveRoute
+  '/api/matches/$matchId/travel-deny': typeof ApiMatchesMatchIdTravelDenyRoute
+  '/api/matches/$matchId/travel-request': typeof ApiMatchesMatchIdTravelRequestRoute
+  '/api/rooms/$roomId/empty-seat': typeof ApiRoomsRoomIdEmptySeatRoute
+  '/api/rooms/$roomId/invites': typeof ApiRoomsRoomIdInvitesRoute
+  '/api/rooms/$roomId/match': typeof ApiRoomsRoomIdMatchRoute
+  '/api/rooms/$roomId/remove-player': typeof ApiRoomsRoomIdRemovePlayerRoute
+  '/api/rooms/$roomId/script': typeof ApiRoomsRoomIdScriptRoute
+  '/api/rooms/$roomId/start-match': typeof ApiRoomsRoomIdStartMatchRoute
+  '/api/matches/$matchId/': typeof ApiMatchesMatchIdIndexRoute
+  '/api/rooms/$roomId/': typeof ApiRoomsRoomIdIndexRoute
+  '/_authed/rooms/_room/$roomId/_st': typeof AuthedRoomsRoomRoomIdStRouteWithChildren
   '/_authed/rooms/_room/$roomId/': typeof AuthedRoomsRoomRoomIdIndexRoute
+  '/_authed/rooms/_room/$roomId/_st/window': typeof AuthedRoomsRoomRoomIdStWindowRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
+    | '/'
+    | '/game'
     | '/scripts'
     | '/about'
     | '/login'
     | '/logout'
     | '/api/health'
     | '/api/whoami'
+    | '/game/grim'
     | '/games/$gameId'
-    | '/'
     | '/auth/forgot-password'
     | '/rooms/n'
     | '/scripts/n'
     | '/api/auth/forgot-password'
     | '/api/auth/logout'
     | '/api/auth/register'
+    | '/api/auth/settings'
     | '/api/dev/grimoire'
-    | '/api/invites'
-    | '/api/rooms'
-    | '/api/scripts'
-    | '/api/games/$gameId/host'
-    | '/api/games/$gameId/ready'
-    | '/api/games/$gameId/start-setup'
-    | '/api/games/$gameId/storytellers'
-    | '/api/games/$gameId/whispers'
-    | '/api/invites/$inviteId/accept'
-    | '/api/invites/$inviteId/cancel'
-    | '/api/invites/$inviteId/reject'
-    | '/api/matches/$matchId/phase'
-    | '/api/matches/$matchId/travel-approve'
-    | '/api/matches/$matchId/travel-deny'
-    | '/api/matches/$matchId/travel-request'
-    | '/api/rooms/$roomId/empty-seat'
-    | '/api/rooms/$roomId/invites'
-    | '/api/rooms/$roomId/match'
-    | '/api/rooms/$roomId/remove-player'
-    | '/api/rooms/$roomId/script'
-    | '/api/rooms/$roomId/start-match'
-    | '/api/matches/$matchId'
-    | '/api/rooms/$roomId'
-    | '/rooms/$roomId'
-  fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/scripts'
-    | '/about'
-    | '/login'
-    | '/logout'
-    | '/api/health'
-    | '/api/whoami'
-    | '/games/$gameId'
-    | '/'
-    | '/auth/forgot-password'
-    | '/rooms/n'
-    | '/scripts/n'
-    | '/api/auth/forgot-password'
-    | '/api/auth/logout'
-    | '/api/auth/register'
-    | '/api/dev/grimoire'
-    | '/api/invites'
-    | '/api/rooms'
-    | '/api/scripts'
-    | '/api/games/$gameId/host'
-    | '/api/games/$gameId/ready'
-    | '/api/games/$gameId/start-setup'
-    | '/api/games/$gameId/storytellers'
-    | '/api/games/$gameId/whispers'
-    | '/api/invites/$inviteId/accept'
-    | '/api/invites/$inviteId/cancel'
-    | '/api/invites/$inviteId/reject'
-    | '/api/matches/$matchId/phase'
-    | '/api/matches/$matchId/travel-approve'
-    | '/api/matches/$matchId/travel-deny'
-    | '/api/matches/$matchId/travel-request'
-    | '/api/rooms/$roomId/empty-seat'
-    | '/api/rooms/$roomId/invites'
-    | '/api/rooms/$roomId/match'
-    | '/api/rooms/$roomId/remove-player'
-    | '/api/rooms/$roomId/script'
-    | '/api/rooms/$roomId/start-match'
-    | '/api/matches/$matchId'
-    | '/api/rooms/$roomId'
-    | '/rooms/$roomId'
-  id:
-    | '__root__'
-    | '/_authed'
-    | '/_unauthed'
-    | '/_authed/scripts'
-    | '/_unauthed/about'
-    | '/_unauthed/login'
-    | '/_unauthed/logout'
-    | '/api/health'
-    | '/api/whoami'
-    | '/games/$gameId'
-    | '/_authed/'
-    | '/_authed/auth/forgot-password'
-    | '/_authed/rooms/n'
-    | '/_authed/scripts/n'
-    | '/api/auth/forgot-password'
-    | '/api/auth/logout'
-    | '/api/auth/register'
-    | '/api/dev/grimoire'
+    | '/game/grim/window'
+    | '/rooms/'
     | '/api/invites/'
     | '/api/rooms/'
     | '/api/scripts/'
+    | '/api/auth/me/mod'
     | '/api/games/$gameId/host'
     | '/api/games/$gameId/ready'
     | '/api/games/$gameId/start-setup'
@@ -518,22 +512,126 @@ export interface FileRouteTypes {
     | '/api/rooms/$roomId/start-match'
     | '/api/matches/$matchId/'
     | '/api/rooms/$roomId/'
+    | '/rooms/$roomId'
+    | '/rooms/$roomId/'
+    | '/rooms/$roomId/window'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/game'
+    | '/scripts'
+    | '/about'
+    | '/login'
+    | '/logout'
+    | '/api/health'
+    | '/api/whoami'
+    | '/game/grim'
+    | '/games/$gameId'
+    | '/auth/forgot-password'
+    | '/rooms/n'
+    | '/scripts/n'
+    | '/api/auth/forgot-password'
+    | '/api/auth/logout'
+    | '/api/auth/register'
+    | '/api/auth/settings'
+    | '/api/dev/grimoire'
+    | '/game/grim/window'
+    | '/rooms'
+    | '/api/invites'
+    | '/api/rooms'
+    | '/api/scripts'
+    | '/api/auth/me/mod'
+    | '/api/games/$gameId/host'
+    | '/api/games/$gameId/ready'
+    | '/api/games/$gameId/start-setup'
+    | '/api/games/$gameId/storytellers'
+    | '/api/games/$gameId/whispers'
+    | '/api/invites/$inviteId/accept'
+    | '/api/invites/$inviteId/cancel'
+    | '/api/invites/$inviteId/reject'
+    | '/api/matches/$matchId/phase'
+    | '/api/matches/$matchId/travel-approve'
+    | '/api/matches/$matchId/travel-deny'
+    | '/api/matches/$matchId/travel-request'
+    | '/api/rooms/$roomId/empty-seat'
+    | '/api/rooms/$roomId/invites'
+    | '/api/rooms/$roomId/match'
+    | '/api/rooms/$roomId/remove-player'
+    | '/api/rooms/$roomId/script'
+    | '/api/rooms/$roomId/start-match'
+    | '/api/matches/$matchId'
+    | '/api/rooms/$roomId'
+    | '/rooms/$roomId'
+    | '/rooms/$roomId/window'
+  id:
+    | '__root__'
+    | '/_authed'
+    | '/_unauthed'
+    | '/game'
+    | '/_authed/scripts'
+    | '/_unauthed/about'
+    | '/_unauthed/login'
+    | '/_unauthed/logout'
+    | '/api/health'
+    | '/api/whoami'
+    | '/game/grim'
+    | '/games/$gameId'
+    | '/_authed/'
+    | '/_authed/auth/forgot-password'
+    | '/_authed/rooms/n'
+    | '/_authed/scripts/n'
+    | '/api/auth/forgot-password'
+    | '/api/auth/logout'
+    | '/api/auth/register'
+    | '/api/auth/settings'
+    | '/api/dev/grimoire'
+    | '/game/grim/window'
+    | '/_authed/rooms/'
+    | '/api/invites/'
+    | '/api/rooms/'
+    | '/api/scripts/'
+    | '/api/auth/me/mod'
+    | '/api/games/$gameId/host'
+    | '/api/games/$gameId/ready'
+    | '/api/games/$gameId/start-setup'
+    | '/api/games/$gameId/storytellers'
+    | '/api/games/$gameId/whispers'
+    | '/api/invites/$inviteId/accept'
+    | '/api/invites/$inviteId/cancel'
+    | '/api/invites/$inviteId/reject'
+    | '/api/matches/$matchId/phase'
+    | '/api/matches/$matchId/travel-approve'
+    | '/api/matches/$matchId/travel-deny'
+    | '/api/matches/$matchId/travel-request'
+    | '/api/rooms/$roomId/empty-seat'
+    | '/api/rooms/$roomId/invites'
+    | '/api/rooms/$roomId/match'
+    | '/api/rooms/$roomId/remove-player'
+    | '/api/rooms/$roomId/script'
+    | '/api/rooms/$roomId/start-match'
+    | '/api/matches/$matchId/'
+    | '/api/rooms/$roomId/'
+    | '/_authed/rooms/_room/$roomId/_st'
     | '/_authed/rooms/_room/$roomId/'
+    | '/_authed/rooms/_room/$roomId/_st/window'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AuthedRoute: typeof AuthedRouteWithChildren
   UnauthedRoute: typeof UnauthedRouteWithChildren
+  GameRoute: typeof GameRouteWithChildren
   ApiHealthRoute: typeof ApiHealthRoute
   ApiWhoamiRoute: typeof ApiWhoamiRoute
   GamesGameIdRoute: typeof GamesGameIdRoute
   ApiAuthForgotPasswordRoute: typeof ApiAuthForgotPasswordRoute
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
   ApiAuthRegisterRoute: typeof ApiAuthRegisterRoute
+  ApiAuthSettingsRoute: typeof ApiAuthSettingsRoute
   ApiDevGrimoireRoute: typeof ApiDevGrimoireRoute
   ApiInvitesIndexRoute: typeof ApiInvitesIndexRoute
   ApiRoomsIndexRoute: typeof ApiRoomsIndexRoute
   ApiScriptsIndexRoute: typeof ApiScriptsIndexRoute
+  ApiAuthMeModRoute: typeof ApiAuthMeModRoute
   ApiGamesGameIdHostRoute: typeof ApiGamesGameIdHostRoute
   ApiGamesGameIdReadyRoute: typeof ApiGamesGameIdReadyRoute
   ApiGamesGameIdStartSetupRoute: typeof ApiGamesGameIdStartSetupRoute
@@ -558,17 +656,24 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/game': {
+      id: '/game'
+      path: '/game'
+      fullPath: '/game'
+      preLoaderRoute: typeof GameRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_unauthed': {
       id: '/_unauthed'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof UnauthedRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authed': {
       id: '/_authed'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthedRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -585,6 +690,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/games/$gameId'
       preLoaderRoute: typeof GamesGameIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/game/grim': {
+      id: '/game/grim'
+      path: '/grim'
+      fullPath: '/game/grim'
+      preLoaderRoute: typeof GameGrimRouteImport
+      parentRoute: typeof GameRoute
     }
     '/api/whoami': {
       id: '/api/whoami'
@@ -631,29 +743,50 @@ declare module '@tanstack/react-router' {
     '/api/scripts/': {
       id: '/api/scripts/'
       path: '/api/scripts'
-      fullPath: '/api/scripts'
+      fullPath: '/api/scripts/'
       preLoaderRoute: typeof ApiScriptsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/rooms/': {
       id: '/api/rooms/'
       path: '/api/rooms'
-      fullPath: '/api/rooms'
+      fullPath: '/api/rooms/'
       preLoaderRoute: typeof ApiRoomsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/invites/': {
       id: '/api/invites/'
       path: '/api/invites'
-      fullPath: '/api/invites'
+      fullPath: '/api/invites/'
       preLoaderRoute: typeof ApiInvitesIndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authed/rooms/': {
+      id: '/_authed/rooms/'
+      path: '/rooms'
+      fullPath: '/rooms/'
+      preLoaderRoute: typeof AuthedRoomsIndexRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/game/grim/window': {
+      id: '/game/grim/window'
+      path: '/window'
+      fullPath: '/game/grim/window'
+      preLoaderRoute: typeof GameGrimWindowRouteImport
+      parentRoute: typeof GameGrimRoute
     }
     '/api/dev/grimoire': {
       id: '/api/dev/grimoire'
       path: '/api/dev/grimoire'
       fullPath: '/api/dev/grimoire'
       preLoaderRoute: typeof ApiDevGrimoireRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/settings': {
+      id: '/api/auth/settings'
+      path: '/api/auth/settings'
+      fullPath: '/api/auth/settings'
+      preLoaderRoute: typeof ApiAuthSettingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/register': {
@@ -701,14 +834,14 @@ declare module '@tanstack/react-router' {
     '/api/rooms/$roomId/': {
       id: '/api/rooms/$roomId/'
       path: '/api/rooms/$roomId'
-      fullPath: '/api/rooms/$roomId'
+      fullPath: '/api/rooms/$roomId/'
       preLoaderRoute: typeof ApiRoomsRoomIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/matches/$matchId/': {
       id: '/api/matches/$matchId/'
       path: '/api/matches/$matchId'
-      fullPath: '/api/matches/$matchId'
+      fullPath: '/api/matches/$matchId/'
       preLoaderRoute: typeof ApiMatchesMatchIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -838,12 +971,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGamesGameIdHostRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/auth/me/mod': {
+      id: '/api/auth/me/mod'
+      path: '/api/auth/me/mod'
+      fullPath: '/api/auth/me/mod'
+      preLoaderRoute: typeof ApiAuthMeModRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authed/rooms/_room/$roomId/': {
       id: '/_authed/rooms/_room/$roomId/'
       path: '/rooms/$roomId'
-      fullPath: '/rooms/$roomId'
+      fullPath: '/rooms/$roomId/'
       preLoaderRoute: typeof AuthedRoomsRoomRoomIdIndexRouteImport
       parentRoute: typeof AuthedRoute
+    }
+    '/_authed/rooms/_room/$roomId/_st': {
+      id: '/_authed/rooms/_room/$roomId/_st'
+      path: '/rooms/$roomId'
+      fullPath: '/rooms/$roomId'
+      preLoaderRoute: typeof AuthedRoomsRoomRoomIdStRouteImport
+      parentRoute: typeof AuthedRoute
+    }
+    '/_authed/rooms/_room/$roomId/_st/window': {
+      id: '/_authed/rooms/_room/$roomId/_st/window'
+      path: '/window'
+      fullPath: '/rooms/$roomId/window'
+      preLoaderRoute: typeof AuthedRoomsRoomRoomIdStWindowRouteImport
+      parentRoute: typeof AuthedRoomsRoomRoomIdStRoute
     }
   }
 }
@@ -860,11 +1014,27 @@ const AuthedScriptsRouteWithChildren = AuthedScriptsRoute._addFileChildren(
   AuthedScriptsRouteChildren,
 )
 
+interface AuthedRoomsRoomRoomIdStRouteChildren {
+  AuthedRoomsRoomRoomIdStWindowRoute: typeof AuthedRoomsRoomRoomIdStWindowRoute
+}
+
+const AuthedRoomsRoomRoomIdStRouteChildren: AuthedRoomsRoomRoomIdStRouteChildren =
+  {
+    AuthedRoomsRoomRoomIdStWindowRoute: AuthedRoomsRoomRoomIdStWindowRoute,
+  }
+
+const AuthedRoomsRoomRoomIdStRouteWithChildren =
+  AuthedRoomsRoomRoomIdStRoute._addFileChildren(
+    AuthedRoomsRoomRoomIdStRouteChildren,
+  )
+
 interface AuthedRouteChildren {
   AuthedScriptsRoute: typeof AuthedScriptsRouteWithChildren
   AuthedIndexRoute: typeof AuthedIndexRoute
   AuthedAuthForgotPasswordRoute: typeof AuthedAuthForgotPasswordRoute
   AuthedRoomsNRoute: typeof AuthedRoomsNRoute
+  AuthedRoomsIndexRoute: typeof AuthedRoomsIndexRoute
+  AuthedRoomsRoomRoomIdStRoute: typeof AuthedRoomsRoomRoomIdStRouteWithChildren
   AuthedRoomsRoomRoomIdIndexRoute: typeof AuthedRoomsRoomRoomIdIndexRoute
 }
 
@@ -873,6 +1043,8 @@ const AuthedRouteChildren: AuthedRouteChildren = {
   AuthedIndexRoute: AuthedIndexRoute,
   AuthedAuthForgotPasswordRoute: AuthedAuthForgotPasswordRoute,
   AuthedRoomsNRoute: AuthedRoomsNRoute,
+  AuthedRoomsIndexRoute: AuthedRoomsIndexRoute,
+  AuthedRoomsRoomRoomIdStRoute: AuthedRoomsRoomRoomIdStRouteWithChildren,
   AuthedRoomsRoomRoomIdIndexRoute: AuthedRoomsRoomRoomIdIndexRoute,
 }
 
@@ -895,19 +1067,44 @@ const UnauthedRouteWithChildren = UnauthedRoute._addFileChildren(
   UnauthedRouteChildren,
 )
 
+interface GameGrimRouteChildren {
+  GameGrimWindowRoute: typeof GameGrimWindowRoute
+}
+
+const GameGrimRouteChildren: GameGrimRouteChildren = {
+  GameGrimWindowRoute: GameGrimWindowRoute,
+}
+
+const GameGrimRouteWithChildren = GameGrimRoute._addFileChildren(
+  GameGrimRouteChildren,
+)
+
+interface GameRouteChildren {
+  GameGrimRoute: typeof GameGrimRouteWithChildren
+}
+
+const GameRouteChildren: GameRouteChildren = {
+  GameGrimRoute: GameGrimRouteWithChildren,
+}
+
+const GameRouteWithChildren = GameRoute._addFileChildren(GameRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   AuthedRoute: AuthedRouteWithChildren,
   UnauthedRoute: UnauthedRouteWithChildren,
+  GameRoute: GameRouteWithChildren,
   ApiHealthRoute: ApiHealthRoute,
   ApiWhoamiRoute: ApiWhoamiRoute,
   GamesGameIdRoute: GamesGameIdRoute,
   ApiAuthForgotPasswordRoute: ApiAuthForgotPasswordRoute,
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,
   ApiAuthRegisterRoute: ApiAuthRegisterRoute,
+  ApiAuthSettingsRoute: ApiAuthSettingsRoute,
   ApiDevGrimoireRoute: ApiDevGrimoireRoute,
   ApiInvitesIndexRoute: ApiInvitesIndexRoute,
   ApiRoomsIndexRoute: ApiRoomsIndexRoute,
   ApiScriptsIndexRoute: ApiScriptsIndexRoute,
+  ApiAuthMeModRoute: ApiAuthMeModRoute,
   ApiGamesGameIdHostRoute: ApiGamesGameIdHostRoute,
   ApiGamesGameIdReadyRoute: ApiGamesGameIdReadyRoute,
   ApiGamesGameIdStartSetupRoute: ApiGamesGameIdStartSetupRoute,
@@ -932,12 +1129,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}

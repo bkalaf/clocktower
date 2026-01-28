@@ -29,7 +29,8 @@ import {
     useDisplayName,
     useUserLevel,
     useUserCurrentXP,
-    useUserRequiredXP
+    useUserRequiredXP,
+    useHasPrivilegedAccess
 } from '../client/state/useIsAuth';
 import { useRightSidebar } from '@/components/ui/sidebar-right';
 import { useRoomUi } from '@/components/room/RoomUiContext';
@@ -46,6 +47,7 @@ export function TopBar() {
     const requiredXP = useUserRequiredXP();
     const { roomId, toggleSettings, toggleNotes } = useRoomUi();
     const { open: rightSidebarOpen, toggleRightSidebar } = useRightSidebar();
+    const isPrivileged = useHasPrivilegedAccess();
     const rightSidebarLabel = rightSidebarOpen ? 'Close right sidebar' : 'Open right sidebar';
     const RightSidebarIcon = rightSidebarOpen ? PanelRightClose : PanelRightOpen;
     const fallbackInitials = useMemo(() => {
@@ -105,6 +107,11 @@ export function TopBar() {
                     <TopBarSidebarTrigger isAuth={isAuth} />
                     <div className='hidden items-center gap-2 md:flex'>
                         <CreateRoomButton />
+                        {isPrivileged && roomId && (
+                            <Button variant='outline' size='sm' className='uppercase tracking-[0.3em]' asChild>
+                                <Link to={`/rooms/${roomId}/st`}>ST Review</Link>
+                            </Button>
+                        )}
                         {isAuth && (
                             <Button
                                 variant='ghost'
