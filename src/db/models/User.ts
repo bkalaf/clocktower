@@ -27,6 +27,7 @@ const userSchema = new Schema<User>(
     {
         _id: { type: String, required: true },
         username: { type: String, required: true, trim: true },
+        displayName: { type: String, trim: true },
         email: { type: String, required: true, lowercase: true, trim: true },
         userRoles: {
             type: [String],
@@ -34,6 +35,7 @@ const userSchema = new Schema<User>(
             required: true,
             default: ['user']
         },
+        avatarPath: { type: String, trim: true },
         penaltyUntil: { type: Date, default: null },
         settings: {
             type: {

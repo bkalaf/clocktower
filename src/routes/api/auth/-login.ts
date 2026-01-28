@@ -42,7 +42,17 @@ export const loginServerFn = createServerFn({
         const session = await createSession(user._id);
         setSessionCookie(session.sessionId, session.expiresAt);
         createSessionActor(session.sessionId);
-        return { ok: true };
+        return {
+            ok: true,
+            user: {
+                _id: user._id,
+                username: user.username,
+                displayName: user.displayName,
+                avatarPath: user.avatarPath,
+                userRoles: user.userRoles,
+                settings: user.settings
+            }
+        };
     });
 
 // export const Route = createFileRoute('/api/auth/login')({

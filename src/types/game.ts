@@ -62,10 +62,12 @@ export const CURSORS_KEY = (gameId: string) => `botc:cursors:${gameId}`;
 export interface User {
     _id: UserId;
     username: string;
+    displayName?: string;
     email: string;
     passwordHash: string;
     userRoles: GlobalRoles[];
     settings: UserSettings;
+    avatarPath?: string;
 }
 
 export type AuthedUser = Omit<User, 'passwordHash'>;

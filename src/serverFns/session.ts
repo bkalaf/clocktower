@@ -19,7 +19,7 @@ const findOne = async (_id: SessionId, expiresAt: number = Date.now()) => {
     // console.log(`expiresAt`, expiresAt);
     const res = await $models.SessionModel.findOne({ _id, expiresAt: { $gt: new Date(expiresAt) } }).populate(
         'userId',
-        '_id username email userRoles settings'
+        '_id username email userRoles settings displayName avatarPath'
     );
     // console.log(`res`, res);
     if (res?.userId && typeof res?.userId !== 'string') {

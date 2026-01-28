@@ -1,10 +1,11 @@
 // src/components/AppShell.tsx
 import { AppSidebar } from './AppSidebar';
-import { SidebarProvider, SidebarInset } from './ui/sidebar';
+import { SidebarInset } from './ui/sidebar';
 import { TopBar } from './TopBar';
 import { BottomBar } from './header/BottomBar';
 import tokensDeskWindow from '@/assets/images/tokens-desk-window.png?url';
 import { RoomUiProvider, useRoomUi } from '@/components/room/RoomUiContext';
+import { AppSidebarRight } from './AppSidebarRight';
 
 const rootBackgroundStyle: React.CSSProperties = {
     backgroundImage: `url(${tokensDeskWindow})`,
@@ -32,9 +33,9 @@ function AppShellContent({ children }: { children: React.ReactNode }) {
         :   rootBackgroundStyle;
 
     return (
-        <SidebarProvider defaultOpen={false}>
+        <>
             <AppSidebar />
-
+            <AppSidebarRight />
             {/* The ONLY place that touches viewport height */}
             <SidebarInset className='h-svh w-svh'>
                 {/* Chrome + content column */}
@@ -45,19 +46,11 @@ function AppShellContent({ children }: { children: React.ReactNode }) {
                     className='min-h-0 bg-cover bg-center flex-1 overflow-hidden object-contain items-center justify-center'
                     style={mainStyle}
                 >
-                    {/* <div className='absolute inset-0'>
-                                <img
-                                    src={tokenTable}
-                                    alt=''
-                                    className='h-full w-full object-contain object-center opacity-70'
-                                />
-                                <div className='absolute inset-0 bg-linear-to-br from-slate-950/75 via-slate-950/60 to-slate-950/80' />
-                            </div> */}
                     {children}
                 </main>
                 <BottomBar />
                 {/* </div> */}
             </SidebarInset>
-        </SidebarProvider>
+        </>
     );
 }

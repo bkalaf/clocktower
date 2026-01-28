@@ -13,3 +13,11 @@ export function useUserId() {
 export function useUsername() {
     return useAppSelector(authSelectors.selectUsername);
 }
+
+export function useAvatarUrl() {
+    return useAppSelector(authSelectors.selectAvatarUrl);
+}
+
+export function useDisplayName() {
+    return useAppSelector(authSelectors.selectDisplayName);
+}

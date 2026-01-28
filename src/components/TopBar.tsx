@@ -1,7 +1,7 @@
 // src/components/TopBar.tsx
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
-import { BookOpen, ChevronDown, LogIn, LogOut, Settings, User, UserPlus, MoveHorizontal } from 'lucide-react';
+import { BookOpen, ChevronDown, LogIn, LogOut, PanelRightClose, PanelRightOpen, Settings, User, UserPlus, MoveHorizontal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -12,7 +12,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useModal } from '@/hooks/useModal';
 
 import { InvitesButton } from './header/InvitesButton';
@@ -21,7 +21,8 @@ import { TopBarScriptsMenu } from './top-bar/TopBarScriptsMenu';
 import { TopBarSidebarTrigger } from './TopBarSidebarTrigger';
 import { UserNameSpan } from './UserNameSpan';
 import { CreateRoomButton } from './CreateRoomButton';
-import { useIsAuth, useUsername } from '../client/state/useIsAuth';
+import { useIsAuth, useUsername, useAvatarUrl, useDisplayName } from '../client/state/useIsAuth';
+import { useRightSidebar } from '@/components/ui/sidebar-right';
 import { useRoomUi } from '@/components/room/RoomUiContext';
 
 export function TopBar() {
@@ -29,8 +30,23 @@ export function TopBar() {
     const { open } = useModal();
     const isAuth = useIsAuth();
     const username = useUsername();
+    const avatarUrl = useAvatarUrl();
+    const displayName = useDisplayName();
     const { roomId, toggleSettings, toggleNotes } = useRoomUi();
-    console.log(`isAuth`, isAuth);
+    const { open: rightSidebarOpen, toggleRightSidebar } = useRightSidebar();
+    const rightSidebarLabel = rightSidebarOpen ? 'Close right sidebar' : 'Open right sidebar';
+    const RightSidebarIcon = rightSidebarOpen ? PanelRightClose : PanelRightOpen;
+    const fallbackInitials = useMemo(() => {
+        const source = (displayName ?? username ?? '').trim();
+        if (!source) return null;
+        const initials = source
+            .split(/\s+/)
+            .map((part) => part.charAt(0))
+            .filter(Boolean)
+            .slice(0, 2)
+            .join('');
+        return initials.toUpperCase();
+    }, [displayName, username]);
     const handleLogin = useCallback(() => {
         navigate({
             to: '/login'
@@ -155,43 +171,59 @@ export function TopBar() {
                                 <Settings className='h-4 w-4' />
                             </Button>
 
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
+                            <div className='flex items-center gap-1'>
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button
+                                            variant='outline'
+                                            size='sm'
+                                            className='flex items-center gap-2 rounded-2xl px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em]'
+                                        >
+                                            <Avatar className='h-7 w-7 border border-white/10 bg-slate-900 shadow-black/50'>
+                                                {avatarUrl ? (
+                                                    <AvatarImage src={avatarUrl} alt={displayName ?? username ?? 'Avatar'} />
+                                                ) : (
+                                                    <AvatarFallback className='text-[11px] font-semibold uppercase tracking-[0.3em]'>
+                                                        {fallbackInitials ?? <User size={16} />}
+                                                    </AvatarFallback>
+                                                )}
+                                            </Avatar>
+                                            <ChevronDown size={14} />
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent
+                                        align='end'
+                                        className='min-w-[200px] rounded-2xl border border-white/10 bg-slate-900/90 p-2 text-xs'
+                                    >
+                                        <DropdownMenuLabel>Account</DropdownMenuLabel>
+                                        {/* <DropdownMenuItem asChild>
+                                            <Link to='/profile'>Profile</Link>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem asChild>
+                                            <Link to='/stats'>User stats</Link>
+                                        </DropdownMenuItem> */}
+                                        <DropdownMenuItem onSelect={handlePreferences}>Preferences</DropdownMenuItem>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem
+                                            variant='destructive'
+                                            onSelect={() => {}}
+                                        >
+                                            <LogOut size={14} />
+                                            Logout
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+                                {roomId && (
                                     <Button
-                                        variant='outline'
-                                        size='sm'
-                                        className='flex items-center gap-2 rounded-2xl px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em]'
+                                        variant='ghost'
+                                        size='icon'
+                                        onClick={toggleRightSidebar}
+                                        aria-label={rightSidebarLabel}
                                     >
-                                        <Avatar className='h-7 w-7 border border-white/10 bg-slate-900 shadow-black/50'>
-                                            <AvatarFallback>
-                                                <User size={16} />
-                                            </AvatarFallback>
-                                        </Avatar>
-                                        <ChevronDown size={14} />
+                                        <RightSidebarIcon className='h-4 w-4' />
                                     </Button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent
-                                    align='end'
-                                    className='min-w-[200px] rounded-2xl border border-white/10 bg-slate-900/90 p-2 text-xs'
-                                >
-                                    <DropdownMenuLabel>Account</DropdownMenuLabel>
-                                    {/* <DropdownMenuItem asChild>
-                                        <Link to='/profile'>Profile</Link>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuItem asChild>
-                                        <Link to='/stats'>User stats</Link>
-                                    </DropdownMenuItem> */}
-                                    <DropdownMenuItem onSelect={handlePreferences}>Preferences</DropdownMenuItem>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem
-                                        variant='destructive'
-                                        onSelect={() => {}}
-                                    >
-                                        <LogOut size={14} />
-                                        Logout
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
+                                )}
+                            </div>
                             <UserNameSpan username={username} />
                         </>
                     )}

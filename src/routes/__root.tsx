@@ -7,6 +7,7 @@ import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 import appCss from './../assets/css/app.css?url';
 import type { QueryClient } from '@tanstack/react-query';
 import { SidebarProvider } from '@/components/ui/sidebar';
+import { RightSidebarProvider } from '@/components/ui/sidebar-right';
 import { NotFound } from '../components/NotFound';
 import { AppShell } from '../components/AppShell';
 import { ModalHost } from '../ui/modals/ModalHost';
@@ -16,6 +17,8 @@ import { useAppDispatch } from '@/client/state/hooks';
 import { authActions } from '@/client/state/authSlice';
 import { themeActions, DEFAULT_THEME_STATE } from '@/client/state/themeSlice';
 import { whoamiFn } from '@/lib/api';
+
+const ASSET_BASE_URL = (import.meta.env.VITE_ASSET_BASE_URL ?? '').replace(/\/$/, '');
 
 interface MyRouterContext {
     queryClient: QueryClient;
@@ -91,7 +94,9 @@ function RootShellComponent({ children }: { children: React.ReactNode }) {
             </head>
             <body>
                 <Provider store={store}>
-                    <SidebarProvider>{children}</SidebarProvider>
+                    <SidebarProvider defaultOpen={false}>
+                        <RightSidebarProvider defaultOpen={false}>{children}</RightSidebarProvider>
+                    </SidebarProvider>
                 </Provider>
                 <TanStackDevtools
                     config={{
@@ -118,14 +123,29 @@ function RootLayout() {
     React.useEffect(() => {
         let isMounted = true;
         const loadUser = async () => {
+            const buildAvatarUrl = (path?: string) => {
+                if (!path) return undefined;
+                const trimmed = path.trim();
+                if (!trimmed) return undefined;
+                if (/^https?:\/\//i.test(trimmed)) {
+                    return trimmed;
+                }
+                const normalized = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+                return ASSET_BASE_URL ? `${ASSET_BASE_URL}${normalized}` : normalized;
+            };
+
             try {
                 const { user } = await whoamiFn();
                 if (!isMounted) return;
                 if (user) {
+                    const displayName = user.displayName ?? user.username;
+                    const avatarUrl = buildAvatarUrl(user.avatarPath);
                     dispatch(
                         authActions.setUser({
                             userId: user._id,
                             username: user.username,
+                            displayName,
+                            avatarUrl,
                             scopes: user.userRoles ?? []
                         })
                     );
